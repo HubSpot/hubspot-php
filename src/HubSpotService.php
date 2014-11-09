@@ -12,8 +12,6 @@ class HubSpotService
      */
     private $userAgent;
 
-brew install php55 --with-fpm --with-homebrew-curl --with-homebrew-openssl
-
     /**
      * The default userAgent string.
      */
