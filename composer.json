@@ -1,0 +1,20 @@
+{
+    "name": "fungku/hubspot-php",
+    "description": "HubSpot PHP API client",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "fungku",
+            "email": "fungku@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fungku\\HubSpot\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
