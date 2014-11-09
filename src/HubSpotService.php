@@ -112,7 +112,7 @@ class HubSpotService
             return null;
         }
 
-        return 'Fungku\HubSpot' . ucfirst($name);
+        return 'Fungku\\HubSpot\\API\\' . ucfirst($name);
     }
 
     /**
