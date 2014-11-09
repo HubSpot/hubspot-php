@@ -78,12 +78,4 @@ class HubSpotService
      * @return void
      */
     private function __wakeup() {}
-
-    /**
-     * @return $this
-     */
-    public function money()
-    {
-        return $this;
-    }
 }
