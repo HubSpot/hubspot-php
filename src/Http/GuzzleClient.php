@@ -11,7 +11,7 @@ class GuzzleClient implements HttpClient
     protected $client;
 
     /**
-     * Constructor.
+     * steven's most favourite constructor.
      */
     function __construct()
     {
