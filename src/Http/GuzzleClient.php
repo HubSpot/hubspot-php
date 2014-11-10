@@ -15,6 +15,11 @@ use GuzzleHttp\Client;
 class GuzzleClient implements HttpClient
 {
     /**
+     * @var Client
+     */
+    protected $client;
+
+    /**
      * HTTP requests.
      *
      * @var array
@@ -33,14 +38,20 @@ class GuzzleClient implements HttpClient
      * @param $name
      * @param $arguments
      * @return mixed
+     * @throws \InvalidArgumentException
      */
     public function __call($name, $arguments)
     {
         if ( ! in_array($name, $this->requests)) {
-            throw new \InvalidArgumentException("");
+            // Change this to a more specific exception:
+            throw new \InvalidArgumentException("That method is not available.");
         }
 
         $options = isset($arguments['options']) ? $arguments['options'] : null;
+
+        if ( ! isset($arguments['url'])) {
+            throw new \InvalidArgumentException("You must provide a url.");
+        }
 
         return $this->client->$name($arguments['url'], $options);
     }
