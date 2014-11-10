@@ -53,19 +53,27 @@ class HubSpotService
      */
     public static function __callStatic($name, array $arguments = array())
     {
+        $apiKey = static::getApiKey($arguments);
+        $userAgent = isset($arguments['userAgent']) ? $arguments['userAgent'] : static::DEFAULT_USER_AGENT;
+        $client = isset($arguments['client']) ? $arguments['client'] : null;
+        $providerClass = static::providerClassName($name);
+
+        return new $providerClass($apiKey, $userAgent, $client);
+    }
+
+    /**
+     * @param $arguments
+     * @return string
+     */
+    private static function getApiKey($arguments)
+    {
         $apiKey = isset($arguments['apiKey']) ? $arguments['apiKey'] : getenv('HUBSPOT_API_KEY');
 
         if ( ! $apiKey) {
             throw new \InvalidArgumentException("You must provide a HubSpot api key.");
         }
 
-        $userAgent = isset($arguments['userAgent']) ? $arguments['userAgent'] : static::DEFAULT_USER_AGENT;
-
-        $client = isset($arguments['client']) ? $arguments['client'] : null;
-
-        $providerClass = static::providerClassName($name);
-
-        return new $providerClass($apiKey, $userAgent, $client);
+        return $apiKey;
     }
 
     /**
@@ -78,7 +86,7 @@ class HubSpotService
     protected static function providerClassName($name)
     {
         if ( ! in_array($name, static::$providers)) {
-            throw new ProviderNotFoundException("That provider does not exist.");
+            throw new ProviderNotFoundException;
         }
 
         return 'Fungku\\HubSpot\\Providers\\' . ucfirst($name);
