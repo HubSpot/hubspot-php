@@ -19,8 +19,8 @@ class GuzzleClient implements HttpClient
     }
 
     /**
-     * @param $url
-     * @param array $options
+     * @param string $url
+     * @param array  $options
      */
     public function get($url, array $options = [])
     {
@@ -28,8 +28,8 @@ class GuzzleClient implements HttpClient
     }
 
     /**
-     * @param $url
-     * @param array $options
+     * @param string $url
+     * @param array  $options
      */
     public function post($url, array $options = [])
     {
@@ -37,8 +37,8 @@ class GuzzleClient implements HttpClient
     }
 
     /**
-     * @param $url
-     * @param array $options
+     * @param string $url
+     * @param array  $options
      */
     public function put($url, array $options = [])
     {
@@ -46,8 +46,8 @@ class GuzzleClient implements HttpClient
     }
 
     /**
-     * @param $url
-     * @param array $options
+     * @param string $url
+     * @param array  $options
      */
     public function delete($url, array $options = [])
     {
