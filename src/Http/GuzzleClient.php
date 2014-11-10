@@ -6,13 +6,6 @@ use GuzzleHttp\Client;
 class GuzzleClient implements HttpClient
 {
     /**
-     * HTTP requests.
-     *
-     * @var array
-     */
-    protected $requests = array('get', 'post', 'put', 'delete');
-
-    /**
      * @var Client
      */
     protected $client;
