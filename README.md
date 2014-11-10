@@ -20,7 +20,7 @@ then run `composer install` or `composer update`
 ```php
 $contacts = new Fungku\HubSpot::contacts('your-api-key');
 
-// get 5 contacts' firstnames, offset by 50
+// get 10 contacts' firstnames, offset by 10
 $contacts->all([
     'count'     => 10,          // defaults to 20
     'property'  => 'firstname', // only get the specified properties
