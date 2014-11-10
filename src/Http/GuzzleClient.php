@@ -7,20 +7,19 @@ use GuzzleHttp\Client;
  * Class GuzzleClient
  * @package Fungku\HubSpot
  *
- * @method get     get($url, $options)
- * @method post    post($url, $options)
- * @method head    head($url, $options)
- * @method put     put($url, $options)
- * @method delete  delete($url, $options)
- * @method options options($url, $options)
- * @method patch   patch($url, $options)
+ * @method get($url, $options)
+ * @method post($url, $options)
+ * @method put($url, $options)
+ * @method delete($url, $options)
  */
 class GuzzleClient implements HttpClient
 {
     /**
+     * HTTP requests.
+     *
      * @var array
      */
-    protected $calls = array('get', 'post', 'head', 'put', 'delete', 'options', 'patch');
+    protected $requests = array('get', 'post', 'put', 'delete');
 
     /**
      * Constructor.
@@ -37,7 +36,7 @@ class GuzzleClient implements HttpClient
      */
     public function __call($name, $arguments)
     {
-        if ( ! in_array($name, $this->$calls)) {
+        if ( ! in_array($name, $this->requests)) {
             throw new \InvalidArgumentException("");
         }
 

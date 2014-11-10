@@ -6,18 +6,18 @@ use Fungku\HubSpot\Exceptions\ProviderNotFoundException;
  * Class HubSpotService
  * @package Fungku\HubSpot
  *
- * @method static blog
- * @method static contacts
- * @method static forms
- * @method static keywords
- * @method static leadNurturing
- * @method static leads
- * @method static lists
- * @method static marketPlace
- * @method static properties
- * @method static settings
- * @method static socialMedia
- * @method static workflows
+ * @method static blog($apiKey, $userAgent = null, $client = null)
+ * @method static contacts($apiKey, $userAgent = null, $client = null)
+ * @method static forms($apiKey, $userAgent = null, $client = null)
+ * @method static keywords($apiKey, $userAgent = null, $client = null)
+ * @method static leadNurturing($apiKey, $userAgent = null, $client = null)
+ * @method static leads($apiKey, $userAgent = null, $client = null)
+ * @method static lists($apiKey, $userAgent = null, $client = null)
+ * @method static marketPlace($apiKey, $userAgent = null, $client = null)
+ * @method static properties($apiKey, $userAgent = null, $client = null)
+ * @method static settings($apiKey, $userAgent = null, $client = null)
+ * @method static socialMedia($apiKey, $userAgent = null, $client = null)
+ * @method static workflows($apiKey, $userAgent = null, $client = null)
  */
 class HubSpotService
 {
@@ -50,7 +50,6 @@ class HubSpotService
      * @param string $name
      * @param array  $arguments
      * @return mixed
-     * @throws ProviderNotFoundException
      */
     public static function __callStatic($name, array $arguments = array())
     {
@@ -65,11 +64,14 @@ class HubSpotService
         // If the userAgent is not provided, use the default.
         $userAgent = isset($arguments['userAgent']) ? $arguments['userAgent'] : static::DEFAULT_USER_AGENT;
 
+        // If the client was provided, use that, otherwise null.
+        $client = isset($arguments['client']) ? $arguments['client'] : null;
+
         // Find the Api provider class.
         $providerClass = static::providerClassName($name);
 
         // Return a new instance of an api class.
-        return new $providerClass($apiKey, $userAgent);
+        return new $providerClass($apiKey, $userAgent, $client);
     }
 
     /**
