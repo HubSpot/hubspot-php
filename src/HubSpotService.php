@@ -1,4 +1,5 @@
 <?php namespace Fungku\HubSpot;
+
 use Fungku\HubSpot\Exceptions\ProviderNotFoundException;
 
 /**
@@ -21,21 +22,16 @@ use Fungku\HubSpot\Exceptions\ProviderNotFoundException;
 class HubSpotService
 {
     /**
-     * @var string
-     */
-    private $apiKey;
-
-    /**
-     * @var string
-     */
-    private $userAgent;
-
-    /**
      * The default userAgent string.
      */
     const DEFAULT_USER_AGENT = 'FungkuHubSpotPHP/2.0 (https://github.com/fungku/hubspot-php)';
 
-    protected static $providers = [
+    /**
+     * The available API provider classes.
+     *
+     * @var array
+     */
+    protected static $providers = array(
         'blog',
         'contacts',
         'forms',
@@ -48,65 +44,42 @@ class HubSpotService
         'settings',
         'socialMedia',
         'workflows',
-    ];
-
-    /**
-     * @param string $apiKey
-     * @param string $userAgent
-     * @throws \InvalidArgumentException
-     */
-    protected function __construct($apiKey = null, $userAgent = null)
-    {
-        // If an api key is not provided, check for an environment variable.
-        $this->apiKey = $apiKey ?: getenv('HUBSPOT_API_KEY');
-
-        // If a user agent is not provided, use the default.
-        $this->userAgent = $userAgent ?: static::DEFAULT_USER_AGENT;
-
-        // If we still do not have an api key, throw an exception.
-        if ( ! $this->apiKey) {
-            throw new \InvalidArgumentException("A HubSpot api key must be provided.");
-        }
-    }
-
-    /**
-     * @param $name
-     * @param $arguments
-     */
-    public static function __callStatic($name, array $arguments = [])
-    {
-        $apiKey = isset($arguments['apiKey']) ? $arguments['apiKey'] : null;
-        $userAgent = isset($arguments['userAgent']) ? $arguments['userAgent'] : null;
-
-        $hubspot = static::instance($apiKey, $userAgent);
-
-        $providerClassName = static::getProviderClassName($name);
-
-        return new $providerClassName($hubspot->apiKey, $hubspot->userAgent);
-    }
-
-    /**
-     * @param string $apiKey
-     * @param string $userAgent
-     * @return static
-     */
-    protected static function instance($apiKey, $userAgent)
-    {
-        static $instance = null;
-
-        if (is_null($instance)) {
-            $instance = new static($apiKey, $userAgent);
-        }
-
-        return $instance;
-    }
+    );
 
     /**
      * @param string $name
+     * @param array  $arguments
+     * @return mixed
      * @throws ProviderNotFoundException
-     * @return string
      */
-    protected static function getProviderClassName($name)
+    public static function __callStatic($name, array $arguments = array())
+    {
+        // If the api key is not included, check for an environment variable.
+        $apiKey = isset($arguments['apiKey']) ? $arguments['apiKey'] : getenv('HUBSPOT_API_KEY');
+
+        // If we still don't have an api key, throw an exception.
+        if ( ! $apiKey) {
+            throw new \InvalidArgumentException("You must provide a HubSpot api key.");
+        }
+
+        // If the userAgent is not provided, use the default.
+        $userAgent = isset($arguments['userAgent']) ? $arguments['userAgent'] : static::DEFAULT_USER_AGENT;
+
+        // Find the Api provider class.
+        $providerClass = static::providerClassName($name);
+
+        // Return a new instance of an api class.
+        return new $providerClass($apiKey, $userAgent);
+    }
+
+    /**
+     * The class name for an existing provider.
+     *
+     * @param string $name
+     * @return string
+     * @throws ProviderNotFoundException
+     */
+    protected static function providerClassName($name)
     {
         if ( ! in_array($name, static::$providers)) {
             throw new ProviderNotFoundException("That provider does not exist.");
@@ -114,18 +87,4 @@ class HubSpotService
 
         return 'Fungku\\HubSpot\\API\\' . ucfirst($name);
     }
-
-    /**
-     * Private clone method to prevent cloning of the instance.
-     *
-     * @return void
-     */
-    private function __clone() {}
-
-    /**
-     * Private unserialize method to prevent unserializing of the singleton.
-     *
-     * @return void
-     */
-    private function __wakeup() {}
 }
