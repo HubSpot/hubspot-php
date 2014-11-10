@@ -81,10 +81,12 @@ class HubSpotService
      */
     protected static function providerClassName($name)
     {
+        // Throw an exception if the method called is not defined in the providers array.
         if ( ! in_array($name, static::$providers)) {
             throw new ProviderNotFoundException("That provider does not exist.");
         }
 
+        // Return the full class name.
         return 'Fungku\\HubSpot\\API\\' . ucfirst($name);
     }
 }

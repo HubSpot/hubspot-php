@@ -1,6 +1,4 @@
-<?php
-
-namespace Fungku\HubSpot\API;
+<?php namespace Fungku\HubSpot\Exceptions;
 
 /**
  * Copyright 2012 HubSpot, Inc.
