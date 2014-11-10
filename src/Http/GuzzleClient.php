@@ -3,15 +3,6 @@
 use Fungku\Hubspot\Contracts\HttpClient;
 use GuzzleHttp\Client;
 
-/**
- * Class GuzzleClient
- * @package Fungku\HubSpot
- *
- * @method get($url, $options)
- * @method post($url, $options)
- * @method put($url, $options)
- * @method delete($url, $options)
- */
 class GuzzleClient implements HttpClient
 {
     /**
@@ -35,24 +26,38 @@ class GuzzleClient implements HttpClient
     }
 
     /**
-     * @param $name
-     * @param $arguments
-     * @return mixed
-     * @throws \InvalidArgumentException
+     * @param $url
+     * @param array $options
      */
-    public function __call($name, $arguments)
+    public function get($url, $options = [])
     {
-        if ( ! in_array($name, $this->requests)) {
-            // Change this to a more specific exception:
-            throw new \InvalidArgumentException("That method is not available.");
-        }
+        return $this->client->get($url, $options);
+    }
 
-        $options = isset($arguments['options']) ? $arguments['options'] : null;
+    /**
+     * @param $url
+     * @param array $options
+     */
+    public function post($url, $options = [])
+    {
+        return $this->client->post($url, $options);
+    }
 
-        if ( ! isset($arguments['url'])) {
-            throw new \InvalidArgumentException("You must provide a url.");
-        }
+    /**
+     * @param $url
+     * @param array $options
+     */
+    public function put($url, $options = [])
+    {
+        return $this->client->put($url, $options);
+    }
 
-        return $this->client->$name($arguments['url'], $options);
+    /**
+     * @param $url
+     * @param array $options
+     */
+    public function delete($url, $options = [])
+    {
+        return $this->client->delete($url, $options);
     }
 }
