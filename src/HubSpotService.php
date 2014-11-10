@@ -1,4 +1,5 @@
 <?php namespace Fungku\HubSpot;
+use Fungku\HubSpot\Exceptions\ProviderNotFoundException;
 
 /**
  * Class HubSpotService
@@ -34,7 +35,7 @@ class HubSpotService
      */
     const DEFAULT_USER_AGENT = 'FungkuHubSpotPHP/2.0 (https://github.com/fungku/hubspot-php)';
 
-    protected static $defaultProviders = [
+    protected static $providers = [
         'blog',
         'contacts',
         'forms',
@@ -52,7 +53,6 @@ class HubSpotService
     /**
      * @param string $apiKey
      * @param string $userAgent
-     *
      * @throws \InvalidArgumentException
      */
     protected function __construct($apiKey = null, $userAgent = null)
@@ -103,13 +103,13 @@ class HubSpotService
 
     /**
      * @param string $name
-     * @return string|null
+     * @throws ProviderNotFoundException
+     * @return string
      */
     protected static function getProviderClassName($name)
     {
-        if ( ! in_array($name, static::$defaultProviders)) {
-            // throw exception? class or method does not exist...
-            return null;
+        if ( ! in_array($name, static::$providers)) {
+            throw new ProviderNotFoundException("That provider does not exist.");
         }
 
         return 'Fungku\\HubSpot\\API\\' . ucfirst($name);
