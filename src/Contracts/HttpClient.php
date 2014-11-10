@@ -2,7 +2,7 @@
 
 interface HttpClient
 {
-    public function get($url);
+    public function get($url, $options);
 
-    public function post($url, $params, $optionsß);
+    public function post($url, $options);
 }
