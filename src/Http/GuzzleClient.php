@@ -15,16 +15,16 @@ use GuzzleHttp\Client;
 class GuzzleClient implements HttpClient
 {
     /**
-     * @var Client
-     */
-    protected $client;
-
-    /**
      * HTTP requests.
      *
      * @var array
      */
     protected $requests = array('get', 'post', 'put', 'delete');
+
+    /**
+     * @var Client
+     */
+    protected $client;
 
     /**
      * Constructor.
