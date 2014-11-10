@@ -21,10 +21,10 @@ then run `composer install` or `composer update`
 $contacts = new Fungku\HubSpot::contacts('your-api-key');
 
 // get 5 contacts' firstnames, offset by 50
-$contacts()->all([
-    'count' => 5,              // defaults to 20
-    'property' => 'firstname', // only get the specified properties
-    'vidOffset' => '50'        // contact offset used for paging
+$contacts->all([
+    'count'     => 10,          // defaults to 20
+    'property'  => 'firstname', // only get the specified properties
+    'vidOffset' => '10'         // contact offset used for paging
 ]);
 ```
 
