@@ -22,7 +22,7 @@ class GuzzleClient implements HttpClient
      * @param $url
      * @param array $options
      */
-    public function get($url, $options = [])
+    public function get($url, array $options = [])
     {
         return $this->client->get($url, $options);
     }
@@ -31,7 +31,7 @@ class GuzzleClient implements HttpClient
      * @param $url
      * @param array $options
      */
-    public function post($url, $options = [])
+    public function post($url, array $options = [])
     {
         return $this->client->post($url, $options);
     }
@@ -40,7 +40,7 @@ class GuzzleClient implements HttpClient
      * @param $url
      * @param array $options
      */
-    public function put($url, $options = [])
+    public function put($url, array $options = [])
     {
         return $this->client->put($url, $options);
     }
@@ -49,7 +49,7 @@ class GuzzleClient implements HttpClient
      * @param $url
      * @param array $options
      */
-    public function delete($url, $options = [])
+    public function delete($url, array $options = [])
     {
         return $this->client->delete($url, $options);
     }
