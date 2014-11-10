@@ -8,7 +8,7 @@ In composer.json:
 
 ```
 "require": {
-	"fungku/hubspot": "1.0.*"
+	"fungku/hubspot-php": "2.0.*"
 }
 ```
 then run `composer install` or `composer update`
@@ -18,16 +18,14 @@ then run `composer install` or `composer update`
 
 
 ```php
-$hapikey = "demo";
-
-$hubspot = new Fungku\HubSpot($hapikey);
+$contacts = new Fungku\HubSpot::contacts('your-api-key');
 
 // get 5 contacts' firstnames, offset by 50
-$contacts = $hubspot->contacts()->get_all_contacts(array(
-    'count' => 5, // defaults to 20
+$contacts()->all([
+    'count' => 5,              // defaults to 20
     'property' => 'firstname', // only get the specified properties
-    'vidOffset' => '50' // contact offset used for paging
-));
+    'vidOffset' => '50'        // contact offset used for paging
+]);
 ```
 
-*Note:* The Hubspot class checks for a `HUBSPOT_APIKEY` environment variable if you don't include one during instantiation.
+*Note:* The Hubspot class checks for a `HUBSPOT_API_KEY` environment variable if you don't include one during instantiation.
