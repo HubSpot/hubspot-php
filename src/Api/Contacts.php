@@ -19,29 +19,31 @@ class Contacts extends Api
     }
 
     /**
-     * @param array $params
+     * @param int   $id      The contact id.
+     * @param array $contact The contact properties to update.
      * @return mixed
      */
-    public function update(array $params)
+    public function update($id, array $contact)
     {
         $requestType = 'post';
-        $endpoint = '/contacts/v1/contact/vid/' . $params['contact_id'] . '/profile';
+        $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
-        $options['json'] = ['properties' => $params['contact']];
+        $options['json'] = ['properties' => $contact];
 
         return $this->call($requestType, $endpoint, $options);
     }
 
     /**
-     * @param array $params
+     * @param string $email   The contact email.
+     * @param array  $contact The contact properties.
      * @return mixed
      */
-    public function createOrUpdate(array $params)
+    public function createOrUpdate($email, array $contact)
     {
         $requestType = 'post';
-        $endpoint = '/contacts/v1/contact/createOrUpdate/email/' . $params['email'];
+        $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
 
-        $options['body'] = ['properties' => json_encode($params['contact'])];
+        $options['body'] = ['properties' => json_encode($contact)];
 
         return $this->call($requestType, $endpoint, $options);
     }
