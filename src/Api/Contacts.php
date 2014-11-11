@@ -43,7 +43,7 @@ class Contacts extends Api
         $requestType = 'post';
         $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
 
-        $options['body'] = ['properties' => json_encode($contact)];
+        $options['json'] = ['properties' => $contact];
 
         return $this->call($requestType, $endpoint, $options);
     }
