@@ -1,7 +1,7 @@
 # HubSpot PHP API client
 
 
-## Setup
+## Setup (don't bother it does not actually exist, still in development!)
 
 In composer.json:
 
@@ -17,7 +17,7 @@ then run `composer install` or `composer update`
 
 
 ```php
-$contacts = new Fungku\HubSpot::contacts('your-api-key');
+$contacts = new Fungku\HubSpot\HubSpotService::contacts('your-api-key');
 
 // get 10 contacts' firstnames, offset by 10
 $contacts->all([

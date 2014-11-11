@@ -1,6 +1,6 @@
-<?php namespace Fungku\HubSpot\Providers;
+<?php namespace Fungku\HubSpot\Api;
 
-class Contacts extends HubSpotProvider
+class Contacts extends Api
 {
     /**
      * Get all contacts.

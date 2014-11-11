@@ -1,6 +1,6 @@
 <?php namespace Fungku\HubSpot;
 
-use Fungku\HubSpot\Exceptions\ProviderNotFoundException;
+use Fungku\HubSpot\Exceptions\HubSpotException;
 
 /**
  * Class HubSpotService
@@ -31,7 +31,7 @@ class HubSpotService
      *
      * @var array
      */
-    protected static $providers = array(
+    protected static $apiClasses = array(
         'blog',
         'contacts',
         'forms',
@@ -81,14 +81,14 @@ class HubSpotService
      *
      * @param string $name
      * @return string
-     * @throws ProviderNotFoundException
+     * @throws HubSpotException
      */
     protected static function providerClassName($name)
     {
-        if ( ! in_array($name, static::$providers)) {
-            throw new ProviderNotFoundException;
+        if ( ! in_array($name, static::$apiClasses)) {
+            throw new HubSpotException("Api Class not found.");
         }
 
-        return 'Fungku\\HubSpot\\Providers\\' . ucfirst($name);
+        return 'Fungku\\HubSpot\\Api\\' . ucfirst($name);
     }
 }

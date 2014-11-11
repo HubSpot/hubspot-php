@@ -1,9 +1,9 @@
-<?php namespace Fungku\HubSpot\Providers;
+<?php namespace Fungku\HubSpot\Api;
 
 use Fungku\Hubspot\Contracts\HttpClient;
 use Fungku\HubSpot\Http\GuzzleClient;
 
-abstract class HubSpotProvider
+abstract class Api
 {
     /**
      * HubSpot api key.
