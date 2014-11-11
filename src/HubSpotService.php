@@ -64,7 +64,7 @@ class HubSpotService
      */
     protected function __construct($apiKey = null, $userAgent = null, HttpClient $client = null)
     {
-        $this->apiKey = $this->checkApiKey($apiKey);
+        $this->apiKey = $this->checkForApiKey($apiKey);
         $this->userAgent = $userAgent ?: static::DEFAULT_USER_AGENT;
         $this->client = $client;
     }
@@ -84,7 +84,7 @@ class HubSpotService
      * @param string $apiKey
      * @return string
      */
-    protected function checkApiKey($apiKey)
+    protected function checkForApiKey($apiKey)
     {
         $apiKey = $apiKey ?: getenv('HUBSPOT_API_KEY');
 
@@ -102,7 +102,7 @@ class HubSpotService
      * @return string
      * @throws HubSpotException
      */
-    protected function providerClassName($name)
+    protected function getApiClassName($name)
     {
         if ( ! in_array($name, $this->apiClasses)) {
             throw new HubSpotException("Api Class not found.");
@@ -118,8 +118,8 @@ class HubSpotService
      */
     public function __call($name, $arguments = null)
     {
-        $providerClass = $this->providerClassName($name);
+        $apiClass = $this->getApiClassName($name);
 
-        return new $providerClass($this->apiKey, $this->userAgent, $this->client);
+        return new $apiClass($this->apiKey, $this->userAgent, $this->client);
     }
 }
