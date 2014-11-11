@@ -47,7 +47,7 @@ abstract class Api
      * @param array  $options
      * @return mixed
      */
-    protected function call($requestType, $endpoint, $options)
+    protected function call($requestType, $endpoint, array $options = [])
     {
         $url = $this->baseUrl . $endpoint . '?hapikey=' . $this->apiKey;
 

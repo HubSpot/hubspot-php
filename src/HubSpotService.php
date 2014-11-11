@@ -22,8 +22,6 @@ use Fungku\HubSpot\Exceptions\HubSpotException;
  */
 class HubSpotService
 {
-    const DEFAULT_USER_AGENT = 'FungkuHubSpotPHP/2.0 (https://github.com/fungku/hubspot-php)';
-
     /**
      * @var array
      */
@@ -56,6 +54,8 @@ class HubSpotService
      * @var HttpClient
      */
     protected $client;
+
+    const DEFAULT_USER_AGENT = 'FungkuHubSpotPHP/2.0 (https://github.com/fungku/hubspot-php)';
 
     /**
      * @param string     $apiKey
@@ -116,7 +116,7 @@ class HubSpotService
      * @param null   $arguments
      * @return mixed
      */
-    public function __call($name, $arguments)
+    public function __call($name, $arguments = null)
     {
         $providerClass = $this->providerClassName($name);
 
