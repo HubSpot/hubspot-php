@@ -1,4 +1,6 @@
 /.idea
+/public
 /vendor
+test.php
 composer.phar
 .DS_Store

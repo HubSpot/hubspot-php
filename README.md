@@ -17,10 +17,10 @@ then run `composer install` or `composer update`
 
 
 ```php
-$contacts = new Fungku\HubSpot\HubSpotService::contacts('your-api-key');
+$hubspot = Fungku\HubSpot\HubSpotService::create('demo');
 
 // get 10 contacts' firstnames, offset by 10
-$contacts->all([
+$contacts = $hubspot->contacts()->all([
     'count'     => 10,          // defaults to 20
     'property'  => 'firstname', // only get the specified properties
     'vidOffset' => '10'         // contact offset used for paging

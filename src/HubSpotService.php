@@ -1,37 +1,33 @@
 <?php namespace Fungku\HubSpot;
 
+use Fungku\Hubspot\Contracts\HttpClient;
 use Fungku\HubSpot\Exceptions\HubSpotException;
 
 /**
  * Class HubSpotService
  * @package Fungku\HubSpot
  *
- * @method static blog($apiKey, $userAgent = null, $client = null)
- * @method static contacts($apiKey, $userAgent = null, $client = null)
- * @method static forms($apiKey, $userAgent = null, $client = null)
- * @method static keywords($apiKey, $userAgent = null, $client = null)
- * @method static leadNurturing($apiKey, $userAgent = null, $client = null)
- * @method static leads($apiKey, $userAgent = null, $client = null)
- * @method static lists($apiKey, $userAgent = null, $client = null)
- * @method static marketPlace($apiKey, $userAgent = null, $client = null)
- * @method static properties($apiKey, $userAgent = null, $client = null)
- * @method static settings($apiKey, $userAgent = null, $client = null)
- * @method static socialMedia($apiKey, $userAgent = null, $client = null)
- * @method static workflows($apiKey, $userAgent = null, $client = null)
+ * @method blog()
+ * @method contacts()
+ * @method forms()
+ * @method keywords()
+ * @method leadNurturing()
+ * @method leads()
+ * @method lists()
+ * @method marketPlace()
+ * @method properties()
+ * @method settings()
+ * @method socialMedia()
+ * @method workflows()
  */
 class HubSpotService
 {
-    /**
-     * The default userAgent string.
-     */
     const DEFAULT_USER_AGENT = 'FungkuHubSpotPHP/2.0 (https://github.com/fungku/hubspot-php)';
 
     /**
-     * The available API provider classes.
-     *
      * @var array
      */
-    protected static $apiClasses = array(
+    protected $apiClasses = [
         'blog',
         'contacts',
         'forms',
@@ -44,31 +40,53 @@ class HubSpotService
         'settings',
         'socialMedia',
         'workflows',
-    );
+    ];
 
     /**
-     * @param string $name
-     * @param array  $arguments
-     * @return mixed
+     * @var string
      */
-    public static function __callStatic($name, array $arguments = array())
+    protected $apiKey;
+
+    /**
+     * @var string
+     */
+    protected $userAgent;
+
+    /**
+     * @var HttpClient
+     */
+    protected $client;
+
+    /**
+     * @param string     $apiKey
+     * @param string     $userAgent
+     * @param HttpClient $client
+     */
+    protected function __construct($apiKey = null, $userAgent = null, HttpClient $client = null)
     {
-        $apiKey = static::getApiKey($arguments);
-        $userAgent = isset($arguments['userAgent']) ? $arguments['userAgent'] : static::DEFAULT_USER_AGENT;
-        $client = isset($arguments['client']) ? $arguments['client'] : null;
-
-        $providerClass = static::providerClassName($name);
-
-        return new $providerClass($apiKey, $userAgent, $client);
+        $this->apiKey = $this->checkApiKey($apiKey);
+        $this->userAgent = $userAgent ?: static::DEFAULT_USER_AGENT;
+        $this->client = $client;
     }
 
     /**
-     * @param $arguments
+     * @param string     $apiKey
+     * @param string     $userAgent
+     * @param HttpClient $client
+     * @return static
+     */
+    public static function create($apiKey = null, $userAgent = null, HttpClient $client = null)
+    {
+        return new static($apiKey, $userAgent, $client);
+    }
+
+    /**
+     * @param string $apiKey
      * @return string
      */
-    private static function getApiKey($arguments)
+    protected function checkApiKey($apiKey)
     {
-        $apiKey = isset($arguments['apiKey']) ? $arguments['apiKey'] : getenv('HUBSPOT_API_KEY');
+        $apiKey = $apiKey ?: getenv('HUBSPOT_API_KEY');
 
         if ( ! $apiKey) {
             throw new \InvalidArgumentException("You must provide a HubSpot api key.");
@@ -84,12 +102,24 @@ class HubSpotService
      * @return string
      * @throws HubSpotException
      */
-    protected static function providerClassName($name)
+    protected function providerClassName($name)
     {
-        if ( ! in_array($name, static::$apiClasses)) {
+        if ( ! in_array($name, $this->apiClasses)) {
             throw new HubSpotException("Api Class not found.");
         }
 
         return 'Fungku\\HubSpot\\Api\\' . ucfirst($name);
+    }
+
+    /**
+     * @param string $name
+     * @param null   $arguments
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        $providerClass = $this->providerClassName($name);
+
+        return new $providerClass($this->apiKey, $this->userAgent, $this->client);
     }
 }
