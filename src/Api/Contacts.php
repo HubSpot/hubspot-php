@@ -5,9 +5,9 @@ use Fungku\HubSpot\Exceptions\HubSpotException;
 class Contacts extends Api
 {
     /**
- * @param array $contact
- * @return mixed
- */
+     * @param array $contact
+     * @return mixed
+     */
     public function create(array $contact)
     {
         $requestType = 'post';
