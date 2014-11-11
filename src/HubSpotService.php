@@ -56,6 +56,7 @@ class HubSpotService
         $apiKey = static::getApiKey($arguments);
         $userAgent = isset($arguments['userAgent']) ? $arguments['userAgent'] : static::DEFAULT_USER_AGENT;
         $client = isset($arguments['client']) ? $arguments['client'] : null;
+
         $providerClass = static::providerClassName($name);
 
         return new $providerClass($apiKey, $userAgent, $client);
