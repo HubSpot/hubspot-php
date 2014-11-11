@@ -6,6 +6,11 @@ use Fungku\HubSpot\Http\GuzzleClient;
 abstract class Api
 {
     /**
+     * @var string
+     */
+    protected $baseUrl = "https://api.hubapi.com";
+
+    /**
      * HubSpot api key.
      *
      * @var string
@@ -34,5 +39,20 @@ abstract class Api
         $this->apiKey = $apiKey;
         $this->userAgent = $userAgent;
         $this->client = $client ?: new GuzzleClient();
+    }
+
+    /**
+     * @param string $requestType
+     * @param string $endpoint
+     * @param array  $options
+     * @return mixed
+     */
+    protected function call($requestType, $endpoint, $options)
+    {
+        $url = $this->baseUrl . $endpoint . '?hapikey=' . $this->apiKey;
+
+        $options['headers']['User-Agent'] = $this->userAgent;
+
+        return $this->client->$requestType($url, $options);
     }
 }
