@@ -14,7 +14,7 @@ then run `composer install` or `composer update`
 
 ## Status
 
-API Status: (:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
+(:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
 
 :x: Blog
 
