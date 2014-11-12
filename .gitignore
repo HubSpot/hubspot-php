@@ -1,6 +1,7 @@
 /.idea
 /public
 /vendor
-test.php
 composer.phar
+composer.lock
+test.php
 .DS_Store
