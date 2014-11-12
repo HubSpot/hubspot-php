@@ -13,7 +13,7 @@ In composer.json:
 then run `composer install` or `composer update`
 
 
-## Example
+## Quickstart
 
 
 ```php
