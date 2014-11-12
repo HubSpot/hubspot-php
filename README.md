@@ -17,10 +17,10 @@ then run `composer install` or `composer update`
 
 
 ```php
-$hubspot = Fungku\HubSpot\HubSpotService::create('demo');
+$hubspot = Fungku\HubSpot\HubSpotService::create('api-key');
 
 // Get a single contact
-$contact = $hubspot->contacts()->getById(196679);
+$contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 
 // Get an array of contacts
 $collection = $hubspot->contacts()->all([
