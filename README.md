@@ -12,6 +12,34 @@ In composer.json:
 ```
 then run `composer install` or `composer update`
 
+## Status
+
+API Status: (:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
+
+:x: Blog
+
+:heavy_check_mark: Contacts
+
+:x: Forms
+
+:x: Keywords
+
+:x: Lead Nurturing
+
+:x: Leads
+
+:x: Lists
+
+:x: MarketPlace
+
+:x: Properties
+
+:x: Settings
+
+:x: Social Media
+
+:x: Workflows
+
 
 ## Quickstart
 
