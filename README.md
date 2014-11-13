@@ -29,7 +29,6 @@ $hubspot = Fungku\HubSpot\HubSpotService::create('api-key');
 #### Get a single contact:
 
 ```php
-// Get a single contact
 $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 ```
 
@@ -49,7 +48,7 @@ foreach ($collection['contacts'] as $contact) {
     echo $contact['properties']['firstname']['value'];
 }
 
-// For pagination
+// Info for pagination
 echo $collection['has-more'];
 echo $collection['vid-offset'];
 ```
@@ -59,6 +58,7 @@ echo $collection['vid-offset'];
 ```php
 $vids = [196189, 196188, 196187];
 
+// Get batch of contacts, and limit properties to firstname
 $contacts = $hubspot->contacts()->getBatchByIds($vids, ['property' => 'firstname']);
 
 foreach ($contacts as $contact) {
