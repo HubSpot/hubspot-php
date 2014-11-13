@@ -14,6 +14,8 @@ I've decided to start from scratch on a HubSpot API client. I already have a [pe
 }
 ```
 
+If you set an environment variable with the key `HUBSPOT_API_KEY` and the value as your api key, you can instantiate `HubSpotService` without including an api key as an argument.
+
 ## Status
 
 (:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
