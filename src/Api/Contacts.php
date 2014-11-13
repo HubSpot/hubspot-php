@@ -10,7 +10,7 @@ class Contacts extends Api
     {
         $endpoint = '/contacts/v1/contact';
 
-        return $this->postRequest($endpoint, $contact);
+        return $this->request('post', $endpoint, $contact);
     }
 
     /**
@@ -22,7 +22,7 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
-        return $this->postRequest($endpoint, $contact);
+        return $this->request('post', $endpoint, $contact);
     }
 
     /**
@@ -34,7 +34,7 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
 
-        return $this->postRequest($endpoint, $contact);
+        return $this->request('post', $endpoint, $contact);
     }
 
     /**
@@ -45,7 +45,7 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contact/batch";
 
-        return $this->postRequest($endpoint, $contacts);
+        return $this->request('post', $endpoint, $contacts);
     }
 
     /**
@@ -56,7 +56,7 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contact/vid/{$id}";
 
-        return $this->deleteRequest($endpoint);
+        return $this->request('delete', $endpoint);
     }
 
     /**
@@ -67,7 +67,7 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/lists/all/contacts/all";
 
-        return $this->getRequest($endpoint, $params);
+        return $this->request('get', $endpoint, $params);
     }
 
     /**
@@ -78,7 +78,7 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/lists/recently_updated/contacts/recent";
 
-        return $this->getRequest($endpoint, $params);
+        return $this->request($endpoint, $params);
     }
 
     /**
@@ -89,7 +89,7 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
-        return $this->getRequest($endpoint);
+        return $this->request($endpoint);
     }
 
     /**
@@ -116,7 +116,7 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contact/email/{$email}/profile";
 
-        return $this->getRequest($endpoint);
+        return $this->request('get', $endpoint);
     }
 
     /**
@@ -132,7 +132,7 @@ class Contacts extends Api
 
         $options['query'] = $params;
 
-        return $this->getRequest($endpoint, $options, $queryString);
+        return $this->request('get', $endpoint, $options, $queryString);
     }
 
     /**
@@ -143,7 +143,7 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contact/utk/{$utk}/profile";
 
-        return $this->getRequest($endpoint);
+        return $this->request('get', $endpoint);
     }
 
 
@@ -160,7 +160,7 @@ class Contacts extends Api
 
         $options['query'] = $params;
 
-        return $this->getRequest($endpoint, $options, $queryString);
+        return $this->request('get', $endpoint, $options, $queryString);
     }
 
     /**
@@ -174,7 +174,7 @@ class Contacts extends Api
 
         $params['q'] = $query;
 
-        return $this->getRequest($endpoint, $params);
+        return $this->request('get', $endpoint, $params);
     }
 
     /**
@@ -184,7 +184,22 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contacts/statistics";
 
-        return $this->getRequest($endpoint);
+        return $this->request('get', $endpoint);
     }
 
+    /**
+     * @param string $varName
+     * @param array  $items
+     * @return string
+     */
+    private function generateBatchQuery($varName, array $items)
+    {
+        $queryString = '';
+
+        foreach ($items as $item) {
+            $queryString .= "&{$varName}={$item}";
+        }
+
+        return $queryString;
+    }
 }

@@ -41,21 +41,6 @@ abstract class Api
         $this->client = $client ?: new GuzzleClient();
     }
 
-    protected function getRequest($endpoint, array $params = [])
-    {
-        $options['query'] = $params;
-
-        return $this->request('get', $endpoint, $options);
-    }
-
-    protected function getBatchRequest($endpoint, array $params = [])
-    {
-
-
-        return $this->request('get', $endpoint, $options);
-    }
-
-
     /**
      * @param string  $method
      * @param string  $endpoint
@@ -77,19 +62,8 @@ abstract class Api
      * @param string $queryString
      * @return string
      */
-    private function generateUrl($endpoint, $queryString = null)
+    protected function generateUrl($endpoint, $queryString = null)
     {
         return $this->baseUrl . $endpoint . '?hapikey=' . $this->apiKey . $queryString;
-    }
-
-    protected function generateBatchQuery($varName, array $items)
-    {
-        $queryString = '';
-
-        foreach ($items as $item) {
-            $queryString .= "&{$varName}={$item}";
-        }
-
-        return $queryString;
     }
 }

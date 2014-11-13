@@ -80,13 +80,15 @@ I would make the syntax cleaner `$contact->firstname`, but as you can see it wou
 
 (:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
 
-:x: Blog
+:interrobang: Blog
 
 :x: Companies :new:
 
 :x: Companies Properties :new:
 
 :heavy_check_mark: Contacts
+
+:x: Contact Lists
 
 :x: Contact Properties
 
@@ -111,8 +113,6 @@ I would make the syntax cleaner `$contact->firstname`, but as you can see it wou
 :x: Leads
 
 :x: Prospects :new:
-
-:x: Lists
 
 :x: MarketPlace
 
