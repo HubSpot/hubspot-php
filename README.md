@@ -18,11 +18,17 @@ If you set an environment variable with the key `HUBSPOT_API_KEY` and the value 
 
 ## Quickstart
 
-#### Get a single contact:
+#### Instantiate hubspot service
+
+All following examples assume this step.
 
 ```php
 $hubspot = Fungku\HubSpot\HubSpotService::create('api-key');
+```
 
+#### Get a single contact:
+
+```php
 // Get a single contact
 $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 ```
@@ -30,8 +36,6 @@ $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 #### Paginate through all contacts:
 
 ```php
-$hubspot = Fungku\HubSpot\HubSpotService::create('api-key');
-
 // Get an array of 10 contacts
 // getting only the firstname and lastname properties
 // and set the offset to 123456
@@ -48,12 +52,11 @@ foreach ($collection['contacts'] as $contact) {
 // For pagination
 echo $collection['has-more'];
 echo $collection['vid-offset'];
+```
 
 #### Get a group of contacts by Ids
 
 ```php
-$hubspot = Fungku\HubSpot\HubSpotService::create('api-key');
-
 $vids = [196189, 196188, 196187];
 
 $contacts = $hubspot->contacts()->getBatchByIds($vids, ['property' => 'firstname']);
