@@ -7,7 +7,7 @@ In composer.json:
 
 ```
 "require": {
-	"fungku/hubspot-php": "2.0.*"
+	"fungku/hubspot-php": "~0.1@dev"
 }
 ```
 then run `composer install` or `composer update`
