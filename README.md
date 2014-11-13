@@ -30,6 +30,8 @@ $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 #### Paginate through all contacts:
 
 ```php
+$hubspot = Fungku\HubSpot\HubSpotService::create('api-key');
+
 // Get an array of 10 contacts
 // getting only the firstname and lastname properties
 // and set the offset to 123456
@@ -50,6 +52,8 @@ echo $collection['vid-offset'];
 #### Get a group of contacts by Ids
 
 ```php
+$hubspot = Fungku\HubSpot\HubSpotService::create('api-key');
+
 $vids = [196189, 196188, 196187];
 
 $contacts = $hubspot->contacts()->getBatchByIds($vids, ['property' => 'firstname']);
