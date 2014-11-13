@@ -1,5 +1,7 @@
 # HubSpot PHP API client
 
+[![Latest Stable Version](https://poser.pugx.org/fungku/hubspot-php/v/stable.svg)](https://packagist.org/packages/fungku/hubspot-php) [![Latest Unstable Version](https://poser.pugx.org/fungku/hubspot-php/v/unstable.svg)](https://packagist.org/packages/fungku/hubspot-php) [![Total Downloads](https://poser.pugx.org/fungku/hubspot-php/downloads.svg)](https://packagist.org/packages/fungku/hubspot-php) [![License](https://poser.pugx.org/fungku/hubspot-php/license.svg)](https://packagist.org/packages/fungku/hubspot-php)
+
 I've decided to start from scratch on a HubSpot API client. I already have a [perfectly functional wrapper](https://github.com/fungku/hubspot) of the [haPihP](https://github.com/HubSpot/haPiHP) client. However, I need some good old fashioned practice, and this is something I'm familiar with and will be using in the future.
 
 ## Setup
