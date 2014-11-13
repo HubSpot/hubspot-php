@@ -16,35 +16,6 @@ I've decided to start from scratch on a HubSpot API client. I already have a [pe
 
 If you set an environment variable with the key `HUBSPOT_API_KEY` and the value as your api key, you can instantiate `HubSpotService` without including an api key as an argument.
 
-## Status
-
-(:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
-
-:x: Blog
-
-:heavy_check_mark: Contacts
-
-:x: Forms
-
-:x: Keywords
-
-:x: Lead Nurturing
-
-:x: Leads
-
-:x: Lists
-
-:x: MarketPlace
-
-:x: Properties
-
-:x: Settings
-
-:x: Social Media
-
-:x: Workflows
-
-
 ## Quickstart
 
 
@@ -75,3 +46,49 @@ echo $collection['vid-offset'];
 *Note:* The Hubspot class checks for a `HUBSPOT_API_KEY` environment variable if you don't include one during instantiation.
 
 I would make the syntax cleaner `$contact->firstname`, but as you can see it would probably take a lot of work. [Here is a sample](https://github.com/fungku/hubspot-php/wiki/Contact-Var-Dump) `var_dump()` of a contact. I might visit this after all the other Api classes are working, though. 
+
+## Status
+
+(:heavy_check_mark: Complete, :interrobang: In Progress, :x: Todo)
+
+:x: Blog
+
+:x: Companies :new:
+
+:x: Companies Properties :new:
+
+:heavy_check_mark: Contacts
+
+:x: Contact Properties
+
+:x: COS Blog :new:
+
+:x: COS Page Publishing :new:
+
+:x: COS Files :new:
+
+:x: Deals :new:
+
+:x: Email :new:
+
+:x: Email Events :new:
+
+:x: Forms
+
+:x: Keywords
+
+:x: Lead Nurturing
+
+:x: Leads
+
+:x: Prospects :new:
+
+:x: Lists
+
+:x: MarketPlace
+
+:x: Settings
+
+:x: Social Media
+
+:x: Workflows
