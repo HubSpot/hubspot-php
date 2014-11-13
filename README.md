@@ -1,7 +1,7 @@
 # HubSpot PHP API client
 
 
-## Setup (don't bother it does not actually exist, still in development!)
+## Setup
 
 In composer.json:
 
