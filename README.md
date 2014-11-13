@@ -1,5 +1,6 @@
 # HubSpot PHP API client
 
+I've decided to start from scratch on a HubSpot API client. I already have a [perfectly functional wrapper](https://github.com/fungku/hubspot) of the haPihP client. However, I need some good old fashioned practice, and this is something I'm familiar with and will be using in the future.
 
 ## Setup
 
