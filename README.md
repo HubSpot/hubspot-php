@@ -10,6 +10,8 @@ in the future.
 The only dependency is Guzzle, because who likes to use cURL? However, I also want to make it possible to drop the 
 dependency and swap it out for a cURL implementation fairly easily.
 
+#### [Please check the status before using!](https://github.com/fungku/hubspot-php#status)
+
 ## Setup
 
 **Composer:**
