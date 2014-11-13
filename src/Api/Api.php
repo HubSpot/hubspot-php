@@ -41,18 +41,55 @@ abstract class Api
         $this->client = $client ?: new GuzzleClient();
     }
 
+    protected function getRequest($endpoint, array $params = [])
+    {
+        $options['query'] = $params;
+
+        return $this->request('get', $endpoint, $options);
+    }
+
+    protected function getBatchRequest($endpoint, array $params = [])
+    {
+
+
+        return $this->request('get', $endpoint, $options);
+    }
+
+
     /**
-     * @param string $requestType
-     * @param string $endpoint
-     * @param array  $options
+     * @param string  $method
+     * @param string  $endpoint
+     * @param array   $options
+     * @param string  $queryString
      * @return mixed
      */
-    protected function call($requestType, $endpoint, array $options = [])
+    protected function request($method, $endpoint, array $options = [], $queryString = null)
     {
-        $url = $this->baseUrl . $endpoint . '?hapikey=' . $this->apiKey;
+        $url = $this->generateUrl($endpoint, $queryString);
 
         $options['headers']['User-Agent'] = $this->userAgent;
 
-        return $this->client->$requestType($url, $options);
+        return $this->client->$method($url, $options);
+    }
+
+    /**
+     * @param string $endpoint
+     * @param string $queryString
+     * @return string
+     */
+    private function generateUrl($endpoint, $queryString = null)
+    {
+        return $this->baseUrl . $endpoint . '?hapikey=' . $this->apiKey . $queryString;
+    }
+
+    protected function generateBatchQuery($varName, array $items)
+    {
+        $queryString = '';
+
+        foreach ($items as $item) {
+            $queryString .= "&{$varName}={$item}";
+        }
+
+        return $queryString;
     }
 }

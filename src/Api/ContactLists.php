@@ -1,6 +1,6 @@
 <?php namespace Fungku\HubSpot\Api;
 
-class Lists extends Api
+class ContactLists extends Api
 {
     /**
      * @param string  $name      The name of the list.
@@ -12,7 +12,7 @@ class Lists extends Api
      */
     public function create($name, $portalId, $dynamic = false, array $filters = [], array $listData = [])
     {
-        $requestType = "post";
+        $method = "post";
         $endpoint = '/contacts/v1/lists';
 
         $data = [
@@ -26,7 +26,7 @@ class Lists extends Api
 
         $options['json'] = $data;
 
-        return $this->call($requestType, $endpoint, $options);
+        return $this->request($method, $endpoint, $options);
     }
 
     /**
@@ -36,12 +36,12 @@ class Lists extends Api
      */
     public function update($id, array $contact)
     {
-        $requestType = "post";
+        $method = "post";
         $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
         $options['json'] = $contact;
 
-        return $this->call($requestType, $endpoint, $options);
+        return $this->request($method, $endpoint, $options);
     }
 
     /**
@@ -51,12 +51,12 @@ class Lists extends Api
      */
     public function createOrUpdate($email, array $contact)
     {
-        $requestType = "post";
+        $method = "post";
         $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
 
         $options['json'] = $contact;
 
-        return $this->call($requestType, $endpoint, $options);
+        return $this->request($method, $endpoint, $options);
     }
 
     /**
@@ -65,12 +65,12 @@ class Lists extends Api
      */
     public function createOrUpdateBatch(array $contacts)
     {
-        $requestType = "post";
+        $method = "post";
         $endpoint = "/contacts/v1/contact/batch";
 
         $options['json'] = $contacts;
 
-        return $this->call($requestType, $endpoint, $options);
+        return $this->request($method, $endpoint, $options);
     }
 
     /**
@@ -79,10 +79,10 @@ class Lists extends Api
      */
     public function delete($id)
     {
-        $requestType = "delete";
+        $method = "delete";
         $endpoint = "/contacts/v1/contact/vid/{$id}";
 
-        return $this->call($requestType, $endpoint);
+        return $this->request($method, $endpoint);
     }
 
     /**
@@ -91,12 +91,12 @@ class Lists extends Api
      */
     public function all(array $params = [])
     {
-        $requestType = "get";
+        $method = "get";
         $endpoint = "/contacts/v1/lists/all/contacts/all";
 
         $options['query'] = $params;
 
-        return $this->call($requestType, $endpoint, $options);
+        return $this->request($method, $endpoint, $options);
     }
 
     /**
@@ -105,12 +105,12 @@ class Lists extends Api
      */
     public function recent(array $params = [])
     {
-        $requestType = "get";
+        $method = "get";
         $endpoint = "/contacts/v1/lists/recently_updated/contacts/recent";
 
         $options['query'] = $params;
 
-        return $this->call($requestType, $endpoint, $options);
+        return $this->request($method, $endpoint, $options);
     }
 
     /**
@@ -119,10 +119,10 @@ class Lists extends Api
      */
     public function getById($id)
     {
-        $requestType = "get";
+        $method = "get";
         $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
-        return $this->call($requestType, $endpoint);
+        return $this->request($method, $endpoint);
     }
 
 //    /**
@@ -131,7 +131,7 @@ class Lists extends Api
 //     */
 //    public function getBatchByIds(array $ids, array $params = [])
 //    {
-//        $requestType = "get";
+//        $method = "get";
 //        $endpoint = "/contacts/v1/contact/vids/batch/";
 //
 //        $vids = [];
@@ -142,7 +142,7 @@ class Lists extends Api
 //
 //        $options['query'] = $vids;
 //
-//        return $this->call($requestType, $endpoint, $options);
+//        return $this->request($method, $endpoint, $options);
 //    }
 
     /**
@@ -151,10 +151,10 @@ class Lists extends Api
      */
     public function getByEmail($email)
     {
-        $requestType = "get";
+        $method = "get";
         $endpoint = "/contacts/v1/contact/email/{$email}/profile";
 
-        return $this->call($requestType, $endpoint);
+        return $this->request($method, $endpoint);
     }
 
 //    /**
@@ -163,7 +163,7 @@ class Lists extends Api
 //     */
 //    public function getBatchByEmails(array $emails, array $params = [])
 //    {
-//        $requestType = "get";
+//        $method = "get";
 //        $endpoint = "/contacts/v1/contact/vids/batch/";
 //
 //        $em = [];
@@ -174,7 +174,7 @@ class Lists extends Api
 //
 //        $options['query'] = $em;
 //
-//        return $this->call($requestType, $endpoint, $options);
+//        return $this->request($method, $endpoint, $options);
 //    }
 
     /**
@@ -183,10 +183,10 @@ class Lists extends Api
      */
     public function getByToken($utk)
     {
-        $requestType = "get";
+        $method = "get";
         $endpoint = "/contacts/v1/contact/utk/{$utk}/profile";
 
-        return $this->call($requestType, $endpoint);
+        return $this->request($method, $endpoint);
     }
 
 
@@ -196,7 +196,7 @@ class Lists extends Api
 //     */
 //    public function getBatchByTokens(array $utks, array $params = [])
 //    {
-//        $requestType = "get";
+//        $method = "get";
 //        $endpoint = "/contacts/v1/contact/utks/batch/";
 //
 //        $tokens = [];
@@ -207,7 +207,7 @@ class Lists extends Api
 //
 //        $options['query'] = $tokens;
 //
-//        return $this->call($requestType, $endpoint, $options);
+//        return $this->request($method, $endpoint, $options);
 //    }
 
     /**
@@ -217,14 +217,14 @@ class Lists extends Api
      */
     public function search($query, array $params = [])
     {
-        $requestType = "get";
+        $method = "get";
         $endpoint = "/contacts/v1/search/query";
 
         $params['q'] = $query;
 
         $options['query'] = $params;
 
-        return $this->call($requestType, $endpoint, $options);
+        return $this->request($method, $endpoint, $options);
     }
 
     /**
@@ -232,10 +232,10 @@ class Lists extends Api
      */
     public function statistics()
     {
-        $requestType = "get";
+        $method = "get";
         $endpoint = "/contacts/v1/contacts/statistics";
 
-        return $this->call($requestType, $endpoint);
+        return $this->request($method, $endpoint);
     }
 
 }
