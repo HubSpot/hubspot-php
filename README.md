@@ -6,14 +6,13 @@ I've decided to start from scratch on a HubSpot API client. I already have a [pe
 
 ## Setup
 
-In composer.json:
+**Composer:**
 
 ```
 "require": {
 	"fungku/hubspot-php": "dev-master"
 }
 ```
-then `composer update`
 
 ## Status
 
