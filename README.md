@@ -13,7 +13,7 @@ In composer.json:
 	"fungku/hubspot-php": "dev-master"
 }
 ```
-then run `composer install` or `composer update`
+then `composer update`
 
 ## Status
 
