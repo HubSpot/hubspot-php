@@ -78,11 +78,11 @@ I would make the syntax cleaner `$contact->firstname`, but as you can see it wou
 
 ## Status
 
-(:ballot_box_with_check: Complete, :black_medium_small_square: In Progress, :white_medium_small_square: Todo, :heavy_multiplication_x: Not planned)
+(:ballot_box_with_check: Complete, :wavy_dash: In Progress, :white_medium_small_square: Todo, :heavy_multiplication_x: Not planned)
 
 If you see something not planned, that you want, make an [issues](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
 
-:black_medium_small_square: Blog
+:wavy_dash: Blog
 
 :heavy_multiplication_x: Companies :new:
 
