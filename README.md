@@ -78,48 +78,48 @@ I would make the syntax cleaner `$contact->firstname`, but as you can see it wou
 
 ## Status
 
-(:white_check_mark: Complete, :large_blue_circle: In Progress, :black_square_button: Todo, :red_circle: Not planned)
+(:ballot_box_with_check: Complete, :black_medium_small_square: In Progress, :white_medium_small_square: Todo, :heavy_multiplication_x: Not planned)
 
 If you see something not planned, that you want, make an [issues](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
 
-:large_blue_circle: Blog
+:black_medium_small_square: Blog
 
-:red_circle: Companies :new:
+:heavy_multiplication_x: Companies :new:
 
-:red_circle: Companies Properties :new:
+:heavy_multiplication_x: Companies Properties :new:
 
-:white_check_mark: Contacts
+:ballot_box_with_check: Contacts
 
-:black_square_button: Contact Lists
+:white_medium_small_square: Contact Lists
 
-:black_square_button: Contact Properties
+:white_medium_small_square: Contact Properties
 
-:red_circle: COS Blog :new:
+:heavy_multiplication_x: COS Blog :new:
 
-:red_circle: COS Page Publishing :new:
+:heavy_multiplication_x: COS Page Publishing :new:
 
-:black_square_button: COS Files :new:
+:white_medium_small_square: COS Files :new:
 
-:red_circle: Deals :new:
+:heavy_multiplication_x: Deals :new:
 
-:black_square_button: Email :new:
+:white_medium_small_square: Email :new:
 
-:red_circle: Email Events :new:
+:heavy_multiplication_x: Email Events :new:
 
-:black_square_button: Forms
+:white_medium_small_square: Forms
 
-:red_circle: Keywords
+:heavy_multiplication_x: Keywords
 
-:black_square_button: Lead Nurturing
+:white_medium_small_square: Lead Nurturing
 
-:black_square_button: Leads
+:white_medium_small_square: Leads
 
-:black_square_button: Prospects :new:
+:white_medium_small_square: Prospects :new:
 
-:red_circle: MarketPlace
+:heavy_multiplication_x: MarketPlace
 
-:red_circle: Settings
+:heavy_multiplication_x: Settings
 
-:black_square_button: Social Media
+:white_medium_small_square: Social Media
 
-:black_square_button: Workflows
+:white_medium_small_square: Workflows
