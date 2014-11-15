@@ -55,7 +55,10 @@ class HubSpotService
      */
     protected $client;
 
-    const DEFAULT_USER_AGENT = 'FungkuHubSpotPHP/2.0 (https://github.com/fungku/hubspot-php)';
+    /**
+     * @type string
+     */
+    const DEFAULT_USER_AGENT = 'Fungku_HubSpot_PHP/0.1 (https://github.com/fungku/hubspot-php)';
 
     /**
      * @param string     $apiKey

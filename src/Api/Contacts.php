@@ -10,7 +10,9 @@ class Contacts extends Api
     {
         $endpoint = '/contacts/v1/contact';
 
-        return $this->request('post', $endpoint, $contact);
+        $options['json'] = $contact;
+
+        return $this->request('post', $endpoint, $options);
     }
 
     /**
@@ -22,7 +24,9 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
-        return $this->request('post', $endpoint, $contact);
+        $options['json'] = $contact;
+
+        return $this->request('post', $endpoint, $options);
     }
 
     /**
@@ -34,7 +38,9 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
 
-        return $this->request('post', $endpoint, $contact);
+        $options['json'] = $contact;
+
+        return $this->request('post', $endpoint, $options);
     }
 
     /**
@@ -44,6 +50,8 @@ class Contacts extends Api
     public function createOrUpdateBatch(array $contacts)
     {
         $endpoint = "/contacts/v1/contact/batch";
+
+        $options['json'] = $contacts;
 
         return $this->request('post', $endpoint, $contacts);
     }
@@ -67,7 +75,9 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/lists/all/contacts/all";
 
-        return $this->request('get', $endpoint, $params);
+        $options['query'] = $params;
+
+        return $this->request('get', $endpoint, $options);
     }
 
     /**
@@ -78,7 +88,9 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/lists/recently_updated/contacts/recent";
 
-        return $this->request($endpoint, $params);
+        $options['query'] = $params;
+
+        return $this->request('get', $endpoint, $options);
     }
 
     /**
@@ -89,7 +101,7 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
-        return $this->request($endpoint);
+        return $this->request('get', $endpoint);
     }
 
     /**

@@ -33,15 +33,24 @@ class BlogPosts extends Api
     }
 
     /**
-     * @param int   $id      The contact id.
-     * @param array $contact The contact properties to update.
+     * @param int   $id     The blog post id.
+     * @param array $params The blog post fields to update.
      * @return mixed
      */
-    public function update($id, array $contact)
+    public function update($id, array $params)
     {
-        $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
+        $endpoint = "/content/api/v2/blog-posts/{$id}";
 
-        return $this->request('post', $endpoint, $contact);
+        $options['json'] = $params;
+
+        return $this->request('post', $endpoint, $options);
+    }
+
+    public function delete($id)
+    {
+        $endpoint = "/content/api/v2/blog-posts/{$id}";
+
+        return $this->request('delete', $endpoint);
     }
 
     /**
