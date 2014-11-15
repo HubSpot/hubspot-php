@@ -84,31 +84,17 @@ If you see something not planned, that you want, make an [issues](https://github
 
 :wavy_dash: Blog
 
-:black_medium_small_square: Companies :new:
-
-:black_medium_small_square: Companies Properties :new:
-
 :ballot_box_with_check: Contacts
 
 :white_medium_small_square: Contact Lists
 
 :white_medium_small_square: Contact Properties
 
-:black_medium_small_square: COS Blog :new:
-
-:black_medium_small_square: COS Page Publishing :new:
-
 :white_medium_small_square: COS Files :new:
-
-:black_medium_small_square: Deals :new:
 
 :white_medium_small_square: Email :new:
 
-:black_medium_small_square: Email Events :new:
-
 :white_medium_small_square: Forms
-
-:black_medium_small_square: Keywords
 
 :white_medium_small_square: Lead Nurturing
 
@@ -116,10 +102,24 @@ If you see something not planned, that you want, make an [issues](https://github
 
 :white_medium_small_square: Prospects :new:
 
-:black_medium_small_square: MarketPlace
-
-:black_medium_small_square: Settings
-
 :white_medium_small_square: Social Media
 
 :white_medium_small_square: Workflows
+
+:black_medium_small_square: Companies :new:
+
+:black_medium_small_square: Companies Properties :new:
+
+:black_medium_small_square: COS Blog :new:
+
+:black_medium_small_square: COS Page Publishing :new:
+
+:black_medium_small_square: Deals :new:
+
+:black_medium_small_square: Email Events :new:
+
+:black_medium_small_square: Keywords
+
+:black_medium_small_square: MarketPlace
+
+:black_medium_small_square: Settings
