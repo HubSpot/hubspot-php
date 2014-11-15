@@ -125,3 +125,5 @@ If you see something not planned, that you want, make an [issues](https://github
 :black_medium_small_square: MarketPlace
 
 :black_medium_small_square: Settings
+
+[ ![Codeship Status for fungku/hubspot-php](https://codeship.com/projects/b7b6d0d0-4f28-0132-62b6-1e43a57e79c2/status)](https://codeship.com/projects/47843)
