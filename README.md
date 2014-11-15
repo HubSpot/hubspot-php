@@ -78,48 +78,48 @@ I would make the syntax cleaner `$contact->firstname`, but as you can see it wou
 
 ## Status
 
-(:heavy_check_mark: Complete, :interrobang: In Progress, :o: Todo, :x: Not planned)
+(:white_check_mark: Complete, :large_blue_circle: In Progress, :black_square_button: Todo, :red_circle: Not planned)
 
 If you see something not planned, that you want, make an [issues](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
 
-:interrobang: Blog
+:large_blue_circle: Blog
 
-:x: Companies :new:
+:red_circle: Companies :new:
 
-:x: Companies Properties :new:
+:red_circle: Companies Properties :new:
 
-:heavy_check_mark: Contacts
+:white_check_mark: Contacts
 
-:o: Contact Lists
+:black_square_button: Contact Lists
 
-:o: Contact Properties
+:black_square_button: Contact Properties
 
-:x: COS Blog :new:
+:red_circle: COS Blog :new:
 
-:x: COS Page Publishing :new:
+:red_circle: COS Page Publishing :new:
 
-:o: COS Files :new:
+:black_square_button: COS Files :new:
 
-:x: Deals :new:
+:red_circle: Deals :new:
 
-:o: Email :new:
+:black_square_button: Email :new:
 
-:x: Email Events :new:
+:red_circle: Email Events :new:
 
-:o: Forms
+:black_square_button: Forms
 
-:x: Keywords
+:red_circle: Keywords
 
-:o: Lead Nurturing
+:black_square_button: Lead Nurturing
 
-:o: Leads
+:black_square_button: Leads
 
-:o: Prospects :new:
+:black_square_button: Prospects :new:
 
-:x: MarketPlace
+:red_circle: MarketPlace
 
-:x: Settings
+:red_circle: Settings
 
-:o: Social Media
+:black_square_button: Social Media
 
-:o: Workflows
+:black_square_button: Workflows
