@@ -1,6 +1,6 @@
 <?php namespace Fungku\HubSpot;
 
-use Fungku\Hubspot\Contracts\HttpClient;
+use Fungku\HubSpot\Contracts\HttpClient;
 use Fungku\HubSpot\Exceptions\HubSpotException;
 
 /**
