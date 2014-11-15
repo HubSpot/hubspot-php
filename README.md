@@ -78,15 +78,15 @@ I would make the syntax cleaner `$contact->firstname`, but as you can see it wou
 
 ## Status
 
-(:ballot_box_with_check: Complete, :wavy_dash: In Progress, :white_medium_small_square: Todo, :heavy_multiplication_x: Not planned)
+(:ballot_box_with_check: Complete, :wavy_dash: In Progress, :white_medium_small_square: Todo, :black_medium_small_square: Not planned)
 
 If you see something not planned, that you want, make an [issues](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
 
 :wavy_dash: Blog
 
-:heavy_multiplication_x: Companies :new:
+:black_medium_small_square: Companies :new:
 
-:heavy_multiplication_x: Companies Properties :new:
+:black_medium_small_square: Companies Properties :new:
 
 :ballot_box_with_check: Contacts
 
@@ -94,21 +94,21 @@ If you see something not planned, that you want, make an [issues](https://github
 
 :white_medium_small_square: Contact Properties
 
-:heavy_multiplication_x: COS Blog :new:
+:black_medium_small_square: COS Blog :new:
 
-:heavy_multiplication_x: COS Page Publishing :new:
+:black_medium_small_square: COS Page Publishing :new:
 
 :white_medium_small_square: COS Files :new:
 
-:heavy_multiplication_x: Deals :new:
+:black_medium_small_square: Deals :new:
 
 :white_medium_small_square: Email :new:
 
-:heavy_multiplication_x: Email Events :new:
+:black_medium_small_square: Email Events :new:
 
 :white_medium_small_square: Forms
 
-:heavy_multiplication_x: Keywords
+:black_medium_small_square: Keywords
 
 :white_medium_small_square: Lead Nurturing
 
@@ -116,9 +116,9 @@ If you see something not planned, that you want, make an [issues](https://github
 
 :white_medium_small_square: Prospects :new:
 
-:heavy_multiplication_x: MarketPlace
+:black_medium_small_square: MarketPlace
 
-:heavy_multiplication_x: Settings
+:black_medium_small_square: Settings
 
 :white_medium_small_square: Social Media
 
