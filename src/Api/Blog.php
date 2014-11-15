@@ -3,34 +3,64 @@
 class Blog extends Api
 {
     /**
-     * @param array $params
+     * Get all blogs.
+     *
+     * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
      * @return mixed
      */
     public function all(array $params = [])
     {
-        $endpoint = '/blog/v1/list.json';
+        $endpoint = '/content/api/v2/blogs';
 
         $options['query'] = $params;
 
         return $this->request('get', $endpoint, $options);
     }
 
-    public function getInfo() {}
+    /**
+     * Get information about a specific blog.
+     *
+     * @param string $id
+     * @return mixed
+     */
+    public function getById($id)
+    {
+        $endpoint = "/content/api/v2/{$id}";
 
-    public function getComments() {}
+        return $this->request('get', $endpoint);
+    }
 
-    public function getPosts() {}
+    /**
+     * Get previous versions of the blog.
+     *
+     * @param string $id     Blog id.
+     * @param array  $params Optional parameters.
+     * @return mixed
+     */
+    public function revisions($id, array $params = [])
+    {
+        $endpoint = "/content/api/v2/blogs/{$id}/versions";
 
-    public function getPostComments() {}
+        $options['query'] = $params;
 
-    public function getCommentInfo() {}
+        return $this->request('get', $endpoint, $options);
+    }
 
-    public function createPost() {}
+    /**
+     * Get a previous version of the blog.
+     *
+     * @param string $id         Blog id.
+     * @param string $version_id Version id.
+     * @param array  $params     Optional parameters.
+     * @return mixed
+     */
+    public function getVersion($id, $version_id, array $params = [])
+    {
+        $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
 
-    public function updatePost() {}
+        $options['query'] = $params;
 
-    public function publishPost() {}
-
-    public function createComment() {}
+        return $this->request('get', $endpoint, $options);
+    }
 
 }
