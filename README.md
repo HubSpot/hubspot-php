@@ -82,13 +82,11 @@ I would make the syntax cleaner `$contact->firstname`, but as you can see it wou
 
 If you see something not planned, that you want, make an [issues](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
 
-:ballot_box_with_check: COS Blog :new:
-
-:black_medium_small_square: COS Page Publishing :new:
+:ballot_box_with_check: Blog (COS) :new:
 
 :ballot_box_with_check: Contacts
 
-:wavy_dash: :white_medium_small_square: Contact Lists
+:wavy_dash: Contact Lists
 
 :white_medium_small_square: Contact Properties
 
@@ -101,6 +99,8 @@ If you see something not planned, that you want, make an [issues](https://github
 :white_medium_small_square: Lead Nurturing
 
 :white_medium_small_square: Leads
+
+:white_medium_small_square: Page Publishing (COS) :new:
 
 :white_medium_small_square: Prospects :new:
 
