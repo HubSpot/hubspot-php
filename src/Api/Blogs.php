@@ -1,6 +1,6 @@
 <?php namespace Fungku\HubSpot\Api;
 
-class Blog extends Api
+class Blogs extends Api
 {
     /**
      * Get all blogs.
@@ -25,7 +25,7 @@ class Blog extends Api
      */
     public function getById($id)
     {
-        $endpoint = "/content/api/v2/{$id}";
+        $endpoint = "/content/api/v2/blogs/{$id}";
 
         return $this->request('get', $endpoint);
     }
@@ -37,7 +37,7 @@ class Blog extends Api
      * @param array  $params Optional parameters.
      * @return mixed
      */
-    public function revisions($id, array $params = [])
+    public function versions($id, array $params = [])
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions";
 
@@ -54,7 +54,7 @@ class Blog extends Api
      * @param array  $params     Optional parameters.
      * @return mixed
      */
-    public function getVersion($id, $version_id, array $params = [])
+    public function getVersionById($id, $version_id, array $params = [])
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
 

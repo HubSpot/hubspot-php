@@ -7,7 +7,7 @@ use Fungku\HubSpot\Exceptions\HubSpotException;
  * Class HubSpotService
  * @package Fungku\HubSpot
  *
- * @method blog()
+ * @method blogs()
  * @method contacts()
  * @method forms()
  * @method keywords()
@@ -26,7 +26,7 @@ class HubSpotService
      * @var array
      */
     protected $apiClasses = [
-        'blog',
+        'blogs',
         'contacts',
         'contactLists',
         'contactProperties',
