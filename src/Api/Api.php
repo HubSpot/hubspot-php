@@ -1,7 +1,6 @@
 <?php namespace Fungku\HubSpot\Api;
 
-use Fungku\Hubspot\Contracts\HttpClient;
-use Fungku\HubSpot\Http\GuzzleClient;
+use Fungku\HubSpot\Http\Client;
 
 abstract class Api
 {
@@ -25,20 +24,19 @@ abstract class Api
     protected $userAgent;
 
     /**
-     * @var HttpClient
+     * @var Client
      */
     protected $client;
 
     /**
      * @param string     $apiKey    HubSpot api key.
      * @param string     $userAgent Client user agent.
-     * @param HttpClient $client    Client that implements HttpClient interface.
      */
-    function __construct($apiKey, $userAgent, HttpClient $client = null)
+    function __construct($apiKey, $userAgent)
     {
         $this->apiKey = $apiKey;
         $this->userAgent = $userAgent;
-        $this->client = $client ?: new GuzzleClient();
+        $this->client = new Client();
     }
 
     /**
@@ -65,5 +63,46 @@ abstract class Api
     protected function generateUrl($endpoint, $queryString = null)
     {
         return $this->baseUrl . $endpoint . '?hapikey=' . $this->apiKey . $queryString;
+    }
+
+    protected function endpoint(array $vars = [])
+    {
+        $endpoint_key = $this->getEndpointKey();
+
+        return $this->generateEndpoint($endpoint_key, $vars);
+    }
+
+    private function getEndpointKey()
+    {
+        $callers = debug_backtrace();
+
+        return $callers[2]['function'];
+    }
+
+    private function generateEndpoint($key, array $vars = [])
+    {
+        if (count($vars)) {
+            return array_walk($vars, replace($key, $vars, $this->endpoints[$key]));
+        }
+
+        return $this->endpoints[$key];
+
+    }
+
+    private function replace($key, $var, $string)
+    {
+        return str_replace('{' . $key . '}', $var, $string);
+    }
+
+    protected function makeRequest($endpoint, array $args = [])
+    {
+        $endpoint = Endpoint::contacts($endpoint);
+
+        $params = array_pop($args['params']);
+
+        $vars = $args;
+
+        return Request::make($endpoint, $vars, $params);
+
     }
 }

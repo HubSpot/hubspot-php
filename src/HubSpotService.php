@@ -1,6 +1,5 @@
 <?php namespace Fungku\HubSpot;
 
-use Fungku\HubSpot\Contracts\HttpClient;
 use Fungku\HubSpot\Exceptions\HubSpotException;
 
 /**
@@ -51,11 +50,6 @@ class HubSpotService
     protected $userAgent;
 
     /**
-     * @var HttpClient
-     */
-    protected $client;
-
-    /**
      * @type string
      */
     const DEFAULT_USER_AGENT = 'Fungku_HubSpot_PHP/0.1 (https://github.com/fungku/hubspot-php)';
@@ -63,24 +57,21 @@ class HubSpotService
     /**
      * @param string     $apiKey
      * @param string     $userAgent
-     * @param HttpClient $client
      */
-    protected function __construct($apiKey = null, $userAgent = null, HttpClient $client = null)
+    protected function __construct($apiKey = null, $userAgent = null)
     {
         $this->apiKey = $this->checkForApiKey($apiKey);
         $this->userAgent = $userAgent ?: static::DEFAULT_USER_AGENT;
-        $this->client = $client;
     }
 
     /**
      * @param string     $apiKey
      * @param string     $userAgent
-     * @param HttpClient $client
      * @return static
      */
-    public static function create($apiKey = null, $userAgent = null, HttpClient $client = null)
+    public static function create($apiKey = null, $userAgent = null)
     {
-        return new static($apiKey, $userAgent, $client);
+        return new static($apiKey, $userAgent);
     }
 
     /**
@@ -105,13 +96,13 @@ class HubSpotService
      * @return string
      * @throws HubSpotException
      */
-    protected function getApiClassName($name)
+    protected function getApiRepositoryName($name)
     {
         if ( ! in_array($name, $this->apiClasses)) {
             throw new HubSpotException("Api Class not found.");
         }
 
-        return 'Fungku\\HubSpot\\Api\\' . ucfirst($name);
+        return 'Fungku\\HubSpot\\Repositories\\' . ucfirst($name);
     }
 
     /**
@@ -121,8 +112,8 @@ class HubSpotService
      */
     public function __call($name, $arguments = null)
     {
-        $apiClass = $this->getApiClassName($name);
+        $repositoryClass = $this->getApiRepositoryName($name);
 
-        return new $apiClass($this->apiKey, $this->userAgent, $this->client);
+        return new $repositoryClass($this->apiKey, $this->userAgent);
     }
 }

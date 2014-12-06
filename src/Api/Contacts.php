@@ -3,17 +3,48 @@
 class Contacts extends Api
 {
     /**
+     * @var array
+     */
+    protected static $endpoints = [
+        "create"              => ["post" => "/contacts/v1/contact"],
+        "update"              => ["post" => "/contacts/v1/contact/vid/{id}/profile"],
+        "createOrUpdate"      => ["post" => "/contacts/v1/contact/createOrUpdate/email/{email}"],
+        "createOrUpdateBatch" => "/contacts/v1/contact/createOrUpdate/email/{email}",
+        "delete"              => "/contacts/v1/contact/vid/{id}",
+        "all"                 => "/contacts/v1/lists/all/contacts/all",
+        "recent"              => "/contacts/v1/lists/recently_updated/contacts/recent",
+//        "getById"             => ,
+//        "getBatchByIds"       => ,
+//        "getByEmail"          => ,
+//        "getBatchByEmails"    => ,
+//        "getByToken"          => ,
+//        "getBatchByTokens"    => ,
+//        "search"              => ,
+//        "statistics"          => ,
+    ];
+
+    /**
      * @param array $contact
      * @return mixed
      */
     public function create(array $contact)
     {
-        $endpoint = '/contacts/v1/contact';
-
-        $options['json'] = $contact;
-
-        return $this->request('post', $endpoint, $options);
+        return $this->call('create', compact('contact'));
     }
+
+
+//    /**
+//     * @param array $contact
+//     * @return mixed
+//     */
+//    public function create(array $contact)
+//    {
+//        $endpoint = '/contacts/v1/contact';
+//
+//        $options['json'] = $contact;
+//
+//        return $this->request('post', $endpoint, $options);
+//    }
 
     /**
      * @param int   $id      The contact id.

@@ -1,12 +1,13 @@
 <?php namespace Fungku\HubSpot\Http;
 
 use Fungku\HubSpot\Contracts\HttpClient;
-use GuzzleHttp\Client;
+use Fungku\HubSpot\Http\Response;
+use GuzzleHttp\Client as GuzzleClient;
 
-class GuzzleClient implements HttpClient
+class Client implements HttpClient
 {
     /**
-     * @var Client
+     * @var GuzzleClient
      */
     protected $client;
 
@@ -15,16 +16,17 @@ class GuzzleClient implements HttpClient
      */
     function __construct()
     {
-        $this->client = new Client();
+        $this->client = new GuzzleClient();
     }
 
     /**
      * @param string $url
-     * @param array  $options
+     * @param array $options
+     * @return Response
      */
     public function get($url, array $options = [])
     {
-        return $this->client->get($url, $options)->json();
+        return new Response($this->client->get($url, $options));
     }
 
     /**
