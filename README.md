@@ -7,12 +7,9 @@ develop: [![Build Status](https://travis-ci.org/fungku/hubspot-php.svg?branch=de
 
 
 I've decided to start from scratch on a HubSpot API client. I already have a
-[perfectly functional wrapper](https://github.com/fungku/hubspot) of the [haPihP](https://github.com/HubSpot/haPiHP)
+[perfectly functional wrapper](https://github.com/fungku/hubspot) of HubSpot/haPihP.
 client. However, I need some good old fashioned practice, and this is something I'm familiar with and will be using
 in the future.
-
-The only dependency is Guzzle, because who likes to use cURL? However, I also want to make it possible to drop the
-dependency and swap it out for a cURL implementation fairly easily.
 
 #### [Please check the status before using!](https://github.com/fungku/hubspot-php#status)
 
