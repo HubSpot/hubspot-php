@@ -1,14 +1,10 @@
 <?php namespace Fungku\HubSpot\Api;
 
-use Fungku\HubSpot\Http\Client;
+use Fungku\HubSpot\Exceptions\HubSpotException;
+use Fungku\HubSpot\Endpoint;
 
 abstract class Api
 {
-    /**
-     * @var string
-     */
-    protected $baseUrl = "https://api.hubapi.com";
-
     /**
      * HubSpot api key.
      *
@@ -24,11 +20,6 @@ abstract class Api
     protected $userAgent;
 
     /**
-     * @var Client
-     */
-    protected $client;
-
-    /**
      * @param string     $apiKey    HubSpot api key.
      * @param string     $userAgent Client user agent.
      */
@@ -36,7 +27,26 @@ abstract class Api
     {
         $this->apiKey = $apiKey;
         $this->userAgent = $userAgent;
-        $this->client = new Client();
+    }
+
+    public function __call($endpoint, array $params = [])
+    {
+        if ( ! isset($this->$endpoint)) {
+            throw new HubSpotException('Endpoint does not exist.');
+        }
+
+        $endpoint = Endpoint::make($this->$endpoint);
+
+        return Request::make($endpoint, $params);
+    }
+
+    private function replaceKeys($endpoint, array $keys)
+    {
+        foreach ($keys as $key => $value) {
+            $endpoint = str_replace('{' . $key . '}', $value, $endpoint);
+        }
+
+        return $endpoint;
     }
 
     /**
@@ -63,35 +73,6 @@ abstract class Api
     protected function generateUrl($endpoint, $queryString = null)
     {
         return $this->baseUrl . $endpoint . '?hapikey=' . $this->apiKey . $queryString;
-    }
-
-    protected function endpoint(array $vars = [])
-    {
-        $endpoint_key = $this->getEndpointKey();
-
-        return $this->generateEndpoint($endpoint_key, $vars);
-    }
-
-    private function getEndpointKey()
-    {
-        $callers = debug_backtrace();
-
-        return $callers[2]['function'];
-    }
-
-    private function generateEndpoint($key, array $vars = [])
-    {
-        if (count($vars)) {
-            return array_walk($vars, replace($key, $vars, $this->endpoints[$key]));
-        }
-
-        return $this->endpoints[$key];
-
-    }
-
-    private function replace($key, $var, $string)
-    {
-        return str_replace('{' . $key . '}', $var, $string);
     }
 
     protected function makeRequest($endpoint, array $args = [])

@@ -1,6 +1,6 @@
 <?php namespace Fungku\HubSpot\Entities;
 
-class Contact extends Entity
+class Contacts extends Entity
 {
     // todo
 }

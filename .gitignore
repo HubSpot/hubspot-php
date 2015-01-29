@@ -1,6 +1,9 @@
+# Directories
 /.idea
 /public
 /vendor
+
+# Files
 composer.phar
 composer.lock
 test.php

@@ -2,26 +2,111 @@
 
 class Contacts extends Api
 {
-    /**
-     * @var array
-     */
-    protected static $endpoints = [
-        "create"              => ["post" => "/contacts/v1/contact"],
-        "update"              => ["post" => "/contacts/v1/contact/vid/{id}/profile"],
-        "createOrUpdate"      => ["post" => "/contacts/v1/contact/createOrUpdate/email/{email}"],
-        "createOrUpdateBatch" => "/contacts/v1/contact/createOrUpdate/email/{email}",
-        "delete"              => "/contacts/v1/contact/vid/{id}",
-        "all"                 => "/contacts/v1/lists/all/contacts/all",
-        "recent"              => "/contacts/v1/lists/recently_updated/contacts/recent",
-//        "getById"             => ,
-//        "getBatchByIds"       => ,
-//        "getByEmail"          => ,
-//        "getBatchByEmails"    => ,
-//        "getByToken"          => ,
-//        "getBatchByTokens"    => ,
-//        "search"              => ,
-//        "statistics"          => ,
+    protected $create = [
+        'method'          => 'post',
+        'endpoint'        => '/contacts/v1/contact',
+        'required_params' => [],
+        'optional_params' => [],
     ];
+
+    protected $update = [
+        'method'   => 'post',
+        'endpoint' => '/contacts/v1/contact/vid/{id}/profile',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $createOrUpdate = [
+        'method'   => 'post',
+        'endpoint' => '/contacts/v1/contact/createOrUpdate/email/{email}',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $createOrUpdateBatch = [
+        'method'   => 'post',
+        'endpoint' => '/contacts/v1/contact/createOrUpdate/email/{email}',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $delete = [
+        'method'   => 'post',
+        'endpoint' => '/contacts/v1/contact/vid/{id}',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $all = [
+        'method'   => 'post',
+        'endpoint' => '/contacts/v1/lists/all/contacts/all',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $recent = [
+        'method'   => 'post',
+        'endpoint' => '/contacts/v1/lists/recently_updated/contacts/recent',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $getById = [
+        'method'   => 'post',
+        'endpoint' => '',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $getBatchByIds = [
+        'method'   => 'post',
+        'endpoint' => '',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $getByEmail = [
+        'method'   => 'post',
+        'endpoint' => '',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $getBatchByEmails = [
+        'method'   => 'post',
+        'endpoint' => '',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $getByToken = [
+        'method'   => 'post',
+        'endpoint' => '',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $getBatchByTokens = [
+        'method'   => 'post',
+        'endpoint' => '',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $search = [
+        'method'   => 'post',
+        'endpoint' => '',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
+    protected $statistics = [
+        'method'   => 'post',
+        'endpoint' => '',
+        'required_params' => [],
+        'optional_params' => [],
+    ];
+
 
     /**
      * @param array $contact
