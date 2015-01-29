@@ -1,10 +1,6 @@
 # HubSpot PHP API client
 
-[![Latest Stable Version](https://poser.pugx.org/fungku/hubspot-php/v/stable.svg)](https://packagist.org/packages/fungku/hubspot-php) [![Latest Unstable Version](https://poser.pugx.org/fungku/hubspot-php/v/unstable.svg)](https://packagist.org/packages/fungku/hubspot-php) [![Total Downloads](https://poser.pugx.org/fungku/hubspot-php/downloads.svg)](https://packagist.org/packages/fungku/hubspot-php) [![License](https://poser.pugx.org/fungku/hubspot-php/license.svg)](https://packagist.org/packages/fungku/hubspot-php) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fungku/hubspot-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fungku/hubspot-php/?branch=master)
-
-###### **Master:** [![Build Status](https://travis-ci.org/fungku/hubspot-php.svg?branch=master)](https://travis-ci.org/fungku/hubspot-php)
-
-###### **Develop:** [![Build Status](https://travis-ci.org/fungku/hubspot-php.svg?branch=develop)](https://travis-ci.org/fungku/hubspot-php)
+[![Latest Stable Version](https://poser.pugx.org/fungku/hubspot-php/v/stable.svg)](https://packagist.org/packages/fungku/hubspot-php) [![Latest Unstable Version](https://poser.pugx.org/fungku/hubspot-php/v/unstable.svg)](https://packagist.org/packages/fungku/hubspot-php) [![Total Downloads](https://poser.pugx.org/fungku/hubspot-php/downloads.svg)](https://packagist.org/packages/fungku/hubspot-php) [![License](https://poser.pugx.org/fungku/hubspot-php/license.svg)](https://packagist.org/packages/fungku/hubspot-php) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fungku/hubspot-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fungku/hubspot-php/?branch=master) [![Build Status](https://travis-ci.org/fungku/hubspot-php.svg?branch=master)](https://travis-ci.org/fungku/hubspot-php)
 
 
 I've decided to start from scratch on a HubSpot API client. I already have a
@@ -131,4 +127,7 @@ If you see something not planned, that you want, make an [issues](https://github
 
 :black_medium_small_square: Settings
 
-[ ![Codeship Status for fungku/hubspot-php](https://codeship.com/projects/b7b6d0d0-4f28-0132-62b6-1e43a57e79c2/status)](https://codeship.com/projects/47843)
+
+###### **Master:** [![Build Status](https://travis-ci.org/fungku/hubspot-php.svg?branch=master)](https://travis-ci.org/fungku/hubspot-php)
+
+###### **Develop:** [![Build Status](https://travis-ci.org/fungku/hubspot-php.svg?branch=develop)](https://travis-ci.org/fungku/hubspot-php)
