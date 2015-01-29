@@ -1,6 +1,7 @@
 {
     "name": "fungku/hubspot-php",
     "description": "HubSpot PHP API client",
+    "keywords": [ "hubspot", "api" ],
     "license": "Apache-2.0",
     "authors": [
         {
@@ -11,6 +12,9 @@
     "require": {
         "php": ">=5.4.0",
         "guzzlehttp/guzzle": "~5.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
     },
     "autoload": {
         "psr-4": {

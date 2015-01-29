@@ -2,121 +2,121 @@
 
 class Contacts extends Api
 {
-    protected $create = [
-        'method'          => 'post',
-        'endpoint'        => '/contacts/v1/contact',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $update = [
-        'method'   => 'post',
-        'endpoint' => '/contacts/v1/contact/vid/{id}/profile',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $createOrUpdate = [
-        'method'   => 'post',
-        'endpoint' => '/contacts/v1/contact/createOrUpdate/email/{email}',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $createOrUpdateBatch = [
-        'method'   => 'post',
-        'endpoint' => '/contacts/v1/contact/createOrUpdate/email/{email}',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $delete = [
-        'method'   => 'post',
-        'endpoint' => '/contacts/v1/contact/vid/{id}',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $all = [
-        'method'   => 'post',
-        'endpoint' => '/contacts/v1/lists/all/contacts/all',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $recent = [
-        'method'   => 'post',
-        'endpoint' => '/contacts/v1/lists/recently_updated/contacts/recent',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $getById = [
-        'method'   => 'post',
-        'endpoint' => '',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $getBatchByIds = [
-        'method'   => 'post',
-        'endpoint' => '',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $getByEmail = [
-        'method'   => 'post',
-        'endpoint' => '',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $getBatchByEmails = [
-        'method'   => 'post',
-        'endpoint' => '',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $getByToken = [
-        'method'   => 'post',
-        'endpoint' => '',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $getBatchByTokens = [
-        'method'   => 'post',
-        'endpoint' => '',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $search = [
-        'method'   => 'post',
-        'endpoint' => '',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-    protected $statistics = [
-        'method'   => 'post',
-        'endpoint' => '',
-        'required_params' => [],
-        'optional_params' => [],
-    ];
-
-
-    /**
-     * @param array $contact
-     * @return mixed
-     */
-    public function create(array $contact)
-    {
-        return $this->call('create', compact('contact'));
-    }
-
+    //protected $create = [
+    //    'method'          => 'post',
+    //    'endpoint'        => '/contacts/v1/contact',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $update = [
+    //    'method'   => 'post',
+    //    'endpoint' => '/contacts/v1/contact/vid/{id}/profile',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $createOrUpdate = [
+    //    'method'   => 'post',
+    //    'endpoint' => '/contacts/v1/contact/createOrUpdate/email/{email}',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $createOrUpdateBatch = [
+    //    'method'   => 'post',
+    //    'endpoint' => '/contacts/v1/contact/createOrUpdate/email/{email}',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $delete = [
+    //    'method'   => 'post',
+    //    'endpoint' => '/contacts/v1/contact/vid/{id}',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $all = [
+    //    'method'   => 'post',
+    //    'endpoint' => '/contacts/v1/lists/all/contacts/all',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $recent = [
+    //    'method'   => 'post',
+    //    'endpoint' => '/contacts/v1/lists/recently_updated/contacts/recent',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $getById = [
+    //    'method'   => 'post',
+    //    'endpoint' => '',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $getBatchByIds = [
+    //    'method'   => 'post',
+    //    'endpoint' => '',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $getByEmail = [
+    //    'method'   => 'post',
+    //    'endpoint' => '',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $getBatchByEmails = [
+    //    'method'   => 'post',
+    //    'endpoint' => '',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $getByToken = [
+    //    'method'   => 'post',
+    //    'endpoint' => '',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $getBatchByTokens = [
+    //    'method'   => 'post',
+    //    'endpoint' => '',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $search = [
+    //    'method'   => 'post',
+    //    'endpoint' => '',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //protected $statistics = [
+    //    'method'   => 'post',
+    //    'endpoint' => '',
+    //    'required_params' => [],
+    //    'optional_params' => [],
+    //];
+    //
+    //
+    ///**
+    // * @param array $contact
+    // * @return mixed
+    // */
+    //public function create(array $contact)
+    //{
+    //    return $this->call('create', compact('contact'));
+    //}
+    //
 
 //    /**
 //     * @param array $contact

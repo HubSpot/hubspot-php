@@ -66,7 +66,7 @@ class HubSpotService
      * @return string
      * @throws HubSpotException
      */
-    protected function getApiRepositoryName($name)
+    protected function getApiClassName($name)
     {
         if ( ! in_array($name, $this->apiClasses)) {
             throw new HubSpotException("Api Class not found.");
