@@ -16,7 +16,7 @@ in the future.
 
 ```
 "require": {
-	"fungku/hubspot-php": "dev-master"
+	"fungku/hubspot-php": "~0.1@dev"
 }
 ```
 
