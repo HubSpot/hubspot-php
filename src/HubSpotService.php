@@ -21,10 +21,8 @@ use Fungku\HubSpot\Exceptions\HubSpotException;
  */
 class HubSpotService
 {
-    /**
-     * @var array
-     */
-    protected $apiClasses = [
+    private $apiKey;
+    private $apiClasses = [
         'blogs',
         'contacts',
         'contactLists',
@@ -40,53 +38,25 @@ class HubSpotService
     ];
 
     /**
-     * @var string
+     * @param string|null $apiKey
+     * @throws HubSpotException
      */
-    protected $apiKey;
-
-    /**
-     * @var string
-     */
-    protected $userAgent;
-
-    /**
-     * @type string
-     */
-    const DEFAULT_USER_AGENT = 'Fungku_HubSpot_PHP/0.1 (https://github.com/fungku/hubspot-php)';
-
-    /**
-     * @param string     $apiKey
-     * @param string     $userAgent
-     */
-    protected function __construct($apiKey = null, $userAgent = null)
+    protected function __construct($apiKey = null)
     {
-        $this->apiKey = $this->checkForApiKey($apiKey);
-        $this->userAgent = $userAgent ?: static::DEFAULT_USER_AGENT;
-    }
+        $this->apiKey = $apiKey ?: getenv('HUBSPOT_API_KEY');
 
-    /**
-     * @param string     $apiKey
-     * @param string     $userAgent
-     * @return static
-     */
-    public static function create($apiKey = null, $userAgent = null)
-    {
-        return new static($apiKey, $userAgent);
+        if (empty($this->apiKey)) {
+            throw new HubSpotException("You must provide a HubSpot api key.");
+        }
     }
 
     /**
      * @param string $apiKey
-     * @return string
+     * @return static
      */
-    protected function checkForApiKey($apiKey)
+    public static function make($apiKey = null)
     {
-        $apiKey = $apiKey ?: getenv('HUBSPOT_API_KEY');
-
-        if ( ! $apiKey) {
-            throw new \InvalidArgumentException("You must provide a HubSpot api key.");
-        }
-
-        return $apiKey;
+        return new static($apiKey);
     }
 
     /**
@@ -102,18 +72,18 @@ class HubSpotService
             throw new HubSpotException("Api Class not found.");
         }
 
-        return 'Fungku\\HubSpot\\Repositories\\' . ucfirst($name);
+        return 'Fungku\\HubSpot\\Api\\' . ucfirst($name);
     }
 
     /**
      * @param string $name
-     * @param null   $arguments
+     * @param null $arguments
      * @return mixed
      */
     public function __call($name, $arguments = null)
     {
-        $repositoryClass = $this->getApiRepositoryName($name);
+        $apiClass = $this->getApiClassName($name);
 
-        return new $repositoryClass($this->apiKey, $this->userAgent);
+        return new $apiClass($this->apiKey);
     }
 }

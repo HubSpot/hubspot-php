@@ -5,28 +5,12 @@ use Fungku\HubSpot\Endpoint;
 
 abstract class Api
 {
-    /**
-     * HubSpot api key.
-     *
-     * @var string
-     */
     protected $apiKey;
-
-    /**
-     * Client UserAgent.
-     *
-     * @var string
-     */
-    protected $userAgent;
-
-    /**
-     * @param string     $apiKey    HubSpot api key.
-     * @param string     $userAgent Client user agent.
-     */
-    function __construct($apiKey, $userAgent)
+    protected $userAgent = 'Fungku_HubSpot_PHP/0.1 (https://github.com/fungku/hubspot-php)';
+    
+    function __construct($apiKey)
     {
         $this->apiKey = $apiKey;
-        $this->userAgent = $userAgent;
     }
 
     public function __call($endpoint, array $params = [])
