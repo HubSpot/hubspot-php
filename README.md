@@ -123,8 +123,3 @@ If you see something not planned, that you want, make an [issues](https://github
 :black_medium_small_square: MarketPlace
 
 :black_medium_small_square: Settings
-
-
-###### **Master:** [![Build Status](https://travis-ci.org/fungku/hubspot-php.svg?branch=master)](https://travis-ci.org/fungku/hubspot-php)
-
-###### **Develop:** [![Build Status](https://travis-ci.org/fungku/hubspot-php.svg?branch=develop)](https://travis-ci.org/fungku/hubspot-php)
