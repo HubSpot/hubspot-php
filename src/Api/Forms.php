@@ -3,63 +3,112 @@
 class Forms extends Api
 {
     /**
-     * Get all blogs.
+     * Submit form data.
+     * http://developers.hubspot.com/docs/methods/forms/submit_form
      *
-     * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
-     * @return mixed
+     * @param array $form
      */
-    public function all(array $params = [])
+    public function submit(array $form)
     {
-        $endpoint = '/content/api/v2/blogs';
+        // TODO: This has a unique base url...
+        // https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_id}
 
-        $options['query'] = $params;
-
-        return $this->request('get', $endpoint, $options);
+        $options['json'] = $form;
     }
 
     /**
-     * Get information about a specific blog.
+     * Get all forms.
      *
-     * @param string $id
      * @return mixed
      */
-    public function getById($id)
+    public function all()
     {
-        $endpoint = "/content/api/v2/blogs/{$id}";
+        $endpoint = "/contacts/v1/forms";
 
         return $this->request('get', $endpoint);
     }
 
     /**
-     * Get previous versions of the blog.
+     * Get a single form.
      *
-     * @param string $id     Blog id.
-     * @param array  $params Optional parameters.
+     * @param string $form_guid
      * @return mixed
      */
-    public function versions($id, array $params = [])
+    public function getById($form_guid)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}/versions";
+        $endpoint = "/contacts/v1/forms/{$form_guid}";
 
-        $options['query'] = $params;
-
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint);
     }
 
     /**
-     * Get a previous version of the blog.
+     * Create a new form.
      *
-     * @param string $id         Blog id.
-     * @param string $version_id Version id.
-     * @param array  $params     Optional parameters.
+     * @param array $form
      * @return mixed
      */
-    public function getVersionById($id, $version_id, array $params = [])
+    public function create(array $form)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
+        $endpoint = "/contacts/v1/forms";
 
-        $options['query'] = $params;
+        $options['json'] = $form;
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('post', $endpoint, $options);
+    }
+
+    /**
+     * Update a form.
+     *
+     * @param string $form_guid
+     * @param array $form
+     * @return mixed
+     */
+    public function update($form_guid, array $form)
+    {
+        $endpoint = "/contacts/v1/forms/{$form_guid}";
+
+        $options['json'] = $form;
+
+        return $this->request('post', $endpoint, $options);
+    }
+
+    /**
+     * Delete a form.
+     *
+     * @param string $form_guid
+     * @return mixed
+     */
+    public function delete($form_guid)
+    {
+        $endpoint = "/contacts/v1/forms/{$form_guid}";
+
+        return $this->request('delete', $endpoint);
+    }
+
+    /**
+     * Get all fields from a form.
+     *
+     * @param string $form_guid
+     * @return mixed
+     */
+    public function getFields($form_guid)
+    {
+        $endpoint = "/contacts/v1/fields/{$form_guid}";
+
+        return $this->request('get', $endpoint);
+    }
+
+    /**
+     * Get a single field from a form.
+     *
+     * @param string $form_guid
+     * @param string $name
+     * @return mixed
+     */
+    public function getFieldByName($form_guid, $name)
+    {
+        $endpoint = "/contacts/v1/fields/{$form_guid}/{$name}";
+
+        return $this->request('get', $endpoint);
     }
 }
