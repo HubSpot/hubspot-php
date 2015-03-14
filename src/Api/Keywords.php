@@ -62,5 +62,4 @@ class Keywords extends Api
 
         return $this->request('get', $endpoint, $options);
     }
-
 }

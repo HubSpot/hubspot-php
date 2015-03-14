@@ -6,4 +6,4 @@ abstract class Entity
     {
         // To-do
     }
-} 
+}

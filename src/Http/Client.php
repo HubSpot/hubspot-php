@@ -14,7 +14,7 @@ class Client implements HttpClient
     /**
      * steven's most favourite constructor.
      */
-    function __construct()
+    public function __construct()
     {
         $this->client = new GuzzleClient();
     }

@@ -62,5 +62,4 @@ class ContactProperties extends Api
 
         return $this->request('get', $endpoint, $options);
     }
-
 }

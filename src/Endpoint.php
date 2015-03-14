@@ -39,4 +39,4 @@ class Endpoint
     {
         return array_merge($this->requiredParams, $this->optionalParams);
     }
-} 
+}

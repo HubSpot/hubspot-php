@@ -8,7 +8,7 @@ abstract class Api
     protected $apiKey;
     protected $userAgent = 'Fungku_HubSpot_PHP/0.1 (https://github.com/fungku/hubspot-php)';
 
-    function __construct($apiKey)
+    public function __construct($apiKey)
     {
         $this->apiKey = $apiKey;
     }

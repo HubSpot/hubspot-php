@@ -62,5 +62,4 @@ class MarketPlace extends Api
 
         return $this->request('get', $endpoint, $options);
     }
-
 }

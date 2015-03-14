@@ -1,3 +1,5 @@
 <?php namespace Fungku\HubSpot\Exceptions;
 
-class HubSpotException extends \Exception {}
+class HubSpotException extends \Exception
+{
+}

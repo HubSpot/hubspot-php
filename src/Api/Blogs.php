@@ -62,5 +62,4 @@ class Blogs extends Api
 
         return $this->request('get', $endpoint, $options);
     }
-
 }

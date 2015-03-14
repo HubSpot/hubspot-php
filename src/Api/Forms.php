@@ -62,5 +62,4 @@ class Forms extends Api
 
         return $this->request('get', $endpoint, $options);
     }
-
 }

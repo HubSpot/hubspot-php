@@ -62,5 +62,4 @@ class Leads extends Api
 
         return $this->request('get', $endpoint, $options);
     }
-
 }

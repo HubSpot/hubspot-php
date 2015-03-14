@@ -237,5 +237,4 @@ class ContactLists extends Api
 
         return $this->request($method, $endpoint);
     }
-
 }

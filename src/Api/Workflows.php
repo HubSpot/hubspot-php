@@ -62,5 +62,4 @@ class Workflows extends Api
 
         return $this->request('get', $endpoint, $options);
     }
-
 }

@@ -12,7 +12,7 @@ class Response
     /**
      * @param ResponseInterface $response
      */
-    function __construct(ResponseInterface $response)
+    public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
     }
