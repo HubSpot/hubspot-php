@@ -12,7 +12,7 @@ class Client implements HttpClient
     protected $client;
 
     /**
-     * steven's most favourite constructor.
+     * Make it, baby.
      */
     public function __construct()
     {
@@ -26,33 +26,37 @@ class Client implements HttpClient
      */
     public function get($url, array $options = [])
     {
-        return new Response($this->client->get($url, $options));
+        //return new Response($this->client->get($url, $options));
+        return $this->client->get($url, $options)->json();
     }
 
     /**
      * @param string $url
-     * @param array  $options
+     * @param array $options
+     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
      */
     public function post($url, array $options = [])
     {
-        return $this->client->post($url, $options);
+        return $this->client->post($url, $options)->json();
     }
 
     /**
      * @param string $url
-     * @param array  $options
+     * @param array $options
+     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
      */
     public function put($url, array $options = [])
     {
-        return $this->client->put($url, $options);
+        return $this->client->put($url, $options)->json();
     }
 
     /**
      * @param string $url
-     * @param array  $options
+     * @param array $options
+     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
      */
     public function delete($url, array $options = [])
     {
-        return $this->client->delete($url, $options);
+        return $this->client->delete($url, $options)->json();
     }
 }

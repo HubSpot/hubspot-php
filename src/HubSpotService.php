@@ -1,6 +1,7 @@
 <?php namespace Fungku\HubSpot;
 
 use Fungku\HubSpot\Exceptions\HubSpotException;
+use Fungku\HubSpot\Http\Client;
 
 /**
  * Class HubSpotService
@@ -84,6 +85,6 @@ class HubSpotService
     {
         $apiClass = $this->getApiClassName($name);
 
-        return new $apiClass($this->apiKey);
+        return new $apiClass($this->apiKey, new Client);
     }
 }

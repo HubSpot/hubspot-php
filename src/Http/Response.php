@@ -1,8 +1,9 @@
 <?php namespace Fungku\HubSpot\Http;
 
+use Fungku\HubSpot\Contracts\ApiResponse;
 use GuzzleHttp\Message\ResponseInterface;
 
-class Response
+class Response implements ApiResponse
 {
     /**
      * @var ResponseInterface
@@ -20,7 +21,7 @@ class Response
     /**
      * @return int
      */
-    public function status()
+    public function statusCode()
     {
         return $this->response->getStatusCode();
     }
@@ -64,5 +65,16 @@ class Response
     public function xml()
     {
         return $this->response->xml();
+    }
+
+    /**
+     * Get the effective URL that resulted in this response (e.g. the last
+     * redirect URL).
+     *
+     * @return string
+     */
+    public function effectiveUrl()
+    {
+        return $this->response->getEffectiveUrl();
     }
 }

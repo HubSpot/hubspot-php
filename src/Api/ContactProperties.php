@@ -3,14 +3,14 @@
 class ContactProperties extends Api
 {
     /**
-     * Get all blogs.
+     * Get all Contact properties.
      *
      * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
      * @return mixed
      */
     public function all(array $params = [])
     {
-        $endpoint = '/content/api/v2/blogs';
+        $endpoint = '/contacts/v1/properties';
 
         $options['query'] = $params;
 
@@ -18,48 +18,101 @@ class ContactProperties extends Api
     }
 
     /**
-     * Get information about a specific blog.
+     * Create a new property.
      *
-     * @param string $id
+     * @param array $property
      * @return mixed
      */
-    public function getById($id)
+    public function create(array $property)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}";
+        $endpoint = "/contacts/v1/properties/{$property['name']}";
+
+        $options['json'] = $property;
+
+        return $this->request('put', $endpoint, $options);
+    }
+
+    /**
+     * Update a property.
+     *
+     * @param array $property
+     * @return mixed
+     */
+    public function update(array $property)
+    {
+        $endpoint = "/contacts/v1/properties/{$property['name']}";
+
+        $options['json'] = $property;
+
+        return $this->request('post', $endpoint, $options);
+    }
+
+    /**
+     * Delete a property.
+     *
+     * @param $name
+     * @return mixed
+     */
+    public function delete($name)
+    {
+        $endpoint = "/contacts/v1/properties/{$name}";
+
+        return $this->request('delete', $endpoint);
+    }
+
+    /**
+     * Get contact property group.
+     *
+     * @param $group_name
+     * @return mixed
+     */
+    public function getGroup($group_name)
+    {
+        $endpoint = "/contacts/v1/groups/{$group_name}";
 
         return $this->request('get', $endpoint);
     }
 
     /**
-     * Get previous versions of the blog.
+     * Create a contact property group.
      *
-     * @param string $id     Blog id.
-     * @param array  $params Optional parameters.
+     * @param array $group Group properties
      * @return mixed
      */
-    public function versions($id, array $params = [])
+    public function createGroup(array $group)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}/versions";
+        $endpoint = "/contacts/v1/groups/{$group['name']}";
 
-        $options['query'] = $params;
+        $options['json'] = $group;
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('put', $endpoint, $options);
     }
 
     /**
-     * Get a previous version of the blog.
+     * Update a property group.
      *
-     * @param string $id         Blog id.
-     * @param string $version_id Version id.
-     * @param array  $params     Optional parameters.
+     * @param array $group
      * @return mixed
      */
-    public function getVersionById($id, $version_id, array $params = [])
+    public function updateGroup(array $group)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
+        $endpoint = "/contacts/v1/groups/{$group['name']}";
 
-        $options['query'] = $params;
+        $options['json'] = $group;
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('post', $endpoint, $options);
+    }
+
+    /**
+     * Delete a property group.
+     *
+     * @param $group_name
+     * @return mixed
+     */
+    public function deleteGroup($group_name)
+    {
+        $endpoint = "/contacts/v1/groups/{$group_name}";
+
+        return $this->request('delete', $endpoint);
     }
 }
