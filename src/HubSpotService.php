@@ -9,6 +9,7 @@ use Fungku\HubSpot\Http\Client;
  *
  * @method blogs()
  * @method contacts()
+ * @method email()
  * @method forms()
  * @method keywords()
  * @method leadNurturing()
@@ -28,6 +29,7 @@ class HubSpotService
         'contacts',
         'contactLists',
         'contactProperties',
+        'email',
         'forms',
         'keywords',
         'leadNurturing',

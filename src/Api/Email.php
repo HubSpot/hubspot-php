@@ -1,6 +1,6 @@
 <?php namespace Fungku\HubSpot\Api;
 
-class Emails extends Api
+class Email extends Api
 {
     /**
      * Get email subscription types for a portal.
@@ -64,6 +64,66 @@ class Emails extends Api
         $options['json'] = $params;
 
         return $this->request('put', $endpoint, $options);
+    }
+
+    /**
+     * Get campaign IDs for a portal.
+     *
+     * @param array $params Optional parameters
+     * @return mixed
+     */
+    public function campaignIds(array $params = [])
+    {
+        $endpoint = "/email/public/v1/campaigns";
+
+        $options['query'] = $params;
+
+        return $this->request('get', $endpoint, $options);
+    }
+
+    /**
+     * Get campaign data for a given campaign.
+     *
+     * @param int $campaign_id
+     * @param int $application_id
+     * @return mixed
+     */
+    public function campaign($campaign_id, $application_id)
+    {
+        $endpoint = "/email/public/v1/campaigns/{$campaign_id}";
+
+        $options['query'] = ['appId' => $application_id];
+
+        return $this->request('get', $endpoint, $options);
+    }
+
+    /**
+     * Get email events for a campaign or recipient.
+     *
+     * @param array $params Optional parameters
+     * @return mixed
+     */
+    public function events(array $params = [])
+    {
+        $endpoint = "/email/public/v1/events";
+
+        $options['query'] = $params;
+
+        return $this->request('get', $endpoint, $options);
+    }
+
+    /**
+     * Get event data for a specific event.
+     *
+     * @param int $id The event ID
+     * @param int $created Timestamp (milliseconds) when the event was created
+     * @return mixed
+     */
+    public function event($id, $created)
+    {
+        $endpoint = "/email/public/v1/events/{$created}/{$id}";
+
+        return $this->request('get', $endpoint);
     }
 
 }
