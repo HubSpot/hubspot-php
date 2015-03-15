@@ -82,7 +82,7 @@ If you see something not planned, that you want, make an [issues](https://github
 
 :ballot_box_with_check: Blog (COS) :new:
 
-:wavy_dash: Blog Posts (COS) :new:
+:ballot_box_with_check: Blog Posts (COS) :new:
 
 :ballot_box_with_check: Contacts
 
