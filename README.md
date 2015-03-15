@@ -29,7 +29,7 @@ All following examples assume this step.
 *Note:* The Hubspot class checks for a `HUBSPOT_API_KEY` environment variable if you don't include one during instantiation.
 
 ```php
-$hubspot = Fungku\HubSpot\HubSpotService::create('api-key');
+$hubspot = Fungku\HubSpot\HubSpotService::make('api-key');
 ```
 
 #### Get a single contact:
@@ -72,13 +72,11 @@ foreach ($contacts as $contact) {
 }
 ```
 
-I would make the syntax cleaner `$contact->firstname`, but as you can see it would probably take a lot of work. [Here is a sample](https://github.com/fungku/hubspot-php/wiki/Contact-Var-Dump) `var_dump()` of a contact. I might visit this after all the other Api classes are working, though.
-
 ## Status
 
 (:ballot_box_with_check: Complete, :wavy_dash: In Progress, :white_medium_small_square: Todo, :black_medium_small_square: Not planned)
 
-If you see something not planned, that you want, make an [issues](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
+If you see something not planned, that you want, make an [issue](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
 
 :ballot_box_with_check: Blog (COS) :new:
 
@@ -90,11 +88,11 @@ If you see something not planned, that you want, make an [issues](https://github
 
 :ballot_box_with_check: Contact Properties
 
-:white_medium_small_square: COS Files :new:
+:wavy_dash: COS Files :new:
 
 :wavy_dash: Email :new:
 
-:white_medium_small_square: Forms
+:wavy_dash:  Forms
 
 :white_medium_small_square: Lead Nurturing
 
