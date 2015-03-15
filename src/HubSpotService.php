@@ -8,6 +8,7 @@ use Fungku\HubSpot\Http\Client;
  * @package Fungku\HubSpot
  *
  * @method blogs()
+ * @method blogPosts()
  * @method contacts()
  * @method email()
  * @method forms()
@@ -26,6 +27,7 @@ class HubSpotService
     private $apiKey;
     private $apiClasses = [
         'blogs',
+        'blogPosts',
         'contacts',
         'contactLists',
         'contactProperties',
