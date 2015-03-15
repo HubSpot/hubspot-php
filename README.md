@@ -86,13 +86,13 @@ If you see something not planned, that you want, make an [issues](https://github
 
 :ballot_box_with_check: Contacts
 
-:wavy_dash: Contact Lists
+:ballot_box_with_check: Contact Lists
 
-:white_medium_small_square: Contact Properties
+:ballot_box_with_check: Contact Properties
 
 :white_medium_small_square: COS Files :new:
 
-:white_medium_small_square: Email :new:
+:wavy_dash: Email :new:
 
 :white_medium_small_square: Forms
 
