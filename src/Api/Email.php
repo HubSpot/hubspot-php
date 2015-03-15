@@ -39,7 +39,7 @@ class Email extends Api
      * @param string $email
      * @return mixed
      */
-    public function subscriptionStatus($portal_id, $email)
+    public function getSubscriptionStatus($portal_id, $email)
     {
         $endpoint = "/email/public/v1/subscriptions/{$email}";
 
@@ -72,7 +72,7 @@ class Email extends Api
      * @param array $params Optional parameters
      * @return mixed
      */
-    public function campaignIds(array $params = [])
+    public function getCampaignIds(array $params = [])
     {
         $endpoint = "/email/public/v1/campaigns";
 
@@ -88,7 +88,7 @@ class Email extends Api
      * @param int $application_id
      * @return mixed
      */
-    public function campaign($campaign_id, $application_id)
+    public function getCampaignById($campaign_id, $application_id)
     {
         $endpoint = "/email/public/v1/campaigns/{$campaign_id}";
 
@@ -103,7 +103,7 @@ class Email extends Api
      * @param array $params Optional parameters
      * @return mixed
      */
-    public function events(array $params = [])
+    public function getEvents(array $params = [])
     {
         $endpoint = "/email/public/v1/events";
 
@@ -119,7 +119,7 @@ class Email extends Api
      * @param int $created Timestamp (milliseconds) when the event was created
      * @return mixed
      */
-    public function event($id, $created)
+    public function getEventById($id, $created)
     {
         $endpoint = "/email/public/v1/events/{$created}/{$id}";
 

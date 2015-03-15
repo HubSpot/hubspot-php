@@ -33,7 +33,9 @@ class BlogPosts extends Api
     }
 
     /**
-     * @param int   $id     The blog post id.
+     * Update a blog post.
+     *
+     * @param int $id The blog post id.
      * @param array $params The blog post fields to update.
      * @return mixed
      */
@@ -43,9 +45,15 @@ class BlogPosts extends Api
 
         $options['json'] = $params;
 
-        return $this->request('post', $endpoint, $options);
+        return $this->request('put', $endpoint, $options);
     }
 
+    /**
+     * Delete a blog post.
+     *
+     * @param int $id
+     * @return mixed
+     */
     public function delete($id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}";
@@ -54,169 +62,171 @@ class BlogPosts extends Api
     }
 
     /**
-     * @param string $email   The contact email.
-     * @param array  $contact The contact properties.
-     * @return mixed
-     */
-    public function createOrUpdate($email, array $contact)
-    {
-        $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
-
-        return $this->request('post', $endpoint, $contact);
-    }
-
-    /**
-     * @param array  $contacts The contacts and properties.
-     * @return mixed
-     */
-    public function createOrUpdateBatch(array $contacts)
-    {
-        $endpoint = "/contacts/v1/contact/batch";
-
-        return $this->request('post', $endpoint, $contacts);
-    }
-
-    /**
-     * @param int $id
-     * @return mixed
-     */
-    public function delete($id)
-    {
-        $endpoint = "/contacts/v1/contact/vid/{$id}";
-
-        return $this->request('delete', $endpoint);
-    }
-
-    /**
-     * @param array $params
-     * @return mixed
-     */
-    public function recent(array $params = [])
-    {
-        $endpoint = "/contacts/v1/lists/recently_updated/contacts/recent";
-
-        return $this->request($endpoint, $params);
-    }
-
-    /**
+     * Get a specific blog post.
+     *
      * @param int $id
      * @return mixed
      */
     public function getById($id)
     {
-        $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
-
-        return $this->request($endpoint);
-    }
-
-    /**
-     * @param array $vids
-     * @param array $params
-     * @return mixed
-     */
-    public function getBatchByIds(array $vids, array $params = [])
-    {
-        $endpoint = "/contacts/v1/contact/vids/batch/";
-
-        $queryString = $this->generateBatchQuery('vid', $vids);
-
-        $options['query'] = $params;
-
-        return $this->request('get', $endpoint, $options, $queryString);
-    }
-
-    /**
-     * @param string $email
-     * @return mixed
-     */
-    public function getByEmail($email)
-    {
-        $endpoint = "/contacts/v1/contact/email/{$email}/profile";
+        $endpoint = "/content/api/v2/blog-posts/{$id}";
 
         return $this->request('get', $endpoint);
     }
 
     /**
-     * @param array $emails
-     * @param array $params
+     * Updates the auto-save buffer.
+     *
+     * @param in $id The blog post ID
      * @return mixed
      */
-    public function getBatchByEmails(array $emails, array $params = [])
+    public function updateAutoSaveBuffer($id)
     {
-        $endpoint = "/contacts/v1/contact/vids/batch/";
+        $endpoint = "/content/api/v2/blog-posts/{$id}/buffer";
 
-        $queryString = $this->generateBatchQuery('email', $emails);
-
-        $options['query'] = $params;
-
-        return $this->request('get', $endpoint, $options, $queryString);
+        return $this->request('put', $endpoint);
     }
 
     /**
-     * @param string $utk
+     * Gets the current contents of the auto-save buffer.
+     *
+     * @param int $id The blog post ID
      * @return mixed
      */
-    public function getByToken($utk)
+    public function getAutoSaveBufferContents($id)
     {
-        $endpoint = "/contacts/v1/contact/utk/{$utk}/profile";
-
-        return $this->request('get', $endpoint);
-    }
-
-
-    /**
-     * @param array $utks
-     * @param array $params
-     * @return mixed
-     */
-    public function getBatchByTokens(array $utks, array $params = [])
-    {
-        $endpoint = "/contacts/v1/contact/utks/batch/";
-
-        $queryString = $this->generateBatchQuery('utk', $utks);
-
-        $options['query'] = $params;
-
-        return $this->request('get', $endpoint, $options, $queryString);
-    }
-
-    /**
-     * @param string $query
-     * @param array  $params
-     * @return mixed
-     */
-    public function search($query, array $params = [])
-    {
-        $endpoint = "/contacts/v1/search/query";
-
-        $params['q'] = $query;
-
-        return $this->request('get', $endpoint, $params);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function statistics()
-    {
-        $endpoint = "/contacts/v1/contacts/statistics";
+        $endpoint = "/content/api/v2/blog-posts/{$id}/buffer";
 
         return $this->request('get', $endpoint);
     }
 
     /**
-     * @param string $varName
-     * @param array  $items
-     * @return string
+     * Clone the blog post.
+     *
+     * @param int $id The blog post ID
+     * @return mixed
      */
-    private function generateBatchQuery($varName, array $items)
+    public function clonePost($id)
     {
-        $queryString = '';
+        $endpoint = "/content/api/v2/blog-posts/{$id}/clone";
 
-        foreach ($items as $item) {
-            $queryString .= "&{$varName}={$item}";
-        }
+        return $this->request('post', $endpoint);
+    }
 
-        return $queryString;
+    /**
+     * Determine if the auto-save buffer differs from the live blog post.
+     *
+     * @param int $id The blog post ID
+     * @return mixed
+     */
+    public function hasBufferedChanges($id)
+    {
+        $endpoint = "/content/api/v2/blog-posts/{$id}/has-buffered-changes";
+
+        return $this->request('get', $endpoint);
+    }
+
+    /**
+     * Either publishes or cancels publishing based on the POSTed JSON.
+     *
+     * Allowable actions are: "push-buffer-live", "schedule-publish", "cancel-publish".
+     * "push-buffer-live": copies the current contents of the auto-save buffer into the live object.
+     * "schedule-publish": which pushes the buffer live and then sets up the content for publishing at
+     *     the existing publish_date time.
+     * "cancel-publish": cancels a previous schedule-publish action.
+     *
+     * @param int $id The blog post ID
+     * @param string $action The publish action
+     * @return mixed
+     */
+    public function publishAction($id, $action)
+    {
+        $endpoint = "/content/api/v2/blog-posts/{$id}/publish-action";
+
+        $options['json'] = ['action' => $action];
+
+        return $this->request('post', $endpoint, $options);
+    }
+
+    /**
+     * Copies the contents of the auto-save buffer into the live blog post.
+     *
+     * @param int $id The blog post ID
+     * @return mixed
+     */
+    public function pushBufferLive($id)
+    {
+        $endpoint = "/content/api/v2/blog-posts/{$id}/push-buffer-live";
+
+        return $this->request('post', $endpoint);
+    }
+
+    /**
+     * Restores a previously deleted blog post.
+     *
+     * @param int $id The blog post ID
+     * @return mixed
+     */
+    public function restoreDeleted($id)
+    {
+        $endpoint = "/content/api/v2/blog-posts/{$id}/restore-deleted";
+
+        return $this->request('post', $endpoint);
+    }
+
+    /**
+     * Validates the auto-save buffer version of the blog post.
+     *
+     * @param int $id The blog post ID
+     * @return mixed
+     */
+    public function validateBuffer($id)
+    {
+        $endpoint = "/content/api/v2/blog-posts/{$id}/validate-buffer";
+
+        return $this->request('post', $endpoint);
+    }
+
+    /**
+     * List previous versions of the blog post.
+     *
+     * @param int $id The blog post ID
+     * @return mixed
+     */
+    public function versions($id)
+    {
+        $endpoint = "/content/api/v2/blog-posts/{$id}/versions";
+
+        return $this->request('get', $endpoint);
+    }
+
+    /**
+     * Get a previous version of the blog post.
+     *
+     * @param int $post_id The blog post ID
+     * @param int $version_id The version ID
+     * @return mixed
+     */
+    public function getVersion($post_id, $version_id)
+    {
+        $endpoint = "/content/api/v2/blog-posts/{$post_id}/versions/{$version_id}";
+
+        return $this->request('get', $endpoint);
+    }
+
+    /**
+     * Restore a previous version of the blog post.
+     *
+     * @param int $post_id The blog post ID
+     * @param int $version_id The version ID
+     * @return mixed
+     */
+    public function restoreVersion($post_id, $version_id)
+    {
+        $endpoint = "/content/api/v2/blog-posts/{$post_id}/versions/restore";
+
+        $options['json'] = compact('version_id');
+
+        return $this->request('post', $endpoint, $options);
     }
 }
