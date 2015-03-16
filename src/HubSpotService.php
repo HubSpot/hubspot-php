@@ -11,6 +11,7 @@ use Fungku\HubSpot\Http\Client;
  * @method blogPosts()
  * @method contacts()
  * @method email()
+ * @method files()
  * @method forms()
  * @method keywords()
  * @method leadNurturing()
@@ -24,7 +25,14 @@ use Fungku\HubSpot\Http\Client;
  */
 class HubSpotService
 {
+    /**
+     * @var string
+     */
     private $apiKey;
+
+    /**
+     * @var array
+     */
     private $apiClasses = [
         'blogs',
         'blogPosts',
@@ -32,6 +40,7 @@ class HubSpotService
         'contactLists',
         'contactProperties',
         'email',
+        'files',
         'forms',
         'keywords',
         'leadNurturing',
@@ -65,8 +74,6 @@ class HubSpotService
     }
 
     /**
-     * The class name for an existing provider.
-     *
      * @param string $name
      * @return string
      * @throws HubSpotException

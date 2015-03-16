@@ -88,11 +88,11 @@ If you see something not planned, that you want, make an [issue](https://github.
 
 :ballot_box_with_check: Contact Properties
 
-:wavy_dash: COS Files :new:
+:ballot_box_with_check: COS Files :new:
 
-:wavy_dash: Email :new:
+:ballot_box_with_check: Email :new:
 
-:wavy_dash:  Forms
+:wavy_dash: Forms
 
 :white_medium_small_square: Lead Nurturing
 
@@ -104,7 +104,7 @@ If you see something not planned, that you want, make an [issue](https://github.
 
 :white_medium_small_square: Social Media
 
-:white_medium_small_square: Workflows
+:ballot_box_with_check: Workflows
 
 :black_medium_small_square: Blog (CMS)
 
