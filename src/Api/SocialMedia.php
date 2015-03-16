@@ -3,63 +3,84 @@
 class SocialMedia extends Api
 {
     /**
-     * Get all blogs.
+     * Get all publishing channels.
      *
-     * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
      * @return mixed
      */
-    public function all(array $params = [])
+    public function channels()
     {
-        $endpoint = '/content/api/v2/blogs';
-
-        $options['query'] = $params;
-
-        return $this->request('get', $endpoint, $options);
-    }
-
-    /**
-     * Get information about a specific blog.
-     *
-     * @param string $id
-     * @return mixed
-     */
-    public function getById($id)
-    {
-        $endpoint = "/content/api/v2/blogs/{$id}";
+        $endpoint = '/broadcast/v1/channels/setting/publish/current';
 
         return $this->request('get', $endpoint);
     }
 
     /**
-     * Get previous versions of the blog.
+     * Get a broadcast channel.
      *
-     * @param string $id     Blog id.
-     * @param array  $params Optional parameters.
+     * @param string $channel_guid
      * @return mixed
      */
-    public function versions($id, array $params = [])
+    public function getChannelById($channel_guid)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}/versions";
+        $endpoint = "/broadcast/v1/channels/{$channel_guid}";
 
-        $options['query'] = $params;
+        return $this->request('get', $endpoint);
+    }
+
+    /**
+     * Get all broadcast messages.
+     *
+     * @param array $params
+     * @return mixed
+     */
+    public function broadcasts(array $params = [])
+    {
+        $endpoint = "/broadcast/v1/broadcasts";
+
+        $options['json'] = $params;
 
         return $this->request('get', $endpoint, $options);
     }
 
     /**
-     * Get a previous version of the blog.
+     * Get a broadcast.
      *
-     * @param string $id         Blog id.
-     * @param string $version_id Version id.
-     * @param array  $params     Optional parameters.
+     * @param string $broadcast_guid
      * @return mixed
      */
-    public function getVersionById($id, $version_id, array $params = [])
+    public function getBroadcastById($broadcast_guid)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
+        $endpoint = "/broadcast/v1/broadcasts/{$broadcast_guid}";
 
-        $options['query'] = $params;
-
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint);
     }
+
+    /**
+     * Create a new broadcast message.
+     *
+     * @param array $broadcast
+     * @return mixed
+     */
+    public function createBroadcast(array $broadcast)
+    {
+        $endpoint = "/broadcast/v1/broadcasts";
+
+        $options['json'] = $broadcast;
+
+        return $this->request('post', $endpoint, $options);
+    }
+
+    /**
+     * Cancel a broadcast message.
+     *
+     * @param string $broadcast_guid
+     * @return mixed
+     */
+    public function cancelBroadcast($broadcast_guid)
+    {
+        $endpoint = "/broadcast/v1/broadcasts/{$broadcast_guid}";
+
+        return $this->request('delete', $endpoint);
+    }
+
 }
