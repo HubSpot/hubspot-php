@@ -4,16 +4,19 @@ class Forms extends Api
 {
     /**
      * Submit form data.
-     * http://developers.hubspot.com/docs/methods/forms/submit_form
      *
+     * @param int $portal_id
+     * @param string $form_guid
      * @param array $form
+     * @return mixed
      */
-    public function submit(array $form)
+    public function submit($portal_id, $form_guid, array $form)
     {
-        // TODO: This has a unique base url...
-        // https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_id}
+        $url = "https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_guid}";
 
-        $options['json'] = $form;
+        $options['body'] = $form;
+
+        return $this->requestUrl('post', $url, $options);
     }
 
     /**

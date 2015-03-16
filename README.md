@@ -94,7 +94,7 @@ If you see something not planned, that you want, make an [issue](https://github.
 
 :ballot_box_with_check: Files (COS) :new:
 
-:wavy_dash: Forms
+:ballot_box_with_check: Forms
 
 :ballot_box_with_check: Keywords
 

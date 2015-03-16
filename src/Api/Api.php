@@ -38,6 +38,22 @@ abstract class Api
      * Send the request to the HubSpot API.
      *
      * @param string $method The HTTP request verb.
+     * @param string $url The url to send the request to.
+     * @param array $options An array of options to send with the request.
+     * @param string $queryString A query string to send with the request.
+     * @return mixed
+     */
+    protected function requestUrl($method, $url, array $options =[], $queryString = null)
+    {
+        $options['headers']['User-Agent'] = self::USER_AGENT;
+
+        return $this->client->$method($url, $options);
+    }
+
+    /**
+     * Send the request to the HubSpot API.
+     *
+     * @param string $method The HTTP request verb.
      * @param string $endpoint The HubSpot API endpoint.
      * @param array $options An array of options to send with the request.
      * @param string $queryString A query string to send with the request.
@@ -47,9 +63,7 @@ abstract class Api
     {
         $url = $this->generateUrl($endpoint, $queryString);
 
-        $options['headers']['User-Agent'] = self::USER_AGENT;
-
-        return $this->client->$method($url, $options);
+        return $this->requestUrl($method, $url, $options, $queryString);
     }
 
     /**
