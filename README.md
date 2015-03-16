@@ -88,19 +88,15 @@ If you see something not planned, that you want, make an [issue](https://github.
 
 :ballot_box_with_check: Contact Properties
 
-:ballot_box_with_check: COS Files :new:
-
 :ballot_box_with_check: Email :new:
 
 :ballot_box_with_check: Email Events :new:
 
+:ballot_box_with_check: Files (COS) :new:
+
 :wavy_dash: Forms
 
 :ballot_box_with_check: Keywords
-
-:white_medium_small_square: Lead Nurturing
-
-:white_medium_small_square: Leads
 
 :white_medium_small_square: Page Publishing (COS) :new:
 

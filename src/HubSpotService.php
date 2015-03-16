@@ -15,8 +15,6 @@ use Fungku\HubSpot\Http\Client;
  * @method files()
  * @method forms()
  * @method keywords()
- * @method leadNurturing()
- * @method leads()
  * @method lists()
  * @method marketPlace()
  * @method properties()
@@ -45,8 +43,6 @@ class HubSpotService
         'files',
         'forms',
         'keywords',
-        'leadNurturing',
-        'leads',
         'marketPlace',
         'settings',
         'socialMedia',
