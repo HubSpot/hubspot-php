@@ -1,6 +1,6 @@
 <?php namespace Fungku\HubSpot\Api;
 
-use Fungku\Hubspot\Contracts\HttpClient;
+use Fungku\HubSpot\Contracts\HttpClient;
 
 abstract class Api
 {

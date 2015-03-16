@@ -1,4 +1,4 @@
-<?php namespace Fungku\Hubspot\Contracts;
+<?php namespace Fungku\HubSpot\Contracts;
 
 interface HttpClient
 {
