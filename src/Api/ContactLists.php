@@ -167,23 +167,23 @@ class ContactLists extends Api
 
         $options['json'] = ['vids' => $contact_id];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->request('get', $endpoint, $options);
     }
 
     /**
-     * Remove a contact from a list.
+     * Add a contact to a list.
      *
      * @param int $list_id
      * @param int $contact_id
      * @return mixed
      */
-    public function removeContact($list_id, $contact_id)
+    public function addContact($list_id, $contact_id)
     {
-        $endpoint = "/contacts/v1/lists/{$list_id}/remove";
+        $endpoint = "/contacts/v1/lists/{$list_id}/add";
 
         $options['json'] = ['vids' => $contact_id];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->request('get', $endpoint, $options);
     }
 
 }

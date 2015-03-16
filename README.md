@@ -1,6 +1,10 @@
 # HubSpot PHP API client
 
-[![Latest Stable Version](https://poser.pugx.org/fungku/hubspot-php/v/stable.svg)](https://packagist.org/packages/fungku/hubspot-php) [![Latest Unstable Version](https://poser.pugx.org/fungku/hubspot-php/v/unstable.svg)](https://packagist.org/packages/fungku/hubspot-php) [![Total Downloads](https://poser.pugx.org/fungku/hubspot-php/downloads.svg)](https://packagist.org/packages/fungku/hubspot-php) [![License](https://poser.pugx.org/fungku/hubspot-php/license.svg)](https://packagist.org/packages/fungku/hubspot-php) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fungku/hubspot-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fungku/hubspot-php/?branch=master) [![Build Status](https://travis-ci.org/fungku/hubspot-php.svg?branch=master)](https://travis-ci.org/fungku/hubspot-php)
+[![Version](https://img.shields.io/packagist/v/fungku/hubspot-php.svg)](https://packagist.org/packages/fungku/hubspot-php)
+ [![Total Downloads](https://img.shields.io/packagist/dt/fungku/hubspot-php.svg)](https://packagist.org/packages/fungku/hubspot-php) 
+ [![License](https://img.shields.io/packagist/l/fungku/hubspot-php.svg)](https://packagist.org/packages/fungku/hubspot-php) 
+ [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fungku/hubspot-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fungku/hubspot-php/?branch=master) 
+ [![Build Status](https://travis-ci.org/fungku/hubspot-php.svg?branch=master)](https://travis-ci.org/fungku/hubspot-php)
 
 A new HubSpot API client. The sequel to my [perfectly functional wrapper](https://github.com/fungku/hubspot) of HubSpot/haPihP.
 client. However, this includes some of the new COS/v2 endpoints.
