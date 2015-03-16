@@ -1,6 +1,6 @@
 # HubSpot PHP API client
 
-[![Version](https://img.shields.io/packagist/v/fungku/hubspot-php.svg)](https://packagist.org/packages/fungku/hubspot-php)
+[![Version](https://img.shields.io/packagist/v/fungku/hubspot-php.svg)](https://packagist.org/packages/fungku/hubspot-php) 
  [![Total Downloads](https://img.shields.io/packagist/dt/fungku/hubspot-php.svg)](https://packagist.org/packages/fungku/hubspot-php) 
  [![License](https://img.shields.io/packagist/l/fungku/hubspot-php.svg)](https://packagist.org/packages/fungku/hubspot-php) 
  [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/fungku/hubspot-php.svg)](https://scrutinizer-ci.com/g/fungku/hubspot-php/?branch=master) 
