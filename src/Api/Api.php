@@ -40,10 +40,9 @@ abstract class Api
      * @param string $method The HTTP request verb.
      * @param string $url The url to send the request to.
      * @param array $options An array of options to send with the request.
-     * @param string $queryString A query string to send with the request.
      * @return mixed
      */
-    protected function requestUrl($method, $url, array $options =[], $queryString = null)
+    protected function requestUrl($method, $url, array $options =[])
     {
         $options['headers']['User-Agent'] = self::USER_AGENT;
 
@@ -63,7 +62,7 @@ abstract class Api
     {
         $url = $this->generateUrl($endpoint, $queryString);
 
-        return $this->requestUrl($method, $url, $options, $queryString);
+        return $this->requestUrl($method, $url, $options);
     }
 
     /**
