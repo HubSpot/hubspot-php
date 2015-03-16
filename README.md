@@ -100,7 +100,7 @@ If you see something not planned, that you want, make an [issue](https://github.
 
 :ballot_box_with_check: Page Publishing (COS) :new:
 
-:white_medium_small_square: Social Media
+:ballot_box_with_check: Social Media
 
 :ballot_box_with_check: Workflows
 
