@@ -24,6 +24,11 @@ class HubSpotServiceSpec extends ObjectBehavior
         $this->blogs()->shouldHaveType('Fungku\HubSpot\Api\Blogs');
     }
 
+    function it_creates_a_blogPosts_api_class()
+    {
+        $this->blogPosts()->shouldHaveType('Fungku\HubSpot\Api\BlogPosts');
+    }
+
     function it_creates_a_contacts_api_class()
     {
         $this->contacts()->shouldHaveType('Fungku\HubSpot\Api\Contacts');
@@ -37,6 +42,21 @@ class HubSpotServiceSpec extends ObjectBehavior
     function it_creates_a_contactProperties_api_class()
     {
         $this->contactProperties()->shouldHaveType('Fungku\HubSpot\Api\ContactProperties');
+    }
+
+    function it_creates_a_email_api_class()
+    {
+        $this->email()->shouldHaveType('Fungku\HubSpot\Api\Email');
+    }
+
+    function it_creates_a_emailEvents_api_class()
+    {
+        $this->emailEvents()->shouldHaveType('Fungku\HubSpot\Api\EmailEvents');
+    }
+
+    function it_creates_a_files_api_class()
+    {
+        $this->files()->shouldHaveType('Fungku\HubSpot\Api\Files');
     }
 
     function it_creates_a_forms_api_class()
@@ -54,9 +74,9 @@ class HubSpotServiceSpec extends ObjectBehavior
         $this->marketPlace()->shouldHaveType('Fungku\HubSpot\Api\MarketPlace');
     }
 
-    function it_creates_a_settings_api_class()
+    function it_creates_a_pages_api_class()
     {
-        $this->settings()->shouldHaveType('Fungku\HubSpot\Api\Settings');
+        $this->pages()->shouldHaveType('Fungku\HubSpot\Api\Pages');
     }
 
     function it_creates_a_socialMedia_api_class()
