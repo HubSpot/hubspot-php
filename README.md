@@ -13,6 +13,8 @@ client. However, this includes some of the new COS/v2 endpoints.
 
 Please try it out, and let me know if things are working as expected.
 
+##### [DOCS](http://fungku.github.io/hubspot-php/api/namespace-Fungku.HubSpot.Api.html)
+
 ## Setup
 
 **Composer:**
