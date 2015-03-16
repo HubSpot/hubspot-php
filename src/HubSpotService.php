@@ -17,6 +17,7 @@ use Fungku\HubSpot\Http\Client;
  * @method keywords()
  * @method lists()
  * @method marketPlace()
+ * @method pages()
  * @method properties()
  * @method settings()
  * @method socialMedia()
@@ -44,6 +45,7 @@ class HubSpotService
         'forms',
         'keywords',
         'marketPlace',
+        'pages',
         'settings',
         'socialMedia',
         'workflows',
