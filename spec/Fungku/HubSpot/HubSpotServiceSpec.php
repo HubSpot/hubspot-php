@@ -49,16 +49,6 @@ class HubSpotServiceSpec extends ObjectBehavior
         $this->keywords()->shouldHaveType('Fungku\HubSpot\Api\Keywords');
     }
 
-    function it_creates_a_leadNurturing_api_class()
-    {
-        $this->leadNurturing()->shouldHaveType('Fungku\HubSpot\Api\LeadNurturing');
-    }
-
-    function it_creates_a_leads_api_class()
-    {
-        $this->leads()->shouldHaveType('Fungku\HubSpot\Api\Leads');
-    }
-
     function it_creates_a_marketPlace_api_class()
     {
         $this->marketPlace()->shouldHaveType('Fungku\HubSpot\Api\MarketPlace');
