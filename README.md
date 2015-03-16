@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/packagist/v/fungku/hubspot-php.svg)](https://packagist.org/packages/fungku/hubspot-php)
  [![Total Downloads](https://img.shields.io/packagist/dt/fungku/hubspot-php.svg)](https://packagist.org/packages/fungku/hubspot-php) 
  [![License](https://img.shields.io/packagist/l/fungku/hubspot-php.svg)](https://packagist.org/packages/fungku/hubspot-php) 
- [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fungku/hubspot-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fungku/hubspot-php/?branch=master) 
+ [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/fungku/hubspot-php.svg)](https://scrutinizer-ci.com/g/fungku/hubspot-php/?branch=master) 
  [![Build Status](https://travis-ci.org/fungku/hubspot-php.svg?branch=master)](https://travis-ci.org/fungku/hubspot-php)
 
 A new HubSpot API client. The sequel to my [perfectly functional wrapper](https://github.com/fungku/hubspot) of HubSpot/haPihP.
