@@ -92,6 +92,8 @@ If you see something not planned, that you want, make an [issue](https://github.
 
 :ballot_box_with_check: Email :new:
 
+:ballot_box_with_check: Email Events :new:
+
 :wavy_dash: Forms
 
 :white_medium_small_square: Lead Nurturing
@@ -113,8 +115,6 @@ If you see something not planned, that you want, make an [issue](https://github.
 :black_medium_small_square: Companies Properties :new:
 
 :black_medium_small_square: Deals :new:
-
-:black_medium_small_square: Email Events :new:
 
 :black_medium_small_square: Keywords
 

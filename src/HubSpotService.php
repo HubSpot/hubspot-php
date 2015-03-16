@@ -11,6 +11,7 @@ use Fungku\HubSpot\Http\Client;
  * @method blogPosts()
  * @method contacts()
  * @method email()
+ * @method emailEvents()
  * @method files()
  * @method forms()
  * @method keywords()
@@ -40,6 +41,7 @@ class HubSpotService
         'contactLists',
         'contactProperties',
         'email',
+        'emailEvents',
         'files',
         'forms',
         'keywords',
