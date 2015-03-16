@@ -3,63 +3,56 @@
 class Keywords extends Api
 {
     /**
-     * Get all blogs.
+     * Get all keywords.
      *
-     * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
      * @return mixed
      */
-    public function all(array $params = [])
+    public function all()
     {
-        $endpoint = '/content/api/v2/blogs';
-
-        $options['query'] = $params;
-
-        return $this->request('get', $endpoint, $options);
-    }
-
-    /**
-     * Get information about a specific blog.
-     *
-     * @param string $id
-     * @return mixed
-     */
-    public function getById($id)
-    {
-        $endpoint = "/content/api/v2/blogs/{$id}";
+        $endpoint = '/keywords/v1/keywords.json';
 
         return $this->request('get', $endpoint);
     }
 
     /**
-     * Get previous versions of the blog.
+     * Get a keyword.
      *
-     * @param string $id     Blog id.
-     * @param array  $params Optional parameters.
+     * @param string $keyword_guid
      * @return mixed
      */
-    public function versions($id, array $params = [])
+    public function getById($keyword_guid)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}/versions";
+        $endpoint = "/keywords/v1/keywords/{$keyword_guid}.json";
 
-        $options['query'] = $params;
-
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint);
     }
 
     /**
-     * Get a previous version of the blog.
+     * Create a new keyword.
      *
-     * @param string $id         Blog id.
-     * @param string $version_id Version id.
-     * @param array  $params     Optional parameters.
+     * @param array $keyword
      * @return mixed
      */
-    public function getVersionById($id, $version_id, array $params = [])
+    public function create(array $keyword)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
+        $endpoint = "/keywords/v1/keywords.json";
 
-        $options['query'] = $params;
+        $options['json'] = $keyword;
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('put', $endpoint, $options);
     }
+
+    /**
+     * Delete a keyword.
+     *
+     * @param string $keyword_guid
+     * @return mixed
+     */
+    public function delete($keyword_guid)
+    {
+        $endpoint = "/keywords/v1/keywords/{$keyword_guid}";
+
+        return $this->request('delete', $endpoint);
+    }
+
 }
