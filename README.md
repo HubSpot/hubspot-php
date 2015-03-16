@@ -12,7 +12,7 @@ client. However, this includes some of the new COS/v2 endpoints.
 
 ```
 "require": {
-	"fungku/hubspot-php": "~0.2@dev"
+	"fungku/hubspot-php": "~1.0"
 }
 ```
 
