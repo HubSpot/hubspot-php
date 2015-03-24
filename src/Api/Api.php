@@ -15,6 +15,11 @@ abstract class Api
     protected $client;
 
     /**
+     * @var bool
+     */
+    private $oauth;
+
+    /**
      * @var string Base url
      */
     protected $baseUrl = "https://api.hubapi.com";
@@ -27,11 +32,13 @@ abstract class Api
     /**
      * @param string $apiKey
      * @param HttpClient $client
+     * @param bool $oauth
      */
-    public function __construct($apiKey, HttpClient $client)
+    public function __construct($apiKey, HttpClient $client, $oauth = false)
     {
         $this->apiKey = $apiKey;
         $this->client = $client;
+        $this->oauth = $oauth;
     }
 
     /**
@@ -74,7 +81,9 @@ abstract class Api
      */
     protected function generateUrl($endpoint, $queryString = null)
     {
-        return $this->baseUrl . $endpoint . '?hapikey=' . $this->apiKey . $queryString;
+        $authType = $this->oauth ? 'access_token' : 'hapikey';
+
+        return $this->baseUrl . $endpoint . '?'. $authType . '=' . $this->apiKey . $queryString;
     }
 
     /**

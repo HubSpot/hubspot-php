@@ -30,11 +30,18 @@ class HubSpotService
     private $apiKey;
 
     /**
+     * @var bool
+     */
+    private $oauth;
+
+    /**
      * @param string|null $apiKey
+     * @param bool $oauth
      * @throws HubSpotException
      */
-    protected function __construct($apiKey = null)
+    protected function __construct($apiKey = null, $oauth = false)
     {
+        $this->oauth = $oauth;
         $this->apiKey = $apiKey ?: getenv('HUBSPOT_API_KEY');
 
         if (empty($this->apiKey)) {
@@ -43,12 +50,21 @@ class HubSpotService
     }
 
     /**
-     * @param string $apiKey
+     * @param string $apiKey HubSpot Api key
      * @return static
      */
     public static function make($apiKey = null)
     {
-        return new static($apiKey);
+        return new static($apiKey, false);
+    }
+
+    /**
+     * @param string $access_token HubSpot oauth access token
+     * @return static
+     */
+    public static function makeWithToken($access_token)
+    {
+        return new static($access_token, true);
     }
 
     /**
@@ -65,7 +81,7 @@ class HubSpotService
             throw new HubSpotException("Target [$apiClass] is not instantiable.");
         }
 
-        return new $apiClass($this->apiKey, new Client);
+        return new $apiClass($this->apiKey, new Client, $this->oauth);
     }
 
     /**
