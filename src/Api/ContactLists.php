@@ -131,14 +131,18 @@ class ContactLists extends Api
     /**
      * Get recently added contact from a list.
      *
-     * @param int $id List id
+     * @param int   $id List id
+     * @param array $params
+     *
      * @return mixed
      */
-    public function recentContacts($id)
+    public function recentContacts($id, array $params = [])
     {
         $endpoint = "/contacts/v1/lists/{$id}/contacts/recent";
 
-        return $this->request('get', $endpoint);
+        $options['query'] = $params;
+
+        return $this->request('get', $endpoint, $options);
     }
 
     /**

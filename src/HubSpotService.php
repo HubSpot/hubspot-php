@@ -7,20 +7,20 @@ use Fungku\HubSpot\Http\Client;
  * Class HubSpotService
  * @package Fungku\HubSpot
  *
- * @method blogs()
- * @method blogPosts()
- * @method contacts()
- * @method email()
- * @method emailEvents()
- * @method files()
- * @method forms()
- * @method keywords()
- * @method lists()
- * @method marketPlace()
- * @method pages()
- * @method properties()
- * @method socialMedia()
- * @method workflows()
+ * @method \Fungku\HubSpot\Api\Blogs blogs()
+ * @method \Fungku\HubSpot\Api\BlogPosts blogPosts()
+ * @method \Fungku\HubSpot\Api\ContactLists contactLists()
+ * @method \Fungku\HubSpot\Api\ContactProperties contactProperties()
+ * @method \Fungku\HubSpot\Api\Contacts contacts()
+ * @method \Fungku\HubSpot\Api\Email email()
+ * @method \Fungku\HubSpot\Api\EmailEvents emailEvents()
+ * @method \Fungku\HubSpot\Api\Files files()
+ * @method \Fungku\HubSpot\Api\Forms forms()
+ * @method \Fungku\HubSpot\Api\Keywords keywords()
+ * @method \Fungku\HubSpot\Api\MarketPlace marketPlace()
+ * @method \Fungku\HubSpot\Api\Pages pages()
+ * @method \Fungku\HubSpot\Api\SocialMedia socialMedia()
+ * @method \Fungku\HubSpot\Api\Workflows workflows()
  */
 class HubSpotService
 {
