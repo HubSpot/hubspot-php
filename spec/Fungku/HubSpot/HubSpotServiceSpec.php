@@ -89,4 +89,13 @@ class HubSpotServiceSpec extends ObjectBehavior
         $this->workflows()->shouldHaveType('Fungku\HubSpot\Api\Workflows');
     }
 
+    function it_throws_a_hubspot_exception_from_uninstantiable_api_class()
+    {
+        $this->shouldThrow('\Fungku\HubSpot\Exceptions\HubSpotException')->during('api');
+    }
+
+    function it_throws_a_reflection_exception_from_nonexistent_api_class()
+    {
+        $this->shouldThrow('\ReflectionException')->during('doesntExist');
+    }
 }

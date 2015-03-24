@@ -30,26 +30,6 @@ class HubSpotService
     private $apiKey;
 
     /**
-     * @var array
-     */
-    private $apiClasses = [
-        'blogs',
-        'blogPosts',
-        'contacts',
-        'contactLists',
-        'contactProperties',
-        'email',
-        'emailEvents',
-        'files',
-        'forms',
-        'keywords',
-        'marketPlace',
-        'pages',
-        'socialMedia',
-        'workflows',
-    ];
-
-    /**
      * @param string|null $apiKey
      * @throws HubSpotException
      */
@@ -73,27 +53,27 @@ class HubSpotService
 
     /**
      * @param string $name
-     * @return string
-     * @throws HubSpotException
-     */
-    protected function getApiClassName($name)
-    {
-        if (! in_array($name, $this->apiClasses)) {
-            throw new HubSpotException("Api class not found.");
-        }
-
-        return 'Fungku\\HubSpot\\Api\\' . ucfirst($name);
-    }
-
-    /**
-     * @param string $name
      * @param null $arguments
      * @return mixed
+     * @throws HubSpotException
      */
     public function __call($name, $arguments = null)
     {
         $apiClass = $this->getApiClassName($name);
 
+        if (! (new \ReflectionClass($apiClass))->isInstantiable()) {
+            throw new HubSpotException("Target [$apiClass] is not instantiable.");
+        }
+
         return new $apiClass($this->apiKey, new Client);
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    protected function getApiClassName($name)
+    {
+        return 'Fungku\\HubSpot\\Api\\' . ucfirst($name);
     }
 }
