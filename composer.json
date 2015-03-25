@@ -17,6 +17,9 @@
         "phpspec/phpspec": "~2.0"
     },
     "autoload": {
+        "files": [
+            "src/Api/helpers.php"
+        ],
         "psr-4": {
             "Fungku\\HubSpot\\": "src/"
         }

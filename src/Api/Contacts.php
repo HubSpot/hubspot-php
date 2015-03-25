@@ -11,7 +11,7 @@ class Contacts extends Api
      */
     public function create(array $contact)
     {
-        if (! $this->hasRequiredProperty('email', $contact)) {
+        if (! has_required_property('email', $contact)) {
             throw new HubSpotException("You need an email address to create a Contact");
         }
 

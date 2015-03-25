@@ -27,7 +27,7 @@ abstract class Api
     /**
      * Default user agent.
      */
-    const USER_AGENT = 'Fungku_HubSpot_PHP/0.1 (https://github.com/fungku/hubspot-php)';
+    const USER_AGENT = 'Fungku_HubSpot_PHP/0.9 (https://github.com/fungku/hubspot-php)';
 
     /**
      * @param string $apiKey
@@ -102,30 +102,5 @@ abstract class Api
         }
 
         return $queryString;
-    }
-
-    /**
-     * Check an array of properties for a required property.
-     *
-     * @param string $required
-     * @param array $properties
-     * @return bool
-     */
-    protected function hasRequiredProperty($required, array $properties)
-    {
-        $result = false;
-
-        foreach ($properties as $property) {
-            if (is_array($property)) {
-                $result = $this->hasRequiredProperty($required, $property);
-            } else {
-                $result = ($required == $property);
-            }
-            if ($result == true) {
-                break;
-            }
-        }
-
-        return $result;
     }
 }

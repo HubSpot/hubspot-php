@@ -19,6 +19,16 @@ class HubSpotServiceSpec extends ObjectBehavior
         $this->shouldHaveType('Fungku\HubSpot\HubSpotService');
     }
 
+    function it_throws_a_hubspot_exception_from_uninstantiable_api_class()
+    {
+        $this->shouldThrow('\Fungku\HubSpot\Exceptions\HubSpotException')->during('api');
+    }
+
+    function it_throws_a_reflection_exception_from_nonexistent_api_class()
+    {
+        $this->shouldThrow('\ReflectionException')->during('doesntExist');
+    }
+
     function it_creates_a_blogs_api_class()
     {
         $this->blogs()->shouldHaveType('Fungku\HubSpot\Api\Blogs');
@@ -87,15 +97,5 @@ class HubSpotServiceSpec extends ObjectBehavior
     function it_creates_a_workflows_api_class()
     {
         $this->workflows()->shouldHaveType('Fungku\HubSpot\Api\Workflows');
-    }
-
-    function it_throws_a_hubspot_exception_from_uninstantiable_api_class()
-    {
-        $this->shouldThrow('\Fungku\HubSpot\Exceptions\HubSpotException')->during('api');
-    }
-
-    function it_throws_a_reflection_exception_from_nonexistent_api_class()
-    {
-        $this->shouldThrow('\ReflectionException')->during('doesntExist');
     }
 }
