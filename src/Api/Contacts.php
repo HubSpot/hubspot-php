@@ -59,7 +59,7 @@ class Contacts extends Api
 
         $options['json'] = $contacts;
 
-        return $this->request('post', $endpoint, $contacts);
+        return $this->request('post', $endpoint, $options);
     }
 
     /**
