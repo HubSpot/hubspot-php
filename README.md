@@ -19,7 +19,7 @@ Please try it out, and let me know if things are working as expected.
 
 **Composer:**
 
-```
+```json
 "require": {
 	"fungku/hubspot-php": "~0.9@dev"
 }
