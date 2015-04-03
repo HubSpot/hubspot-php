@@ -77,11 +77,11 @@ class Contacts extends Api
      * @param array $params Optional parameters ['count', 'property', 'offset']
      * @return mixed
      */
-    public function all(array $params = [])
+    public function all($params)
     {
         $endpoint = "/contacts/v1/lists/all/contacts/all";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -90,11 +90,11 @@ class Contacts extends Api
      * @param array $params
      * @return mixed
      */
-    public function recent(array $params = [])
+    public function recent($params)
     {
         $endpoint = "/contacts/v1/lists/recently_updated/contacts/recent";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -115,13 +115,13 @@ class Contacts extends Api
      * @param array $params
      * @return mixed
      */
-    public function getBatchByIds(array $vids, array $params = [])
+    public function getBatchByIds(array $vids, $params)
     {
         $endpoint = "/contacts/v1/contact/vids/batch/";
 
         $queryString = $this->generateBatchQuery('vid', $vids);
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options, $queryString);
     }
@@ -142,13 +142,13 @@ class Contacts extends Api
      * @param array $params
      * @return mixed
      */
-    public function getBatchByEmails(array $emails, array $params = [])
+    public function getBatchByEmails(array $emails, $params)
     {
         $endpoint = "/contacts/v1/contact/vids/batch/";
 
         $queryString = $this->generateBatchQuery('email', $emails);
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options, $queryString);
     }
@@ -169,13 +169,13 @@ class Contacts extends Api
      * @param array $params
      * @return mixed
      */
-    public function getBatchByTokens(array $utks, array $params = [])
+    public function getBatchByTokens(array $utks, $params)
     {
         $endpoint = "/contacts/v1/contact/utks/batch/";
 
         $queryString = $this->generateBatchQuery('utk', $utks);
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options, $queryString);
     }
@@ -185,7 +185,7 @@ class Contacts extends Api
      * @param array  $params
      * @return mixed
      */
-    public function search($query, array $params = [])
+    public function search($query, $params)
     {
         $endpoint = "/contacts/v1/search/query";
 

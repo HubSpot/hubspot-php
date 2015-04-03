@@ -1,6 +1,8 @@
 <?php namespace Fungku\HubSpot\Api;
 
 use Fungku\HubSpot\Contracts\HttpClient;
+use Fungku\HubSpot\Exceptions\HubSpotException;
+use Fungku\HubSpot\Http\Query;
 
 abstract class Api
 {
@@ -102,5 +104,19 @@ abstract class Api
         }
 
         return $queryString;
+    }
+
+    /**
+     * @param array|Query $params
+     * @return mixed
+     * @throws HubSpotException
+     */
+    protected function getQuery($params)
+    {
+        if (is_array($params) || $params instanceof Query) {
+            return $params;
+        }
+
+        throw new HubSpotException('Argument must be an array or an instance of ' . Query::class);
     }
 }

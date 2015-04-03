@@ -63,11 +63,11 @@ class ContactLists extends Api
      * @param array $params ['count', 'offset']
      * @return mixed
      */
-    public function all(array $params = [])
+    public function all($params)
     {
         $endpoint = "/contacts/v1/lists";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -89,11 +89,11 @@ class ContactLists extends Api
      * @param array $params Optional parameters ['count', 'offset']
      * @return mixed
      */
-    public function getAllStatic(array $params = [])
+    public function getAllStatic($params)
     {
         $endpoint = "/contacts/v1/lists/static";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -102,11 +102,11 @@ class ContactLists extends Api
      * @param array $params Optional parameters ['count', 'offset']
      * @return mixed
      */
-    public function getAllDynamic(array $params = [])
+    public function getAllDynamic($params)
     {
         $endpoint = "/contacts/v1/lists/dynamic";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -119,11 +119,11 @@ class ContactLists extends Api
      *     { count, vidOffset, property, propertyMode, formSubmissionMode, showListMemberships }
      * @return mixed
      */
-    public function contacts($id, array $params = [])
+    public function contacts($id, $params)
     {
         $endpoint = "/contacts/v1/lists/{$id}/contacts/all";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -136,11 +136,11 @@ class ContactLists extends Api
      *
      * @return mixed
      */
-    public function recentContacts($id, array $params = [])
+    public function recentContacts($id, $params)
     {
         $endpoint = "/contacts/v1/lists/{$id}/contacts/recent";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }

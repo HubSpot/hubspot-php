@@ -23,11 +23,11 @@ class Email extends Api
      * @param array $params Optional parameters
      * @return mixed
      */
-    public function subscriptionsTimeline(array $params = [])
+    public function subscriptionsTimeline($params)
     {
         $endpoint = "/email/public/v1/subscriptions/timeline";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -56,7 +56,7 @@ class Email extends Api
      * @param array $params
      * @return mixed
      */
-    public function updateSubscription($portal_id, $email, array $params = [])
+    public function updateSubscription($portal_id, $email, $params)
     {
         $endpoint = "/email/public/v1/subscriptions/{$email}";
 

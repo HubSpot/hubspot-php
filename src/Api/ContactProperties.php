@@ -8,11 +8,11 @@ class ContactProperties extends Api
      * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
      * @return mixed
      */
-    public function all(array $params = [])
+    public function all($params)
     {
         $endpoint = '/contacts/v1/properties';
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }

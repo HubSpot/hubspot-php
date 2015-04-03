@@ -8,11 +8,11 @@ class EmailEvents extends Api
      * @param array $params Optional parameters
      * @return mixed
      */
-    public function getCampaignIds(array $params = [])
+    public function getCampaignIds($params)
     {
         $endpoint = "/email/public/v1/campaigns";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -43,7 +43,7 @@ class EmailEvents extends Api
     {
         $endpoint = "/email/public/v1/events";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }

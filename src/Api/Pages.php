@@ -8,7 +8,7 @@ class Pages extends Api
      * @param array $params Optional Parameters.
      * @return mixed
      */
-    public function create(array $params = [])
+    public function create($params)
     {
         $endpoint = '/content/api/v2/pages';
 
@@ -23,11 +23,11 @@ class Pages extends Api
      * @param array $params Optional parameters.
      * @return mixed
      */
-    public function all(array $params = [])
+    public function all($params)
     {
         $endpoint = "/content/api/v2/pages";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $params);
     }

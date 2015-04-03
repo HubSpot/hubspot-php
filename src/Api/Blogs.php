@@ -8,11 +8,11 @@ class Blogs extends Api
      * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
      * @return mixed
      */
-    public function all(array $params = [])
+    public function all($params)
     {
         $endpoint = '/content/api/v2/blogs';
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -37,11 +37,11 @@ class Blogs extends Api
      * @param array  $params Optional parameters.
      * @return mixed
      */
-    public function versions($id, array $params = [])
+    public function versions($id, $params)
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -54,11 +54,11 @@ class Blogs extends Api
      * @param array  $params     Optional parameters.
      * @return mixed
      */
-    public function getVersionById($id, $version_id, array $params = [])
+    public function getVersionById($id, $version_id, $params)
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
 
-        $options['query'] = $params;
+        $options['query'] = $this->getQuery($params);
 
         return $this->request('get', $endpoint, $options);
     }
