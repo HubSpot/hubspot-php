@@ -109,7 +109,7 @@ abstract class Api
     /**
      * @param array|Query $params
      * @return mixed
-     * @throws HubSpotException
+     * @throws \InvalidArgumentException
      */
     protected function getQuery($params)
     {
@@ -117,6 +117,6 @@ abstract class Api
             return $params;
         }
 
-        throw new HubSpotException('Argument must be an array or an instance of \Fungku\HubSpot\Http\Query');
+        throw new \InvalidArgumentException('Argument must be an array or an instance of \Fungku\HubSpot\Http\Query');
     }
 }
