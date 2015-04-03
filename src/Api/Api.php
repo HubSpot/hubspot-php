@@ -117,6 +117,6 @@ abstract class Api
             return $params;
         }
 
-        throw new HubSpotException('Argument must be an array or an instance of ' . Query::class);
+        throw new HubSpotException('Argument must be an array or an instance of \Fungku\HubSpot\Http\Query');
     }
 }
