@@ -51,7 +51,7 @@ $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 // and set the offset to 123456
 $collection = $hubspot->contacts()->all([
         'count'      => 10,
-        'properties' => 'firstname, lastname',
+        'properties' => ['firstname', 'lastname'],
         'vidOffset'  => 123456,
 ]);
 
