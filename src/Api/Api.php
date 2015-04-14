@@ -59,25 +59,8 @@ abstract class Api
         try {
             return $this->client->$method($url, $options);
         } catch (RequestException $e) {
-            return $this->respondWithError($e);
+            return $e->getResponse();
         }
-    }
-
-    /**
-     * @param $e
-     * @return string
-     */
-    protected function respondWithError($e)
-    {
-        $response = $e->getResponse();
-
-        return json_encode([
-            'error' => [
-                'status'  => $response->getStatusCode(),
-                'message' => $response->getReasonPhrase(),
-                'url'     => $response->getEffectiveUrl(),
-            ],
-        ]);
     }
 
     /**
