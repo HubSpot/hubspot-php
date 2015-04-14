@@ -98,7 +98,7 @@ class Contacts extends Api
      * A paginated list of contacts will be returned to you, with a maximum of 100 contacts per page, as specified by
      * the "count" parameter. The endpoint only scrolls back in time 30 days.
      *
-     * @param array $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property', 'propertyMode', 'formSubmissionMode', 'showListMemberships']
+     * @param mixed[] $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property', 'propertyMode', 'formSubmissionMode', 'showListMemberships']
      *
      * @link http://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
      *
