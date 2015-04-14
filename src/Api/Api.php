@@ -3,6 +3,7 @@
 use Fungku\HubSpot\Contracts\HttpClient;
 use Fungku\HubSpot\Exceptions\HubSpotException;
 use Fungku\HubSpot\Http\Query;
+use GuzzleHttp\Exception\RequestException;
 
 abstract class Api
 {
@@ -55,7 +56,28 @@ abstract class Api
     {
         $options['headers']['User-Agent'] = self::USER_AGENT;
 
-        return $this->client->$method($url, $options);
+        try {
+            return $this->client->$method($url, $options);
+        } catch (RequestException $e) {
+            return $this->respondWithError($e);
+        }
+    }
+
+    /**
+     * @param $e
+     * @return string
+     */
+    protected function respondWithError($e)
+    {
+        $response = $e->getResponse();
+
+        return json_encode([
+            'error' => [
+                'status'  => $response->getStatusCode(),
+                'message' => $response->getReasonPhrase(),
+                'url'     => $response->getEffectiveUrl(),
+            ],
+        ]);
     }
 
     /**
