@@ -74,7 +74,7 @@ class Contacts extends Api
     }
 
     /**
-     * @param array $params Optional parameters ['count', 'property', 'offset']
+     * @param array $params Optional parameters ['count', 'property', 'vidOffset']
      * @return mixed
      */
     public function all($params)
