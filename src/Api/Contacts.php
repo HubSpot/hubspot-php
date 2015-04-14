@@ -74,7 +74,7 @@ class Contacts extends Api
     }
 
     /**
-     * @param array $params Optional parameters ['count', 'property', 'offset']
+     * @param array $params Optional parameters ['count', 'property', 'vidOffset']
      * @return mixed
      */
     public function all($params)
@@ -94,16 +94,30 @@ class Contacts extends Api
     }
 
     /**
-     * @param array $params
+     * For a given portal, return all contacts that have been recently updated or created.
+     * A paginated list of contacts will be returned to you, with a maximum of 100 contacts per page, as specified by
+     * the "count" parameter. The endpoint only scrolls back in time 30 days.
+     *
+     * @param mixed[] $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property', 'propertyMode', 'formSubmissionMode', 'showListMemberships']
+     *
+     * @link http://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
+     *
      * @return mixed
      */
     public function recent($params)
     {
         $endpoint = "/contacts/v1/lists/recently_updated/contacts/recent";
 
+        if (isset($params['property']) && is_array($params['property'])) {
+            $queryString = $this->generateBatchQuery('property', $params['property']);
+            unset($params['property']);
+        } else {
+            $queryString = null;
+        }
+
         $options['query'] = $this->getQuery($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, $options, $queryString);
     }
 
     /**
