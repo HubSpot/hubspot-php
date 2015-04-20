@@ -195,7 +195,7 @@ class Contacts extends Api
      */
     public function getBatchByEmails(array $emails, $params)
     {
-        $endpoint = "/contacts/v1/contact/vids/batch/";
+        $endpoint = "/contacts/v1/contact/emails/batch/";
 
         $queryString = $this->generateBatchQuery('email', $emails);
 
