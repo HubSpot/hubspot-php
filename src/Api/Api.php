@@ -95,7 +95,8 @@ abstract class Api
 
     /**
      * Generate a query string for batch requests.
-     * Multiple items with the same variable name, not something PHP generally likes.
+     * 
+     * This is a workaround to deal with multiple items with the same key/variable name, not something PHP generally likes.
      *
      * @param string $varName The name of the query variable.
      * @param array $items An array of item values for the variable.
