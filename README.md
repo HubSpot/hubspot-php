@@ -109,14 +109,14 @@ If you see something not planned, that you want, make an [issue](https://github.
 
 :ballot_box_with_check: Workflows
 
-:black_medium_small_square: Blog (CMS)
+:white_medium_small_square: Companies :new:
 
-:black_medium_small_square: Companies :new:
+:white_medium_small_square: Companies Properties :new:
 
-:black_medium_small_square: Companies Properties :new:
-
-:black_medium_small_square: Deals :new:
+:white_medium_small_square: Deals :new:
 
 :black_medium_small_square: MarketPlace
 
 :black_medium_small_square: Settings
+
+:black_medium_small_square: Blog (CMS)
