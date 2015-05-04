@@ -37,14 +37,15 @@ class Contacts extends Api
     }
 
     /**
-     * @param array $contact The contact properties.
+     * @param string $email The contact's email address.
+     * @param array $properties The contact properties.
      * @return mixed
      */
-    public function createOrUpdate(array $contact)
+    public function createOrUpdate($email, array $properties)
     {
-        $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$contact['email']}";
+        $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
 
-        $options['json'] = $contact;
+        $options['json'] = $properties;
 
         return $this->request('post', $endpoint, $options);
     }
