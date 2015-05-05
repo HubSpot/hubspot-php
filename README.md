@@ -11,9 +11,7 @@ client. However, this includes some of the new COS/v2 endpoints.
 
 ##### BETA
 
-Please try it out, and let me know if things are working as expected.
-
-##### [DOCS](http://fungku.github.io/hubspot-php/api/namespace-Fungku.HubSpot.Api.html)
+Please try it out, and let me know if things are working as expected. There may still be a few small breaking changes here and there, so it is not recommended to use this in production unless you really know what you're doing.
 
 ## Setup
 
