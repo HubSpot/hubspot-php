@@ -118,3 +118,5 @@ If you see something not planned, that you want, make an [issue](https://github.
 :black_medium_small_square: Settings
 
 :black_medium_small_square: Blog (CMS)
+
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/32dd9bdd-1ace-455d-872e-17aac72ac8c1/big.png)](https://insight.sensiolabs.com/projects/32dd9bdd-1ace-455d-872e-17aac72ac8c1)
