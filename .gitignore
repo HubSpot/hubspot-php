@@ -10,4 +10,3 @@
 composer.phar
 composer.lock
 test.php
-.DS_Store
