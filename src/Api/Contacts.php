@@ -5,33 +5,29 @@ use Fungku\HubSpot\Exceptions\HubSpotException;
 class Contacts extends Api
 {
     /**
-     * @param array $contact Array of contact properties.
+     * @param array $properties Array of contact properties.
      * @return mixed
      * @throws HubSpotException
      */
-    public function create(array $contact)
+    public function create(array $properties)
     {
-        if (! has_required_property('email', $contact)) {
-            throw new HubSpotException("You need an email address to create a Contact");
-        }
-
         $endpoint = "/contacts/v1/contact";
 
-        $options['json'] = $contact;
+        $options['json'] = ['properties' => $properties];
 
         return $this->request('post', $endpoint, $options);
     }
 
     /**
      * @param int $id The contact id.
-     * @param array $contact The contact properties to update.
+     * @param array $properties The contact properties to update.
      * @return mixed
      */
-    public function update($id, array $contact)
+    public function update($id, array $properties)
     {
         $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
-        $options['json'] = $contact;
+        $options['json'] = ['properties' => $properties];
 
         return $this->request('post', $endpoint, $options);
     }
@@ -45,7 +41,7 @@ class Contacts extends Api
     {
         $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
 
-        $options['json'] = $properties;
+        $options['json'] = ['properties' => $properties];
 
         return $this->request('post', $endpoint, $options);
     }
