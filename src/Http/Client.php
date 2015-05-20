@@ -1,7 +1,6 @@
 <?php namespace Fungku\HubSpot\Http;
 
 use Fungku\HubSpot\Contracts\HttpClient;
-use Fungku\HubSpot\Http\Response;
 use GuzzleHttp\Client as GuzzleClient;
 
 class Client implements HttpClient
@@ -26,7 +25,6 @@ class Client implements HttpClient
      */
     public function get($url, array $options = [])
     {
-        //return new Response($this->client->get($url, $options));
         return $this->client->get($url, $options)->json();
     }
 

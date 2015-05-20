@@ -1,7 +1,6 @@
 <?php namespace Fungku\HubSpot\Api;
 
 use Fungku\HubSpot\Contracts\HttpClient;
-use Fungku\HubSpot\Exceptions\HubSpotException;
 use Fungku\HubSpot\Http\Query;
 use GuzzleHttp\Exception\RequestException;
 

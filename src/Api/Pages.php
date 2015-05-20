@@ -14,7 +14,7 @@ class Pages extends Api
 
         $options['json'] = $params;
 
-        return $this->request('post', $endpoint, $params);
+        return $this->request('post', $endpoint, $options);
     }
 
     /**
@@ -29,7 +29,7 @@ class Pages extends Api
 
         $options['query'] = $this->getQuery($params);
 
-        return $this->request('get', $endpoint, $params);
+        return $this->request('get', $endpoint, $options);
     }
 
     /**
