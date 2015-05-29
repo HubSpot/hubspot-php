@@ -39,7 +39,7 @@ class ContactsSpec extends ObjectBehavior
         $contact = ['email' => 'test@123test.com'];
 
         $this->client->post(self::getUrl('/contacts/v1/contact'), [
-            'json'    => $contact,
+            'json'    => ['properties' => $contact],
             'headers' => $this->headers,
         ])->shouldBeCalled();
 
@@ -52,7 +52,7 @@ class ContactsSpec extends ObjectBehavior
         $id = 1;
 
         $this->client->post(self::getUrl("/contacts/v1/contact/vid/{$id}/profile"), [
-            'json'    => $contact,
+            'json'    => ['properties' => $contact],
             'headers' => $this->headers,
         ])->shouldBeCalled();
 
