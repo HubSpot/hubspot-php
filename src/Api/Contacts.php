@@ -126,6 +126,17 @@ class Contacts extends Api
 
         return $this->request('get', $endpoint, $options, $queryString);
     }
+    
+    /**
+     * Get all contacts who have been updated since a specific time.
+     * 
+     * @param int $time Timestamp representing the cut-off time.
+     * @return mixed
+     */
+    public function getAllUpdatedSince($time)
+    {
+        // TODO: Get all contacts who have been updated since a certain time
+    }
 
     /**
      * @param int $id
