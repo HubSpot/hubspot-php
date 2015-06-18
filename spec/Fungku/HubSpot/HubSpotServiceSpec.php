@@ -98,4 +98,9 @@ class HubSpotServiceSpec extends ObjectBehavior
     {
         $this->workflows()->shouldHaveType('Fungku\HubSpot\Api\Workflows');
     }
+
+    function it_creates_an_events_api_class()
+    {
+        $this->events()->shouldHaveType('Fungku\HubSpot\Api\Events');
+    }
 }
