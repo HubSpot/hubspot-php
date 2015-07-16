@@ -133,7 +133,6 @@ class ContactLists extends Api
      *
      * @param int   $id List id
      * @param array $params
-     *
      * @return mixed
      */
     public function recentContacts($id, $params)
