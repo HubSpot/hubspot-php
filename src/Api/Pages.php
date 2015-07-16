@@ -23,7 +23,7 @@ class Pages extends Api
      * @param array $params Optional parameters.
      * @return mixed
      */
-    public function all($params)
+    public function all($params = [])
     {
         $endpoint = "/content/api/v2/pages";
 
