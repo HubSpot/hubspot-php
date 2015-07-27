@@ -3,7 +3,12 @@
 class Forms extends Api
 {
     /**
-     * Submit form data.
+     * Submit data to a form.
+     * 
+     * @link http://developers.hubspot.com/docs/methods/forms/submit_form
+     * 
+     * Send form submission data to HubSpot. Form submissions from external sources can be made to any registered
+     * HubSpot form. You can see a list of forms on your portal by going to the Contacts > Forms page
      *
      * @param int $portal_id
      * @param string $form_guid
