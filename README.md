@@ -7,7 +7,7 @@
  [![Build Status](https://img.shields.io/travis/fungku/hubspot-php.svg?style=flat-square)](https://travis-ci.org/fungku/hubspot-php)
 
 A new HubSpot API client. The sequel to my [perfectly functional wrapper](https://github.com/fungku/hubspot) of HubSpot/haPihP.
-client. However, this includes some of the new COS/v2 endpoints.
+client. However, this is a complete re-write and includes some of the new COS/v2 endpoints.
 
 ##### BETA
 
@@ -47,19 +47,19 @@ $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 // Get an array of 10 contacts
 // getting only the firstname and lastname properties
 // and set the offset to 123456
-$collection = $hubspot->contacts()->all([
+$contacts = $hubspot->contacts()->all([
         'count'     => 10,
         'property'  => ['firstname', 'lastname'],
         'vidOffset' => 123456,
 ]);
 
-foreach ($collection['contacts'] as $contact) {
+foreach ($contacts['contacts'] as $contact) {
     echo $contact['properties']['firstname']['value'];
 }
 
 // Info for pagination
-echo $collection['has-more'];
-echo $collection['vid-offset'];
+echo $contacts['has-more'];
+echo $contacts['vid-offset'];
 ```
 
 #### Get a group of contacts by Ids
