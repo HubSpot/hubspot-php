@@ -123,9 +123,16 @@ class ContactLists extends Api
     {
         $endpoint = "/contacts/v1/lists/{$id}/contacts/all";
 
+        if (isset($params['property']) && is_array($params['property'])) {
+            $queryString = $this->generateBatchQuery('property', $params['property']);
+            unset($params['property']);
+        } else {
+            $queryString = null;
+        }
+
         $options['query'] = $this->getQuery($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, $options, $queryString);
     }
 
     /**
