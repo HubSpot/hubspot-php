@@ -21,8 +21,12 @@ class Events extends Api
      *
      * @return void
      */
-    public function trigger($hubId, $eventId,
-        $contactEmail = null, $contactRevenue = null, array $contactProperties = array()
+    public function trigger(
+        $hubId,
+        $eventId,
+        $contactEmail = null,
+        $contactRevenue = null,
+        array $contactProperties = array()
     ) {
         $endpoint = sprintf(
             '/event?_a=%s&_n=%s',
