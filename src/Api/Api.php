@@ -94,7 +94,7 @@ abstract class Api
     {
         $authType = $this->oauth ? 'access_token' : 'hapikey';
 
-        return $this->baseUrl . $endpoint . '?'. $authType . '=' . $this->apiKey . $queryString;
+        return self::BASE_URL . $endpoint . '?'. $authType . '=' . $this->apiKey . $queryString;
     }
 
     /**
