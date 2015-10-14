@@ -44,10 +44,6 @@ class Events extends Api
             }
         }
 
-        try {
-            $this->request('get', $endpoint);
-        } catch (\GuzzleHttp\Exception\ParseException $e) {
-            // The response is not JSON, so this is expected.
-        }
+        $this->request('get', $endpoint);
     }
 }
