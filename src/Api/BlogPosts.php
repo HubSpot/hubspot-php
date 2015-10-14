@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class BlogPosts extends Api
 {
@@ -6,6 +8,7 @@ class BlogPosts extends Api
      * Create a new blog post.
      *
      * @param array $params Optional Parameters.
+     *
      * @return mixed
      */
     public function create($params)
@@ -21,6 +24,7 @@ class BlogPosts extends Api
      * Get all blog posts.
      *
      * @param array $params Optional parameters.
+     *
      * @return mixed
      */
     public function all($params)
@@ -35,8 +39,9 @@ class BlogPosts extends Api
     /**
      * Update a blog post.
      *
-     * @param int $id The blog post id.
+     * @param int   $id     The blog post id.
      * @param array $params The blog post fields to update.
+     *
      * @return mixed
      */
     public function update($id, array $params)
@@ -51,7 +56,8 @@ class BlogPosts extends Api
     /**
      * Delete a blog post.
      *
-     * @param int $id
+     * @param int $id Blog post ID
+     *
      * @return mixed
      */
     public function delete($id)
@@ -64,7 +70,8 @@ class BlogPosts extends Api
     /**
      * Get a specific blog post.
      *
-     * @param int $id
+     * @param int $id Blog post ID
+     *
      * @return mixed
      */
     public function getById($id)
@@ -78,6 +85,7 @@ class BlogPosts extends Api
      * Updates the auto-save buffer.
      *
      * @param in $id The blog post ID
+     *
      * @return mixed
      */
     public function updateAutoSaveBuffer($id)
@@ -91,6 +99,7 @@ class BlogPosts extends Api
      * Gets the current contents of the auto-save buffer.
      *
      * @param int $id The blog post ID
+     *
      * @return mixed
      */
     public function getAutoSaveBufferContents($id)
@@ -104,6 +113,7 @@ class BlogPosts extends Api
      * Clone the blog post.
      *
      * @param int $id The blog post ID
+     *
      * @return mixed
      */
     public function clonePost($id)
@@ -117,6 +127,7 @@ class BlogPosts extends Api
      * Determine if the auto-save buffer differs from the live blog post.
      *
      * @param int $id The blog post ID
+     *
      * @return mixed
      */
     public function hasBufferedChanges($id)
@@ -135,15 +146,16 @@ class BlogPosts extends Api
      *     the existing publish_date time.
      * "cancel-publish": cancels a previous schedule-publish action.
      *
-     * @param int $id The blog post ID
+     * @param int    $id     The blog post ID
      * @param string $action The publish action
+     *
      * @return mixed
      */
     public function publishAction($id, $action)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}/publish-action";
 
-        $options['json'] = ['action' => $action];
+        $options['json'] = array('action' => $action);
 
         return $this->request('post', $endpoint, $options);
     }
@@ -152,6 +164,7 @@ class BlogPosts extends Api
      * Copies the contents of the auto-save buffer into the live blog post.
      *
      * @param int $id The blog post ID
+     *
      * @return mixed
      */
     public function pushBufferLive($id)
@@ -165,6 +178,7 @@ class BlogPosts extends Api
      * Restores a previously deleted blog post.
      *
      * @param int $id The blog post ID
+     *
      * @return mixed
      */
     public function restoreDeleted($id)
@@ -178,6 +192,7 @@ class BlogPosts extends Api
      * Validates the auto-save buffer version of the blog post.
      *
      * @param int $id The blog post ID
+     *
      * @return mixed
      */
     public function validateBuffer($id)
@@ -191,6 +206,7 @@ class BlogPosts extends Api
      * List previous versions of the blog post.
      *
      * @param int $id The blog post ID
+     *
      * @return mixed
      */
     public function versions($id)
@@ -203,8 +219,9 @@ class BlogPosts extends Api
     /**
      * Get a previous version of the blog post.
      *
-     * @param int $post_id The blog post ID
+     * @param int $post_id    The blog post ID
      * @param int $version_id The version ID
+     *
      * @return mixed
      */
     public function getVersion($post_id, $version_id)
@@ -217,8 +234,9 @@ class BlogPosts extends Api
     /**
      * Restore a previous version of the blog post.
      *
-     * @param int $post_id The blog post ID
+     * @param int $post_id    The blog post ID
      * @param int $version_id The version ID
+     *
      * @return mixed
      */
     public function restoreVersion($post_id, $version_id)

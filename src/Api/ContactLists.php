@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class ContactLists extends Api
 {
@@ -6,6 +8,7 @@ class ContactLists extends Api
      * Create a new contact list.
      *
      * @param array $list Contact list properties.
+     *
      * @return mixed
      */
     public function create(array $list)
@@ -20,8 +23,9 @@ class ContactLists extends Api
     /**
      * Update a contact list.
      *
-     * @param int $id The contact list id.
+     * @param int   $id   The contact list id.
      * @param array $list The contact list properties to update.
+     *
      * @return mixed
      */
     public function update($id, array $list)
@@ -36,7 +40,8 @@ class ContactLists extends Api
     /**
      * Delete a contact list.
      *
-     * @param int $id
+     * @param int $id Contact list ID
+     *
      * @return mixed
      */
     public function delete($id)
@@ -47,7 +52,10 @@ class ContactLists extends Api
     }
 
     /**
-     * @param int $id
+     * Get a Contact list by ID
+     *
+     * @param int $id Contact list ID
+     *
      * @return mixed
      */
     public function getById($id)
@@ -61,6 +69,7 @@ class ContactLists extends Api
      * Get a set of contact lists.
      *
      * @param array $params ['count', 'offset']
+     *
      * @return mixed
      */
     public function all($params)
@@ -73,7 +82,10 @@ class ContactLists extends Api
     }
 
     /**
-     * @param array $ids
+     * Get a list of Contact lists by ID
+     *
+     * @param array $ids Array of Contact list IDs
+     *
      * @return mixed
      */
     public function getBatchByIds(array $ids)
@@ -86,7 +98,10 @@ class ContactLists extends Api
     }
 
     /**
+     * Get all the static lists
+     *
      * @param array $params Optional parameters ['count', 'offset']
+     *
      * @return mixed
      */
     public function getAllStatic($params)
@@ -99,7 +114,10 @@ class ContactLists extends Api
     }
 
     /**
+     * Get all the dynamic lists
+     *
      * @param array $params Optional parameters ['count', 'offset']
+     *
      * @return mixed
      */
     public function getAllDynamic($params)
@@ -114,9 +132,10 @@ class ContactLists extends Api
     /**
      * Get contacts in a list.
      *
-     * @param int $id List id
+     * @param int   $id     List id
      * @param array $params Optional parameters
      *     { count, vidOffset, property, propertyMode, formSubmissionMode, showListMemberships }
+     *
      * @return mixed
      */
     public function contacts($id, $params)
@@ -138,8 +157,9 @@ class ContactLists extends Api
     /**
      * Get recently added contact from a list.
      *
-     * @param int   $id List id
-     * @param array $params
+     * @param int   $id     List id
+     * @param array $params Array of request params
+     *
      * @return mixed
      */
     public function recentContacts($id, $params)
@@ -155,6 +175,7 @@ class ContactLists extends Api
      * Refresh a list.
      *
      * @param int $id List id
+     *
      * @return mixed
      */
     public function refresh($id)
@@ -167,15 +188,16 @@ class ContactLists extends Api
     /**
      * Add a contact to a list.
      *
-     * @param int $list_id
-     * @param array $contact_ids
+     * @param int   $list_id     Contact list ID
+     * @param array $contact_ids Contact Ids
+     *
      * @return mixed
      */
     public function addContact($list_id, array $contact_ids)
     {
         $endpoint = "/contacts/v1/lists/{$list_id}/add";
 
-        $options['json'] = ['vids' => $contact_ids];
+        $options['json'] = array('vids' => $contact_ids);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -183,17 +205,17 @@ class ContactLists extends Api
     /**
      * Remove a contact from a list.
      *
-     * @param int $list_id
-     * @param array $contact_ids
+     * @param int   $list_id     Contact list ID
+     * @param array $contact_ids Contact Ids
+     *
      * @return mixed
      */
     public function removeContact($list_id, array $contact_ids)
     {
         $endpoint = "/contacts/v1/lists/{$list_id}/remove";
 
-        $options['json'] = ['vids' => $contact_ids];
+        $options['json'] = array('vids' => $contact_ids);
 
         return $this->request('post', $endpoint, $options);
     }
-
 }
