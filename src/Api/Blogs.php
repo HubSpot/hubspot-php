@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Blogs extends Api
 {
@@ -6,6 +8,7 @@ class Blogs extends Api
      * Get all blogs.
      *
      * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
+     *
      * @return mixed
      */
     public function all($params)
@@ -20,7 +23,8 @@ class Blogs extends Api
     /**
      * Get information about a specific blog.
      *
-     * @param string $id
+     * @param string $id Blog ID
+     *
      * @return mixed
      */
     public function getById($id)
@@ -35,6 +39,7 @@ class Blogs extends Api
      *
      * @param string $id     Blog id.
      * @param array  $params Optional parameters.
+     *
      * @return mixed
      */
     public function versions($id, $params)
@@ -52,6 +57,7 @@ class Blogs extends Api
      * @param string $id         Blog id.
      * @param string $version_id Version id.
      * @param array  $params     Optional parameters.
+     *
      * @return mixed
      */
     public function getVersionById($id, $version_id, $params)

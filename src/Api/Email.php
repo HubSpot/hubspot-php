@@ -1,26 +1,30 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Email extends Api
 {
     /**
      * Get email subscription types for a portal.
      *
-     * @param int $portal_id
+     * @param int $portalId Portal ID
+     *
      * @return mixed
      */
-    public function subscriptionDefinitions($portal_id)
-   {
-       $endpoint = "/email/public/v1/subscriptions";
+    public function subscriptionDefinitions($portalId)
+    {
+        $endpoint = "/email/public/v1/subscriptions";
 
-       $options['query'] = ['portalId' => $portal_id];
+        $options['query'] = array('portalId' => $portalId);
 
-       return $this->request('get', $endpoint, $options);
-   }
+        return $this->request('get', $endpoint, $options);
+    }
 
     /**
      * View subscriptions timeline for a portal.
      *
      * @param array $params Optional parameters
+     *
      * @return mixed
      */
     public function subscriptionsTimeline($params)
@@ -35,15 +39,16 @@ class Email extends Api
     /**
      * Get email subscription status for an email address.
      *
-     * @param int $portal_id
-     * @param string $email
+     * @param int    $portalId Portal ID
+     * @param string $email    Email address
+     *
      * @return mixed
      */
-    public function getSubscriptionStatus($portal_id, $email)
+    public function getSubscriptionStatus($portalId, $email)
     {
         $endpoint = "/email/public/v1/subscriptions/{$email}";
 
-        $options['query'] = ['portalId' => $portal_id];
+        $options['query'] = array('portalId' => $portalId);
 
         return $this->request('get', $endpoint, $options);
     }
@@ -51,19 +56,19 @@ class Email extends Api
     /**
      * Update email subscription status for an email address.
      *
-     * @param int $portal_id
-     * @param string $email
-     * @param array $params
+     * @param int    $portalId Portal ID
+     * @param string $email    Email Address
+     * @param array  $params   Extra params
+     *
      * @return mixed
      */
-    public function updateSubscription($portal_id, $email, $params)
+    public function updateSubscription($portalId, $email, $params)
     {
         $endpoint = "/email/public/v1/subscriptions/{$email}";
 
-        $options['query'] = ['portalId' => $portal_id];
+        $options['query'] = array('portalId' => $portalId);
         $options['json'] = $params;
 
         return $this->request('put', $endpoint, $options);
     }
-
 }

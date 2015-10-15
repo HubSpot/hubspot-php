@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class SocialMedia extends Api
 {
@@ -17,7 +19,8 @@ class SocialMedia extends Api
     /**
      * Get a broadcast channel.
      *
-     * @param string $channel_guid
+     * @param string $channel_guid Channel GUID
+     *
      * @return mixed
      */
     public function getChannelById($channel_guid)
@@ -30,7 +33,8 @@ class SocialMedia extends Api
     /**
      * Get all broadcast messages.
      *
-     * @param array $params
+     * @param array $params Parmaters
+     *
      * @return mixed
      */
     public function broadcasts($params)
@@ -45,7 +49,8 @@ class SocialMedia extends Api
     /**
      * Get a broadcast.
      *
-     * @param string $broadcast_guid
+     * @param string $broadcast_guid Broadcase GUID
+     *
      * @return mixed
      */
     public function getBroadcastById($broadcast_guid)
@@ -58,7 +63,8 @@ class SocialMedia extends Api
     /**
      * Create a new broadcast message.
      *
-     * @param array $broadcast
+     * @param array $broadcast Broadcase parameters
+     *
      * @return mixed
      */
     public function createBroadcast(array $broadcast)
@@ -73,7 +79,8 @@ class SocialMedia extends Api
     /**
      * Cancel a broadcast message.
      *
-     * @param string $broadcast_guid
+     * @param string $broadcast_guid Broadcase GUID
+     *
      * @return mixed
      */
     public function cancelBroadcast($broadcast_guid)
@@ -82,5 +89,4 @@ class SocialMedia extends Api
 
         return $this->request('delete', $endpoint);
     }
-
 }

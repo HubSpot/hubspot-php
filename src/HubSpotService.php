@@ -1,11 +1,13 @@
-<?php namespace Fungku\HubSpot;
+<?php
+
+namespace Fungku\HubSpot;
 
 use Fungku\HubSpot\Exceptions\HubSpotException;
 use Fungku\HubSpot\Contracts\HttpClient;
-use Fungku\HubSpot\Http\Client;
 
 /**
  * Class HubSpotService
+ *
  * @package Fungku\HubSpot
  *
  * @method \Fungku\HubSpot\Api\Blogs blogs()
@@ -27,35 +29,45 @@ use Fungku\HubSpot\Http\Client;
 class HubSpotService
 {
     /**
+     * Api Key or OAuth token
+     *
      * @var string
      */
     private $apiKey;
 
     /**
+     * Use Oauth?
+     *
      * @var bool
      */
     private $oauth;
 
     /**
-     * @param string|null $apiKey
-     * @param bool $oauth
-     * @param HttpClient $client
+     * Setup the service with required information
+     *
+     * @param string|null $apiKey ApiKey/Oauth token
+     * @param bool        $oauth  Use Oauth?
+     * @param HttpClient  $client Http client implementation
+     *
      * @throws HubSpotException
      */
-    protected function __construct($apiKey = null, $oauth = false, HttpClient $client = null)
+    protected function __construct($apiKey = null, $oauth = false, HttpClient $client)
     {
         $this->oauth = $oauth;
         $this->apiKey = $apiKey ?: getenv('HUBSPOT_API_KEY');
+        $this->client = $client;
 
         if (empty($this->apiKey)) {
             throw new HubSpotException("You must provide a HubSpot api key.");
         }
-        $this->client = ($client) ?: new Client;
     }
 
     /**
-     * @param string $apiKey HubSpot Api key
+     * Get an instance isomg hapikey option
+     *
+     * @param string     $apiKey HubSpot Api key
      * @param HttpClient $client An HttpClient implementation
+     *
      * @return static
      */
     public static function make($apiKey = null, HttpClient $client = null)
@@ -64,8 +76,11 @@ class HubSpotService
     }
 
     /**
-     * @param string $access_token HubSpot oauth access token
-     * @param HttpClient $client An HttpClient implementation
+     * Get an instance using an OAuth token
+     *
+     * @param string     $access_token HubSpot oauth access token
+     * @param HttpClient $client       An HttpClient implementation
+     *
      * @return static
      */
     public static function makeWithToken($access_token, HttpClient $client = null)
@@ -74,16 +89,21 @@ class HubSpotService
     }
 
     /**
-     * @param string $name
-     * @param null $arguments
+     * Magic method to get an API class instance
+     *
+     * @param string $name      Api class name e.g. Contacts
+     * @param array  $arguments Method args
+     *
      * @return mixed
+     *
      * @throws HubSpotException
      */
-    public function __call($name, $arguments = null)
+    public function __call($name, array $arguments = array())
     {
         $apiClass = $this->getApiClassName($name);
 
-        if (! (new \ReflectionClass($apiClass))->isInstantiable()) {
+        $reflection = new \ReflectionClass($apiClass);
+        if (! $reflection->isInstantiable()) {
             throw new HubSpotException("Target [$apiClass] is not instantiable.");
         }
 
@@ -91,7 +111,10 @@ class HubSpotService
     }
 
     /**
-     * @param string $name
+     * Get the fully qualified class name
+     *
+     * @param string $name Class name
+     *
      * @return string
      */
     protected function getApiClassName($name)

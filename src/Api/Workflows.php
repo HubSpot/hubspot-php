@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Workflows extends Api
 {
@@ -17,7 +19,8 @@ class Workflows extends Api
     /**
      * Get a specific workflow.
      *
-     * @param int $id
+     * @param int $id Workflow ID
+     *
      * @return mixed
      */
     public function getById($id)
@@ -30,8 +33,9 @@ class Workflows extends Api
     /**
      * Enroll a contact in a workflow.
      *
-     * @param int $workflow_id
-     * @param string $email
+     * @param int    $workflow_id Workflow ID
+     * @param string $email       Email address
+     *
      * @return mixed
      */
     public function enrollContact($workflow_id, $email)
@@ -44,8 +48,9 @@ class Workflows extends Api
     /**
      * Unenroll a contact from a workflow.
      *
-     * @param int $workflow_id
-     * @param string $email
+     * @param int    $workflow_id Workflow ID
+     * @param string $email       Email address
+     *
      * @return mixed
      */
     public function unenrollContact($workflow_id, $email)
@@ -59,6 +64,7 @@ class Workflows extends Api
      * Create a new workflow.
      *
      * @param array $workflow The workflow properties
+     *
      * @return mixed
      */
     public function create(array $workflow)
@@ -73,14 +79,15 @@ class Workflows extends Api
     /**
      * Delete a workflow.
      *
-     * @param int $id
+     * @param int $id Workflow ID
+     *
      * @return mixed
      */
     public function delete($id)
     {
         $endpoint = "/automation/v2/workflows/{$id}";
 
-        $options['query'] = ['updatedAt' => time()];
+        $options['query'] = array('updatedAt' => time());
 
         return $this->request('delete', $endpoint, $options);
     }
@@ -88,7 +95,8 @@ class Workflows extends Api
     /**
      * Get current enrollments for a contact.
      *
-     * @param int $contact_id
+     * @param int $contact_id Contact Id
+     *
      * @return mixed
      */
     public function enrollmentsForContact($contact_id)
@@ -101,9 +109,10 @@ class Workflows extends Api
     /**
      * Get past events for contact from a workflow.
      *
-     * @param int $workflow_id
-     * @param int $contact_id
-     * @param array $params Optional parameters.
+     * @param int   $workflow_id Wofkflow Id
+     * @param int   $contact_id  Contact Id
+     * @param array $params      Optional parameters.
+     *
      * @return mixed
      */
     public function pastEventsForContact($workflow_id, $contact_id, $params)
@@ -118,9 +127,10 @@ class Workflows extends Api
     /**
      * Get upcoming (scheduled) events for a contact in a workflow.
      *
-     * @param int $workflow_id
-     * @param int $contact_id
-     * @param array $params
+     * @param int   $workflow_id Workflow ID
+     * @param int   $contact_id  Contact ID
+     * @param array $params      Parameters
+     *
      * @return mixed
      */
     public function upcomingEventsForContact($workflow_id, $contact_id, $params)
@@ -131,5 +141,4 @@ class Workflows extends Api
 
         return $this->request('get', $endpoint, $options);
     }
-
 }
