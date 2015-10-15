@@ -37,7 +37,7 @@ class SocialMedia extends Api
      *
      * @return mixed
      */
-    public function broadcasts(array $params)
+    public function broadcasts($params)
     {
         $endpoint = "/broadcast/v1/broadcasts";
 

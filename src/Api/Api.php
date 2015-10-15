@@ -28,8 +28,9 @@ abstract class Api
 
     /**
      * Base url
+     * @var string
      */
-    const BASE_URL = "https://api.hubapi.com";
+    protected $baseUrl = "https://api.hubapi.com";
 
     /**
      * Default user agent.
@@ -59,7 +60,7 @@ abstract class Api
      *
      * @return mixed
      */
-    protected function requestUrl($method, $url, array $options = array())
+    protected function requestUrl($method, $url, $options)
     {
         $options['headers']['User-Agent'] = self::USER_AGENT;
 
@@ -80,7 +81,7 @@ abstract class Api
      *
      * @return mixed
      */
-    protected function request($method, $endpoint, array $options = array(), $queryString = null)
+    protected function request($method, $endpoint, array $options, $queryString = null)
     {
         $url = $this->generateUrl($endpoint, $queryString);
 
@@ -99,7 +100,7 @@ abstract class Api
     {
         $authType = $this->oauth ? 'access_token' : 'hapikey';
 
-        return self::BASE_URL . $endpoint . '?'. $authType . '=' . $this->apiKey . $queryString;
+        return $this->baseUrl . $endpoint . '?'. $authType . '=' . $this->apiKey . $queryString;
     }
 
     /**

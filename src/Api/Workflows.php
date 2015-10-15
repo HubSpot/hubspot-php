@@ -115,7 +115,7 @@ class Workflows extends Api
      *
      * @return mixed
      */
-    public function pastEventsForContact($workflow_id, $contact_id, array $params)
+    public function pastEventsForContact($workflow_id, $contact_id, $params)
     {
         $endpoint = " /automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/past";
 
@@ -133,7 +133,7 @@ class Workflows extends Api
      *
      * @return mixed
      */
-    public function upcomingEventsForContact($workflow_id, $contact_id, array $params)
+    public function upcomingEventsForContact($workflow_id, $contact_id, $params)
     {
         $endpoint = "/automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/upcoming";
 
