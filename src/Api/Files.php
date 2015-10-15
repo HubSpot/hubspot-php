@@ -12,7 +12,7 @@ class Files extends Api
      *
      * @return mixed
      */
-    public function upload($file, array $params = array())
+    public function upload($file, $params)
     {
         $endpoint = "/filemanager/api/v2/files";
 
@@ -34,7 +34,7 @@ class Files extends Api
      *
      * @return mixed
      */
-    public function allFiles(array $params = array())
+    public function allFiles($params)
     {
         $endpoint = "/filemanager/api/v2/files";
 
@@ -153,7 +153,7 @@ class Files extends Api
      *
      * @return mixed
      */
-    public function folders(array $params)
+    public function folders($params)
     {
         $endpoint = "/filemanager/api/v2/folders";
 

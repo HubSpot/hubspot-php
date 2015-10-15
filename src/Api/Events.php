@@ -26,7 +26,7 @@ class Events extends Api
         $eventId,
         $contactEmail = null,
         $contactRevenue = null,
-        array $contactProperties = array()
+        array $contactProperties 
     ) {
         $endpoint = sprintf(
             '/event?_a=%s&_n=%s',
