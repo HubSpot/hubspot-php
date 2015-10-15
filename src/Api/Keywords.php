@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Keywords extends Api
 {
@@ -17,7 +19,8 @@ class Keywords extends Api
     /**
      * Get a keyword.
      *
-     * @param string $keyword_guid
+     * @param string $keyword_guid Keyword GUID
+     *
      * @return mixed
      */
     public function getById($keyword_guid)
@@ -30,7 +33,8 @@ class Keywords extends Api
     /**
      * Create a new keyword.
      *
-     * @param array $keyword
+     * @param array $keyword Keyword data
+     *
      * @return mixed
      */
     public function create(array $keyword)
@@ -45,7 +49,8 @@ class Keywords extends Api
     /**
      * Delete a keyword.
      *
-     * @param string $keyword_guid
+     * @param string $keyword_guid Keyword GUID
+     *
      * @return mixed
      */
     public function delete($keyword_guid)
@@ -54,5 +59,4 @@ class Keywords extends Api
 
         return $this->request('delete', $endpoint);
     }
-
 }

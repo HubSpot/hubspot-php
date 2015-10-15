@@ -1,12 +1,15 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Files extends Api
 {
     /**
      * Upload a new file.
      *
-     * @param string $file File path
-     * @param array $params Optional parameters
+     * @param string $file   File path
+     * @param array  $params Optional parameters
+     *
      * @return mixed
      */
     public function upload($file, $params)
@@ -15,11 +18,11 @@ class Files extends Api
 
         $options['query'] = isset($params['overwrite']) ? $params['overwrite'] : false;
 
-        $options['body'] = [
+        $options['body'] = array(
             'files'        => fopen($file, 'rb'),
             'file_names'   => isset($params['file_names']) ? $params['file_names'] : null,
             'folder_paths' => isset($params['folder_paths']) ? $params['folder_paths'] : null,
-        ];
+        );
 
         return $this->request('post', $endpoint, $options);
     }
@@ -28,9 +31,10 @@ class Files extends Api
      * Get meta data for all files.
      *
      * @param array $params Optional parameters
+     *
      * @return mixed
      */
-    public function files($params)
+    public function allFiles($params)
     {
         $endpoint = "/filemanager/api/v2/files";
 
@@ -42,17 +46,18 @@ class Files extends Api
     /**
      * Upload a replacement file.
      *
-     * @param int $file_id The file ID
-     * @param string $file The file path
+     * @param int    $file_id The file ID
+     * @param string $file    The file path
+     *
      * @return mixed
      */
     public function replace($file_id, $file)
     {
         $endpoint = "/filemanager/api/v2/files/{$file_id}";
 
-        $options['body'] = [
+        $options['body'] = array(
             'files' => fopen($file, 'rb'),
-        ];
+        );
 
         return $this->request('post', $endpoint, $options);
     }
@@ -60,7 +65,8 @@ class Files extends Api
     /**
      * Get file metadata.
      *
-     * @param $file_id
+     * @param string $file_id File ID
+     *
      * @return mixed
      */
     public function meta($file_id)
@@ -74,6 +80,7 @@ class Files extends Api
      * Archive a file.
      *
      * @param int $file_id The file ID
+     *
      * @return mixed
      */
     public function archive($file_id)
@@ -87,6 +94,7 @@ class Files extends Api
      * Delete a file.
      *
      * @param int $file_id The file ID
+     *
      * @return mixed
      */
     public function delete($file_id)
@@ -100,12 +108,13 @@ class Files extends Api
      * Move a file to a new folder.
      *
      * Parameters:
-     * folder_path  string	The path of the folder to move the file into. Use this OR folder_id - not both.
-     * folder_id	string	The id of the folder to move the file into. Use this OR folder_path - not both.
-     * name	        string	The new name of the file.
+     * Folder_path  string  The path of the folder to move the file into. Use this OR folder_id - not both.
+     * Folder_id    string  The id of the folder to move the file into. Use this OR folder_path - not both.
+     * Name         string  The new name of the file
      *
-     * @param int $file_id
-     * @param array $params
+     * @param int   $file_id File ID
+     * @param array $params  Parameters
+     *
      * @return mixed
      */
     public function move($file_id, array $params)
@@ -120,18 +129,19 @@ class Files extends Api
     /**
      * Create a new folder.
      *
-     * @param string $folder_name
-     * @param int $parent_folder_id
+     * @param string $folder_name      Folder name
+     * @param int    $parent_folder_id Parent folder ID
+     *
      * @return mixed
      */
     public function createFolder($folder_name, $parent_folder_id)
     {
         $endpoint = "/filemanager/api/v2/folders";
 
-        $options['json'] = [
+        $options['json'] = array(
             'folder_name'      => $folder_name,
             'parent_folder_id' => $parent_folder_id,
-        ];
+        );
 
         return $this->request('post', $endpoint, $options);
     }
@@ -139,7 +149,8 @@ class Files extends Api
     /**
      * List folders metadata.
      *
-     * @param array $params
+     * @param array $params Parameters
+     *
      * @return mixed
      */
     public function folders($params)
@@ -154,8 +165,9 @@ class Files extends Api
     /**
      * Update a folder.
      *
-     * @param int $folder_id
-     * @param array $params
+     * @param int   $folder_id Folder ID
+     * @param array $params    Parameters
+     *
      * @return mixed
      */
     public function updateFolder($folder_id, array $params)
@@ -170,7 +182,8 @@ class Files extends Api
     /**
      * Delete a folder.
      *
-     * @param int $folder_id
+     * @param int $folder_id Folder ID
+     *
      * @return mixed
      */
     public function deleteFolder($folder_id)
@@ -183,7 +196,8 @@ class Files extends Api
     /**
      * Get the folder by ID.
      *
-     * @param int $folder_id
+     * @param int $folder_id Folder ID
+     *
      * @return mixed
      */
     public function getFolderById($folder_id)
@@ -196,8 +210,9 @@ class Files extends Api
     /**
      * Move a folder.
      *
-     * @param int $folder_id
-     * @param array $params
+     * @param int   $folder_id Folder ID
+     * @param array $params    Params
+     *
      * @return mixed
      */
     public function moveFolder($folder_id, array $params)
@@ -208,5 +223,4 @@ class Files extends Api
 
         return $this->request('post', $endpoint, $options);
     }
-
 }

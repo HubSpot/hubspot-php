@@ -1,53 +1,68 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 use Fungku\HubSpot\Exceptions\HubSpotException;
 
 class Contacts extends Api
 {
     /**
+     * Create a Contact
+     *
      * @param array $properties Array of contact properties.
+     *
      * @return mixed
+     *
      * @throws HubSpotException
      */
     public function create(array $properties)
     {
         $endpoint = "/contacts/v1/contact";
 
-        $options['json'] = ['properties' => $properties];
+        $options['json'] = array('properties' => $properties);
 
         return $this->request('post', $endpoint, $options);
     }
 
     /**
-     * @param int $id The contact id.
+     * Update a Contact
+     *
+     * @param int   $id         The contact id.
      * @param array $properties The contact properties to update.
+     *
      * @return mixed
      */
     public function update($id, array $properties)
     {
         $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
-        $options['json'] = ['properties' => $properties];
+        $options['json'] = array('properties' => $properties);
 
         return $this->request('post', $endpoint, $options);
     }
 
     /**
-     * @param string $email The contact's email address.
-     * @param array $properties The contact properties.
+     * Create or update contact
+     *
+     * @param string $email      The contact's email address.
+     * @param array  $properties The contact properties.
+     *
      * @return mixed
      */
     public function createOrUpdate($email, array $properties)
     {
         $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
 
-        $options['json'] = ['properties' => $properties];
+        $options['json'] = array('properties' => $properties);
 
         return $this->request('post', $endpoint, $options);
     }
 
     /**
+     * Create or update a batch of Contacts
+     *
      * @param array $contacts The contacts and properties.
+     *
      * @return mixed
      */
     public function createOrUpdateBatch(array $contacts)
@@ -60,7 +75,10 @@ class Contacts extends Api
     }
 
     /**
-     * @param int $id
+     * Deleta a Contact by ID
+     *
+     * @param int $id Contact ID
+     *
      * @return mixed
      */
     public function delete($id)
@@ -80,9 +98,10 @@ class Contacts extends Api
      * you know where you are in the list of contacts. You can then use the "vid-offset" field in the "vidOffset"
      * parameter described below.
      *
+     * @param array $params Array of optional parameters ['count', 'property', 'vidOffset']
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/get_contacts
      *
-     * @param array $params Array of optional parameters ['count', 'property', 'vidOffset']
      * @return mixed
      */
     public function all($params)
@@ -106,9 +125,11 @@ class Contacts extends Api
      * A paginated list of contacts will be returned to you, with a maximum of 100 contacts per page, as specified by
      * the "count" parameter. The endpoint only scrolls back in time 30 days.
      *
+     * @param array $params Array of optional parameters
+     *   ['count', 'timeOffset', 'vidOffset', 'property', 'propertyMode', 'formSubmissionMode', 'showListMemberships']
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
      *
-     * @param array $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property', 'propertyMode', 'formSubmissionMode', 'showListMemberships']
      * @return mixed
      */
     public function recent($params)
@@ -128,7 +149,10 @@ class Contacts extends Api
     }
 
     /**
-     * @param int $id
+     * Get a Contact by ID
+     *
+     * @param int $id Contact ID
+     *
      * @return mixed
      */
     public function getById($id)
@@ -145,10 +169,12 @@ class Contacts extends Api
      * This method will also return you much of the HubSpot lead "intelligence" for each requested contact record. The
      * endpoint accepts many query parameters that allow for customization based on a variety of integration use cases.
      *
+     * @param array $vids   Array of visitor IDs
+     * @param array $params Array of optional parameters
+     *   ['property', 'propertyMode', 'formSubmissionMode', 'showListMemberships', 'includeDeletes']
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/get_batch_by_vid
      *
-     * @param array $vids Array of visitor IDs
-     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode', 'showListMemberships', 'includeDeletes']
      * @return mixed
      */
     public function getBatchByIds(array $vids, $params)
@@ -168,7 +194,10 @@ class Contacts extends Api
     }
 
     /**
-     * @param string $email
+     * Get a Contact by email address
+     *
+     * @param string $email Email address
+     *
      * @return mixed
      */
     public function getByEmail($email)
@@ -184,10 +213,12 @@ class Contacts extends Api
      * This method will also return you much of the HubSpot lead "intelligence" for each requested contact record. The
      * endpoint accepts many query parameters that allow for customization based on a variety of integration use cases.
      *
+     * @param array $emails Array of email adresses
+     * @param array $params Array of optional parameters
+     *   ['property', 'propertyMode', 'formSubmissionMode', 'showListMemberships', 'includeDeletes']
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/get_batch_by_email
      *
-     * @param array $emails Array of email adresses
-     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode', 'showListMemberships', 'includeDeletes']
      * @return mixed
      */
     public function getBatchByEmails(array $emails, $params)
@@ -207,7 +238,10 @@ class Contacts extends Api
     }
 
     /**
-     * @param string $utk
+     * Get a Contact by Token
+     *
+     * @param string $utk Token
+     *
      * @return mixed
      */
     public function getByToken($utk)
@@ -227,10 +261,12 @@ class Contacts extends Api
      * The endpoint does not allow for CORS, so if you are looking up contacts from their user token on the client,
      * you'll need to spin up a proxy server to interact with the API.
      *
+     * @param array $utks   Array of hubspot user tokens (hubspotutk)
+     * @param array $params Array of optional parameters
+     *   ['property', 'propertyMode', 'formSubmissionMode', 'showListMemberships', 'includeDeletes']
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/get_batch_by_utk
      *
-     * @param array $utks Array of hubspot user tokens (hubspotutk)
-     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode', 'showListMemberships', 'includeDeletes']
      * @return mixed
      */
     public function getBatchByTokens(array $utks, $params)
@@ -258,10 +294,11 @@ class Contacts extends Api
      * return is the contact ID (vid) that you can then use to look up much
      * more data about that particular contact by its ID.
      *
+     * @param string $query  Search query
+     * @param array  $params Array of optional parameters ['count', 'offset']
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/search_contacts
      *
-     * @param string $query Search query
-     * @param array $params Array of optional parameters ['count', 'offset']
      * @return mixed
      */
     public function search($query, $params)
@@ -274,6 +311,8 @@ class Contacts extends Api
     }
 
     /**
+     * Get Contact statistics
+     *
      * @return mixed
      */
     public function statistics()
@@ -282,5 +321,4 @@ class Contacts extends Api
 
         return $this->request('get', $endpoint);
     }
-
 }

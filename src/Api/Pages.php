@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Pages extends Api
 {
@@ -6,6 +8,7 @@ class Pages extends Api
      * Create a new page.
      *
      * @param array $params Optional Parameters.
+     *
      * @return mixed
      */
     public function create($params)
@@ -21,9 +24,10 @@ class Pages extends Api
      * Get all pages.
      *
      * @param array $params Optional parameters.
+     *
      * @return mixed
      */
-    public function all($params = [])
+    public function all($params )
     {
         $endpoint = "/content/api/v2/pages";
 
@@ -35,8 +39,9 @@ class Pages extends Api
     /**
      * Update a page.
      *
-     * @param int $page_id The page id.
-     * @param array $params The page fields to update.
+     * @param int   $page_id The page id.
+     * @param array $params  The page fields to update.
+     *
      * @return mixed
      */
     public function update($page_id, array $params)
@@ -51,7 +56,8 @@ class Pages extends Api
     /**
      * Delete a page.
      *
-     * @param int $page_id
+     * @param int $page_id Page ID
+     *
      * @return mixed
      */
     public function delete($page_id)
@@ -64,7 +70,8 @@ class Pages extends Api
     /**
      * Get a specific page.
      *
-     * @param int $page_id
+     * @param int $page_id Page ID
+     *
      * @return mixed
      */
     public function getById($page_id)
@@ -78,6 +85,7 @@ class Pages extends Api
      * Updates the auto-save buffer.
      *
      * @param in $page_id The page ID
+     *
      * @return mixed
      */
     public function updateAutoSaveBuffer($page_id)
@@ -91,6 +99,7 @@ class Pages extends Api
      * Gets the current contents of the auto-save buffer.
      *
      * @param int $page_id The page ID
+     *
      * @return mixed
      */
     public function getAutoSaveBufferContents($page_id)
@@ -104,6 +113,7 @@ class Pages extends Api
      * Clone the page.
      *
      * @param int $page_id The page ID
+     *
      * @return mixed
      */
     public function clonePage($page_id)
@@ -117,6 +127,7 @@ class Pages extends Api
      * Determine if the auto-save buffer differs from the live page.
      *
      * @param int $page_id The page ID
+     *
      * @return mixed
      */
     public function hasBufferedChanges($page_id)
@@ -135,15 +146,16 @@ class Pages extends Api
      *     the existing publish_date time.
      * "cancel-publish": cancels a previous schedule-publish action.
      *
-     * @param int $page_id The page ID
-     * @param string $action The publish action
+     * @param int    $page_id The page ID
+     * @param string $action  The publish action
+     *
      * @return mixed
      */
     public function publishAction($page_id, $action)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}/publish-action";
 
-        $options['json'] = ['action' => $action];
+        $options['json'] = array('action' => $action);
 
         return $this->request('post', $endpoint, $options);
     }
@@ -152,6 +164,7 @@ class Pages extends Api
      * Copies the contents of the auto-save buffer into the live page.
      *
      * @param int $page_id The page ID
+     *
      * @return mixed
      */
     public function pushBufferLive($page_id)
@@ -165,6 +178,7 @@ class Pages extends Api
      * Restores a previously deleted page.
      *
      * @param int $page_id The page ID
+     *
      * @return mixed
      */
     public function restoreDeleted($page_id)
@@ -178,6 +192,7 @@ class Pages extends Api
      * Validates the auto-save buffer version of the page.
      *
      * @param int $page_id The page ID
+     *
      * @return mixed
      */
     public function validateBuffer($page_id)
@@ -191,6 +206,7 @@ class Pages extends Api
      * List previous versions of the page.
      *
      * @param int $page_id The page ID
+     *
      * @return mixed
      */
     public function versions($page_id)
@@ -203,8 +219,9 @@ class Pages extends Api
     /**
      * Restore a previous version of the page.
      *
-     * @param int $page_id The page ID
+     * @param int $page_id    The page ID
      * @param int $version_id The version ID
+     *
      * @return mixed
      */
     public function restoreVersion($page_id, $version_id)

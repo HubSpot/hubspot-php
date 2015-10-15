@@ -1,18 +1,21 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Forms extends Api
 {
     /**
      * Submit data to a form.
-     * 
-     * @link http://developers.hubspot.com/docs/methods/forms/submit_form
-     * 
+     *
      * Send form submission data to HubSpot. Form submissions from external sources can be made to any registered
      * HubSpot form. You can see a list of forms on your portal by going to the Contacts > Forms page
      *
-     * @param int $portal_id
-     * @param string $form_guid
-     * @param array $form
+     * @param int    $portal_id Portal ID
+     * @param string $form_guid Form GUID
+     * @param array  $form      Form data
+     *
+     * @link http://developers.hubspot.com/docs/methods/forms/submit_form
+     *
      * @return mixed
      */
     public function submit($portal_id, $form_guid, array $form)
@@ -39,7 +42,8 @@ class Forms extends Api
     /**
      * Get a single form.
      *
-     * @param string $form_guid
+     * @param string $form_guid Form GUID
+     *
      * @return mixed
      */
     public function getById($form_guid)
@@ -52,7 +56,8 @@ class Forms extends Api
     /**
      * Create a new form.
      *
-     * @param array $form
+     * @param array $form Form config
+     *
      * @return mixed
      */
     public function create(array $form)
@@ -67,8 +72,9 @@ class Forms extends Api
     /**
      * Update a form.
      *
-     * @param string $form_guid
-     * @param array $form
+     * @param string $form_guid Form GUID
+     * @param array  $form      Form config
+     *
      * @return mixed
      */
     public function update($form_guid, array $form)
@@ -83,7 +89,8 @@ class Forms extends Api
     /**
      * Delete a form.
      *
-     * @param string $form_guid
+     * @param string $form_guid Form GUID
+     *
      * @return mixed
      */
     public function delete($form_guid)
@@ -96,7 +103,8 @@ class Forms extends Api
     /**
      * Get all fields from a form.
      *
-     * @param string $form_guid
+     * @param string $form_guid Form GUID
+     *
      * @return mixed
      */
     public function getFields($form_guid)
@@ -109,8 +117,9 @@ class Forms extends Api
     /**
      * Get a single field from a form.
      *
-     * @param string $form_guid
-     * @param string $name
+     * @param string $form_guid Form GUID
+     * @param string $name      Field name
+     *
      * @return mixed
      */
     public function getFieldByName($form_guid, $name)
