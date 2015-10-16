@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Http;
+<?php
+
+namespace Fungku\HubSpot\Http;
 
 use Fungku\HubSpot\Contracts\ApiResponse;
 use GuzzleHttp\Message\ResponseInterface;

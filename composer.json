@@ -10,8 +10,8 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "guzzlehttp/guzzle": "~5.0|~6.0"
+        "php": ">=5.5.0",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
@@ -19,7 +19,8 @@
     "autoload": {
         "psr-4": {
             "Fungku\\HubSpot\\": "src/"
-        }
+        },
+        "files": ["src/helpers.php"]
     },
     "minimum-stability": "stable"
 }

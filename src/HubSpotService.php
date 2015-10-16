@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot;
+<?php
+
+namespace Fungku\HubSpot;
 
 use Fungku\HubSpot\Exceptions\HubSpotException;
 use Fungku\HubSpot\Contracts\HttpClient;
@@ -50,7 +52,7 @@ class HubSpotService
         if (empty($this->apiKey)) {
             throw new HubSpotException("You must provide a HubSpot api key.");
         }
-        $this->client = ($client) ?: new Client;
+        $this->client = $client ?: new Client();
     }
 
     /**

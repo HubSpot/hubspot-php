@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Blogs extends Api
 {
@@ -12,9 +14,9 @@ class Blogs extends Api
     {
         $endpoint = '/content/api/v2/blogs';
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -41,9 +43,9 @@ class Blogs extends Api
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -58,8 +60,8 @@ class Blogs extends Api
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 }

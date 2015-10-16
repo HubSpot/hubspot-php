@@ -29,7 +29,7 @@ Please try it out, and let me know if things are working as expected. There may 
 
 All following examples assume this step.
 
-*Note:* The Hubspot class checks for a `HUBSPOT_API_KEY` environment variable if you don't include one during instantiation.
+*Note:* The HubSpot class checks for a `HUBSPOT_API_KEY` environment variable if you don't include one during instantiation.
 
 ```php
 $hubspot = Fungku\HubSpot\HubSpotService::make('api-key');

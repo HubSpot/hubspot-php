@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Contracts;
+<?php
+
+namespace Fungku\HubSpot\Contracts;
 
 interface ApiResponse
 {

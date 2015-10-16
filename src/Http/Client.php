@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Http;
+<?php
+
+namespace Fungku\HubSpot\Http;
 
 use Fungku\HubSpot\Contracts\HttpClient;
 use GuzzleHttp\Client as GuzzleClient;
@@ -6,55 +8,66 @@ use GuzzleHttp\Client as GuzzleClient;
 class Client implements HttpClient
 {
     /**
-     * @var GuzzleClient
+     * @var \GuzzleHttp\Client
      */
     protected $client;
 
     /**
      * Make it, baby.
+     *
+     * @param \GuzzleHttp\Client $client
      */
-    public function __construct()
+    public function __construct(GuzzleClient $client = null)
     {
-        $this->client = new GuzzleClient();
+        $this->client = $client ?: new GuzzleClient();
     }
+
 
     /**
      * @param string $url
      * @param array $options
-     * @return Response
+     * @return mixed
      */
     public function get($url, array $options = [])
     {
-        return $this->client->get($url, $options)->json();
+        return $this->client->request('GET', $url, $options)
+            ->getBody()
+            ->getContents();
     }
 
     /**
      * @param string $url
      * @param array $options
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @return mixed
      */
     public function post($url, array $options = [])
     {
-        return $this->client->post($url, $options)->json();
+        return $this->client->request('POST', $url, $options)
+            ->getBody()
+            ->getContents();
     }
 
     /**
      * @param string $url
      * @param array $options
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @return mixed
      */
     public function put($url, array $options = [])
     {
-        return $this->client->put($url, $options)->json();
+        return $this->client->request('PUT', $url, $options)
+            ->getBody()
+            ->getContents();
     }
 
     /**
      * @param string $url
      * @param array $options
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @return mixed
      */
     public function delete($url, array $options = [])
     {
-        return $this->client->delete($url, $options)->json();
+        return $this->client->request('DELETE', $url, $options)
+            ->getBody()
+            ->getContents();
     }
 }

@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class ContactLists extends Api
 {
@@ -67,9 +69,9 @@ class ContactLists extends Api
     {
         $endpoint = "/contacts/v1/lists";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -82,7 +84,7 @@ class ContactLists extends Api
 
         $queryString = $this->generateBatchQuery('listId', $ids);
 
-        return $this->request('get', $endpoint, null, $queryString);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -93,9 +95,9 @@ class ContactLists extends Api
     {
         $endpoint = "/contacts/v1/lists/static";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -106,9 +108,9 @@ class ContactLists extends Api
     {
         $endpoint = "/contacts/v1/lists/dynamic";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -130,9 +132,9 @@ class ContactLists extends Api
             $queryString = null;
         }
 
-        $options['query'] = $this->getQuery($params);
+        $queryString .= $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options, $queryString);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -146,9 +148,9 @@ class ContactLists extends Api
     {
         $endpoint = "/contacts/v1/lists/{$id}/contacts/recent";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**

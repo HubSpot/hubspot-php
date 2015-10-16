@@ -19,9 +19,13 @@ class Events extends Api
      * @param  float  $contactRevenue Optional - the monetary value this event means to you.
      * @param  array  $contactProperties Optional - array of new contact properties.
      */
-    public function trigger($hubId, $eventId,
-        $contactEmail = null, $contactRevenue = null, array $contactProperties = [])
-    {
+    public function trigger(
+        $hubId,
+        $eventId,
+        $contactEmail = null,
+        $contactRevenue = null,
+        array $contactProperties = []
+    ) {
         $endpoint = sprintf('/event?_a=%s&_n=%s',
             urlencode($hubId),
             urlencode($eventId));

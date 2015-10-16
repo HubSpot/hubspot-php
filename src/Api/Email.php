@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Email extends Api
 {
@@ -12,9 +14,9 @@ class Email extends Api
    {
        $endpoint = "/email/public/v1/subscriptions";
 
-       $options['query'] = ['portalId' => $portal_id];
+       $queryString = $this->buildQueryString(['portalId' => $portal_id]);
 
-       return $this->request('get', $endpoint, $options);
+       return $this->request('get', $endpoint, [], $queryString);
    }
 
     /**
@@ -27,9 +29,9 @@ class Email extends Api
     {
         $endpoint = "/email/public/v1/subscriptions/timeline";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -43,9 +45,9 @@ class Email extends Api
     {
         $endpoint = "/email/public/v1/subscriptions/{$email}";
 
-        $options['query'] = ['portalId' => $portal_id];
+        $queryString = $this->buildQueryString(['portalId' => $portal_id]);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -60,10 +62,10 @@ class Email extends Api
     {
         $endpoint = "/email/public/v1/subscriptions/{$email}";
 
-        $options['query'] = ['portalId' => $portal_id];
+        $queryString = $this->buildQueryString(['portalId' => $portal_id]);
         $options['json'] = $params;
 
-        return $this->request('put', $endpoint, $options);
+        return $this->request('put', $endpoint, $options, $queryString);
     }
 
 }

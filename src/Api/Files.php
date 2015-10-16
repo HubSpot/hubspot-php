@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Files extends Api
 {
@@ -13,7 +15,9 @@ class Files extends Api
     {
         $endpoint = "/filemanager/api/v2/files";
 
-        $options['query'] = isset($params['overwrite']) ? $params['overwrite'] : false;
+        $queryString = $this->buildQueryString([
+            'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false
+        ]);
 
         $options['body'] = [
             'files'        => fopen($file, 'rb'),
@@ -21,7 +25,7 @@ class Files extends Api
             'folder_paths' => isset($params['folder_paths']) ? $params['folder_paths'] : null,
         ];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->request('post', $endpoint, $options, $queryString);
     }
 
     /**

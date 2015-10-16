@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class ContactProperties extends Api
 {
@@ -100,9 +102,9 @@ class ContactProperties extends Api
     {
         $endpoint = "/contacts/v2/groups";
 
-        $options['query'] = ['includeProperties' => $includeProperties];
+        $queryString = $this->buildQueryString(['includeProperties' => $includeProperties]);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**

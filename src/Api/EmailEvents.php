@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class EmailEvents extends Api
 {
@@ -12,9 +14,9 @@ class EmailEvents extends Api
     {
         $endpoint = "/email/public/v1/campaigns";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -28,9 +30,9 @@ class EmailEvents extends Api
     {
         $endpoint = "/email/public/v1/campaigns/{$campaign_id}";
 
-        $options['query'] = ['appId' => $application_id];
+        $queryString = $this->buildQueryString(['appId' => $application_id]);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -43,9 +45,9 @@ class EmailEvents extends Api
     {
         $endpoint = "/email/public/v1/events";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**

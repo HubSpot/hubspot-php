@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Workflows extends Api
 {
@@ -80,9 +82,9 @@ class Workflows extends Api
     {
         $endpoint = "/automation/v2/workflows/{$id}";
 
-        $options['query'] = ['updatedAt' => time()];
+        $queryString = $this->buildQueryString(['updatedAt' => time()]);
 
-        return $this->request('delete', $endpoint, $options);
+        return $this->request('delete', $endpoint, [], $queryString);
     }
 
     /**
@@ -110,9 +112,9 @@ class Workflows extends Api
     {
         $endpoint = " /automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/past";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -127,9 +129,9 @@ class Workflows extends Api
     {
         $endpoint = "/automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/upcoming";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
 }
