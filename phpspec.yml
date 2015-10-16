@@ -1,0 +1,6 @@
+suites:
+    main:
+        namespace: Fungku\HubSpot
+        psr4_prefix: Fungku\HubSpot
+
+formatter.name: pretty
