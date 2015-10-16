@@ -13,6 +13,10 @@ client. However, this is a complete re-write and includes some of the new COS/v2
 
 Please try it out, and let me know if things are working as expected. There may still be a few small breaking changes here and there, so it is not recommended to use this in production unless you really know what you're doing.
 
+##### Guzzle 6
+
+For Guzzle v6 support, please see the [develop branch](https://github.com/ryanwinchester/hubspot-php/tree/develop).
+
 ## Setup
 
 **Composer:**
