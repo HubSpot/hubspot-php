@@ -72,11 +72,6 @@ abstract class Api
      */
     protected function request($method, $endpoint, $options = [], $queryString = null)
     {
-        if (isset($options['query'])) {
-            $queryString .= implode('&', $options['query']);
-            unset($options['query']);
-        }
-
         $url = $this->generateUrl($endpoint, $queryString);
 
         return $this->requestUrl($method, $url, $options);
@@ -118,6 +113,6 @@ abstract class Api
      */
     protected function buildQueryString($query = [])
     {
-        return \Fungku\HubSpot\build_query($query);
+        return '&' . \Fungku\HubSpot\build_query($query);
     }
 }

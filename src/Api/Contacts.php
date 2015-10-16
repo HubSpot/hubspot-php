@@ -95,7 +95,7 @@ class Contacts extends Api
             $queryString = $this->generateBatchQuery('property', $params['property']);
             unset($params['property']);
         } else {
-            $queryString = null;
+            $queryString = '';
         }
 
         $queryString .= $this->buildQueryString($params);
