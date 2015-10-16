@@ -4,10 +4,10 @@
  [![Total Downloads](https://img.shields.io/packagist/dt/fungku/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/fungku/hubspot-php)
  [![License](https://img.shields.io/packagist/l/fungku/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/fungku/hubspot-php)
  [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/fungku/hubspot-php.svg?style=flat-square)](https://scrutinizer-ci.com/g/fungku/hubspot-php/?branch=master)
- [![Build Status](https://img.shields.io/travis/fungku/hubspot-php.svg?style=flat-square)](https://travis-ci.org/fungku/hubspot-php)
+ [![Build Status](https://img.shields.io/travis/ryanwinchester/hubspot-php.svg?style=flat-square)](https://travis-ci.org/ryanwinchester/hubspot-php)
 
 A new HubSpot API client. The sequel to my [perfectly functional wrapper](https://github.com/fungku/hubspot) of HubSpot/haPihP.
-client. However, this includes some of the new COS/v2 endpoints.
+client. However, this is a complete re-write and includes some of the new COS/v2 endpoints.
 
 ##### BETA
 
@@ -47,19 +47,19 @@ $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 // Get an array of 10 contacts
 // getting only the firstname and lastname properties
 // and set the offset to 123456
-$collection = $hubspot->contacts()->all([
+$contacts = $hubspot->contacts()->all([
         'count'     => 10,
         'property'  => ['firstname', 'lastname'],
         'vidOffset' => 123456,
 ]);
 
-foreach ($collection['contacts'] as $contact) {
+foreach ($contacts['contacts'] as $contact) {
     echo $contact['properties']['firstname']['value'];
 }
 
 // Info for pagination
-echo $collection['has-more'];
-echo $collection['vid-offset'];
+echo $contacts['has-more'];
+echo $contacts['vid-offset'];
 ```
 
 #### Get a group of contacts by Ids
@@ -106,6 +106,8 @@ If you see something not planned, that you want, make an [issue](https://github.
 :ballot_box_with_check: Social Media
 
 :ballot_box_with_check: Workflows
+
+:ballot_box_with_check: Events (Enterprise) :new:
 
 :white_medium_small_square: Companies :new:
 

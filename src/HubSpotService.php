@@ -1,6 +1,7 @@
 <?php namespace Fungku\HubSpot;
 
 use Fungku\HubSpot\Exceptions\HubSpotException;
+use Fungku\HubSpot\Contracts\HttpClient;
 use Fungku\HubSpot\Http\Client;
 
 /**
@@ -21,6 +22,7 @@ use Fungku\HubSpot\Http\Client;
  * @method \Fungku\HubSpot\Api\Pages pages()
  * @method \Fungku\HubSpot\Api\SocialMedia socialMedia()
  * @method \Fungku\HubSpot\Api\Workflows workflows()
+ * @method \Fungku\HubSpot\Api\Events events()
  */
 class HubSpotService
 {
@@ -37,9 +39,10 @@ class HubSpotService
     /**
      * @param string|null $apiKey
      * @param bool $oauth
+     * @param HttpClient $client
      * @throws HubSpotException
      */
-    protected function __construct($apiKey = null, $oauth = false)
+    protected function __construct($apiKey = null, $oauth = false, HttpClient $client = null)
     {
         $this->oauth = $oauth;
         $this->apiKey = $apiKey ?: getenv('HUBSPOT_API_KEY');
@@ -47,24 +50,27 @@ class HubSpotService
         if (empty($this->apiKey)) {
             throw new HubSpotException("You must provide a HubSpot api key.");
         }
+        $this->client = ($client) ?: new Client;
     }
 
     /**
      * @param string $apiKey HubSpot Api key
+     * @param HttpClient $client An HttpClient implementation
      * @return static
      */
-    public static function make($apiKey = null)
+    public static function make($apiKey = null, HttpClient $client = null)
     {
-        return new static($apiKey, false);
+        return new static($apiKey, false, $client);
     }
 
     /**
      * @param string $access_token HubSpot oauth access token
+     * @param HttpClient $client An HttpClient implementation
      * @return static
      */
-    public static function makeWithToken($access_token)
+    public static function makeWithToken($access_token, HttpClient $client = null)
     {
-        return new static($access_token, true);
+        return new static($access_token, true, $client);
     }
 
     /**
@@ -81,7 +87,7 @@ class HubSpotService
             throw new HubSpotException("Target [$apiClass] is not instantiable.");
         }
 
-        return new $apiClass($this->apiKey, new Client, $this->oauth);
+        return new $apiClass($this->apiKey, $this->client, $this->oauth);
     }
 
     /**
