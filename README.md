@@ -47,32 +47,23 @@ $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 // Get an array of 10 contacts
 // getting only the firstname and lastname properties
 // and set the offset to 123456
-$contacts = $hubspot->contacts()->all([
+$data = $hubspot->contacts()->all([
         'count'     => 10,
         'property'  => ['firstname', 'lastname'],
         'vidOffset' => 123456,
 ]);
 
-foreach ($contacts['contacts'] as $contact) {
-    echo $contact['properties']['firstname']['value'];
+foreach ($data->contacts as $contact) {
+    echo sprintf(
+        "Contact name is %s %s.",
+        $contact->properties->firstname->value,
+        $contact->properties->lastname->value
+    );
 }
 
 // Info for pagination
-echo $contacts['has-more'];
-echo $contacts['vid-offset'];
-```
-
-#### Get a group of contacts by Ids
-
-```php
-$vids = [196189, 196188, 196187];
-
-// Get batch of contacts, and limit properties to firstname
-$contacts = $hubspot->contacts()->getBatchByIds($vids, ['property' => 'firstname']);
-
-foreach ($contacts as $contact) {
-    echo $contact['properties']['firstname']['value'];
-}
+echo $data->{'has-more'};
+echo $data->{'vid-offset'};
 ```
 
 ## Status
