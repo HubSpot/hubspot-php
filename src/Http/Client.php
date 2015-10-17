@@ -24,41 +24,41 @@ class Client implements HttpClient
 
 
     /**
-     * @param string $url
-     * @param array $options
-     * @return mixed
+     * @param  string  $url
+     * @param  array   $options
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function get($url, array $options = [])
+    public function get($url, $options = [])
     {
         return new Response($this->client->request('GET', $url, $options));
     }
 
     /**
-     * @param string $url
-     * @param array $options
-     * @return mixed
+     * @param  string  $url
+     * @param  array   $options
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function post($url, array $options = [])
+    public function post($url, $options = [])
     {
         return new Response($this->client->request('POST', $url, $options));
     }
 
     /**
-     * @param string $url
-     * @param array $options
-     * @return mixed
+     * @param  string  $url
+     * @param  array   $options
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function put($url, array $options = [])
+    public function put($url, $options = [])
     {
         return new Response($this->client->request('PUT', $url, $options));
     }
 
     /**
-     * @param string $url
-     * @param array $options
-     * @return mixed
+     * @param  string  $url
+     * @param  array   $options
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function delete($url, array $options = [])
+    public function delete($url, $options = [])
     {
         return new Response($this->client->request('DELETE', $url, $options));
     }

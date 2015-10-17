@@ -14,13 +14,14 @@ class Events extends Api
      *
      * This only works for enterprise accounts.
      *
-     * @param  string  $hubId              Your HubSpot portal ID ("Hub ID"). You can find your Hub ID in the
+     * @param  string $hubId               Your HubSpot portal ID ("Hub ID"). You can find your Hub ID in the
      *                                     footer of the HubSpot UI, or in the URL. For example, in this URL:
      *                                     "https://app.hubspot.com/reports/56043/events/" your Hub ID is "56043".
-     * @param  string  $eventId
-     * @param  string  $contactEmail       Optional.
-     * @param  float   $contactRevenue     Optional - the monetary value this event means to you.
-     * @param  array   $contactProperties  Optional - array of new contact properties.
+     * @param  string $eventId
+     * @param  string $contactEmail        Optional.
+     * @param  float  $contactRevenue      Optional - the monetary value this event means to you.
+     * @param  array  $contactProperties   Optional - array of new contact properties.
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function trigger(
         $hubId,
@@ -37,9 +38,9 @@ class Events extends Api
         $queryString = $this->buildQueryString($contactProperties);
 
         try {
-            $this->request('get', $endpoint, [], $queryString);
+            return $this->request('get', $endpoint, [], $queryString);
         } catch (\GuzzleHttp\Exception\ParseException $e) {
             // The response is not JSON, so this is expected.
         }
-   }
+    }
 }

@@ -29,19 +29,25 @@ use Fungku\HubSpot\Http\Client;
 class HubSpotService
 {
     /**
+     * The HubSpot API key or Oauth token.
+     *
      * @var string
      */
     private $apiKey;
 
     /**
+     * Using Oauth?
+     *
      * @var bool
      */
     private $oauth;
 
     /**
-     * @param string|null $apiKey
-     * @param bool $oauth
-     * @param HttpClient $client
+     * C O N S T R U C T
+     *
+     * @param  string|null  $apiKey
+     * @param  bool         $oauth
+     * @param  HttpClient   $client
      * @throws HubSpotException
      */
     protected function __construct($apiKey = null, $oauth = false, HttpClient $client = null)
@@ -56,8 +62,10 @@ class HubSpotService
     }
 
     /**
-     * @param string $apiKey HubSpot Api key
-     * @param HttpClient $client An HttpClient implementation
+     * Make an instance of the service with an API key.
+     *
+     * @param  string      $apiKey  HubSpot Api key
+     * @param  HttpClient  $client  An HttpClient implementation
      * @return static
      */
     public static function make($apiKey = null, HttpClient $client = null)
@@ -66,8 +74,10 @@ class HubSpotService
     }
 
     /**
-     * @param string $access_token HubSpot oauth access token
-     * @param HttpClient $client An HttpClient implementation
+     * Make an instance of the service with an Oauth token.
+     *
+     * @param  string      $access_token  HubSpot oauth access token
+     * @param  HttpClient  $client        An HttpClient implementation
      * @return static
      */
     public static function makeWithToken($access_token, HttpClient $client = null)
@@ -76,8 +86,10 @@ class HubSpotService
     }
 
     /**
-     * @param string $name
-     * @param null $arguments
+     * Return an instance of an API class based on the method called.
+     *
+     * @param  string  $name
+     * @param  array   $arguments
      * @return mixed
      * @throws HubSpotException
      */
@@ -93,7 +105,9 @@ class HubSpotService
     }
 
     /**
-     * @param string $name
+     * Get the API Class name from the method name.
+     *
+     * @param  string  $name
      * @return string
      */
     protected function getApiClassName($name)

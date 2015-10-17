@@ -8,22 +8,22 @@ class Email extends Api
      * Get email subscription types for a portal.
      *
      * @param int $portal_id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function subscriptionDefinitions($portal_id)
-   {
-       $endpoint = "/email/public/v1/subscriptions";
+    {
+        $endpoint = "/email/public/v1/subscriptions";
 
-       $queryString = $this->buildQueryString(['portalId' => $portal_id]);
+        $queryString = $this->buildQueryString(['portalId' => $portal_id]);
 
-       return $this->request('get', $endpoint, [], $queryString);
-   }
+        return $this->request('get', $endpoint, [], $queryString);
+    }
 
     /**
      * View subscriptions timeline for a portal.
      *
      * @param array $params Optional parameters
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function subscriptionsTimeline($params = [])
     {
@@ -37,9 +37,9 @@ class Email extends Api
     /**
      * Get email subscription status for an email address.
      *
-     * @param int $portal_id
+     * @param int    $portal_id
      * @param string $email
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getSubscriptionStatus($portal_id, $email)
     {
@@ -53,10 +53,10 @@ class Email extends Api
     /**
      * Update email subscription status for an email address.
      *
-     * @param int $portal_id
+     * @param int    $portal_id
      * @param string $email
-     * @param array $params
-     * @return mixed
+     * @param array  $params
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function updateSubscription($portal_id, $email, $params = [])
     {

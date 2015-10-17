@@ -9,9 +9,10 @@ class ContactProperties extends Api
      *
      * Properties in HubSpot are fields that have been created, in this case for deals in a given portal.
      * This endpoint will return all of the contacts properties, including their definition, for a given portal.
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/v2/get_contacts_properties
      *
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function all()
     {
@@ -24,10 +25,11 @@ class ContactProperties extends Api
      * Get a Contact Property.
      *
      * Returns a JSON object representing the definition for a given contact property.
+     *
      * @link http://developers.hubspot.com/docs/methods/companies/get_contact_property
      *
      * @param string $name The name of the property.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function get($name)
     {
@@ -41,10 +43,11 @@ class ContactProperties extends Api
      *
      * Create a property on every contact object to store a specific piece of data. In the example below,
      * we want to store an invoice number on a separate field on deals.
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property
      *
      * @param array $property
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function create($property)
     {
@@ -59,10 +62,11 @@ class ContactProperties extends Api
      * Update a contact property.
      *
      * Update a specified contact property.
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property
      *
      * @param array $property
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function update($property)
     {
@@ -77,10 +81,11 @@ class ContactProperties extends Api
      * Delete a contact property.
      *
      * For a portal, delete an existing contact property.
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property
      *
      * @param string $name
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($name)
     {
@@ -93,10 +98,11 @@ class ContactProperties extends Api
      * Get contact property group.
      *
      * Returns all of the contact property groups for a given portal.
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
      *
      * @param bool $includeProperties
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getGroup($includeProperties = false)
     {
@@ -112,10 +118,11 @@ class ContactProperties extends Api
      *
      * Create a new contact property group to gather like contact-level data. Property groups allow you to more
      * easily manage properties in a given portal and make contact records easier to parse for the user.
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property_group
      *
      * @param array $group Group properties
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function createGroup($group)
     {
@@ -130,10 +137,11 @@ class ContactProperties extends Api
      * Update a property group.
      *
      * Update a previously created contact property group.
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property_group
      *
      * @param array $group
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function updateGroup($group)
     {
@@ -148,10 +156,11 @@ class ContactProperties extends Api
      * Delete a property group.
      *
      * Delete an existing contact property group.
+     *
      * @link http://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property_group
      *
      * @param string $name
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function deleteGroup($name)
     {

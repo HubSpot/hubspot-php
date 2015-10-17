@@ -4,11 +4,31 @@ namespace Fungku\HubSpot\Contracts;
 
 interface HttpClient
 {
-    public function get($url, array $options);
+    /**
+     * @param  string  $url
+     * @param  array   $options
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function get($url, $options);
 
-    public function post($url, array $options);
+    /**
+     * @param  string  $url
+     * @param  array   $options
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function post($url, $options);
 
-    public function delete($url, array $options);
+    /**
+     * @param  string  $url
+     * @param  array   $options
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function delete($url, $options);
 
-    public function put($url, array $options);
+    /**
+     * @param  string  $url
+     * @param  array   $options
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function put($url, $options);
 }

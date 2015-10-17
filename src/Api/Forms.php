@@ -6,16 +6,16 @@ class Forms extends Api
 {
     /**
      * Submit data to a form.
-     * 
+     *
      * @link http://developers.hubspot.com/docs/methods/forms/submit_form
-     * 
+     *
      * Send form submission data to HubSpot. Form submissions from external sources can be made to any registered
      * HubSpot form. You can see a list of forms on your portal by going to the Contacts > Forms page
      *
-     * @param int $portal_id
+     * @param int    $portal_id
      * @param string $form_guid
-     * @param array $form
-     * @return mixed
+     * @param array  $form
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function submit($portal_id, $form_guid, $form)
     {
@@ -29,7 +29,7 @@ class Forms extends Api
     /**
      * Get all forms.
      *
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function all()
     {
@@ -42,7 +42,7 @@ class Forms extends Api
      * Get a single form.
      *
      * @param string $form_guid
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getById($form_guid)
     {
@@ -55,7 +55,7 @@ class Forms extends Api
      * Create a new form.
      *
      * @param array $form
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function create($form)
     {
@@ -70,8 +70,8 @@ class Forms extends Api
      * Update a form.
      *
      * @param string $form_guid
-     * @param array $form
-     * @return mixed
+     * @param array  $form
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function update($form_guid, $form)
     {
@@ -86,7 +86,7 @@ class Forms extends Api
      * Delete a form.
      *
      * @param string $form_guid
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($form_guid)
     {
@@ -99,7 +99,7 @@ class Forms extends Api
      * Get all fields from a form.
      *
      * @param string $form_guid
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getFields($form_guid)
     {
@@ -113,7 +113,7 @@ class Forms extends Api
      *
      * @param string $form_guid
      * @param string $name
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getFieldByName($form_guid, $name)
     {

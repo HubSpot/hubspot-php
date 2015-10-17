@@ -7,7 +7,7 @@ class SocialMedia extends Api
     /**
      * Get all publishing channels.
      *
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function channels()
     {
@@ -20,7 +20,7 @@ class SocialMedia extends Api
      * Get a broadcast channel.
      *
      * @param string $channel_guid
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getChannelById($channel_guid)
     {
@@ -33,7 +33,7 @@ class SocialMedia extends Api
      * Get all broadcast messages.
      *
      * @param array $params
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function broadcasts($params = [])
     {
@@ -48,7 +48,7 @@ class SocialMedia extends Api
      * Get a broadcast.
      *
      * @param string $broadcast_guid
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getBroadcastById($broadcast_guid)
     {
@@ -61,7 +61,7 @@ class SocialMedia extends Api
      * Create a new broadcast message.
      *
      * @param array $broadcast
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function createBroadcast($broadcast)
     {
@@ -76,7 +76,7 @@ class SocialMedia extends Api
      * Cancel a broadcast message.
      *
      * @param string $broadcast_guid
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function cancelBroadcast($broadcast_guid)
     {

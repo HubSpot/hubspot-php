@@ -8,7 +8,7 @@ class ContactLists extends Api
      * Create a new contact list.
      *
      * @param array $list Contact list properties.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function create($list)
     {
@@ -22,9 +22,9 @@ class ContactLists extends Api
     /**
      * Update a contact list.
      *
-     * @param int $id The contact list id.
+     * @param int   $id   The contact list id.
      * @param array $list The contact list properties to update.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function update($id, $list)
     {
@@ -39,7 +39,7 @@ class ContactLists extends Api
      * Delete a contact list.
      *
      * @param int $id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($id)
     {
@@ -50,7 +50,7 @@ class ContactLists extends Api
 
     /**
      * @param int $id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getById($id)
     {
@@ -63,7 +63,7 @@ class ContactLists extends Api
      * Get a set of contact lists.
      *
      * @param array $params ['count', 'offset']
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function all($params = [])
     {
@@ -76,7 +76,7 @@ class ContactLists extends Api
 
     /**
      * @param array $ids
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getBatchByIds($ids)
     {
@@ -89,7 +89,7 @@ class ContactLists extends Api
 
     /**
      * @param array $params Optional parameters ['count', 'offset']
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getAllStatic($params = [])
     {
@@ -102,7 +102,7 @@ class ContactLists extends Api
 
     /**
      * @param array $params Optional parameters ['count', 'offset']
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getAllDynamic($params = [])
     {
@@ -116,10 +116,10 @@ class ContactLists extends Api
     /**
      * Get contacts in a list.
      *
-     * @param int $id List id
+     * @param int   $id     List id
      * @param array $params Optional parameters
-     *     { count, vidOffset, property, propertyMode, formSubmissionMode, showListMemberships }
-     * @return mixed
+     *                      { count, vidOffset, property, propertyMode, formSubmissionMode, showListMemberships }
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function contacts($id, $params = [])
     {
@@ -135,7 +135,7 @@ class ContactLists extends Api
      *
      * @param int   $id List id
      * @param array $params
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function recentContacts($id, $params = [])
     {
@@ -150,7 +150,7 @@ class ContactLists extends Api
      * Refresh a list.
      *
      * @param int $id List id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function refresh($id)
     {
@@ -162,9 +162,9 @@ class ContactLists extends Api
     /**
      * Add a contact to a list.
      *
-     * @param int $list_id
+     * @param int   $list_id
      * @param array $contact_ids
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function addContact($list_id, $contact_ids)
     {
@@ -178,9 +178,9 @@ class ContactLists extends Api
     /**
      * Remove a contact from a list.
      *
-     * @param int $list_id
+     * @param int   $list_id
      * @param array $contact_ids
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function removeContact($list_id, $contact_ids)
     {
