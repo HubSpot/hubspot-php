@@ -10,7 +10,7 @@ class ContactLists extends Api
      * @param array $list Contact list properties.
      * @return mixed
      */
-    public function create(array $list)
+    public function create($list)
     {
         $endpoint = '/contacts/v1/lists';
 
@@ -26,7 +26,7 @@ class ContactLists extends Api
      * @param array $list The contact list properties to update.
      * @return mixed
      */
-    public function update($id, array $list)
+    public function update($id, $list)
     {
         $endpoint = "/contacts/v1/lists/{$id}";
 
@@ -65,7 +65,7 @@ class ContactLists extends Api
      * @param array $params ['count', 'offset']
      * @return mixed
      */
-    public function all($params)
+    public function all($params = [])
     {
         $endpoint = "/contacts/v1/lists";
 
@@ -78,11 +78,11 @@ class ContactLists extends Api
      * @param array $ids
      * @return mixed
      */
-    public function getBatchByIds(array $ids)
+    public function getBatchByIds($ids)
     {
         $endpoint = "/contacts/v1/lists/batch";
 
-        $queryString = $this->generateBatchQuery('listId', $ids);
+        $queryString = $this->buildQueryString(['listId' => $ids]);
 
         return $this->request('get', $endpoint, [], $queryString);
     }
@@ -91,7 +91,7 @@ class ContactLists extends Api
      * @param array $params Optional parameters ['count', 'offset']
      * @return mixed
      */
-    public function getAllStatic($params)
+    public function getAllStatic($params = [])
     {
         $endpoint = "/contacts/v1/lists/static";
 
@@ -104,7 +104,7 @@ class ContactLists extends Api
      * @param array $params Optional parameters ['count', 'offset']
      * @return mixed
      */
-    public function getAllDynamic($params)
+    public function getAllDynamic($params = [])
     {
         $endpoint = "/contacts/v1/lists/dynamic";
 
@@ -121,18 +121,11 @@ class ContactLists extends Api
      *     { count, vidOffset, property, propertyMode, formSubmissionMode, showListMemberships }
      * @return mixed
      */
-    public function contacts($id, $params)
+    public function contacts($id, $params = [])
     {
         $endpoint = "/contacts/v1/lists/{$id}/contacts/all";
 
-        if (isset($params['property']) && is_array($params['property'])) {
-            $queryString = $this->generateBatchQuery('property', $params['property']);
-            unset($params['property']);
-        } else {
-            $queryString = null;
-        }
-
-        $queryString .= $this->buildQueryString($params);
+        $queryString = $this->buildQueryString($params);
 
         return $this->request('get', $endpoint, [], $queryString);
     }
@@ -144,7 +137,7 @@ class ContactLists extends Api
      * @param array $params
      * @return mixed
      */
-    public function recentContacts($id, $params)
+    public function recentContacts($id, $params = [])
     {
         $endpoint = "/contacts/v1/lists/{$id}/contacts/recent";
 
@@ -173,7 +166,7 @@ class ContactLists extends Api
      * @param array $contact_ids
      * @return mixed
      */
-    public function addContact($list_id, array $contact_ids)
+    public function addContact($list_id, $contact_ids)
     {
         $endpoint = "/contacts/v1/lists/{$list_id}/add";
 
@@ -189,7 +182,7 @@ class ContactLists extends Api
      * @param array $contact_ids
      * @return mixed
      */
-    public function removeContact($list_id, array $contact_ids)
+    public function removeContact($list_id, $contact_ids)
     {
         $endpoint = "/contacts/v1/lists/{$list_id}/remove";
 

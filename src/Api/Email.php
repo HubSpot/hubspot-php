@@ -25,7 +25,7 @@ class Email extends Api
      * @param array $params Optional parameters
      * @return mixed
      */
-    public function subscriptionsTimeline($params)
+    public function subscriptionsTimeline($params = [])
     {
         $endpoint = "/email/public/v1/subscriptions/timeline";
 
@@ -58,7 +58,7 @@ class Email extends Api
      * @param array $params
      * @return mixed
      */
-    public function updateSubscription($portal_id, $email, $params)
+    public function updateSubscription($portal_id, $email, $params = [])
     {
         $endpoint = "/email/public/v1/subscriptions/{$email}";
 

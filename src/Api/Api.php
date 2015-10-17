@@ -4,6 +4,7 @@ namespace Fungku\HubSpot\Api;
 
 use Fungku\HubSpot\Contracts\HttpClient;
 use Fungku\HubSpot\Http\Query;
+use Fungku\HubSpot\Support\QueryBuilder;
 use GuzzleHttp\Exception\RequestException;
 
 abstract class Api
@@ -92,27 +93,11 @@ abstract class Api
     }
 
     /**
-     * Generate a query string for batch requests.
-     * 
-     * This is a workaround to deal with multiple items with the same key/variable name, not something PHP generally likes.
-     *
-     * @param string $property The name of the query variable.
-     * @param array $items An array of item values for the variable.
-     * @return string
-     */
-    protected function generateBatchQuery($property, array $items = [])
-    {
-        return array_reduce($items, function($query, $item) use ($property) {
-            return $query . "&{$property}={$item}";
-        }, '');
-    }
-
-    /**
      * @param array $query
      * @return string
      */
     protected function buildQueryString($query = [])
     {
-        return '&' . \Fungku\HubSpot\build_query($query);
+        return QueryBuilder::build($query);
     }
 }

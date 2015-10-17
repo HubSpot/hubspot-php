@@ -46,7 +46,7 @@ class ContactProperties extends Api
      * @param array $property
      * @return mixed
      */
-    public function create(array $property)
+    public function create($property)
     {
         $endpoint = "/contacts/v2/properties";
 
@@ -64,7 +64,7 @@ class ContactProperties extends Api
      * @param array $property
      * @return mixed
      */
-    public function update(array $property)
+    public function update($property)
     {
         $endpoint = "/contacts/v2/properties/named/{$property['name']}";
 
@@ -117,7 +117,7 @@ class ContactProperties extends Api
      * @param array $group Group properties
      * @return mixed
      */
-    public function createGroup(array $group)
+    public function createGroup($group)
     {
         $endpoint = "/contacts/v2/groups";
 
@@ -135,7 +135,7 @@ class ContactProperties extends Api
      * @param array $group
      * @return mixed
      */
-    public function updateGroup(array $group)
+    public function updateGroup($group)
     {
         $endpoint = "/contacts/v2/groups/named/{$group['name']}";
 

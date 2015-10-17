@@ -10,7 +10,7 @@ class EmailEvents extends Api
      * @param array $params Optional parameters
      * @return mixed
      */
-    public function getCampaignIds($params)
+    public function getCampaignIds($params = [])
     {
         $endpoint = "/email/public/v1/campaigns";
 
@@ -41,7 +41,7 @@ class EmailEvents extends Api
      * @param array $params Optional parameters
      * @return mixed
      */
-    public function get(array $params)
+    public function get($params = [])
     {
         $endpoint = "/email/public/v1/events";
 

@@ -11,7 +11,7 @@ class Files extends Api
      * @param array $params Optional parameters
      * @return mixed
      */
-    public function upload($file, $params)
+    public function upload($file, $params = [])
     {
         $endpoint = "/filemanager/api/v2/files";
 
@@ -34,7 +34,7 @@ class Files extends Api
      * @param array $params Optional parameters
      * @return mixed
      */
-    public function files($params)
+    public function files($params = [])
     {
         $endpoint = "/filemanager/api/v2/files";
 
@@ -112,7 +112,7 @@ class Files extends Api
      * @param array $params
      * @return mixed
      */
-    public function move($file_id, array $params)
+    public function move($file_id, $params = [])
     {
         $endpoint = "/filemanager/api/v2/files/{$file_id}/move-file";
 
@@ -146,7 +146,7 @@ class Files extends Api
      * @param array $params
      * @return mixed
      */
-    public function folders($params)
+    public function folders($params = [])
     {
         $endpoint = "/filemanager/api/v2/folders";
 
@@ -162,7 +162,7 @@ class Files extends Api
      * @param array $params
      * @return mixed
      */
-    public function updateFolder($folder_id, array $params)
+    public function updateFolder($folder_id, $params = [])
     {
         $endpoint = "/filemanager/api/v2/folders/{$folder_id}";
 
@@ -204,7 +204,7 @@ class Files extends Api
      * @param array $params
      * @return mixed
      */
-    public function moveFolder($folder_id, array $params)
+    public function moveFolder($folder_id, $params = [])
     {
         $endpoint = "/filemanager/api/v2/folders/{$folder_id}/move-folder";
 

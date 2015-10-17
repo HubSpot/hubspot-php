@@ -41,7 +41,7 @@ class Pages extends Api
      * @param array $params The page fields to update.
      * @return mixed
      */
-    public function update($page_id, array $params)
+    public function update($page_id, $params)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}";
 

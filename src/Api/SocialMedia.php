@@ -35,7 +35,7 @@ class SocialMedia extends Api
      * @param array $params
      * @return mixed
      */
-    public function broadcasts($params)
+    public function broadcasts($params = [])
     {
         $endpoint = "/broadcast/v1/broadcasts";
 
@@ -63,7 +63,7 @@ class SocialMedia extends Api
      * @param array $broadcast
      * @return mixed
      */
-    public function createBroadcast(array $broadcast)
+    public function createBroadcast($broadcast)
     {
         $endpoint = "/broadcast/v1/broadcasts";
 

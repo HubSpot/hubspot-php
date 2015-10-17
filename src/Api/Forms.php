@@ -17,7 +17,7 @@ class Forms extends Api
      * @param array $form
      * @return mixed
      */
-    public function submit($portal_id, $form_guid, array $form)
+    public function submit($portal_id, $form_guid, $form)
     {
         $url = "https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_guid}";
 
@@ -57,7 +57,7 @@ class Forms extends Api
      * @param array $form
      * @return mixed
      */
-    public function create(array $form)
+    public function create($form)
     {
         $endpoint = "/contacts/v1/forms";
 
@@ -73,7 +73,7 @@ class Forms extends Api
      * @param array $form
      * @return mixed
      */
-    public function update($form_guid, array $form)
+    public function update($form_guid, $form)
     {
         $endpoint = "/contacts/v1/forms/{$form_guid}";
 

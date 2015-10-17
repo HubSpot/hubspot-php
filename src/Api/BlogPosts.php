@@ -10,7 +10,7 @@ class BlogPosts extends Api
      * @param array $params Optional Parameters.
      * @return mixed
      */
-    public function create($params)
+    public function create($params = [])
     {
         $endpoint = '/content/api/v2/blog-posts';
 
@@ -25,7 +25,7 @@ class BlogPosts extends Api
      * @param array $params Optional parameters.
      * @return mixed
      */
-    public function all($params)
+    public function all($params = [])
     {
         $endpoint = "/content/api/v2/blog-posts";
 
@@ -41,7 +41,7 @@ class BlogPosts extends Api
      * @param array $params The blog post fields to update.
      * @return mixed
      */
-    public function update($id, array $params)
+    public function update($id, $params = [])
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}";
 

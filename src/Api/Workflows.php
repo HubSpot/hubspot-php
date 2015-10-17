@@ -63,7 +63,7 @@ class Workflows extends Api
      * @param array $workflow The workflow properties
      * @return mixed
      */
-    public function create(array $workflow)
+    public function create($workflow)
     {
         $endpoint = "/automation/v2/workflows";
 
@@ -108,7 +108,7 @@ class Workflows extends Api
      * @param array $params Optional parameters.
      * @return mixed
      */
-    public function pastEventsForContact($workflow_id, $contact_id, $params)
+    public function pastEventsForContact($workflow_id, $contact_id, $params = [])
     {
         $endpoint = " /automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/past";
 
@@ -125,7 +125,7 @@ class Workflows extends Api
      * @param array $params
      * @return mixed
      */
-    public function upcomingEventsForContact($workflow_id, $contact_id, $params)
+    public function upcomingEventsForContact($workflow_id, $contact_id, $params = [])
     {
         $endpoint = "/automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/upcoming";
 

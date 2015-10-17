@@ -35,7 +35,7 @@ class Keywords extends Api
      * @param array $keyword
      * @return mixed
      */
-    public function create(array $keyword)
+    public function create($keyword)
     {
         $endpoint = "/keywords/v1/keywords.json";
 

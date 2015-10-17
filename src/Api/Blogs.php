@@ -10,7 +10,7 @@ class Blogs extends Api
      * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
      * @return mixed
      */
-    public function all($params)
+    public function all($params = [])
     {
         $endpoint = '/content/api/v2/blogs';
 
@@ -39,7 +39,7 @@ class Blogs extends Api
      * @param array  $params Optional parameters.
      * @return mixed
      */
-    public function versions($id, $params)
+    public function versions($id, $params = [])
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions";
 
@@ -56,7 +56,7 @@ class Blogs extends Api
      * @param array  $params     Optional parameters.
      * @return mixed
      */
-    public function getVersionById($id, $version_id, $params)
+    public function getVersionById($id, $version_id, $params = [])
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
 
