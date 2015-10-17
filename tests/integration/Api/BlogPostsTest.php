@@ -47,9 +47,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(2, count($response['objects']));
-        $this->assertNotNull($response->objects[0]->blog_author->email);
-        $this->assertNotNull($response->objects[1]->blog_author->email);
+        $this->assertLessThanOrEqual(2, count($response->objects));
         $this->assertGreaterThanOrEqual(3, $response->offset);
     }
 
@@ -62,9 +60,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(2, count($response['objects']));
-        $this->assertNotNull($response['objects'][0]['blog_author']['email']);
-        $this->assertNotNull($response['objects'][1]['blog_author']['email']);
+        $this->assertLessThanOrEqual(2, count($response['objects']));
         $this->assertGreaterThanOrEqual(3, $response['offset']);
     }
 
