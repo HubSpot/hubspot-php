@@ -10,7 +10,7 @@ class Email extends Api
      * @param int $portal_id
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function subscriptionDefinitions($portal_id)
+    public function subscriptions($portal_id)
     {
         $endpoint = "/email/public/v1/subscriptions";
 
@@ -41,7 +41,7 @@ class Email extends Api
      * @param string $email
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function getSubscriptionStatus($portal_id, $email)
+    public function subscriptionStatus($portal_id, $email)
     {
         $endpoint = "/email/public/v1/subscriptions/{$email}";
 
