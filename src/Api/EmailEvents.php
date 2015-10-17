@@ -41,7 +41,7 @@ class EmailEvents extends Api
      * @param array $params Optional parameters
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function get($params = [])
+    public function all($params = [])
     {
         $endpoint = "/email/public/v1/events";
 
@@ -63,5 +63,4 @@ class EmailEvents extends Api
 
         return $this->request('get', $endpoint);
     }
-
 }
