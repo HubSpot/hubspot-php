@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class MarketPlace extends Api
 {

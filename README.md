@@ -21,10 +21,8 @@ For Guzzle v6 support, please see the [develop branch](https://github.com/ryanwi
 
 **Composer:**
 
-```json
-"require": {
-	"fungku/hubspot-php": "~0.9@dev"
-}
+```bash
+composer require "fungku/hubspot-php: dev-develop"
 ```
 
 ## Quickstart
@@ -33,7 +31,7 @@ For Guzzle v6 support, please see the [develop branch](https://github.com/ryanwi
 
 All following examples assume this step.
 
-*Note:* The Hubspot class checks for a `HUBSPOT_API_KEY` environment variable if you don't include one during instantiation.
+*Note:* The HubSpot class checks for a `HUBSPOT_API_KEY` environment variable if you don't include one during instantiation.
 
 ```php
 $hubspot = Fungku\HubSpot\HubSpotService::make('api-key');
@@ -42,7 +40,10 @@ $hubspot = Fungku\HubSpot\HubSpotService::make('api-key');
 #### Get a single contact:
 
 ```php
-$contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
+$response = $hubspot->contacts()->getByEmail("test@hubspot.com");
+$contact = $response->getData();
+
+echo $contact->properties->email->value;
 ```
 
 #### Paginate through all contacts:
@@ -51,32 +52,51 @@ $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 // Get an array of 10 contacts
 // getting only the firstname and lastname properties
 // and set the offset to 123456
-$contacts = $hubspot->contacts()->all([
+$response = $hubspot->contacts()->all([
         'count'     => 10,
         'property'  => ['firstname', 'lastname'],
         'vidOffset' => 123456,
 ]);
+```
 
-foreach ($contacts['contacts'] as $contact) {
-    echo $contact['properties']['firstname']['value'];
+Working with the data is easy!
+
+```php
+foreach ($response->contacts as $contact) {
+    echo sprintf(
+        "Contact name is %s %s." . PHP_EOL,
+        $contact->properties->firstname->value,
+        $contact->properties->lastname->value
+    );
 }
 
 // Info for pagination
-echo $contacts['has-more'];
-echo $contacts['vid-offset'];
+echo $response->{'has-more'};
+echo $response->{'vid-offset'};
 ```
 
-#### Get a group of contacts by Ids
+or if you prefer to use array access?
 
 ```php
-$vids = [196189, 196188, 196187];
-
-// Get batch of contacts, and limit properties to firstname
-$contacts = $hubspot->contacts()->getBatchByIds($vids, ['property' => 'firstname']);
-
-foreach ($contacts as $contact) {
-    echo $contact['properties']['firstname']['value'];
+foreach ($response['contacts'] as $contact) {
+    echo sprintf(
+        "Contact name is %s %s." . PHP_EOL,
+        $contact['properties']['firstname']['value'],
+        $contact['properties']['lastname']['value']
+    );
 }
+
+// Info for pagination
+echo $response['has-more'];
+echo $response['vid-offset'];
+```
+
+Now with response methods implementing [PSR-7 ResponseInterface](https://github.com/php-fig/http-message/tree/master/src)
+
+```php
+$response->getStatusCode()   // 200;
+$response->getReasonPhrase() // 'OK';
+// etc...
 ```
 
 ## Status

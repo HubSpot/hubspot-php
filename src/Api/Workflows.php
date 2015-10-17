@@ -1,11 +1,13 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Workflows extends Api
 {
     /**
      * Get all workflows.
      *
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function all()
     {
@@ -18,7 +20,7 @@ class Workflows extends Api
      * Get a specific workflow.
      *
      * @param int $id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getById($id)
     {
@@ -30,9 +32,9 @@ class Workflows extends Api
     /**
      * Enroll a contact in a workflow.
      *
-     * @param int $workflow_id
+     * @param int    $workflow_id
      * @param string $email
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function enrollContact($workflow_id, $email)
     {
@@ -44,9 +46,9 @@ class Workflows extends Api
     /**
      * Unenroll a contact from a workflow.
      *
-     * @param int $workflow_id
+     * @param int    $workflow_id
      * @param string $email
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function unenrollContact($workflow_id, $email)
     {
@@ -59,9 +61,9 @@ class Workflows extends Api
      * Create a new workflow.
      *
      * @param array $workflow The workflow properties
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function create(array $workflow)
+    public function create($workflow)
     {
         $endpoint = "/automation/v2/workflows";
 
@@ -74,22 +76,22 @@ class Workflows extends Api
      * Delete a workflow.
      *
      * @param int $id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($id)
     {
         $endpoint = "/automation/v2/workflows/{$id}";
 
-        $options['query'] = ['updatedAt' => time()];
+        $queryString = $this->buildQueryString(['updatedAt' => time()]);
 
-        return $this->request('delete', $endpoint, $options);
+        return $this->request('delete', $endpoint, [], $queryString);
     }
 
     /**
      * Get current enrollments for a contact.
      *
      * @param int $contact_id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function enrollmentsForContact($contact_id)
     {
@@ -101,35 +103,35 @@ class Workflows extends Api
     /**
      * Get past events for contact from a workflow.
      *
-     * @param int $workflow_id
-     * @param int $contact_id
+     * @param int   $workflow_id
+     * @param int   $contact_id
      * @param array $params Optional parameters.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function pastEventsForContact($workflow_id, $contact_id, $params)
+    public function pastEventsForContact($workflow_id, $contact_id, $params = [])
     {
         $endpoint = " /automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/past";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * Get upcoming (scheduled) events for a contact in a workflow.
      *
-     * @param int $workflow_id
-     * @param int $contact_id
+     * @param int   $workflow_id
+     * @param int   $contact_id
      * @param array $params
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function upcomingEventsForContact($workflow_id, $contact_id, $params)
+    public function upcomingEventsForContact($workflow_id, $contact_id, $params = [])
     {
         $endpoint = "/automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/upcoming";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
 }

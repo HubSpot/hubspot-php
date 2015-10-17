@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Pages extends Api
 {
@@ -6,7 +8,7 @@ class Pages extends Api
      * Create a new page.
      *
      * @param array $params Optional Parameters.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function create($params)
     {
@@ -21,25 +23,25 @@ class Pages extends Api
      * Get all pages.
      *
      * @param array $params Optional parameters.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function all($params = [])
     {
         $endpoint = "/content/api/v2/pages";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * Update a page.
      *
-     * @param int $page_id The page id.
-     * @param array $params The page fields to update.
-     * @return mixed
+     * @param int   $page_id The page id.
+     * @param array $params  The page fields to update.
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function update($page_id, array $params)
+    public function update($page_id, $params)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}";
 
@@ -52,7 +54,7 @@ class Pages extends Api
      * Delete a page.
      *
      * @param int $page_id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($page_id)
     {
@@ -65,7 +67,7 @@ class Pages extends Api
      * Get a specific page.
      *
      * @param int $page_id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getById($page_id)
     {
@@ -78,7 +80,7 @@ class Pages extends Api
      * Updates the auto-save buffer.
      *
      * @param in $page_id The page ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function updateAutoSaveBuffer($page_id)
     {
@@ -91,7 +93,7 @@ class Pages extends Api
      * Gets the current contents of the auto-save buffer.
      *
      * @param int $page_id The page ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getAutoSaveBufferContents($page_id)
     {
@@ -104,7 +106,7 @@ class Pages extends Api
      * Clone the page.
      *
      * @param int $page_id The page ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function clonePage($page_id)
     {
@@ -117,7 +119,7 @@ class Pages extends Api
      * Determine if the auto-save buffer differs from the live page.
      *
      * @param int $page_id The page ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function hasBufferedChanges($page_id)
     {
@@ -135,9 +137,9 @@ class Pages extends Api
      *     the existing publish_date time.
      * "cancel-publish": cancels a previous schedule-publish action.
      *
-     * @param int $page_id The page ID
-     * @param string $action The publish action
-     * @return mixed
+     * @param int    $page_id The page ID
+     * @param string $action  The publish action
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function publishAction($page_id, $action)
     {
@@ -152,7 +154,7 @@ class Pages extends Api
      * Copies the contents of the auto-save buffer into the live page.
      *
      * @param int $page_id The page ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function pushBufferLive($page_id)
     {
@@ -165,7 +167,7 @@ class Pages extends Api
      * Restores a previously deleted page.
      *
      * @param int $page_id The page ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function restoreDeleted($page_id)
     {
@@ -178,7 +180,7 @@ class Pages extends Api
      * Validates the auto-save buffer version of the page.
      *
      * @param int $page_id The page ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function validateBuffer($page_id)
     {
@@ -191,7 +193,7 @@ class Pages extends Api
      * List previous versions of the page.
      *
      * @param int $page_id The page ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function versions($page_id)
     {
@@ -203,9 +205,9 @@ class Pages extends Api
     /**
      * Restore a previous version of the page.
      *
-     * @param int $page_id The page ID
+     * @param int $page_id    The page ID
      * @param int $version_id The version ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function restoreVersion($page_id, $version_id)
     {

@@ -1,14 +1,16 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class BlogPosts extends Api
 {
     /**
      * Create a new blog post.
      *
-     * @param array $params Optional Parameters.
-     * @return mixed
+     * @param  array $params Optional Parameters.
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function create($params)
+    public function create($params = [])
     {
         $endpoint = '/content/api/v2/blog-posts';
 
@@ -20,26 +22,26 @@ class BlogPosts extends Api
     /**
      * Get all blog posts.
      *
-     * @param array $params Optional parameters.
-     * @return mixed
+     * @param  array $params Optional parameters.
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function all($params)
+    public function all($params = [])
     {
         $endpoint = "/content/api/v2/blog-posts";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * Update a blog post.
      *
-     * @param int $id The blog post id.
-     * @param array $params The blog post fields to update.
-     * @return mixed
+     * @param  int   $id     The blog post id.
+     * @param  array $params The blog post fields to update.
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function update($id, array $params)
+    public function update($id, $params = [])
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}";
 
@@ -51,8 +53,8 @@ class BlogPosts extends Api
     /**
      * Delete a blog post.
      *
-     * @param int $id
-     * @return mixed
+     * @param  int $id
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($id)
     {
@@ -64,8 +66,8 @@ class BlogPosts extends Api
     /**
      * Get a specific blog post.
      *
-     * @param int $id
-     * @return mixed
+     * @param  int $id
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getById($id)
     {
@@ -77,8 +79,8 @@ class BlogPosts extends Api
     /**
      * Updates the auto-save buffer.
      *
-     * @param in $id The blog post ID
-     * @return mixed
+     * @param  int $id The blog post ID
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function updateAutoSaveBuffer($id)
     {
@@ -90,8 +92,8 @@ class BlogPosts extends Api
     /**
      * Gets the current contents of the auto-save buffer.
      *
-     * @param int $id The blog post ID
-     * @return mixed
+     * @param  int $id The blog post ID
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getAutoSaveBufferContents($id)
     {
@@ -103,8 +105,8 @@ class BlogPosts extends Api
     /**
      * Clone the blog post.
      *
-     * @param int $id The blog post ID
-     * @return mixed
+     * @param  int $id The blog post ID
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function clonePost($id)
     {
@@ -116,8 +118,8 @@ class BlogPosts extends Api
     /**
      * Determine if the auto-save buffer differs from the live blog post.
      *
-     * @param int $id The blog post ID
-     * @return mixed
+     * @param  int $id The blog post ID
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function hasBufferedChanges($id)
     {
@@ -135,9 +137,9 @@ class BlogPosts extends Api
      *     the existing publish_date time.
      * "cancel-publish": cancels a previous schedule-publish action.
      *
-     * @param int $id The blog post ID
-     * @param string $action The publish action
-     * @return mixed
+     * @param  int    $id     The blog post ID
+     * @param  string $action The publish action
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function publishAction($id, $action)
     {
@@ -151,8 +153,8 @@ class BlogPosts extends Api
     /**
      * Copies the contents of the auto-save buffer into the live blog post.
      *
-     * @param int $id The blog post ID
-     * @return mixed
+     * @param  int $id The blog post ID
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function pushBufferLive($id)
     {
@@ -164,8 +166,8 @@ class BlogPosts extends Api
     /**
      * Restores a previously deleted blog post.
      *
-     * @param int $id The blog post ID
-     * @return mixed
+     * @param  int $id The blog post ID
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function restoreDeleted($id)
     {
@@ -177,8 +179,8 @@ class BlogPosts extends Api
     /**
      * Validates the auto-save buffer version of the blog post.
      *
-     * @param int $id The blog post ID
-     * @return mixed
+     * @param  int $id The blog post ID
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function validateBuffer($id)
     {
@@ -190,8 +192,8 @@ class BlogPosts extends Api
     /**
      * List previous versions of the blog post.
      *
-     * @param int $id The blog post ID
-     * @return mixed
+     * @param  int $id The blog post ID
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function versions($id)
     {
@@ -203,9 +205,9 @@ class BlogPosts extends Api
     /**
      * Get a previous version of the blog post.
      *
-     * @param int $post_id The blog post ID
+     * @param int $post_id    The blog post ID
      * @param int $version_id The version ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getVersion($post_id, $version_id)
     {
@@ -217,9 +219,9 @@ class BlogPosts extends Api
     /**
      * Restore a previous version of the blog post.
      *
-     * @param int $post_id The blog post ID
+     * @param int $post_id    The blog post ID
      * @param int $version_id The version ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function restoreVersion($post_id, $version_id)
     {

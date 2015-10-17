@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Blogs extends Api
 {
@@ -6,22 +8,22 @@ class Blogs extends Api
      * Get all blogs.
      *
      * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function all($params)
+    public function all($params = [])
     {
         $endpoint = '/content/api/v2/blogs';
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * Get information about a specific blog.
      *
      * @param string $id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getById($id)
     {
@@ -35,15 +37,15 @@ class Blogs extends Api
      *
      * @param string $id     Blog id.
      * @param array  $params Optional parameters.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function versions($id, $params)
+    public function versions($id, $params = [])
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -52,14 +54,14 @@ class Blogs extends Api
      * @param string $id         Blog id.
      * @param string $version_id Version id.
      * @param array  $params     Optional parameters.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function getVersionById($id, $version_id, $params)
+    public function getVersionById($id, $version_id, $params = [])
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 }

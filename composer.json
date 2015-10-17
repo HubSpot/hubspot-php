@@ -10,15 +10,21 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "guzzlehttp/guzzle": "~5.0"
+        "php": ">=5.5.0",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.0",
+        "phpunit/phpunit": "~4.0"
     },
     "autoload": {
         "psr-4": {
             "Fungku\\HubSpot\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fungku\\HubSpot\\Tests\\Integration\\": "tests/integration/"
         }
     },
     "minimum-stability": "stable"

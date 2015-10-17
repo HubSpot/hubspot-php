@@ -1,0 +1,7 @@
+suites:
+    main:
+        namespace: Fungku\HubSpot
+        psr4_prefix: Fungku\HubSpot
+        spec_path: tests
+
+formatter.name: pretty

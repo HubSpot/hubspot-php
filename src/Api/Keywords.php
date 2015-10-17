@@ -1,11 +1,13 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Keywords extends Api
 {
     /**
      * Get all keywords.
      *
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function all()
     {
@@ -18,7 +20,7 @@ class Keywords extends Api
      * Get a keyword.
      *
      * @param string $keyword_guid
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getById($keyword_guid)
     {
@@ -31,9 +33,9 @@ class Keywords extends Api
      * Create a new keyword.
      *
      * @param array $keyword
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function create(array $keyword)
+    public function create($keyword)
     {
         $endpoint = "/keywords/v1/keywords.json";
 
@@ -46,7 +48,7 @@ class Keywords extends Api
      * Delete a keyword.
      *
      * @param string $keyword_guid
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($keyword_guid)
     {

@@ -1,15 +1,15 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
 
-use Fungku\HubSpot\Exceptions\HubSpotException;
+namespace Fungku\HubSpot\Api;
+
 
 class Contacts extends Api
 {
     /**
      * @param array $properties Array of contact properties.
-     * @return mixed
-     * @throws HubSpotException
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function create(array $properties)
+    public function create($properties)
     {
         $endpoint = "/contacts/v1/contact";
 
@@ -19,11 +19,11 @@ class Contacts extends Api
     }
 
     /**
-     * @param int $id The contact id.
+     * @param int   $id         The contact id.
      * @param array $properties The contact properties to update.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function update($id, array $properties)
+    public function update($id, $properties)
     {
         $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
@@ -33,11 +33,11 @@ class Contacts extends Api
     }
 
     /**
-     * @param string $email The contact's email address.
-     * @param array $properties The contact properties.
-     * @return mixed
+     * @param string $email      The contact's email address.
+     * @param array  $properties The contact properties.
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function createOrUpdate($email, array $properties)
+    public function createOrUpdate($email, $properties = [])
     {
         $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
 
@@ -48,9 +48,9 @@ class Contacts extends Api
 
     /**
      * @param array $contacts The contacts and properties.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function createOrUpdateBatch(array $contacts)
+    public function createOrUpdateBatch($contacts)
     {
         $endpoint = "/contacts/v1/contact/batch";
 
@@ -61,7 +61,7 @@ class Contacts extends Api
 
     /**
      * @param int $id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($id)
     {
@@ -83,22 +83,15 @@ class Contacts extends Api
      * @link http://developers.hubspot.com/docs/methods/contacts/get_contacts
      *
      * @param array $params Array of optional parameters ['count', 'property', 'vidOffset']
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function all($params)
+    public function all($params = [])
     {
         $endpoint = "/contacts/v1/lists/all/contacts/all";
 
-        if (isset($params['property']) && is_array($params['property'])) {
-            $queryString = $this->generateBatchQuery('property', $params['property']);
-            unset($params['property']);
-        } else {
-            $queryString = null;
-        }
+        $queryString = $this->buildQueryString($params);
 
-        $options['query'] = $this->getQuery($params);
-
-        return $this->request('get', $endpoint, $options, $queryString);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -108,28 +101,22 @@ class Contacts extends Api
      *
      * @link http://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
      *
-     * @param array $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property', 'propertyMode', 'formSubmissionMode', 'showListMemberships']
-     * @return mixed
+     * @param array $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property',
+     *                      'propertyMode', 'formSubmissionMode', 'showListMemberships']
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function recent($params)
+    public function recent($params = [])
     {
         $endpoint = "/contacts/v1/lists/recently_updated/contacts/recent";
 
-        if (isset($params['property']) && is_array($params['property'])) {
-            $queryString = $this->generateBatchQuery('property', $params['property']);
-            unset($params['property']);
-        } else {
-            $queryString = null;
-        }
+        $queryString = $this->buildQueryString($params);
 
-        $options['query'] = $this->getQuery($params);
-
-        return $this->request('get', $endpoint, $options, $queryString);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param int $id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getById($id)
     {
@@ -147,29 +134,25 @@ class Contacts extends Api
      *
      * @link http://developers.hubspot.com/docs/methods/contacts/get_batch_by_vid
      *
-     * @param array $vids Array of visitor IDs
-     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode', 'showListMemberships', 'includeDeletes']
-     * @return mixed
+     * @param array $vids   Array of visitor IDs
+     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
+     *                      'showListMemberships', 'includeDeletes']
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function getBatchByIds(array $vids, $params)
+    public function getBatchByIds($vids, $params = [])
     {
         $endpoint = "/contacts/v1/contact/vids/batch/";
 
-        $queryString = $this->generateBatchQuery('vid', $vids);
+        $params['vid'] = $vids;
 
-        if (isset($params['property']) && is_array($params['property'])) {
-            $queryString .= $this->generateBatchQuery('property', $params['property']);
-            unset($params['property']);
-        }
+        $queryString = $this->buildQueryString($params);
 
-        $options['query'] = $this->getQuery($params);
-
-        return $this->request('get', $endpoint, $options, $queryString);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param string $email
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getByEmail($email)
     {
@@ -187,28 +170,24 @@ class Contacts extends Api
      * @link http://developers.hubspot.com/docs/methods/contacts/get_batch_by_email
      *
      * @param array $emails Array of email adresses
-     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode', 'showListMemberships', 'includeDeletes']
-     * @return mixed
+     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
+     *                      'showListMemberships', 'includeDeletes']
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function getBatchByEmails(array $emails, $params)
+    public function getBatchByEmails($emails, $params = [])
     {
         $endpoint = "/contacts/v1/contact/emails/batch/";
 
-        $queryString = $this->generateBatchQuery('email', $emails);
+        $params['email'] = $emails;
 
-        if (isset($params['property']) && is_array($params['property'])) {
-            $queryString .= $this->generateBatchQuery('property', $params['property']);
-            unset($params['property']);
-        }
+        $queryString = $this->buildQueryString($params);
 
-        $options['query'] = $this->getQuery($params);
-
-        return $this->request('get', $endpoint, $options, $queryString);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param string $utk
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getByToken($utk)
     {
@@ -229,24 +208,20 @@ class Contacts extends Api
      *
      * @link http://developers.hubspot.com/docs/methods/contacts/get_batch_by_utk
      *
-     * @param array $utks Array of hubspot user tokens (hubspotutk)
-     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode', 'showListMemberships', 'includeDeletes']
-     * @return mixed
+     * @param array $utks   Array of hubspot user tokens (hubspotutk)
+     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
+     *                      'showListMemberships', 'includeDeletes']
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function getBatchByTokens(array $utks, $params)
+    public function getBatchByTokens($utks, $params = [])
     {
         $endpoint = "/contacts/v1/contact/utks/batch/";
 
-        $queryString = $this->generateBatchQuery('utk', $utks);
+        $params['utk'] = $utks;
 
-        if (isset($params['property']) && is_array($params['property'])) {
-            $queryString .= $this->generateBatchQuery('property', $params['property']);
-            unset($params['property']);
-        }
+        $queryString = $this->buildQueryString($params);
 
-        $options['query'] = $this->getQuery($params);
-
-        return $this->request('get', $endpoint, $options, $queryString);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -260,21 +235,23 @@ class Contacts extends Api
      *
      * @link http://developers.hubspot.com/docs/methods/contacts/search_contacts
      *
-     * @param string $query Search query
-     * @param array $params Array of optional parameters ['count', 'offset']
-     * @return mixed
+     * @param string $query  Search query
+     * @param array  $params Array of optional parameters ['count', 'offset']
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function search($query, $params)
+    public function search($query, $params = [])
     {
         $endpoint = "/contacts/v1/search/query";
 
         $params['q'] = $query;
 
-        return $this->request('get', $endpoint, $params);
+        $queryString = $this->buildQueryString($params);
+
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function statistics()
     {

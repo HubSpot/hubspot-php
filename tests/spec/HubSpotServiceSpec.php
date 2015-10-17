@@ -7,11 +7,9 @@ use Prophecy\Argument;
 
 class HubSpotServiceSpec extends ObjectBehavior
 {
-    private $apiKey = "demo";
-
     function let()
     {
-        $this->beConstructedThrough('make', [$this->apiKey]);
+        $this->beConstructedThrough('make', ['demo']);
     }
 
     function it_is_initializable()

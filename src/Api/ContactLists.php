@@ -1,4 +1,6 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class ContactLists extends Api
 {
@@ -6,9 +8,9 @@ class ContactLists extends Api
      * Create a new contact list.
      *
      * @param array $list Contact list properties.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function create(array $list)
+    public function create($list)
     {
         $endpoint = '/contacts/v1/lists';
 
@@ -20,11 +22,11 @@ class ContactLists extends Api
     /**
      * Update a contact list.
      *
-     * @param int $id The contact list id.
+     * @param int   $id   The contact list id.
      * @param array $list The contact list properties to update.
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function update($id, array $list)
+    public function update($id, $list)
     {
         $endpoint = "/contacts/v1/lists/{$id}";
 
@@ -37,7 +39,7 @@ class ContactLists extends Api
      * Delete a contact list.
      *
      * @param int $id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($id)
     {
@@ -48,7 +50,7 @@ class ContactLists extends Api
 
     /**
      * @param int $id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getById($id)
     {
@@ -61,78 +63,71 @@ class ContactLists extends Api
      * Get a set of contact lists.
      *
      * @param array $params ['count', 'offset']
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function all($params)
+    public function all($params = [])
     {
         $endpoint = "/contacts/v1/lists";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param array $ids
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function getBatchByIds(array $ids)
+    public function getBatchByIds($ids)
     {
         $endpoint = "/contacts/v1/lists/batch";
 
-        $queryString = $this->generateBatchQuery('listId', $ids);
+        $queryString = $this->buildQueryString(['listId' => $ids]);
 
-        return $this->request('get', $endpoint, null, $queryString);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param array $params Optional parameters ['count', 'offset']
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function getAllStatic($params)
+    public function getAllStatic($params = [])
     {
         $endpoint = "/contacts/v1/lists/static";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param array $params Optional parameters ['count', 'offset']
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function getAllDynamic($params)
+    public function getAllDynamic($params = [])
     {
         $endpoint = "/contacts/v1/lists/dynamic";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * Get contacts in a list.
      *
-     * @param int $id List id
+     * @param int   $id     List id
      * @param array $params Optional parameters
-     *     { count, vidOffset, property, propertyMode, formSubmissionMode, showListMemberships }
-     * @return mixed
+     *                      { count, vidOffset, property, propertyMode, formSubmissionMode, showListMemberships }
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function contacts($id, $params)
+    public function contacts($id, $params = [])
     {
         $endpoint = "/contacts/v1/lists/{$id}/contacts/all";
 
-        if (isset($params['property']) && is_array($params['property'])) {
-            $queryString = $this->generateBatchQuery('property', $params['property']);
-            unset($params['property']);
-        } else {
-            $queryString = null;
-        }
+        $queryString = $this->buildQueryString($params);
 
-        $options['query'] = $this->getQuery($params);
-
-        return $this->request('get', $endpoint, $options, $queryString);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -140,22 +135,22 @@ class ContactLists extends Api
      *
      * @param int   $id List id
      * @param array $params
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function recentContacts($id, $params)
+    public function recentContacts($id, $params = [])
     {
         $endpoint = "/contacts/v1/lists/{$id}/contacts/recent";
 
-        $options['query'] = $this->getQuery($params);
+        $queryString = $this->buildQueryString($params);
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * Refresh a list.
      *
      * @param int $id List id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function refresh($id)
     {
@@ -167,11 +162,11 @@ class ContactLists extends Api
     /**
      * Add a contact to a list.
      *
-     * @param int $list_id
+     * @param int   $list_id
      * @param array $contact_ids
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function addContact($list_id, array $contact_ids)
+    public function addContact($list_id, $contact_ids)
     {
         $endpoint = "/contacts/v1/lists/{$list_id}/add";
 
@@ -183,11 +178,11 @@ class ContactLists extends Api
     /**
      * Remove a contact from a list.
      *
-     * @param int $list_id
+     * @param int   $list_id
      * @param array $contact_ids
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function removeContact($list_id, array $contact_ids)
+    public function removeContact($list_id, $contact_ids)
     {
         $endpoint = "/contacts/v1/lists/{$list_id}/remove";
 

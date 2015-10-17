@@ -1,19 +1,23 @@
-<?php namespace Fungku\HubSpot\Api;
+<?php
+
+namespace Fungku\HubSpot\Api;
 
 class Files extends Api
 {
     /**
      * Upload a new file.
      *
-     * @param string $file File path
-     * @param array $params Optional parameters
-     * @return mixed
+     * @param string $file   File path
+     * @param array  $params Optional parameters
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function upload($file, $params)
+    public function upload($file, $params = [])
     {
         $endpoint = "/filemanager/api/v2/files";
 
-        $options['query'] = isset($params['overwrite']) ? $params['overwrite'] : false;
+        $queryString = $this->buildQueryString([
+            'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false,
+        ]);
 
         $options['body'] = [
             'files'        => fopen($file, 'rb'),
@@ -21,16 +25,16 @@ class Files extends Api
             'folder_paths' => isset($params['folder_paths']) ? $params['folder_paths'] : null,
         ];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->request('post', $endpoint, $options, $queryString);
     }
 
     /**
      * Get meta data for all files.
      *
      * @param array $params Optional parameters
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function files($params)
+    public function files($params = [])
     {
         $endpoint = "/filemanager/api/v2/files";
 
@@ -42,9 +46,9 @@ class Files extends Api
     /**
      * Upload a replacement file.
      *
-     * @param int $file_id The file ID
-     * @param string $file The file path
-     * @return mixed
+     * @param int    $file_id The file ID
+     * @param string $file    The file path
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function replace($file_id, $file)
     {
@@ -61,7 +65,7 @@ class Files extends Api
      * Get file metadata.
      *
      * @param $file_id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function meta($file_id)
     {
@@ -74,7 +78,7 @@ class Files extends Api
      * Archive a file.
      *
      * @param int $file_id The file ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function archive($file_id)
     {
@@ -87,7 +91,7 @@ class Files extends Api
      * Delete a file.
      *
      * @param int $file_id The file ID
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($file_id)
     {
@@ -100,15 +104,15 @@ class Files extends Api
      * Move a file to a new folder.
      *
      * Parameters:
-     * folder_path  string	The path of the folder to move the file into. Use this OR folder_id - not both.
-     * folder_id	string	The id of the folder to move the file into. Use this OR folder_path - not both.
-     * name	        string	The new name of the file.
+     * folder_path  string    The path of the folder to move the file into. Use this OR folder_id - not both.
+     * folder_id    string    The id of the folder to move the file into. Use this OR folder_path - not both.
+     * name            string    The new name of the file.
      *
-     * @param int $file_id
+     * @param int   $file_id
      * @param array $params
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function move($file_id, array $params)
+    public function move($file_id, $params = [])
     {
         $endpoint = "/filemanager/api/v2/files/{$file_id}/move-file";
 
@@ -121,8 +125,8 @@ class Files extends Api
      * Create a new folder.
      *
      * @param string $folder_name
-     * @param int $parent_folder_id
-     * @return mixed
+     * @param int    $parent_folder_id
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function createFolder($folder_name, $parent_folder_id)
     {
@@ -140,9 +144,9 @@ class Files extends Api
      * List folders metadata.
      *
      * @param array $params
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function folders($params)
+    public function folders($params = [])
     {
         $endpoint = "/filemanager/api/v2/folders";
 
@@ -154,11 +158,11 @@ class Files extends Api
     /**
      * Update a folder.
      *
-     * @param int $folder_id
+     * @param int   $folder_id
      * @param array $params
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function updateFolder($folder_id, array $params)
+    public function updateFolder($folder_id, $params = [])
     {
         $endpoint = "/filemanager/api/v2/folders/{$folder_id}";
 
@@ -171,7 +175,7 @@ class Files extends Api
      * Delete a folder.
      *
      * @param int $folder_id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function deleteFolder($folder_id)
     {
@@ -184,7 +188,7 @@ class Files extends Api
      * Get the folder by ID.
      *
      * @param int $folder_id
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
     public function getFolderById($folder_id)
     {
@@ -196,11 +200,11 @@ class Files extends Api
     /**
      * Move a folder.
      *
-     * @param int $folder_id
+     * @param int   $folder_id
      * @param array $params
-     * @return mixed
+     * @return \Fungku\HubSpot\Http\Response
      */
-    public function moveFolder($folder_id, array $params)
+    public function moveFolder($folder_id, $params = [])
     {
         $endpoint = "/filemanager/api/v2/folders/{$folder_id}/move-folder";
 
