@@ -157,7 +157,6 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contacts->getBatchByIds($ids);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(3, count((array) $response->getData()));
     }
 
     /** @test */
