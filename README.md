@@ -50,10 +50,14 @@ $data = $hubspot->contacts()->all([
         'property'  => ['firstname', 'lastname'],
         'vidOffset' => 123456,
 ]);
+```
 
+Working with the data is easy!
+
+```php
 foreach ($data->contacts as $contact) {
     echo sprintf(
-        "Contact name is %s %s.",
+        "Contact name is %s %s." . PHP_EOL,
         $contact->properties->firstname->value,
         $contact->properties->lastname->value
     );
@@ -62,6 +66,22 @@ foreach ($data->contacts as $contact) {
 // Info for pagination
 echo $data->{'has-more'};
 echo $data->{'vid-offset'};
+```
+
+or if you prefer to use array access?
+
+```php
+foreach ($data['contacts'] as $contact) {
+    echo sprintf(
+        "Contact name is %s %s." . PHP_EOL,
+        $contact['properties']['firstname']['value'],
+        $contact['properties']['lastname']['value']
+    );
+}
+
+// Info for pagination
+echo $data['has-more'];
+echo $data['vid-offset'];
 ```
 
 ## Status

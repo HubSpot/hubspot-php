@@ -4,6 +4,13 @@ namespace Fungku\HubSpot\Support;
 
 class QueryBuilder
 {
+    /**
+     * Generate a query string.
+     *
+     * @param  array  $params
+     * @param  int    $encoding
+     * @return string
+     */
     public static function build($params = [], $encoding = PHP_QUERY_RFC3986)
     {
         if (empty($params)) {
@@ -37,6 +44,11 @@ class QueryBuilder
         }, '');
     }
 
+    /**
+     * @param  string  $value
+     * @param  int     $encoding
+     * @return string
+     */
     public static function encode($value, $encoding = PHP_QUERY_RFC3986)
     {
         switch ($encoding) {
