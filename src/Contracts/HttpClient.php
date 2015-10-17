@@ -9,26 +9,26 @@ interface HttpClient
      * @param  array   $options
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function get($url, $options);
+    public function get($url, $options = []);
 
     /**
      * @param  string  $url
      * @param  array   $options
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function post($url, $options);
+    public function post($url, $options = []);
 
     /**
      * @param  string  $url
      * @param  array   $options
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function delete($url, $options);
+    public function delete($url, $options = []);
 
     /**
      * @param  string  $url
      * @param  array   $options
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function put($url, $options);
+    public function put($url, $options = []);
 }

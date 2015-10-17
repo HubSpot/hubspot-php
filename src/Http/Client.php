@@ -22,7 +22,6 @@ class Client implements HttpClient
         $this->client = $client ?: new GuzzleClient();
     }
 
-
     /**
      * @param  string  $url
      * @param  array   $options

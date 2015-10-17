@@ -49,17 +49,6 @@ class ContactLists extends Api
     }
 
     /**
-     * @param int $id
-     * @return \Fungku\HubSpot\Http\Response
-     */
-    public function getById($id)
-    {
-        $endpoint = "/contacts/v1/lists/{$id}";
-
-        return $this->request('get', $endpoint);
-    }
-
-    /**
      * Get a set of contact lists.
      *
      * @param array $params ['count', 'offset']
@@ -72,6 +61,17 @@ class ContactLists extends Api
         $queryString = $this->buildQueryString($params);
 
         return $this->request('get', $endpoint, [], $queryString);
+    }
+
+    /**
+     * @param int $id
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function getById($id)
+    {
+        $endpoint = "/contacts/v1/lists/{$id}";
+
+        return $this->request('get', $endpoint);
     }
 
     /**

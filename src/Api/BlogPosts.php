@@ -77,16 +77,21 @@ class BlogPosts extends Api
     }
 
     /**
-     * Updates the auto-save buffer.
+     * Updates the auto-save buffer. Live objects will not be impacted.
      *
-     * @param  int $id The blog post ID
+     * @link http://developers.hubspot.com/docs/methods/blogv2/put_blog_posts_blog_post_id_buffer
+     *
+     * @param  int   $id     The blog post ID.
+     * @param  array $params Allowed parameters.
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function updateAutoSaveBuffer($id)
+    public function updateAutoSaveBuffer($id, $params = [])
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}/buffer";
 
-        return $this->request('put', $endpoint);
+        $options['json'] = $params;
+
+        return $this->request('put', $endpoint, $options);
     }
 
     /**

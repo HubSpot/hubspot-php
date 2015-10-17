@@ -3,6 +3,7 @@
 namespace Fungku\HubSpot\Api;
 
 use Fungku\HubSpot\Contracts\HttpClient;
+use Fungku\HubSpot\Http\Response;
 use Fungku\HubSpot\Support\QueryBuilder;
 use GuzzleHttp\Exception\RequestException;
 
@@ -57,7 +58,7 @@ abstract class Api
         try {
             return $this->client->$method($url, $options);
         } catch (RequestException $e) {
-            return $e->getResponse();
+            return new Response($e->getResponse());
         }
     }
 

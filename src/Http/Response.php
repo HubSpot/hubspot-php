@@ -28,13 +28,25 @@ class Response implements ResponseInterface, ArrayAccess
     }
 
     /**
+     * Get the api data from the response as usual.
+     *
+     * @param  string  $name
      * @return mixed
      */
-    private function getDataFromResponse($response)
+    public function __get($name)
+    {
+        return $this->data->$name;
+    }
+
+    /**
+     * @param  ResponseInterface $response
+     * @return mixed
+     */
+    private function getDataFromResponse(ResponseInterface $response)
     {
         $contents = $response->getBody()->getContents();
 
-        return $contents ? json_decode($contents) : null;
+        return $contents ? json_decode($contents) : new \stdClass();
     }
 
     /**
@@ -45,6 +57,16 @@ class Response implements ResponseInterface, ArrayAccess
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * Return an array of the data.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return json_decode(json_encode($this->data), true);
     }
 
     /**
@@ -324,7 +346,7 @@ class Response implements ResponseInterface, ArrayAccess
      */
     public function offsetGet($offset)
     {
-        $data = json_decode(json_encode($this->data), true);
+        $data = $this->toArray();
 
         return $data[$offset];
     }
@@ -351,16 +373,4 @@ class Response implements ResponseInterface, ArrayAccess
     {
         unset($this->data->$offset);
     }
-
-    /**
-     * Get the api data from the response as usual.
-     *
-     * @param  string  $name
-     * @return mixed
-     */
-    public function __get($name)
-    {
-        return $this->data->$name;
-    }
-
 }

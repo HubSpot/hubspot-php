@@ -15,6 +15,22 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $this->contacts = new Contacts('demo', new Client());
     }
 
+    /*
+     * Lots of tests need an existing object to modify.
+     */
+    private function createContact()
+    {
+        $response = $this->contacts->create([
+            ['property' => 'email',     'value' => 'test'.uniqid().'@hubspot.com'],
+            ['property' => 'firstname', 'value' => 'joe'],
+            ['property' => 'lastname',  'value' => 'user'],
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        return $response;
+    }
+
     /** @test */
     public function all_with_no_params()
     {
@@ -56,23 +72,11 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function create()
-    {
-        $response = $this->contacts->create([
-            ['property' => 'firstname', 'value' => 'joe'],
-            ['property' => 'lastname', 'value'  => 'user'],
-        ]);
-
-        $this->assertEquals(200, $response->getStatusCode());
-    }
-
-    /** @test */
     public function update()
     {
-        $response = $this->contacts->all(['count' => 1, 'property' => 'email', 'vidOffset' => 1]);
-        $id = $response->contacts[0]->vid;
+        $contact = $this->createContact();
 
-        $response = $this->contacts->update($id, [
+        $response = $this->contacts->update($contact->vid, [
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value'  => 'user'],
         ]);
@@ -117,10 +121,9 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function delete()
     {
-        $response = $this->contacts->all(['count' => 1, 'property' => 'email', 'vidOffset' => 1]);
-        $id = $response->contacts[0]->vid;
+        $contact = $this->createContact();
 
-        $response = $this->contacts->delete($id);
+        $response = $this->contacts->delete($contact->vid);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -136,10 +139,9 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getById()
     {
-        $response = $this->contacts->all(['count' => 1, 'property' => 'email', 'vidOffset' => 1]);
-        $id = $response->contacts[0]->vid;
+        $contact = $this->createContact();
 
-        $response = $this->contacts->getById($id);
+        $response = $this->contacts->getById($contact->vid);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -147,10 +149,13 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getBatchByIds()
     {
-        $response = $this->contacts->all(['count' => 3, 'property' => 'firstname', 'vidOffset' => 1]);
+        $contacts = [
+            $this->createContact(),
+            $this->createContact(),
+        ];
 
-        $ids = array_reduce($response['contacts'], function($vids, $contact) {
-            $vids[] = $contact['vid'];
+        $ids = array_reduce($contacts, function($vids, $contact) {
+            $vids[] = $contact->vid;
             return $vids;
         }, []);
 
@@ -162,10 +167,9 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getByEmail()
     {
-        $response = $this->contacts->all(['count' => 1, 'property' => 'email', 'vidOffset' => 1]);
-        $email = $response->contacts[0]->properties->email->value;
+        $contact = $this->createContact();
 
-        $response = $this->contacts->getByEmail($email);
+        $response = $this->contacts->getByEmail($contact->properties->email->value);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -173,10 +177,13 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getBatchByEmails()
     {
-        $response = $this->contacts->all(['count' => 3, 'property' => 'email', 'vidOffset' => 1]);
+        $contacts = [
+            $this->createContact(),
+            $this->createContact(),
+        ];
 
-        $emails = array_reduce($response['contacts'], function($values, $contact) {
-            $values[] = $contact['properties']['email']['value'];
+        $emails = array_reduce($contacts, function($values, $contact) {
+            $values[] = $contact->properties->email->value;
             return $values;
         }, []);
 
@@ -185,27 +192,14 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-    /**
-     * I don't know how to make this work... without doing a lot of work.
-     */
     public function getByToken()
     {
-        $response = $this->contacts->all(['count' => 1, 'vidOffset' => 1]);
-        $utk = $response->contacts[0]->properties->usertoken->value;
-
-        $response = $this->contacts->getByToken($utk);
-
-        $this->assertEquals(200, $response->getStatusCode());
+        // TODO: This is harder...
     }
 
-    /**
-     * Same with this one...
-     */
     public function getBatchByTokens()
     {
-        $response = $this->contacts->getByBatchByTokens($id);
-
-        $this->assertEquals(200, $response->getStatusCode());
+        // TODO: ... and so is this one
     }
 
     /** @test */
