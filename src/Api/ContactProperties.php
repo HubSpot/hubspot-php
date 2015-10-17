@@ -33,7 +33,7 @@ class ContactProperties extends Api
      */
     public function get($name)
     {
-        $endpoint = "contacts/v2/properties/named/{$name}";
+        $endpoint = "/contacts/v2/properties/named/{$name}";
 
         return $this->request('get', $endpoint);
     }
@@ -65,13 +65,15 @@ class ContactProperties extends Api
      *
      * @link http://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property
      *
-     * @param array $property
+     * @param string $name
+     * @param array  $property
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function update($property)
+    public function update($name, $property)
     {
-        $endpoint = "/contacts/v2/properties/named/{$property['name']}";
+        $endpoint = "/contacts/v2/properties/named/{$name}";
 
+        $property['name'] = $name;
         $options['json'] = $property;
 
         return $this->request('put', $endpoint, $options);
@@ -95,7 +97,7 @@ class ContactProperties extends Api
     }
 
     /**
-     * Get contact property group.
+     * Get contact property groups.
      *
      * Returns all of the contact property groups for a given portal.
      *
@@ -104,7 +106,7 @@ class ContactProperties extends Api
      * @param bool $includeProperties
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function getGroup($includeProperties = false)
+    public function getGroups($includeProperties = false)
     {
         $endpoint = "/contacts/v2/groups";
 
@@ -140,13 +142,15 @@ class ContactProperties extends Api
      *
      * @link http://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property_group
      *
-     * @param array $group
+     * @param string $name
+     * @param array  $group
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function updateGroup($group)
+    public function updateGroup($name, $group)
     {
-        $endpoint = "/contacts/v2/groups/named/{$group['name']}";
+        $endpoint = "/contacts/v2/groups/named/{$name}";
 
+        $group['name'] = $name;
         $options['json'] = $group;
 
         return $this->request('put', $endpoint, $options);

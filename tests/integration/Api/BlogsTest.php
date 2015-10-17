@@ -52,7 +52,7 @@ class BlogsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function versions_and_getVersion()
+    public function versions_getVersion()
     {
         $blogs = $this->blogs->all(['limit' => 1]);
 

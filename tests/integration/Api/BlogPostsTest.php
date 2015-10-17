@@ -150,7 +150,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function delete_and_restoreDeleted()
+    public function delete_restoreDeleted()
     {
         $post = $this->createBlogPost();
 
@@ -173,7 +173,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function versions_and_getVersion_and_restoreVersion()
+    public function versions_getVersion_restoreVersion()
     {
         $post = $this->createBlogPost();
 

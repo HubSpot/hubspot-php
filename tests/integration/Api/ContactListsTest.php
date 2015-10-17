@@ -36,12 +36,6 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
             ],
         ]);
 
-//        var_dump([
-//            $response->getStatusCode(),
-//            $response->getReasonPhrase(),
-//            ($response instanceof \Fungku\HubSpot\Http\Response)
-//        ]);
-
         $this->assertEquals(200, $response->getStatusCode());
 
         return $response;
