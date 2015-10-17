@@ -15,7 +15,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
-        "phpunit/phpunit": "^5.0"
+        "phpunit/phpunit": "~4.0"
     },
     "autoload": {
         "psr-4": {
@@ -24,7 +24,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Fungku\\HubSpot\\Tests\\Integration": "tests/integration/"
+            "Fungku\\HubSpot\\Tests\\Integration\\": "tests/integration/"
         }
     },
     "minimum-stability": "stable"
