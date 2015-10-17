@@ -13,16 +13,20 @@ client. However, this is a complete re-write and includes some of the new COS/v2
 
 Please try it out, and let me know if things are working as expected. There may still be a few small breaking changes here and there, so it is not recommended to use this in production unless you really know what you're doing.
 
-##### Guzzle 6
 
-For Guzzle v6 support, please see the [develop branch](https://github.com/ryanwinchester/hubspot-php/tree/develop).
+#### PHP 5.5+ and Guzzle 6
+
+I've upgraded to Guzzle v6 now.
+
+ - **For php 5.3:** see the [php53](https://github.com/ryanwinchester/hubspot-php/tree/php53) branch. You will need to supply your own `HttpClient` implementation.
+ - **For php 5.4:** see the [php54-guzzle5](https://github.com/ryanwinchester/hubspot-php/tree/php54-guzzle5) branch.
 
 ## Setup
 
 **Composer:**
 
 ```bash
-composer require "fungku/hubspot-php: dev-develop"
+composer require "fungku/hubspot-php: dev-master"
 ```
 
 ## Quickstart

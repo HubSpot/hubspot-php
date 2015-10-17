@@ -40,7 +40,7 @@ class QueryBuilder
     public static function buildBatch($key, $items, $encoding = PHP_QUERY_RFC3986)
     {
         return array_reduce($items, function($query, $item) use ($key, $encoding) {
-            return $query . "&" . static::encode($key, $encoding) . '=' . static::encode($item);
+            return $query . "&" . static::encode($key, $encoding) . '=' . static::encode($item, $encoding);
         }, '');
     }
 
