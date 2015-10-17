@@ -36,7 +36,10 @@ $hubspot = Fungku\HubSpot\HubSpotService::make('api-key');
 #### Get a single contact:
 
 ```php
-$contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
+$response = $hubspot->contacts()->getByEmail("test@hubspot.com");
+$contact = $response->getData();
+
+echo $contact->properties->email->value;
 ```
 
 #### Paginate through all contacts:
@@ -45,7 +48,7 @@ $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 // Get an array of 10 contacts
 // getting only the firstname and lastname properties
 // and set the offset to 123456
-$data = $hubspot->contacts()->all([
+$response = $hubspot->contacts()->all([
         'count'     => 10,
         'property'  => ['firstname', 'lastname'],
         'vidOffset' => 123456,
@@ -55,7 +58,7 @@ $data = $hubspot->contacts()->all([
 Working with the data is easy!
 
 ```php
-foreach ($data->contacts as $contact) {
+foreach ($response->contacts as $contact) {
     echo sprintf(
         "Contact name is %s %s." . PHP_EOL,
         $contact->properties->firstname->value,
@@ -64,14 +67,14 @@ foreach ($data->contacts as $contact) {
 }
 
 // Info for pagination
-echo $data->{'has-more'};
-echo $data->{'vid-offset'};
+echo $response->{'has-more'};
+echo $response->{'vid-offset'};
 ```
 
 or if you prefer to use array access?
 
 ```php
-foreach ($data['contacts'] as $contact) {
+foreach ($response['contacts'] as $contact) {
     echo sprintf(
         "Contact name is %s %s." . PHP_EOL,
         $contact['properties']['firstname']['value'],
@@ -80,8 +83,16 @@ foreach ($data['contacts'] as $contact) {
 }
 
 // Info for pagination
-echo $data['has-more'];
-echo $data['vid-offset'];
+echo $response['has-more'];
+echo $response['vid-offset'];
+```
+
+Now with response methods implementing [PSR-7 ResponseInterface](https://github.com/php-fig/http-message/tree/master/src)
+
+```php
+$response->getStatusCode()   // 200;
+$response->getReasonPhrase() // 'OK';
+// etc...
 ```
 
 ## Status
