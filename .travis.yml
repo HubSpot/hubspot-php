@@ -17,7 +17,9 @@ before_script:
   # temp hack for PHPSPEC to work with PHP 7:
   - bash -c 'if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then wget https://github.com/digitalkaoz/typehint-to-docblock/releases/download/0.2.2/typehint-to-docblock.phar && php typehint-to-docblock.phar transform spec; fi;'
 
-script: vendor/bin/phpspec run
+script:
+  - vendor/bin/phpspec run
+  - vendor/bin/phpunit --debug
 
 # Use Travis' new container-based infrastructure.
 # See http://docs.travis-ci.com/user/migrating-from-legacy/#How-can-I-use-container-based-infrastructure%3F
