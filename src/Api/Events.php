@@ -39,8 +39,8 @@ class Events extends Api
         $contactProperties['email'] = $contactEmail;
         $contactProperties['_m'] = $contactRevenue;
 
-        $queryString = $this->buildQueryString($contactProperties);
+        $url = $this->baseUrl . $endpoint . $this->buildQueryString($contactProperties);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->requestUrl('get', $url);
     }
 }

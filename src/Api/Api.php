@@ -54,7 +54,7 @@ abstract class Api
      * @param  array  $options An array of options to send with the request.
      * @return \Fungku\HubSpot\Http\Response
      */
-    protected function requestUrl($method, $url, array $options = [])
+    protected function requestUrl($method, $url, $options = [])
     {
         $options['headers']['User-Agent'] = self::USER_AGENT;
 
