@@ -46,7 +46,7 @@ class Response implements ResponseInterface, ArrayAccess
     {
         $contents = $response->getBody()->getContents();
 
-        return $contents ? json_decode($contents) : new \stdClass();
+        return $contents ? json_decode($contents) : null;
     }
 
     /**

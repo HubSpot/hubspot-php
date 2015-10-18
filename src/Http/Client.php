@@ -4,6 +4,7 @@ namespace Fungku\HubSpot\Http;
 
 use Fungku\HubSpot\Contracts\HttpClient;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Exception\RequestException;
 
 class Client implements HttpClient
 {
@@ -23,42 +24,59 @@ class Client implements HttpClient
     }
 
     /**
-     * @param  string  $url
-     * @param  array   $options
+     * Submit the request and build the response object.
+     *
+     * @param string $method
+     * @param string $url
+     * @param array  $options
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    private function makeRequest($method, $url, $options)
+    {
+        try {
+            return new Response($this->client->request($method, $url, $options));
+        } catch (RequestException $e) {
+            return new Response($e->getResponse());
+        }
+    }
+
+    /**
+     * @param  string $url
+     * @param  array  $options
      * @return \Fungku\HubSpot\Http\Response
      */
     public function get($url, $options = [])
     {
-        return new Response($this->client->request('GET', $url, $options));
+        return $this->makeRequest('GET', $url, $options);
     }
 
     /**
-     * @param  string  $url
-     * @param  array   $options
+     * @param  string $url
+     * @param  array  $options
      * @return \Fungku\HubSpot\Http\Response
      */
     public function post($url, $options = [])
     {
-        return new Response($this->client->request('POST', $url, $options));
+        return $this->makeRequest('POST', $url, $options);
     }
 
     /**
-     * @param  string  $url
-     * @param  array   $options
+     * @param  string $url
+     * @param  array  $options
      * @return \Fungku\HubSpot\Http\Response
      */
     public function put($url, $options = [])
     {
-        return new Response($this->client->request('PUT', $url, $options));
+        return $this->makeRequest('PUT', $url, $options);
     }
 
     /**
-     * @param  string  $url
-     * @param  array   $options
+     * @param  string $url
+     * @param  array  $options
      * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($url, $options = [])
     {
-        return new Response($this->client->request('DELETE', $url, $options));
+        return $this->makeRequest('DELETE', $url, $options);
     }
 }
