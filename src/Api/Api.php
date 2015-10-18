@@ -7,6 +7,18 @@ use Fungku\HubSpot\Support\QueryBuilder;
 
 abstract class Api
 {
+    const USER_AGENT = 'Fungku_HubSpot_PHP/0.9 (https://github.com/ryanwinchester/hubspot-php)';
+
+    /**
+     * @var string
+     */
+    protected $baseUrl = "https://api.hubapi.com";
+
+    /**
+     * @var int
+     */
+    protected $urlEncoding = PHP_QUERY_RFC3986;
+
     /**
      * @var string
      */
@@ -21,13 +33,6 @@ abstract class Api
      * @var bool
      */
     private $oauth;
-
-    /**
-     * @var string
-     */
-    protected $baseUrl = "https://api.hubapi.com";
-
-    const USER_AGENT = 'Fungku_HubSpot_PHP/0.9 (https://github.com/ryanwinchester/hubspot-php)';
 
     /**
      * @param  string     $apiKey
@@ -87,11 +92,22 @@ abstract class Api
     }
 
     /**
+     * Build a query string from an array.
+     *
      * @param  array $query
      * @return string
      */
     protected function buildQueryString($query = [])
     {
         return QueryBuilder::build($query);
+    }
+
+    /**
+     * @param  string $value
+     * @return string
+     */
+    protected function urlEncode($value)
+    {
+        return QueryBuilder::encode($value, $this->urlEncoding);
     }
 }

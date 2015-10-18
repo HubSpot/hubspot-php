@@ -7,13 +7,16 @@ class Keywords extends Api
     /**
      * Get all keywords.
      *
+     * @param string $search Optional search query.
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function all()
+    public function all($search = null)
     {
-        $endpoint = '/keywords/v1/keywords.json';
+        $endpoint = '/keywords/v1/keywords';
 
-        return $this->request('get', $endpoint);
+        $queryString = $this->buildQueryString(['search' => $search]);
+
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -24,7 +27,7 @@ class Keywords extends Api
      */
     public function getById($keyword_guid)
     {
-        $endpoint = "/keywords/v1/keywords/{$keyword_guid}.json";
+        $endpoint = "/keywords/v1/keywords/{$keyword_guid}";
 
         return $this->request('get', $endpoint);
     }
@@ -37,7 +40,7 @@ class Keywords extends Api
      */
     public function create($keyword)
     {
-        $endpoint = "/keywords/v1/keywords.json";
+        $endpoint = "/keywords/v1/keywords";
 
         $options['json'] = $keyword;
 

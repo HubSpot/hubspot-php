@@ -18,7 +18,7 @@ class Events extends Api
      *                                     footer of the HubSpot UI, or in the URL. For example, in this URL:
      *                                     "https://app.hubspot.com/reports/56043/events/" your Hub ID is "56043".
      * @param  string $eventId
-     * @param  string $contactEmail        Optional.
+     * @param  string $contactEmail        Optional - contact email.
      * @param  float  $contactRevenue      Optional - the monetary value this event means to you.
      * @param  array  $contactProperties   Optional - array of new contact properties.
      * @return \Fungku\HubSpot\Http\Response
@@ -30,17 +30,17 @@ class Events extends Api
         $contactRevenue = null,
         $contactProperties = []
     ) {
-        $endpoint = sprintf('/v1/event?_a=%s&_n=%s', urlencode($hubId), urlencode($eventId));
+        $endpoint = sprintf(
+            "/v1/event?_a=%s&_n=%s",
+            $this->urlEncode($hubId),
+            $this->urlEncode($eventId)
+        );
 
         $contactProperties['email'] = $contactEmail;
         $contactProperties['_m'] = $contactRevenue;
 
         $queryString = $this->buildQueryString($contactProperties);
 
-        try {
-            return $this->request('get', $endpoint, [], $queryString);
-        } catch (\GuzzleHttp\Exception\ParseException $e) {
-            // The response is not JSON, so this is expected.
-        }
+        return $this->request('get', $endpoint, [], $queryString);
     }
 }
