@@ -44,8 +44,7 @@ $hubspot = Fungku\HubSpot\HubSpotService::make('api-key');
 #### Get a single contact:
 
 ```php
-$response = $hubspot->contacts()->getByEmail("test@hubspot.com");
-$contact = $response->getData();
+$contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 
 echo $contact->properties->email->value;
 ```
@@ -57,9 +56,9 @@ echo $contact->properties->email->value;
 // getting only the firstname and lastname properties
 // and set the offset to 123456
 $response = $hubspot->contacts()->all([
-        'count'     => 10,
-        'property'  => ['firstname', 'lastname'],
-        'vidOffset' => 123456,
+    'count'     => 10,
+    'property'  => ['firstname', 'lastname'],
+    'vidOffset' => 123456,
 ]);
 ```
 
