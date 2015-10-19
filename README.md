@@ -11,7 +11,7 @@ client. However, this is a complete re-write and includes some of the new COS/v2
 
 ##### BETA
 
-Please try it out, and let me know if things are working as expected. There may still be a few small breaking changes here and there, so it is not recommended to use this in production unless you really know what you're doing.
+Please try it out, and let me know if things are working as expected. There may still be a few small breaking changes here and there, so it is not recommended to use this in production unless you really know what you're doing and don't mind working with code that is changing...
 
 
 #### PHP 5.5+ and Guzzle 6
