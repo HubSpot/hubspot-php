@@ -10,8 +10,7 @@ class BlogPostsSpec extends ObjectBehavior
 {
     function let(Client $client)
     {
-        $this->client = $client;
-        $this->beConstructedWith($this->apiKey, $this->client);
+        $this->beConstructedWith('demo', $client);
     }
 
     function it_is_initializable()
