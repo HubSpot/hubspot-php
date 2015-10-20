@@ -15,7 +15,8 @@
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
-        "phpunit/phpunit": "~4.0"
+        "phpunit/phpunit": "~4.0",
+        "codeclimate/php-test-reporter": " dev-master@dev"
     },
     "autoload": {
         "psr-4": {

@@ -6,12 +6,6 @@ php:
   - '7.0'
   - hhvm
 
-# PHPSPEC mocking breaks in php 7,
-# can't get around the typehints
-#matrix:
-#  allow_failures:
-#    - php: '7.0'
-
 before_script:
   - travis_retry composer self-update
   - composer install --prefer-source --no-interaction
@@ -20,7 +14,14 @@ before_script:
 
 script:
   - vendor/bin/phpspec run
-  - vendor/bin/phpunit --debug
+  - vendor/bin/phpunit --debug --coverage-clover build/logs/clover.xml
+
+after_script:
+  - vendor/bin/test-reporter
+
+addons:
+  code_climate:
+    repo_token: $CODE_CLIMATE_TOKEN
 
 # Use Travis' new container-based infrastructure.
 # See http://docs.travis-ci.com/user/migrating-from-legacy/#How-can-I-use-container-based-infrastructure%3F
