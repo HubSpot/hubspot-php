@@ -9,8 +9,8 @@ php:
 sudo: false
 
 before_script:
+  - travis_retry composer self-update
   - travis_retry composer install --no-interaction --prefer-source
-  - composer install --prefer-source --no-interaction
   # temp hack for PHPSPEC to work with PHP 7:
   - bash -c 'if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then wget https://github.com/digitalkaoz/typehint-to-docblock/releases/download/0.2.2/typehint-to-docblock.phar && php typehint-to-docblock.phar transform tests/spec; fi;'
 
