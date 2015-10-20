@@ -6,15 +6,17 @@ php:
   - '7.0'
   - hhvm
 
+sudo: false
+
 before_script:
-  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-source
   - composer install --prefer-source --no-interaction
   # temp hack for PHPSPEC to work with PHP 7:
   - bash -c 'if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then wget https://github.com/digitalkaoz/typehint-to-docblock/releases/download/0.2.2/typehint-to-docblock.phar && php typehint-to-docblock.phar transform tests/spec; fi;'
 
 script:
-  - vendor/bin/phpspec run
-  - vendor/bin/phpunit --debug --coverage-clover build/logs/clover.xml
+  - vendor/bin/phpspec run --verbose
+  - vendor/bin/phpunit --verbose --coverage-clover build/logs/clover.xml
 
 after_script:
   - vendor/bin/test-reporter
@@ -22,7 +24,3 @@ after_script:
 addons:
   code_climate:
     repo_token: $CODE_CLIMATE_TOKEN
-
-# Use Travis' new container-based infrastructure.
-# See http://docs.travis-ci.com/user/migrating-from-legacy/#How-can-I-use-container-based-infrastructure%3F
-sudo: false
