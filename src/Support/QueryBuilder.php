@@ -60,7 +60,6 @@ class QueryBuilder
                 return urlencode($value);
             default:
                 throw new \InvalidArgumentException('Invalid type');
-                break;
         }
     }
 }

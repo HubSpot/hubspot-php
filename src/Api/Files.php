@@ -34,7 +34,7 @@ class Files extends Api
      * @param array $params Optional parameters
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function files($params = [])
+    public function all($params = [])
     {
         $endpoint = "/filemanager/api/v2/files";
 

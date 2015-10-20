@@ -43,6 +43,11 @@ class HubSpotService
     private $oauth;
 
     /**
+     * @var Client
+     */
+    private $client;
+
+    /**
      * C O N S T R U C T O R ( ^_^)y
      *
      * @param  string|null  $apiKey
