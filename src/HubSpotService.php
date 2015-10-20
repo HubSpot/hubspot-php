@@ -43,7 +43,7 @@ class HubSpotService
     private $oauth;
 
     /**
-     * @var Client
+     * @var HttpClient
      */
     private $client;
 
