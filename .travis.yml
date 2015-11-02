@@ -24,3 +24,7 @@ after_script:
 addons:
   code_climate:
     repo_token: $CODE_CLIMATE_TOKEN
+
+branches:
+  except:
+    - php53
