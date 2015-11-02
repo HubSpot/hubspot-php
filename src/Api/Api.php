@@ -76,7 +76,7 @@ abstract class Api
      *
      * @return mixed
      */
-    protected function request($method, $endpoint, array $options, $queryString = null)
+    protected function request($method, $endpoint, $options = array(), $queryString = null)
     {
         $url = $this->generateUrl($endpoint, $queryString);
 
@@ -95,7 +95,7 @@ abstract class Api
     {
         $authType = $this->oauth ? 'access_token' : 'hapikey';
 
-        return self::BASE_URL . $endpoint . '?'. $authType . '=' . $this->apiKey . $queryString;
+        return $this->baseUrl . $endpoint . '?'. $authType . '=' . $this->apiKey . $queryString;
     }
 
     /**
