@@ -47,4 +47,40 @@ class CompaniesSpec extends ObjectBehavior
         $this->create($properties)->shouldReturn('response');
     }
 
+    function it_can_update_a_company($client)
+    {
+        $id = 10444744;
+        $properties = [
+            [
+                'name' => 'description',
+                'value' => 'A far better description than before'
+            ]
+        ];
+
+        $url = $this->buildUrl("/companies/v2/companies/{$id}");
+
+        $client->put($url,
+            [
+                'headers' => $this->headers,
+                'json' => [
+                    'properties' => $properties
+                ]
+            ])->shouldBeCalled()->willReturn('response');
+
+        $this->update($id, $properties)->shouldReturn('response');
+    }
+
+    function it_can_delete_a_company($client)
+    {
+        $id = 10444744;
+
+        $url = $this->buildUrl("/companies/v2/companies/{$id}");
+
+        $client->delete($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->delete($id)->shouldReturn('response');
+    }
+
 }

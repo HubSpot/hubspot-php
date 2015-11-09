@@ -22,11 +22,59 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function create()
     {
+        $response = $this->createCompany();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('A company name', $response['properties']['name']['value']);
+        $this->assertEquals('A company description', $response['properties']['description']['value']);
+    }
+
+    /** @test */
+    public function update()
+    {
+        //Create a new company
+        $newCompanyResponse = $this->createCompany();
+
+        $id = $newCompanyResponse['companyId'];
+        $companyDescription = 'A far better description than before';
+        $properties = [
+            'name' => 'description',
+            'value' => $companyDescription
+        ];
+
+        $response = $this->companies->update($id, $properties);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals($id, $response['companyId']);
+        $this->assertEquals($companyDescription, $response['properties']['description']['value']);
+    }
+
+    /** @test */
+    public function delete()
+    {
+        //Create a new company
+        $newCompanyResponse = $this->createCompany();
+        $id = $newCompanyResponse['companyId'];
+
+        $response = $this->companies->delete($id);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals($id, $response['companyId']);
+        $this->assertTrue($response['deleted']);
+    }
+
+    /**
+     * Creates a Company with the HubSpotApi
+     *
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    private function createCompany()
+    {
         $companyName = 'A company name';
         $companyDescription = 'A company description';
         $properties = [
             [
-                'name'  => 'name',
+                'name' => 'name',
                 'value' => $companyName
             ],
             [
@@ -37,8 +85,6 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
 
         $response = $this->companies->create($properties);
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals($companyName, $response['properties']['name']['value']);
-        $this->assertEquals($companyDescription, $response['properties']['description']['value']);
+        return $response;
     }
 }
