@@ -132,4 +132,58 @@ class CompaniesSpec extends ObjectBehavior
         $this->getById($id)->shouldReturn('response');
     }
 
+    function it_can_add_contact_to_company($client)
+    {
+        $companyId = 1;
+        $contactId = 2;
+
+        $url = $this->buildUrl("/companies/v2/companies/{$companyId}/contacts/{$contactId}");
+
+        $client->put($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->addContact($contactId, $companyId)->shouldReturn('response');
+    }
+
+    function it_can_get_contacts_associated_with_the_company($client)
+    {
+        $id = 10444744;
+
+        $url = $this->buildUrl("/companies/v2/companies/{$id}/contacts");
+
+        $client->get($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->getAssociatedContacts($id)->shouldReturn('response');
+    }
+
+    function it_can_get_the_ids_of_the_contacts_associated_with_the_company($client)
+    {
+        $id = 10444744;
+
+        $url = $this->buildUrl("/companies/v2/companies/{$id}/vids");
+
+        $client->get($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->getAssociatedContactIds($id)->shouldReturn('response');
+    }
+
+    function it_can_remove_a_contact_from_a_company($client)
+    {
+        $companyId = 1;
+        $contactId = 2;
+
+        $url = $this->buildUrl("/companies/v2/companies/{$companyId}/contacts/{$contactId}");
+
+        $client->delete($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->removeContact($contactId, $companyId)->shouldReturn('response');
+    }
+
 }
