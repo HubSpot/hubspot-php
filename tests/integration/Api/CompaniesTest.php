@@ -63,6 +63,24 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response['deleted']);
     }
 
+    /** @test */
+    public function getRecentlyModified()
+    {
+        $response = $this->companies->getRecentlyModified();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThan(2, $response['results']);
+    }
+
+    /** @test */
+    public function getRecentlyCreated()
+    {
+        $response = $this->companies->getRecentlyCreated();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThan(2, $response['results']);
+    }
+
     /**
      * Creates a Company with the HubSpotApi
      *

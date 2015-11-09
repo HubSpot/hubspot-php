@@ -47,5 +47,31 @@ class Companies extends Api
         return $this->request('delete', $endpoint);
     }
 
+    /**
+     * Returns the recently modified companies
+     *
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function getRecentlyModified()
+    {
+        $endpoint = '/companies/v2/companies/recent/modified';
+
+        return $this->request('get', $endpoint);
+    }
+
+    /**
+     * Returns the recently created companies
+     *
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function getRecentlyCreated()
+    {
+        $endpoint = '/companies/v2/companies/recent/created';
+
+        return $this->request('get', $endpoint);
+    }
+
+
+
 
 }
