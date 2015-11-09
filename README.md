@@ -137,7 +137,7 @@ If you see something not planned, that you want, make an [issue](https://github.
 
 :ballot_box_with_check: Events (Enterprise) :new:
 
-:white_medium_small_square: Companies :new:
+:ballot_box_with_check: Companies :new:
 
 :white_medium_small_square: Companies Properties :new:
 

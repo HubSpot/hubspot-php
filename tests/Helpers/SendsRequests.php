@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\helpers\Fungku\HubSpot;
+namespace Fungku\HubSpot\Tests\Helpers;
 
 use Fungku\HubSpot\Support\QueryBuilder;
 

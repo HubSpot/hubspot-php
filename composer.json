@@ -23,5 +23,10 @@
             "Fungku\\HubSpot\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+          "Fungku\\HubSpot\\Tests\\": "tests/"
+        }
+    },
     "minimum-stability": "stable"
 }
