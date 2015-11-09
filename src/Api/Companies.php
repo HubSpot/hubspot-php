@@ -71,6 +71,31 @@ class Companies extends Api
         return $this->request('get', $endpoint);
     }
 
+    /**
+     * Returns a list of all companies that have a matching domain
+     * @param string $domain The domain of the company eq. 'example.com'.
+     *
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function getByDomain($domain)
+    {
+        $endpoint = "/companies/v2/companies/domain/{$domain}";
+
+        return $this->request('get', $endpoint);
+    }
+
+    /**
+     * Returns a company with id $id
+     * @param int $id
+     *
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function getById($id)
+    {
+        $endpoint = "/companies/v2/companies/{$id}";
+
+        return $this->request('get', $endpoint);
+    }
 
 
 

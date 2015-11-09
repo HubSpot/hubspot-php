@@ -81,6 +81,29 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan(2, $response['results']);
     }
 
+    /** @test */
+    public function getByDomain()
+    {
+        $domain = 'example.com';
+        $response = $this->companies->getByDomain($domain);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals($domain, $response[0]['properties']['domain']['value']);
+    }
+
+    /** @test */
+    public function getById()
+    {
+        //Ensure that we have a company to fetch
+        $newCompanyResponse = $this->createCompany();
+        $id = $newCompanyResponse['companyId'];
+
+        $response = $this->companies->getById($id);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals($id, $response['companyId']);
+    }
+
     /**
      * Creates a Company with the HubSpotApi
      *

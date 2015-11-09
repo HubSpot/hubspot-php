@@ -106,4 +106,30 @@ class CompaniesSpec extends ObjectBehavior
 
     }
 
+    function it_can_get_companies_by_domain($client)
+    {
+        $domain = 'example.com';
+
+        $url = $this->buildUrl("/companies/v2/companies/domain/{$domain}");
+
+        $client->get($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->getByDomain($domain)->shouldReturn('response');
+    }
+
+    function it_can_get_a_company_by_id($client)
+    {
+        $id = 10444744;
+
+        $url = $this->buildUrl("/companies/v2/companies/{$id}");
+
+        $client->get($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->getById($id)->shouldReturn('response');
+    }
+
 }
