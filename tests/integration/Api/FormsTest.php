@@ -72,7 +72,7 @@ class FormsTest extends \PHPUnit_Framework_TestCase
         $form = $this->createForm();
 
         $response = $this->forms->update($form->guid, [
-            'name' => 'new name',
+            'name' => 'new name ' . uniqid(),
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
