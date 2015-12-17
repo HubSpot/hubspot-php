@@ -203,6 +203,8 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
             ['property' => 'lastname', 'value' => 'user'],
         ]);
 
+        sleep(1);
+
         return $contactResponse;
     }
 
@@ -219,6 +221,8 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $contactId = $newContactResponse['vid'];
 
         $response = $this->companies->addContact($contactId, $companyId);
+
+        sleep(1);
 
         return [$contactId, $response];
     }

@@ -26,6 +26,8 @@ class KeywordsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(201, $response->getStatusCode());
 
+        sleep(1);
+
         return $response;
     }
 
