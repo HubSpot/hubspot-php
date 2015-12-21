@@ -94,6 +94,17 @@ class CompaniesSpec extends ObjectBehavior
         $this->getRecentlyModified()->shouldReturn('response');
     }
 
+    function it_can_also_define_count_and_offset_for_recently_modified_companies($client)
+    {
+        $url = $this->buildUrl('/companies/v2/companies/recent/modified', '&offset=1&count=2');
+
+        $client->get($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->getRecentlyModified(['offset' => 1, 'count' => 2])->shouldReturn('response');
+    }
+
     function it_can_get_recently_created_companies($client)
     {
         $url = $this->buildUrl('/companies/v2/companies/recent/created');
@@ -104,6 +115,17 @@ class CompaniesSpec extends ObjectBehavior
 
         $this->getRecentlyCreated()->shouldReturn('response');
 
+    }
+
+    function it_can_also_define_count_and_offset_for_recently_created_companies($client)
+    {
+        $url = $this->buildUrl('/companies/v2/companies/recent/created', '&offset=1&count=2');
+
+        $client->get($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->getRecentlyCreated(['offset' => 1, 'count' => 2])->shouldReturn('response');
     }
 
     function it_can_get_companies_by_domain($client)
@@ -148,28 +170,54 @@ class CompaniesSpec extends ObjectBehavior
 
     function it_can_get_contacts_associated_with_the_company($client)
     {
-        $id = 10444744;
+        $compnayId = 10444744;
 
-        $url = $this->buildUrl("/companies/v2/companies/{$id}/contacts");
+        $url = $this->buildUrl("/companies/v2/companies/{$compnayId}/contacts");
 
         $client->get($url, [
             'headers' => $this->headers
         ])->shouldBeCalled()->willReturn('response');
 
-        $this->getAssociatedContacts($id)->shouldReturn('response');
+        $this->getAssociatedContacts($compnayId)->shouldReturn('response');
+    }
+
+    function it_can_also_define_count_and_vidOffset_for_associated_contacts($client)
+    {
+        $companyId = 10444744;
+
+        $url = $this->buildUrl("/companies/v2/companies/{$companyId}/contacts", '&count=1&vidOffset=2');
+
+        $client->get($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => 2])->shouldReturn('response');
     }
 
     function it_can_get_the_ids_of_the_contacts_associated_with_the_company($client)
     {
-        $id = 10444744;
+        $companyId = 10444744;
 
-        $url = $this->buildUrl("/companies/v2/companies/{$id}/vids");
+        $url = $this->buildUrl("/companies/v2/companies/{$companyId}/vids");
 
         $client->get($url, [
             'headers' => $this->headers
         ])->shouldBeCalled()->willReturn('response');
 
-        $this->getAssociatedContactIds($id)->shouldReturn('response');
+        $this->getAssociatedContactIds($companyId)->shouldReturn('response');
+    }
+
+    function it_can_also_define_count_and_vidOffset_for_associated_contact_ids($client)
+    {
+        $companyId = 10444744;
+
+        $url = $this->buildUrl("/companies/v2/companies/{$companyId}/vids", '&count=1&vidOffset=2');
+
+        $client->get($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->getAssociatedContactIds($companyId,  ['count' => 1, 'vidOffset' => 2])->shouldReturn('response');
     }
 
     function it_can_remove_a_contact_from_a_company($client)
