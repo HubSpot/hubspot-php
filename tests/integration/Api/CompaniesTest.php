@@ -203,10 +203,10 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(1, $response['vids']);
 
-        $offsetResponse = $this->companies->getAssociatedContactIds($companyId, ['count' => 1, 'vidOffset' => $contactId2]);
+        $offsetResponse = $this->companies->getAssociatedContactIds($companyId, ['count' => 1, 'vidOffset' => $contactId2 + 1]);
         $this->assertEquals(200, $offsetResponse->getStatusCode());
-        $this->assertCount(1, $offsetResponse['vids']);
-        $this->assertEquals($contactId2, $offsetResponse['vidOffset']);
+        $this->assertTrue(empty($offsetResponse['vids']));
+        $this->assertEquals($contactId2 + 1, $offsetResponse['vidOffset']);
     }
 
     /** @test */
