@@ -69,6 +69,15 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Custom property', $response->label);
     }
 
+    /** @test */
+    public function all()
+    {
+        $response = $this->companyProperties->all();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThanOrEqual(2, count($response->getData()));
+    }
+
 
     /**
      * Creates a new company property

@@ -100,4 +100,15 @@ class CompanyPropertiesSpec extends ObjectBehavior
 
         $this->get($propertyName)->shouldReturn('response');
     }
+
+    function it_can_get_all_company_properties($client)
+    {
+        $url = $this->buildUrl("/companies/v2/properties/");
+
+        $client->get($url, ['headers' => $this->headers])
+            ->shouldBeCalled()
+            ->willReturn('response');
+
+        $this->all()->shouldReturn('response');
+    }
 }

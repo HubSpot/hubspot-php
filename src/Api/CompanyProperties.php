@@ -57,7 +57,7 @@ class CompanyProperties extends Api
 
     /**
      * Returns a JSON object representing the definition for a given company property.
-     * @param $propertyName The API name of the property that you wish to see metadata for.
+     * @param string $propertyName The API name of the property that you wish to see metadata for.
      *
      * @link http://developers.hubspot.com/docs/methods/companies/get_company_property
      *
@@ -66,6 +66,20 @@ class CompanyProperties extends Api
     public function get($propertyName)
     {
         $endpoint = "/companies/v2/properties/named/{$propertyName}";
+
+        return $this->request('get', $endpoint);
+    }
+
+    /**
+     * Returns all of the company properties, including their definition.
+     *
+     * @link http://developers.hubspot.com/docs/methods/companies/get_company_properties
+     *
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function all()
+    {
+        $endpoint = '/companies/v2/properties/';
 
         return $this->request('get', $endpoint);
     }
