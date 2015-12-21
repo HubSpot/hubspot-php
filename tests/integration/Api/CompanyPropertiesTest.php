@@ -78,9 +78,56 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThanOrEqual(2, count($response->getData()));
     }
 
+    /** @test */
+    public function createGroup()
+    {
+        $response = $this->createCompanyPropertyGroup();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('A New Custom Group', $response['displayName']);
+    }
+
+    /** @test */
+    public function updateGroup()
+    {
+        $createdGroupResponse = $this->createCompanyPropertyGroup();
+
+        $group = [
+            "displayName" => "An Updated Company Property Group",
+            "displayOrder" => 6,
+        ];
+
+        $response = $this->companyProperties->updateGroup($createdGroupResponse->name, $group);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('An Updated Company Property Group', $response['displayName']);
+    }
+
+    /** @test */
+    public function deleteGroup()
+    {
+        $createdGroupResponse = $this->createCompanyPropertyGroup();
+        $response = $this->companyProperties->deleteGroup($createdGroupResponse->name);
+
+        $this->assertEquals(204, $response->getStatusCode());
+    }
+
+    /** @test */
+    public function getAllGroups()
+    {
+        $response = $this->companyProperties->getAllGroups();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThanOrEqual(2, count($response->getData()));
+        $this->assertObjectNotHasAttribute('properties', $response->getData()[0]);
+
+        $response = $this->companyProperties->getAllGroups(true);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThanOrEqual(2, count($response->getData()));
+        $this->assertObjectHasAttribute('properties', $response->getData()[0]);
+    }
 
     /**
      * Creates a new company property
+     *
      * @return \Fungku\HubSpot\Http\Response
      */
     private function createCompanyProperty()
@@ -98,6 +145,24 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         ];
 
         $response = $this->companyProperties->create($property);
+
+        return $response;
+    }
+
+    /**
+     * Creates a new company property group.
+     *
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    private function createCompanyPropertyGroup()
+    {
+        $group = [
+            "name" => "t" . uniqid(),
+            "displayName" => "A New Custom Group",
+            "displayOrder" => 6,
+        ];
+
+        $response = $this->companyProperties->createGroup($group);
 
         return $response;
     }

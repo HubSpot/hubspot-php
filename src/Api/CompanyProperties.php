@@ -83,4 +83,76 @@ class CompanyProperties extends Api
 
         return $this->request('get', $endpoint);
     }
+
+    /**
+     * Create a new company property group to gather like company-level data.
+     * @param array $group Defines the group and any properties within it.
+     *
+     * @link http://developers.hubspot.com/docs/methods/companies/create_company_property_group
+     *
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function createGroup($group)
+    {
+        $endpoint = '/companies/v2/groups/';
+
+        $options['json'] = $group;
+
+        return $this->request('post', $endpoint, $options);
+    }
+
+    /**
+     * Update a previously created company property group.
+     * @param string $groupName The API name of the property group that you will be updating.
+     * @param array $group Defines the property group and any properties within it.
+     *
+     * @link http://developers.hubspot.com/docs/methods/companies/update_company_property_group
+     *
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function updateGroup($groupName, $group)
+    {
+        $endpoint = "/companies/v2/groups/named/{$groupName}";
+
+        $group['name'] = $groupName;
+        $options['json'] = $group;
+
+        return $this->request('put', $endpoint, $options);
+    }
+
+    /**
+     * Delete an existing company property group.
+     * @param string $groupName The API name of the property group that you will be deleting.
+     *
+     * @link http://developers.hubspot.com/docs/methods/companies/delete_company_property_group
+     *
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function deleteGroup($groupName)
+    {
+        $endpoint = "/companies/v2/groups/named/{$groupName}";
+
+        return $this->request('delete', $endpoint);
+    }
+
+    /**
+     * Returns all of the company property groups for a given portal.
+     * @param bool $includeProperties If true returns all of the properties for each company property group.
+     *
+     * @link http://developers.hubspot.com/docs/methods/companies/get_company_property_groups
+     *
+     * @return \Fungku\HubSpot\Http\Response
+     */
+    public function getAllGroups($includeProperties = false)
+    {
+        $endpoint = '/companies/v2/groups/';
+
+        if($includeProperties){
+            $queryString = $this->buildQueryString(['includeProperties' => 'true']);
+
+            return $this->request('get', $endpoint, [], $queryString);
+        }
+
+        return $this->request('get', $endpoint);
+    }
 }

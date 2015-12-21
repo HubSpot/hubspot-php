@@ -111,4 +111,90 @@ class CompanyPropertiesSpec extends ObjectBehavior
 
         $this->all()->shouldReturn('response');
     }
+
+    function it_can_create_a_company_property_group($client)
+    {
+        $url = $this->buildUrl('/companies/v2/groups/');
+
+        $group = [
+            "name" => "anewcustomgroup",
+            "displayName" => "A New Custom Group",
+            "displayOrder" => 6,
+            "properties" => [
+                'description' => "A company's shipping address",
+                'label' => 'ShippingAddress',
+                'fieldType' => 'text',
+                'formField' => True,
+                'type' => 'string',
+                'options' => [],
+                'displayOrder' => 0,
+                'name' => 'shippingaddress'
+            ]
+        ];
+
+        $client->post($url,[
+            'headers' => $this->headers,
+            'json' => $group
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->createGroup($group)->shouldReturn('response');
+    }
+
+    function it_can_update_a_company_property_group($client)
+    {
+        $propertyGroupName = "acustomcompanygroup";
+
+        $url = $this->buildUrl("/companies/v2/groups/named/{$propertyGroupName}");
+
+        $group = [
+            "displayName" => "An Updated Company Property Group",
+            "displayOrder" => 6,
+            "properties" => []
+        ];
+
+        $jsonGroup = $group;
+        $jsonGroup['name'] = $propertyGroupName;
+
+        $client->put($url, [
+            'headers' => $this->headers,
+            'json' => $jsonGroup
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->updateGroup($propertyGroupName, $group)->shouldReturn('response');
+    }
+
+    function it_can_delete_company_property_group($client)
+    {
+        $propertyGroupName = "acustomcompanygroup";
+
+        $url = $this->buildUrl("/companies/v2/groups/named/{$propertyGroupName}");
+
+        $client->delete($url, ['headers' => $this->headers])
+            ->shouldBeCalled()
+            ->willReturn('response');
+
+        $this->deleteGroup($propertyGroupName)->shouldReturn('response');
+    }
+
+    function it_can_get_all_company_property_groups($client)
+    {
+        $url = $this->buildUrl('/companies/v2/groups/');
+
+        $client->get($url, ['headers' => $this->headers])
+            ->shouldBeCalled()
+            ->willReturn('response');
+
+        $this->getAllGroups()->shouldReturn('response');
+    }
+
+    function it_can_get_all_company_property_groups_with_properties($client)
+    {
+        $url = $this->buildUrl('/companies/v2/groups/', '&includeProperties=true');
+
+        $client->get($url, ['headers' => $this->headers])
+            ->shouldBeCalled()
+            ->willReturn('response');
+
+        $this->getAllGroups(true)->shouldReturn('response');
+    }
 }
