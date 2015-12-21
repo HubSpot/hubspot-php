@@ -101,4 +101,9 @@ class HubSpotServiceSpec extends ObjectBehavior
     {
         $this->events()->shouldHaveType('Fungku\HubSpot\Api\Events');
     }
+
+    function it_creates_a_company_properties_api_class()
+    {
+        $this->companyProperties()->shouldHaveType('Fungku\HubSpot\Api\CompanyProperties');
+    }
 }
