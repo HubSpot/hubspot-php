@@ -49,26 +49,32 @@ class Companies extends Api
 
     /**
      * Returns the recently modified companies
+     * @param array $params Array of optional parameters ['count', 'offset']
      *
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function getRecentlyModified()
+    public function getRecentlyModified($params = [])
     {
         $endpoint = '/companies/v2/companies/recent/modified';
 
-        return $this->request('get', $endpoint);
+        $queryString = $this->buildQueryString($params);
+
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * Returns the recently created companies
+     * @param array $params Array of optional parameters ['count', 'offset']
      *
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function getRecentlyCreated()
+    public function getRecentlyCreated($params = [])
     {
         $endpoint = '/companies/v2/companies/recent/created';
 
-        return $this->request('get', $endpoint);
+        $queryString = $this->buildQueryString($params);
+
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -114,28 +120,34 @@ class Companies extends Api
 
     /**
      * Returns an array of the associated contacts for the given company
-     * @param int $id The id of the company.
+     * @param int $companyId The id of the company.
+     * @param array $params Array of optional parameters ['count', 'vidOffset']
      *
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function getAssociatedContacts($id)
+    public function getAssociatedContacts($companyId, $params = [])
     {
-        $endpoint = "/companies/v2/companies/{$id}/contacts";
+        $endpoint = "/companies/v2/companies/{$companyId}/contacts";
 
-        return $this->request('get', $endpoint);
+        $queryString = $this->buildQueryString($params);
+
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * Returns all of the contact IDs who are associated with the given company
-     * @param int $id The id of the company.
+     * @param int $companyId The id of the company.
+     * @param array $params Array of optional parameters ['count', 'vidOffset']
      *
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function getAssociatedContactIds($id)
+    public function getAssociatedContactIds($companyId, $params = [])
     {
-        $endpoint = "/companies/v2/companies/{$id}/vids";
+        $endpoint = "/companies/v2/companies/{$companyId}/vids";
 
-        return $this->request('get', $endpoint);
+        $queryString = $this->buildQueryString($params);
+
+        return $this->request('get', $endpoint, [], $queryString);
     }
 
     /**
