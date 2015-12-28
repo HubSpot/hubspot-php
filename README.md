@@ -114,6 +114,7 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [x] Contacts
 - [x] Contact Lists
 - [x] Contact Properties
+- [ ] Deals :new:
 - [x] Email :new:
 - [x] Email Events :new:
 - [x] Events (Enterprise) :new:
@@ -122,6 +123,5 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [x] Keywords
 - [x] Page Publishing (COS) :new:
 - [x] Social Media
-- [x] Workflows
-- [ ] Deals :new:
 - [ ] Templates (COS) :new:
+- [x] Workflows
