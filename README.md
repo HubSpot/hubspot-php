@@ -105,50 +105,23 @@ $response->getReasonPhrase() // 'OK';
 
 ## Status
 
-(:ballot_box_with_check: Complete, :wavy_dash: In Progress, :white_medium_small_square: Todo, :black_medium_small_square: Not planned)
-
 If you see something not planned, that you want, make an [issue](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
 
-:ballot_box_with_check: Blog (COS) :new:
-
-:ballot_box_with_check: Blog Posts (COS) :new:
-
-:ballot_box_with_check: Contacts
-
-:ballot_box_with_check: Contact Lists
-
-:ballot_box_with_check: Contact Properties
-
-:ballot_box_with_check: Email :new:
-
-:ballot_box_with_check: Email Events :new:
-
-:ballot_box_with_check: Files (COS) :new:
-
-:ballot_box_with_check: Forms
-
-:ballot_box_with_check: Keywords
-
-:ballot_box_with_check: Page Publishing (COS) :new:
-
-:ballot_box_with_check: Social Media
-
-:ballot_box_with_check: Workflows
-
-:ballot_box_with_check: Events (Enterprise) :new:
-
-:ballot_box_with_check: Companies :new:
-
-:ballot_box_with_check: Companies Properties :new:
-
-:white_medium_small_square: Deals :new:
-
-:white_medium_small_square: Templates (COS) :new:
-
-:black_medium_small_square: MarketPlace
-
-:black_medium_small_square: Settings
-
-:black_medium_small_square: Blog (CMS)
-
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/32dd9bdd-1ace-455d-872e-17aac72ac8c1/big.png)](https://insight.sensiolabs.com/projects/32dd9bdd-1ace-455d-872e-17aac72ac8c1)
+- [x] Blog (COS) :new:
+- [x] Blog Posts (COS) :new:
+- [x] Contacts
+- [x] Contact Lists
+- [x] Contact Properties
+- [x] Email :new:
+- [x] Email Events :new:
+- [x] Files (COS) :new:
+- [x] Forms
+- [x] Keywords
+- [x] Page Publishing (COS) :new:
+- [x] Social Media
+- [x] Workflows
+- [x] Events (Enterprise) :new:
+- [x] Companies :new:
+- [x] Companies Properties :new:
+- [ ] Deals :new:
+- [ ] Templates (COS) :new:
