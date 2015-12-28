@@ -18,6 +18,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->companyProperties = new CompanyProperties('demo', new Client());
+        sleep(1);
     }
 
     /** @test */
@@ -28,7 +29,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Custom property', $response['label']);
     }
-    
+
     /** @test */
     public function update()
     {

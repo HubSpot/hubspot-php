@@ -13,6 +13,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->blogPosts = new BlogPosts('demo', new Client());
+        sleep(1);
     }
 
     /*

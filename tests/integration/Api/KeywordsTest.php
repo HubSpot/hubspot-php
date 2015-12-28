@@ -13,6 +13,7 @@ class KeywordsTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->keywords = new Keywords('demo', new Client());
+        sleep(1);
     }
 
     /*
@@ -25,8 +26,6 @@ class KeywordsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(201, $response->getStatusCode());
-
-        sleep(1);
 
         return $response;
     }

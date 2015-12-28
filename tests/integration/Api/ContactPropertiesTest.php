@@ -13,6 +13,7 @@ class ContactPropertiesTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->contactProperties = new ContactProperties('demo', new Client());
+        sleep(1);
     }
 
     /*

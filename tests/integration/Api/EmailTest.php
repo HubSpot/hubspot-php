@@ -13,6 +13,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->email = new Email('demo', new Client());
+        sleep(1);
     }
 
     /** @test */

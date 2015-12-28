@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Fungku\HubSpot\Tests\Integration\Api;
-
 
 use Fungku\HubSpot\Api\Companies;
 use Fungku\HubSpot\Api\Contacts;
@@ -19,6 +17,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->companies = new Companies('demo', new Client());
+        sleep(1);
     }
 
     /** @test */
@@ -154,7 +153,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $response['contacts']);
         $this->assertEquals($contactId, $response['contacts'][0]['vid']);
     }
-    
+
     /** @test */
     public function getAssociatedContactsWithCountAndOffset()
     {

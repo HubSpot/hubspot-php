@@ -13,6 +13,7 @@ class FormsTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->forms = new Forms('demo', new Client());
+        sleep(1);
     }
 
     /*
@@ -54,8 +55,6 @@ class FormsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-
-        sleep(1);
 
         return $response;
     }

@@ -13,6 +13,7 @@ class EmailEventsTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->emailEvents = new EmailEvents('demo', new Client());
+        sleep(1);
     }
 
     /** @test */
