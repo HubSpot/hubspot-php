@@ -143,6 +143,8 @@ If you see something not planned, that you want, make an [issue](https://github.
 
 :white_medium_small_square: Deals :new:
 
+:white_medium_small_square: Templates (COS) :new:
+
 :black_medium_small_square: MarketPlace
 
 :black_medium_small_square: Settings
