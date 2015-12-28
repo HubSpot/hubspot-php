@@ -21,6 +21,8 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
      */
     private function createBlogPost()
     {
+        sleep(1);
+
         $response = $this->blogPosts->create([
             'name'             => 'My Super Awesome Post ' . uniqid(),
             'content_group_id' => 351076997,

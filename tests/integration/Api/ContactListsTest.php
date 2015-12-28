@@ -21,6 +21,8 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
      */
     private function createList()
     {
+        sleep(1);
+
         $response = $this->contactLists->create([
             'name'     => 'Test ' . uniqid(),
             'dynamic'  => true,

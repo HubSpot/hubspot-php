@@ -24,6 +24,8 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function create()
     {
+        sleep(1);
+
         $response = $this->createCompanyProperty();
 
         $this->assertEquals(200, $response->getStatusCode());

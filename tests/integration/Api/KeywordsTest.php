@@ -12,7 +12,7 @@ class KeywordsTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->keywords = new Keywords('demo', new Client());
+        $this->keywords = new Keywords('demooooo-oooo-oooo-oooo-oooooooooooo', new Client(), true);
         sleep(1);
     }
 
@@ -21,6 +21,8 @@ class KeywordsTest extends \PHPUnit_Framework_TestCase
      */
     private function createKeyword()
     {
+        sleep(1);
+
         $response = $this->keywords->create([
             "keyword"      => "k " . uniqid(),
         ]);

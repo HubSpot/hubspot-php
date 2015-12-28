@@ -21,6 +21,8 @@ class FormsTest extends \PHPUnit_Framework_TestCase
      */
     private function createForm()
     {
+        sleep(1);
+
         $response = $this->forms->create([
             "name" => "Test Form " . uniqid(),
             "action" => "",

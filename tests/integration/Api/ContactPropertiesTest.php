@@ -21,6 +21,8 @@ class ContactPropertiesTest extends \PHPUnit_Framework_TestCase
      */
     private function createProperty()
     {
+        sleep(1);
+
         $response = $this->contactProperties->create([
             "name"         => "t" . uniqid(),
             "label"        => "A New Custom Property",

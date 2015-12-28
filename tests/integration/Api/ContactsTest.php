@@ -21,6 +21,8 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
      */
     private function createContact()
     {
+        sleep(1);
+
         $response = $this->contacts->create([
             ['property' => 'email',     'value' => 'rw_test'.uniqid().'@hubspot.com'],
             ['property' => 'firstname', 'value' => 'joe'],
