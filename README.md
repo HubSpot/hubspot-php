@@ -109,19 +109,19 @@ If you see something not planned, that you want, make an [issue](https://github.
 
 - [x] Blog (COS) :new:
 - [x] Blog Posts (COS) :new:
+- [x] Companies :new:
+- [x] Company Properties :new:
 - [x] Contacts
 - [x] Contact Lists
 - [x] Contact Properties
 - [x] Email :new:
 - [x] Email Events :new:
+- [x] Events (Enterprise) :new:
 - [x] Files (COS) :new:
 - [x] Forms
 - [x] Keywords
 - [x] Page Publishing (COS) :new:
 - [x] Social Media
 - [x] Workflows
-- [x] Events (Enterprise) :new:
-- [x] Companies :new:
-- [x] Companies Properties :new:
 - [ ] Deals :new:
 - [ ] Templates (COS) :new:
