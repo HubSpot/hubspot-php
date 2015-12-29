@@ -166,10 +166,9 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(1, $response['contacts']);
 
-
         $offsetResponse = $this->companies->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => $contactId2 + 1 ]);
         $this->assertEquals(200, $offsetResponse->getStatusCode());
-        $this->assertEquals($contactId2 + 1, $offsetResponse['vidOffset']);
+        $this->assertGreaterThanOrEqual($contactId2 + 1, $offsetResponse['vidOffset']);
     }
 
     /** @test */
