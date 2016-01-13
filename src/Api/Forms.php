@@ -21,7 +21,7 @@ class Forms extends Api
     {
         $url = "https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_guid}";
 
-        $options['body'] = $form;
+        $options['form_params'] = $form;
 
         return $this->requestUrl('post', $url, $options);
     }

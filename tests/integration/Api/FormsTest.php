@@ -7,6 +7,9 @@ use Fungku\HubSpot\Http\Client;
 
 class FormsTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Forms
+     */
     private $forms;
 
     public function setUp()
@@ -119,5 +122,17 @@ class FormsTest extends \PHPUnit_Framework_TestCase
         $response = $this->forms->getFieldByName($form->guid, 'firstname');
 
         $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /** @test */
+    public function submit()
+    {
+        $form = $this->createForm();
+
+        $response = $this->forms->submit(62515, $form->guid, [
+            'firstname' => 'FooBar'
+        ]);
+
+        $this->assertEquals(204, $response->getStatusCode());
     }
 }
