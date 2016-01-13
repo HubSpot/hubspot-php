@@ -202,7 +202,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
 
         $offsetResponse = $this->companies->getAssociatedContactIds($companyId, ['count' => 1, 'vidOffset' => $contactId2 + 1]);
         $this->assertEquals(200, $offsetResponse->getStatusCode());
-        $this->assertEquals($contactId2 + 1, $offsetResponse['vidOffset']);
+        $this->assertGreaterThanOrEqual($contactId2 + 1, $offsetResponse['vidOffset']);
     }
 
     /** @test */
@@ -224,8 +224,6 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
      */
     private function createCompany()
     {
-        sleep(1);
-
         $companyName = 'A company name';
         $companyDescription = 'A company description';
         $properties = [
@@ -241,6 +239,8 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
 
         $response = $this->companies->create($properties);
 
+        sleep(1);
+
         return $response;
     }
 
@@ -253,13 +253,13 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     {
         $contactsClient = new Contacts('demo', new Client());
 
-        sleep(1);
-
         $contactResponse = $contactsClient->create([
             ['property' => 'email', 'value' => 'rw_test' . uniqid() . '@hubspot.com'],
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value' => 'user'],
         ]);
+
+        sleep(1);
 
         return $contactResponse;
     }
@@ -273,14 +273,12 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
      */
     private function createAssociatedContact($companyId)
     {
-        sleep(1);
-
         $newContactResponse = $this->createContact();
         $contactId = $newContactResponse['vid'];
 
-        sleep(1);
-
         $response = $this->companies->addContact($contactId, $companyId);
+
+        sleep(1);
 
         return [$contactId, $response];
     }
