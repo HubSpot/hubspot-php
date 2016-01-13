@@ -24,8 +24,6 @@ class FormsTest extends \PHPUnit_Framework_TestCase
      */
     private function createForm()
     {
-        sleep(1);
-
         $response = $this->forms->create([
             "name" => "Test Form " . uniqid(),
             "action" => "",
@@ -37,25 +35,29 @@ class FormsTest extends \PHPUnit_Framework_TestCase
             "leadNurturingCampaignId" => "",
             "notifyRecipients" => "",
             "embeddedCode" => "",
-            "fields" => [
-                [
-                    "name" => "firstname",
-                    "label" => "First Name",
-                    "description" => "",
-                    "groupName" => "contactinformation",
-                    "type" => "string",
-                    "fieldType" => "text",
-                    "displayOrder" => 1,
-                    "required" => true,
-                    "enabled" => true,
-                    "hidden" => false,
-                    "defaultValue" => "",
-                    "isSmartField" => false,
-                    "validation" => [
-                        "name" => "",
-                        "message" => ""
+            "formFieldGroups" => [
+                "fields" => [
+                    [
+                        "name" => "firstname",
+                        "label" => "First Name",
+                        "description" => "",
+                        "groupName" => "contactinformation",
+                        "type" => "string",
+                        "fieldType" => "text",
+                        "displayOrder" => 1,
+                        "required" => true,
+                        "enabled" => true,
+                        "hidden" => false,
+                        "defaultValue" => "",
+                        "isSmartField" => false,
+                        "validation" => [
+                            "name" => "",
+                            "message" => ""
+                        ],
                     ],
                 ],
+                "default" => true,
+                "isSmartGroup" => false,
             ],
         ]);
 

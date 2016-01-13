@@ -27,26 +27,30 @@ class Forms extends Api
     }
 
     /**
-     * Get all forms.
+     * Return all forms that have been created in the portal.
+     *
+     * @link http://developers.hubspot.com/docs/methods/forms/v2/get_forms
      *
      * @return \Fungku\HubSpot\Http\Response
      */
     public function all()
     {
-        $endpoint = "/contacts/v1/forms";
+        $endpoint = "/forms/v2/forms";
 
         return $this->request('get', $endpoint);
     }
 
     /**
-     * Get a single form.
+     * Return a single form based on the unique ID of that form.
+     *
+     * @link http://developers.hubspot.com/docs/methods/forms/v2/get_form
      *
      * @param string $form_guid
      * @return \Fungku\HubSpot\Http\Response
      */
     public function getById($form_guid)
     {
-        $endpoint = "/contacts/v1/forms/{$form_guid}";
+        $endpoint = "/forms/v2/forms/{$form_guid}";
 
         return $this->request('get', $endpoint);
     }
@@ -54,12 +58,14 @@ class Forms extends Api
     /**
      * Create a new form.
      *
+     * @link http://developers.hubspot.com/docs/methods/forms/v2/create_form
+     *
      * @param array $form
      * @return \Fungku\HubSpot\Http\Response
      */
     public function create($form)
     {
-        $endpoint = "/contacts/v1/forms";
+        $endpoint = "/forms/v2/forms";
 
         $options['json'] = $form;
 
@@ -67,7 +73,9 @@ class Forms extends Api
     }
 
     /**
-     * Update a form.
+     * Update an existing form.
+     *
+     * @link http://developers.hubspot.com/docs/methods/forms/v2/update_form
      *
      * @param string $form_guid
      * @param array  $form
@@ -75,7 +83,7 @@ class Forms extends Api
      */
     public function update($form_guid, $form)
     {
-        $endpoint = "/contacts/v1/forms/{$form_guid}";
+        $endpoint = "/forms/v2/forms/{$form_guid}";
 
         $options['json'] = $form;
 
@@ -83,14 +91,16 @@ class Forms extends Api
     }
 
     /**
-     * Delete a form.
+     * Delete an existing form.
+     *
+     * @link http://developers.hubspot.com/docs/methods/forms/v2/delete_form
      *
      * @param string $form_guid
      * @return \Fungku\HubSpot\Http\Response
      */
     public function delete($form_guid)
     {
-        $endpoint = "/contacts/v1/forms/{$form_guid}";
+        $endpoint = "/forms/v2/forms/{$form_guid}";
 
         return $this->request('delete', $endpoint);
     }
@@ -98,12 +108,14 @@ class Forms extends Api
     /**
      * Get all fields from a form.
      *
+     * @link http://developers.hubspot.com/docs/methods/forms/v2/get_fields
+     *
      * @param string $form_guid
      * @return \Fungku\HubSpot\Http\Response
      */
     public function getFields($form_guid)
     {
-        $endpoint = "/contacts/v1/fields/{$form_guid}";
+        $endpoint = "/forms/v2/fields/{$form_guid}";
 
         return $this->request('get', $endpoint);
     }
@@ -111,13 +123,15 @@ class Forms extends Api
     /**
      * Get a single field from a form.
      *
+     * @link http://developers.hubspot.com/docs/methods/forms/v2/get_field
+     *
      * @param string $form_guid
      * @param string $name
      * @return \Fungku\HubSpot\Http\Response
      */
     public function getFieldByName($form_guid, $name)
     {
-        $endpoint = "/contacts/v1/fields/{$form_guid}/{$name}";
+        $endpoint = "/forms/v2/fields/{$form_guid}/{$name}";
 
         return $this->request('get', $endpoint);
     }
