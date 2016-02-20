@@ -2,7 +2,6 @@
 
 namespace Fungku\HubSpot\Api;
 
-
 class Engagements extends Api
 {
     /**
@@ -75,7 +74,5 @@ class Engagements extends Api
         $endpoint = "/engagements/v1/engagements/{$id}/associations/{$object_type}/{$object_id}";
 
         return $this->request('put', $endpoint);
-
     }
-
 }

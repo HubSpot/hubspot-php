@@ -30,12 +30,12 @@ class EngagementsTest extends \PHPUnit_Framework_TestCase
             "ownerId" => 1,
             "type" => "NOTE",
             "timestamp" => 1409172644778,
-        ],[
+        ], [
             "contactIds" => [$contact->vid],
             "companyIds" => [],
             "dealIds" => [],
             "ownerIds" => [],
-        ],[
+        ], [
             'body' => 'note body',
         ]);
 
@@ -54,7 +54,7 @@ class EngagementsTest extends \PHPUnit_Framework_TestCase
             "ownerId" => 1,
             "type" => "NOTE",
             "timestamp" => 1409172644778
-        ],[
+        ], [
             'body' => 'note body',
         ]);
 
@@ -90,6 +90,4 @@ class EngagementsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(204, $response->getStatusCode());
     }
-
-
 }
