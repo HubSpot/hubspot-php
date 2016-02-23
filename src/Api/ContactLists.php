@@ -172,7 +172,7 @@ class ContactLists extends Api
 
         $options['json'] = ['vids' => $contact_ids];
 
-        return $this->request('get', $endpoint, $options);
+        return $this->request('post', $endpoint, $options);
     }
 
     /**
