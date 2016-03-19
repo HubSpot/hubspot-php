@@ -6,6 +6,11 @@ use Fungku\HubSpot\Api\Companies;
 use Fungku\HubSpot\Api\Contacts;
 use Fungku\HubSpot\Http\Client;
 
+/**
+ * Class CompaniesTest
+ * @package Fungku\HubSpot\Tests\Integration\Api
+ * @group companies
+ */
 class CompaniesTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -28,6 +33,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('A company name', $response['properties']['name']['value']);
         $this->assertEquals('A company description', $response['properties']['description']['value']);
+        $this->assertEquals('example.com', $response['properties']['domain']['value']);
     }
 
     /** @test */
@@ -234,7 +240,11 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
             [
                 'name' => 'description',
                 'value' => $companyDescription
-            ]
+            ],
+            [
+                'name' => 'domain',
+                'value' => 'example.com'
+            ],
         ];
 
         $response = $this->companies->create($properties);
