@@ -27,6 +27,8 @@ use Fungku\HubSpot\Http\Client;
  * @method \Fungku\HubSpot\Api\SocialMedia socialMedia()
  * @method \Fungku\HubSpot\Api\Workflows workflows()
  * @method \Fungku\HubSpot\Api\Events events()
+ * @method \Fungku\HubSpot\Api\Deals deals()
+ * @method \Fungku\HubSpot\Api\Owners owners()
  */
 class HubSpotService
 {
