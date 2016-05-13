@@ -2,7 +2,8 @@
 
 namespace Fungku\HubSpot\Api;
 
-class BlogTopics extends Api {
+class BlogTopics extends Api
+{
 
     /**
      * Get all the blog topcis
@@ -10,7 +11,8 @@ class BlogTopics extends Api {
      * @param  array $params Optional parameters ['name','slug','limit','offset']
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function all($params = []) {
+    public function all($params = [])
+    {
 
         $endpoint = '/blogs/v3/topics';
 
@@ -28,7 +30,8 @@ class BlogTopics extends Api {
      * @param array $params Array of optional parameters ['name','slug','limit', 'offset', 'active', 'blog']
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function search($query, $params = []) {
+    public function search($query, $params = [])
+    {
         $endpoint = '/blogs/v3/topics/search';
 
         $params['q'] = $query;
@@ -42,7 +45,8 @@ class BlogTopics extends Api {
      * @param int $id
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function getById($id) {
+    public function getById($id)
+    {
         $endpoint = "/blogs/v3/topics/{$id}";
 
         return $this->request('get', $endpoint);
@@ -55,7 +59,8 @@ class BlogTopics extends Api {
      * @param  array $params Optional Parameters.
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function create($name, $params = []) {
+    public function create($name, $params = [])
+    {
         $endpoint = '/blogs/v3/topics';
 
         $params['name'] = $name;
@@ -72,7 +77,8 @@ class BlogTopics extends Api {
      * @param  array $params The blog topic fields to update.
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function update($id, $params = []) {
+    public function update($id, $params = [])
+    {
         $endpoint = "/blogs/v3/topics/{$id}";
 
         $options['json'] = $params;
@@ -86,7 +92,8 @@ class BlogTopics extends Api {
      * @param  int $id
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function delete($id) {
+    public function delete($id)
+    {
         $endpoint = "/blogs/v3/topics/{$id}";
 
         return $this->request('delete', $endpoint);
@@ -99,7 +106,8 @@ class BlogTopics extends Api {
      * @param string $groupedTopicName New name of the group
      * @return \Fungku\HubSpot\Http\Response
      */
-    public function merge($topicIds, $groupedTopicName) {
+    public function merge($topicIds, $groupedTopicName)
+    {
         $endpoint = "/blogs/v3/topics/group-topics";
 
         $options['json'] = [
@@ -109,5 +117,4 @@ class BlogTopics extends Api {
 
         return $this->request('post', $endpoint, $options);
     }
-
 }
