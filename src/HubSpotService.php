@@ -12,6 +12,7 @@ use Fungku\HubSpot\Http\Client;
  *
  * @method \Fungku\HubSpot\Api\Blogs blogs()
  * @method \Fungku\HubSpot\Api\BlogPosts blogPosts()
+ * @method \Fungku\HubSpot\Api\BlogTopics blogTopics()
  * @method \Fungku\HubSpot\Api\Companies companies()
  * @method \Fungku\HubSpot\Api\CompanyProperties companyProperties()
  * @method \Fungku\HubSpot\Api\ContactLists contactLists()
