@@ -109,6 +109,7 @@ If you see something not planned, that you want, make an [issue](https://github.
 
 - [x] Blog (COS) :new:
 - [x] Blog Posts (COS) :new:
+- [x] Blog Topics (COS) :new:
 - [x] Companies :new:
 - [x] Company Properties :new:
 - [x] Contacts
