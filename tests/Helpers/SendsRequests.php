@@ -8,14 +8,14 @@ trait SendsRequests
 {
     protected $client;
 
-    protected $baseUrl = "https://api.hubapi.com";
+    protected $baseUrl = 'https://api.hubapi.com';
 
     protected $auth = '?hapikey=demo';
 
-    protected $apiKey = "demo";
+    protected $apiKey = 'demo';
 
     protected $headers = [
-        "User-Agent" => "Fungku_HubSpot_PHP/0.9 (https://github.com/ryanwinchester/hubspot-php)"
+        'User-Agent' => 'Fungku_HubSpot_PHP/0.9 (https://github.com/ryanwinchester/hubspot-php)',
     ];
 
     protected function buildQuery($query = [])
