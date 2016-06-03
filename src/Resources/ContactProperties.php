@@ -16,7 +16,7 @@ class ContactProperties extends Resource
      */
     function all()
     {
-        $endpoint = '/contacts/v2/properties';
+        $endpoint = 'https://api.hubapi.com/contacts/v2/properties';
 
         return $this->client->request('get', $endpoint);
     }
@@ -33,7 +33,7 @@ class ContactProperties extends Resource
      */
     function get($name)
     {
-        $endpoint = "/contacts/v2/properties/named/{$name}";
+        $endpoint = "https://api.hubapi.com/contacts/v2/properties/named/{$name}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -51,7 +51,7 @@ class ContactProperties extends Resource
      */
     function create($property)
     {
-        $endpoint = "/contacts/v2/properties";
+        $endpoint = "https://api.hubapi.com/contacts/v2/properties";
 
         $options['json'] = $property;
 
@@ -71,7 +71,7 @@ class ContactProperties extends Resource
      */
     function update($name, $property)
     {
-        $endpoint = "/contacts/v2/properties/named/{$name}";
+        $endpoint = "https://api.hubapi.com/contacts/v2/properties/named/{$name}";
 
         $property['name'] = $name;
         $options['json'] = $property;
@@ -91,7 +91,7 @@ class ContactProperties extends Resource
      */
     function delete($name)
     {
-        $endpoint = "/contacts/v2/properties/named/{$name}";
+        $endpoint = "https://api.hubapi.com/contacts/v2/properties/named/{$name}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -108,7 +108,7 @@ class ContactProperties extends Resource
      */
     function getGroups($includeProperties = false)
     {
-        $endpoint = "/contacts/v2/groups";
+        $endpoint = "https://api.hubapi.com/contacts/v2/groups";
 
         $queryString = build_query_string(['includeProperties' => $includeProperties]);
 
@@ -128,7 +128,7 @@ class ContactProperties extends Resource
      */
     function createGroup($group)
     {
-        $endpoint = "/contacts/v2/groups";
+        $endpoint = "https://api.hubapi.com/contacts/v2/groups";
 
         $options['json'] = $group;
 
@@ -148,7 +148,7 @@ class ContactProperties extends Resource
      */
     function updateGroup($name, $group)
     {
-        $endpoint = "/contacts/v2/groups/named/{$name}";
+        $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$name}";
 
         $group['name'] = $name;
         $options['json'] = $group;
@@ -168,7 +168,7 @@ class ContactProperties extends Resource
      */
     function deleteGroup($name)
     {
-        $endpoint = "/contacts/v2/groups/named/{$name}";
+        $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$name}";
 
         return $this->client->request('delete', $endpoint);
     }

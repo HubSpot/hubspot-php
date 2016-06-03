@@ -12,7 +12,7 @@ class Engagements extends Resource
      */
     function create($engagement, $associations, $metadata)
     {
-        $endpoint = "/engagements/v1/engagements";
+        $endpoint = "https://api.hubapi.com/engagements/v1/engagements";
 
         $options['json'] = [
             'engagement' => $engagement,
@@ -31,7 +31,7 @@ class Engagements extends Resource
      */
     function update($id, $engagement, $metadata)
     {
-        $endpoint = "/engagements/v1/engagements/{$id}";
+        $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}";
 
         $options['json'] = [
             'engagement' => $engagement,
@@ -47,7 +47,7 @@ class Engagements extends Resource
      */
     function delete($id)
     {
-        $endpoint = "/engagements/v1/engagements/{$id}";
+        $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -58,7 +58,7 @@ class Engagements extends Resource
      */
     function get($id)
     {
-        $endpoint = "/engagements/v1/engagements/{$id}";
+        $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -71,7 +71,7 @@ class Engagements extends Resource
      **/
     function associate($id, $object_type, $object_id)
     {
-        $endpoint = "/engagements/v1/engagements/{$id}/associations/{$object_type}/{$object_id}";
+        $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}/associations/{$object_type}/{$object_id}";
 
         return $this->client->request('put', $endpoint);
     }

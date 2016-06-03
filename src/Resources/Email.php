@@ -12,7 +12,7 @@ class Email extends Resource
      */
     function subscriptions($portal_id)
     {
-        $endpoint = "/email/public/v1/subscriptions";
+        $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions";
 
         $queryString = build_query_string(['portalId' => $portal_id]);
 
@@ -27,7 +27,7 @@ class Email extends Resource
      */
     function subscriptionsTimeline($params = [])
     {
-        $endpoint = "/email/public/v1/subscriptions/timeline";
+        $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions/timeline";
 
         $queryString = build_query_string($params);
 
@@ -43,7 +43,7 @@ class Email extends Resource
      */
     function subscriptionStatus($portal_id, $email)
     {
-        $endpoint = "/email/public/v1/subscriptions/{$email}";
+        $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions/{$email}";
 
         $queryString = build_query_string(['portalId' => $portal_id]);
 
@@ -60,7 +60,7 @@ class Email extends Resource
      */
     function updateSubscription($portal_id, $email, $params = [])
     {
-        $endpoint = "/email/public/v1/subscriptions/{$email}";
+        $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions/{$email}";
 
         $queryString = build_query_string(['portalId' => $portal_id]);
         $options['json'] = $params;

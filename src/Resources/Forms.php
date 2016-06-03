@@ -19,11 +19,11 @@ class Forms extends Resource
      */
     function submit($portal_id, $form_guid, $form)
     {
-        $url = "https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_guid}";
+        $endpoint = "https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_guid}";
 
         $options['form_params'] = $form;
 
-        return $this->client->request('post', null, $options, null, $url);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
@@ -35,7 +35,7 @@ class Forms extends Resource
      */
     function all()
     {
-        $endpoint = "/forms/v2/forms";
+        $endpoint = "https://api.hubapi.com/forms/v2/forms";
 
         return $this->client->request('get', $endpoint);
     }
@@ -50,7 +50,7 @@ class Forms extends Resource
      */
     function getById($form_guid)
     {
-        $endpoint = "/forms/v2/forms/{$form_guid}";
+        $endpoint = "https://api.hubapi.com/forms/v2/forms/{$form_guid}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -65,7 +65,7 @@ class Forms extends Resource
      */
     function create($form)
     {
-        $endpoint = "/forms/v2/forms";
+        $endpoint = "https://api.hubapi.com/forms/v2/forms";
 
         $options['json'] = $form;
 
@@ -83,7 +83,7 @@ class Forms extends Resource
      */
     function update($form_guid, $form)
     {
-        $endpoint = "/forms/v2/forms/{$form_guid}";
+        $endpoint = "https://api.hubapi.com/forms/v2/forms/{$form_guid}";
 
         $options['json'] = $form;
 
@@ -100,7 +100,7 @@ class Forms extends Resource
      */
     function delete($form_guid)
     {
-        $endpoint = "/forms/v2/forms/{$form_guid}";
+        $endpoint = "https://api.hubapi.com/forms/v2/forms/{$form_guid}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -115,7 +115,7 @@ class Forms extends Resource
      */
     function getFields($form_guid)
     {
-        $endpoint = "/forms/v2/fields/{$form_guid}";
+        $endpoint = "https://api.hubapi.com/forms/v2/fields/{$form_guid}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -131,7 +131,7 @@ class Forms extends Resource
      */
     function getFieldByName($form_guid, $name)
     {
-        $endpoint = "/forms/v2/fields/{$form_guid}/{$name}";
+        $endpoint = "https://api.hubapi.com/forms/v2/fields/{$form_guid}/{$name}";
 
         return $this->client->request('get', $endpoint);
     }

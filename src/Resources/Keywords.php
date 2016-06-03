@@ -12,7 +12,7 @@ class Keywords extends Resource
      */
     function all($search = null)
     {
-        $endpoint = '/keywords/v1/keywords';
+        $endpoint = 'https://api.hubapi.com/keywords/v1/keywords';
 
         $queryString = build_query_string(['search' => $search]);
 
@@ -27,7 +27,7 @@ class Keywords extends Resource
      */
     function getById($keyword_guid)
     {
-        $endpoint = "/keywords/v1/keywords/{$keyword_guid}";
+        $endpoint = "https://api.hubapi.com/keywords/v1/keywords/{$keyword_guid}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -40,7 +40,7 @@ class Keywords extends Resource
      */
     function create($keyword)
     {
-        $endpoint = "/keywords/v1/keywords";
+        $endpoint = "https://api.hubapi.com/keywords/v1/keywords";
 
         $options['json'] = $keyword;
 
@@ -55,7 +55,7 @@ class Keywords extends Resource
      */
     function delete($keyword_guid)
     {
-        $endpoint = "/keywords/v1/keywords/{$keyword_guid}";
+        $endpoint = "https://api.hubapi.com/keywords/v1/keywords/{$keyword_guid}";
 
         return $this->client->request('delete', $endpoint);
     }

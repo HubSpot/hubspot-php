@@ -11,7 +11,7 @@ class Contacts extends Resource
      */
     function create($properties)
     {
-        $endpoint = "/contacts/v1/contact";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact";
 
         $options['json'] = ['properties' => $properties];
 
@@ -25,7 +25,7 @@ class Contacts extends Resource
      */
     function update($id, $properties)
     {
-        $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/vid/{$id}/profile";
 
         $options['json'] = ['properties' => $properties];
 
@@ -39,7 +39,7 @@ class Contacts extends Resource
      */
     function createOrUpdate($email, $properties = [])
     {
-        $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/{$email}";
 
         $options['json'] = ['properties' => $properties];
 
@@ -52,7 +52,7 @@ class Contacts extends Resource
      */
     function createOrUpdateBatch($contacts)
     {
-        $endpoint = "/contacts/v1/contact/batch";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/batch";
 
         $options['json'] = $contacts;
 
@@ -65,7 +65,7 @@ class Contacts extends Resource
      */
     function delete($id)
     {
-        $endpoint = "/contacts/v1/contact/vid/{$id}";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/vid/{$id}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -87,7 +87,7 @@ class Contacts extends Resource
      */
     function all($params = [])
     {
-        $endpoint = "/contacts/v1/lists/all/contacts/all";
+        $endpoint = "https://api.hubapi.com/contacts/v1/lists/all/contacts/all";
 
         $queryString = build_query_string($params);
 
@@ -107,7 +107,7 @@ class Contacts extends Resource
      */
     function recent($params = [])
     {
-        $endpoint = "/contacts/v1/lists/recently_updated/contacts/recent";
+        $endpoint = "https://api.hubapi.com/contacts/v1/lists/recently_updated/contacts/recent";
 
         $queryString = build_query_string($params);
 
@@ -120,7 +120,7 @@ class Contacts extends Resource
      */
     function getById($id)
     {
-        $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/vid/{$id}/profile";
 
         return $this->client->request('get', $endpoint);
     }
@@ -141,7 +141,7 @@ class Contacts extends Resource
      */
     function getBatchByIds($vids, $params = [])
     {
-        $endpoint = "/contacts/v1/contact/vids/batch/";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/vids/batch/";
 
         $params['vid'] = $vids;
 
@@ -156,7 +156,7 @@ class Contacts extends Resource
      */
     function getByEmail($email)
     {
-        $endpoint = "/contacts/v1/contact/email/{$email}/profile";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile";
 
         return $this->client->request('get', $endpoint);
     }
@@ -176,7 +176,7 @@ class Contacts extends Resource
      */
     function getBatchByEmails($emails, $params = [])
     {
-        $endpoint = "/contacts/v1/contact/emails/batch/";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/emails/batch/";
 
         $params['email'] = $emails;
 
@@ -191,7 +191,7 @@ class Contacts extends Resource
      */
     function getByToken($utk)
     {
-        $endpoint = "/contacts/v1/contact/utk/{$utk}/profile";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/utk/{$utk}/profile";
 
         return $this->client->request('get', $endpoint);
     }
@@ -215,7 +215,7 @@ class Contacts extends Resource
      */
     function getBatchByTokens($utks, $params = [])
     {
-        $endpoint = "/contacts/v1/contact/utks/batch/";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/utks/batch/";
 
         $params['utk'] = $utks;
 
@@ -241,7 +241,7 @@ class Contacts extends Resource
      */
     function search($query, $params = [])
     {
-        $endpoint = "/contacts/v1/search/query";
+        $endpoint = "https://api.hubapi.com/contacts/v1/search/query";
 
         $params['q'] = $query;
 
@@ -255,7 +255,7 @@ class Contacts extends Resource
      */
     function statistics()
     {
-        $endpoint = "/contacts/v1/contacts/statistics";
+        $endpoint = "https://api.hubapi.com/contacts/v1/contacts/statistics";
 
         return $this->client->request('get', $endpoint);
     }

@@ -14,7 +14,7 @@ class BlogTopics extends Resource
     function all($params = [])
     {
 
-        $endpoint = '/blogs/v3/topics';
+        $endpoint = 'https://api.hubapi.com/blogs/v3/topics';
 
         $queryString = build_query_string($params);
 
@@ -32,7 +32,7 @@ class BlogTopics extends Resource
      */
     function search($query, $params = [])
     {
-        $endpoint = '/blogs/v3/topics/search';
+        $endpoint = 'https://api.hubapi.com/blogs/v3/topics/search';
 
         $params['q'] = $query;
 
@@ -47,7 +47,7 @@ class BlogTopics extends Resource
      */
     function getById($id)
     {
-        $endpoint = "/blogs/v3/topics/{$id}";
+        $endpoint = "https://api.hubapi.com/blogs/v3/topics/{$id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -61,7 +61,7 @@ class BlogTopics extends Resource
      */
     function create($name, $params = [])
     {
-        $endpoint = '/blogs/v3/topics';
+        $endpoint = 'https://api.hubapi.com/blogs/v3/topics';
 
         $params['name'] = $name;
 
@@ -79,7 +79,7 @@ class BlogTopics extends Resource
      */
     function update($id, $params = [])
     {
-        $endpoint = "/blogs/v3/topics/{$id}";
+        $endpoint = "https://api.hubapi.com/blogs/v3/topics/{$id}";
 
         $options['json'] = $params;
 
@@ -94,7 +94,7 @@ class BlogTopics extends Resource
      */
     function delete($id)
     {
-        $endpoint = "/blogs/v3/topics/{$id}";
+        $endpoint = "https://api.hubapi.com/blogs/v3/topics/{$id}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -108,7 +108,7 @@ class BlogTopics extends Resource
      */
     function merge($topicIds, $groupedTopicName)
     {
-        $endpoint = "/blogs/v3/topics/group-topics";
+        $endpoint = "https://api.hubapi.com/blogs/v3/topics/group-topics";
 
         $options['json'] = [
             'topicIds' => $topicIds,

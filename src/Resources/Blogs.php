@@ -12,7 +12,7 @@ class Blogs extends Resource
      */
     function all($params = [])
     {
-        $endpoint = '/content/api/v2/blogs';
+        $endpoint = 'https://api.hubapi.com/content/api/v2/blogs';
 
         $queryString = build_query_string($params);
 
@@ -27,7 +27,7 @@ class Blogs extends Resource
      */
     function getById($id)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blogs/{$id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -40,7 +40,7 @@ class Blogs extends Resource
      */
     function versions($id)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}/versions";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blogs/{$id}/versions";
 
         return $this->client->request('get', $endpoint);
     }
@@ -54,7 +54,7 @@ class Blogs extends Resource
      */
     function getVersion($id, $version_id)
     {
-        $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blogs/{$id}/versions/{$version_id}";
 
         return $this->client->request('get', $endpoint);
     }

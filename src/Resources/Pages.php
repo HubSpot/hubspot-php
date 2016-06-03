@@ -12,7 +12,7 @@ class Pages extends Resource
      */
     function create($params)
     {
-        $endpoint = '/content/api/v2/pages';
+        $endpoint = 'https://api.hubapi.com/content/api/v2/pages';
 
         $options['json'] = $params;
 
@@ -27,7 +27,7 @@ class Pages extends Resource
      */
     function all($params = [])
     {
-        $endpoint = "/content/api/v2/pages";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages";
 
         $queryString = build_query_string($params);
 
@@ -43,7 +43,7 @@ class Pages extends Resource
      */
     function update($page_id, $params)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}";
 
         $options['json'] = $params;
 
@@ -58,7 +58,7 @@ class Pages extends Resource
      */
     function delete($page_id)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -71,7 +71,7 @@ class Pages extends Resource
      */
     function getById($page_id)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -84,7 +84,7 @@ class Pages extends Resource
      */
     function updateAutoSaveBuffer($page_id)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}/buffer";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/buffer";
 
         return $this->client->request('put', $endpoint);
     }
@@ -97,7 +97,7 @@ class Pages extends Resource
      */
     function getAutoSaveBufferContents($page_id)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}/buffer";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/buffer";
 
         return $this->client->request('get', $endpoint);
     }
@@ -110,7 +110,7 @@ class Pages extends Resource
      */
     function clonePage($page_id)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}/clone";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/clone";
 
         return $this->client->request('post', $endpoint);
     }
@@ -123,7 +123,7 @@ class Pages extends Resource
      */
     function hasBufferedChanges($page_id)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}/has-buffered-changes";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/has-buffered-changes";
 
         return $this->client->request('get', $endpoint);
     }
@@ -143,7 +143,7 @@ class Pages extends Resource
      */
     function publishAction($page_id, $action)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}/publish-action";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/publish-action";
 
         $options['json'] = ['action' => $action];
 
@@ -158,7 +158,7 @@ class Pages extends Resource
      */
     function pushBufferLive($page_id)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}/push-buffer-live";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/push-buffer-live";
 
         return $this->client->request('post', $endpoint);
     }
@@ -171,7 +171,7 @@ class Pages extends Resource
      */
     function restoreDeleted($page_id)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}/restore-deleted";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/restore-deleted";
 
         return $this->client->request('post', $endpoint);
     }
@@ -184,7 +184,7 @@ class Pages extends Resource
      */
     function validateBuffer($page_id)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}/validate-buffer";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/validate-buffer";
 
         return $this->client->request('post', $endpoint);
     }
@@ -197,7 +197,7 @@ class Pages extends Resource
      */
     function versions($page_id)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}/versions";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/versions";
 
         return $this->client->request('get', $endpoint);
     }
@@ -211,7 +211,7 @@ class Pages extends Resource
      */
     function restoreVersion($page_id, $version_id)
     {
-        $endpoint = "/content/api/v2/pages/{$page_id}/versions/restore";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/versions/restore";
 
         $options['json'] = compact('version_id');
 

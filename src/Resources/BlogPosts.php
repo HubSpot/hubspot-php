@@ -12,7 +12,7 @@ class BlogPosts extends Resource
      */
     function create($params = [])
     {
-        $endpoint = '/content/api/v2/blog-posts';
+        $endpoint = 'https://api.hubapi.com/content/api/v2/blog-posts';
 
         $options['json'] = $params;
 
@@ -27,7 +27,7 @@ class BlogPosts extends Resource
      */
     function all($params = [])
     {
-        $endpoint = "/content/api/v2/blog-posts";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts";
 
         $queryString = build_query_string($params);
 
@@ -43,7 +43,7 @@ class BlogPosts extends Resource
      */
     function update($id, $params = [])
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}";
 
         $options['json'] = $params;
 
@@ -58,7 +58,7 @@ class BlogPosts extends Resource
      */
     function delete($id)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -71,7 +71,7 @@ class BlogPosts extends Resource
      */
     function getById($id)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -87,7 +87,7 @@ class BlogPosts extends Resource
      */
     function updateAutoSaveBuffer($id, $params = [])
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}/buffer";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/buffer";
 
         $options['json'] = $params;
 
@@ -102,7 +102,7 @@ class BlogPosts extends Resource
      */
     function getAutoSaveBufferContents($id)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}/buffer";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/buffer";
 
         return $this->client->request('get', $endpoint);
     }
@@ -115,7 +115,7 @@ class BlogPosts extends Resource
      */
     function clonePost($id)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}/clone";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/clone";
 
         return $this->client->request('post', $endpoint);
     }
@@ -128,7 +128,7 @@ class BlogPosts extends Resource
      */
     function hasBufferedChanges($id)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}/has-buffered-changes";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/has-buffered-changes";
 
         return $this->client->request('get', $endpoint);
     }
@@ -148,7 +148,7 @@ class BlogPosts extends Resource
      */
     function publishAction($id, $action)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}/publish-action";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/publish-action";
 
         $options['json'] = ['action' => $action];
 
@@ -163,7 +163,7 @@ class BlogPosts extends Resource
      */
     function pushBufferLive($id)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}/push-buffer-live";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/push-buffer-live";
 
         return $this->client->request('post', $endpoint);
     }
@@ -176,7 +176,7 @@ class BlogPosts extends Resource
      */
     function restoreDeleted($id)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}/restore-deleted";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/restore-deleted";
 
         return $this->client->request('post', $endpoint);
     }
@@ -189,7 +189,7 @@ class BlogPosts extends Resource
      */
     function validateBuffer($id)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}/validate-buffer";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/validate-buffer";
 
         return $this->client->request('post', $endpoint);
     }
@@ -202,7 +202,7 @@ class BlogPosts extends Resource
      */
     function versions($id)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$id}/versions";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/versions";
 
         return $this->client->request('get', $endpoint);
     }
@@ -216,7 +216,7 @@ class BlogPosts extends Resource
      */
     function getVersion($post_id, $version_id)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$post_id}/versions/{$version_id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$post_id}/versions/{$version_id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -230,7 +230,7 @@ class BlogPosts extends Resource
      */
     function restoreVersion($post_id, $version_id)
     {
-        $endpoint = "/content/api/v2/blog-posts/{$post_id}/versions/restore";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$post_id}/versions/restore";
 
         $options['json'] = compact('version_id');
 

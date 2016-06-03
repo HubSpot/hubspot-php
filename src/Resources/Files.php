@@ -13,7 +13,7 @@ class Files extends Resource
      */
     function upload($file, $params = [])
     {
-        $endpoint = "/filemanager/api/v2/files";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/files";
 
         $queryString = build_query_string([
             'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false,
@@ -36,7 +36,7 @@ class Files extends Resource
      */
     function all($params = [])
     {
-        $endpoint = "/filemanager/api/v2/files";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/files";
 
         $options['json'] = $params;
 
@@ -52,7 +52,7 @@ class Files extends Resource
      */
     function replace($file_id, $file)
     {
-        $endpoint = "/filemanager/api/v2/files/{$file_id}";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}";
 
         $options['body'] = [
             'files' => fopen($file, 'rb'),
@@ -69,7 +69,7 @@ class Files extends Resource
      */
     function meta($file_id)
     {
-        $endpoint = "/filemanager/api/v2/files/{$file_id}";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -82,7 +82,7 @@ class Files extends Resource
      */
     function archive($file_id)
     {
-        $endpoint = "/filemanager/api/v2/files/{$file_id}/archive";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}/archive";
 
         return $this->client->request('post', $endpoint);
     }
@@ -95,7 +95,7 @@ class Files extends Resource
      */
     function delete($file_id)
     {
-        $endpoint = "/filemanager/api/v2/files/{$file_id}";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -114,7 +114,7 @@ class Files extends Resource
      */
     function move($file_id, $params = [])
     {
-        $endpoint = "/filemanager/api/v2/files/{$file_id}/move-file";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}/move-file";
 
         $options['json'] = $params;
 
@@ -130,7 +130,7 @@ class Files extends Resource
      */
     function createFolder($folder_name, $parent_folder_id)
     {
-        $endpoint = "/filemanager/api/v2/folders";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders";
 
         $options['json'] = [
             'folder_name'      => $folder_name,
@@ -148,7 +148,7 @@ class Files extends Resource
      */
     function folders($params = [])
     {
-        $endpoint = "/filemanager/api/v2/folders";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders";
 
         $options['json'] = $params;
 
@@ -164,7 +164,7 @@ class Files extends Resource
      */
     function updateFolder($folder_id, $params = [])
     {
-        $endpoint = "/filemanager/api/v2/folders/{$folder_id}";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders/{$folder_id}";
 
         $options['json'] = $params;
 
@@ -179,7 +179,7 @@ class Files extends Resource
      */
     function deleteFolder($folder_id)
     {
-        $endpoint = "/filemanager/api/v2/folders/{$folder_id}";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders/{$folder_id}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -192,7 +192,7 @@ class Files extends Resource
      */
     function getFolderById($folder_id)
     {
-        $endpoint = "/filemanager/api/v2/folders/{$folder_id}";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders/{$folder_id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -206,7 +206,7 @@ class Files extends Resource
      */
     function moveFolder($folder_id, $params = [])
     {
-        $endpoint = "/filemanager/api/v2/folders/{$folder_id}/move-folder";
+        $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders/{$folder_id}/move-folder";
 
         $options['json'] = $params;
 

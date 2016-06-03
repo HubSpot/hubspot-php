@@ -11,7 +11,7 @@ class SocialMedia extends Resource
      */
     function channels()
     {
-        $endpoint = '/broadcast/v1/channels/setting/publish/current';
+        $endpoint = 'https://api.hubapi.com/broadcast/v1/channels/setting/publish/current';
 
         return $this->client->request('get', $endpoint);
     }
@@ -24,7 +24,7 @@ class SocialMedia extends Resource
      */
     function getChannelById($channel_guid)
     {
-        $endpoint = "/broadcast/v1/channels/{$channel_guid}";
+        $endpoint = "https://api.hubapi.com/broadcast/v1/channels/{$channel_guid}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -37,7 +37,7 @@ class SocialMedia extends Resource
      */
     function broadcasts($params = [])
     {
-        $endpoint = "/broadcast/v1/broadcasts";
+        $endpoint = "https://api.hubapi.com/broadcast/v1/broadcasts";
 
         $options['json'] = $params;
 
@@ -52,7 +52,7 @@ class SocialMedia extends Resource
      */
     function getBroadcastById($broadcast_guid)
     {
-        $endpoint = "/broadcast/v1/broadcasts/{$broadcast_guid}";
+        $endpoint = "https://api.hubapi.com/broadcast/v1/broadcasts/{$broadcast_guid}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -65,7 +65,7 @@ class SocialMedia extends Resource
      */
     function createBroadcast($broadcast)
     {
-        $endpoint = "/broadcast/v1/broadcasts";
+        $endpoint = "https://api.hubapi.com/broadcast/v1/broadcasts";
 
         $options['json'] = $broadcast;
 
@@ -80,7 +80,7 @@ class SocialMedia extends Resource
      */
     function cancelBroadcast($broadcast_guid)
     {
-        $endpoint = "/broadcast/v1/broadcasts/{$broadcast_guid}";
+        $endpoint = "https://api.hubapi.com/broadcast/v1/broadcasts/{$broadcast_guid}";
 
         return $this->client->request('delete', $endpoint);
     }

@@ -14,7 +14,7 @@ class Owners extends Resource
      */
     function create($properties)
     {
-        $endpoint = '/owners/v2/owners/';
+        $endpoint = 'https://api.hubapi.com/owners/v2/owners/';
         $options['json'] = $properties;
 
         return $this->client->request('post', $endpoint, $options);
@@ -27,7 +27,7 @@ class Owners extends Resource
      */
     function update($id, $properties)
     {
-        $endpoint = "/owners/v2/owners/{$id}";
+        $endpoint = "https://api.hubapi.com/owners/v2/owners/{$id}";
         $options['json'] = $properties;
 
         return $this->client->request('put', $endpoint, $options);
@@ -39,7 +39,7 @@ class Owners extends Resource
      */
     function getById($id)
     {
-        $endpoint = '/owners/v2/owners/'.$id;
+        $endpoint = 'https://api.hubapi.com/owners/v2/owners/'.$id;
 
         return $this->client->request('get', $endpoint);
     }
@@ -50,7 +50,7 @@ class Owners extends Resource
      */
     function all($params = [])
     {
-        $endpoint = '/owners/v2/owners';
+        $endpoint = 'https://api.hubapi.com/owners/v2/owners';
 
         $queryString = build_query_string($params);
 

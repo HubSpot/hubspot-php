@@ -12,7 +12,7 @@ class EmailEvents extends Resource
      */
     function getCampaignIds($params = [])
     {
-        $endpoint = "/email/public/v1/campaigns";
+        $endpoint = "https://api.hubapi.com/email/public/v1/campaigns";
 
         $queryString = build_query_string($params);
 
@@ -28,7 +28,7 @@ class EmailEvents extends Resource
      */
     function getCampaignById($campaign_id, $application_id)
     {
-        $endpoint = "/email/public/v1/campaigns/{$campaign_id}";
+        $endpoint = "https://api.hubapi.com/email/public/v1/campaigns/{$campaign_id}";
 
         $queryString = build_query_string(['appId' => $application_id]);
 
@@ -43,7 +43,7 @@ class EmailEvents extends Resource
      */
     function all($params = [])
     {
-        $endpoint = "/email/public/v1/events";
+        $endpoint = "https://api.hubapi.com/email/public/v1/events";
 
         $queryString = build_query_string($params);
 
@@ -59,7 +59,7 @@ class EmailEvents extends Resource
      */
     function getById($id, $created)
     {
-        $endpoint = "/email/public/v1/events/{$created}/{$id}";
+        $endpoint = "https://api.hubapi.com/email/public/v1/events/{$created}/{$id}";
 
         return $this->client->request('get', $endpoint);
     }

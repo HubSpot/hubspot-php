@@ -11,7 +11,7 @@ class Workflows extends Resource
      */
     function all()
     {
-        $endpoint = "/automation/v2/workflows";
+        $endpoint = "https://api.hubapi.com/automation/v2/workflows";
 
         return $this->client->request('get', $endpoint);
     }
@@ -24,7 +24,7 @@ class Workflows extends Resource
      */
     function getById($id)
     {
-        $endpoint = "/automation/v2/workflows/{$id}";
+        $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -38,7 +38,7 @@ class Workflows extends Resource
      */
     function enrollContact($workflow_id, $email)
     {
-        $endpoint = "/automation/v2/workflows/{$workflow_id}/enrollments/contacts/{$email}";
+        $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$workflow_id}/enrollments/contacts/{$email}";
 
         return $this->client->request('post', $endpoint);
     }
@@ -52,7 +52,7 @@ class Workflows extends Resource
      */
     function unenrollContact($workflow_id, $email)
     {
-        $endpoint = "/automation/v2/workflows/{$workflow_id}/enrollments/contacts/{$email}";
+        $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$workflow_id}/enrollments/contacts/{$email}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -65,7 +65,7 @@ class Workflows extends Resource
      */
     function create($workflow)
     {
-        $endpoint = "/automation/v2/workflows";
+        $endpoint = "https://api.hubapi.com/automation/v2/workflows";
 
         $options['json'] = $workflow;
 
@@ -80,7 +80,7 @@ class Workflows extends Resource
      */
     function delete($id)
     {
-        $endpoint = "/automation/v2/workflows/{$id}";
+        $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$id}";
 
         $queryString = build_query_string(['updatedAt' => time()]);
 
@@ -95,7 +95,7 @@ class Workflows extends Resource
      */
     function enrollmentsForContact($contact_id)
     {
-        $endpoint = "/automation/v2/workflows/enrollments/contacts/{$contact_id}";
+        $endpoint = "https://api.hubapi.com/automation/v2/workflows/enrollments/contacts/{$contact_id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -127,7 +127,7 @@ class Workflows extends Resource
      */
     function upcomingEventsForContact($workflow_id, $contact_id, $params = [])
     {
-        $endpoint = "/automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/upcoming";
+        $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/upcoming";
 
         $queryString = build_query_string($params);
 

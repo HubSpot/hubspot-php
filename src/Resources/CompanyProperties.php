@@ -14,7 +14,7 @@ class CompanyProperties extends Resource
      */
     function create($property)
     {
-        $endpoint = '/companies/v2/properties/';
+        $endpoint = 'https://api.hubapi.com/companies/v2/properties/';
 
         $options['json'] = $property;
 
@@ -32,7 +32,7 @@ class CompanyProperties extends Resource
      */
     function update($propertyName, $property)
     {
-        $endpoint = "/companies/v2/properties/named/{$propertyName}";
+        $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
         $property['name'] = $propertyName;
         $options['json'] = $property;
@@ -50,7 +50,7 @@ class CompanyProperties extends Resource
      */
     function delete($propertyName)
     {
-        $endpoint = "/companies/v2/properties/named/{$propertyName}";
+        $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -65,7 +65,7 @@ class CompanyProperties extends Resource
      */
     function get($propertyName)
     {
-        $endpoint = "/companies/v2/properties/named/{$propertyName}";
+        $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -79,7 +79,7 @@ class CompanyProperties extends Resource
      */
     function all()
     {
-        $endpoint = '/companies/v2/properties/';
+        $endpoint = 'https://api.hubapi.com/companies/v2/properties/';
 
         return $this->client->request('get', $endpoint);
     }
@@ -94,7 +94,7 @@ class CompanyProperties extends Resource
      */
     function createGroup($group)
     {
-        $endpoint = '/companies/v2/groups/';
+        $endpoint = 'https://api.hubapi.com/companies/v2/groups/';
 
         $options['json'] = $group;
 
@@ -112,7 +112,7 @@ class CompanyProperties extends Resource
      */
     function updateGroup($groupName, $group)
     {
-        $endpoint = "/companies/v2/groups/named/{$groupName}";
+        $endpoint = "https://api.hubapi.com/companies/v2/groups/named/{$groupName}";
 
         $group['name'] = $groupName;
         $options['json'] = $group;
@@ -130,7 +130,7 @@ class CompanyProperties extends Resource
      */
     function deleteGroup($groupName)
     {
-        $endpoint = "/companies/v2/groups/named/{$groupName}";
+        $endpoint = "https://api.hubapi.com/companies/v2/groups/named/{$groupName}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -145,7 +145,7 @@ class CompanyProperties extends Resource
      */
     function getAllGroups($includeProperties = false)
     {
-        $endpoint = '/companies/v2/groups/';
+        $endpoint = 'https://api.hubapi.com/companies/v2/groups/';
 
         if($includeProperties){
             $queryString = build_query_string(['includeProperties' => 'true']);

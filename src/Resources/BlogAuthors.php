@@ -12,7 +12,7 @@ class BlogAuthors extends Resource
      */
     function create($params = [])
     {
-        $endpoint = '/blogs/v3/blog-authors';
+        $endpoint = 'https://api.hubapi.com/blogs/v3/blog-authors';
 
         $options['json'] = $params;
 
@@ -27,7 +27,7 @@ class BlogAuthors extends Resource
      */
     function all($params = [])
     {
-        $endpoint = '/blogs/v3/blog-authors';
+        $endpoint = 'https://api.hubapi.com/blogs/v3/blog-authors';
 
         $queryString = build_query_string($params);
 
@@ -43,7 +43,7 @@ class BlogAuthors extends Resource
      */
     function search($q = '', $params = [])
     {
-        $endpoint = '/blogs/v3/blog-authors/search';
+        $endpoint = 'https://api.hubapi.com/blogs/v3/blog-authors/search';
 
         $params['q'] = $q;
 
@@ -61,7 +61,7 @@ class BlogAuthors extends Resource
      */
     function update($id, $params = [])
     {
-        $endpoint = "/blogs/v3/blog-authors/{$id}";
+        $endpoint = "https://api.hubapi.com/blogs/v3/blog-authors/{$id}";
 
         $options['json'] = $params;
 
@@ -76,7 +76,7 @@ class BlogAuthors extends Resource
      */
     function delete($id)
     {
-        $endpoint = "/blogs/v3/blog-authors/{$id}";
+        $endpoint = "https://api.hubapi.com/blogs/v3/blog-authors/{$id}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -89,7 +89,7 @@ class BlogAuthors extends Resource
      */
     function getById($id)
     {
-        $endpoint = "/blogs/v3/blog-authors/{$id}";
+        $endpoint = "https://api.hubapi.com/blogs/v3/blog-authors/{$id}";
 
         return $this->client->request('get', $endpoint);
     }

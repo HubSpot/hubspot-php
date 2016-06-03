@@ -47,23 +47,19 @@ class Client
      * @param  string $method The HTTP request verb
      * @param  string $endpoint The Hubspot API endpoint
      * @param  array $options An array of options to send with the request
-     * @param  null $query_string A query string to send with the request
-     * @param  string $url
+     * @param  string $query_string A query string to send with the request
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function request($method, $endpoint, $options = [], $query_string = null, $url = null)
+    function request($method, $endpoint, $options = [], $query_string = null)
     {
-        $url = $url ?: $this->generateUrl($endpoint, $query_string);
+        $url = $this->generateUrl($endpoint, $query_string);
 
         $options['headers']['User-Agent'] = $this->user_agent;
 
         try {
             return new Response($this->client->request($method, $url, $options));
         } catch (\Exception $e) {
-            if (method_exists($e, 'hasResponse') && $e->hasResponse()) {
-                return new Response($e->getResponse());
-            }
             throw new BadRequest($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -79,6 +75,6 @@ class Client
     {
         $authType = $this->oauth ? 'access_token' : 'hapikey';
 
-        return $this->base_url.$endpoint.'?'.$authType.'='.$this->key.$query_string;
+        return $endpoint.'?'.$authType.'='.$this->key.$query_string;
     }
 }

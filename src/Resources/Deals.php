@@ -12,7 +12,7 @@ class Deals extends Resource
      */
     function create(array $deal)
     {
-        $endpoint = "/deals/v1/deal";
+        $endpoint = "https://api.hubapi.com/deals/v1/deal";
 
         $options['json'] = $deal;
 
@@ -26,7 +26,7 @@ class Deals extends Resource
      */
     function update($id, array $deal)
     {
-        $endpoint = "/deals/v1/deal/{$id}";
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
         $options['json'] = $deal;
 
@@ -39,7 +39,7 @@ class Deals extends Resource
      */
     function delete($id)
     {
-        $endpoint = "/deals/v1/deal/{$id}";
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -50,7 +50,7 @@ class Deals extends Resource
      */
     function getRecentlyModified(array $params = [])
     {
-        $endpoint = "/deals/v1/deal/recent/modified";
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/recent/modified";
         $queryString = build_query_string($params);
 
         return $this->client->request('get', $endpoint, [], $queryString);
@@ -62,7 +62,7 @@ class Deals extends Resource
      */
     function getRecentlyCreated(array $params = [])
     {
-        $endpoint = "/deals/v1/deal/recent/created";
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/recent/created";
         $queryString = build_query_string($params);
 
         return $this->client->request('get', $endpoint, [], $queryString);
@@ -74,7 +74,7 @@ class Deals extends Resource
      */
     function getById($id)
     {
-        $endpoint = "/deals/v1/deal/{$id}";
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -86,7 +86,7 @@ class Deals extends Resource
      */
     function associateWithCompany($dealId, $companyIds)
     {
-        $endpoint = "/deals/v1/deal/{$dealId}/associations/COMPANY";
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/COMPANY";
 
         $queryString = build_query_string(['id' => (array)$companyIds]);
 
@@ -100,7 +100,7 @@ class Deals extends Resource
      */
     function disassociateFromCompany($dealId, $companyIds)
     {
-        $endpoint = "/deals/v1/deal/{$dealId}/associations/COMPANY";
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/COMPANY";
 
         $queryString = build_query_string(['id' => (array)$companyIds]);
 
@@ -114,7 +114,7 @@ class Deals extends Resource
      */
     function associateWithContact($dealId, $contactIds)
     {
-        $endpoint = "/deals/v1/deal/{$dealId}/associations/CONTACT";
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/CONTACT";
 
         $queryString = build_query_string(['id' => (array)$contactIds]);
 
@@ -128,7 +128,7 @@ class Deals extends Resource
      */
     function disassociateFromContact($dealId, $contactIds)
     {
-        $endpoint = "/deals/v1/deal/{$dealId}/associations/CONTACT";
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/CONTACT";
 
         $queryString = build_query_string(['id' => (array)$contactIds]);
 

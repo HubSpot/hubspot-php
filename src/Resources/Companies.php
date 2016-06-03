@@ -15,7 +15,7 @@ class Companies extends Resource
      */
     function create($properties)
     {
-        $endpoint = '/companies/v2/companies/';
+        $endpoint = 'https://api.hubapi.com/companies/v2/companies/';
         $options['json'] = ['properties' => $properties];
 
         return $this->client->request('post', $endpoint, $options);
@@ -32,7 +32,7 @@ class Companies extends Resource
      */
     function update($id, $properties)
     {
-        $endpoint = "/companies/v2/companies/{$id}";
+        $endpoint = "https://api.hubapi.com/companies/v2/companies/{$id}";
         $options['json'] = ['properties' => $properties];
 
         return $this->client->request('put', $endpoint, $options);
@@ -48,7 +48,7 @@ class Companies extends Resource
      */
     function delete($id)
     {
-        $endpoint = "/companies/v2/companies/{$id}";
+        $endpoint = "https://api.hubapi.com/companies/v2/companies/{$id}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -63,7 +63,7 @@ class Companies extends Resource
      */
     function getRecentlyModified($params = [])
     {
-        $endpoint = '/companies/v2/companies/recent/modified';
+        $endpoint = 'https://api.hubapi.com/companies/v2/companies/recent/modified';
 
         $queryString = build_query_string($params);
 
@@ -80,7 +80,7 @@ class Companies extends Resource
      */
     function getRecentlyCreated($params = [])
     {
-        $endpoint = '/companies/v2/companies/recent/created';
+        $endpoint = 'https://api.hubapi.com/companies/v2/companies/recent/created';
 
         $queryString = build_query_string($params);
 
@@ -97,7 +97,7 @@ class Companies extends Resource
      */
     function getByDomain($domain)
     {
-        $endpoint = "/companies/v2/companies/domain/{$domain}";
+        $endpoint = "https://api.hubapi.com/companies/v2/companies/domain/{$domain}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -112,7 +112,7 @@ class Companies extends Resource
      */
     function getById($id)
     {
-        $endpoint = "/companies/v2/companies/{$id}";
+        $endpoint = "https://api.hubapi.com/companies/v2/companies/{$id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -129,7 +129,7 @@ class Companies extends Resource
      */
     function addContact($contactId, $companyId)
     {
-        $endpoint = "/companies/v2/companies/{$companyId}/contacts/{$contactId}";
+        $endpoint = "https://api.hubapi.com/companies/v2/companies/{$companyId}/contacts/{$contactId}";
 
         return $this->client->request('put', $endpoint);
     }
@@ -145,7 +145,7 @@ class Companies extends Resource
      */
     function getAssociatedContacts($companyId, $params = [])
     {
-        $endpoint = "/companies/v2/companies/{$companyId}/contacts";
+        $endpoint = "https://api.hubapi.com/companies/v2/companies/{$companyId}/contacts";
 
         $queryString = build_query_string($params);
 
@@ -163,7 +163,7 @@ class Companies extends Resource
      */
     function getAssociatedContactIds($companyId, $params = [])
     {
-        $endpoint = "/companies/v2/companies/{$companyId}/vids";
+        $endpoint = "https://api.hubapi.com/companies/v2/companies/{$companyId}/vids";
 
         $queryString = build_query_string($params);
 
@@ -181,7 +181,7 @@ class Companies extends Resource
      */
     function removeContact($contactId, $companyId)
     {
-        $endpoint = "/companies/v2/companies/{$companyId}/contacts/{$contactId}";
+        $endpoint = "https://api.hubapi.com/companies/v2/companies/{$companyId}/contacts/{$contactId}";
 
         return $this->client->request('delete', $endpoint);
     }

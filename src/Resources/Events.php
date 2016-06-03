@@ -5,11 +5,6 @@ namespace SevenShores\Hubspot\Resources;
 class Events extends Resource
 {
     /**
-     * @var string
-     */
-    protected $base_url = "http://track.hubspot.com";
-
-    /**
      * Trigger a custom event.
      *
      * This only works for enterprise accounts.
@@ -30,10 +25,8 @@ class Events extends Resource
         $contactRevenue = null,
         $contactProperties = []
     ) {
-        $this->client->base_url = $this->base_url;
-
         $endpoint = sprintf(
-            "/v1/event?_a=%s&_n=%s",
+            "http://track.hubspot.com/v1/event?_a=%s&_n=%s",
             url_encode($hubId),
             url_encode($eventId)
         );
