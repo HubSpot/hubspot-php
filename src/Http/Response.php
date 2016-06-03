@@ -16,7 +16,7 @@ class Response implements ResponseInterface, ArrayAccess
     /**
      * @var mixed
      */
-    protected $data;
+    public $data;
 
     /**
      * @param \Psr\Http\Message\ResponseInterface $response

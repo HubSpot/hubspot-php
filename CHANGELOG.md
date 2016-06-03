@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - `Client` is now constructed with a configuration array @ryanwinchester
 - Removed `$base_url` in favour of putting the whole endpoint url in the resource methods. @ryanwinchester
 - Optional `HUBSPOT_API_KEY` environment variable changed to `HUBSPOT_SECRET` @ryanwinchester
+- Made `$data` property of `Response` public. Because why not? @ryanwinchester
 
 ### Fixed
 - Trying to return a response with`RequestException` in the `Client`. It now re-throws a new `BadRequest` Exception. [#48](https://github.com/ryanwinchester/hubspot-php/issues/48) @ryanwinchester
