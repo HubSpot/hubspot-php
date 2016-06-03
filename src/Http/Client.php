@@ -31,7 +31,7 @@ class Client
      * @param  GuzzleClient $client The Http Client (Defaults to Guzzle)
      * @throws \SevenShores\Hubspot\Exceptions\HubspotException
      */
-    function __construct($config, $client = null)
+    function __construct($config = [], $client = null)
     {
         $this->key = isset($config['key']) ? $config['key'] : getenv('HUBSPOT_SECRET');
         if (empty($this->key)) {
