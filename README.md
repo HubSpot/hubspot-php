@@ -7,40 +7,36 @@
   [![CodeClimate Test Coverage](https://img.shields.io/codeclimate/coverage/github/ryanwinchester/hubspot-php.svg?style=flat-square)](https://codeclimate.com/github/ryanwinchester/hubspot-php/coverage)
  [![Build Status](https://img.shields.io/travis/ryanwinchester/hubspot-php.svg?style=flat-square)](https://travis-ci.org/ryanwinchester/hubspot-php)
 
-A new HubSpot API client. The sequel to my [perfectly functional wrapper](https://github.com/fungku/hubspot) of HubSpot/haPihP.
+Hubspot API client. The sequel to my [perfectly functional wrapper](https://github.com/fungku/hubspot) of HubSpot/haPihP.
 client. However, this is a complete re-write and includes some of the new COS/v2 endpoints.
-
-##### BETA
-
-Please try it out, and let me know if things are working as expected. There may still be a few small breaking changes here and there, so it is not recommended to use this in production unless you really know what you're doing and don't mind working with code that is changing...
-
-
-#### PHP 5.5+ and Guzzle 6
-
-I've upgraded to Guzzle v6 now.
-
- - **For php 5.3:** see the [php53](https://github.com/ryanwinchester/hubspot-php/tree/php53) branch. You will need to supply your own `HttpClient` implementation.
- - **For php 5.4:** see the [php54-guzzle5](https://github.com/ryanwinchester/hubspot-php/tree/php54-guzzle5) branch.
 
 ## Setup
 
 **Composer:**
 
 ```bash
-composer require "fungku/hubspot-php: dev-master"
+composer require "sevenshores/hubspot-php:~1.0"
 ```
 
 ## Quickstart
 
-#### Instantiate hubspot service
+### Examples Using Factory
 
 All following examples assume this step.
 
-*Note:* The HubSpot class checks for a `HUBSPOT_API_KEY` environment variable if you don't include one during instantiation.
-
 ```php
-$hubspot = Fungku\HubSpot\HubSpotService::make('api-key');
+$hubspot = SevenShores\Hubspot\Factory::create('api-key');
+
+// OR instantiate by passing a configuration array.
+// The only required value is the 'key'
+
+$hubspot = new SevenShores\Hubspot\Factory([
+  'key'      => 'demo',
+  'oauth'    => false, // default
+  'base_url' => 'https://api.hubapi.com' // default
+]);
 ```
+*Note:* The Client class checks for a `HUBSPOT_SECRET` environment variable if you don't include an api key or oauth token during instantiation.
 
 #### Get a single contact:
 
@@ -101,6 +97,27 @@ Now with response methods implementing [PSR-7 ResponseInterface](https://github.
 $response->getStatusCode()   // 200;
 $response->getReasonPhrase() // 'OK';
 // etc...
+```
+
+### Example Without Factory
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Contacts;
+
+$client = new Client(['key' => 'demo']);
+
+$contacts = new Contacts($client);
+
+$response = $contacts->all();
+
+foreach ($response->contacts as $contact) {
+    //
+}
 ```
 
 ## Status
