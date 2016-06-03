@@ -1,12 +1,13 @@
 {
-    "name": "fungku/hubspot-php",
+    "name": "ryanwinchester/hubspot-php",
     "description": "HubSpot PHP API client",
     "keywords": [ "hubspot", "api" ],
     "license": "Apache-2.0",
     "authors": [
         {
-            "name": "Ryan Winchester (fungku)",
-            "email": "fungku@gmail.com"
+            "name": "Ryan Winchester",
+            "email": "fungku@gmail.com",
+            "homepage": "http://ryanwinchester.ca"
         }
     ],
     "require": {

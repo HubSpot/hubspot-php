@@ -15,7 +15,7 @@ client. However, this is a complete re-write and includes some of the new COS/v2
 **Composer:**
 
 ```bash
-composer require "sevenshores/hubspot-php:~1.0"
+composer require "ryanwinchester/hubspot-php:1.0.*@dev"
 ```
 
 ## Quickstart
@@ -124,7 +124,7 @@ foreach ($response->contacts as $contact) {
 
 If you see something not planned, that you want, make an [issue](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
 
-- [x] Blog (COS) :new:
+- [x] Blogs (COS) :new:
 - [x] Blog Authors (COS) :new:
 - [x] Blog Posts (COS) :new:
 - [x] Blog Topics (COS) :new:
@@ -133,13 +133,15 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [x] Contacts
 - [x] Contact Lists
 - [x] Contact Properties
-- [ ] Deals :new:
+- [x] Deals :new:
 - [x] Email :new:
 - [x] Email Events :new:
+- [x] Engagements
 - [x] Events (Enterprise) :new:
 - [x] Files (COS) :new:
 - [x] Forms
 - [x] Keywords
+- [x] Owners
 - [x] Page Publishing (COS) :new:
 - [x] Social Media
 - [ ] Templates (COS) :new:
