@@ -1,22 +1,22 @@
 <?php
-namespace Fungku\HubSpot\Api;
+namespace SevenShores\Hubspot\Resources;
 
-use Fungku\HubSpot\Exceptions\HubSpotException;
+use SevenShores\Hubspot\Exceptions\HubspotException;
 
-class Deals extends Api
+class Deals extends Resource
 {
     /**
      * @param array $deal Array of deal properties.
      * @return mixed
      * @throws HubSpotException
      */
-    public function create(array $deal)
+    function create(array $deal)
     {
         $endpoint = "/deals/v1/deal";
 
         $options['json'] = $deal;
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
@@ -24,59 +24,59 @@ class Deals extends Api
      * @param array $deal The deal properties to update.
      * @return mixed
      */
-    public function update($id, array $deal)
+    function update($id, array $deal)
     {
         $endpoint = "/deals/v1/deal/{$id}";
 
         $options['json'] = $deal;
 
-        return $this->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, $options);
     }
 
     /**
      * @param int $id
      * @return mixed
      */
-    public function delete($id)
+    function delete($id)
     {
         $endpoint = "/deals/v1/deal/{$id}";
 
-        return $this->request('delete', $endpoint);
+        return $this->client->request('delete', $endpoint);
     }
 
     /**
      * @param array $params Optional parameters ['limit', 'offset']
      * @return mixed
      */
-    public function getRecentlyModified(array $params = [])
+    function getRecentlyModified(array $params = [])
     {
         $endpoint = "/deals/v1/deal/recent/modified";
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param array $params Optional parameters ['limit', 'offset']
      * @return mixed
      */
-    public function getRecentlyCreated(array $params = [])
+    function getRecentlyCreated(array $params = [])
     {
         $endpoint = "/deals/v1/deal/recent/created";
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param int $id
      * @return mixed
      */
-    public function getById($id)
+    function getById($id)
     {
         $endpoint = "/deals/v1/deal/{$id}";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -84,13 +84,13 @@ class Deals extends Api
      * @param int|int[] $companyIds
      * @return mixed
      */
-    public function associateWithCompany($dealId, $companyIds)
+    function associateWithCompany($dealId, $companyIds)
     {
         $endpoint = "/deals/v1/deal/{$dealId}/associations/COMPANY";
 
-        $queryString = $this->buildQueryString(['id' => (array)$companyIds]);
+        $queryString = build_query_string(['id' => (array)$companyIds]);
 
-        return $this->request('put', $endpoint, [], $queryString);
+        return $this->client->request('put', $endpoint, [], $queryString);
     }
 
     /**
@@ -98,13 +98,13 @@ class Deals extends Api
      * @param int|int[] $companyIds
      * @return mixed
      */
-    public function disassociateFromCompany($dealId, $companyIds)
+    function disassociateFromCompany($dealId, $companyIds)
     {
         $endpoint = "/deals/v1/deal/{$dealId}/associations/COMPANY";
 
-        $queryString = $this->buildQueryString(['id' => (array)$companyIds]);
+        $queryString = build_query_string(['id' => (array)$companyIds]);
 
-        return $this->request('delete', $endpoint, [], $queryString);
+        return $this->client->request('delete', $endpoint, [], $queryString);
     }
 
     /**
@@ -112,13 +112,13 @@ class Deals extends Api
      * @param int|int[] $contactIds
      * @return mixed
      */
-    public function associateWithContact($dealId, $contactIds)
+    function associateWithContact($dealId, $contactIds)
     {
         $endpoint = "/deals/v1/deal/{$dealId}/associations/CONTACT";
 
-        $queryString = $this->buildQueryString(['id' => (array)$contactIds]);
+        $queryString = build_query_string(['id' => (array)$contactIds]);
 
-        return $this->request('put', $endpoint, [], $queryString);
+        return $this->client->request('put', $endpoint, [], $queryString);
     }
 
     /**
@@ -126,12 +126,12 @@ class Deals extends Api
      * @param int|int[] $contactIds
      * @return mixed
      */
-    public function disassociateFromContact($dealId, $contactIds)
+    function disassociateFromContact($dealId, $contactIds)
     {
         $endpoint = "/deals/v1/deal/{$dealId}/associations/CONTACT";
 
-        $queryString = $this->buildQueryString(['id' => (array)$contactIds]);
+        $queryString = build_query_string(['id' => (array)$contactIds]);
 
-        return $this->request('delete', $endpoint, [], $queryString);
+        return $this->client->request('delete', $endpoint, [], $queryString);
     }
 }

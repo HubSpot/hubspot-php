@@ -1,55 +1,55 @@
 <?php
 
-namespace Fungku\HubSpot\Api;
+namespace SevenShores\Hubspot\Resources;
 
-class BlogTopics extends Api
+class BlogTopics extends Resource
 {
 
     /**
      * Get all the blog topcis
      *
      * @param  array $params Optional parameters ['name','slug','limit','offset']
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function all($params = [])
+    function all($params = [])
     {
 
         $endpoint = '/blogs/v3/topics';
 
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * Search a topic by the query. $query will match name and slug partially
      *
-     * @link http://developers.hubspot.com/docs/methods/blog/v3/search-blog-topics
+     * @see http://developers.hubspot.com/docs/methods/blog/v3/search-blog-topics
      *
      * @param string $query  Search query
      * @param array $params Array of optional parameters ['name','slug','limit', 'offset', 'active', 'blog']
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function search($query, $params = [])
+    function search($query, $params = [])
     {
         $endpoint = '/blogs/v3/topics/search';
 
         $params['q'] = $query;
 
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param int $id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getById($id)
+    function getById($id)
     {
         $endpoint = "/blogs/v3/topics/{$id}";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -57,9 +57,9 @@ class BlogTopics extends Api
      *
      * @param string $name Name of the topic
      * @param  array $params Optional Parameters.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function create($name, $params = [])
+    function create($name, $params = [])
     {
         $endpoint = '/blogs/v3/topics';
 
@@ -67,7 +67,7 @@ class BlogTopics extends Api
 
         $options['json'] = $params;
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
@@ -75,28 +75,28 @@ class BlogTopics extends Api
      *
      * @param  int   $id     The blog topic id.
      * @param  array $params The blog topic fields to update.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function update($id, $params = [])
+    function update($id, $params = [])
     {
         $endpoint = "/blogs/v3/topics/{$id}";
 
         $options['json'] = $params;
 
-        return $this->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, $options);
     }
 
     /**
      * Delete a blog topic.
      *
      * @param  int $id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function delete($id)
+    function delete($id)
     {
         $endpoint = "/blogs/v3/topics/{$id}";
 
-        return $this->request('delete', $endpoint);
+        return $this->client->request('delete', $endpoint);
     }
 
     /**
@@ -104,9 +104,9 @@ class BlogTopics extends Api
      *
      * @param array $topicIds Array of topic ids
      * @param string $groupedTopicName New name of the group
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function merge($topicIds, $groupedTopicName)
+    function merge($topicIds, $groupedTopicName)
     {
         $endpoint = "/blogs/v3/topics/group-topics";
 
@@ -115,6 +115,6 @@ class BlogTopics extends Api
             'groupedTopicName' => $groupedTopicName
         ];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 }

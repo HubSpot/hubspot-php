@@ -1,38 +1,63 @@
 <?php
 
-namespace Fungku\HubSpot\Http;
+namespace SevenShores\Hubspot\Http;
 
-use Fungku\HubSpot\Contracts\HttpClient;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
+use SevenShores\Hubspot\Exceptions\HubspotException;
+use SevenShores\Hubspot\Response;
 
-class Client implements HttpClient
+class Client
 {
-    /**
-     * @var \GuzzleHttp\Client
-     */
-    protected $client;
+    /** @var string */
+    public $key;
+
+    /** @var bool */
+    public $oauth;
+
+    /** @var \GuzzleHttp\Client */
+    public $client;
+
+    /** @var string */
+    public $base_url = "https://api.hubapi.com";
+
+    /** @var string */
+    public $user_agent = 'SevenShores_Hubspot_PHP/1.0 (https://github.com/sevenshores/hubspot-php)';
 
     /**
      * Make it, baby.
      *
-     * @param \GuzzleHttp\Client $client
+     * @param  array        $config Configuration array
+     * @param  GuzzleClient $client The Http Client (Defaults to Guzzle)
+     * @throws \SevenShores\Hubspot\Exceptions\HubspotException
      */
-    public function __construct(GuzzleClient $client = null)
+    function __construct($config, $client = null)
     {
+        $this->key = isset($config['key']) ? $config['key'] : getenv('HUBSPOT_SECRET');
+        if (empty($this->key)) {
+            throw new HubspotException("You must provide a Hubspot api key or token.");
+        }
+        $this->oauth = isset($config['oauth']) ? $config['oauth'] : false;
+        $this->base_url = isset($config['base_url']) ? $config['base_url'] : $this->base_url;
         $this->client = $client ?: new GuzzleClient();
     }
 
     /**
-     * Submit the request and build the response object.
+     * Send the request...
      *
-     * @param string $method
-     * @param string $url
-     * @param array  $options
-     * @return \Fungku\HubSpot\Http\Response
+     * @param  string  $method        The HTTP request verb
+     * @param  string  $endpoint      The Hubspot API endpoint
+     * @param  array   $options       An array of options to send with the request
+     * @param  null    $query_string  A query string to send with the request
+     * @param  string  $url
+     * @return \SevenShores\Hubspot\Response
      */
-    private function makeRequest($method, $url, $options)
+    function request($method, $endpoint, $options = [], $query_string = null, $url = null)
     {
+        $url = $url ?: $this->generateUrl($endpoint, $query_string);
+
+        $options['headers']['User-Agent'] = $this->user_agent;
+
         try {
             return new Response($this->client->request($method, $url, $options));
         } catch (RequestException $e) {
@@ -41,42 +66,16 @@ class Client implements HttpClient
     }
 
     /**
-     * @param  string $url
-     * @param  array  $options
-     * @return \Fungku\HubSpot\Http\Response
+     * Generate the full endpoint url, including query string.
+     *
+     * @param  string  $endpoint      The HubSpot API endpoint.
+     * @param  string  $query_string  The query string to send to the endpoint.
+     * @return string
      */
-    public function get($url, $options = [])
+    protected function generateUrl($endpoint, $query_string = null)
     {
-        return $this->makeRequest('GET', $url, $options);
-    }
+        $authType = $this->oauth ? 'access_token' : 'hapikey';
 
-    /**
-     * @param  string $url
-     * @param  array  $options
-     * @return \Fungku\HubSpot\Http\Response
-     */
-    public function post($url, $options = [])
-    {
-        return $this->makeRequest('POST', $url, $options);
-    }
-
-    /**
-     * @param  string $url
-     * @param  array  $options
-     * @return \Fungku\HubSpot\Http\Response
-     */
-    public function put($url, $options = [])
-    {
-        return $this->makeRequest('PUT', $url, $options);
-    }
-
-    /**
-     * @param  string $url
-     * @param  array  $options
-     * @return \Fungku\HubSpot\Http\Response
-     */
-    public function delete($url, $options = [])
-    {
-        return $this->makeRequest('DELETE', $url, $options);
+        return $this->base_url.$endpoint.'?'.$authType.'='.$this->key.$query_string;
     }
 }

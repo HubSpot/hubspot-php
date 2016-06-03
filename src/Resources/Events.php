@@ -1,8 +1,8 @@
 <?php
 
-namespace Fungku\HubSpot\Api;
+namespace SevenShores\Hubspot\Resources;
 
-class Events extends Api
+class Events extends Resource
 {
     /**
      * @var string
@@ -21,9 +21,9 @@ class Events extends Api
      * @param  string $contactEmail        Optional - contact email.
      * @param  float  $contactRevenue      Optional - the monetary value this event means to you.
      * @param  array  $contactProperties   Optional - array of new contact properties.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function trigger(
+    function trigger(
         $hubId,
         $eventId,
         $contactEmail = null,
@@ -39,7 +39,7 @@ class Events extends Api
         $contactProperties['email'] = $contactEmail;
         $contactProperties['_m'] = $contactRevenue;
 
-        $url = $this->baseUrl . $endpoint . $this->buildQueryString($contactProperties);
+        $url = $this->baseUrl . $endpoint . build_query_string($contactProperties);
 
         return $this->requestUrl('get', $url);
     }

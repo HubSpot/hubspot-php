@@ -1,73 +1,73 @@
 <?php
 
-namespace Fungku\HubSpot\Api;
+namespace SevenShores\Hubspot\Resources;
 
 
-class Contacts extends Api
+class Contacts extends Resource
 {
     /**
      * @param array $properties Array of contact properties.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function create($properties)
+    function create($properties)
     {
         $endpoint = "/contacts/v1/contact";
 
         $options['json'] = ['properties' => $properties];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * @param int   $id         The contact id.
      * @param array $properties The contact properties to update.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function update($id, $properties)
+    function update($id, $properties)
     {
         $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
         $options['json'] = ['properties' => $properties];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * @param string $email      The contact's email address.
      * @param array  $properties The contact properties.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function createOrUpdate($email, $properties = [])
+    function createOrUpdate($email, $properties = [])
     {
         $endpoint = "/contacts/v1/contact/createOrUpdate/email/{$email}";
 
         $options['json'] = ['properties' => $properties];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * @param array $contacts The contacts and properties.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function createOrUpdateBatch($contacts)
+    function createOrUpdateBatch($contacts)
     {
         $endpoint = "/contacts/v1/contact/batch";
 
         $options['json'] = $contacts;
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * @param int $id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function delete($id)
+    function delete($id)
     {
         $endpoint = "/contacts/v1/contact/vid/{$id}";
 
-        return $this->request('delete', $endpoint);
+        return $this->client->request('delete', $endpoint);
     }
 
     /**
@@ -80,18 +80,18 @@ class Contacts extends Api
      * you know where you are in the list of contacts. You can then use the "vid-offset" field in the "vidOffset"
      * parameter described below.
      *
-     * @link http://developers.hubspot.com/docs/methods/contacts/get_contacts
+     * @see http://developers.hubspot.com/docs/methods/contacts/get_contacts
      *
      * @param array $params Array of optional parameters ['count', 'property', 'vidOffset']
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function all($params = [])
+    function all($params = [])
     {
         $endpoint = "/contacts/v1/lists/all/contacts/all";
 
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -99,30 +99,30 @@ class Contacts extends Api
      * A paginated list of contacts will be returned to you, with a maximum of 100 contacts per page, as specified by
      * the "count" parameter. The endpoint only scrolls back in time 30 days.
      *
-     * @link http://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
+     * @see http://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
      *
      * @param array $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property',
      *                      'propertyMode', 'formSubmissionMode', 'showListMemberships']
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function recent($params = [])
+    function recent($params = [])
     {
         $endpoint = "/contacts/v1/lists/recently_updated/contacts/recent";
 
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param int $id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getById($id)
+    function getById($id)
     {
         $endpoint = "/contacts/v1/contact/vid/{$id}/profile";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -132,33 +132,33 @@ class Contacts extends Api
      * This method will also return you much of the HubSpot lead "intelligence" for each requested contact record. The
      * endpoint accepts many query parameters that allow for customization based on a variety of integration use cases.
      *
-     * @link http://developers.hubspot.com/docs/methods/contacts/get_batch_by_vid
+     * @see http://developers.hubspot.com/docs/methods/contacts/get_batch_by_vid
      *
      * @param array $vids   Array of visitor IDs
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                      'showListMemberships', 'includeDeletes']
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getBatchByIds($vids, $params = [])
+    function getBatchByIds($vids, $params = [])
     {
         $endpoint = "/contacts/v1/contact/vids/batch/";
 
         $params['vid'] = $vids;
 
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param string $email
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getByEmail($email)
+    function getByEmail($email)
     {
         $endpoint = "/contacts/v1/contact/email/{$email}/profile";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -167,33 +167,33 @@ class Contacts extends Api
      * This method will also return you much of the HubSpot lead "intelligence" for each requested contact record. The
      * endpoint accepts many query parameters that allow for customization based on a variety of integration use cases.
      *
-     * @link http://developers.hubspot.com/docs/methods/contacts/get_batch_by_email
+     * @see http://developers.hubspot.com/docs/methods/contacts/get_batch_by_email
      *
      * @param array $emails Array of email adresses
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                      'showListMemberships', 'includeDeletes']
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getBatchByEmails($emails, $params = [])
+    function getBatchByEmails($emails, $params = [])
     {
         $endpoint = "/contacts/v1/contact/emails/batch/";
 
         $params['email'] = $emails;
 
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * @param string $utk
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getByToken($utk)
+    function getByToken($utk)
     {
         $endpoint = "/contacts/v1/contact/utk/{$utk}/profile";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -206,22 +206,22 @@ class Contacts extends Api
      * The endpoint does not allow for CORS, so if you are looking up contacts from their user token on the client,
      * you'll need to spin up a proxy server to interact with the API.
      *
-     * @link http://developers.hubspot.com/docs/methods/contacts/get_batch_by_utk
+     * @see http://developers.hubspot.com/docs/methods/contacts/get_batch_by_utk
      *
      * @param array $utks   Array of hubspot user tokens (hubspotutk)
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                      'showListMemberships', 'includeDeletes']
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getBatchByTokens($utks, $params = [])
+    function getBatchByTokens($utks, $params = [])
     {
         $endpoint = "/contacts/v1/contact/utks/batch/";
 
         $params['utk'] = $utks;
 
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -233,31 +233,31 @@ class Contacts extends Api
      * return is the contact ID (vid) that you can then use to look up much
      * more data about that particular contact by its ID.
      *
-     * @link http://developers.hubspot.com/docs/methods/contacts/search_contacts
+     * @see http://developers.hubspot.com/docs/methods/contacts/search_contacts
      *
      * @param string $query  Search query
      * @param array  $params Array of optional parameters ['count', 'offset']
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function search($query, $params = [])
+    function search($query, $params = [])
     {
         $endpoint = "/contacts/v1/search/query";
 
         $params['q'] = $query;
 
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function statistics()
+    function statistics()
     {
         $endpoint = "/contacts/v1/contacts/statistics";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
 }

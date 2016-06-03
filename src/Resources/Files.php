@@ -1,21 +1,21 @@
 <?php
 
-namespace Fungku\HubSpot\Api;
+namespace SevenShores\Hubspot\Resources;
 
-class Files extends Api
+class Files extends Resource
 {
     /**
      * Upload a new file.
      *
      * @param string $file   File path
      * @param array  $params Optional parameters
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function upload($file, $params = [])
+    function upload($file, $params = [])
     {
         $endpoint = "/filemanager/api/v2/files";
 
-        $queryString = $this->buildQueryString([
+        $queryString = build_query_string([
             'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false,
         ]);
 
@@ -25,22 +25,22 @@ class Files extends Api
             'folder_paths' => isset($params['folder_paths']) ? $params['folder_paths'] : null,
         ];
 
-        return $this->request('post', $endpoint, $options, $queryString);
+        return $this->client->request('post', $endpoint, $options, $queryString);
     }
 
     /**
      * Get meta data for all files.
      *
      * @param array $params Optional parameters
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function all($params = [])
+    function all($params = [])
     {
         $endpoint = "/filemanager/api/v2/files";
 
         $options['json'] = $params;
 
-        return $this->request('get', $endpoint, $options);
+        return $this->client->request('get', $endpoint, $options);
     }
 
     /**
@@ -48,9 +48,9 @@ class Files extends Api
      *
      * @param int    $file_id The file ID
      * @param string $file    The file path
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function replace($file_id, $file)
+    function replace($file_id, $file)
     {
         $endpoint = "/filemanager/api/v2/files/{$file_id}";
 
@@ -58,46 +58,46 @@ class Files extends Api
             'files' => fopen($file, 'rb'),
         ];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * Get file metadata.
      *
      * @param $file_id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function meta($file_id)
+    function meta($file_id)
     {
         $endpoint = "/filemanager/api/v2/files/{$file_id}";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
      * Archive a file.
      *
      * @param int $file_id The file ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function archive($file_id)
+    function archive($file_id)
     {
         $endpoint = "/filemanager/api/v2/files/{$file_id}/archive";
 
-        return $this->request('post', $endpoint);
+        return $this->client->request('post', $endpoint);
     }
 
     /**
      * Delete a file.
      *
      * @param int $file_id The file ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function delete($file_id)
+    function delete($file_id)
     {
         $endpoint = "/filemanager/api/v2/files/{$file_id}";
 
-        return $this->request('delete', $endpoint);
+        return $this->client->request('delete', $endpoint);
     }
 
     /**
@@ -110,15 +110,15 @@ class Files extends Api
      *
      * @param int   $file_id
      * @param array $params
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function move($file_id, $params = [])
+    function move($file_id, $params = [])
     {
         $endpoint = "/filemanager/api/v2/files/{$file_id}/move-file";
 
         $options['json'] = $params;
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
@@ -126,9 +126,9 @@ class Files extends Api
      *
      * @param string $folder_name
      * @param int    $parent_folder_id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function createFolder($folder_name, $parent_folder_id)
+    function createFolder($folder_name, $parent_folder_id)
     {
         $endpoint = "/filemanager/api/v2/folders";
 
@@ -137,22 +137,22 @@ class Files extends Api
             'parent_folder_id' => $parent_folder_id,
         ];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * List folders metadata.
      *
      * @param array $params
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function folders($params = [])
+    function folders($params = [])
     {
         $endpoint = "/filemanager/api/v2/folders";
 
         $options['json'] = $params;
 
-        return $this->request('get', $endpoint, $options);
+        return $this->client->request('get', $endpoint, $options);
     }
 
     /**
@@ -160,41 +160,41 @@ class Files extends Api
      *
      * @param int   $folder_id
      * @param array $params
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function updateFolder($folder_id, $params = [])
+    function updateFolder($folder_id, $params = [])
     {
         $endpoint = "/filemanager/api/v2/folders/{$folder_id}";
 
         $options['json'] = $params;
 
-        return $this->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, $options);
     }
 
     /**
      * Delete a folder.
      *
      * @param int $folder_id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function deleteFolder($folder_id)
+    function deleteFolder($folder_id)
     {
         $endpoint = "/filemanager/api/v2/folders/{$folder_id}";
 
-        return $this->request('delete', $endpoint);
+        return $this->client->request('delete', $endpoint);
     }
 
     /**
      * Get the folder by ID.
      *
      * @param int $folder_id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getFolderById($folder_id)
+    function getFolderById($folder_id)
     {
         $endpoint = "/filemanager/api/v2/folders/{$folder_id}";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -202,15 +202,15 @@ class Files extends Api
      *
      * @param int   $folder_id
      * @param array $params
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function moveFolder($folder_id, $params = [])
+    function moveFolder($folder_id, $params = [])
     {
         $endpoint = "/filemanager/api/v2/folders/{$folder_id}/move-folder";
 
         $options['json'] = $params;
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
 }

@@ -1,48 +1,48 @@
 <?php
 
-namespace Fungku\HubSpot\Api;
+namespace SevenShores\Hubspot\Resources;
 
-class Blogs extends Api
+class Blogs extends Resource
 {
     /**
      * Get all blogs.
      *
      * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function all($params = [])
+    function all($params = [])
     {
         $endpoint = '/content/api/v2/blogs';
 
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
      * Get information about a specific blog.
      *
      * @param string $id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getById($id)
+    function getById($id)
     {
         $endpoint = "/content/api/v2/blogs/{$id}";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
      * Get previous versions of the blog.
      *
      * @param string $id     Blog id.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function versions($id)
+    function versions($id)
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -50,12 +50,12 @@ class Blogs extends Api
      *
      * @param string $id         Blog id.
      * @param string $version_id Version id.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getVersion($id, $version_id)
+    function getVersion($id, $version_id)
     {
         $endpoint = "/content/api/v2/blogs/{$id}/versions/{$version_id}";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 }

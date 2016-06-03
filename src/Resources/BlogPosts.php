@@ -1,37 +1,37 @@
 <?php
 
-namespace Fungku\HubSpot\Api;
+namespace SevenShores\Hubspot\Resources;
 
-class BlogPosts extends Api
+class BlogPosts extends Resource
 {
     /**
      * Create a new blog post.
      *
      * @param  array $params Optional Parameters.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function create($params = [])
+    function create($params = [])
     {
         $endpoint = '/content/api/v2/blog-posts';
 
         $options['json'] = $params;
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * Get all blog posts.
      *
      * @param  array $params Optional parameters.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function all($params = [])
+    function all($params = [])
     {
         $endpoint = "/content/api/v2/blog-posts";
 
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -39,98 +39,98 @@ class BlogPosts extends Api
      *
      * @param  int   $id     The blog post id.
      * @param  array $params The blog post fields to update.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function update($id, $params = [])
+    function update($id, $params = [])
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}";
 
         $options['json'] = $params;
 
-        return $this->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, $options);
     }
 
     /**
      * Delete a blog post.
      *
      * @param  int $id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function delete($id)
+    function delete($id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}";
 
-        return $this->request('delete', $endpoint);
+        return $this->client->request('delete', $endpoint);
     }
 
     /**
      * Get a specific blog post.
      *
      * @param  int $id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getById($id)
+    function getById($id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
      * Updates the auto-save buffer. Live objects will not be impacted.
      *
-     * @link http://developers.hubspot.com/docs/methods/blogv2/put_blog_posts_blog_post_id_buffer
+     * @see http://developers.hubspot.com/docs/methods/blogv2/put_blog_posts_blog_post_id_buffer
      *
      * @param  int   $id     The blog post ID.
      * @param  array $params Allowed parameters.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function updateAutoSaveBuffer($id, $params = [])
+    function updateAutoSaveBuffer($id, $params = [])
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}/buffer";
 
         $options['json'] = $params;
 
-        return $this->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, $options);
     }
 
     /**
      * Gets the current contents of the auto-save buffer.
      *
      * @param  int $id The blog post ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getAutoSaveBufferContents($id)
+    function getAutoSaveBufferContents($id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}/buffer";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
      * Clone the blog post.
      *
      * @param  int $id The blog post ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function clonePost($id)
+    function clonePost($id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}/clone";
 
-        return $this->request('post', $endpoint);
+        return $this->client->request('post', $endpoint);
     }
 
     /**
      * Determine if the auto-save buffer differs from the live blog post.
      *
      * @param  int $id The blog post ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function hasBufferedChanges($id)
+    function hasBufferedChanges($id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}/has-buffered-changes";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -144,67 +144,67 @@ class BlogPosts extends Api
      *
      * @param  int    $id     The blog post ID
      * @param  string $action The publish action
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function publishAction($id, $action)
+    function publishAction($id, $action)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}/publish-action";
 
         $options['json'] = ['action' => $action];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * Copies the contents of the auto-save buffer into the live blog post.
      *
      * @param  int $id The blog post ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function pushBufferLive($id)
+    function pushBufferLive($id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}/push-buffer-live";
 
-        return $this->request('post', $endpoint);
+        return $this->client->request('post', $endpoint);
     }
 
     /**
      * Restores a previously deleted blog post.
      *
      * @param  int $id The blog post ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function restoreDeleted($id)
+    function restoreDeleted($id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}/restore-deleted";
 
-        return $this->request('post', $endpoint);
+        return $this->client->request('post', $endpoint);
     }
 
     /**
      * Validates the auto-save buffer version of the blog post.
      *
      * @param  int $id The blog post ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function validateBuffer($id)
+    function validateBuffer($id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}/validate-buffer";
 
-        return $this->request('post', $endpoint);
+        return $this->client->request('post', $endpoint);
     }
 
     /**
      * List previous versions of the blog post.
      *
      * @param  int $id The blog post ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function versions($id)
+    function versions($id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$id}/versions";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -212,13 +212,13 @@ class BlogPosts extends Api
      *
      * @param int $post_id    The blog post ID
      * @param int $version_id The version ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getVersion($post_id, $version_id)
+    function getVersion($post_id, $version_id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$post_id}/versions/{$version_id}";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -226,14 +226,14 @@ class BlogPosts extends Api
      *
      * @param int $post_id    The blog post ID
      * @param int $version_id The version ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function restoreVersion($post_id, $version_id)
+    function restoreVersion($post_id, $version_id)
     {
         $endpoint = "/content/api/v2/blog-posts/{$post_id}/versions/restore";
 
         $options['json'] = compact('version_id');
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 }

@@ -1,37 +1,37 @@
 <?php
 
-namespace Fungku\HubSpot\Api;
+namespace SevenShores\Hubspot\Resources;
 
-class Pages extends Api
+class Pages extends Resource
 {
     /**
      * Create a new page.
      *
      * @param array $params Optional Parameters.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function create($params)
+    function create($params)
     {
         $endpoint = '/content/api/v2/pages';
 
         $options['json'] = $params;
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * Get all pages.
      *
      * @param array $params Optional parameters.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function all($params = [])
+    function all($params = [])
     {
         $endpoint = "/content/api/v2/pages";
 
-        $queryString = $this->buildQueryString($params);
+        $queryString = build_query_string($params);
 
-        return $this->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -39,93 +39,93 @@ class Pages extends Api
      *
      * @param int   $page_id The page id.
      * @param array $params  The page fields to update.
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function update($page_id, $params)
+    function update($page_id, $params)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}";
 
         $options['json'] = $params;
 
-        return $this->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, $options);
     }
 
     /**
      * Delete a page.
      *
      * @param int $page_id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function delete($page_id)
+    function delete($page_id)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}";
 
-        return $this->request('delete', $endpoint);
+        return $this->client->request('delete', $endpoint);
     }
 
     /**
      * Get a specific page.
      *
      * @param int $page_id
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getById($page_id)
+    function getById($page_id)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
      * Updates the auto-save buffer.
      *
      * @param in $page_id The page ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function updateAutoSaveBuffer($page_id)
+    function updateAutoSaveBuffer($page_id)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}/buffer";
 
-        return $this->request('put', $endpoint);
+        return $this->client->request('put', $endpoint);
     }
 
     /**
      * Gets the current contents of the auto-save buffer.
      *
      * @param int $page_id The page ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getAutoSaveBufferContents($page_id)
+    function getAutoSaveBufferContents($page_id)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}/buffer";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
      * Clone the page.
      *
      * @param int $page_id The page ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function clonePage($page_id)
+    function clonePage($page_id)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}/clone";
 
-        return $this->request('post', $endpoint);
+        return $this->client->request('post', $endpoint);
     }
 
     /**
      * Determine if the auto-save buffer differs from the live page.
      *
      * @param int $page_id The page ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function hasBufferedChanges($page_id)
+    function hasBufferedChanges($page_id)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}/has-buffered-changes";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -139,67 +139,67 @@ class Pages extends Api
      *
      * @param int    $page_id The page ID
      * @param string $action  The publish action
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function publishAction($page_id, $action)
+    function publishAction($page_id, $action)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}/publish-action";
 
         $options['json'] = ['action' => $action];
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * Copies the contents of the auto-save buffer into the live page.
      *
      * @param int $page_id The page ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function pushBufferLive($page_id)
+    function pushBufferLive($page_id)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}/push-buffer-live";
 
-        return $this->request('post', $endpoint);
+        return $this->client->request('post', $endpoint);
     }
 
     /**
      * Restores a previously deleted page.
      *
      * @param int $page_id The page ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function restoreDeleted($page_id)
+    function restoreDeleted($page_id)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}/restore-deleted";
 
-        return $this->request('post', $endpoint);
+        return $this->client->request('post', $endpoint);
     }
 
     /**
      * Validates the auto-save buffer version of the page.
      *
      * @param int $page_id The page ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function validateBuffer($page_id)
+    function validateBuffer($page_id)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}/validate-buffer";
 
-        return $this->request('post', $endpoint);
+        return $this->client->request('post', $endpoint);
     }
 
     /**
      * List previous versions of the page.
      *
      * @param int $page_id The page ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function versions($page_id)
+    function versions($page_id)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}/versions";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
@@ -207,14 +207,14 @@ class Pages extends Api
      *
      * @param int $page_id    The page ID
      * @param int $version_id The version ID
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function restoreVersion($page_id, $version_id)
+    function restoreVersion($page_id, $version_id)
     {
         $endpoint = "/content/api/v2/pages/{$page_id}/versions/restore";
 
         $options['json'] = compact('version_id');
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 }

@@ -21,7 +21,8 @@
     "autoload": {
         "psr-4": {
             "Fungku\\HubSpot\\": "src/"
-        }
+        },
+        "files": [ "src/helpers.php" ]
     },
     "autoload-dev": {
         "psr-4": {

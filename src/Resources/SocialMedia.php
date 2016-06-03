@@ -1,88 +1,88 @@
 <?php
 
-namespace Fungku\HubSpot\Api;
+namespace SevenShores\Hubspot\Resources;
 
-class SocialMedia extends Api
+class SocialMedia extends Resource
 {
     /**
      * Get all publishing channels.
      *
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function channels()
+    function channels()
     {
         $endpoint = '/broadcast/v1/channels/setting/publish/current';
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
      * Get a broadcast channel.
      *
      * @param string $channel_guid
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getChannelById($channel_guid)
+    function getChannelById($channel_guid)
     {
         $endpoint = "/broadcast/v1/channels/{$channel_guid}";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
      * Get all broadcast messages.
      *
      * @param array $params
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function broadcasts($params = [])
+    function broadcasts($params = [])
     {
         $endpoint = "/broadcast/v1/broadcasts";
 
         $options['json'] = $params;
 
-        return $this->request('get', $endpoint, $options);
+        return $this->client->request('get', $endpoint, $options);
     }
 
     /**
      * Get a broadcast.
      *
      * @param string $broadcast_guid
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function getBroadcastById($broadcast_guid)
+    function getBroadcastById($broadcast_guid)
     {
         $endpoint = "/broadcast/v1/broadcasts/{$broadcast_guid}";
 
-        return $this->request('get', $endpoint);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
      * Create a new broadcast message.
      *
      * @param array $broadcast
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function createBroadcast($broadcast)
+    function createBroadcast($broadcast)
     {
         $endpoint = "/broadcast/v1/broadcasts";
 
         $options['json'] = $broadcast;
 
-        return $this->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * Cancel a broadcast message.
      *
      * @param string $broadcast_guid
-     * @return \Fungku\HubSpot\Http\Response
+     * @return \SevenShores\Hubspot\Response
      */
-    public function cancelBroadcast($broadcast_guid)
+    function cancelBroadcast($broadcast_guid)
     {
         $endpoint = "/broadcast/v1/broadcasts/{$broadcast_guid}";
 
-        return $this->request('delete', $endpoint);
+        return $this->client->request('delete', $endpoint);
     }
 
 }
