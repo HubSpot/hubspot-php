@@ -8,7 +8,7 @@ class BlogAuthors extends Resource
      * Create a new blog author.
      *
      * @param  array $params Optional Parameters.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($params = [])
     {
@@ -23,7 +23,7 @@ class BlogAuthors extends Resource
      * Get all blog authors.
      *
      * @param  array $params Optional parameters.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all($params = [])
     {
@@ -39,7 +39,7 @@ class BlogAuthors extends Resource
      *
      * @param string $q         Search query
      * @param array $params     Optional parameters.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function search($q = '', $params = [])
     {
@@ -57,7 +57,7 @@ class BlogAuthors extends Resource
      *
      * @param  int   $id     Unique identifier for a blog author.
      * @param  array $params Fields to update.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function update($id, $params = [])
     {
@@ -72,7 +72,7 @@ class BlogAuthors extends Resource
      * Delete a blog author.
      *
      * @param  int $id  Unique identifier for the blog author to delete.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($id)
     {
@@ -85,7 +85,7 @@ class BlogAuthors extends Resource
      * Get a specific blog author.
      *
      * @param  int $id  Unique identifier for a blog author.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getById($id)
     {

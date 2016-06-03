@@ -1,8 +1,6 @@
 <?php
 
-namespace Fungku\HubSpot\Tests\Unit\Support;
-
-use Fungku\HubSpot\Support\QueryBuilder;
+namespace SevenShores\Hubspot\Tests\Unit\Support;
 
 class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +12,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
             'lastname'  => 'blo'
         ];
 
-        $queryString = QueryBuilder::build($query);
+        $queryString = build_query_string($query);
 
         $this->assertEquals('&firstname=joe&lastname=blo', $queryString);
     }
@@ -29,7 +27,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $queryString = QueryBuilder::build($query);
+        $queryString = build_query_string($query);
 
         $this->assertEquals('&property=firstname&property=lastname', $queryString);
     }
@@ -39,7 +37,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $ids = [10, 11, 12, 13, 14, 15];
 
-        $queryString = QueryBuilder::buildBatch('id', $ids);
+        $queryString = build_batch_query_string('id', $ids);
 
         $this->assertEquals('&id=10&id=11&id=12&id=13&id=14&id=15', $queryString);
     }
@@ -56,7 +54,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $queryString = QueryBuilder::build($query);
+        $queryString = build_query_string($query);
 
         $this->assertEquals(
             '&email=test%40test.com&description=two%20words&property=firstname&property=lastname',
@@ -76,7 +74,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $queryString = QueryBuilder::build($query, PHP_QUERY_RFC1738);
+        $queryString = build_query_string($query, PHP_QUERY_RFC1738);
 
         $this->assertEquals(
             '&email=test%40test.com&description=two+words&property=firstname&property=lastname',
@@ -89,7 +87,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $string = "I wan't this encoded!";
 
-        $queryString = QueryBuilder::encode($string);
+        $queryString = url_encode($string);
 
         $this->assertEquals(
             'I%20wan%27t%20this%20encoded%21',
@@ -102,7 +100,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $string = "I wan't this encoded!";
 
-        $queryString = QueryBuilder::encode($string, false);
+        $queryString = url_encode($string, false);
 
         $this->assertEquals($string, $queryString);
     }

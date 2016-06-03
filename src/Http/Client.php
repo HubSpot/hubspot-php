@@ -5,7 +5,6 @@ namespace SevenShores\Hubspot\Http;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
 use SevenShores\Hubspot\Exceptions\HubspotException;
-use SevenShores\Hubspot\Response;
 
 class Client
 {
@@ -50,7 +49,7 @@ class Client
      * @param  array   $options       An array of options to send with the request
      * @param  null    $query_string  A query string to send with the request
      * @param  string  $url
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function request($method, $endpoint, $options = [], $query_string = null, $url = null)
     {

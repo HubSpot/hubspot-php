@@ -12,7 +12,7 @@ class ContactProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/get_contacts_properties
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all()
     {
@@ -29,7 +29,7 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/companies/get_contact_property
      *
      * @param string $name The name of the property.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function get($name)
     {
@@ -47,7 +47,7 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property
      *
      * @param array $property
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($property)
     {
@@ -67,7 +67,7 @@ class ContactProperties extends Resource
      *
      * @param string $name
      * @param array  $property
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function update($name, $property)
     {
@@ -87,7 +87,7 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property
      *
      * @param string $name
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($name)
     {
@@ -104,7 +104,7 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
      *
      * @param bool $includeProperties
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getGroups($includeProperties = false)
     {
@@ -124,7 +124,7 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property_group
      *
      * @param array $group Group properties
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function createGroup($group)
     {
@@ -144,7 +144,7 @@ class ContactProperties extends Resource
      *
      * @param string $name
      * @param array  $group
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function updateGroup($name, $group)
     {
@@ -164,7 +164,7 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property_group
      *
      * @param string $name
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function deleteGroup($name)
     {

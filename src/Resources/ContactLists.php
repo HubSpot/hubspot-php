@@ -8,7 +8,7 @@ class ContactLists extends Resource
      * Create a new contact list.
      *
      * @param array $list Contact list properties.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($list)
     {
@@ -24,7 +24,7 @@ class ContactLists extends Resource
      *
      * @param int   $id   The contact list id.
      * @param array $list The contact list properties to update.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function update($id, $list)
     {
@@ -39,7 +39,7 @@ class ContactLists extends Resource
      * Delete a contact list.
      *
      * @param int $id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($id)
     {
@@ -52,7 +52,7 @@ class ContactLists extends Resource
      * Get a set of contact lists.
      *
      * @param array $params ['count', 'offset']
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all($params = [])
     {
@@ -65,7 +65,7 @@ class ContactLists extends Resource
 
     /**
      * @param int $id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getById($id)
     {
@@ -76,7 +76,7 @@ class ContactLists extends Resource
 
     /**
      * @param array $ids
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getBatchByIds($ids)
     {
@@ -89,7 +89,7 @@ class ContactLists extends Resource
 
     /**
      * @param array $params Optional parameters ['count', 'offset']
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getAllStatic($params = [])
     {
@@ -102,7 +102,7 @@ class ContactLists extends Resource
 
     /**
      * @param array $params Optional parameters ['count', 'offset']
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getAllDynamic($params = [])
     {
@@ -119,7 +119,7 @@ class ContactLists extends Resource
      * @param int   $id     List id
      * @param array $params Optional parameters
      *                      { count, vidOffset, property, propertyMode, formSubmissionMode, showListMemberships }
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function contacts($id, $params = [])
     {
@@ -135,7 +135,7 @@ class ContactLists extends Resource
      *
      * @param int   $id List id
      * @param array $params
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function recentContacts($id, $params = [])
     {
@@ -150,7 +150,7 @@ class ContactLists extends Resource
      * Refresh a list.
      *
      * @param int $id List id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function refresh($id)
     {
@@ -164,7 +164,7 @@ class ContactLists extends Resource
      *
      * @param int   $list_id
      * @param array $contact_ids
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function addContact($list_id, $contact_ids)
     {
@@ -180,7 +180,7 @@ class ContactLists extends Resource
      *
      * @param int   $list_id
      * @param array $contact_ids
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function removeContact($list_id, $contact_ids)
     {

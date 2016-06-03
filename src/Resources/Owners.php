@@ -10,7 +10,7 @@ class Owners extends Resource
 {
     /**
      * @param array $properties
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($properties)
     {
@@ -23,7 +23,7 @@ class Owners extends Resource
     /**
      * @param int $id
      * @param array $properties
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function update($id, $properties)
     {
@@ -35,7 +35,7 @@ class Owners extends Resource
 
     /**
      * @param int $id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getById($id)
     {
@@ -46,7 +46,7 @@ class Owners extends Resource
 
     /**
      * @param array $params
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all($params = [])
     {

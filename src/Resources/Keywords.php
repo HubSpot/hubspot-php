@@ -8,7 +8,7 @@ class Keywords extends Resource
      * Get all keywords.
      *
      * @param string $search Optional search query.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all($search = null)
     {
@@ -23,7 +23,7 @@ class Keywords extends Resource
      * Get a keyword.
      *
      * @param string $keyword_guid
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getById($keyword_guid)
     {
@@ -36,7 +36,7 @@ class Keywords extends Resource
      * Create a new keyword.
      *
      * @param array $keyword
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($keyword)
     {
@@ -51,7 +51,7 @@ class Keywords extends Resource
      * Delete a keyword.
      *
      * @param string $keyword_guid
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($keyword_guid)
     {

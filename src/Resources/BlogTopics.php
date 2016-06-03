@@ -9,7 +9,7 @@ class BlogTopics extends Resource
      * Get all the blog topcis
      *
      * @param  array $params Optional parameters ['name','slug','limit','offset']
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all($params = [])
     {
@@ -28,7 +28,7 @@ class BlogTopics extends Resource
      *
      * @param string $query  Search query
      * @param array $params Array of optional parameters ['name','slug','limit', 'offset', 'active', 'blog']
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function search($query, $params = [])
     {
@@ -43,7 +43,7 @@ class BlogTopics extends Resource
 
     /**
      * @param int $id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getById($id)
     {
@@ -57,7 +57,7 @@ class BlogTopics extends Resource
      *
      * @param string $name Name of the topic
      * @param  array $params Optional Parameters.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($name, $params = [])
     {
@@ -75,7 +75,7 @@ class BlogTopics extends Resource
      *
      * @param  int   $id     The blog topic id.
      * @param  array $params The blog topic fields to update.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function update($id, $params = [])
     {
@@ -90,7 +90,7 @@ class BlogTopics extends Resource
      * Delete a blog topic.
      *
      * @param  int $id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($id)
     {
@@ -104,7 +104,7 @@ class BlogTopics extends Resource
      *
      * @param array $topicIds Array of topic ids
      * @param string $groupedTopicName New name of the group
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function merge($topicIds, $groupedTopicName)
     {

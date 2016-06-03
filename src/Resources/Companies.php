@@ -11,7 +11,7 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/create_company
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($properties)
     {
@@ -28,7 +28,7 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/update_company
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function update($id, $properties)
     {
@@ -44,7 +44,7 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/delete_company
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($id)
     {
@@ -59,7 +59,7 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_companies_modified
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getRecentlyModified($params = [])
     {
@@ -76,7 +76,7 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_companies_created
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getRecentlyCreated($params = [])
     {
@@ -93,7 +93,7 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_companies_by_domain
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getByDomain($domain)
     {
@@ -108,7 +108,7 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getById($id)
     {
@@ -125,7 +125,7 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/add_contact_to_company
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function addContact($contactId, $companyId)
     {
@@ -141,7 +141,7 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_contacts
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getAssociatedContacts($companyId, $params = [])
     {
@@ -159,7 +159,7 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_contacts_by_id
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getAssociatedContactIds($companyId, $params = [])
     {
@@ -177,7 +177,7 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/remove_contact_from_company
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function removeContact($contactId, $companyId)
     {

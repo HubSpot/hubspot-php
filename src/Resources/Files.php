@@ -9,7 +9,7 @@ class Files extends Resource
      *
      * @param string $file   File path
      * @param array  $params Optional parameters
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function upload($file, $params = [])
     {
@@ -32,7 +32,7 @@ class Files extends Resource
      * Get meta data for all files.
      *
      * @param array $params Optional parameters
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all($params = [])
     {
@@ -48,7 +48,7 @@ class Files extends Resource
      *
      * @param int    $file_id The file ID
      * @param string $file    The file path
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function replace($file_id, $file)
     {
@@ -65,7 +65,7 @@ class Files extends Resource
      * Get file metadata.
      *
      * @param $file_id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function meta($file_id)
     {
@@ -78,7 +78,7 @@ class Files extends Resource
      * Archive a file.
      *
      * @param int $file_id The file ID
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function archive($file_id)
     {
@@ -91,7 +91,7 @@ class Files extends Resource
      * Delete a file.
      *
      * @param int $file_id The file ID
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($file_id)
     {
@@ -110,7 +110,7 @@ class Files extends Resource
      *
      * @param int   $file_id
      * @param array $params
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function move($file_id, $params = [])
     {
@@ -126,7 +126,7 @@ class Files extends Resource
      *
      * @param string $folder_name
      * @param int    $parent_folder_id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function createFolder($folder_name, $parent_folder_id)
     {
@@ -144,7 +144,7 @@ class Files extends Resource
      * List folders metadata.
      *
      * @param array $params
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function folders($params = [])
     {
@@ -160,7 +160,7 @@ class Files extends Resource
      *
      * @param int   $folder_id
      * @param array $params
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function updateFolder($folder_id, $params = [])
     {
@@ -175,7 +175,7 @@ class Files extends Resource
      * Delete a folder.
      *
      * @param int $folder_id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function deleteFolder($folder_id)
     {
@@ -188,7 +188,7 @@ class Files extends Resource
      * Get the folder by ID.
      *
      * @param int $folder_id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getFolderById($folder_id)
     {
@@ -202,7 +202,7 @@ class Files extends Resource
      *
      * @param int   $folder_id
      * @param array $params
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function moveFolder($folder_id, $params = [])
     {

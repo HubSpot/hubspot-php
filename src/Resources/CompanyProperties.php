@@ -10,7 +10,7 @@ class CompanyProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/create_company_property
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($property)
     {
@@ -28,7 +28,7 @@ class CompanyProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/update_company_property
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function update($propertyName, $property)
     {
@@ -46,7 +46,7 @@ class CompanyProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/delete_company_property
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($propertyName)
     {
@@ -61,7 +61,7 @@ class CompanyProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_property
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function get($propertyName)
     {
@@ -75,7 +75,7 @@ class CompanyProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_properties
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all()
     {
@@ -90,7 +90,7 @@ class CompanyProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/create_company_property_group
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function createGroup($group)
     {
@@ -108,7 +108,7 @@ class CompanyProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/update_company_property_group
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function updateGroup($groupName, $group)
     {
@@ -126,7 +126,7 @@ class CompanyProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/delete_company_property_group
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function deleteGroup($groupName)
     {
@@ -141,7 +141,7 @@ class CompanyProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_property_groups
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getAllGroups($includeProperties = false)
     {

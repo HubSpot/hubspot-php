@@ -8,7 +8,7 @@ class BlogPosts extends Resource
      * Create a new blog post.
      *
      * @param  array $params Optional Parameters.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($params = [])
     {
@@ -23,7 +23,7 @@ class BlogPosts extends Resource
      * Get all blog posts.
      *
      * @param  array $params Optional parameters.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all($params = [])
     {
@@ -39,7 +39,7 @@ class BlogPosts extends Resource
      *
      * @param  int   $id     The blog post id.
      * @param  array $params The blog post fields to update.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function update($id, $params = [])
     {
@@ -54,7 +54,7 @@ class BlogPosts extends Resource
      * Delete a blog post.
      *
      * @param  int $id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($id)
     {
@@ -67,7 +67,7 @@ class BlogPosts extends Resource
      * Get a specific blog post.
      *
      * @param  int $id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getById($id)
     {
@@ -83,7 +83,7 @@ class BlogPosts extends Resource
      *
      * @param  int   $id     The blog post ID.
      * @param  array $params Allowed parameters.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function updateAutoSaveBuffer($id, $params = [])
     {
@@ -98,7 +98,7 @@ class BlogPosts extends Resource
      * Gets the current contents of the auto-save buffer.
      *
      * @param  int $id The blog post ID
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getAutoSaveBufferContents($id)
     {
@@ -111,7 +111,7 @@ class BlogPosts extends Resource
      * Clone the blog post.
      *
      * @param  int $id The blog post ID
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function clonePost($id)
     {
@@ -124,7 +124,7 @@ class BlogPosts extends Resource
      * Determine if the auto-save buffer differs from the live blog post.
      *
      * @param  int $id The blog post ID
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function hasBufferedChanges($id)
     {
@@ -144,7 +144,7 @@ class BlogPosts extends Resource
      *
      * @param  int    $id     The blog post ID
      * @param  string $action The publish action
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function publishAction($id, $action)
     {
@@ -159,7 +159,7 @@ class BlogPosts extends Resource
      * Copies the contents of the auto-save buffer into the live blog post.
      *
      * @param  int $id The blog post ID
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function pushBufferLive($id)
     {
@@ -172,7 +172,7 @@ class BlogPosts extends Resource
      * Restores a previously deleted blog post.
      *
      * @param  int $id The blog post ID
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function restoreDeleted($id)
     {
@@ -185,7 +185,7 @@ class BlogPosts extends Resource
      * Validates the auto-save buffer version of the blog post.
      *
      * @param  int $id The blog post ID
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function validateBuffer($id)
     {
@@ -198,7 +198,7 @@ class BlogPosts extends Resource
      * List previous versions of the blog post.
      *
      * @param  int $id The blog post ID
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function versions($id)
     {
@@ -212,7 +212,7 @@ class BlogPosts extends Resource
      *
      * @param int $post_id    The blog post ID
      * @param int $version_id The version ID
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getVersion($post_id, $version_id)
     {
@@ -226,7 +226,7 @@ class BlogPosts extends Resource
      *
      * @param int $post_id    The blog post ID
      * @param int $version_id The version ID
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function restoreVersion($post_id, $version_id)
     {

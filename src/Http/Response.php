@@ -1,6 +1,6 @@
 <?php
 
-namespace SevenShores\Hubspot;
+namespace SevenShores\Hubspot\Http;
 
 use ArrayAccess;
 use Psr\Http\Message\ResponseInterface;

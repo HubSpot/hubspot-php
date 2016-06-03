@@ -1,30 +1,24 @@
 <?php
 
-namespace Fungku\HubSpot\Tests\Helpers;
-
-use Fungku\HubSpot\Support\QueryBuilder;
+namespace SevenShores\Hubspot\Tests\Helpers;
 
 trait SendsRequests
 {
     protected $client;
-
-    protected $baseUrl = 'https://api.hubapi.com';
-
+    protected $base_url = 'https://api.hubapi.com';
     protected $auth = '?hapikey=demo';
-
-    protected $apiKey = 'demo';
-
+    protected $api_key = 'demo';
     protected $headers = [
-        'User-Agent' => 'Fungku_HubSpot_PHP/0.9 (https://github.com/ryanwinchester/hubspot-php)',
+        'User-Agent' => 'SevenShores_Hubspot_PHP/1.0 (https://github.com/ryanwinchester/hubspot-php)',
     ];
 
     protected function buildQuery($query = [])
     {
-        return QueryBuilder::build($query);
+        return build_query_string($query);
     }
 
-    protected function buildUrl($endpoint, $queryString = null)
+    protected function buildUrl($endpoint, $query_string = null)
     {
-        return $this->baseUrl . $endpoint . $this->auth . $queryString;
+        return $this->base_url.$endpoint.$this->auth.$query_string;
     }
 }

@@ -20,13 +20,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Fungku\\HubSpot\\": "src/"
+            "SevenShores\\Hubspot\\": "src/"
         },
         "files": [ "src/helpers.php" ]
     },
     "autoload-dev": {
         "psr-4": {
-          "Fungku\\HubSpot\\Tests\\": "tests/"
+          "SevenShores\\Hubspot\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable"

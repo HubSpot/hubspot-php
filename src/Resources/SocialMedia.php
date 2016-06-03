@@ -7,7 +7,7 @@ class SocialMedia extends Resource
     /**
      * Get all publishing channels.
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function channels()
     {
@@ -20,7 +20,7 @@ class SocialMedia extends Resource
      * Get a broadcast channel.
      *
      * @param string $channel_guid
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getChannelById($channel_guid)
     {
@@ -33,7 +33,7 @@ class SocialMedia extends Resource
      * Get all broadcast messages.
      *
      * @param array $params
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function broadcasts($params = [])
     {
@@ -48,7 +48,7 @@ class SocialMedia extends Resource
      * Get a broadcast.
      *
      * @param string $broadcast_guid
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getBroadcastById($broadcast_guid)
     {
@@ -61,7 +61,7 @@ class SocialMedia extends Resource
      * Create a new broadcast message.
      *
      * @param array $broadcast
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function createBroadcast($broadcast)
     {
@@ -76,7 +76,7 @@ class SocialMedia extends Resource
      * Cancel a broadcast message.
      *
      * @param string $broadcast_guid
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function cancelBroadcast($broadcast_guid)
     {

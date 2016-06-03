@@ -7,7 +7,7 @@ class Contacts extends Resource
 {
     /**
      * @param array $properties Array of contact properties.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($properties)
     {
@@ -21,7 +21,7 @@ class Contacts extends Resource
     /**
      * @param int   $id         The contact id.
      * @param array $properties The contact properties to update.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function update($id, $properties)
     {
@@ -35,7 +35,7 @@ class Contacts extends Resource
     /**
      * @param string $email      The contact's email address.
      * @param array  $properties The contact properties.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function createOrUpdate($email, $properties = [])
     {
@@ -48,7 +48,7 @@ class Contacts extends Resource
 
     /**
      * @param array $contacts The contacts and properties.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function createOrUpdateBatch($contacts)
     {
@@ -61,7 +61,7 @@ class Contacts extends Resource
 
     /**
      * @param int $id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($id)
     {
@@ -83,7 +83,7 @@ class Contacts extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/get_contacts
      *
      * @param array $params Array of optional parameters ['count', 'property', 'vidOffset']
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all($params = [])
     {
@@ -103,7 +103,7 @@ class Contacts extends Resource
      *
      * @param array $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property',
      *                      'propertyMode', 'formSubmissionMode', 'showListMemberships']
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function recent($params = [])
     {
@@ -116,7 +116,7 @@ class Contacts extends Resource
 
     /**
      * @param int $id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getById($id)
     {
@@ -137,7 +137,7 @@ class Contacts extends Resource
      * @param array $vids   Array of visitor IDs
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                      'showListMemberships', 'includeDeletes']
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getBatchByIds($vids, $params = [])
     {
@@ -152,7 +152,7 @@ class Contacts extends Resource
 
     /**
      * @param string $email
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getByEmail($email)
     {
@@ -172,7 +172,7 @@ class Contacts extends Resource
      * @param array $emails Array of email adresses
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                      'showListMemberships', 'includeDeletes']
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getBatchByEmails($emails, $params = [])
     {
@@ -187,7 +187,7 @@ class Contacts extends Resource
 
     /**
      * @param string $utk
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getByToken($utk)
     {
@@ -211,7 +211,7 @@ class Contacts extends Resource
      * @param array $utks   Array of hubspot user tokens (hubspotutk)
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                      'showListMemberships', 'includeDeletes']
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getBatchByTokens($utks, $params = [])
     {
@@ -237,7 +237,7 @@ class Contacts extends Resource
      *
      * @param string $query  Search query
      * @param array  $params Array of optional parameters ['count', 'offset']
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function search($query, $params = [])
     {
@@ -251,7 +251,7 @@ class Contacts extends Resource
     }
 
     /**
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function statistics()
     {

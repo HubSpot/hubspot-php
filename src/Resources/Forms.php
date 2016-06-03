@@ -15,7 +15,7 @@ class Forms extends Resource
      * @param int    $portal_id
      * @param string $form_guid
      * @param array  $form
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function submit($portal_id, $form_guid, $form)
     {
@@ -23,7 +23,7 @@ class Forms extends Resource
 
         $options['form_params'] = $form;
 
-        return $this->requestUrl('post', $url, $options);
+        return $this->client->request('post', null, $options, null, $url);
     }
 
     /**
@@ -31,7 +31,7 @@ class Forms extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/forms/v2/get_forms
      *
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all()
     {
@@ -46,7 +46,7 @@ class Forms extends Resource
      * @see http://developers.hubspot.com/docs/methods/forms/v2/get_form
      *
      * @param string $form_guid
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getById($form_guid)
     {
@@ -61,7 +61,7 @@ class Forms extends Resource
      * @see http://developers.hubspot.com/docs/methods/forms/v2/create_form
      *
      * @param array $form
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($form)
     {
@@ -79,7 +79,7 @@ class Forms extends Resource
      *
      * @param string $form_guid
      * @param array  $form
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function update($form_guid, $form)
     {
@@ -96,7 +96,7 @@ class Forms extends Resource
      * @see http://developers.hubspot.com/docs/methods/forms/v2/delete_form
      *
      * @param string $form_guid
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($form_guid)
     {
@@ -111,7 +111,7 @@ class Forms extends Resource
      * @see http://developers.hubspot.com/docs/methods/forms/v2/get_fields
      *
      * @param string $form_guid
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getFields($form_guid)
     {
@@ -127,7 +127,7 @@ class Forms extends Resource
      *
      * @param string $form_guid
      * @param string $name
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getFieldByName($form_guid, $name)
     {

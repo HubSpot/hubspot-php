@@ -7,7 +7,7 @@ class Events extends Resource
     /**
      * @var string
      */
-    protected $baseUrl = "http://track.hubspot.com";
+    protected $base_url = "http://track.hubspot.com";
 
     /**
      * Trigger a custom event.
@@ -21,7 +21,7 @@ class Events extends Resource
      * @param  string $contactEmail        Optional - contact email.
      * @param  float  $contactRevenue      Optional - the monetary value this event means to you.
      * @param  array  $contactProperties   Optional - array of new contact properties.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function trigger(
         $hubId,
@@ -30,17 +30,19 @@ class Events extends Resource
         $contactRevenue = null,
         $contactProperties = []
     ) {
+        $this->client->base_url = $this->base_url;
+
         $endpoint = sprintf(
             "/v1/event?_a=%s&_n=%s",
-            $this->urlEncode($hubId),
-            $this->urlEncode($eventId)
+            url_encode($hubId),
+            url_encode($eventId)
         );
 
         $contactProperties['email'] = $contactEmail;
         $contactProperties['_m'] = $contactRevenue;
 
-        $url = $this->baseUrl . $endpoint . build_query_string($contactProperties);
+        $query_string = build_query_string($contactProperties);
 
-        return $this->requestUrl('get', $url);
+        return $this->client->request('get', $endpoint, [], $query_string);
     }
 }

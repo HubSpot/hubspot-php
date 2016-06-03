@@ -8,7 +8,7 @@ class Engagements extends Resource
      * @param array $engagement Array of engagement engagement.
      * @param array $associations Array of engagement associations.
      * @param array $metadata Array of engagement metadata.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function create($engagement, $associations, $metadata)
     {
@@ -27,7 +27,7 @@ class Engagements extends Resource
      * @param int   $id         The engagement id.
      * @param array $engagement The engagement engagement to update.
      * @param array $metadata The engagement metadata to update.
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function update($id, $engagement, $metadata)
     {
@@ -43,7 +43,7 @@ class Engagements extends Resource
 
     /**
      * @param int $id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function delete($id)
     {
@@ -54,7 +54,7 @@ class Engagements extends Resource
 
     /**
      * @param int $id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function get($id)
     {
@@ -67,7 +67,7 @@ class Engagements extends Resource
      * @param int $id
      * @param string $object_type
      * @param int $object_id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      **/
     function associate($id, $object_type, $object_id)
     {

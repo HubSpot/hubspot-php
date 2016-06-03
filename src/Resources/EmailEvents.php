@@ -8,7 +8,7 @@ class EmailEvents extends Resource
      * Get campaign IDs for a portal.
      *
      * @param array $params Optional parameters
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getCampaignIds($params = [])
     {
@@ -24,7 +24,7 @@ class EmailEvents extends Resource
      *
      * @param int $campaign_id
      * @param int $application_id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getCampaignById($campaign_id, $application_id)
     {
@@ -39,7 +39,7 @@ class EmailEvents extends Resource
      * Get email events for a campaign or recipient.
      *
      * @param array $params Optional parameters
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function all($params = [])
     {
@@ -55,7 +55,7 @@ class EmailEvents extends Resource
      *
      * @param int $id      The event ID
      * @param int $created Timestamp (milliseconds) when the event was created
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function getById($id, $created)
     {

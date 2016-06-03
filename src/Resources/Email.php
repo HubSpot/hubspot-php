@@ -8,7 +8,7 @@ class Email extends Resource
      * Get email subscription types for a portal.
      *
      * @param int $portal_id
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function subscriptions($portal_id)
     {
@@ -23,7 +23,7 @@ class Email extends Resource
      * View subscriptions timeline for a portal.
      *
      * @param array $params Optional parameters
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function subscriptionsTimeline($params = [])
     {
@@ -39,7 +39,7 @@ class Email extends Resource
      *
      * @param int    $portal_id
      * @param string $email
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function subscriptionStatus($portal_id, $email)
     {
@@ -56,7 +56,7 @@ class Email extends Resource
      * @param int    $portal_id
      * @param string $email
      * @param array  $params
-     * @return \SevenShores\Hubspot\Response
+     * @return \SevenShores\Hubspot\Http\Response
      */
     function updateSubscription($portal_id, $email, $params = [])
     {
