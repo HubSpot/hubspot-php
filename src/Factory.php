@@ -42,25 +42,25 @@ class Factory
     }
 
     /**
-     * Make an instance of the service with an API key.
+     * Create an instance of the service with an API key.
      *
      * @param  string  $api_key  Hubspot API key.
      * @param  Client  $client   An Http client.
      * @return static
      */
-    static function make($api_key = null, $client = null)
+    static function create($api_key = null, $client = null)
     {
         return new static(['key' => $api_key], $client);
     }
 
     /**
-     * Make an instance of the service with an Oauth token.
+     * Create an instance of the service with an Oauth token.
      *
      * @param  string  $token   Hubspot oauth access token.
      * @param  Client  $client  An Http client.
      * @return static
      */
-    static function makeWithToken($token, $client = null)
+    static function createWithToken($token, $client = null)
     {
         return new static(['key' => $token, 'oauth' => true], $client);
     }
