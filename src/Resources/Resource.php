@@ -2,8 +2,6 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-use SevenShores\Hubspot\Http\Client;
-
 abstract class Resource
 {
     /**
@@ -16,7 +14,7 @@ abstract class Resource
      *
      * @param \SevenShores\Hubspot\Http\Client $client
      */
-    function __construct(Client $client)
+    function __construct($client)
     {
         $this->client = $client;
     }
