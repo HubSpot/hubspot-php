@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Exceptions;
 
-class BadRequest
+class BadRequest extends \Exception
 {
     //
 }

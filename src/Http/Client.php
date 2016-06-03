@@ -18,10 +18,7 @@ class Client
     public $client;
 
     /** @var string */
-    public $base_url = "https://api.hubapi.com";
-
-    /** @var string */
-    public $user_agent = 'SevenShores_Hubspot_PHP/1.0 (https://github.com/sevenshores/hubspot-php)';
+    private $user_agent = "SevenShores_Hubspot_PHP/1.0.0-rc.1 (https://github.com/ryanwinchester/hubspot-php)";
 
     /**
      * Make it, baby.
@@ -32,12 +29,11 @@ class Client
      */
     function __construct($config = [], $client = null)
     {
-        $this->key = isset($config['key']) ? $config['key'] : getenv('HUBSPOT_SECRET');
+        $this->key = isset($config["key"]) ? $config["key"] : getenv("HUBSPOT_SECRET");
         if (empty($this->key)) {
             throw new InvalidArgument("You must provide a Hubspot api key or token.");
         }
-        $this->oauth = isset($config['oauth']) ? $config['oauth'] : false;
-        $this->base_url = isset($config['base_url']) ? $config['base_url'] : $this->base_url;
+        $this->oauth = isset($config["oauth"]) ? $config["oauth"] : false;
         $this->client = $client ?: new GuzzleClient();
     }
 
@@ -55,7 +51,7 @@ class Client
     {
         $url = $this->generateUrl($endpoint, $query_string);
 
-        $options['headers']['User-Agent'] = $this->user_agent;
+        $options["headers"]["User-Agent"] = $this->user_agent;
 
         try {
             return new Response($this->client->request($method, $url, $options));
@@ -73,8 +69,8 @@ class Client
      */
     protected function generateUrl($endpoint, $query_string = null)
     {
-        $authType = $this->oauth ? 'access_token' : 'hapikey';
+        $authType = $this->oauth ? "access_token" : "hapikey";
 
-        return $endpoint.'?'.$authType.'='.$this->key.$query_string;
+        return $endpoint."?".$authType."=".$this->key.$query_string;
     }
 }
