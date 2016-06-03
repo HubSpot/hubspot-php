@@ -3,8 +3,8 @@
 namespace SevenShores\Hubspot\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\RequestException;
-use SevenShores\Hubspot\Exceptions\HubspotException;
+use SevenShores\Hubspot\Exceptions\BadRequest;
+use SevenShores\Hubspot\Exceptions\InvalidArgument;
 
 class Client
 {
@@ -28,13 +28,13 @@ class Client
      *
      * @param  array        $config Configuration array
      * @param  GuzzleClient $client The Http Client (Defaults to Guzzle)
-     * @throws \SevenShores\Hubspot\Exceptions\HubspotException
+     * @throws \SevenShores\Hubspot\Exceptions\InvalidArgument
      */
     function __construct($config = [], $client = null)
     {
         $this->key = isset($config['key']) ? $config['key'] : getenv('HUBSPOT_SECRET');
         if (empty($this->key)) {
-            throw new HubspotException("You must provide a Hubspot api key or token.");
+            throw new InvalidArgument("You must provide a Hubspot api key or token.");
         }
         $this->oauth = isset($config['oauth']) ? $config['oauth'] : false;
         $this->base_url = isset($config['base_url']) ? $config['base_url'] : $this->base_url;
@@ -44,12 +44,13 @@ class Client
     /**
      * Send the request...
      *
-     * @param  string  $method        The HTTP request verb
-     * @param  string  $endpoint      The Hubspot API endpoint
-     * @param  array   $options       An array of options to send with the request
-     * @param  null    $query_string  A query string to send with the request
-     * @param  string  $url
+     * @param  string $method The HTTP request verb
+     * @param  string $endpoint The Hubspot API endpoint
+     * @param  array $options An array of options to send with the request
+     * @param  null $query_string A query string to send with the request
+     * @param  string $url
      * @return \SevenShores\Hubspot\Http\Response
+     * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
     function request($method, $endpoint, $options = [], $query_string = null, $url = null)
     {
@@ -59,8 +60,11 @@ class Client
 
         try {
             return new Response($this->client->request($method, $url, $options));
-        } catch (RequestException $e) {
-            return new Response($e->getResponse());
+        } catch (\Exception $e) {
+            if (method_exists($e, 'hasResponse') && $e->hasResponse()) {
+                return new Response($e->getResponse());
+            }
+            throw new BadRequest($e->getMessage(), $e->getCode(), $e);
         }
     }
 
