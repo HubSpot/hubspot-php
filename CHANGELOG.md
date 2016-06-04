@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- *nothing of note yet here*
+
+## [1.0.0-rc.1]
 
 ### Added
 - [CHANGELOG](http://keepachangelog.com/) @ryanwinchester
@@ -23,4 +26,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Trying to return a response with`RequestException` in the `Client`. It now re-throws a new `BadRequest` Exception. [#48](https://github.com/ryanwinchester/hubspot-php/issues/48) @ryanwinchester
 
-[Unreleased]: https://github.com/ryanwinchester/hubspot-php/compare/master...refactor
+[Unreleased]: https://github.com/ryanwinchester/hubspot-php/compare/v1.0.0-rc.1...HEAD
+[1.0.0-rc.1]: https://github.com/ryanwinchester/hubspot-php/compare/v0.9.11...v1.0.0-rc.1
