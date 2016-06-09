@@ -9,6 +9,7 @@ use SevenShores\Hubspot\Http\Client;
  *
  * @method \SevenShores\Hubspot\Resources\Blogs blogs()
  * @method \SevenShores\Hubspot\Resources\BlogPosts blogPosts()
+ * @method \SevenShores\Hubspot\Resources\BlogTopics blogTopics()
  * @method \SevenShores\Hubspot\Resources\Companies companies()
  * @method \SevenShores\Hubspot\Resources\CompanyProperties companyProperties()
  * @method \SevenShores\Hubspot\Resources\ContactLists contactLists()
