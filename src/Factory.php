@@ -5,8 +5,7 @@ namespace SevenShores\Hubspot;
 use SevenShores\Hubspot\Http\Client;
 
 /**
- * Class HubspotService
- * @package SevenShores\Hubspot
+ * Class Factory
  *
  * @method \SevenShores\Hubspot\Resources\Blogs blogs()
  * @method \SevenShores\Hubspot\Resources\BlogPosts blogPosts()
