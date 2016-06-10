@@ -74,7 +74,7 @@ class Factory
      */
     function __call($name, $arguments = null)
     {
-        $resource = 'SevenShores\\Hubspot\\Resource\\' . ucfirst($name);
+        $resource = 'SevenShores\\Hubspot\\Resources\\' . ucfirst($name);
 
         return new $resource($this->client);
     }
