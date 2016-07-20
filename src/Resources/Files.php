@@ -19,10 +19,18 @@ class Files extends Resource
             'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false,
         ]);
 
-        $options['body'] = [
-            'files'        => fopen($file, 'rb'),
-            'file_names'   => isset($params['file_names']) ? $params['file_names'] : null,
-            'folder_paths' => isset($params['folder_paths']) ? $params['folder_paths'] : null,
+        $options['multipart'] = [
+            [
+                'name' => 'files',
+                'contents' => fopen($file, 'rb')
+            ],
+            [
+                'name' => 'file_names',
+                'contents' => isset($params['file_names']) ? $params['file_names'] : null
+            ],[
+                'name' => 'folder_paths',
+                'contents' => isset($params['folder_paths']) ? $params['folder_paths'] : null
+            ]
         ];
 
         return $this->client->request('post', $endpoint, $options, $queryString);
