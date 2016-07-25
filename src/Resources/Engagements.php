@@ -8,9 +8,10 @@ class Engagements extends Resource
      * @param array $engagement Array of engagement engagement.
      * @param array $associations Array of engagement associations.
      * @param array $metadata Array of engagement metadata.
+     * @param array $attachments Array of engagement attachments.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($engagement, $associations, $metadata)
+    function create($engagement, $associations, $metadata, $attachments = array())
     {
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements";
 
@@ -18,6 +19,7 @@ class Engagements extends Resource
             'engagement' => $engagement,
             'associations' => $associations,
             'metadata' => $metadata,
+            'attachments' => $attachments
         ];
 
         return $this->client->request('post', $endpoint, $options);
