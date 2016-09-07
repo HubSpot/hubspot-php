@@ -15,6 +15,7 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Resources\ContactLists contactLists()
  * @method \SevenShores\Hubspot\Resources\ContactProperties contactProperties()
  * @method \SevenShores\Hubspot\Resources\Contacts contacts()
+ * @method \SevenShores\Hubspot\Resources\Engagements engagements()
  * @method \SevenShores\Hubspot\Resources\Email email()
  * @method \SevenShores\Hubspot\Resources\EmailEvents emailEvents()
  * @method \SevenShores\Hubspot\Resources\Files files()
