@@ -7,6 +7,7 @@ use SevenShores\Hubspot\Http\Client;
 /**
  * Class Factory
  *
+ * @method \SevenShores\Hubspot\Resources\BlogAuthors blogauthors()
  * @method \SevenShores\Hubspot\Resources\Blogs blogs()
  * @method \SevenShores\Hubspot\Resources\BlogPosts blogPosts()
  * @method \SevenShores\Hubspot\Resources\BlogTopics blogTopics()
@@ -17,14 +18,15 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Resources\Contacts contacts()
  * @method \SevenShores\Hubspot\Resources\Email email()
  * @method \SevenShores\Hubspot\Resources\EmailEvents emailEvents()
+ * @method \SevenShores\Hubspot\Resources\Engagements engagements()
  * @method \SevenShores\Hubspot\Resources\Files files()
  * @method \SevenShores\Hubspot\Resources\Forms forms()
  * @method \SevenShores\Hubspot\Resources\Keywords keywords()
- * @method \SevenShores\Hubspot\Resources\MarketPlace marketPlace()
  * @method \SevenShores\Hubspot\Resources\Pages pages()
  * @method \SevenShores\Hubspot\Resources\SocialMedia socialMedia()
  * @method \SevenShores\Hubspot\Resources\Workflows workflows()
  * @method \SevenShores\Hubspot\Resources\Events events()
+ * @method \SevenShores\Hubspot\Resources\DealProperties dealproperties()
  * @method \SevenShores\Hubspot\Resources\Deals deals()
  * @method \SevenShores\Hubspot\Resources\Owners owners()
  */
