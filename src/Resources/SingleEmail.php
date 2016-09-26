@@ -16,7 +16,7 @@ class SingleEmail extends Resource
 
         $options['json'] = [
           'emailId'           => $id,
-          'message'           => $message
+          'message'           => $message,
           'contactProperties' => $contactProperties,
           'customProperties'  => $customProperties
         ];
