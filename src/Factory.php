@@ -29,6 +29,7 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Resources\DealProperties dealproperties()
  * @method \SevenShores\Hubspot\Resources\Deals deals()
  * @method \SevenShores\Hubspot\Resources\Owners owners()
+ * @method \SevenShores\Hubspot\Resources\SingleSend singleSend()
  */
 class Factory
 {
