@@ -7,7 +7,12 @@ class SingleEmail extends Resource
     /**
      * Send an email designed and maintained in the HubSpot marketing Email Tool.
      *
-     * @param array  $params
+     * @see http://developers.hubspot.com/docs/methods/email/transactional_email/single-send-overview
+     *
+     * @param int    $id
+     * @param array  $message
+     * @param array  $contactProperties
+     * @param array  $customProperties
      * @return \SevenShores\Hubspot\Http\Response
      */
     function send($id, $message = [], $contactProperties = [], $customProperties = [])
