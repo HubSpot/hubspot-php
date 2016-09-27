@@ -138,14 +138,37 @@ class Timeline extends Resource
     /**
      * Create Property for Timeline Event Type
      *
-     * @param string $appId
-     * @param string $eventTypeId
+     * @param string      $appId
+     * @param string      $eventTypeId
+     * @param string      $name
+     * @param string      $label
+     * @param string      $propertyType
+     * @param string|null $objectProperty
+     * @param array|null  $options
+     *
+     * @return mixed
      *
      * @see http://developers.hubspot.com/docs/methods/timeline/create-timeline-event-type-property
      */
-    public function createEventTypeProperty($appId, $eventTypeId)
-    {
+    public function createEventTypeProperty(
+        $appId,
+        $eventTypeId,
+        $name,
+        $label,
+        $propertyType,
+        $objectProperty = null,
+        $options = null
+    ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
+
+        $options = [
+            'name'         => $name,
+            'label'        => $label,
+            'propertyType' => $propertyType,
+            'options'      => $options,
+        ];
+
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
