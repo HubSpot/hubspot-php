@@ -21,11 +21,14 @@ class Timeline extends Resource
      *
      * @param string $appId
      *
+     * @return mixed
+     *
      * @see http://developers.hubspot.com/docs/methods/timeline/get-event-types
      */
     public function getEventTypes($appId)
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types";
+        return $this->client->request('get', $endpoint);
     }
 
     /**
