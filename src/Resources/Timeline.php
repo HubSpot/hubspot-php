@@ -78,14 +78,29 @@ class Timeline extends Resource
     /**
      * Update Timeline Event Type
      *
-     * @param string $appId
-     * @param string $eventTypeId
+     * @param string      $appId
+     * @param string      $eventTypeId
+     * @param string|null $name
+     * @param string|null $headerTemplate
+     * @param string|null $detailTemplate
+     * @param string|null $objectType
+     *
+     * @return mixed
      *
      * @see http://developers.hubspot.com/docs/methods/timeline/update-event-type
      */
     public function updateEventType($appId, $eventTypeId)
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}";
+
+        $options = [
+            'name'           => $name,
+            'headerTemplate' => $headerTemplate,
+            'detailTemplate' => $detailTemplate,
+            'objectType'     => $objectType,
+        ];
+
+        return $this->client->request('put', $endpoint, $options);
     }
 
     /**
