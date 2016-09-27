@@ -5,6 +5,8 @@ namespace SevenShores\Hubspot\Resources;
 class Timeline extends Resource
 {
     /**
+     * Create or Update Timeline Event
+     *
      * @param string $appId
      *
      * @see http://developers.hubspot.com/docs/methods/timeline/create-or-update-event
@@ -15,6 +17,8 @@ class Timeline extends Resource
     }
 
     /**
+     * Get Timeline Event Types
+     *
      * @param string $appId
      *
      * @see http://developers.hubspot.com/docs/methods/timeline/get-event-types
@@ -25,6 +29,8 @@ class Timeline extends Resource
     }
 
     /**
+     * Create Timeline Event Type
+     *
      * @param string $appId
      *
      * @see http://developers.hubspot.com/docs/methods/timeline/create-event-type
@@ -35,6 +41,8 @@ class Timeline extends Resource
     }
 
     /**
+     * Update Timeline Event Type
+     *
      * @param string $appId
      * @param string $eventTypeId
      *
@@ -46,6 +54,8 @@ class Timeline extends Resource
     }
 
     /**
+     * Delete Timeline Event Type
+     *
      * @param string $appId
      * @param string $eventTypeId
      *
@@ -57,6 +67,8 @@ class Timeline extends Resource
     }
 
     /**
+     * Get Properties for Timeline Event Type
+     *
      * @param string $appId
      * @param string $eventTypeId
      *
@@ -68,6 +80,8 @@ class Timeline extends Resource
     }
 
     /**
+     * Create Property for Timeline Event Type
+     *
      * @param string $appId
      * @param string $eventTypeId
      *
@@ -79,10 +93,12 @@ class Timeline extends Resource
     }
 
     /**
+     * Update Property for Timeline Event Type
+     *
      * @param string $appId
      * @param string $eventTypeId
      *
-     * @see http://developers.hubspot.com/docs/methods/timeline/delete-timeline-event-type-property
+     * @see http://developers.hubspot.com/docs/methods/timeline/udpate-timeline-event-type-property
      */
     public function updateEventTypeProperty($appId, $eventTypeId)
     {
@@ -90,6 +106,8 @@ class Timeline extends Resource
     }
 
     /**
+     * Delete Property for Timeline Event Type
+     *
      * @param string $appId
      * @param string $eventTypeId
      *
