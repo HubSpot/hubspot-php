@@ -156,4 +156,5 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [x] Page Publishing (COS) :new:
 - [x] Social Media
 - [ ] Templates (COS) :new:
+- [ ] Timeline :new:
 - [x] Workflows
