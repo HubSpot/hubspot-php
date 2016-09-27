@@ -111,10 +111,13 @@ class Timeline extends Resource
      * @param string $appId
      * @param string $eventTypeId
      *
+     * @return mixed
+     *
      * @see http://developers.hubspot.com/docs/methods/timeline/delete-timeline-event-type-property
      */
     public function deleteEventTypeProperty($appId, $eventTypeId)
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
+        return $this->client->request('delete', $endpoint);
     }
 }
