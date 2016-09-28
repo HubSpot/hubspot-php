@@ -67,7 +67,24 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      */
     public function createOrUpdate()
     {
-        // @todo
+        $response = $this->createEventTypeProperty();
+        $eventTypeProperty = json_decode((string) $response->getBody());
+
+        $timestamp = new \DateTime();
+        $timestamp->setDate(2016, 6, 11);
+
+        $response = $this->timeline->createOrUpdate(
+            self::APP_ID,
+            $this->eventTypeId,
+            'TEST-PHP-HUBSPOT-'.substr(md5(microtime()),rand(0,26),16),
+            null,
+            'demo@demo.com',
+            null,
+            [
+                $eventTypeProperty->name => 'BAM',
+            ],
+            $timestamp
+        );
     }
 
     /**

@@ -2,17 +2,21 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+use DateTime;
+
 class Timeline extends Resource
 {
     /**
      * Create or Update Timeline Event
      *
-     * @param int         $appId
-     * @param int         $eventTypeId
-     * @param string      $id
-     * @param int|null    $objectId
-     * @param string|null $email
-     * @param string|null $utk
+     * @param int           $appId
+     * @param int           $eventTypeId
+     * @param string        $id
+     * @param int|null      $objectId
+     * @param string|null   $email
+     * @param string|null   $utk
+     * @param array         $extraData
+     * @param DateTime|null $timestamp
      *
      * @return mixed
      *
@@ -24,7 +28,9 @@ class Timeline extends Resource
         $id,
         $objectId = null,
         $email = null,
-        $utk = null
+        $utk = null,
+        $extraData = [],
+        DateTime $timestamp = null
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event";
 
@@ -34,7 +40,13 @@ class Timeline extends Resource
             'objectId'    => $objectId,
             'email'       => $email,
             'utk'         => $utk,
+            'extraData'   => $extraData,
         ];
+
+        if (isset($timestamp)) {
+            // Times must be in milliseconds epoch time.
+            $data['json']['timestamp'] = $timestamp->getTimestamp() * 1000;
+        }
 
         return $this->client->request('put', $endpoint, $data);
     }
