@@ -166,7 +166,7 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      */
     public function createEventTypeProperty()
     {
-        $name = 'property';
+        $name = 'property-' . substr(md5(microtime()),rand(0,26),5);
         $label = 'Property';
         $propertyType = 'String';
 
