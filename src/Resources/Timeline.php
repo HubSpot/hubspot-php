@@ -208,19 +208,32 @@ class Timeline extends Resource
     public function updateEventTypeProperty(
         $appId,
         $eventTypeId,
-        $id,
-        $propertyType = null,
+        $eventTypePropertyId,
         $label = null,
+        $propertyType = null,
         $options = null
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
 
         $options['json'] = [
-            'id'           => $id,
-            'propertyType' => $propertyType,
-            'label'        => $label,
-            'options'      => $options,
+            'id' => $eventTypePropertyId,
         ];
+
+        if (isset($label)) {
+            $options['json']['label'] = $label;
+        }
+
+        if (isset($propertyType)) {
+            $options['json']['propertyType'] = $propertyType;
+        }
+
+        if (isset($options)) {
+            $options['json']['options'] = $options;
+        }
+
+        var_dump($options);
+
+        $options['debug'] = true;
 
         return $this->client->request('put', $endpoint, $options);
     }
@@ -228,16 +241,17 @@ class Timeline extends Resource
     /**
      * Delete Property for Timeline Event Type
      *
-     * @param int    $appId
-     * @param string $eventTypeId
+     * @param int $appId
+     * @param int $eventTypeId
+     * @param int $eventTypePropertyId
      *
      * @return mixed
      *
      * @see http://developers.hubspot.com/docs/methods/timeline/delete-timeline-event-type-property
      */
-    public function deleteEventTypeProperty($appId, $eventTypeId)
+    public function deleteEventTypeProperty($appId, $eventTypeId, $eventTypePropertyId)
     {
-        $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
+        $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties/{$eventTypePropertyId}";
         return $this->client->request('delete', $endpoint);
     }
 }

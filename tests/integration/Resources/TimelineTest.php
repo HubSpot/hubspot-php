@@ -197,6 +197,15 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      */
     public function deleteEventTypeProperty()
     {
-        // @todo
+        $response = $this->createEventTypeProperty();
+        $eventTypeProperty = json_decode((string) $response->getBody());
+        $response = $this->timeline->deleteEventTypeProperty(
+            self::APP_ID,
+            $this->eventTypeId,
+            $eventTypeProperty->id
+        );
+
+        $this->assertEquals(204, $response->getStatusCode());
+        return $response;
     }
 }
