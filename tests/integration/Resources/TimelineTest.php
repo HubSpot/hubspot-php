@@ -192,7 +192,27 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      */
     public function updateEventTypeProperty()
     {
-        // @todo
+        $response = $this->createEventTypeProperty();
+        $eventTypeProperty = json_decode((string) $response->getBody());
+
+        $label = 'New Property Label';
+        $propertyType = 'String';
+
+        $response = $this->timeline->updateEventTypeProperty(
+            self::APP_ID,
+            $this->eventTypeId,
+            $eventTypeProperty->id,
+            $eventTypeProperty->name,
+            $label,
+            $propertyType
+        );
+
+        $eventTypeProperty = json_decode((string) $response->getBody());
+        $this->assertEquals($label, $eventTypeProperty->label);
+        $this->assertEquals($propertyType, $eventTypeProperty->propertyType);
+        $this->assertEquals(200, $response->getStatusCode());
+
+        return $response;
     }
 
     /**

@@ -8,7 +8,7 @@ class Timeline extends Resource
      * Create or Update Timeline Event
      *
      * @param int         $appId
-     * @param string      $eventTypeId
+     * @param int         $eventTypeId
      * @param string      $id
      * @param int|null    $objectId
      * @param string|null $email
@@ -28,7 +28,7 @@ class Timeline extends Resource
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event";
 
-        $options['json'] = [
+        $data['json'] = [
             'eventTypeId' => $eventTypeId,
             'id'          => $id,
             'objectId'    => $objectId,
@@ -36,7 +36,7 @@ class Timeline extends Resource
             'utk'         => $utk,
         ];
 
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, $data);
     }
 
     /**
@@ -76,7 +76,7 @@ class Timeline extends Resource
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types";
 
-        $options['json'] = [
+        $data['json'] = [
             'applicationId'  => $appId,
             'name'           => $name,
             'headerTemplate' => $headerTemplate,
@@ -84,14 +84,14 @@ class Timeline extends Resource
             'objectType'     => $objectType,
         ];
 
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $data);
     }
 
     /**
      * Update Timeline Event Type
      *
      * @param int         $appId
-     * @param string      $eventTypeId
+     * @param int         $eventTypeId
      * @param string|null $name
      * @param string|null $headerTemplate
      * @param string|null $detailTemplate
@@ -111,7 +111,7 @@ class Timeline extends Resource
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}";
 
-        $options['json'] = [
+        $data['json'] = [
             'applicationId'  => $appId,
             'name'           => $name,
             'headerTemplate' => $headerTemplate,
@@ -119,14 +119,14 @@ class Timeline extends Resource
             'objectType'     => $objectType,
         ];
 
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, $data);
     }
 
     /**
      * Delete Timeline Event Type
      *
-     * @param int    $appId
-     * @param string $eventTypeId
+     * @param int $appId
+     * @param int $eventTypeId
      *
      * @return mixed
      *
@@ -141,8 +141,8 @@ class Timeline extends Resource
     /**
      * Get Properties for Timeline Event Type
      *
-     * @param int    $appId
-     * @param string $eventTypeId
+     * @param int $appId
+     * @param int $eventTypeId
      *
      * @return mixed
      *
@@ -158,7 +158,7 @@ class Timeline extends Resource
      * Create Property for Timeline Event Type
      *
      * @param int         $appId
-     * @param string      $eventTypeId
+     * @param int         $eventTypeId
      * @param string      $name
      * @param string      $label
      * @param string      $propertyType
@@ -180,7 +180,7 @@ class Timeline extends Resource
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
 
-        $options['json'] = [
+        $data['json'] = [
             'name'           => $name,
             'label'          => $label,
             'propertyType'   => $propertyType,
@@ -188,18 +188,19 @@ class Timeline extends Resource
             'options'        => $options,
         ];
 
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $data);
     }
 
     /**
      * Update Property for Timeline Event Type
      *
-     * @param int         $appId
-     * @param string      $eventTypeId
-     * @param string      $id
-     * @param string|null $propertyType
-     * @param string|null $label
-     * @param array|null  $options
+     * @param int        $appId
+     * @param int        $eventTypeId
+     * @param int        $eventTypePropertyId
+     * @param string     $name
+     * @param string     $label
+     * @param string     $propertyType
+     * @param array|null $options
      *
      * @return mixed
      *
@@ -209,33 +210,25 @@ class Timeline extends Resource
         $appId,
         $eventTypeId,
         $eventTypePropertyId,
-        $label = null,
-        $propertyType = null,
+        $name,
+        $label,
+        $propertyType,
         $options = null
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
 
-        $options['json'] = [
-            'id' => $eventTypePropertyId,
+        $data['json'] = [
+            'id'           => $eventTypePropertyId,
+            'name'         => $name,
+            'label'        => $label,
+            'propertyType' => $propertyType,
         ];
 
-        if (isset($label)) {
-            $options['json']['label'] = $label;
-        }
-
-        if (isset($propertyType)) {
-            $options['json']['propertyType'] = $propertyType;
-        }
-
         if (isset($options)) {
-            $options['json']['options'] = $options;
+            $data['json']['options'] = $options;
         }
 
-        var_dump($options);
-
-        $options['debug'] = true;
-
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, $data);
     }
 
     /**
