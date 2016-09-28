@@ -163,7 +163,7 @@ class Timeline extends Resource
      * @param string      $label
      * @param string      $propertyType
      * @param string|null $objectProperty
-     * @param array|null  $options
+     * @param array       $options
      *
      * @return mixed
      *
@@ -176,15 +176,16 @@ class Timeline extends Resource
         $label,
         $propertyType,
         $objectProperty = null,
-        $options = null
+        $options = []
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
 
         $options['json'] = [
-            'name'         => $name,
-            'label'        => $label,
-            'propertyType' => $propertyType,
-            'options'      => $options,
+            'name'           => $name,
+            'label'          => $label,
+            'propertyType'   => $propertyType,
+            'objectProperty' => $objectProperty,
+            'options'        => $options,
         ];
 
         return $this->client->request('post', $endpoint, $options);
