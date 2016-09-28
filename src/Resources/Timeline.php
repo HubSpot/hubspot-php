@@ -18,8 +18,14 @@ class Timeline extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/timeline/create-or-update-event
      */
-    public function createOrUpdate($appId, $eventTypeId, $id, $objectId = null, $email = null, $utk = null)
-    {
+    public function createOrUpdate(
+        $appId,
+        $eventTypeId,
+        $id,
+        $objectId = null,
+        $email = null,
+        $utk = null
+    ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event";
 
         $options['json'] = [
@@ -61,8 +67,13 @@ class Timeline extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/timeline/create-event-type
      */
-    public function createEventType($appId, $name, $headerTemplate = null, $detailTemplate = null, $objectType = null)
-    {
+    public function createEventType(
+        $appId,
+        $name,
+        $headerTemplate = null,
+        $detailTemplate = null,
+        $objectType = null
+    ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types";
 
         $options['json'] = [
@@ -90,8 +101,14 @@ class Timeline extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/timeline/update-event-type
      */
-    public function updateEventType($appId, $eventTypeId)
-    {
+    public function updateEventType(
+        $appId,
+        $eventTypeId,
+        $name = null,
+        $headerTemplate = null,
+        $detailTemplate = null,
+        $objectType = null
+    ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}";
 
         $options['json'] = [
@@ -186,8 +203,14 @@ class Timeline extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/timeline/udpate-timeline-event-type-property
      */
-    public function updateEventTypeProperty($appId, $eventTypeId, $id, $propertyType = null, $label = null, $options = null)
-    {
+    public function updateEventTypeProperty(
+        $appId,
+        $eventTypeId,
+        $id,
+        $propertyType = null,
+        $label = null,
+        $options = null
+    ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
 
         $options['json'] = [
