@@ -4,7 +4,7 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Resources\Timeline;
 
-class TimelineTest extends \PHPUint_Framework_TestCase
+class TimelineTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Timeline
