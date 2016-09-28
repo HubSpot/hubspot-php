@@ -7,7 +7,7 @@ class Timeline extends Resource
     /**
      * Create or Update Timeline Event
      *
-     * @param string      $appId
+     * @param int         $appId
      * @param string      $eventTypeId
      * @param string      $id
      * @param int|null    $objectId
@@ -36,7 +36,7 @@ class Timeline extends Resource
     /**
      * Get Timeline Event Types
      *
-     * @param string $appId
+     * @param int $appId
      *
      * @return mixed
      *
@@ -51,7 +51,7 @@ class Timeline extends Resource
     /**
      * Create Timeline Event Type
      *
-     * @param string      $appId
+     * @param int         $appId
      * @param string      $name
      * @param string|null $headerTemplate
      * @param string|null $detailTemplate
@@ -78,7 +78,7 @@ class Timeline extends Resource
     /**
      * Update Timeline Event Type
      *
-     * @param string      $appId
+     * @param int         $appId
      * @param string      $eventTypeId
      * @param string|null $name
      * @param string|null $headerTemplate
@@ -106,7 +106,7 @@ class Timeline extends Resource
     /**
      * Delete Timeline Event Type
      *
-     * @param string $appId
+     * @param int    $appId
      * @param string $eventTypeId
      *
      * @return mixed
@@ -122,7 +122,7 @@ class Timeline extends Resource
     /**
      * Get Properties for Timeline Event Type
      *
-     * @param string $appId
+     * @param int    $appId
      * @param string $eventTypeId
      *
      * @return mixed
@@ -138,7 +138,7 @@ class Timeline extends Resource
     /**
      * Create Property for Timeline Event Type
      *
-     * @param string      $appId
+     * @param int         $appId
      * @param string      $eventTypeId
      * @param string      $name
      * @param string      $label
@@ -174,7 +174,7 @@ class Timeline extends Resource
     /**
      * Update Property for Timeline Event Type
      *
-     * @param string      $appId
+     * @param int         $appId
      * @param string      $eventTypeId
      * @param string      $id
      * @param string|null $propertyType
@@ -202,7 +202,7 @@ class Timeline extends Resource
     /**
      * Delete Property for Timeline Event Type
      *
-     * @param string $appId
+     * @param int    $appId
      * @param string $eventTypeId
      *
      * @return mixed
