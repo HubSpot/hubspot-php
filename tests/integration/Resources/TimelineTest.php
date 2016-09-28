@@ -36,17 +36,30 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
             'userId' => '215482',
         ]));
 
+        $response = $this->createEventType();
+        $eventType = json_decode((string) $response->getBody());
+
+        // Set this for future tests
+        if ($id = $eventType->id) {
+            $this->eventTypeId = $id;
+        }
+
         sleep(1);
     }
 
     /**
-     * Create an event type if one doesn't exist for our APP_ID.
+     * {@inheritdoc}
      */
-    private function setupEventType()
+    public function tearDown()
     {
-        if (!$this->eventTypeId) {
-            $response = $this->createEventType();
+        parent::tearDown();
+
+        // Make sure that everything still exists
+        if (!$this->timeline || !$this->eventTypeId) {
+            return false;
         }
+
+        $this->deleteEventType();
     }
 
     /**
@@ -62,9 +75,6 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      */
     public function getEventTypes()
     {
-        // Create a new event type so we have at least one to get info from.
-        $this->setupEventType();
-
         $response = $this->timeline->getEventTypes(self::APP_ID);
         $this->assertEquals(200, $response->getStatusCode());
 
@@ -97,11 +107,6 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($objectType, $eventType->objectType);
         $this->assertEquals(200, $response->getStatusCode());
 
-        // Set this for future tests
-        if ($id = $eventType->id) {
-            $this->eventTypeId = $id;
-        }
-
         return $response;
     }
 
@@ -118,9 +123,6 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      */
     public function deleteEventType()
     {
-        // Create a new event type so we have at least one to delete.
-        $this->setupEventType();
-
         $response = $this->timeline->deleteEventType(self::APP_ID, $this->eventTypeId);
         $this->assertEquals(204, $response->getStatusCode());
 
