@@ -70,7 +70,33 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      */
     public function createEventType()
     {
-        // @todo
+        $name = 'Event name';
+        $headerTemplate = 'Event header template';
+        $detailTemplate = 'Event detail template';
+        $objectType = 'CONTACT';
+
+        $response = $this->timeline->createEventType(
+            self::APP_ID,
+            $name,
+            $headerTemplate,
+            $detailTemplate,
+            $objectType
+        );
+
+        $eventType = json_decode((string) $response->getBody());
+
+        $this->assertEquals($name, $eventType->name);
+        $this->assertEquals($headerTemplate, $eventType->headerTemplate);
+        $this->assertEquals($detailTemplate, $eventType->detailTemplate);
+        $this->assertEquals($objectType, $eventType->objectType);
+        $this->assertEquals(200, $response->getStatusCode());
+
+        // Set this for future tests
+        if ($id = $eventType->id) {
+            $this->eventTypeId = $id;
+        }
+
+        return $response;
     }
 
     /**
