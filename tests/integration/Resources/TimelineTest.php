@@ -62,7 +62,13 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      */
     public function getEventTypes()
     {
-        // @todo
+        // Create a new event type so we have at least one to get info from.
+        $this->setupEventType();
+
+        $response = $this->timeline->getEventTypes(self::APP_ID);
+        $this->assertEquals(200, $response->getStatusCode());
+
+        return $response;
     }
 
     /**
