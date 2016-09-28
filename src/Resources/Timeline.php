@@ -112,6 +112,7 @@ class Timeline extends Resource
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}";
 
         $options['json'] = [
+            'applicationId'  => $appId,
             'name'           => $name,
             'headerTemplate' => $headerTemplate,
             'detailTemplate' => $detailTemplate,
