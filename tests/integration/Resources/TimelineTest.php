@@ -8,9 +8,21 @@ use SevenShores\Hubspot\Resources\Timeline;
 class TimelineTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Demo application to be used for testing.
+     *
+     * @see https://app.hubspot.com/developers/62515/application/36472
+     */
+    const APP_ID = 36472;
+
+    /**
      * @var Timeline
      */
     protected $timeline;
+
+    /**
+     * @var int
+     */
+    private $eventTypeId;
 
     /**
      * {@inheritdoc}
@@ -18,8 +30,23 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->timeline = new Timeline(new Client(['key' => 'demo']));
+
+        $this->timeline = new Timeline(new Client([
+            'key'    => 'demo',
+            'userId' => '215482',
+        ]));
+
         sleep(1);
+    }
+
+    /**
+     * Create an event type if one doesn't exist for our APP_ID.
+     */
+    private function setupEventType()
+    {
+        if (!$this->eventTypeId) {
+            $response = $this->createEventType();
+        }
     }
 
     /**
