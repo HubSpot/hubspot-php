@@ -158,6 +158,7 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
         $this->createEventTypeProperty();
         $response = $this->timeline->getEventTypeProperties(self::APP_ID, $this->eventTypeId);
         $this->assertEquals(200, $response->getStatusCode());
+
         return $response;
     }
 
@@ -229,6 +230,7 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(204, $response->getStatusCode());
+
         return $response;
     }
 }
