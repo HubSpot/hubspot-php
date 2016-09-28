@@ -118,7 +118,9 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      */
     public function deleteEventType()
     {
+        // Create a new event type so we have at least one to delete.
         $this->setupEventType();
+
         $response = $this->timeline->deleteEventType(self::APP_ID, $this->eventTypeId);
         $this->assertEquals(204, $response->getStatusCode());
 
