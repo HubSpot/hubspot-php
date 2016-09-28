@@ -22,7 +22,7 @@ class Timeline extends Resource
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event";
 
-        $options = [
+        $options['json'] = [
             'eventTypeId' => $eventTypeId,
             'id'          => $id,
             'objectId'    => $objectId,
@@ -65,7 +65,7 @@ class Timeline extends Resource
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types";
 
-        $options = [
+        $options['json'] = [
             'name'           => $name,
             'headerTemplate' => $headerTemplate,
             'detailTemplate' => $detailTemplate,
@@ -93,7 +93,7 @@ class Timeline extends Resource
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}";
 
-        $options = [
+        $options['json'] = [
             'name'           => $name,
             'headerTemplate' => $headerTemplate,
             'detailTemplate' => $detailTemplate,
@@ -161,7 +161,7 @@ class Timeline extends Resource
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
 
-        $options = [
+        $options['json'] = [
             'name'         => $name,
             'label'        => $label,
             'propertyType' => $propertyType,
@@ -189,7 +189,7 @@ class Timeline extends Resource
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
 
-        $options = [
+        $options['json'] = [
             'id'           => $id,
             'propertyType' => $propertyType,
             'label'        => $label,
