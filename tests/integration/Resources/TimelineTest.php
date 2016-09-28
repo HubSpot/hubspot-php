@@ -155,7 +155,10 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      */
     public function getEventTypeProperties()
     {
-        // @todo
+        $this->createEventTypeProperty();
+        $response = $this->timeline->getEventTypeProperties(self::APP_ID, $this->eventTypeId);
+        $this->assertEquals(200, $response->getStatusCode());
+        return $response;
     }
 
     /**
