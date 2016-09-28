@@ -2,6 +2,7 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Timeline;
 
 class TimelineTest extends \PHPUnit_Framework_TestCase
