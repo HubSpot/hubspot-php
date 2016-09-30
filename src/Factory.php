@@ -24,6 +24,7 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Resources\Keywords keywords()
  * @method \SevenShores\Hubspot\Resources\Pages pages()
  * @method \SevenShores\Hubspot\Resources\SocialMedia socialMedia()
+ * @method \SevenShores\Hubspot\Resources\Timeline timeline()
  * @method \SevenShores\Hubspot\Resources\Workflows workflows()
  * @method \SevenShores\Hubspot\Resources\Events events()
  * @method \SevenShores\Hubspot\Resources\DealProperties dealproperties()

@@ -14,6 +14,9 @@ class Client
     /** @var bool */
     public $oauth;
 
+    /** @var int */
+    public $userId;
+
     /** @var \GuzzleHttp\Client */
     public $client;
 
@@ -33,6 +36,11 @@ class Client
         if (empty($this->key)) {
             throw new InvalidArgument("You must provide a Hubspot api key or token.");
         }
+
+        if (isset($config['userId'])) {
+            $this->userId = $config['userId'];
+        }
+
         $this->oauth = isset($config["oauth"]) ? $config["oauth"] : false;
         $this->client = $client ?: new GuzzleClient();
     }
@@ -71,6 +79,11 @@ class Client
     {
         $authType = $this->oauth ? "access_token" : "hapikey";
 
-        return $endpoint."?".$authType."=".$this->key.$query_string;
+        $url = $endpoint."?".$authType."=".$this->key;
+        if ($this->userId) {
+            $url .= "&userId={$this->userId}";
+        }
+
+        return $url.$query_string;
     }
 }
