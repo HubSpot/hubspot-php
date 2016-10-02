@@ -7,7 +7,7 @@ use SevenShores\Hubspot\Http\Client;
 /**
  * Class Factory
  *
- * @method \SevenShores\Hubspot\Resources\BlogAuthors blogauthors()
+ * @method \SevenShores\Hubspot\Resources\BlogAuthors blogAuthors()
  * @method \SevenShores\Hubspot\Resources\Blogs blogs()
  * @method \SevenShores\Hubspot\Resources\BlogPosts blogPosts()
  * @method \SevenShores\Hubspot\Resources\BlogTopics blogTopics()
@@ -27,7 +27,7 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Resources\Timeline timeline()
  * @method \SevenShores\Hubspot\Resources\Workflows workflows()
  * @method \SevenShores\Hubspot\Resources\Events events()
- * @method \SevenShores\Hubspot\Resources\DealProperties dealproperties()
+ * @method \SevenShores\Hubspot\Resources\DealProperties dealProperties()
  * @method \SevenShores\Hubspot\Resources\Deals deals()
  * @method \SevenShores\Hubspot\Resources\Owners owners()
  * @method \SevenShores\Hubspot\Resources\SingleEmail singleEmail()
