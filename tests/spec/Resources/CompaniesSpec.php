@@ -83,6 +83,17 @@ class CompaniesSpec extends ObjectBehavior
         $this->delete($id)->shouldReturn('response');
     }
 
+    function it_can_get_all_companies($client)
+    {
+        $url = $this->buildUrl('/companies/v2/companies/paged');
+
+        $client->get($url, [
+            'headers' => $this->headers
+        ])->shouldBeCalled()->willReturn('response');
+
+        $this->getRecentlyModified()->shouldReturn('response');
+    }
+
     function it_can_get_recently_modified_companies($client)
     {
         $url = $this->buildUrl('/companies/v2/companies/recent/modified');

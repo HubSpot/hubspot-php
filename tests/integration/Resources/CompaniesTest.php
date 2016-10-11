@@ -69,6 +69,15 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function getAll()
+    {
+        $response = $this->companies->all();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThan(0, count($response->data->companies));
+    }
+
+    /** @test */
     public function getRecentlyModified()
     {
         $response = $this->companies->getRecentlyModified();

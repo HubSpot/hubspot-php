@@ -54,6 +54,23 @@ class Companies extends Resource
     }
 
     /**
+     * Returns all companies
+     * @param array $params Array of optional parameters ['limit', 'offset', 'properties']
+     *
+     * @see http://developers.hubspot.com/docs/methods/companies/get-all-companies
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function all($params = [])
+    {
+        $endpoint = 'https://api.hubapi.com/companies/v2/companies/paged';
+
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
+    }
+
+    /**
      * Returns the recently modified companies
      * @param array $params Array of optional parameters ['count', 'offset']
      *
