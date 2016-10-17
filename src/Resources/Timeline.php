@@ -15,6 +15,7 @@ class Timeline extends Resource
      * @param string|null $utk
      * @param array       $extraData
      * @param mixed       $timestamp
+     * @param array       $eventTypeData
      *
      * @return mixed
      *
@@ -28,11 +29,12 @@ class Timeline extends Resource
         $email = null,
         $utk = null,
         $extraData = [],
-        $timestamp = null
+        $timestamp = null,
+        $eventTypeData = []
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event";
 
-        $data['json'] = [
+        $data['json'] = array_merge([
             'eventTypeId' => $eventTypeId,
             'id'          => $id,
             'objectId'    => $objectId,
@@ -40,7 +42,7 @@ class Timeline extends Resource
             'utk'         => $utk,
             'extraData'   => $extraData,
             'timestamp'   => $this->timestamp($timestamp),
-        ];
+        ], $eventTypeData);
 
         return $this->client->request('put', $endpoint, $data);
     }
