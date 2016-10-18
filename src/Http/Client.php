@@ -46,6 +46,10 @@ class Client
 
         $this->oauth = isset($config["oauth"]) ? $config["oauth"] : false;
         $this->oauth2 = isset($config["oauth2"]) ? $config["oauth2"] : false;
+        if ($this->oauth && $this->oauth2) {
+            throw new InvalidArgument("Cannot sign requests with both OAuth1 and OAuth2");
+        }
+
         $this->client = $client ?: new GuzzleClient();
     }
 
