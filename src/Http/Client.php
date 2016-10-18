@@ -14,6 +14,9 @@ class Client
     /** @var bool */
     public $oauth;
 
+    /** @var bool */
+    public $oauth2;
+
     /** @var int */
     public $userId;
 
@@ -42,6 +45,7 @@ class Client
         }
 
         $this->oauth = isset($config["oauth"]) ? $config["oauth"] : false;
+        $this->oauth2 = isset($config["oauth2"]) ? $config["oauth2"] : false;
         $this->client = $client ?: new GuzzleClient();
     }
 
@@ -61,6 +65,10 @@ class Client
 
         $options["headers"]["User-Agent"] = $this->user_agent;
 
+        if ($this->oauth2) {
+            $options["headers"]["Authorization"] = "Bearer " . $this->key;
+        }
+
         try {
             return new Response($this->client->request($method, $url, $options));
         } catch (\Exception $e) {
@@ -78,10 +86,18 @@ class Client
     protected function generateUrl($endpoint, $query_string = null)
     {
         $authType = $this->oauth ? "access_token" : "hapikey";
+        $url = $endpoint."?";
 
-        $url = $endpoint."?".$authType."=".$this->key;
-        if ($this->userId) {
-            $url .= "&userId={$this->userId}";
+        if (!$this->oauth2) {
+            $url .= $authType."=".$this->key;
+
+            if ($this->userId) {
+                $url .= "&userId={$this->userId}";
+            }
+        } else {
+            if ($this->userId) {
+                $url .= "userId={$this->userId}";
+            }
         }
 
         return $url.$query_string;
