@@ -60,12 +60,13 @@ class Client
      * @param  string $endpoint The Hubspot API endpoint
      * @param  array $options An array of options to send with the request
      * @param  string $query_string A query string to send with the request
+     * @param  boolean $requires_auth Whether or not this HubSpot API endpoint requires authentication
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function request($method, $endpoint, $options = [], $query_string = null)
+    function request($method, $endpoint, $options = [], $query_string = null, $requires_auth = true)
     {
-        $url = $this->generateUrl($endpoint, $query_string);
+        $url = $this->generateUrl($endpoint, $query_string, $requires_auth);
 
         $options["headers"]["User-Agent"] = $this->user_agent;
 
@@ -85,22 +86,26 @@ class Client
      *
      * @param  string  $endpoint      The HubSpot API endpoint.
      * @param  string  $query_string  The query string to send to the endpoint.
+     * @param  boolean $requires_auth Whether or not this HubSpot API endpoint requires authentication
      * @return string
      */
-    protected function generateUrl($endpoint, $query_string = null)
+    protected function generateUrl($endpoint, $query_string = null, $requires_auth = true)
     {
-        $authType = $this->oauth ? "access_token" : "hapikey";
         $url = $endpoint."?";
 
-        if (!$this->oauth2) {
-            $url .= $authType."=".$this->key;
+        if ($requires_auth) {
+            $authType = $this->oauth ? "access_token" : "hapikey";
 
-            if ($this->userId) {
-                $url .= "&userId={$this->userId}";
-            }
-        } else {
-            if ($this->userId) {
-                $url .= "userId={$this->userId}";
+            if (!$this->oauth2) {
+                $url .= $authType."=".$this->key;
+
+                if ($this->userId) {
+                    $url .= "&userId={$this->userId}";
+                }
+            } else {
+                if ($this->userId) {
+                    $url .= "userId={$this->userId}";
+                }
             }
         }
 
