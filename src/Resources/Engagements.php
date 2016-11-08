@@ -66,6 +66,24 @@ class Engagements extends Resource
     }
 
     /**
+     * Returns all engagements.
+     *
+     * @param array $params Array of optional parameters ['limit', 'offset']
+     *
+     * @see http://developers.hubspot.com/docs/methods/engagements/get-all-engagements
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function all($params = [])
+    {
+        $endpoint = 'https://api.hubapi.com/engagements/v1/engagements/paged';
+
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
+    }
+
+    /**
      * @param int $id
      * @param string $object_type
      * @param int $object_id
