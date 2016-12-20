@@ -27,6 +27,7 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Resources\Timeline timeline()
  * @method \SevenShores\Hubspot\Resources\Workflows workflows()
  * @method \SevenShores\Hubspot\Resources\Events events()
+ * @method \SevenShores\Hubspot\Resources\DealPipelines dealPipelines()
  * @method \SevenShores\Hubspot\Resources\DealProperties dealProperties()
  * @method \SevenShores\Hubspot\Resources\Deals deals()
  * @method \SevenShores\Hubspot\Resources\Owners owners()
