@@ -3,6 +3,8 @@
 namespace SevenShores\Hubspot\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use SevenShores\Hubspot\Exceptions\BadRequest;
 use SevenShores\Hubspot\Exceptions\InvalidArgument;
 
@@ -10,7 +12,6 @@ class Client
 {
     /** @var string */
     public $key;
-
     /** @var bool */
     public $oauth;
 
@@ -23,18 +24,36 @@ class Client
     /** @var \GuzzleHttp\Client */
     public $client;
 
+    /**
+     * Guzzle allows options into its request method. Prepare for some defaults
+     * @var array
+     */
+    protected $clientOptions = [];
+
+    /**
+     * if set to false, no Response object is created, but the one from Guzzle is directly returned
+     * comes in handy own error handling
+     *
+     * @var bool
+     */
+    protected $wrapResponse = true;
+
     /** @var string */
     private $user_agent = "SevenShores_Hubspot_PHP/1.0.0-rc.1 (https://github.com/ryanwinchester/hubspot-php)";
 
     /**
      * Make it, baby.
      *
-     * @param  array        $config Configuration array
+     * @param  array $config Configuration array
      * @param  GuzzleClient $client The Http Client (Defaults to Guzzle)
-     * @throws \SevenShores\Hubspot\Exceptions\InvalidArgument
+     * @param array $clientOptions options to be passed to Guzzle upon each request
+     * @param bool $wrapResponse wrap request response in own Response object
      */
-    function __construct($config = [], $client = null)
+    public function __construct($config = [], $client = null, $clientOptions = [], $wrapResponse = true)
     {
+        $this->clientOptions = $clientOptions;
+        $this->wrapResponse = $wrapResponse;
+
         $this->key = isset($config["key"]) ? $config["key"] : getenv("HUBSPOT_SECRET");
         if (empty($this->key)) {
             throw new InvalidArgument("You must provide a Hubspot api key or token.");
@@ -61,13 +80,14 @@ class Client
      * @param  array $options An array of options to send with the request
      * @param  string $query_string A query string to send with the request
      * @param  boolean $requires_auth Whether or not this HubSpot API endpoint requires authentication
-     * @return \SevenShores\Hubspot\Http\Response
+     * @return \SevenShores\Hubspot\Http\Response|ResponseInterface
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function request($method, $endpoint, $options = [], $query_string = null, $requires_auth = true)
+    public function request($method, $endpoint, $options = [], $query_string = null, $requires_auth = true)
     {
         $url = $this->generateUrl($endpoint, $query_string, $requires_auth);
 
+        $options = array_merge($this->clientOptions, $options);
         $options["headers"]["User-Agent"] = $this->user_agent;
 
         if ($this->oauth2) {
@@ -75,6 +95,9 @@ class Client
         }
 
         try {
+            if ($this->wrapResponse === false) {
+                return $this->client->request($method, $url, $options);
+            }
             return new Response($this->client->request($method, $url, $options));
         } catch (\Exception $e) {
             throw new BadRequest($e->getMessage(), $e->getCode(), $e);

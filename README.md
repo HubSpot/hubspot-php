@@ -49,6 +49,25 @@ $hubspot = new SevenShores\Hubspot\Factory([
 ```
 *Note:* The Client class checks for a `HUBSPOT_SECRET` environment variable if you don't include an api key or oauth token during instantiation.
 
+*Note:* You can prevent any error handling provided by this package by passing following options into client creation routine:
+(applies also to `Factory::create()` and `Factory::createWithToken()`)
+
+```php
+$hubspot = new SevenShores\Hubspot\Factory([
+  'key'      => 'demo',
+  'oauth'    => false, // default
+  'base_url' => 'https://api.hubapi.com' // default
+],
+[
+  'http_errors' = true // pass any Guzzle related option to any request, e.g. throw no exceptions
+],
+false // return Guzzle Response object for any ->request(*) call
+);
+```
+
+By setting `http_errors` to true, you will not receive any exceptions at all, but pure responses.
+For possible options, see http://docs.guzzlephp.org/en/latest/request-options.html.
+
 #### Get a single contact:
 
 ```php
