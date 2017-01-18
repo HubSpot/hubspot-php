@@ -38,36 +38,42 @@ class Factory
     /**
      * C O N S T R U C T O R ( ^_^)y
      *
-     * @param  array   $config  An array of configurations. You need at least the 'key'.
-     * @param  Client  $client
+     * @param  array $config An array of configurations. You need at least the 'key'.
+     * @param  Client $client
+     * @param array $clientOptions options to be send with each request
+     * @param bool $wrapResponse wrap request response in own Response object
      */
-    function __construct($config = [], $client = null)
+    public function __construct($config = [], $client = null, $clientOptions = [], $wrapResponse = true)
     {
-        $this->client = $client ?: new Client($config);
+        $this->client = $client ?: new Client($config, null, $clientOptions, $wrapResponse);
     }
 
     /**
      * Create an instance of the service with an API key.
      *
-     * @param  string  $api_key  Hubspot API key.
-     * @param  Client  $client   An Http client.
+     * @param  string $api_key Hubspot API key.
+     * @param  Client $client An Http client.
+     * @param array $clientOptions options to be send with each request
+     * @param bool $wrapResponse wrap request response in own Response object
      * @return static
      */
-    static function create($api_key = null, $client = null)
+    public static function create($api_key = null, $client = null, $clientOptions = [], $wrapResponse = true)
     {
-        return new static(['key' => $api_key], $client);
+        return new static(['key' => $api_key], $client, $clientOptions, $wrapResponse);
     }
 
     /**
      * Create an instance of the service with an Oauth token.
      *
-     * @param  string  $token   Hubspot oauth access token.
-     * @param  Client  $client  An Http client.
+     * @param  string $token Hubspot oauth access token.
+     * @param  Client $client An Http client.
+     * @param array $clientOptions options to be send with each request
+     * @param bool $wrapResponse wrap request response in own Response object
      * @return static
      */
-    static function createWithToken($token, $client = null)
+    public static function createWithToken($token, $client = null, $clientOptions = [], $wrapResponse = true)
     {
-        return new static(['key' => $token, 'oauth' => true], $client);
+        return new static(['key' => $token, 'oauth' => true], $client, $clientOptions, $wrapResponse);
     }
 
     /**
