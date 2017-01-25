@@ -3,7 +3,6 @@
 namespace SevenShores\Hubspot\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use SevenShores\Hubspot\Exceptions\BadRequest;
 use SevenShores\Hubspot\Exceptions\InvalidArgument;
