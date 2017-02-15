@@ -88,6 +88,19 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function updateByEmail()
+    {
+        $contact = $this->createContact();
+
+        $response = $this->contacts->updateByEmail($contact->properties->email->value, [
+            ['property' => 'firstname', 'value' => 'joe'],
+            ['property' => 'lastname', 'value'  => 'user'],
+        ]);
+
+        $this->assertEquals(204, $response->getStatusCode());
+    }
+
+    /** @test */
     public function createOrUpdate()
     {
         $response = $this->contacts->createOrUpdate('test@hubspot.com', [

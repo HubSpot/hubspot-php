@@ -34,6 +34,20 @@ class Contacts extends Resource
 
     /**
      * @param string $email      The contact's email address.
+     * @param array  $properties The contact properties to update.
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function updateByEmail($email, $properties)
+    {
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile";
+
+        $options['json'] = ['properties' => $properties];
+
+        return $this->client->request('post', $endpoint, $options);
+    }
+
+    /**
+     * @param string $email      The contact's email address.
      * @param array  $properties The contact properties.
      * @return \SevenShores\Hubspot\Http\Response
      */
