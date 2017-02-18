@@ -1,7 +1,7 @@
 # HubSpot PHP API client
 
 [![Version](https://img.shields.io/packagist/v/ryanwinchester/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/ryanwinchester/hubspot-php)
- [![Total Downloads](https://img.shields.io/packagist/dt/fungku/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/fungku/hubspot-php)
+ [![Total Downloads](https://img.shields.io/packagist/dt/ryanwinchester/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/ryanwinchester/hubspot-php)
  [![License](https://img.shields.io/packagist/l/ryanwinchester/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/ryanwinchester/hubspot-php)
 
 Hubspot API client. The sequel to my [perfectly functional wrapper](https://github.com/fungku/hubspot) of HubSpot/haPihP.
