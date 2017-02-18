@@ -66,3 +66,25 @@ if (! function_exists('url_encode')) {
         }
     }
 }
+
+if (! function_exists('ms_timestamp')) {
+    /**
+     * Get a millisecond timestamp from a date or time.
+     *
+     * @param  mixed $time
+     * @return int
+     */
+    function ms_timestamp($time)
+    {
+        switch (true) {
+            case $time instanceof \DateTime:
+                return $time->getTimestamp() * 1000;
+            case is_numeric($time) && strlen((string) $time) === 10:
+                return $time * 1000;
+            case is_string($time):
+                return strtotime($time) * 1000;
+            default:
+                return $time;
+        }
+    }
+}

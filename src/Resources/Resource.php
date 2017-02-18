@@ -20,20 +20,13 @@ abstract class Resource
     }
 
     /**
-     * Convert a timestamp or DateTime to a millisecond timestamp.
+     * Convert a time, DateTime, or string to a millisecond timestamp.
      *
-     * @param \DateTime|int|null $timestamp
+     * @param \DateTime|int|null $time
      * @return int|null
      */
-    protected function timestamp($timestamp)
+    protected function timestamp($time)
     {
-        switch (true) {
-            case $timestamp instanceof \DateTime:
-                return $timestamp->getTimestamp() * 1000;
-            case is_numeric($timestamp) && strlen((string)$timestamp) == 10:
-                return $timestamp * 1000;
-            default:
-                return $timestamp;
-        }
+        return ms_timestamp($time);
     }
 }
