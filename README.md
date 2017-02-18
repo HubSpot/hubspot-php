@@ -3,8 +3,6 @@
 [![Version](https://img.shields.io/packagist/v/ryanwinchester/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/ryanwinchester/hubspot-php)
  [![Total Downloads](https://img.shields.io/packagist/dt/fungku/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/fungku/hubspot-php)
  [![License](https://img.shields.io/packagist/l/ryanwinchester/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/ryanwinchester/hubspot-php)
- [![CodeClimate Test Coverage](https://img.shields.io/codeclimate/coverage/github/ryanwinchester/hubspot-php.svg?style=flat-square)](https://codeclimate.com/github/ryanwinchester/hubspot-php/coverage)
- [![Build Status](https://img.shields.io/travis/ryanwinchester/hubspot-php.svg?style=flat-square)](https://travis-ci.org/ryanwinchester/hubspot-php)
 
 Hubspot API client. The sequel to my [perfectly functional wrapper](https://github.com/fungku/hubspot) of HubSpot/haPihP.
 client. However, this is a complete re-write and includes some of the new COS/v2 endpoints.
