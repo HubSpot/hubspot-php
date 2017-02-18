@@ -9,24 +9,12 @@
 Hubspot API client. The sequel to my [perfectly functional wrapper](https://github.com/fungku/hubspot) of HubSpot/haPihP.
 client. However, this is a complete re-write and includes some of the new COS/v2 endpoints.
 
-## ANNOUNCEMENT!
-
-RC-1 just released! Please note the breaking changes in the [CHANGELOG](https://github.com/ryanwinchester/hubspot-php/blob/master/CHANGELOG.md)
-
-**TL;DR Most importantly:**
-
-- Package name changed from `fungku/hubspot-php` to `ryanwinchester/hubspot-php`
-- Namespace changed from `Fungku\HubSpot` to `SevenShores\Hubspot`
-- `HubSpotService` class renamed to `Factory`
-- `HubSpotService::make()` is now `Factory::create()`
-- `HubSpotService::makeWithToken()` is now `Factory::createWithToken()`
-
 ## Setup
 
 **Composer:**
 
 ```bash
-composer require "ryanwinchester/hubspot-php:1.0.*@dev"
+composer require "ryanwinchester/hubspot-php:~1.0"
 ```
 
 ## Quickstart
@@ -47,8 +35,6 @@ $hubspot = new SevenShores\Hubspot\Factory([
   'base_url' => 'https://api.hubapi.com' // default
 ]);
 ```
-*Note:* The Client class checks for a `HUBSPOT_SECRET` environment variable if you don't include an api key or oauth token during instantiation.
-
 *Note:* You can prevent any error handling provided by this package by passing following options into client creation routine:
 (applies also to `Factory::create()` and `Factory::createWithToken()`)
 
