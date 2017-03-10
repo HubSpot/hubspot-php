@@ -95,4 +95,16 @@ class Engagements extends Resource
 
         return $this->client->request('put', $endpoint);
     }
+    
+    /**
+     * @param string $object_type
+     * @param int $object_id
+     * @return \SevenShores\Hubspot\Http\Response
+     **/
+    function associated($object_type, $object_id)
+    {
+        $endpoint = "https://api.hubapi.com/engagements/v1/engagements/associated/{$object_type}/{$object_id}/paged";
+
+        return $this->client->request('get', $endpoint);
+    }
 }
