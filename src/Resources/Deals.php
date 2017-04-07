@@ -34,6 +34,21 @@ class Deals extends Resource
     }
 
     /**
+     * @param array $params
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
+     * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     */
+    function getAll(array $params = []){
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/paged";
+
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
+    }
+
+
+    /**
      * @param int $id
      * @return mixed
      */
