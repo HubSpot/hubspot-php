@@ -154,6 +154,22 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(3, count($response['results']));
     }
 
+
+    /**
+     * @getAll
+     */
+    public function getAll()
+    {
+        $response = $this->deals->getAll([
+            'offset' => 1,
+            'count' => 2,
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertSame(2, count($response['results']));
+    }
+
+
     /**
      * @test
      */
