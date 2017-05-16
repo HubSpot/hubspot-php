@@ -12,7 +12,7 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      *
      * @see https://app.hubspot.com/developers/62515/application/36472
      */
-    const APP_ID = 41826;
+    const APP_ID = 36472;
 
     /**
      * @var Timeline
@@ -32,10 +32,8 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->timeline = new Timeline(new Client([
-            'key'    => 'CMjgz43BKxICUQEYtei2ASC8n_YBKOLGAjIZAEL7khORGkg_hPhjuQ8PUkVGNyGKyiIKag',
-            'token'    => 'CMjgz43BKxICUQEYtei2ASC8n_YBKOLGAjIZAEL7khORGkg_hPhjuQ8PUkVGNyGKyiIKag',
-            'oauth2' => true,
-            'userId' => '4034492',
+            'key'    => 'demo',
+            'userId' => '215482',
         ]));
 
         $response = $this->createEventType();
@@ -125,6 +123,8 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
             self::APP_ID,
             $events
         );
+
+        $this->assertEquals(204, $response->getStatusCode());
 
     }
 
