@@ -12,7 +12,7 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
      *
      * @see https://app.hubspot.com/developers/62515/application/36472
      */
-    const APP_ID = 36472;
+    const APP_ID = 41826;
 
     /**
      * @var Timeline
@@ -32,8 +32,10 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->timeline = new Timeline(new Client([
-            'key'    => 'demo',
-            'userId' => '215482',
+            'key'    => 'CMjgz43BKxICUQEYtei2ASC8n_YBKOLGAjIZAEL7khORGkg_hPhjuQ8PUkVGNyGKyiIKag',
+            'token'    => 'CMjgz43BKxICUQEYtei2ASC8n_YBKOLGAjIZAEL7khORGkg_hPhjuQ8PUkVGNyGKyiIKag',
+            'oauth2' => true,
+            'userId' => '4034492',
         ]));
 
         $response = $this->createEventType();
@@ -100,27 +102,23 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
 
         $events = [
             [
-                $this->eventTypeId,
-                'TEST-PHP-HUBSPOT-'.substr(md5(microtime()),rand(0,26),16),
-                null,
-                'demo@demo.com',
-                null,
-                [
+                'eventTypeId'            => $this->eventTypeId,
+                'id'                     => substr(md5(microtime()),rand(0,26),16),
+                'email'                  => 'demo@demo.com',
+                'extraData'              => [
                     $eventTypeProperty->name => 'BAM',
                 ],
-                $timestamp
+                'timestamp'              => ms_timestamp($timestamp)
             ],
             [
-                $this->eventTypeId,
-                'TEST-PHP-HUBSPOT-'.substr(md5(microtime()),rand(0,26),16),
-                null,
-                'demo@demo.com',
-                null,
-                [
-                    $eventTypeProperty->name => 'BAM',
+                'eventTypeId'            => $this->eventTypeId,
+                'id'                     => substr(md5(microtime()),rand(0,26),16),
+                'email'                  => 'demo2@demo.com',
+                'extraData'              => [
+                    $eventTypeProperty->name => 'WAM',
                 ],
-                $timestamp
-            ],
+                'timestamp'              => ms_timestamp($timestamp)
+            ]
         ];
 
         $response = $this->timeline->createOrUpdateBatch(
