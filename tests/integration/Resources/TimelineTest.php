@@ -90,6 +90,49 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function createOrUpdateBatch()
+    {
+        $response = $this->createEventTypeProperty();
+        $eventTypeProperty = json_decode((string) $response->getBody());
+
+        $timestamp = new \DateTime();
+        $timestamp->setDate(2016, 6, 11);
+
+        $events = [
+            [
+                $this->eventTypeId,
+                'TEST-PHP-HUBSPOT-'.substr(md5(microtime()),rand(0,26),16),
+                null,
+                'demo@demo.com',
+                null,
+                [
+                    $eventTypeProperty->name => 'BAM',
+                ],
+                $timestamp
+            ],
+            [
+                $this->eventTypeId,
+                'TEST-PHP-HUBSPOT-'.substr(md5(microtime()),rand(0,26),16),
+                null,
+                'demo@demo.com',
+                null,
+                [
+                    $eventTypeProperty->name => 'BAM',
+                ],
+                $timestamp
+            ],
+        ];
+
+        $response = $this->timeline->createOrUpdateBatch(
+            self::APP_ID,
+            $events
+        );
+
+    }
+
+    /**
+     * @test
+     */
     public function getEventTypes()
     {
         $response = $this->timeline->getEventTypes(self::APP_ID);
