@@ -163,14 +163,27 @@ class ContactLists extends Resource
      * Add a contact to a list.
      *
      * @param int   $list_id
-     * @param array $contact_ids
+     * @param array $contact_handles
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function addContact($list_id, $contact_ids)
+    function addContact($list_id, $contact_handles)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$list_id}/add";
 
-        $options['json'] = ['vids' => $contact_ids];
+        $json = [];
+
+        $vids = array_filter($contact_handles, 'is_numeric');
+        $emails = array_diff($contact_handles, $vids);
+
+        if (count($vids)) {
+            $json['vids'] = $vids;
+        }
+
+        if (count($emails)) {
+            $json['emails'] = $emails;
+        }
+
+        $options['json'] = $json;
 
         return $this->client->request('post', $endpoint, $options);
     }
