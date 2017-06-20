@@ -138,13 +138,16 @@ class Deals extends Resource
     
     /**
      * @param int $contactId
+     * @param array $params Optional parameters ['limit', 'offset']
      * @return mixed
      */
-    function associatedWithContact($contactId)
+    function associatedWithContact($contactId, $params = [])
     {
-        $endpoint = "https://api.hubapi.com/deals/v1/deal/associated/contact/{$contactId}";
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/associated/contact/{$contactId}/paged";
 
-        return $this->client->request('get', $endpoint);
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
