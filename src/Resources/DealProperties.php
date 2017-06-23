@@ -23,6 +23,26 @@ class DealProperties extends Resource
     }
 
     /**
+     * Create a deal property.
+     *
+     * Create a property on every deal object to store a specific piece of data. In the example below,
+     * we want to store an invoice number on a separate field on deals.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/create_deal_property
+     *
+     * @param array $property
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function create($property)
+    {
+        $endpoint = "https://api.hubapi.com/properties/v1/deals/properties/";
+
+        $options['json'] = $property;
+
+        return $this->client->request('post', $endpoint, $options);
+    }
+
+    /**
      * Update a deal property.
      *
      * Update a specified deal property.
