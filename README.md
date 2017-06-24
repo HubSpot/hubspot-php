@@ -42,6 +42,7 @@ $hubspot = new SevenShores\Hubspot\Factory([
   'oauth'    => false, // default
   'base_url' => 'https://api.hubapi.com' // default
 ],
+null,
 [
   'http_errors' = true // pass any Guzzle related option to any request, e.g. throw no exceptions
 ],
