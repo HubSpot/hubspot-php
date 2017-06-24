@@ -267,4 +267,50 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $response = $this->deals->getById($dealId);
         $this->assertSame([$secondContactId], $response->associations->associatedVids);
     }
+
+    /**
+     * @test
+     */
+    public function getAssociatedDealsByCompany()
+    {
+        $companyId = $this->createCompany();
+
+        $firstDeal = $this->createDeal()->dealId;
+        $secondDeal = $this->createDeal()->dealId;
+
+        $this->deals->associateWithCompany($firstDeal, [
+            $companyId
+        ]);
+        $this->deals->associateWithCompany($secondDeal, [
+            $companyId
+        ]);
+
+        $response = $this->deals->getAssociatedDeals('company', $companyId);
+        $this->assertCount(2, $response->deals);
+    }
+
+    /**
+     * @test
+     */
+    public function getAssociatedDealsByContact()
+    {
+        $contactId = $this->createContact();
+
+        $firstDeal = $this->createDeal()->dealId;
+        $secondDeal = $this->createDeal()->dealId;
+        $thirdDeal = $this->createDeal()->dealId;
+
+        $this->deals->associateWithContact($firstDeal, [
+            $contactId
+        ]);
+        $this->deals->associateWithContact($secondDeal, [
+            $contactId
+        ]);
+        $this->deals->associateWithContact($thirdDeal, [
+            $contactId
+        ]);
+
+        $response = $this->deals->getAssociatedDeals('contact', $contactId);
+        $this->assertCount(3, $response->deals);
+    }
 }
