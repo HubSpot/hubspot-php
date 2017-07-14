@@ -166,13 +166,17 @@ class Contacts extends Resource
 
     /**
      * @param string $email
+     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
+     *                      'showListMemberships']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getByEmail($email)
+    function getByEmail($email, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile";
 
-        return $this->client->request('get', $endpoint);
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
