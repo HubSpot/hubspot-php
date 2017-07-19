@@ -39,9 +39,9 @@ class SocialMedia extends Resource
     {
         $endpoint = "https://api.hubapi.com/broadcast/v1/broadcasts";
 
-        $options['json'] = $params;
+        $queryString = build_query_string($params);
 
-        return $this->client->request('get', $endpoint, $options);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
