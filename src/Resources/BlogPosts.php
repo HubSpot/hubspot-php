@@ -109,15 +109,19 @@ class BlogPosts extends Resource
 
     /**
      * Clone the blog post.
+     * Requires including a request body of {"name": "New Page Name"}
      *
      * @param  int $id The blog post ID
+     * @param  string $name The cloned post name
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function clonePost($id)
+    function clonePost($id, $name)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/clone";
 
-        return $this->client->request('post', $endpoint);
+        $options['json'] = ['name' => $name];
+
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
