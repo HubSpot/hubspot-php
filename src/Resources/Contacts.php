@@ -130,13 +130,17 @@ class Contacts extends Resource
 
     /**
      * @param int $id
+     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
+     *                      'showListMemberships']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id)
+    function getById($id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/vid/{$id}/profile";
 
-        return $this->client->request('get', $endpoint);
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -166,13 +170,17 @@ class Contacts extends Resource
 
     /**
      * @param string $email
+     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
+     *                      'showListMemberships']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getByEmail($email)
+    function getByEmail($email, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile";
 
-        return $this->client->request('get', $endpoint);
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -201,13 +209,17 @@ class Contacts extends Resource
 
     /**
      * @param string $utk
+     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
+     *                      'showListMemberships']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getByToken($utk)
+    function getByToken($utk, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/utk/{$utk}/profile";
 
-        return $this->client->request('get', $endpoint);
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
