@@ -36,6 +36,23 @@ class HubDB extends Resource
     }
 
     /**
+     * @param string $name table name
+     * @param array $columns column name and type should be represented as associative array, e.g. ["name" => "Name", "type" => "TEXT"], @see https://developers.hubspot.com/docs/methods/hubdb/create_table
+     * @param bool $published whether to publish table
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
+     */
+    public function createTable($name, array $columns, $published = true) {
+        $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables';
+        $options['json'] = ['name' => $name, 'columns' => $columns];
+        if($published) {
+            $options['json']['published'] = round(microtime(true) * 1000);
+        }
+
+        return $this->client->request('post', $endpoint, $options);
+    }
+
+    /**
      * Get table rows
      *
      * @param int $portalId Hub/Portal ID
