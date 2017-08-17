@@ -21,7 +21,7 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Resources\Engagements engagements()
  * @method \SevenShores\Hubspot\Resources\Files files()
  * @method \SevenShores\Hubspot\Resources\Forms forms()
- * @method \SevenShores\Hubspot\Resources\HubDB hubDb()
+ * @method \SevenShores\Hubspot\Resources\HubDB hubDB()
  * @method \SevenShores\Hubspot\Resources\Keywords keywords()
  * @method \SevenShores\Hubspot\Resources\Pages pages()
  * @method \SevenShores\Hubspot\Resources\SocialMedia socialMedia()
