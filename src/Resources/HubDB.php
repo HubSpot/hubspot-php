@@ -46,7 +46,7 @@ class HubDB extends Resource
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables';
         $options['json'] = ['name' => $name, 'columns' => $columns];
         if($published) {
-            $options['json']['published'] = round(microtime(true) * 1000);
+            $options['json']['publishedAt'] = round(microtime(true) * 1000);
         }
 
         return $this->client->request('post', $endpoint, $options);
