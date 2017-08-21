@@ -38,12 +38,11 @@ class HubDB extends Resource
     /**
      * Delete a table
      *
-     * @param int $portalId Hub ID
      * @param int $tableId Table ID
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function deleteTable($portalId, $tableId) {
+    public function deleteTable($tableId) {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId;
 
         return $this->client->request('delete', $endpoint);
