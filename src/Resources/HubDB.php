@@ -49,6 +49,20 @@ class HubDB extends Resource
     }
 
     /**
+     * Delete a row
+     *
+     * @param int $tableId Table ID
+     * @param int $rowId Row ID
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
+     */
+    public function deleteRow($tableId, $rowId) {
+        $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId.'/rows/'.$rowId;
+
+        return $this->client->request('delete', $endpoint);
+    }
+
+    /**
      * @param string $name table name
      * @param array $columns column name and type should be represented as associative array, e.g. ["name" => "Name", "type" => "TEXT"], @see https://developers.hubspot.com/docs/methods/hubdb/create_table
      * @param bool $published whether to publish table
