@@ -75,8 +75,8 @@ class HubDB extends Resource
         $options['json'] = ['name' => $name, 'columns' => $columns];
         if($published) {
             $options['json']['publishedAt'] = round(microtime(true) * 1000);
-            $options['json']['useForPages'] = $useForPages;
         }
+        $options['json']['useForPages'] = $useForPages;
 
         return $this->client->request('post', $endpoint, $options);
     }
@@ -108,6 +108,21 @@ class HubDB extends Resource
     public function addRow($tableId, array $values) {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId.'/rows';
         $options['json'] = ['values' => $values];
+
+        return $this->client->request('post', $endpoint, $options);
+    }
+
+    /**
+     * @param int $tableId table ID
+     * @param array $values
+     * @param string $title page title for dynamic page
+     * @param string $path path to access page (appended to domain to form page URL)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
+     */
+    public function addRowForPage($tableId, array $values, $title = '', $path = '') {
+        $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId.'/rows';
+        $options['json'] = ['values' => $values, 'hs_name' => $title, 'hs_path' => $path];
 
         return $this->client->request('post', $endpoint, $options);
     }
