@@ -13,6 +13,7 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Resources\BlogTopics blogTopics()
  * @method \SevenShores\Hubspot\Resources\Companies companies()
  * @method \SevenShores\Hubspot\Resources\CompanyProperties companyProperties()
+ * @method \SevenShores\Hubspot\Resources\CalendarEvents calendarEvents()
  * @method \SevenShores\Hubspot\Resources\ContactLists contactLists()
  * @method \SevenShores\Hubspot\Resources\ContactProperties contactProperties()
  * @method \SevenShores\Hubspot\Resources\Contacts contacts()
