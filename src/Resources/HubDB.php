@@ -122,7 +122,7 @@ class HubDB extends Resource
      */
     public function addRowForPage($tableId, array $values, $title = '', $path = '') {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId.'/rows';
-        $options['json'] = ['values' => $values, 'hs_name' => $title, 'hs_path' => $path];
+        $options['json'] = ['values' => $values, 'name' => $title, 'path' => $path];
 
         return $this->client->request('post', $endpoint, $options);
     }
