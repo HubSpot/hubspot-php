@@ -44,7 +44,7 @@ $hubspot = new SevenShores\Hubspot\Factory([
 ],
 null,
 [
-  'http_errors' = true // pass any Guzzle related option to any request, e.g. throw no exceptions
+  'http_errors' => true // pass any Guzzle related option to any request, e.g. throw no exceptions
 ],
 false // return Guzzle Response object for any ->request(*) call
 );
