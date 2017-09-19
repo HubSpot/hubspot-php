@@ -180,7 +180,12 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
 
     public function addContact()
     {
-        // TODO
+        $list = $this->createList();
+
+        // TODO - add additional test for vid based contact add.
+        $response = $this->addContact($list, [], 'test@test.com');
+
+        $this->assertEquals(204, $response->getStatusCode());
     }
 
     public function removeContact()

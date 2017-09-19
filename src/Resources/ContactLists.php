@@ -164,13 +164,17 @@ class ContactLists extends Resource
      *
      * @param int   $list_id
      * @param array $contact_ids
+     * @param array $emails
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function addContact($list_id, $contact_ids)
+    function addContact($list_id, $contact_ids, $emails = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$list_id}/add";
 
-        $options['json'] = ['vids' => $contact_ids];
+        $options['json'] = [
+          'vids' => $contact_ids,
+          'emails' => $emails,
+        ];
 
         return $this->client->request('post', $endpoint, $options);
     }
