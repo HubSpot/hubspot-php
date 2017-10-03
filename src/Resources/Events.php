@@ -39,6 +39,6 @@ class Events extends Resource
 
         $query_string = build_query_string($parameters);
 
-        return $this->client->request('get', $endpoint, [], $query_string);
+        return $this->client->request('get', $endpoint, [], $query_string, false);
     }
 }
