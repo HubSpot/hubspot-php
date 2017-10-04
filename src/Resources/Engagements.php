@@ -24,6 +24,24 @@ class Engagements extends Resource
 
         return $this->client->request('post', $endpoint, $options);
     }
+    
+    /**
+     * Returns all recently created or updated engagements.
+     *
+     * @param array $params Array of optional parameters ['count', 'offset', 'since]
+     *
+     * @see https://developers.hubspot.com/docs/methods/engagements/get-recent-engagements
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function recent($params = [])
+    {
+        $endpoint = 'https://api.hubapi.com/engagements/v1/engagements/recent/modified';
+
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
+    }
 
     /**
      * @param int   $id         The engagement id.
