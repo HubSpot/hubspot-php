@@ -120,6 +120,32 @@ class Companies extends Resource
     }
 
     /**
+     * @param string $domain
+     * @param array $properties
+     * @param int $limit
+     * @param int $offset
+     *
+     * @see https://developers.hubspot.com/docs/methods/companies/search_companies_by_domain
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
+     */
+    public function searchByDomain($domain, $properties = [], $limit = 100, $offset = 0)
+    {
+        $endpoint = "https://api.hubapi.com/companies/v2/domains/{$domain}/companies";
+        $options['json'] = [
+            'limit' => $limit,
+            'offset' => [
+                'isPrimary' => true,
+                'companyId' => $offset
+            ],
+            'requestOptions' => [
+                'properties' => $properties
+            ]
+        ];
+        return $this->client->request('post', $endpoint, $options);
+    }
+
+    /**
      * Returns a company with id $id
      * @param int $id
      *
