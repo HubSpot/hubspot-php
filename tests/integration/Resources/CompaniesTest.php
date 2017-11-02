@@ -233,6 +233,17 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     */
+    public function searchCompanyByDomain()
+    {
+        $response = $this->companies->searchByDomain('hubspot.com', ['name', 'domain']);
+        $this->assertEquals(200, $response->getStatusCode());
+        $results = $response->getData();
+        $this->assertEquals('Hubspot, Inc', current($results)[0]->properties->domain->value);
+    }
+
+    /**
      * Creates a Company with the HubSpotApi
      *
      * @return \SevenShores\Hubspot\Http\Response
