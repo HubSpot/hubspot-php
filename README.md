@@ -44,13 +44,13 @@ $hubspot = new SevenShores\Hubspot\Factory([
 ],
 null,
 [
-  'http_errors' => true // pass any Guzzle related option to any request, e.g. throw no exceptions
+  'http_errors' => false // pass any Guzzle related option to any request, e.g. throw no exceptions
 ],
 false // return Guzzle Response object for any ->request(*) call
 );
 ```
 
-By setting `http_errors` to true, you will not receive any exceptions at all, but pure responses.
+By setting `http_errors` to false, you will not receive any exceptions at all, but pure responses.
 For possible options, see http://docs.guzzlephp.org/en/latest/request-options.html.
 
 #### Get a single contact:
