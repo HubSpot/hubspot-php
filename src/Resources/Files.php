@@ -159,9 +159,9 @@ class Files extends Resource
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders";
 
-        $options['json'] = $params;
+        $queryString = build_query_string($params);
 
-        return $this->client->request('get', $endpoint, $options);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
