@@ -63,8 +63,11 @@ class Files extends Resource
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}";
 
-        $options['body'] = [
-            'files' => fopen($file, 'rb'),
+        $options['multipart'] = [
+            [
+                'name' => 'files',
+                'contents' => fopen($file, 'rb')
+            ]
         ];
 
         return $this->client->request('post', $endpoint, $options);
