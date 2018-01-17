@@ -24,7 +24,7 @@ class Engagements extends Resource
 
         return $this->client->request('post', $endpoint, $options);
     }
-    
+
     /**
      * Returns all recently created or updated engagements.
      *
@@ -113,16 +113,17 @@ class Engagements extends Resource
 
         return $this->client->request('put', $endpoint);
     }
-    
+
     /**
      * @param string $object_type
      * @param int $object_id
+     * @param array $params Array of optional parameters ['limit', 'offset']
      * @return \SevenShores\Hubspot\Http\Response
      **/
-    function associated($object_type, $object_id)
+    function associated($object_type, $object_id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements/associated/{$object_type}/{$object_id}/paged";
-
-        return $this->client->request('get', $endpoint);
+        $queryString = build_query_string($params);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 }
