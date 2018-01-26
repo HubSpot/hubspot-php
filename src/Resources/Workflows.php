@@ -104,17 +104,19 @@ class Workflows extends Resource
      * Get past events for contact from a workflow.
      *
      * @param int $workflow_id
-     * @param int $contact_id
+     * @param array $filter
      * @param array $params Optional parameters.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function pastEventsForContact($workflow_id, $contact_id, $params = [])
+    public function pastEventsForContact($workflow_id, $filter, $params = [])
     {
-        $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/past";
+        $endpoint = "https://api.hubapi.com/automation/v3/logevents/workflows/{$workflow_id}/filter";
+
+        $options['json'] = $filter;
 
         $queryString = build_query_string($params);
 
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request('put', $endpoint, $options, $queryString);
     }
 
     /**
