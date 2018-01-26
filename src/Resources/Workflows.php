@@ -11,7 +11,7 @@ class Workflows extends Resource
      */
     public function all()
     {
-        $endpoint = 'https://api.hubapi.com/automation/v2/workflows';
+        $endpoint = 'https://api.hubapi.com/automation/v3/workflows';
 
         return $this->client->request('get', $endpoint);
     }
@@ -24,7 +24,7 @@ class Workflows extends Resource
      */
     public function getById($id)
     {
-        $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$id}";
+        $endpoint = "https://api.hubapi.com/automation/v3/workflows/{$id}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -65,7 +65,7 @@ class Workflows extends Resource
      */
     public function create($workflow)
     {
-        $endpoint = 'https://api.hubapi.com/automation/v2/workflows';
+        $endpoint = 'https://api.hubapi.com/automation/v3/workflows';
 
         $options['json'] = $workflow;
 
@@ -80,11 +80,9 @@ class Workflows extends Resource
      */
     public function delete($id)
     {
-        $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$id}";
+        $endpoint = "https://api.hubapi.com/automation/v3/workflows/{$id}";
 
-        $queryString = build_query_string(['updatedAt' => time()]);
-
-        return $this->client->request('delete', $endpoint, [], $queryString);
+        return $this->client->request('delete', $endpoint, []);
     }
 
     /**
@@ -101,14 +99,15 @@ class Workflows extends Resource
     }
 
     /**
-     * Get past events for contact from a workflow.
+     * Get a history of events for a specific workflow, filtered for a
+     * specific contact and/or event type(s).
      *
      * @param int $workflow_id
      * @param array $filter
      * @param array $params Optional parameters.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function pastEventsForContact($workflow_id, $filter, $params = [])
+    public function logEvents($workflow_id, $filter, $params = [])
     {
         $endpoint = "https://api.hubapi.com/automation/v3/logevents/workflows/{$workflow_id}/filter";
 
@@ -118,22 +117,4 @@ class Workflows extends Resource
 
         return $this->client->request('put', $endpoint, $options, $queryString);
     }
-
-    /**
-     * Get upcoming (scheduled) events for a contact in a workflow.
-     *
-     * @param int $workflow_id
-     * @param int $contact_id
-     * @param array $params
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function upcomingEventsForContact($workflow_id, $contact_id, $params = [])
-    {
-        $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/upcoming";
-
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
-    }
-
 }
