@@ -110,7 +110,7 @@ class Workflows extends Resource
      *
      * @param int   $workflow_id
      * @param array $filter
-     * @param array $params       Optional parameters.
+     * @param array $params      Optional parameters.
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
