@@ -110,7 +110,7 @@ class Workflows extends Resource
      */
     function pastEventsForContact($workflow_id, $contact_id, $params = [])
     {
-        $endpoint = " /automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/past";
+        $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/past";
 
         $queryString = build_query_string($params);
 
