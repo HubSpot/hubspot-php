@@ -20,6 +20,7 @@ class Workflows extends Resource
      * Get a specific workflow.
      *
      * @param int $id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getById($id)
@@ -32,8 +33,9 @@ class Workflows extends Resource
     /**
      * Enroll a contact in a workflow.
      *
-     * @param int $workflow_id
+     * @param int    $workflow_id
      * @param string $email
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function enrollContact($workflow_id, $email)
@@ -46,8 +48,9 @@ class Workflows extends Resource
     /**
      * Unenroll a contact from a workflow.
      *
-     * @param int $workflow_id
+     * @param int    $workflow_id
      * @param string $email
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function unenrollContact($workflow_id, $email)
@@ -61,6 +64,7 @@ class Workflows extends Resource
      * Create a new workflow.
      *
      * @param array $workflow The workflow properties
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function create($workflow)
@@ -76,6 +80,7 @@ class Workflows extends Resource
      * Delete a workflow.
      *
      * @param int $id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function delete($id)
@@ -89,6 +94,7 @@ class Workflows extends Resource
      * Get current enrollments for a contact.
      *
      * @param int $contact_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function enrollmentsForContact($contact_id)
@@ -102,9 +108,10 @@ class Workflows extends Resource
      * Get a history of events for a specific workflow, filtered for a
      * specific contact and/or event type(s).
      *
-     * @param int $workflow_id
+     * @param int   $workflow_id
      * @param array $filter
-     * @param array $params Optional parameters.
+     * @param array $params       Optional parameters.
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function logEvents($workflow_id, $filter, $params = [])
