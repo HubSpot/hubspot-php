@@ -39,6 +39,18 @@ class Companies extends Resource
     }
 
     /**
+     * @param array $companies The companies and properties.
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function updateBatch($companies)
+    {
+        $endpoint = "https://api.hubapi.com/companies/v1/batch-async/update";
+        $options['json'] = $companies;
+
+        return $this->client->request('post', $endpoint, $options);
+    }
+
+    /**
      * Deletes a company
      * @param int $id The company id
      *
