@@ -56,6 +56,31 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function updateBatch()
+    {
+        $newCompanyResponse = $this->createCompany();
+
+        $id = $newCompanyResponse['companyId'];
+        $companyDescription = 'A far better description than before';
+
+        $companies = [
+            [
+                'objectId' => $id,
+                'properties' => [
+                    [
+                        'name' => 'description',
+                        'value' => $companyDescription,
+                    ],
+                ],
+            ],
+        ];
+
+        $response = $this->companies->updateBatch($companies);
+
+        $this->assertEquals(202, $response->getStatusCode());
+    }
+
+    /** @test */
     public function delete()
     {
         $newCompanyResponse = $this->createCompany();
