@@ -116,9 +116,9 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
     {
         $post = $this->createBlogPost();
 
-        $response = $this->blogPosts->clonePost($post->id);
+        $response = $this->blogPosts->clonePost($post->id, 'Cloned post name');
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(201, $response->getStatusCode());
     }
 
     /** @test */
