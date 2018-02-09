@@ -285,5 +285,23 @@ class Contacts extends Resource
 
         return $this->client->request('get', $endpoint);
     }
+    
+    /**
+     * Merge two contact records. The contact ID in the URL will be treated as the 
+     * primary contact, and the contact ID in the request body will be treated as 
+     * the secondary contact.
+     *
+     * @param int $id         Primary contact id.
+     * @param int $vidToMerge Contact ID of the secondary contact.
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function merge($id, $vidToMerge)
+    {
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/merge-vids/{$id}/";
+
+        $options['json'] = ['vidToMerge' => $vidToMerge];
+
+        return $this->client->request('post', $endpoint, $options);
+    }
 
 }
