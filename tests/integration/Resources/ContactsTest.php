@@ -134,6 +134,30 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(202, $response->getStatusCode());
     }
 
+
+    /** @test */
+    public function createOrUpdateBatchWithAuditId()
+    {
+        $response = $this->contacts->createOrUpdateBatch([
+            [
+                'email' => 'test1@hubspot.com',
+                'properties' => [
+                    ['property' => 'firstname', 'value' => 'joe'],
+                    ['property' => 'lastname', 'value'  => 'user'],
+                ],
+            ],
+            [
+                'email' => 'test2@hubspot.com',
+                'properties' => [
+                    ['property' => 'firstname', 'value' => 'jane'],
+                    ['property' => 'lastname', 'value'  => 'user'],
+                ],
+            ]
+        ],['auditId' => 'TEST_CHANGE_SOURCE']);
+
+        $this->assertEquals(202, $response->getStatusCode());
+    }
+
     /** @test */
     public function delete()
     {
