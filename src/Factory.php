@@ -36,6 +36,7 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Resources\SingleEmail singleEmail()
  * @method \SevenShores\Hubspot\Resources\Integration integration()
  * @method \SevenShores\Hubspot\Resources\EcommerceBridge ecommerceBridge()
+ * @method \SevenShores\Hubspot\Resources\Webhooks webhooks()
  */
 class Factory
 {
