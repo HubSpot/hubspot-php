@@ -102,17 +102,20 @@ class Pages extends Resource
         return $this->client->request('get', $endpoint);
     }
 
-    /**
-     * Clone the page.
-     *
-     * @param int $page_id The page ID
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    function clonePage($page_id)
+	/**
+	 * Clone the page.
+	 *
+	 * @param int $page_id The page ID
+	 * @param string $name The cloned page name
+	 * @return \SevenShores\Hubspot\Http\Response
+	 */
+    function clonePage($page_id, $name)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/clone";
 
-        return $this->client->request('post', $endpoint);
+        $options['json'] = ['name' => $name];
+
+        return $this->client->request('post', $endpoint, $options);
     }
 
     /**
