@@ -48,6 +48,27 @@ class Timeline extends Resource
     }
 
     /**
+     * Get Timeline Event
+     *
+     * @param int         $appId
+     * @param int         $eventTypeId
+     * @param string      $id
+     *
+     * @return mixed
+     *
+     * @see https://developers.hubspot.com/docs/methods/timeline/get-event
+     */
+    public function get(
+        $appId,
+        $eventTypeId,
+        $id
+    )
+    {
+        $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event/{$eventTypeId}/{$id}";
+        return $this->client->request('get', $endpoint);
+    }
+
+    /**
      * Batch Create or Update Timeline Events
      *
      * @param  int      $appId
