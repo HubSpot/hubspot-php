@@ -130,6 +130,26 @@ class Contacts extends Resource
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
+    
+    /**
+     * For a given portal, return all contacts that have been recently created.
+     * A paginated list of contacts will be returned to you, with a maximum of 100 contacts per page, as specified by
+     * the "count" parameter. The endpoint only scrolls back in time 30 days.
+     *
+     * @see http://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
+     *
+     * @param array $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property',
+     *                      'propertyMode', 'formSubmissionMode', 'showListMemberships']
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function recentNew($params = [])
+    {
+        $endpoint = "https://api.hubapi.com/contacts/v1/lists/all/contacts/recent";
+
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
+    }
 
     /**
      * @param int $id
