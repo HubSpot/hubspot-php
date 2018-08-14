@@ -126,4 +126,14 @@ class Engagements extends Resource
         $queryString = build_query_string($params);
         return $this->client->request('get', $endpoint, [], $queryString);
     }
+    
+    /**
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function activityTypes()
+    {
+        $endpoint = "https://api.hubapi.com/engagements/v1/activity-types";
+
+        return $this->client->request('get', $endpoint);
+    }
 }
