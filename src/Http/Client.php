@@ -50,7 +50,7 @@ class Client
      */
     public function __construct($config = [], $client = null, $clientOptions = [], $wrapResponse = true)
     {
-        $this->clientOptions = $clientOptions;
+        $this->clientOptions = (array) $clientOptions;
         $this->wrapResponse = $wrapResponse;
 
         $this->key = isset($config["key"]) ? $config["key"] : getenv("HUBSPOT_SECRET");
