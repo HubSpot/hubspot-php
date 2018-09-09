@@ -4,7 +4,20 @@ namespace SevenShores\Hubspot\Resources;
 
 class Integration extends Resource
 {
-
+    
+    /**
+     * Get account details
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     *
+     * @see https://developers.hubspot.com/docs/methods/get-account-details
+     */
+    public function getAccountDetails()
+    {
+        $endpoint = "https://api.hubapi.com/integrations/v1/me";
+        return $this->client->request('get', $endpoint);
+    }
+    
     /**
      * Check daily API usage
      *
