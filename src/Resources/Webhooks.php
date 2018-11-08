@@ -72,7 +72,7 @@ class Webhooks extends Resource
      */    
     function viewSettings($app_id)
     {
-        $endpoint = "https://api.hubapiqa.com/webhooks/v1/{$app_id}/settings";
+        $endpoint = "https://api.hubapi.com/webhooks/v1/{$app_id}/settings";
 
         return $this->client->request('get', $endpoint);
     }
@@ -86,7 +86,7 @@ class Webhooks extends Resource
      */    
     function updateSettings($app_id, $settings)
     {
-        $endpoint = "https://api.hubapiqa.com/webhooks/v1/{$app_id}/settings";
+        $endpoint = "https://api.hubapi.com/webhooks/v1/{$app_id}/settings";
 
         $options['json'] = $settings;
 
