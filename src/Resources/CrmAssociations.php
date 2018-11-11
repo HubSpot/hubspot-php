@@ -1,18 +1,19 @@
 <?php
-namespace SevenShores\Hubspot\Resources;
 
-use SevenShores\Hubspot\Exceptions\HubspotException;
+namespace SevenShores\Hubspot\Resources;
 
 class CrmAssociations extends Resource
 {
     /**
      * @param array $ticket Array of deal properties.
-     * @return mixed
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return mixed
      */
-    function create(array $data)
+    public function create(array $data)
     {
-        $endpoint = "https://api.hubapi.com/crm-associations/v1/associations";
+        $endpoint = 'https://api.hubapi.com/crm-associations/v1/associations';
 
         $options['json'] = $data;
 
@@ -20,17 +21,17 @@ class CrmAssociations extends Resource
     }
 
     /**
-     * @param int $id The deal id.
+     * @param int   $id     The deal id.
      * @param array $ticket The deal properties to update.
+     *
      * @return mixed
      */
-    function delete(array $data)
+    public function delete(array $data)
     {
-        $endpoint = "https://api.hubapi.com/crm-associations/v1/associations/delete";
+        $endpoint = 'https://api.hubapi.com/crm-associations/v1/associations/delete';
 
         $options['json'] = $data;
 
         return $this->client->request('put', $endpoint, $options);
     }
-
 }

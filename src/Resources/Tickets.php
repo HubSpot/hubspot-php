@@ -1,18 +1,19 @@
 <?php
-namespace SevenShores\Hubspot\Resources;
 
-use SevenShores\Hubspot\Exceptions\HubspotException;
+namespace SevenShores\Hubspot\Resources;
 
 class Tickets extends Resource
 {
     /**
      * @param array $ticket Array of deal properties.
-     * @return mixed
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return mixed
      */
-    function create(array $ticket)
+    public function create(array $ticket)
     {
-        $endpoint = "https://api.hubapi.com/crm-objects/v1/objects/tickets";
+        $endpoint = 'https://api.hubapi.com/crm-objects/v1/objects/tickets';
 
         $options['json'] = $ticket;
 
@@ -20,11 +21,12 @@ class Tickets extends Resource
     }
 
     /**
-     * @param int $id The deal id.
+     * @param int   $id     The deal id.
      * @param array $ticket The deal properties to update.
+     *
      * @return mixed
      */
-    function update($id, array $ticket)
+    public function update($id, array $ticket)
     {
         $endpoint = "https://api.hubapi.com/crm-objects/v1/objects/tickets/{$id}";
 
@@ -36,23 +38,25 @@ class Tickets extends Resource
     /**
      * @param array $params
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    function getAll(array $params = []){
-        $endpoint = "https://api.hubapi.com/crm-objects/v1/objects/tickets/paged";
+    public function getAll(array $params = [])
+    {
+        $endpoint = 'https://api.hubapi.com/crm-objects/v1/objects/tickets/paged';
 
         $queryString = build_query_string($params);
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
 
-
     /**
      * @param int $id
+     *
      * @return mixed
      */
-    function delete($id)
+    public function delete($id)
     {
         $endpoint = "https://api.hubapi.com/crm-objects/v1/objects/tickets/{$id}";
 
@@ -61,9 +65,10 @@ class Tickets extends Resource
 
     /**
      * @param int $id
+     *
      * @return mixed
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = "https://api.hubapi.com/crm-objects/v1/objects/tickets/{$id}";
 
@@ -72,14 +77,14 @@ class Tickets extends Resource
 
     /**
      * @param array $params Optional parameters ['timestamp', 'changeType', 'objectId']
+     *
      * @return mixed
      */
-    function getChangelog(array $params = [])
+    public function getChangelog(array $params = [])
     {
-        $endpoint = "https://api.hubapi.com/crm-objects/v1/change-log/tickets";
+        $endpoint = 'https://api.hubapi.com/crm-objects/v1/change-log/tickets';
         $queryString = build_query_string($params);
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
-
 }

@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot;
 use SevenShores\Hubspot\Http\Client;
 
 /**
- * Class Factory
+ * Class Factory.
  *
  * @method \SevenShores\Hubspot\Resources\BlogAuthors blogAuthors()
  * @method \SevenShores\Hubspot\Resources\Blogs blogs()
@@ -43,12 +43,12 @@ use SevenShores\Hubspot\Http\Client;
 class Factory
 {
     /**
-     * C O N S T R U C T O R ( ^_^)y
+     * C O N S T R U C T O R ( ^_^)y.
      *
-     * @param  array $config An array of configurations. You need at least the 'key'.
-     * @param  Client $client
-     * @param array $clientOptions options to be send with each request
-     * @param bool $wrapResponse wrap request response in own Response object
+     * @param array  $config        An array of configurations. You need at least the 'key'.
+     * @param Client $client
+     * @param array  $clientOptions options to be send with each request
+     * @param bool   $wrapResponse  wrap request response in own Response object
      */
     public function __construct($config = [], $client = null, $clientOptions = [], $wrapResponse = true)
     {
@@ -58,10 +58,11 @@ class Factory
     /**
      * Create an instance of the service with an API key.
      *
-     * @param  string $api_key Hubspot API key.
-     * @param  Client $client An Http client.
-     * @param array $clientOptions options to be send with each request
-     * @param bool $wrapResponse wrap request response in own Response object
+     * @param string $api_key       Hubspot API key.
+     * @param Client $client        An Http client.
+     * @param array  $clientOptions options to be send with each request
+     * @param bool   $wrapResponse  wrap request response in own Response object
+     *
      * @return static
      */
     public static function create($api_key = null, $client = null, $clientOptions = [], $wrapResponse = true)
@@ -72,10 +73,11 @@ class Factory
     /**
      * Create an instance of the service with an Oauth token.
      *
-     * @param  string $token Hubspot oauth access token.
-     * @param  Client $client An Http client.
-     * @param array $clientOptions options to be send with each request
-     * @param bool $wrapResponse wrap request response in own Response object
+     * @param string $token         Hubspot oauth access token.
+     * @param Client $client        An Http client.
+     * @param array  $clientOptions options to be send with each request
+     * @param bool   $wrapResponse  wrap request response in own Response object
+     *
      * @return static
      */
     public static function createWithToken($token, $client = null, $clientOptions = [], $wrapResponse = true)
@@ -86,13 +88,14 @@ class Factory
     /**
      * Return an instance of a Resource based on the method called.
      *
-     * @param  string  $name
-     * @param  array   $arguments
+     * @param string $name
+     * @param array  $arguments
+     *
      * @return \SevenShores\Hubspot\Resources\Resource
      */
-    function __call($name, $arguments = null)
+    public function __call($name, $arguments = null)
     {
-        $resource = 'SevenShores\\Hubspot\\Resources\\' . ucfirst($name);
+        $resource = 'SevenShores\\Hubspot\\Resources\\'.ucfirst($name);
 
         return new $resource($this->client);
     }
