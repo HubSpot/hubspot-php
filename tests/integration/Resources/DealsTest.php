@@ -122,6 +122,40 @@ class DealsTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function updateBatch()
+    {
+        $deal1 = $this->createDeal();
+        $deal2 = $this->createDeal();
+
+        $response = $this->deals->updateBatch([
+            [
+                'objectId' => $deal1->dealId,
+                'properties' => [
+                    ['name' => 'dealname', 'value'  => 'Even cooler Deal'],
+                    ['name' => 'amount', 'value' => '59999' ],
+                ],
+            ],
+            [
+                'objectId' => $deal2->dealId,
+                'properties' => [
+                    ['name' => 'dealname', 'value'  => 'Still ok Deal'],
+                ],
+            ]
+        ]);
+
+        $this->assertEquals(202, $response->getStatusCode());
+
+        $response = $this->deals->getById($deal1->dealId);
+        $this->assertSame('Even cooler Deal', $response['properties']['dealname']['value']);
+        $this->assertSame('59999', $response['properties']['amount']['value']);
+
+        $response = $this->deals->getById($deal2->dealId);
+        $this->assertSame('Still ok Deal', $response['properties']['dealname']['value']);
+    }
+
+    /**
+     * @test
+     */
     public function delete()
     {
         $response = $this->createDeal();
