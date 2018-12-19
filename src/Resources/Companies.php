@@ -118,6 +118,7 @@ class Companies extends Resource
 
     /**
      * Returns an array of companies that have a matching domain
+     * @deprecated use searchByDomain instead
      * @param string $domain The domain of the company eq. 'example.com'.
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_companies_by_domain
