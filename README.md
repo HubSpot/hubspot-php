@@ -139,6 +139,7 @@ foreach ($response->contacts as $contact) {
 
 If you see something not planned, that you want, make an [issue](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
 
+- [x] Analytics :new:
 - [x] Blogs (COS) :new:
 - [x] Blog Authors (COS) :new:
 - [x] Blog Posts (COS) :new:
