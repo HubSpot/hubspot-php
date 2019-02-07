@@ -121,6 +121,21 @@ class Forms extends Resource
     }
 
     /**
+     * Get all fields from a form.
+     *
+     * @see https://developers.hubspot.com/docs/methods/forms/get-submissions-for-a-form
+     *
+     * @param string $form_guid
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function getSubmissions($form_guid)
+    {
+        $endpoint = "https://api.hubapi.com/form-integrations/v1/submissions/forms/{$form_guid}";
+
+        return $this->client->request('get', $endpoint);
+    }
+
+    /**
      * Get a single field from a form.
      *
      * @see http://developers.hubspot.com/docs/methods/forms/v2/get_field

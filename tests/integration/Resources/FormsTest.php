@@ -117,6 +117,22 @@ class FormsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function getSubmissions()
+    {
+        $form = $this->createForm();
+
+        $submit = $this->forms->submit(62515, $form->guid, [
+            'firstname' => 'FooBar'
+        ]);
+
+        sleep(1);
+
+        $response = $this->forms->getSubmissions($form->guid);
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /** @test */
     public function getFieldByName()
     {
         $form = $this->createForm();
