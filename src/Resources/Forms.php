@@ -20,6 +20,10 @@ class Forms extends Resource
     function submit($portal_id, $form_guid, $form)
     {
         $endpoint = "https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_guid}";
+        
+        if (! empty($form['hs_context'])) {
+            $form['hs_context'] = json_encode($form['hs_context']);
+        }
 
         $options['form_params'] = $form;
 
