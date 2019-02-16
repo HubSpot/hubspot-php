@@ -22,7 +22,7 @@ class Forms extends Resource
     {
         $endpoint = "https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_guid}";
 
-        if (!empty($form['hs_context'])) {
+        if (!empty($form['hs_context']) && !is_string($form['hs_context'])) {
             $form['hs_context'] = json_encode($form['hs_context']);
         }
 
