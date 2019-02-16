@@ -15,13 +15,14 @@ class Forms extends Resource
      * @param int    $portal_id
      * @param string $form_guid
      * @param array  $form
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function submit($portal_id, $form_guid, $form)
+    public function submit($portal_id, $form_guid, $form)
     {
         $endpoint = "https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_guid}";
-        
-        if (! empty($form['hs_context'])) {
+
+        if (!empty($form['hs_context'])) {
             $form['hs_context'] = json_encode($form['hs_context']);
         }
 
@@ -37,9 +38,9 @@ class Forms extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all()
+    public function all()
     {
-        $endpoint = "https://api.hubapi.com/forms/v2/forms";
+        $endpoint = 'https://api.hubapi.com/forms/v2/forms';
 
         return $this->client->request('get', $endpoint);
     }
@@ -50,9 +51,10 @@ class Forms extends Resource
      * @see http://developers.hubspot.com/docs/methods/forms/v2/get_form
      *
      * @param string $form_guid
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($form_guid)
+    public function getById($form_guid)
     {
         $endpoint = "https://api.hubapi.com/forms/v2/forms/{$form_guid}";
 
@@ -65,11 +67,12 @@ class Forms extends Resource
      * @see http://developers.hubspot.com/docs/methods/forms/v2/create_form
      *
      * @param array $form
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($form)
+    public function create($form)
     {
-        $endpoint = "https://api.hubapi.com/forms/v2/forms";
+        $endpoint = 'https://api.hubapi.com/forms/v2/forms';
 
         $options['json'] = $form;
 
@@ -83,9 +86,10 @@ class Forms extends Resource
      *
      * @param string $form_guid
      * @param array  $form
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($form_guid, $form)
+    public function update($form_guid, $form)
     {
         $endpoint = "https://api.hubapi.com/forms/v2/forms/{$form_guid}";
 
@@ -100,9 +104,10 @@ class Forms extends Resource
      * @see http://developers.hubspot.com/docs/methods/forms/v2/delete_form
      *
      * @param string $form_guid
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($form_guid)
+    public function delete($form_guid)
     {
         $endpoint = "https://api.hubapi.com/forms/v2/forms/{$form_guid}";
 
@@ -115,9 +120,10 @@ class Forms extends Resource
      * @see http://developers.hubspot.com/docs/methods/forms/v2/get_fields
      *
      * @param string $form_guid
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getFields($form_guid)
+    public function getFields($form_guid)
     {
         $endpoint = "https://api.hubapi.com/forms/v2/fields/{$form_guid}";
 
@@ -131,9 +137,10 @@ class Forms extends Resource
      *
      * @param string $form_guid
      * @param string $name
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getFieldByName($form_guid, $name)
+    public function getFieldByName($form_guid, $name)
     {
         $endpoint = "https://api.hubapi.com/forms/v2/fields/{$form_guid}/{$name}";
 
