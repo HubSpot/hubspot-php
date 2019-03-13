@@ -2,6 +2,8 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+use SevenShores\Hubspot\Exceptions\BadRequest;
+
 class Engagements extends Resource
 {
     /**
@@ -44,13 +46,20 @@ class Engagements extends Resource
     }
 
     /**
-     * @param int   $id         The engagement id.
+     * @param int $id The engagement id.
      * @param array $engagement The engagement engagement to update.
      * @param array $metadata The engagement metadata to update.
+     * @param string $method
      * @return \SevenShores\Hubspot\Http\Response
+     * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function update($id, $engagement, $metadata)
+    function update($id, $engagement, $metadata, $method = 'put')
     {
+        $availableMethods = ['put', 'patch'];
+
+        if (! \in_array($method, $availableMethods)) {
+            throw new BadRequest('Method name '.$method.' is invalid', 400);
+        }
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}";
 
         $options['json'] = [
@@ -58,7 +67,7 @@ class Engagements extends Resource
             'metadata' => $metadata,
         ];
 
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request($method, $endpoint, $options);
     }
 
     /**
@@ -126,7 +135,7 @@ class Engagements extends Resource
         $queryString = build_query_string($params);
         return $this->client->request('get', $endpoint, [], $queryString);
     }
-    
+
     /**
      * @return \SevenShores\Hubspot\Http\Response
      */
