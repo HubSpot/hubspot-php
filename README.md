@@ -149,6 +149,7 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [x] Contacts
 - [x] Contact Lists
 - [x] Contact Properties
+- [x] CRM Pipelines :new:
 - [x] Deals :new:
 - [x] Email :new:
 - [x] Email Events :new:
