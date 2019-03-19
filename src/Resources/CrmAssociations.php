@@ -21,6 +21,27 @@ class CrmAssociations extends Resource
     }
 
     /**
+     * @param array $data Array of objectId, definitionId, and optional category.
+     *
+     * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return mixed
+     */
+    public function get(array $data)
+    {
+        $endpoint = 'https://api.hubapi.com/crm-associations/v1/associations/';
+
+        // default category to HUBSPOT_DEFINED
+        if (!array_key_exists('category', $data)) {
+            $data['category'] = 'HUBSPOT_DEFINED';
+        }
+
+        $options['json'] = $data;
+
+        return $this->client->request('get', $endpoint, $options);
+    }
+
+    /**
      * @param int   $id     The deal id.
      * @param array $ticket The deal properties to update.
      *
