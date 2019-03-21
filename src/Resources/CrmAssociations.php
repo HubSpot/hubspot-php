@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 class CrmAssociations extends Resource
 {
     /**
-     * @param array $ticket Array of deal properties.
+     * @param array $data Array of fromObjectId, toObjectId, definitionId, and optional category.
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
@@ -14,6 +14,11 @@ class CrmAssociations extends Resource
     public function create(array $data)
     {
         $endpoint = 'https://api.hubapi.com/crm-associations/v1/associations';
+
+        // default category to HUBSPOT_DEFINED
+        if (!array_key_exists('category', $data)) {
+            $data['category'] = 'HUBSPOT_DEFINED';
+        }
 
         $options['json'] = $data;
 
@@ -40,14 +45,20 @@ class CrmAssociations extends Resource
     }
 
     /**
-     * @param int   $id     The deal id.
-     * @param array $ticket The deal properties to update.
+     * @param array $data Array of fromObjectId, toObjectId, definitionId, and optional category.
+     *
+     * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return mixed
      */
     public function delete(array $data)
     {
         $endpoint = 'https://api.hubapi.com/crm-associations/v1/associations/delete';
+
+        // default category to HUBSPOT_DEFINED
+        if (!array_key_exists('category', $data)) {
+            $data['category'] = 'HUBSPOT_DEFINED';
+        }
 
         $options['json'] = $data;
 
