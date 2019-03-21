@@ -29,16 +29,14 @@ class CrmAssociations extends Resource
      */
     public function get(array $data)
     {
-        $endpoint = 'https://api.hubapi.com/crm-associations/v1/associations/';
-
         // default category to HUBSPOT_DEFINED
         if (!array_key_exists('category', $data)) {
             $data['category'] = 'HUBSPOT_DEFINED';
         }
 
-        $options['json'] = $data;
+        $endpoint = "https://api.hubapi.com/crm-associations/v1/associations/{$data['objectId']}/{$data['category']}/{$data['definitionId']}";
 
-        return $this->client->request('get', $endpoint, $options);
+        return $this->client->request('get', $endpoint);
     }
 
     /**
