@@ -53,7 +53,7 @@ class Engagements extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function update($id, $engagement, $metadata, $method = 'put')
+    function update($id, $engagement, $metadata, $method = 'patch')
     {
         $availableMethods = ['put', 'patch'];
 
