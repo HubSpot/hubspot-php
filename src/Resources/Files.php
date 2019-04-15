@@ -17,6 +17,7 @@ class Files extends Resource
 
         $queryString = build_query_string([
             'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false,
+            'hidden' => isset($params['hidden']) ? $params['hidden'] : false
         ]);
 
         $options['multipart'] = [
