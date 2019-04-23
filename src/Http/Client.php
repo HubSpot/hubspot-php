@@ -56,6 +56,9 @@ class Client
     /** @var int Delay before we wait before requests when API reports low request credits  */
     private $backOffDelay = null;
 
+    /** @var bool Handle rate limits automatically */
+    private $handleRateLimits = null;
+
     /**
      * Make it, baby.
      *
@@ -84,6 +87,7 @@ class Client
         $this->exceptionMax = isset($config["exceptionMax"]) ? $config["exceptionMax"] : 10;
         $this->exceptionDelay = isset($config["exceptionDelay"]) ? $config["exceptionDelay"] : 1000000;
         $this->backOffDelay = isset($config["backOffDelay"]) ? $config["backOffDelay"] : 1000000;
+        $this->handleRateLimits = isset($config["handleRateLimits"]) ? $config["handleRateLimits"] : true;
 
         if ($this->oauth && $this->oauth2) {
             throw new InvalidArgument("Cannot sign requests with both OAuth1 and OAuth2");
@@ -117,7 +121,8 @@ class Client
         try {
             $keepTrying = true;
             $exceptionCounter = 0;
-            if(!is_null($this->requestsRemainingThisSecond)
+            if($this->handleRateLimits
+                && !is_null($this->requestsRemainingThisSecond)
                 && (
                     ($this->requestsRemainingThisSecond <= 1)
                     ||
@@ -132,6 +137,9 @@ class Client
                     $response = $this->client->request($method, $url, $options);
                     $keepTrying = false;
                 } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+                    if(!$this->handleRateLimits) {
+                        throw $e;
+                    }
                     switch ($e->getCode()) {
                         /**
                          * @see https://developers.hubspot.com/docs/faq/api-error-responses
@@ -173,8 +181,10 @@ class Client
             } while ($keepTrying === true);
 
             // Check headers for delay
-            $this->requestsRemainingThisSecond = (int)$response->getHeader('X-HubSpot-RateLimit-Secondly-Remaining')[0];
-            $this->requestsRemainingThisSecondTime = time();
+            if($this->handleRateLimits) {
+                $this->requestsRemainingThisSecond = (int)$response->getHeader('X-HubSpot-RateLimit-Secondly-Remaining')[0];
+                $this->requestsRemainingThisSecondTime = time();
+            }
 
             if ($this->wrapResponse === false) {
                 return $response;
