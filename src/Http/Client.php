@@ -167,10 +167,9 @@ class Client
                              * those limits.
                              */
                         case 429:
-                            $matches = [];
-                            preg_match('/X-HubSpot-RateLimit-Daily-Remaining: (\d+)/', $e->getMessage(), $matches);
-                            if(isset($matches[1])) {
-                                $dailyLimitLeft = (int)$matches[1];
+                            $header = $e->getResponse()->getHeader('X-HubSpot-RateLimit-Daily-Remaining');
+                            if(is_array($header) && sizeof($header)) {
+                                $dailyLimitLeft = (int)$header[0];
                                 if($dailyLimitLeft === 0) {
                                     throw $e;
                                 }
@@ -190,8 +189,11 @@ class Client
 
             // Check headers for delay
             if($this->handleRateLimits) {
-                $this->requestsRemainingThisSecond = (int)$response->getHeader('X-HubSpot-RateLimit-Secondly-Remaining')[0];
-                $this->requestsRemainingThisSecondTime = time();
+                $header = $response->getHeader('X-HubSpot-RateLimit-Secondly-Remaining');
+                if(is_array($header) && sizeof($header)) {
+                    $this->requestsRemainingThisSecond = (int)$header[0];
+                    $this->requestsRemainingThisSecondTime = time();
+                }
             }
 
             if ($this->wrapResponse === false) {
