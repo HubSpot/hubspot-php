@@ -167,6 +167,14 @@ class Client
                              * those limits.
                              */
                         case 429:
+                            $matches = [];
+                            preg_match('/X-HubSpot-RateLimit-Daily-Remaining: (\d+)/', $e->getMessage(), $matches);
+                            if(isset($matches[1])) {
+                                $dailyLimitLeft = (int)$matches[1];
+                                if($dailyLimitLeft === 0) {
+                                    throw $e;
+                                }
+                            }
                             $exceptionCounter++;
                             if ($exceptionCounter >= $this->exceptionMax) {
                                 throw $e;
