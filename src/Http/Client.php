@@ -41,6 +41,22 @@ class Client
     private $user_agent = "SevenShores_Hubspot_PHP/1.0.0-rc.1 (https://github.com/ryanwinchester/hubspot-php)";
 
     /**
+     * @var int Number of requests remaining this second
+     */
+    private $requestsRemainingThisSecond = null;
+
+    private $requestsRemainingThisSecondTime = null;
+
+    /** @var int Max number of exceptions we can handle before aborting the re-try */
+    private $exceptionMax = null;
+
+    /** @var int Delay before retry in microseconds when an exception occurs */
+    private $exceptionDelay = null;
+
+    /** @var int Delay before we wait before requests when API reports low request credits  */
+    private $backOffDelay = null;
+
+    /**
      * Make it, baby.
      *
      * @param  array $config Configuration array
@@ -64,6 +80,11 @@ class Client
 
         $this->oauth = isset($config["oauth"]) ? $config["oauth"] : false;
         $this->oauth2 = isset($config["oauth2"]) ? $config["oauth2"] : false;
+
+        $this->exceptionMax = isset($config["exceptionMax"]) ? $config["exceptionMax"] : 10;
+        $this->exceptionDelay = isset($config["exceptionDelay"]) ? $config["exceptionDelay"] : 1000000;
+        $this->backOffDelay = isset($config["backOffDelay"]) ? $config["backOffDelay"] : 1000000;
+
         if ($this->oauth && $this->oauth2) {
             throw new InvalidArgument("Cannot sign requests with both OAuth1 and OAuth2");
         }
@@ -94,10 +115,71 @@ class Client
         }
 
         try {
-            if ($this->wrapResponse === false) {
-                return $this->client->request($method, $url, $options);
+            $keepTrying = true;
+            $exceptionCounter = 0;
+            if(!is_null($this->requestsRemainingThisSecond)
+                && (
+                    ($this->requestsRemainingThisSecond <= 1)
+                    ||
+                    (($this->requestsRemainingThisSecond <= 2)
+                        && ($this->requestsRemainingThisSecondTime == time()))
+                )
+            ){
+                usleep($this->backOffDelay);
             }
-            return new Response($this->client->request($method, $url, $options));
+            do {
+                try {
+                    $response = $this->client->request($method, $url, $options);
+                    $keepTrying = false;
+                } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+                    switch ($e->getCode()) {
+                        /**
+                         * @see https://developers.hubspot.com/docs/faq/api-error-responses
+                         *
+                         * 500 This is not documented but it happens. Seems like its part of the rate limiting but they
+                         * choose this instead of 429 in some cases. If the message is "internal error" then that means
+                         * we have to backoff, otherwise re-throw the user error for them to handle it
+                         */
+                        case 500:
+                            if(strpos($e->getMessage(),'"message":"internal error"') === false) {
+                                throw $e;
+                            }
+                        /**
+                         * 502/504 timeouts - HubSpot has processing limits in place to prevent a single client causing
+                         * degraded performance, and these responses indicate that those limits have been hit.
+                         * You'll normally only see these timeout responses when making a a large number of requests
+                         * over a sustained period.  If you get one of these responses, you should pause your requests
+                         * for a few seconds, then retry.
+                         */
+                        case 502:
+                        case 504:
+                            /**
+                             * 429 Too many requests - Returned when your portal or app is over the API rate limits.
+                             * Please see this document for details on those rate limits and suggestions for working within
+                             * those limits.
+                             */
+                        case 429:
+                            $exceptionCounter++;
+                            if ($exceptionCounter >= $this->exceptionMax) {
+                                throw $e;
+                            }
+                            usleep($this->exceptionDelay);
+                            $keepTrying = true;
+                            break;
+                        default: // Throw to outer handler
+                            throw $e;
+                    }
+                }
+            } while ($keepTrying === true);
+
+            // Check headers for delay
+            $this->requestsRemainingThisSecond = (int)$response->getHeader('X-HubSpot-RateLimit-Secondly-Remaining')[0];
+            $this->requestsRemainingThisSecondTime = time();
+
+            if ($this->wrapResponse === false) {
+                return $response;
+            }
+            return new Response($response);
         } catch (\GuzzleHttp\Exception\BadResponseException $e) {
             throw new BadRequest(\GuzzleHttp\Psr7\str($e->getResponse()), $e->getCode(), $e);
         } catch (\Exception $e) {
