@@ -62,15 +62,18 @@ class Contacts extends Resource
 
     /**
      * @param array $contacts The contacts and properties.
+     * @param array $params Array of optional parameters ['auditId']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function createOrUpdateBatch($contacts)
+    function createOrUpdateBatch($contacts, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/batch";
 
+        $queryString = build_query_string($params);
+
         $options['json'] = $contacts;
 
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, $options, $queryString);
     }
 
     /**
@@ -122,6 +125,26 @@ class Contacts extends Resource
     function recent($params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/recently_updated/contacts/recent";
+
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
+    }
+    
+    /**
+     * For a given portal, return all contacts that have been recently created.
+     * A paginated list of contacts will be returned to you, with a maximum of 100 contacts per page, as specified by
+     * the "count" parameter. The endpoint only scrolls back in time 30 days.
+     *
+     * @see http://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
+     *
+     * @param array $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property',
+     *                      'propertyMode', 'formSubmissionMode', 'showListMemberships']
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function recentNew($params = [])
+    {
+        $endpoint = "https://api.hubapi.com/contacts/v1/lists/all/contacts/recent";
 
         $queryString = build_query_string($params);
 
@@ -284,6 +307,24 @@ class Contacts extends Resource
         $endpoint = "https://api.hubapi.com/contacts/v1/contacts/statistics";
 
         return $this->client->request('get', $endpoint);
+    }
+    
+    /**
+     * Merge two contact records. The contact ID in the URL will be treated as the 
+     * primary contact, and the contact ID in the request body will be treated as 
+     * the secondary contact.
+     *
+     * @param int $id         Primary contact id.
+     * @param int $vidToMerge Contact ID of the secondary contact.
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function merge($id, $vidToMerge)
+    {
+        $endpoint = "https://api.hubapi.com/contacts/v1/contact/merge-vids/{$id}/";
+
+        $options['json'] = ['vidToMerge' => $vidToMerge];
+
+        return $this->client->request('post', $endpoint, $options);
     }
 
 }

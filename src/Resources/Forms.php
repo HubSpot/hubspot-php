@@ -135,4 +135,21 @@ class Forms extends Resource
 
         return $this->client->request('get', $endpoint);
     }
+
+    /**
+     * Get all submissions from a form.
+     *
+     * @see https://developers.hubspot.com/docs/methods/forms/get-submissions-for-a-form
+     *
+     * @param string $form_guid
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function getSubmissions($form_guid, $params = []){
+        $endpoint = "https://api.hubapi.com/form-integrations/v1/submissions/forms/{$form_guid}";
+
+        $queryString = build_query_string($params);
+        
+        return $this->client->request('get', $endpoint, [], $queryString);
+    }
+
 }

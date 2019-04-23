@@ -39,6 +39,18 @@ class Companies extends Resource
     }
 
     /**
+     * @param array $companies The companies and properties.
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function updateBatch($companies)
+    {
+        $endpoint = "https://api.hubapi.com/companies/v1/batch-async/update";
+        $options['json'] = $companies;
+
+        return $this->client->request('post', $endpoint, $options);
+    }
+
+    /**
      * Deletes a company
      * @param int $id The company id
      *
@@ -106,6 +118,7 @@ class Companies extends Resource
 
     /**
      * Returns an array of companies that have a matching domain
+     * @deprecated use searchByDomain instead
      * @param string $domain The domain of the company eq. 'example.com'.
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_companies_by_domain

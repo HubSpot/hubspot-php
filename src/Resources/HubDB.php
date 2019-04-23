@@ -140,6 +140,6 @@ class HubDB extends Resource
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId.'/rows/'.$rowId;
         $options['json'] = ['values' => $values];
 
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('put', $endpoint, $options);
     }
 }

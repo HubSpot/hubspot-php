@@ -34,6 +34,23 @@ class Deals extends Resource
     }
 
     /**
+     * Update a group of existing deal records by their dealId.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/batch-update-deals
+     *
+     * @param array $deals The deals and properties.
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function updateBatch(array $deals)
+    {
+        $endpoint = "https://api.hubapi.com/deals/v1/batch-async/update";
+
+        $options['json'] = $deals;
+
+        return $this->client->request('post', $endpoint, $options);
+    }
+
+    /**
      * @param array $params
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
@@ -135,7 +152,7 @@ class Deals extends Resource
 
         return $this->client->request('put', $endpoint, [], $queryString);
     }
-    
+
     /**
      * @param int $contactId
      * @param array $params Optional parameters ['limit', 'offset']
