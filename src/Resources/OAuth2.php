@@ -12,9 +12,10 @@ class OAuth2 extends Resource
 	 * @param string $clientId      The Client ID of your app.
 	 * @param string $redirectURI   The URL that you want the visitor redirected to after granting access to your app. For security reasons, this URL must use https.
 	 * @param array  $scopesArray   A set of scopes that your app will need access to.
+     	 * @param array  $optionalScopesArray   A set of optional scopes that your app will need access to.
 	 * @return \SevenShores\Hubspot\Http\Response
 	 */
-	function getAuthUrl($clientId, $redirectURI, $scopesArray=array())
+	function getAuthUrl($clientId, $redirectURI, $scopesArray=array(), $optionalScopesArray=array())
 	{
 		$scopeString = '';
 		if(count($scopesArray)>0)
@@ -29,7 +30,20 @@ class OAuth2 extends Resource
 			}
 		}
 
-		return "https://app.hubspot.com/oauth/authorize?client_id={$clientId}&scope={$scopeString}&redirect_uri=".urlencode($redirectURI);
+		$optionalScopeString = '';
+		if(count($optionalScopesArray)>0)
+		{
+		    $optionalScopeString = '';
+		    foreach($optionalScopesArray as $_index => $scopeStr)
+		    {
+			if($_index>0)
+			    $optionalScopeString .= "%20";
+
+			$optionalScopeString .= $scopeStr;
+		    }
+		}
+
+		return "https://app.hubspot.com/oauth/authorize?client_id={$clientId}&scope={$scopeString}&redirect_uri=".urlencode($redirectURI)."&optional_scope={$optionalScopeString}";
 	}
 
 	/**
