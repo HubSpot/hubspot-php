@@ -50,7 +50,7 @@ class CrmAssociations extends Resource
         $endpoint = "https://api.hubapi.com/crm-associations/v1/associations/{$objectId}/HUBSPOT_DEFINED/{$definitionId}";
 
         if ($params) {
-            $endpoint .= '?' . http_build_query($params);
+            $endpoint .= '?'.http_build_query($params);
         }
 
         return $this->client->request('get', $endpoint);
@@ -59,9 +59,9 @@ class CrmAssociations extends Resource
     /**
      * @param array $ticket Array of deal properties.
      *
-     * @return mixed
      * @throws BadRequest
      *
+     * @return mixed
      */
     public function create(array $data)
     {
@@ -73,7 +73,7 @@ class CrmAssociations extends Resource
     }
 
     /**
-     * @param int   $id The deal id.
+     * @param int   $id     The deal id.
      * @param array $ticket The deal properties to update.
      *
      * @return mixed
