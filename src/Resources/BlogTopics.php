@@ -13,7 +13,6 @@ class BlogTopics extends Resource
      */
     function all($params = [])
     {
-
         $endpoint = 'https://api.hubapi.com/blogs/v3/topics';
 
         $queryString = build_query_string($params);

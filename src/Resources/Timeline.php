@@ -272,6 +272,7 @@ class Timeline extends Resource
     public function deleteEventTypeProperty($appId, $eventTypeId, $eventTypePropertyId)
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties/{$eventTypePropertyId}";
+        
         return $this->client->request('delete', $endpoint);
     }
 }
