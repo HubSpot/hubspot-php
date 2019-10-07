@@ -1,4 +1,5 @@
 <?php
+
 namespace SevenShores\Hubspot\Resources;
 
 class DealPipelines extends Resource {
