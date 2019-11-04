@@ -94,7 +94,7 @@ class Factory
      *
      * @return \SevenShores\Hubspot\Resources\Resource
      */
-    public function __call($name, $arguments = null)
+    public function __call($name, $args)
     {
         $resource = 'SevenShores\\Hubspot\\Resources\\'.ucfirst($name);
 
