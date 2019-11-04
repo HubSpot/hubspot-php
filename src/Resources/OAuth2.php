@@ -11,10 +11,10 @@ class OAuth2 extends Resource
     /**
      * Initiate an Integration with OAuth 2.0
      *
-     * @param string $clientId      The Client ID of your app.
-     * @param string $redirectURI   The URL that you want the visitor redirected to after granting access to your app. For security reasons, this URL must use https.
-     * @param array  $scopesArray   A set of scopes that your app will need access to.
-     * @param array  $optionalScopesArray   A set of optional scopes that your app will need access to.
+     * @param string $clientId The Client ID of your app.
+     * @param string $redirectURI The URL that you want the visitor redirected to after granting access to your app. For security reasons, this URL must use https.
+     * @param array $scopesArray A set of scopes that your app will need access to.
+     * @param array $optionalScopesArray A set of optional scopes that your app will need access to.
      * @return string
      */
     function getAuthUrl($clientId, $redirectURI, $scopesArray = array(), $optionalScopesArray = array())
@@ -44,7 +44,7 @@ class OAuth2 extends Resource
 
         $options['headers']['content-type'] = 'application/x-www-form-urlencoded';
 
-        return $this->client->request('post', $this->endpoint.'/token', $options);
+        return $this->client->request('post', $this->endpoint . '/token', $options);
     }
 
     /**
@@ -68,7 +68,7 @@ class OAuth2 extends Resource
 
         $options['headers']['content-type'] = 'application/x-www-form-urlencoded';
 
-        return $this->client->request('post', $this->endpoint.'/token', $options);
+        return $this->client->request('post', $this->endpoint . '/token', $options);
     }
 
     /**
@@ -80,7 +80,7 @@ class OAuth2 extends Resource
      */
     function getAccessTokenInfo($token)
     {
-        return $this->client->request('get', $this->endpoint."/access-tokens/{$token}");
+        return $this->client->request('get', $this->endpoint . "/access-tokens/{$token}");
     }
 
     /**
@@ -92,7 +92,7 @@ class OAuth2 extends Resource
      */
     function getRefreshTokenInfo($token)
     {
-        return $this->client->request('get', $this->endpoint."/refresh-tokens/{$token}");
+        return $this->client->request('get', $this->endpoint . "/refresh-tokens/{$token}");
     }
 
     /**
@@ -104,7 +104,7 @@ class OAuth2 extends Resource
      */
     function deleteRefreshToken($token)
     {
-        return $this->client->request('delete', $this->endpoint."/refresh-tokens/{$token}");
+        return $this->client->request('delete', $this->endpoint . "/refresh-tokens/{$token}");
     }
 
 }
