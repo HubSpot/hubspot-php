@@ -12,10 +12,9 @@ class OAuth2 extends Resource
 	 * @param string $clientId      The Client ID of your app.
 	 * @param string $redirectURI   The URL that you want the visitor redirected to after granting access to your app. For security reasons, this URL must use https.
 	 * @param array  $scopesArray   A set of scopes that your app will need access to.
-     	 * @param array  $optionalScopesArray   A set of optional scopes that your app will need access to.
 	 * @return \SevenShores\Hubspot\Http\Response
 	 */
-	function getAuthUrl($clientId, $redirectURI, $scopesArray=array(), $optionalScopesArray=array())
+	public function getAuthUrl($clientId, $redirectURI, array $scopesArray = [])
 	{
 		$scopeString = '';
 		if(count($scopesArray)>0)
@@ -30,20 +29,7 @@ class OAuth2 extends Resource
 			}
 		}
 
-		$optionalScopeString = '';
-		if(count($optionalScopesArray)>0)
-		{
-		    $optionalScopeString = '';
-		    foreach($optionalScopesArray as $_index => $scopeStr)
-		    {
-			if($_index>0)
-			    $optionalScopeString .= "%20";
-
-			$optionalScopeString .= $scopeStr;
-		    }
-		}
-
-		return "https://app.hubspot.com/oauth/authorize?client_id={$clientId}&scope={$scopeString}&redirect_uri=".urlencode($redirectURI)."&optional_scope={$optionalScopeString}";
+		return "https://app.hubspot.com/oauth/authorize?client_id={$clientId}&scope={$scopeString}&redirect_uri=".urlencode($redirectURI);
 	}
 
 	/**
@@ -55,7 +41,7 @@ class OAuth2 extends Resource
 	 * @param string $tokenCode     The code parameter returned to your redirect URI when the user authorized your app. Or a refresh token.
 	 * @return \SevenShores\Hubspot\Http\Response
 	 */
-	function getTokensByCode($clientId, $clientSecret, $redirectURI, $tokenCode)
+    public function getTokensByCode($clientId, $clientSecret, $redirectURI, $tokenCode)
 	{
 		$options['form_params'] = [
 			'grant_type' => 'authorization_code',
@@ -79,7 +65,7 @@ class OAuth2 extends Resource
 	 * @param string $refreshToken  The refresh token.
 	 * @return \SevenShores\Hubspot\Http\Response
 	 */
-	function getTokensByRefresh($clientId, $clientSecret, $refreshToken)
+    public function getTokensByRefresh($clientId, $clientSecret, $refreshToken)
 	{
 		$options['form_params'] = [
 			'grant_type' => 'refresh_token',
@@ -99,7 +85,7 @@ class OAuth2 extends Resource
 	 * @param  int $token The access token that you want to get the information for.
 	 * @return \SevenShores\Hubspot\Http\Response
 	 */
-	function getAccessTokenInfo($token)
+    public function getAccessTokenInfo($token)
 	{
 		return $this->client->request('get', $this->endpoint."/access-tokens/{$token}");
 	}
@@ -110,7 +96,7 @@ class OAuth2 extends Resource
 	 * @param  int $token The refresh token that you want to get the information for.
 	 * @return \SevenShores\Hubspot\Http\Response
 	 */
-	function getRefreshTokenInfo($token)
+	public function getRefreshTokenInfo($token)
 	{
 		return $this->client->request('get', $this->endpoint."/refresh-tokens/{$token}");
 	}
@@ -121,7 +107,7 @@ class OAuth2 extends Resource
 	 * @param  int $token The refresh token that you want to delete.
 	 * @return \SevenShores\Hubspot\Http\Response
 	 */
-	function deleteRefreshToken($token)
+	public function deleteRefreshToken($token)
 	{
 		return $this->client->request('delete', $this->endpoint."/refresh-tokens/{$token}");
 	}
