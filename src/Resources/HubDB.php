@@ -11,7 +11,8 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function tables($portalId) {
+    public function tables($portalId)
+    {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables';
 
         $queryString = build_query_string(['portalId' => $portalId]);
@@ -27,7 +28,8 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function tableInfo($portalId, $tableId) {
+    public function tableInfo($portalId, $tableId)
+    {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId;
 
         $queryString = build_query_string(['portalId' => $portalId]);
@@ -42,7 +44,8 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function deleteTable($tableId) {
+    public function deleteTable($tableId)
+    {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId;
 
         return $this->client->request('delete', $endpoint);
@@ -56,7 +59,8 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function deleteRow($tableId, $rowId) {
+    public function deleteRow($tableId, $rowId)
+    {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId.'/rows/'.$rowId;
 
         return $this->client->request('delete', $endpoint);
@@ -70,7 +74,8 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function createTable($name, array $columns, $published = true, $useForPages = false) {
+    public function createTable($name, array $columns, $published = true, $useForPages = false)
+    {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables';
         $options['json'] = ['name' => $name, 'columns' => $columns];
         if($published) {
@@ -105,7 +110,8 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function addRow($tableId, array $values) {
+    public function addRow($tableId, array $values)
+    {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId.'/rows';
         $options['json'] = ['values' => $values];
 
@@ -120,7 +126,8 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function addRowForPage($tableId, array $values, $title = '', $path = '') {
+    public function addRowForPage($tableId, array $values, $title = '', $path = '')
+    {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId.'/rows';
         $options['json'] = ['values' => $values, 'name' => $title, 'path' => $path];
 
@@ -136,7 +143,8 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function updateRow($tableId, $rowId, array $values) {
+    public function updateRow($tableId, $rowId, array $values)
+    {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables/'.$tableId.'/rows/'.$rowId;
         $options['json'] = ['values' => $values];
 

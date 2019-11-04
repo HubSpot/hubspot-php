@@ -51,7 +51,6 @@ class Files extends Resource
         return $this->client->request('get', $endpoint, [], $queryString);
     }
 
-
     /**
      * Upload a replacement file.
      *

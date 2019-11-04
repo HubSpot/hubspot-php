@@ -1,4 +1,5 @@
 <?php
+
 namespace SevenShores\Hubspot\Resources;
 
 use SevenShores\Hubspot\Exceptions\HubspotException;
