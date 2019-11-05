@@ -25,24 +25,6 @@ class OAuth2 extends Resource
     }
 
     /**
-     *
-     * @param array $scopes
-     * @return string
-     */
-    protected function scopeToString(array $scopes)
-    {
-        $string = '';
-        foreach($scopes as $scope) {
-            if(!empty($string))
-                $string .= "%20";
-
-            $string .= $scope;
-        }
-
-        return $string;
-    }
-
-    /**
      * Get OAuth 2.0 Access Token and Refresh Tokens by using a one-time code
      *
      * @param string $clientId The Client ID of your app.
