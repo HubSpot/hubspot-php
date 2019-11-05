@@ -30,16 +30,20 @@ class Response implements ResponseInterface, ArrayAccess
     /**
      * Get the api data from the response as usual.
      *
-     * @param  string  $name
+     * @param string $name
      * @return mixed
      */
     function __get($name)
     {
-        return $this->data->$name;
+        if (property_exists($this->data, $name)) {
+            return $this->data->$name;
+        }
+
+        return $this->data;
     }
 
     /**
-     * @param  ResponseInterface $response
+     * @param ResponseInterface $response
      * @return mixed
      */
     private function getDataFromResponse(ResponseInterface $response)
@@ -72,7 +76,7 @@ class Response implements ResponseInterface, ArrayAccess
     /**
      * Whether a offset exists
      *
-     * @param  mixed  $offset
+     * @param mixed $offset
      * @return boolean
      */
     function offsetExists($offset)
@@ -83,7 +87,7 @@ class Response implements ResponseInterface, ArrayAccess
     /**
      * Offset to retrieve
      *
-     * @param  mixed  $offset
+     * @param mixed $offset
      * @return mixed
      */
     function offsetGet($offset)
@@ -96,8 +100,8 @@ class Response implements ResponseInterface, ArrayAccess
     /**
      * Offset to set
      *
-     * @param  mixed  $offset
-     * @param  mixed  $value
+     * @param mixed $offset
+     * @param mixed $value
      * @return void
      */
     function offsetSet($offset, $value)
@@ -108,7 +112,7 @@ class Response implements ResponseInterface, ArrayAccess
     /**
      * Offset to unset
      *
-     * @param  mixed  $offset
+     * @param mixed $offset
      * @return void
      */
     function offsetUnset($offset)
