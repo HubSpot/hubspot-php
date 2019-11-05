@@ -54,9 +54,6 @@ class Client
         $this->wrapResponse = $wrapResponse;
 
         $this->key = isset($config["key"]) ? $config["key"] : getenv("HUBSPOT_SECRET");
-        if (empty($this->key)) {
-            throw new InvalidArgument("You must provide a Hubspot api key or token.");
-        }
 
         if (isset($config['userId'])) {
             $this->userId = $config['userId'];
@@ -84,6 +81,10 @@ class Client
      */
     public function request($method, $endpoint, $options = [], $query_string = null, $requires_auth = true)
     {
+        if ($requires_auth && empty($this->key)) {
+            throw new InvalidArgument("You must provide a Hubspot api key or token.");
+        }
+
         $url = $this->generateUrl($endpoint, $query_string, $requires_auth);
 
         $options = array_merge($this->clientOptions, $options);
