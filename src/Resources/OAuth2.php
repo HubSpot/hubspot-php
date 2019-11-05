@@ -21,7 +21,7 @@ class OAuth2 extends Resource
      */
     public function getAuthUrl($clientId, $redirectURI, $scopes = [], $optionalScopes = [])
     {
-        return Utils::getFactory()->oAuth2()->getAuthUrl($clientId, $redirectURI, $scopes, $optionalScopes);
+        return Utils\OAuth2::getAuthUrl($clientId, $redirectURI, $scopes, $optionalScopes);
     }
 
     /**
