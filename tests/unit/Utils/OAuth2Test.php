@@ -9,7 +9,7 @@ class OAuth2Test extends \PHPUnit_Framework_TestCase
     /** @test */
     public function build_authorization_url()
     {
-        $authUrl = Utils::getFactory()->oAuth2()->getAuthUrl(
+        $authUrl = Utils\OAuth2::getAuthUrl(
             'clientid',
             'http://localhost',
             ['contacts'],

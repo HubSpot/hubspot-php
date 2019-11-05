@@ -15,7 +15,7 @@ class OAuth2
      * @param array  $optionalScopesArray   A set of optional scopes that your app will need access to.
      * @return string
      */
-    function getAuthUrl($clientId, $redirectURI, $scopesArray = array(), $optionalScopesArray = array())
+    public static function getAuthUrl($clientId, $redirectURI, $scopesArray = array(), $optionalScopesArray = array())
     {
         return self::AUTHORIZE_URL.'?'.http_build_query([
             'client_id' => $clientId,
