@@ -57,7 +57,7 @@ class Timeline extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/timeline/batch-create-or-update-events
      */
-    public function createOrUpdateBatch($appId,$events=[])
+    public function createOrUpdateBatch($appId, $events = [])
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event/batch";
 
