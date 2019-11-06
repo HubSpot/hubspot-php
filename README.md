@@ -1,8 +1,8 @@
 # HubSpot PHP API client
 
-[![Version](https://img.shields.io/packagist/v/ryanwinchester/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/ryanwinchester/hubspot-php)
- [![Total Downloads](https://img.shields.io/packagist/dt/ryanwinchester/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/ryanwinchester/hubspot-php)
- [![License](https://img.shields.io/packagist/l/ryanwinchester/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/ryanwinchester/hubspot-php)
+[![Version](https://img.shields.io/packagist/v/hubspot/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/hubspot/hubspot-php)
+[![Total Downloads](https://img.shields.io/packagist/dt/hubspot/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/hubspot/hubspot-php)
+[![License](https://img.shields.io/packagist/l/hubspot/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/hubspot/hubspot-php)
 
 Hubspot API client. The sequel to my [perfectly functional wrapper](https://github.com/fungku/hubspot) of HubSpot/haPihP.
 client. However, this is a complete re-write and includes some of the new COS/v2 endpoints.
@@ -12,7 +12,7 @@ client. However, this is a complete re-write and includes some of the new COS/v2
 **Composer:**
 
 ```bash
-composer require "ryanwinchester/hubspot-php:~1.0"
+composer require "hubspot/hubspot-php:~1.0"
 ```
 
 ## Quickstart
@@ -133,6 +133,41 @@ $response = $contacts->all();
 foreach ($response->contacts as $contact) {
     //
 }
+```
+
+### Example of using built in utils
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use SevenShores\Hubspot\Utils\OAuth2;
+
+$authUrl = OAuth2::getAuthUrl(
+    'clientId',
+    'http://localhost/callaback.php',
+    'contacts'
+);
+
+```
+
+or using Factory:
+
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use SevenShores\Hubspot\Utils;
+
+$authUrl = Utils::getFactory()->oAuth2()->getAuthUrl(
+    'clientId',
+    'http://localhost/callaback.php',
+    'contacts'
+);
+
 ```
 
 ## Status
