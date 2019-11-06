@@ -57,7 +57,7 @@ class Timeline extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/timeline/batch-create-or-update-events
      */
-    public function createOrUpdateBatch($appId,$events=[])
+    public function createOrUpdateBatch($appId, $events = [])
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event/batch";
 
@@ -78,6 +78,21 @@ class Timeline extends Resource
     public function getEventTypes($appId)
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types";
+        return $this->client->request('get', $endpoint);
+    }
+
+    /**
+     * Get Timeline Event Type by id
+     *
+     * @param int $appId
+     * @param int $eventTypeId
+     *
+     * @return mixed
+     *
+     */
+    public function getEventTypeById($appId, $eventTypeId)
+    {
+        $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}";
         return $this->client->request('get', $endpoint);
     }
 
