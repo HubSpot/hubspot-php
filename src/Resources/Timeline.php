@@ -82,6 +82,21 @@ class Timeline extends Resource
     }
 
     /**
+     * Get Timeline Event Type by id
+     *
+     * @param int $appId
+     * @param int $eventTypeId
+     *
+     * @return mixed
+     *
+     */
+    public function getEventTypeById($appId, $eventTypeId)
+    {
+        $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}";
+        return $this->client->request('get', $endpoint);
+    }
+
+    /**
      * Create Timeline Event Type
      *
      * @param int         $appId
