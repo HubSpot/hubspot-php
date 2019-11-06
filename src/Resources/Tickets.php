@@ -64,15 +64,19 @@ class Tickets extends Resource
     }
 
     /**
-     * @param int $id
+     * @param int   $id
+     * @param array $params Optional parameters ['properties', 'propertiesWithHistory', 'includeDeletes']
      *
      * @return mixed
+     * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    public function getById($id)
+    public function getById($id, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/crm-objects/v1/objects/tickets/{$id}";
 
-        return $this->client->request('get', $endpoint);
+        $queryString = build_query_string($params);
+
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
