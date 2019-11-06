@@ -135,7 +135,7 @@ foreach ($response->contacts as $contact) {
 }
 ```
 
-### Example of using utils
+### Example of using built in utils
 
 ```php
 <?php
@@ -169,7 +169,6 @@ $authUrl = Utils::getFactory()->oAuth2()->getAuthUrl(
 );
 
 ```
-
 
 ## Status
 
