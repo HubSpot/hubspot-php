@@ -11,6 +11,7 @@ class Client
 {
     /** @var string */
     public $key;
+
     /** @var bool */
     public $oauth;
 

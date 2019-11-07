@@ -11,17 +11,17 @@ class CompaniesSpec extends ObjectBehavior
 {
     use SendsRequests;
 
-    function let(Client $client)
+    public function let(Client $client)
     {
         $this->beConstructedWith('demo', $client);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('SevenShores\Hubspot\Resources\Companies');
     }
 
-    function it_can_create_a_new_company($client)
+    public function it_can_create_a_new_company($client)
     {
         $properties = [
             [
@@ -47,7 +47,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->create($properties)->shouldReturn('response');
     }
 
-    function it_can_update_a_company($client)
+    public function it_can_update_a_company($client)
     {
         $id = 10444744;
         $properties = [
@@ -70,7 +70,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->update($id, $properties)->shouldReturn('response');
     }
 
-    function it_can_delete_a_company($client)
+    public function it_can_delete_a_company($client)
     {
         $id = 10444744;
 
@@ -83,7 +83,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->delete($id)->shouldReturn('response');
     }
 
-    function it_can_get_all_companies($client)
+    public function it_can_get_all_companies($client)
     {
         $url = $this->buildUrl('/companies/v2/companies/paged');
 
@@ -94,7 +94,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->getRecentlyModified()->shouldReturn('response');
     }
 
-    function it_can_get_recently_modified_companies($client)
+    public function it_can_get_recently_modified_companies($client)
     {
         $url = $this->buildUrl('/companies/v2/companies/recent/modified');
 
@@ -105,7 +105,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->getRecentlyModified()->shouldReturn('response');
     }
 
-    function it_can_also_define_count_and_offset_for_recently_modified_companies($client)
+    public function it_can_also_define_count_and_offset_for_recently_modified_companies($client)
     {
         $url = $this->buildUrl('/companies/v2/companies/recent/modified', '&offset=1&count=2');
 
@@ -116,7 +116,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->getRecentlyModified(['offset' => 1, 'count' => 2])->shouldReturn('response');
     }
 
-    function it_can_get_recently_created_companies($client)
+    public function it_can_get_recently_created_companies($client)
     {
         $url = $this->buildUrl('/companies/v2/companies/recent/created');
 
@@ -128,7 +128,7 @@ class CompaniesSpec extends ObjectBehavior
 
     }
 
-    function it_can_also_define_count_and_offset_for_recently_created_companies($client)
+    public function it_can_also_define_count_and_offset_for_recently_created_companies($client)
     {
         $url = $this->buildUrl('/companies/v2/companies/recent/created', '&offset=1&count=2');
 
@@ -139,7 +139,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->getRecentlyCreated(['offset' => 1, 'count' => 2])->shouldReturn('response');
     }
 
-    function it_can_get_companies_by_domain($client)
+    public function it_can_get_companies_by_domain($client)
     {
         $domain = 'example.com';
 
@@ -152,7 +152,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->getByDomain($domain)->shouldReturn('response');
     }
 
-    function it_can_get_a_company_by_id($client)
+    public function it_can_get_a_company_by_id($client)
     {
         $id = 10444744;
 
@@ -165,7 +165,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->getById($id)->shouldReturn('response');
     }
 
-    function it_can_add_contact_to_company($client)
+    public function it_can_add_contact_to_company($client)
     {
         $companyId = 1;
         $contactId = 2;
@@ -179,7 +179,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->addContact($contactId, $companyId)->shouldReturn('response');
     }
 
-    function it_can_get_contacts_associated_with_the_company($client)
+    public function it_can_get_contacts_associated_with_the_company($client)
     {
         $compnayId = 10444744;
 
@@ -192,7 +192,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->getAssociatedContacts($compnayId)->shouldReturn('response');
     }
 
-    function it_can_also_define_count_and_vidOffset_for_associated_contacts($client)
+    public function it_can_also_define_count_and_vidOffset_for_associated_contacts($client)
     {
         $companyId = 10444744;
 
@@ -205,7 +205,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => 2])->shouldReturn('response');
     }
 
-    function it_can_get_the_ids_of_the_contacts_associated_with_the_company($client)
+    public function it_can_get_the_ids_of_the_contacts_associated_with_the_company($client)
     {
         $companyId = 10444744;
 
@@ -218,7 +218,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->getAssociatedContactIds($companyId)->shouldReturn('response');
     }
 
-    function it_can_also_define_count_and_vidOffset_for_associated_contact_ids($client)
+    public function it_can_also_define_count_and_vidOffset_for_associated_contact_ids($client)
     {
         $companyId = 10444744;
 
@@ -231,7 +231,7 @@ class CompaniesSpec extends ObjectBehavior
         $this->getAssociatedContactIds($companyId,  ['count' => 1, 'vidOffset' => 2])->shouldReturn('response');
     }
 
-    function it_can_remove_a_contact_from_a_company($client)
+    public function it_can_remove_a_contact_from_a_company($client)
     {
         $companyId = 1;
         $contactId = 2;

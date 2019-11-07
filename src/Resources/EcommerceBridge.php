@@ -10,7 +10,7 @@ class EcommerceBridge extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function install()
+    public function install()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/installs';
 
@@ -23,7 +23,7 @@ class EcommerceBridge extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function checkInstall()
+    public function checkInstall()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/installs/status';
 
@@ -36,7 +36,7 @@ class EcommerceBridge extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function uninstall()
+    public function uninstall()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/installs/uninstall';
 
@@ -50,7 +50,7 @@ class EcommerceBridge extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function upsertSettings($settings = [])
+    public function upsertSettings($settings = [])
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/settings';
 
@@ -66,7 +66,7 @@ class EcommerceBridge extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function deleteSettings()
+    public function deleteSettings()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/settings';
 
@@ -81,7 +81,7 @@ class EcommerceBridge extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function sendSyncMessages($objectType, $messages = [])
+    public function sendSyncMessages($objectType, $messages = [])
     {
         $endpoint = "https://api.hubapi.com/extensions/ecomm/v1/sync-messages/{$objectType}";
 
@@ -96,7 +96,7 @@ class EcommerceBridge extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function getSyncErrors()
+    public function getSyncErrors()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/sync-errors';
 
@@ -110,7 +110,7 @@ class EcommerceBridge extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function setImportUri($importTriggerUri)
+    public function setImportUri($importTriggerUri)
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/import-settings';
 
@@ -127,7 +127,7 @@ class EcommerceBridge extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function getImportSettings()
+    public function getImportSettings()
     {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/import-settings';
 
@@ -142,7 +142,7 @@ class EcommerceBridge extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function importObjects($importStartedAt, $objectType, $pageNumber, $messages)
+    public function importObjects($importStartedAt, $objectType, $pageNumber, $messages)
     {
         $endpoint = "https://api.hubapi.com/import-pages/{$importStartedAt}/{$objectType}/{$pageNumber}";
 
@@ -159,7 +159,7 @@ class EcommerceBridge extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function signalImportEnd($importStartedAt, $objectType, $pageCount, $itemCount)
+    public function signalImportEnd($importStartedAt, $objectType, $pageCount, $itemCount)
     {
         $endpoint = "https://api.hubapi.com/import-pages/{$importStartedAt}/{$objectType}/end";
 

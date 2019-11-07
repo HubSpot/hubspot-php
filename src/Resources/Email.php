@@ -10,7 +10,7 @@ class Email extends Resource
      * @param int $portal_id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function subscriptions($portal_id)
+    public function subscriptions($portal_id)
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions";
 
@@ -25,7 +25,7 @@ class Email extends Resource
      * @param array $params Optional parameters
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function subscriptionsTimeline($params = [])
+    public function subscriptionsTimeline($params = [])
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions/timeline";
 
@@ -41,7 +41,7 @@ class Email extends Resource
      * @param string $email
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function subscriptionStatus($portal_id, $email)
+    public function subscriptionStatus($portal_id, $email)
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions/{$email}";
 
@@ -58,7 +58,7 @@ class Email extends Resource
      * @param array  $params
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function updateSubscription($portal_id, $email, $params = [])
+    public function updateSubscription($portal_id, $email, $params = [])
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions/{$email}";
 
@@ -67,5 +67,4 @@ class Email extends Resource
 
         return $this->client->request('put', $endpoint, $options, $queryString);
     }
-
 }

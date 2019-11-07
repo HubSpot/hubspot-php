@@ -9,7 +9,7 @@ class Contacts extends Resource
      * @param array $properties Array of contact properties.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($properties)
+    public function create($properties)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact";
 
@@ -23,7 +23,7 @@ class Contacts extends Resource
      * @param array $properties The contact properties to update.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($id, $properties)
+    public function update($id, $properties)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/vid/{$id}/profile";
 
@@ -37,7 +37,7 @@ class Contacts extends Resource
      * @param array  $properties The contact properties to update.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function updateByEmail($email, $properties)
+    public function updateByEmail($email, $properties)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile";
 
@@ -51,7 +51,7 @@ class Contacts extends Resource
      * @param array  $properties The contact properties.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function createOrUpdate($email, $properties = [])
+    public function createOrUpdate($email, $properties = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/{$email}";
 
@@ -65,7 +65,7 @@ class Contacts extends Resource
      * @param array $params Array of optional parameters ['auditId']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function createOrUpdateBatch($contacts, $params = [])
+    public function createOrUpdateBatch($contacts, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/batch";
 
@@ -80,7 +80,7 @@ class Contacts extends Resource
      * @param int $id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($id)
+    public function delete($id)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/vid/{$id}";
 
@@ -102,7 +102,7 @@ class Contacts extends Resource
      * @param array $params Array of optional parameters ['count', 'property', 'vidOffset']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/all/contacts/all";
 
@@ -122,7 +122,7 @@ class Contacts extends Resource
      *                      'propertyMode', 'formSubmissionMode', 'showListMemberships']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function recent($params = [])
+    public function recent($params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/recently_updated/contacts/recent";
 
@@ -142,7 +142,7 @@ class Contacts extends Resource
      *                      'propertyMode', 'formSubmissionMode', 'showListMemberships']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function recentNew($params = [])
+    public function recentNew($params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/all/contacts/recent";
 
@@ -157,7 +157,7 @@ class Contacts extends Resource
      *                      'showListMemberships']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id, $params = [])
+    public function getById($id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/vid/{$id}/profile";
 
@@ -180,7 +180,7 @@ class Contacts extends Resource
      *                      'showListMemberships', 'includeDeletes']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getBatchByIds($vids, $params = [])
+    public function getBatchByIds($vids, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/vids/batch/";
 
@@ -197,7 +197,7 @@ class Contacts extends Resource
      *                      'showListMemberships']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getByEmail($email, $params = [])
+    public function getByEmail($email, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile";
 
@@ -219,7 +219,7 @@ class Contacts extends Resource
      *                      'showListMemberships', 'includeDeletes']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getBatchByEmails($emails, $params = [])
+    public function getBatchByEmails($emails, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/emails/batch/";
 
@@ -236,7 +236,7 @@ class Contacts extends Resource
      *                      'showListMemberships']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getByToken($utk, $params = [])
+    public function getByToken($utk, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/utk/{$utk}/profile";
 
@@ -262,7 +262,7 @@ class Contacts extends Resource
      *                      'showListMemberships', 'includeDeletes']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getBatchByTokens($utks, $params = [])
+    public function getBatchByTokens($utks, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/utks/batch/";
 
@@ -288,7 +288,7 @@ class Contacts extends Resource
      * @param array  $params Array of optional parameters ['count', 'offset']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function search($query, $params = [])
+    public function search($query, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/search/query";
 
@@ -302,7 +302,7 @@ class Contacts extends Resource
     /**
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function statistics()
+    public function statistics()
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contacts/statistics";
 
@@ -318,7 +318,7 @@ class Contacts extends Resource
      * @param int $vidToMerge Contact ID of the secondary contact.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function merge($id, $vidToMerge)
+    public function merge($id, $vidToMerge)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/merge-vids/{$id}/";
 
@@ -326,5 +326,4 @@ class Contacts extends Resource
 
         return $this->client->request('post', $endpoint, $options);
     }
-
 }

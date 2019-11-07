@@ -10,7 +10,7 @@ class EmailEvents extends Resource
      * @param array $params Optional parameters
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getCampaignIds($params = [])
+    public function getCampaignIds($params = [])
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/campaigns";
 
@@ -26,7 +26,7 @@ class EmailEvents extends Resource
      * @param int $application_id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getCampaignById($campaign_id, $application_id)
+    public function getCampaignById($campaign_id, $application_id)
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/campaigns/{$campaign_id}";
 
@@ -41,7 +41,7 @@ class EmailEvents extends Resource
      * @param array $params Optional parameters
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/events";
 
@@ -57,7 +57,7 @@ class EmailEvents extends Resource
      * @param int $created Timestamp (milliseconds) when the event was created
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id, $created)
+    public function getById($id, $created)
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/events/{$created}/{$id}";
 

@@ -10,7 +10,7 @@ class Comments extends Resource
      * @param array $params Optional parameters ['limit', 'offset', 'portalId', 'state', 'contentId', 'reverse']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
         $endpoint = 'https://api.hubapi.com/comments/v3/comments';
 
@@ -25,7 +25,7 @@ class Comments extends Resource
      * @param string $id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = "https://api.hubapi.com/comments/v3/comments/{$id}";
 

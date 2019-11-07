@@ -8,12 +8,12 @@ use Prophecy\Argument;
 
 class WorkflowsSpec extends ObjectBehavior
 {
-    function let(Client $client)
+    public function let(Client $client)
     {
         $this->beConstructedWith('demo', $client);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('SevenShores\Hubspot\Resources\Workflows');
     }

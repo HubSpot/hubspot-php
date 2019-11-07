@@ -10,7 +10,7 @@ class Keywords extends Resource
      * @param string $search Optional search query.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($search = null)
+    public function all($search = null)
     {
         $endpoint = 'https://api.hubapi.com/keywords/v1/keywords';
 
@@ -25,7 +25,7 @@ class Keywords extends Resource
      * @param string $keyword_guid
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($keyword_guid)
+    public function getById($keyword_guid)
     {
         $endpoint = "https://api.hubapi.com/keywords/v1/keywords/{$keyword_guid}";
 
@@ -38,7 +38,7 @@ class Keywords extends Resource
      * @param array $keyword
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($keyword)
+    public function create($keyword)
     {
         $endpoint = "https://api.hubapi.com/keywords/v1/keywords";
 
@@ -53,11 +53,10 @@ class Keywords extends Resource
      * @param string $keyword_guid
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($keyword_guid)
+    public function delete($keyword_guid)
     {
         $endpoint = "https://api.hubapi.com/keywords/v1/keywords/{$keyword_guid}";
 
         return $this->client->request('delete', $endpoint);
     }
-
 }

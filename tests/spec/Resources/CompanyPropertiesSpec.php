@@ -9,20 +9,19 @@ use Prophecy\Argument;
 
 class CompanyPropertiesSpec extends ObjectBehavior
 {
-
     use SendsRequests;
 
-    function let(Client $client)
+    public function let(Client $client)
     {
         $this->beConstructedWith('demo', $client);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('SevenShores\Hubspot\Resources\CompanyProperties');
     }
 
-    function it_can_create_a_company_property($client)
+    public function it_can_create_a_company_property($client)
     {
         $url = $this->buildUrl('/companies/v2/properties/');
 
@@ -46,7 +45,7 @@ class CompanyPropertiesSpec extends ObjectBehavior
         $this->create($property)->shouldReturn('response');
     }
 
-    function it_can_update_a_company_property($client)
+    public function it_can_update_a_company_property($client)
     {
         $propertyName = 'shippingaddress';
 
@@ -74,7 +73,7 @@ class CompanyPropertiesSpec extends ObjectBehavior
         $this->update($propertyName, $property)->shouldReturn('response');
     }
 
-    function it_can_delete_a_company_property($client)
+    public function it_can_delete_a_company_property($client)
     {
         $propertyName = 'shippingaddress';
 
@@ -85,10 +84,9 @@ class CompanyPropertiesSpec extends ObjectBehavior
             ->willReturn('response');
 
         $this->delete($propertyName)->shouldReturn('response');
-
     }
 
-    function it_can_get_a_company_property($client)
+    public function it_can_get_a_company_property($client)
     {
         $propertyName = 'shippingaddress';
 
@@ -101,7 +99,7 @@ class CompanyPropertiesSpec extends ObjectBehavior
         $this->get($propertyName)->shouldReturn('response');
     }
 
-    function it_can_get_all_company_properties($client)
+    public function it_can_get_all_company_properties($client)
     {
         $url = $this->buildUrl("/companies/v2/properties/");
 
@@ -112,7 +110,7 @@ class CompanyPropertiesSpec extends ObjectBehavior
         $this->all()->shouldReturn('response');
     }
 
-    function it_can_create_a_company_property_group($client)
+    public function it_can_create_a_company_property_group($client)
     {
         $url = $this->buildUrl('/companies/v2/groups/');
 
@@ -140,7 +138,7 @@ class CompanyPropertiesSpec extends ObjectBehavior
         $this->createGroup($group)->shouldReturn('response');
     }
 
-    function it_can_update_a_company_property_group($client)
+    public function it_can_update_a_company_property_group($client)
     {
         $propertyGroupName = "acustomcompanygroup";
 
@@ -163,7 +161,7 @@ class CompanyPropertiesSpec extends ObjectBehavior
         $this->updateGroup($propertyGroupName, $group)->shouldReturn('response');
     }
 
-    function it_can_delete_company_property_group($client)
+    public function it_can_delete_company_property_group($client)
     {
         $propertyGroupName = "acustomcompanygroup";
 
@@ -176,7 +174,7 @@ class CompanyPropertiesSpec extends ObjectBehavior
         $this->deleteGroup($propertyGroupName)->shouldReturn('response');
     }
 
-    function it_can_get_all_company_property_groups($client)
+    public function it_can_get_all_company_property_groups($client)
     {
         $url = $this->buildUrl('/companies/v2/groups/');
 
@@ -187,7 +185,7 @@ class CompanyPropertiesSpec extends ObjectBehavior
         $this->getAllGroups()->shouldReturn('response');
     }
 
-    function it_can_get_all_company_property_groups_with_properties($client)
+    public function it_can_get_all_company_property_groups_with_properties($client)
     {
         $url = $this->buildUrl('/companies/v2/groups/', '&includeProperties=true');
 

@@ -9,7 +9,7 @@ class Workflows extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all()
+    public function all()
     {
         $endpoint = "https://api.hubapi.com/automation/v2/workflows";
 
@@ -22,7 +22,7 @@ class Workflows extends Resource
      * @param int $id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$id}";
 
@@ -36,7 +36,7 @@ class Workflows extends Resource
      * @param string $email
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function enrollContact($workflow_id, $email)
+    public function enrollContact($workflow_id, $email)
     {
         $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$workflow_id}/enrollments/contacts/{$email}";
 
@@ -50,7 +50,7 @@ class Workflows extends Resource
      * @param string $email
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function unenrollContact($workflow_id, $email)
+    public function unenrollContact($workflow_id, $email)
     {
         $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$workflow_id}/enrollments/contacts/{$email}";
 
@@ -63,7 +63,7 @@ class Workflows extends Resource
      * @param array $workflow The workflow properties
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($workflow)
+    public function create($workflow)
     {
         $endpoint = "https://api.hubapi.com/automation/v2/workflows";
 
@@ -78,7 +78,7 @@ class Workflows extends Resource
      * @param int $id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($id)
+    public function delete($id)
     {
         $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$id}";
 
@@ -93,7 +93,7 @@ class Workflows extends Resource
      * @param int $contact_id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function enrollmentsForContact($contact_id)
+    public function enrollmentsForContact($contact_id)
     {
         $endpoint = "https://api.hubapi.com/automation/v2/workflows/enrollments/contacts/{$contact_id}";
 
@@ -108,7 +108,7 @@ class Workflows extends Resource
      * @param array $params Optional parameters.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function pastEventsForContact($workflow_id, $contact_id, $params = [])
+    public function pastEventsForContact($workflow_id, $contact_id, $params = [])
     {
         $endpoint = " /automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/past";
 
@@ -125,7 +125,7 @@ class Workflows extends Resource
      * @param array $params
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function upcomingEventsForContact($workflow_id, $contact_id, $params = [])
+    public function upcomingEventsForContact($workflow_id, $contact_id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/automation/v2/workflows/{$workflow_id}/logevents/contacts/{$contact_id}/upcoming";
 
@@ -133,5 +133,4 @@ class Workflows extends Resource
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
-
 }
