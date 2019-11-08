@@ -5,6 +5,7 @@ namespace SevenShores\Hubspot\Http;
 use GuzzleHttp\Client as GuzzleClient;
 use Psr\Http\Message\ResponseInterface;
 use SevenShores\Hubspot\Exceptions\BadRequest;
+use SevenShores\Hubspot\Exceptions\HubspotException;
 use SevenShores\Hubspot\Exceptions\InvalidArgument;
 
 class Client
@@ -78,6 +79,7 @@ class Client
      * @param  boolean $requires_auth Whether or not this HubSpot API endpoint requires authentication
      * @return \SevenShores\Hubspot\Http\Response|ResponseInterface
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     * @throws \SevenShores\Hubspot\Exceptions\HubspotException
      */
     public function request($method, $endpoint, $options = [], $query_string = null, $requires_auth = true)
     {
@@ -99,9 +101,9 @@ class Client
                 return $this->client->request($method, $url, $options);
             }
             return new Response($this->client->request($method, $url, $options));
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
-            throw new BadRequest(\GuzzleHttp\Psr7\str($e->getResponse()), $e->getCode(), $e);
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\ServerException $e) {
+            throw new HubspotException(\GuzzleHttp\Psr7\str($e->getResponse()), $e->getCode(), $e);
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
             throw new BadRequest($e->getMessage(), $e->getCode(), $e);
         }
     }
