@@ -90,4 +90,14 @@ class EngagementsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(204, $response->getStatusCode());
     }
+
+    /** @test */
+    public function get_call_dispositions()
+    {
+        $response = $this->engagements->getCallDispositions();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertCount(6, $response->getData());
+    }
+
 }

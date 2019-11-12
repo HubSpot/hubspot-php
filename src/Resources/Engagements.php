@@ -145,4 +145,18 @@ class Engagements extends Resource
 
         return $this->client->request('get', $endpoint);
     }
+
+    /**
+     * Get the possible dispositions for sales calls (stored as engagements), listed as
+     * the outcome when viewing the call's outcome when viewing
+     * the call in the timeline in HubSpot.
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
+     */
+    public function getCallDispositions()
+    {
+        $endpoint = 'https://api.hubapi.com/calling/v1/dispositions';
+
+        return $this->client->request('get', $endpoint);
+    }
 }
