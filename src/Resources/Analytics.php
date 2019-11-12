@@ -16,7 +16,7 @@ class Analytics extends Resource
      * @param array $params Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getByCategory($breakdown_by, $time_period, $startDate, $endDate, $params = [])
+    public function getByCategory($breakdown_by, $time_period, $startDate, $endDate, $params = [])
     {
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$breakdown_by}/{$time_period}";
         $params = array_merge(compact('startDate', 'endDate'), $params);
@@ -38,7 +38,7 @@ class Analytics extends Resource
      * @param array $params Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getByType($object_type, $time_period, $startDate, $endDate, $params = [])
+    public function getByType($object_type, $time_period, $startDate, $endDate, $params = [])
     {
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$object_type}/{$time_period}";
         $params = array_merge(compact('startDate', 'endDate'), $params);
@@ -60,7 +60,7 @@ class Analytics extends Resource
      * @param array $params Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getHosted($content_type, $time_period, $startDate, $endDate, $params = [])
+    public function getHosted($content_type, $time_period, $startDate, $endDate, $params = [])
     {
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$content_type}/{$time_period}";
         $params = array_merge(compact('startDate', 'endDate'), $params);
@@ -78,7 +78,7 @@ class Analytics extends Resource
      * @param array $params Array of optional parameters ['includeDeletes']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getEvents($params = [])
+    public function getEvents($params = [])
     {
         $endpoint = "https://api.hubapi.com/reports/v2/events";
 
@@ -95,7 +95,7 @@ class Analytics extends Resource
      * @param array $params Array of optional parameters
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getViews($params = [])
+    public function getViews($params = [])
     {
         $endpoint = "https://api.hubapi.com/analytics/v2/views";
 
@@ -113,7 +113,7 @@ class Analytics extends Resource
      * @param array $params Array of optional parameters ['includeDeletes']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getEventsById($id, $params = [])
+    public function getEventsById($id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/analytics/v2/views";
 
@@ -133,7 +133,7 @@ class Analytics extends Resource
      * @param array $params Array of optional parameters
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function checkForExistence($objectType, $params = [])
+    public function checkForExistence($objectType, $params = [])
     {
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$objectType}/exists";
 

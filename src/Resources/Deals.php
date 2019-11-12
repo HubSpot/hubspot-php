@@ -11,7 +11,7 @@ class Deals extends Resource
      * @return mixed
      * @throws HubSpotException
      */
-    function create(array $deal)
+    public function create(array $deal)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal";
 
@@ -25,7 +25,7 @@ class Deals extends Resource
      * @param array $deal The deal properties to update.
      * @return mixed
      */
-    function update($id, array $deal)
+    public function update($id, array $deal)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
@@ -42,7 +42,7 @@ class Deals extends Resource
      * @param array $deals The deals and properties.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function updateBatch(array $deals)
+    public function updateBatch(array $deals)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/batch-async/update";
 
@@ -57,7 +57,8 @@ class Deals extends Resource
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function getAll(array $params = []){
+    public function getAll(array $params = [])
+    {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/paged";
 
         $queryString = build_query_string($params);
@@ -70,7 +71,7 @@ class Deals extends Resource
      * @param int $id
      * @return mixed
      */
-    function delete($id)
+    public function delete($id)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
@@ -81,7 +82,7 @@ class Deals extends Resource
      * @param array $params Optional parameters ['limit', 'offset']
      * @return mixed
      */
-    function getRecentlyModified(array $params = [])
+    public function getRecentlyModified(array $params = [])
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/recent/modified";
         $queryString = build_query_string($params);
@@ -93,7 +94,7 @@ class Deals extends Resource
      * @param array $params Optional parameters ['limit', 'offset']
      * @return mixed
      */
-    function getRecentlyCreated(array $params = [])
+    public function getRecentlyCreated(array $params = [])
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/recent/created";
         $queryString = build_query_string($params);
@@ -105,7 +106,7 @@ class Deals extends Resource
      * @param int $id
      * @return mixed
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
@@ -117,7 +118,7 @@ class Deals extends Resource
      * @param int|int[] $companyIds
      * @return mixed
      */
-    function associateWithCompany($dealId, $companyIds)
+    public function associateWithCompany($dealId, $companyIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/COMPANY";
 
@@ -131,7 +132,7 @@ class Deals extends Resource
      * @param int|int[] $companyIds
      * @return mixed
      */
-    function disassociateFromCompany($dealId, $companyIds)
+    public function disassociateFromCompany($dealId, $companyIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/COMPANY";
 
@@ -145,7 +146,7 @@ class Deals extends Resource
      * @param int|int[] $contactIds
      * @return mixed
      */
-    function associateWithContact($dealId, $contactIds)
+    public function associateWithContact($dealId, $contactIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/CONTACT";
 
@@ -159,7 +160,7 @@ class Deals extends Resource
      * @param array $params Optional parameters ['limit', 'offset']
      * @return mixed
      */
-    function associatedWithContact($contactId, $params = [])
+    public function associatedWithContact($contactId, $params = [])
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/associated/contact/{$contactId}/paged";
 
@@ -173,7 +174,7 @@ class Deals extends Resource
      * @param int|int[] $contactIds
      * @return mixed
      */
-    function disassociateFromContact($dealId, $contactIds)
+    public function disassociateFromContact($dealId, $contactIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/CONTACT";
 

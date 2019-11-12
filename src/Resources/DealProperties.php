@@ -15,7 +15,7 @@ class DealProperties extends Resource
      * @param string $name The name of the property.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function get($name)
+    public function get($name)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/properties/named/{$name}";
 
@@ -33,7 +33,7 @@ class DealProperties extends Resource
      * @param array $property
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($property)
+    public function create($property)
     {
         $endpoint = "https://api.hubapi.com/properties/v1/deals/properties/";
 
@@ -53,7 +53,7 @@ class DealProperties extends Resource
      * @param array  $property
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($name, $property)
+    public function update($name, $property)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/properties/named/{$name}";
 
@@ -114,7 +114,7 @@ class DealProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function updateGroup($groupName, $group)
+    public function updateGroup($groupName, $group)
     {
         $endpoint = "https://api.hubapi.com/properties/v1/deals/groups/named/{$groupName}";
 
@@ -132,7 +132,7 @@ class DealProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function deleteGroup($groupName)
+    public function deleteGroup($groupName)
     {
         $endpoint = "https://api.hubapi.com/properties/v1/deals/groups/named/{$groupName}";
 
@@ -153,7 +153,7 @@ class DealProperties extends Resource
     {
         $endpoint = "https://api.hubapi.com/properties/v1/deals/groups/named/{$groupName}";
 
-        if($includeProperties){
+        if ($includeProperties) {
             $queryString = build_query_string(['includeProperties' => 'true']);
 
             return $this->client->request('get', $endpoint, [], $queryString);
@@ -170,11 +170,11 @@ class DealProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getAllGroups($includeProperties = false)
+    public function getAllGroups($includeProperties = false)
     {
         $endpoint = 'https://api.hubapi.com/properties/v1/deals/groups';
 
-        if($includeProperties){
+        if ($includeProperties) {
             $queryString = build_query_string(['includeProperties' => 'true']);
 
             return $this->client->request('get', $endpoint, [], $queryString);

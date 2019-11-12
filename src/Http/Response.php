@@ -21,7 +21,7 @@ class Response implements ResponseInterface, ArrayAccess
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
      */
-    function __construct(ResponseInterface $response)
+    public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
         $this->data = $this->getDataFromResponse($response);
@@ -33,7 +33,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @param  string  $name
      * @return mixed
      */
-    function __get($name)
+    public function __get($name)
     {
         return $this->data->$name;
     }
@@ -54,7 +54,7 @@ class Response implements ResponseInterface, ArrayAccess
      *
      * @return mixed
      */
-    function getData()
+    public function getData()
     {
         return $this->data;
     }
@@ -64,7 +64,7 @@ class Response implements ResponseInterface, ArrayAccess
      *
      * @return array
      */
-    function toArray()
+    public function toArray()
     {
         return json_decode(json_encode($this->data), true);
     }
@@ -75,7 +75,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @param  mixed  $offset
      * @return boolean
      */
-    function offsetExists($offset)
+    public function offsetExists($offset)
     {
         return isset($this->data->$offset);
     }
@@ -86,7 +86,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @param  mixed  $offset
      * @return mixed
      */
-    function offsetGet($offset)
+    public function offsetGet($offset)
     {
         $data = $this->toArray();
 
@@ -100,7 +100,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @param  mixed  $value
      * @return void
      */
-    function offsetSet($offset, $value)
+    public function offsetSet($offset, $value)
     {
         $this->data->$offset = $value;
     }
@@ -111,7 +111,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @param  mixed  $offset
      * @return void
      */
-    function offsetUnset($offset)
+    public function offsetUnset($offset)
     {
         unset($this->data->$offset);
     }
@@ -123,7 +123,7 @@ class Response implements ResponseInterface, ArrayAccess
      *
      * @return string HTTP protocol version.
      */
-    function getProtocolVersion()
+    public function getProtocolVersion()
     {
         return $this->response->getProtocolVersion();
     }
@@ -141,7 +141,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @param string $version HTTP protocol version
      * @return self
      */
-    function withProtocolVersion($version)
+    public function withProtocolVersion($version)
     {
         return $this->response->withProtocolVersion($version);
     }
@@ -171,7 +171,7 @@ class Response implements ResponseInterface, ArrayAccess
      *     key MUST be a header name, and each value MUST be an array of strings
      *     for that header.
      */
-    function getHeaders()
+    public function getHeaders()
     {
         return $this->response->getHeaders();
     }
@@ -184,7 +184,7 @@ class Response implements ResponseInterface, ArrayAccess
      *     name using a case-insensitive string comparison. Returns false if
      *     no matching header name is found in the message.
      */
-    function hasHeader($name)
+    public function hasHeader($name)
     {
         return $this->response->hasHeader($name);
     }
@@ -203,7 +203,7 @@ class Response implements ResponseInterface, ArrayAccess
      *    header. If the header does not appear in the message, this method MUST
      *    return an empty array.
      */
-    function getHeader($name)
+    public function getHeader($name)
     {
         return $this->response->getHeader($name);
     }
@@ -227,7 +227,7 @@ class Response implements ResponseInterface, ArrayAccess
      *    concatenated together using a comma. If the header does not appear in
      *    the message, this method MUST return an empty string.
      */
-    function getHeaderLine($name)
+    public function getHeaderLine($name)
     {
         return $this->response->getHeaderLine($name);
     }
@@ -247,7 +247,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @return self
      * @throws \InvalidArgumentException for invalid header names or values.
      */
-    function withHeader($name, $value)
+    public function withHeader($name, $value)
     {
         return $this->response->withHeader($name, $value);
     }
@@ -268,7 +268,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @return self
      * @throws \InvalidArgumentException for invalid header names or values.
      */
-    function withAddedHeader($name, $value)
+    public function withAddedHeader($name, $value)
     {
         return $this->response->withAddedHeader($name, $value);
     }
@@ -285,7 +285,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @param string $name Case-insensitive header field name to remove.
      * @return self
      */
-    function withoutHeader($name)
+    public function withoutHeader($name)
     {
         return $this->response->withoutHeader($name);
     }
@@ -295,7 +295,7 @@ class Response implements ResponseInterface, ArrayAccess
      *
      * @return StreamInterface Returns the body as a stream.
      */
-    function getBody()
+    public function getBody()
     {
         return $this->response->getBody();
     }
@@ -313,7 +313,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @return self
      * @throws \InvalidArgumentException When the body is not valid.
      */
-    function withBody(StreamInterface $body)
+    public function withBody(StreamInterface $body)
     {
         return $this->response->withBody($body);
     }
@@ -326,7 +326,7 @@ class Response implements ResponseInterface, ArrayAccess
      *
      * @return int Status code.
      */
-    function getStatusCode()
+    public function getStatusCode()
     {
         return $this->response->getStatusCode();
     }
@@ -351,7 +351,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @return self
      * @throws \InvalidArgumentException For invalid status code arguments.
      */
-    function withStatus($code, $reasonPhrase = '')
+    public function withStatus($code, $reasonPhrase = '')
     {
         return $this->response->withStatus($code, $reasonPhrase);
     }
@@ -369,7 +369,7 @@ class Response implements ResponseInterface, ArrayAccess
      * @link http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
      * @return string Reason phrase; must return an empty string if none present.
      */
-    function getReasonPhrase()
+    public function getReasonPhrase()
     {
         return $this->response->getReasonPhrase();
     }

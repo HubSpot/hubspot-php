@@ -12,17 +12,17 @@ class DealPropertiesSpec extends ObjectBehavior
 
     use SendsRequests;
 
-    function let(Client $client)
+    public function let(Client $client)
     {
         $this->beConstructedWith('demo', $client);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('SevenShores\Hubspot\Resources\DealProperties');
     }
 
-    function it_can_create_a_deal_property($client)
+    public function it_can_create_a_deal_property($client)
     {
         $url = $this->buildUrl(' /properties/v1/deals/properties/');
 

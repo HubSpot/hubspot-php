@@ -13,7 +13,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($properties)
+    public function create($properties)
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/';
         $options['json'] = ['properties' => $properties];
@@ -30,7 +30,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($id, $properties)
+    public function update($id, $properties)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/{$id}";
         $options['json'] = ['properties' => $properties];
@@ -42,7 +42,7 @@ class Companies extends Resource
      * @param array $companies The companies and properties.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function updateBatch($companies)
+    public function updateBatch($companies)
     {
         $endpoint = "https://api.hubapi.com/companies/v1/batch-async/update";
         $options['json'] = $companies;
@@ -58,7 +58,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($id)
+    public function delete($id)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/{$id}";
 
@@ -73,7 +73,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/paged';
 
@@ -90,7 +90,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getRecentlyModified($params = [])
+    public function getRecentlyModified($params = [])
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/recent/modified';
 
@@ -107,7 +107,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getRecentlyCreated($params = [])
+    public function getRecentlyCreated($params = [])
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/recent/created';
 
@@ -125,7 +125,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getByDomain($domain)
+    public function getByDomain($domain)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/domain/{$domain}";
 
@@ -166,7 +166,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/{$id}";
 
@@ -183,7 +183,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function addContact($contactId, $companyId)
+    public function addContact($contactId, $companyId)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/{$companyId}/contacts/{$contactId}";
 
@@ -199,7 +199,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getAssociatedContacts($companyId, $params = [])
+    public function getAssociatedContacts($companyId, $params = [])
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/{$companyId}/contacts";
 
@@ -217,7 +217,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getAssociatedContactIds($companyId, $params = [])
+    public function getAssociatedContactIds($companyId, $params = [])
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/{$companyId}/vids";
 
@@ -235,13 +235,10 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function removeContact($contactId, $companyId)
+    public function removeContact($contactId, $companyId)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/{$companyId}/contacts/{$contactId}";
 
         return $this->client->request('delete', $endpoint);
     }
-
-
-
 }

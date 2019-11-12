@@ -23,17 +23,17 @@ class ContactsSpec extends ObjectBehavior
         return $this->baseUrl . $endpoint . '?hapikey=' . $this->apiKey;
     }
 
-    function let(Client $client)
+    public function let(Client $client)
     {
         $this->beConstructedWith('demo', $client);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('SevenShores\Hubspot\Resources\Contacts');
     }
 
-//    function it_makes_create_request()
+//    public function it_makes_create_request()
 //    {
 //        $contact = ['email' => 'test@123test.com'];
 //
@@ -45,7 +45,7 @@ class ContactsSpec extends ObjectBehavior
 //        $this->create($contact);
 //    }
 //
-//    function it_makes_an_update_request()
+//    public function it_makes_an_update_request()
 //    {
 //        $contact = ['email' => 'test@123test.com'];
 //        $id = 1;

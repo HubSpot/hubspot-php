@@ -10,7 +10,7 @@ class BlogAuthors extends Resource
      * @param  array $params Optional Parameters.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($params = [])
+    public function create($params = [])
     {
         $endpoint = 'https://api.hubapi.com/blogs/v3/blog-authors';
 
@@ -25,7 +25,7 @@ class BlogAuthors extends Resource
      * @param  array $params Optional parameters.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
         $endpoint = 'https://api.hubapi.com/blogs/v3/blog-authors';
 
@@ -41,7 +41,7 @@ class BlogAuthors extends Resource
      * @param array $params     Optional parameters.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function search($q = '', $params = [])
+    public function search($q = '', $params = [])
     {
         $endpoint = 'https://api.hubapi.com/blogs/v3/blog-authors/search';
 
@@ -59,7 +59,7 @@ class BlogAuthors extends Resource
      * @param  array $params Fields to update.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($id, $params = [])
+    public function update($id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/blogs/v3/blog-authors/{$id}";
 
@@ -74,7 +74,7 @@ class BlogAuthors extends Resource
      * @param  int $id  Unique identifier for the blog author to delete.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($id)
+    public function delete($id)
     {
         $endpoint = "https://api.hubapi.com/blogs/v3/blog-authors/{$id}";
 
@@ -87,7 +87,7 @@ class BlogAuthors extends Resource
      * @param  int $id  Unique identifier for a blog author.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = "https://api.hubapi.com/blogs/v3/blog-authors/{$id}";
 

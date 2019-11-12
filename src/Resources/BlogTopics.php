@@ -11,7 +11,7 @@ class BlogTopics extends Resource
      * @param  array $params Optional parameters ['name','slug','limit','offset']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
         $endpoint = 'https://api.hubapi.com/blogs/v3/topics';
 
@@ -29,7 +29,7 @@ class BlogTopics extends Resource
      * @param array $params Array of optional parameters ['name','slug','limit', 'offset', 'active', 'blog']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function search($query, $params = [])
+    public function search($query, $params = [])
     {
         $endpoint = 'https://api.hubapi.com/blogs/v3/topics/search';
 
@@ -44,7 +44,7 @@ class BlogTopics extends Resource
      * @param int $id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = "https://api.hubapi.com/blogs/v3/topics/{$id}";
 
@@ -58,7 +58,7 @@ class BlogTopics extends Resource
      * @param  array $params Optional Parameters.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($name, $params = [])
+    public function create($name, $params = [])
     {
         $endpoint = 'https://api.hubapi.com/blogs/v3/topics';
 
@@ -76,7 +76,7 @@ class BlogTopics extends Resource
      * @param  array $params The blog topic fields to update.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($id, $params = [])
+    public function update($id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/blogs/v3/topics/{$id}";
 
@@ -91,7 +91,7 @@ class BlogTopics extends Resource
      * @param  int $id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($id)
+    public function delete($id)
     {
         $endpoint = "https://api.hubapi.com/blogs/v3/topics/{$id}";
 
@@ -105,7 +105,7 @@ class BlogTopics extends Resource
      * @param string $groupedTopicName New name of the group
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function merge($topicIds, $groupedTopicName)
+    public function merge($topicIds, $groupedTopicName)
     {
         $endpoint = "https://api.hubapi.com/blogs/v3/topics/group-topics";
 

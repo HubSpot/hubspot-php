@@ -15,7 +15,7 @@ class SingleEmail extends Resource
      * @param array  $customProperties
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function send($id, $message = [], $contactProperties = [], $customProperties = [])
+    public function send($id, $message = [], $contactProperties = [], $customProperties = [])
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/singleEmail/send";
 

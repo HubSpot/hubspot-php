@@ -12,7 +12,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($property)
+    public function create($property)
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/properties/';
 
@@ -30,7 +30,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($propertyName, $property)
+    public function update($propertyName, $property)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
@@ -48,7 +48,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($propertyName)
+    public function delete($propertyName)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
@@ -63,7 +63,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function get($propertyName)
+    public function get($propertyName)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
@@ -77,7 +77,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all()
+    public function all()
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/properties/';
 
@@ -92,7 +92,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function createGroup($group)
+    public function createGroup($group)
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/groups/';
 
@@ -110,7 +110,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function updateGroup($groupName, $group)
+    public function updateGroup($groupName, $group)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/groups/named/{$groupName}";
 
@@ -128,7 +128,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function deleteGroup($groupName)
+    public function deleteGroup($groupName)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/groups/named/{$groupName}";
 
@@ -143,11 +143,11 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getAllGroups($includeProperties = false)
+    public function getAllGroups($includeProperties = false)
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/groups/';
 
-        if($includeProperties){
+        if ($includeProperties) {
             $queryString = build_query_string(['includeProperties' => 'true']);
 
             return $this->client->request('get', $endpoint, [], $queryString);

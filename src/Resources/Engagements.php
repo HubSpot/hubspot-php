@@ -13,7 +13,7 @@ class Engagements extends Resource
      * @param array $attachments Array of engagement attachments.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($engagement, $associations, $metadata, $attachments = array())
+    public function create($engagement, $associations, $metadata, $attachments = array())
     {
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements";
 
@@ -36,7 +36,7 @@ class Engagements extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function recent($params = [])
+    public function recent($params = [])
     {
         $endpoint = 'https://api.hubapi.com/engagements/v1/engagements/recent/modified';
 
@@ -53,7 +53,7 @@ class Engagements extends Resource
      * @return \SevenShores\Hubspot\Http\Response
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      */
-    function update($id, $engagement, $metadata, $method = 'patch')
+    public function update($id, $engagement, $metadata, $method = 'patch')
     {
         $availableMethods = ['put', 'patch'];
 
@@ -74,7 +74,7 @@ class Engagements extends Resource
      * @param int $id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($id)
+    public function delete($id)
     {
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}";
 
@@ -85,7 +85,7 @@ class Engagements extends Resource
      * @param int $id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function get($id)
+    public function get($id)
     {
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}";
 
@@ -116,7 +116,7 @@ class Engagements extends Resource
      * @param int $object_id
      * @return \SevenShores\Hubspot\Http\Response
      **/
-    function associate($id, $object_type, $object_id)
+    public function associate($id, $object_type, $object_id)
     {
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}/associations/{$object_type}/{$object_id}";
 
@@ -129,7 +129,7 @@ class Engagements extends Resource
      * @param array $params Array of optional parameters ['limit', 'offset']
      * @return \SevenShores\Hubspot\Http\Response
      **/
-    function associated($object_type, $object_id, $params = [])
+    public function associated($object_type, $object_id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements/associated/{$object_type}/{$object_id}/paged";
         $queryString = build_query_string($params);
@@ -139,7 +139,7 @@ class Engagements extends Resource
     /**
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function activityTypes()
+    public function activityTypes()
     {
         $endpoint = "https://api.hubapi.com/engagements/v1/activity-types";
 

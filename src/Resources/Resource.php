@@ -10,11 +10,11 @@ abstract class Resource
     protected $client;
 
     /**
-     * Makin' a good ole resource
+     * Makin' a good old resource
      *
      * @param \SevenShores\Hubspot\Http\Client $client
      */
-    function __construct($client)
+    public function __construct($client)
     {
         $this->client = $client;
     }

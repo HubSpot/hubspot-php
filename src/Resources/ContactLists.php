@@ -10,7 +10,7 @@ class ContactLists extends Resource
      * @param array $list Contact list properties.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function create($list)
+    public function create($list)
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/lists';
 
@@ -26,7 +26,7 @@ class ContactLists extends Resource
      * @param array $list The contact list properties to update.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function update($id, $list)
+    public function update($id, $list)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}";
 
@@ -41,7 +41,7 @@ class ContactLists extends Resource
      * @param int $id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function delete($id)
+    public function delete($id)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}";
 
@@ -54,7 +54,7 @@ class ContactLists extends Resource
      * @param array $params ['count', 'offset']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists";
 
@@ -67,7 +67,7 @@ class ContactLists extends Resource
      * @param int $id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}";
 
@@ -78,7 +78,7 @@ class ContactLists extends Resource
      * @param array $ids
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getBatchByIds($ids)
+    public function getBatchByIds($ids)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/batch";
 
@@ -91,7 +91,7 @@ class ContactLists extends Resource
      * @param array $params Optional parameters ['count', 'offset']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getAllStatic($params = [])
+    public function getAllStatic($params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/static";
 
@@ -104,7 +104,7 @@ class ContactLists extends Resource
      * @param array $params Optional parameters ['count', 'offset']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getAllDynamic($params = [])
+    public function getAllDynamic($params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/dynamic";
 
@@ -121,7 +121,7 @@ class ContactLists extends Resource
      *                      { count, vidOffset, property, propertyMode, formSubmissionMode, showListMemberships }
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function contacts($id, $params = [])
+    public function contacts($id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}/contacts/all";
 
@@ -137,7 +137,7 @@ class ContactLists extends Resource
      * @param array $params
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function recentContacts($id, $params = [])
+    public function recentContacts($id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}/contacts/recent";
 
@@ -152,7 +152,7 @@ class ContactLists extends Resource
      * @param int $id List id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function refresh($id)
+    public function refresh($id)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}/refresh";
 
@@ -167,7 +167,7 @@ class ContactLists extends Resource
      * @param array $emails
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function addContact($list_id, $contact_ids, $emails = [])
+    public function addContact($list_id, $contact_ids, $emails = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$list_id}/add";
 
@@ -186,7 +186,7 @@ class ContactLists extends Resource
      * @param array $contact_ids
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function removeContact($list_id, $contact_ids)
+    public function removeContact($list_id, $contact_ids)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$list_id}/remove";
 
@@ -194,5 +194,4 @@ class ContactLists extends Resource
 
         return $this->client->request('post', $endpoint, $options);
     }
-
 }

@@ -18,7 +18,7 @@ class Events extends Resource
      * @param  array  $contactProperties   Optional - array of new contact properties.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function trigger(
+    public function trigger(
         $hubId,
         $eventId,
         $contactEmail = null,

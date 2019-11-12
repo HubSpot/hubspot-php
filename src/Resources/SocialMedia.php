@@ -9,7 +9,7 @@ class SocialMedia extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function channels()
+    public function channels()
     {
         $endpoint = 'https://api.hubapi.com/broadcast/v1/channels/setting/publish/current';
 
@@ -22,7 +22,7 @@ class SocialMedia extends Resource
      * @param string $channel_guid
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getChannelById($channel_guid)
+    public function getChannelById($channel_guid)
     {
         $endpoint = "https://api.hubapi.com/broadcast/v1/channels/{$channel_guid}";
 
@@ -35,7 +35,7 @@ class SocialMedia extends Resource
      * @param array $params
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function broadcasts($params = [])
+    public function broadcasts($params = [])
     {
         $endpoint = "https://api.hubapi.com/broadcast/v1/broadcasts";
 
@@ -50,7 +50,7 @@ class SocialMedia extends Resource
      * @param string $broadcast_guid
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getBroadcastById($broadcast_guid)
+    public function getBroadcastById($broadcast_guid)
     {
         $endpoint = "https://api.hubapi.com/broadcast/v1/broadcasts/{$broadcast_guid}";
 
@@ -63,7 +63,7 @@ class SocialMedia extends Resource
      * @param array $broadcast
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function createBroadcast($broadcast)
+    public function createBroadcast($broadcast)
     {
         $endpoint = "https://api.hubapi.com/broadcast/v1/broadcasts";
 
@@ -78,11 +78,10 @@ class SocialMedia extends Resource
      * @param string $broadcast_guid
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function cancelBroadcast($broadcast_guid)
+    public function cancelBroadcast($broadcast_guid)
     {
         $endpoint = "https://api.hubapi.com/broadcast/v1/broadcasts/{$broadcast_guid}";
 
         return $this->client->request('delete', $endpoint);
     }
-
 }

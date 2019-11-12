@@ -10,7 +10,7 @@ class Blogs extends Resource
      * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function all($params = [])
+    public function all($params = [])
     {
         $endpoint = 'https://api.hubapi.com/content/api/v2/blogs';
 
@@ -25,7 +25,7 @@ class Blogs extends Resource
      * @param string $id
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getById($id)
+    public function getById($id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blogs/{$id}";
 
@@ -38,7 +38,7 @@ class Blogs extends Resource
      * @param string $id     Blog id.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function versions($id)
+    public function versions($id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blogs/{$id}/versions";
 
@@ -52,7 +52,7 @@ class Blogs extends Resource
      * @param string $version_id Version id.
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function getVersion($id, $version_id)
+    public function getVersion($id, $version_id)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blogs/{$id}/versions/{$version_id}";
 
