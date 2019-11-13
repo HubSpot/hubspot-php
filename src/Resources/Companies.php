@@ -196,6 +196,9 @@ class Companies extends Resource
      * @param array $params Array of optional parameters ['count', 'vidOffset']
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_contacts
+     * @see CrmAssociations::get is used to manage associations between objects
+     *
+     * @deprecated
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
