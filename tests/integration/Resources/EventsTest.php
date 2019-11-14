@@ -12,7 +12,7 @@ class EventsTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->events = new Events(new Client(['key' => 'demo']));
+        $this->events = new Events(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
 

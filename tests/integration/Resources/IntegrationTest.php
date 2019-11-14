@@ -20,7 +20,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->integration = new Integration(new Client(['key' => 'demo']));
+        $this->integration = new Integration(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
 

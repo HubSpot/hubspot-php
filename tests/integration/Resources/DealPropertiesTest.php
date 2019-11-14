@@ -17,7 +17,7 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->dealProperties = new DealProperties(new Client(['key' => 'demo']));
+        $this->dealProperties = new DealProperties(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
 

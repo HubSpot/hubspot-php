@@ -12,7 +12,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->blogTopics = new BlogTopics(new Client(['key' => 'demo']));
+        $this->blogTopics = new BlogTopics(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
 

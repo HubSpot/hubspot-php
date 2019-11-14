@@ -18,7 +18,7 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->ecommerceBridge = new EcommerceBridge(new Client(['key' => 'demo']));
+        $this->ecommerceBridge = new EcommerceBridge(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
 
