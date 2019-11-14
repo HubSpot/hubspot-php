@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\BlogTopics;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\BlogTopics;
 
 class BlogTopicsTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,8 +23,8 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     {
         sleep(1);
 
-        $response = $this->blogTopics->create('Topic Test ' . uniqid(), [
-            'description' => 'Topic Test ' . uniqid() . ' Description',
+        $response = $this->blogTopics->create('Topic Test '.uniqid(), [
+            'description' => 'Topic Test '.uniqid().' Description',
         ]);
 
         $this->assertEquals(201, $response->getStatusCode());
@@ -44,7 +44,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     public function all_with_params()
     {
         $response = $this->blogTopics->all([
-            'limit'  => 2,
+            'limit' => 2,
             'offset' => 3,
         ]);
 
@@ -73,7 +73,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     public function search_with_query_and_params()
     {
         $response = $this->blogTopics->search('Test', [
-            'limit'  => 5,
+            'limit' => 5,
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -93,8 +93,8 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function create()
     {
-        $response = $this->blogTopics->create('Topic Test ' . uniqid(), [
-            'description' => 'Topic Test ' . uniqid() . ' Description',
+        $response = $this->blogTopics->create('Topic Test '.uniqid(), [
+            'description' => 'Topic Test '.uniqid().' Description',
         ]);
 
         $this->assertEquals(201, $response->getStatusCode());
@@ -106,8 +106,8 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
         $topic = $this->createBlogTopic();
 
         $response = $this->blogTopics->update($topic->id, [
-            'name' => 'Topic Test ' . uniqid() . ' Updated',
-            'description' => 'Topic Test ' . uniqid() . ' Description Updated',
+            'name' => 'Topic Test '.uniqid().' Updated',
+            'description' => 'Topic Test '.uniqid().' Description Updated',
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());

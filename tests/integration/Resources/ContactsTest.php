@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Contacts;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Contacts;
 
 class ContactsTest extends \PHPUnit_Framework_TestCase
 {
@@ -46,8 +46,8 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     public function all_with_params()
     {
         $response = $this->contacts->all([
-            'count'     => 2,
-            'property'  => ['firstname', 'lastname'],
+            'count' => 2,
+            'property' => ['firstname', 'lastname'],
             'vidOffset' => 1234,
         ]);
 
@@ -62,8 +62,8 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     public function all_with_params_and_array_access()
     {
         $response = $this->contacts->all([
-            'count'     => 2,
-            'property'  => ['firstname', 'lastname'],
+            'count' => 2,
+            'property' => ['firstname', 'lastname'],
             'vidOffset' => 1234,
         ]);
 
@@ -81,7 +81,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
 
         $response = $this->contacts->update($contact->vid, [
             ['property' => 'firstname', 'value' => 'joe'],
-            ['property' => 'lastname', 'value'  => 'user'],
+            ['property' => 'lastname', 'value' => 'user'],
         ]);
 
         $this->assertEquals(204, $response->getStatusCode());
@@ -94,7 +94,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
 
         $response = $this->contacts->updateByEmail($contact->properties->email->value, [
             ['property' => 'firstname', 'value' => 'joe'],
-            ['property' => 'lastname', 'value'  => 'user'],
+            ['property' => 'lastname', 'value' => 'user'],
         ]);
 
         $this->assertEquals(204, $response->getStatusCode());
@@ -105,7 +105,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     {
         $response = $this->contacts->createOrUpdate('test@hubspot.com', [
             ['property' => 'firstname', 'value' => 'joe'],
-            ['property' => 'lastname', 'value'  => 'user'],
+            ['property' => 'lastname', 'value' => 'user'],
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -119,21 +119,20 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
                 'email' => 'test1@hubspot.com',
                 'properties' => [
                     ['property' => 'firstname', 'value' => 'joe'],
-                    ['property' => 'lastname', 'value'  => 'user'],
+                    ['property' => 'lastname', 'value' => 'user'],
                 ],
             ],
             [
                 'email' => 'test2@hubspot.com',
                 'properties' => [
                     ['property' => 'firstname', 'value' => 'jane'],
-                    ['property' => 'lastname', 'value'  => 'user'],
+                    ['property' => 'lastname', 'value' => 'user'],
                 ],
-            ]
+            ],
         ]);
 
         $this->assertEquals(202, $response->getStatusCode());
     }
-
 
     /** @test */
     public function createOrUpdateBatchWithAuditId()
@@ -143,17 +142,17 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
                 'email' => 'test1@hubspot.com',
                 'properties' => [
                     ['property' => 'firstname', 'value' => 'joe'],
-                    ['property' => 'lastname', 'value'  => 'user'],
+                    ['property' => 'lastname', 'value' => 'user'],
                 ],
             ],
             [
                 'email' => 'test2@hubspot.com',
                 'properties' => [
                     ['property' => 'firstname', 'value' => 'jane'],
-                    ['property' => 'lastname', 'value'  => 'user'],
+                    ['property' => 'lastname', 'value' => 'user'],
                 ],
-            ]
-        ],['auditId' => 'TEST_CHANGE_SOURCE']);
+            ],
+        ], ['auditId' => 'TEST_CHANGE_SOURCE']);
 
         $this->assertEquals(202, $response->getStatusCode());
     }
@@ -194,8 +193,9 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
             $this->createContact(),
         ];
 
-        $ids = array_reduce($contacts, function($vids, $contact) {
+        $ids = array_reduce($contacts, function ($vids, $contact) {
             $vids[] = $contact->vid;
+
             return $vids;
         }, []);
 
@@ -222,8 +222,9 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
             $this->createContact(),
         ];
 
-        $emails = array_reduce($contacts, function($values, $contact) {
+        $emails = array_reduce($contacts, function ($values, $contact) {
             $values[] = $contact->properties->email->value;
+
             return $values;
         }, []);
 

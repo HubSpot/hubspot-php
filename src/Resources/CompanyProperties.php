@@ -6,6 +6,7 @@ class CompanyProperties extends Resource
 {
     /**
      * Creates a property on every company object to store a specific piece of data.
+     *
      * @param array $property
      *
      * @see http://developers.hubspot.com/docs/methods/companies/create_company_property
@@ -23,8 +24,9 @@ class CompanyProperties extends Resource
 
     /**
      * Update the specified company-level property. This does not update the value on a specified company, but instead changes the definition of the company property.
+     *
      * @param string $propertyName
-     * @param array $property
+     * @param array  $property
      *
      * @see http://developers.hubspot.com/docs/methods/companies/update_company_property
      *
@@ -42,7 +44,8 @@ class CompanyProperties extends Resource
 
     /**
      * For a portal, delete an existing company property.
-     * @param string $propertyName The API name of the property that you will be deleting.
+     *
+     * @param string $propertyName the API name of the property that you will be deleting
      *
      * @see http://developers.hubspot.com/docs/methods/companies/delete_company_property
      *
@@ -57,7 +60,8 @@ class CompanyProperties extends Resource
 
     /**
      * Returns a JSON object representing the definition for a given company property.
-     * @param string $propertyName The API name of the property that you wish to see metadata for.
+     *
+     * @param string $propertyName the API name of the property that you wish to see metadata for
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_property
      *
@@ -86,7 +90,8 @@ class CompanyProperties extends Resource
 
     /**
      * Create a new company property group to gather like company-level data.
-     * @param array $group Defines the group and any properties within it.
+     *
+     * @param array $group defines the group and any properties within it
      *
      * @see http://developers.hubspot.com/docs/methods/companies/create_company_property_group
      *
@@ -103,8 +108,9 @@ class CompanyProperties extends Resource
 
     /**
      * Update a previously created company property group.
-     * @param string $groupName The API name of the property group that you will be updating.
-     * @param array $group Defines the property group and any properties within it.
+     *
+     * @param string $groupName the API name of the property group that you will be updating
+     * @param array  $group     defines the property group and any properties within it
      *
      * @see http://developers.hubspot.com/docs/methods/companies/update_company_property_group
      *
@@ -122,7 +128,8 @@ class CompanyProperties extends Resource
 
     /**
      * Delete an existing company property group.
-     * @param string $groupName The API name of the property group that you will be deleting.
+     *
+     * @param string $groupName the API name of the property group that you will be deleting
      *
      * @see http://developers.hubspot.com/docs/methods/companies/delete_company_property_group
      *
@@ -137,7 +144,8 @@ class CompanyProperties extends Resource
 
     /**
      * Returns all of the company property groups for a given portal.
-     * @param bool $includeProperties If true returns all of the properties for each company property group.
+     *
+     * @param bool $includeProperties if true returns all of the properties for each company property group
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_property_groups
      *

@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\BlogAuthors;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\BlogAuthors;
 
 class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,8 +24,8 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
 
         $response = $this->blogAuthors->create([
-            'fullName' => 'John Smith ' . uniqid(),
-            'email' => 'john.smith' . uniqid() . '@example.com',
+            'fullName' => 'John Smith '.uniqid(),
+            'email' => 'john.smith'.uniqid().'@example.com',
             'username' => 'john-smith',
         ]);
 
@@ -46,7 +46,7 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     public function all_with_params()
     {
         $response = $this->blogAuthors->all([
-            'limit'  => 2,
+            'limit' => 2,
             'offset' => 3,
         ]);
 
@@ -75,7 +75,7 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     public function search_with_query_and_params()
     {
         $response = $this->blogAuthors->search('john-smith', [
-            'limit'  => 5,
+            'limit' => 5,
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -96,8 +96,8 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     public function create()
     {
         $response = $this->blogAuthors->create([
-            'fullName' => 'John Smith ' . uniqid(),
-            'email' => 'john.smith' . uniqid() . '@example.com',
+            'fullName' => 'John Smith '.uniqid(),
+            'email' => 'john.smith'.uniqid().'@example.com',
             'username' => 'john-smith',
         ]);
 

@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Analytics;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Analytics;
 
 class AnalyticsTest extends \PHPUnit_Framework_TestCase
 {

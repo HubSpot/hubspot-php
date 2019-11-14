@@ -24,11 +24,12 @@ class PagesTest extends \PHPUnit_Framework_TestCase
         sleep(1);
 
         $response = $this->pages->create([
-            'name'             => 'My Super Awesome Post ' . uniqid(),
+            'name' => 'My Super Awesome Post '.uniqid(),
             'content_group_id' => 351076997,
         ]);
 
         $this->assertEquals(201, $response->getStatusCode());
+
         return $response;
     }
 
@@ -39,5 +40,4 @@ class PagesTest extends \PHPUnit_Framework_TestCase
         $response = $this->pages->clonePage($post->id, 'New page name');
         $this->assertEquals(201, $response->getStatusCode());
     }
-
 }

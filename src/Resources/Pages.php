@@ -7,7 +7,8 @@ class Pages extends Resource
     /**
      * Create a new page.
      *
-     * @param array $params Optional Parameters.
+     * @param array $params optional Parameters
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function create($params)
@@ -22,12 +23,13 @@ class Pages extends Resource
     /**
      * Get all pages.
      *
-     * @param array $params Optional parameters.
+     * @param array $params optional parameters
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function all($params = [])
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages";
+        $endpoint = 'https://api.hubapi.com/content/api/v2/pages';
 
         $queryString = build_query_string($params);
 
@@ -37,8 +39,9 @@ class Pages extends Resource
     /**
      * Update a page.
      *
-     * @param int   $page_id The page id.
-     * @param array $params  The page fields to update.
+     * @param int   $page_id the page id
+     * @param array $params  the page fields to update
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function update($page_id, $params)
@@ -54,6 +57,7 @@ class Pages extends Resource
      * Delete a page.
      *
      * @param int $page_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function delete($page_id)
@@ -67,6 +71,7 @@ class Pages extends Resource
      * Get a specific page.
      *
      * @param int $page_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getById($page_id)
@@ -80,6 +85,7 @@ class Pages extends Resource
      * Updates the auto-save buffer.
      *
      * @param in $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function updateAutoSaveBuffer($page_id)
@@ -93,6 +99,7 @@ class Pages extends Resource
      * Gets the current contents of the auto-save buffer.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getAutoSaveBufferContents($page_id)
@@ -105,8 +112,9 @@ class Pages extends Resource
     /**
      * Clone the page.
      *
-     * @param int $page_id The page ID
-     * @param string $name The cloned page name
+     * @param int    $page_id The page ID
+     * @param string $name    The cloned page name
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function clonePage($page_id, $name)
@@ -122,6 +130,7 @@ class Pages extends Resource
      * Determine if the auto-save buffer differs from the live page.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function hasBufferedChanges($page_id)
@@ -142,6 +151,7 @@ class Pages extends Resource
      *
      * @param int    $page_id The page ID
      * @param string $action  The publish action
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function publishAction($page_id, $action)
@@ -157,6 +167,7 @@ class Pages extends Resource
      * Copies the contents of the auto-save buffer into the live page.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function pushBufferLive($page_id)
@@ -170,6 +181,7 @@ class Pages extends Resource
      * Restores a previously deleted page.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function restoreDeleted($page_id)
@@ -183,6 +195,7 @@ class Pages extends Resource
      * Validates the auto-save buffer version of the page.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function validateBuffer($page_id)
@@ -196,6 +209,7 @@ class Pages extends Resource
      * List previous versions of the page.
      *
      * @param int $page_id The page ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function versions($page_id)
@@ -210,6 +224,7 @@ class Pages extends Resource
      *
      * @param int $page_id    The page ID
      * @param int $version_id The version ID
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function restoreVersion($page_id, $version_id)

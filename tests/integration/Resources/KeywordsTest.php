@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Keywords;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Keywords;
 
 class KeywordsTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,7 +23,7 @@ class KeywordsTest extends \PHPUnit_Framework_TestCase
     private function createKeyword()
     {
         $response = $this->keywords->create([
-            "keyword" => "k " . uniqid(),
+            'keyword' => 'k '.uniqid(),
         ]);
 
         $this->assertEquals(201, $response->getStatusCode());

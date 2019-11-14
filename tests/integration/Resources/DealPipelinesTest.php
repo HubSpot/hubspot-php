@@ -5,9 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 use SevenShores\Hubspot\Http\Client;
 
 /**
- * Class DealPipelinesTest
- * @package SevenShores\Hubspot\Resources
- * group dealPipelines
+ * Class DealPipelinesTest.
  */
 class DealPipelinesTest extends \PHPUnit_Framework_TestCase
 {
@@ -71,8 +69,8 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
                     'label' => 'Initial Stage',
                     'displayOrder' => 0,
                     'probability' => 0.3,
-                ]
-            ]
+                ],
+            ],
         ]);
         $data = $response->getData();
         $this->assertEquals('New Business Pipeline', $data->label);
@@ -95,7 +93,7 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
             'stages' => [
                 [
                     'label' => 'new stage',
-                ]
+                ],
             ],
         ]);
         $data = $response->getData();
@@ -113,5 +111,4 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
         $response = $this->dealPipelines->delete($id);
         $this->assertSame(204, $response->getStatusCode());
     }
-
 }

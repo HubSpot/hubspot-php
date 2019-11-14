@@ -48,7 +48,6 @@ class CrmAssociations extends Resource
     /**
      * @param $objectId
      * @param $definitionId
-     * @param array $params
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      *
@@ -69,7 +68,7 @@ class CrmAssociations extends Resource
     }
 
     /**
-     * @param array $association.
+     * @param array $association
      *
      * @throws BadRequest
      *
@@ -87,7 +86,7 @@ class CrmAssociations extends Resource
     }
 
     /**
-     * @param array $associations.
+     * @param array $associations
      *
      * @throws BadRequest
      *
@@ -105,7 +104,7 @@ class CrmAssociations extends Resource
     }
 
     /**
-     * @param array $association.
+     * @param array $association
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      *
@@ -121,7 +120,7 @@ class CrmAssociations extends Resource
     }
 
     /**
-     * @param array $associations.
+     * @param array $associations
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      *

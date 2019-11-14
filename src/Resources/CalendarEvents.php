@@ -18,8 +18,8 @@ class CalendarEvents extends Resource
     }
 
     /**
-     * @param int   $id         The task id.
-     * @param array $properties The task properties to update.
+     * @param int   $id         the task id
+     * @param array $properties the task properties to update
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -46,6 +46,7 @@ class CalendarEvents extends Resource
 
     /**
      * @param int $id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function deleteTask($id)
@@ -58,19 +59,18 @@ class CalendarEvents extends Resource
     /**
      * Get an aggregation for all calendar event types.
      *
-     *
      * @see https://developers.hubspot.com/docs/methods/calendar/list-events
      *
-     * @param int $startDate    The beginning value of the query range, in UTC, in milliseconds
-     * @param int $endDate      The end value of the query range, in UTC, in milliseconds
-     * @param array $params     Array of optional parameters:
-     *                          limit, type, campaignGuid, contentCategory, includeNoCampaigns
+     * @param int   $startDate The beginning value of the query range, in UTC, in milliseconds
+     * @param int   $endDate   The end value of the query range, in UTC, in milliseconds
+     * @param array $params    Array of optional parameters:
+     *                         limit, type, campaignGuid, contentCategory, includeNoCampaigns
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function all($startDate, $endDate, $params = [])
     {
-        $endpoint = "https://api.hubapi.com/calendar/v1/events";
+        $endpoint = 'https://api.hubapi.com/calendar/v1/events';
         $params = array_merge(compact('startDate', 'endDate'), $params);
 
         $queryString = build_query_string($params);
@@ -84,16 +84,16 @@ class CalendarEvents extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/calendar/list-tasks
      *
-     * @param int $startDate    The beginning value of the query range, in UTC, in milliseconds
-     * @param int $endDate      The end value of the query range, in UTC, in milliseconds
-     * @param array $params     Array of optional parameters:
-     *                          limit, campaignGuid, includeNoCampaigns
+     * @param int   $startDate The beginning value of the query range, in UTC, in milliseconds
+     * @param int   $endDate   The end value of the query range, in UTC, in milliseconds
+     * @param array $params    Array of optional parameters:
+     *                         limit, campaignGuid, includeNoCampaigns
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function allTasks($startDate, $endDate, $params = [])
     {
-        $endpoint = "https://api.hubapi.com/calendar/v1/events/task";
+        $endpoint = 'https://api.hubapi.com/calendar/v1/events/task';
         $params = array_merge(compact('startDate', 'endDate'), $params);
 
         $queryString = build_query_string($params);
@@ -107,16 +107,16 @@ class CalendarEvents extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/calendar/list-social-events
      *
-     * @param int $startDate    The beginning value of the query range, in UTC, in milliseconds
-     * @param int $endDate      The end value of the query range, in UTC, in milliseconds
-     * @param array $params     Array of optional parameters:
-     *                          limit, offset, campaignGuid, includeNoCampaigns
+     * @param int   $startDate The beginning value of the query range, in UTC, in milliseconds
+     * @param int   $endDate   The end value of the query range, in UTC, in milliseconds
+     * @param array $params    Array of optional parameters:
+     *                         limit, offset, campaignGuid, includeNoCampaigns
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function allSocialEvents($startDate, $endDate, $params = [])
     {
-        $endpoint = "https://api.hubapi.com/calendar/v1/events/social";
+        $endpoint = 'https://api.hubapi.com/calendar/v1/events/social';
         $params = array_merge(compact('startDate', 'endDate'), $params);
 
         $queryString = build_query_string($params);
@@ -130,16 +130,16 @@ class CalendarEvents extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/calendar/list-content-events
      *
-     * @param int $startDate    The beginning value of the query range, in UTC, in milliseconds
-     * @param int $endDate      The end value of the query range, in UTC, in milliseconds
-     * @param array $params     Array of optional parameters:
-     *                          limit, offset, contentCategory, campaignGuid, includeNoCampaigns
+     * @param int   $startDate The beginning value of the query range, in UTC, in milliseconds
+     * @param int   $endDate   The end value of the query range, in UTC, in milliseconds
+     * @param array $params    Array of optional parameters:
+     *                         limit, offset, contentCategory, campaignGuid, includeNoCampaigns
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function allContentEvents($startDate, $endDate, $params = [])
     {
-        $endpoint = "https://api.hubapi.com/calendar/v1/events/content";
+        $endpoint = 'https://api.hubapi.com/calendar/v1/events/content';
         $params = array_merge(compact('startDate', 'endDate'), $params);
 
         $queryString = build_query_string($params);

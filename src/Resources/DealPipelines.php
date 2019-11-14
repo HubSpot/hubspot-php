@@ -2,10 +2,10 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class DealPipelines extends Resource {
-
+class DealPipelines extends Resource
+{
     /**
-     * Get all pipelines
+     * Get all pipelines.
      *
      * @return mixed
      */
@@ -17,9 +17,9 @@ class DealPipelines extends Resource {
     }
 
     /**
-     * Get single pipeline by id
+     * Get single pipeline by id.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return mixed
      */
@@ -31,15 +31,13 @@ class DealPipelines extends Resource {
     }
 
     /**
-     * Create a pipeline
-     *
-     * @param  array $pipeline
+     * Create a pipeline.
      *
      * @return mixed
      */
     public function create(array $pipeline)
     {
-        $endpoint = "https://api.hubapi.com/deals/v1/pipelines";
+        $endpoint = 'https://api.hubapi.com/deals/v1/pipelines';
 
         $options['json'] = $pipeline;
 
@@ -47,10 +45,9 @@ class DealPipelines extends Resource {
     }
 
     /**
-     * Update a pipeline
+     * Update a pipeline.
      *
-     * @param  int $id
-     * @param  array $pipeline
+     * @param int $id
      *
      * @return mixed
      */
@@ -64,9 +61,9 @@ class DealPipelines extends Resource {
     }
 
     /**
-     * Delete a pipeline
+     * Delete a pipeline.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return mixed
      */

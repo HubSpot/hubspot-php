@@ -2,9 +2,8 @@
 
 namespace spec\SevenShores\Hubspot\Resources;
 
-use SevenShores\Hubspot\Http\Client;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use SevenShores\Hubspot\Http\Client;
 
 class ContactsSpec extends ObjectBehavior
 {
@@ -20,7 +19,7 @@ class ContactsSpec extends ObjectBehavior
 
     private function getUrl($endpoint)
     {
-        return $this->baseUrl . $endpoint . '?hapikey=' . $this->apiKey;
+        return $this->baseUrl.$endpoint.'?hapikey='.$this->apiKey;
     }
 
     public function let(Client $client)

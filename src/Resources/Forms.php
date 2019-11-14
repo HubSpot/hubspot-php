@@ -22,7 +22,7 @@ class Forms extends Resource
     {
         $endpoint = "https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_guid}";
 
-        if (!empty($form['hs_context']) && !is_string($form['hs_context'])) {
+        if (! empty($form['hs_context']) && ! is_string($form['hs_context'])) {
             $form['hs_context'] = json_encode($form['hs_context']);
         }
 
@@ -153,6 +153,7 @@ class Forms extends Resource
      * @see https://developers.hubspot.com/docs/methods/forms/get-submissions-for-a-form
      *
      * @param string $form_guid
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getSubmissions($form_guid, $params = [])
@@ -160,7 +161,7 @@ class Forms extends Resource
         $endpoint = "https://api.hubapi.com/form-integrations/v1/submissions/forms/{$form_guid}";
 
         $queryString = build_query_string($params);
-        
+
         return $this->client->request('get', $endpoint, [], $queryString);
     }
 }

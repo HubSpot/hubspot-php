@@ -7,7 +7,8 @@ class BlogAuthors extends Resource
     /**
      * Create a new blog author.
      *
-     * @param  array $params Optional Parameters.
+     * @param array $params optional Parameters
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function create($params = [])
@@ -22,7 +23,8 @@ class BlogAuthors extends Resource
     /**
      * Get all blog authors.
      *
-     * @param  array $params Optional parameters.
+     * @param array $params optional parameters
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function all($params = [])
@@ -37,8 +39,9 @@ class BlogAuthors extends Resource
     /**
      * Search blog authors.
      *
-     * @param string $q         Search query
-     * @param array $params     Optional parameters.
+     * @param string $q      Search query
+     * @param array  $params optional parameters
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function search($q = '', $params = [])
@@ -55,8 +58,9 @@ class BlogAuthors extends Resource
     /**
      * Update a blog author.
      *
-     * @param  int   $id     Unique identifier for a blog author.
-     * @param  array $params Fields to update.
+     * @param int   $id     unique identifier for a blog author
+     * @param array $params fields to update
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function update($id, $params = [])
@@ -71,7 +75,8 @@ class BlogAuthors extends Resource
     /**
      * Delete a blog author.
      *
-     * @param  int $id  Unique identifier for the blog author to delete.
+     * @param int $id unique identifier for the blog author to delete
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function delete($id)
@@ -84,7 +89,8 @@ class BlogAuthors extends Resource
     /**
      * Get a specific blog author.
      *
-     * @param  int $id  Unique identifier for a blog author.
+     * @param int $id unique identifier for a blog author
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getById($id)
@@ -93,5 +99,4 @@ class BlogAuthors extends Resource
 
         return $this->client->request('get', $endpoint);
     }
-
 }
