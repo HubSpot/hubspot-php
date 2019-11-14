@@ -17,7 +17,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->companyProperties = new CompanyProperties(new Client(['key' => 'demo']));
+        $this->companyProperties = new CompanyProperties(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
 

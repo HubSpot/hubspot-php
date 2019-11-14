@@ -12,7 +12,7 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->blogAuthors = new BlogAuthors(new Client(['key' => 'demo']));
+        $this->blogAuthors = new BlogAuthors(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
 

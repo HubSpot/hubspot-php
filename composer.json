@@ -11,14 +11,13 @@
         }
     ],
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=5.6.0",
         "ext-json": "*",
         "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0",
         "phpunit/phpunit": "~4.0",
-        "codeclimate/php-test-reporter": " dev-master@dev"
+        "phpspec/phpspec": "^3.4"
     },
     "autoload": {
         "psr-4": {
