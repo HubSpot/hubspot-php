@@ -8,6 +8,7 @@ class Comments extends Resource
      * Get all comments.
      *
      * @param array $params Optional parameters ['limit', 'offset', 'portalId', 'state', 'contentId', 'reverse']
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function all($params = [])
@@ -23,6 +24,7 @@ class Comments extends Resource
      * Get information about a specific comment.
      *
      * @param string $id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getById($id)
@@ -31,6 +33,4 @@ class Comments extends Resource
 
         return $this->client->request('get', $endpoint);
     }
-
-
 }

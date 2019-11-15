@@ -8,6 +8,7 @@ class Webhooks extends Resource
      * Get list of subscriptions.
      *
      * @param int $app_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getSubscription($app_id)
@@ -22,6 +23,7 @@ class Webhooks extends Resource
      *
      * @param int   $app_id
      * @param array $subscription
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function createSubscription($app_id, $subscription)
@@ -39,6 +41,7 @@ class Webhooks extends Resource
      * @param int   $app_id
      * @param int   $subscription_id
      * @param array $subscription
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function updateSubscription($app_id, $subscription_id, $subscription)
@@ -55,6 +58,7 @@ class Webhooks extends Resource
      *
      * @param int $app_id
      * @param int $subscription_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function deleteSubscription($app_id, $subscription_id)
@@ -68,6 +72,7 @@ class Webhooks extends Resource
      * Get webhook settings.
      *
      * @param int $app_id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function viewSettings($app_id)
@@ -82,6 +87,7 @@ class Webhooks extends Resource
      *
      * @param int   $app_id
      * @param array $settings
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function updateSettings($app_id, $settings)

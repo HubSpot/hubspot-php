@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Events;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Events;
 
 class EventsTest extends \PHPUnit_Framework_TestCase
 {

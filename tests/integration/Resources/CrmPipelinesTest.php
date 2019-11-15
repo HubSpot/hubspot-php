@@ -2,7 +2,6 @@
 
 namespace SevenShores\Hubspot\Tests\integration\Resources;
 
-
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\CrmPipelines;
 
@@ -58,15 +57,15 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
     public function createTicketsPipeline()
     {
         $data = [
-            'label' => 'Demo Ticket Pipeline ' . uniqid(),
+            'label' => 'Demo Ticket Pipeline '.uniqid(),
             'displayOrder' => 1,
             'active' => true,
             'stages' => [
                 [
                     'label' => 'Demo Stage',
-                    'displayOrder' => 1
-                ]
-            ]
+                    'displayOrder' => 1,
+                ],
+            ],
         ];
 
         $response = $this->pipelines->create('tickets', $data);
@@ -80,7 +79,7 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
     public function createDealsPipeline()
     {
         $data = [
-            'label' => 'Demo Deal Pipeline ' . uniqid(),
+            'label' => 'Demo Deal Pipeline '.uniqid(),
             'displayOrder' => 1,
             'active' => true,
             'stages' => [
@@ -88,10 +87,10 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
                     'label' => 'Demo Stage',
                     'displayOrder' => 1,
                     'metadata' => [
-                        'probability' => 0.5
-                    ]
-                ]
-            ]
+                        'probability' => 0.5,
+                    ],
+                ],
+            ],
         ];
 
         $response = $this->pipelines->create('deals', $data);
@@ -107,15 +106,15 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
         $pipeline = $this->createTicketsPipeline();
 
         $data = [
-            'label' => 'Updated Ticket Pipeline ' . uniqid(),
+            'label' => 'Updated Ticket Pipeline '.uniqid(),
             'displayOrder' => 1,
             'active' => true,
             'stages' => [
                 [
                     'label' => 'Demo Stage',
                     'displayOrder' => 1,
-                ]
-            ]
+                ],
+            ],
         ];
 
         $response = $this->pipelines->update('tickets', $pipeline->pipelineId, $data);
@@ -129,7 +128,7 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
         $pipeline = $this->createDealsPipeline();
 
         $data = [
-            'label' => 'Updated Deals Pipeline ' . uniqid(),
+            'label' => 'Updated Deals Pipeline '.uniqid(),
             'displayOrder' => 1,
             'active' => true,
             'stages' => [
@@ -137,10 +136,10 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
                     'label' => 'Demo Stage',
                     'displayOrder' => 1,
                     'metadata' => [
-                        'probability' => 0.5
-                    ]
-                ]
-            ]
+                        'probability' => 0.5,
+                    ],
+                ],
+            ],
         ];
 
         $response = $this->pipelines->update('deals', $pipeline->pipelineId, $data);

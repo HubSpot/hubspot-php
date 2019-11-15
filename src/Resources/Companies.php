@@ -4,10 +4,10 @@ namespace SevenShores\Hubspot\Resources;
 
 class Companies extends Resource
 {
-
     /**
-     * Create a company
-     * @param array $properties Array of company properties.
+     * Create a company.
+     *
+     * @param array $properties array of company properties
      *
      * @see http://developers.hubspot.com/docs/methods/companies/create_company
      *
@@ -22,9 +22,10 @@ class Companies extends Resource
     }
 
     /**
-     * Updates a company
-     * @param int $id The company id.
-     * @param array $properties The company properties to update.
+     * Updates a company.
+     *
+     * @param int   $id         the company id
+     * @param array $properties the company properties to update
      *
      * @see http://developers.hubspot.com/docs/methods/companies/update_company
      *
@@ -39,19 +40,21 @@ class Companies extends Resource
     }
 
     /**
-     * @param array $companies The companies and properties.
+     * @param array $companies the companies and properties
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function updateBatch($companies)
     {
-        $endpoint = "https://api.hubapi.com/companies/v1/batch-async/update";
+        $endpoint = 'https://api.hubapi.com/companies/v1/batch-async/update';
         $options['json'] = $companies;
 
         return $this->client->request('post', $endpoint, $options);
     }
 
     /**
-     * Deletes a company
+     * Deletes a company.
+     *
      * @param int $id The company id
      *
      * @see http://developers.hubspot.com/docs/methods/companies/delete_company
@@ -66,7 +69,8 @@ class Companies extends Resource
     }
 
     /**
-     * Returns all companies
+     * Returns all companies.
+     *
      * @param array $params Array of optional parameters ['limit', 'offset', 'properties']
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get-all-companies
@@ -83,7 +87,8 @@ class Companies extends Resource
     }
 
     /**
-     * Returns the recently modified companies
+     * Returns the recently modified companies.
+     *
      * @param array $params Array of optional parameters ['count', 'offset']
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_companies_modified
@@ -100,7 +105,8 @@ class Companies extends Resource
     }
 
     /**
-     * Returns the recently created companies
+     * Returns the recently created companies.
+     *
      * @param array $params Array of optional parameters ['count', 'offset']
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_companies_created
@@ -117,8 +123,10 @@ class Companies extends Resource
     }
 
     /**
-     * Returns an array of companies that have a matching domain
+     * Returns an array of companies that have a matching domain.
+     *
      * @deprecated use searchByDomain instead
+     *
      * @param string $domain The domain of the company eq. 'example.com'.
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_companies_by_domain
@@ -134,9 +142,9 @@ class Companies extends Resource
 
     /**
      * @param string $domain
-     * @param array $properties
-     * @param int $limit
-     * @param int $offset
+     * @param array  $properties
+     * @param int    $limit
+     * @param int    $offset
      *
      * @see https://developers.hubspot.com/docs/methods/companies/search_companies_by_domain
      *
@@ -149,17 +157,19 @@ class Companies extends Resource
             'limit' => $limit,
             'offset' => [
                 'isPrimary' => true,
-                'companyId' => $offset
+                'companyId' => $offset,
             ],
             'requestOptions' => [
-                'properties' => $properties
-            ]
+                'properties' => $properties,
+            ],
         ];
+
         return $this->client->request('post', $endpoint, $options);
     }
 
     /**
-     * Returns a company with id $id
+     * Returns a company with id $id.
+     *
      * @param int $id
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company
@@ -175,7 +185,8 @@ class Companies extends Resource
 
     /**
      * Associates a given contact to a given company
-     * If a contact is already associated to a different company, the contact will be added to the new company
+     * If a contact is already associated to a different company, the contact will be added to the new company.
+     *
      * @param int $contactId
      * @param int $companyId
      *
@@ -191,13 +202,13 @@ class Companies extends Resource
     }
 
     /**
-     * Returns an array of the associated contacts for the given company
-     * @param int $companyId The id of the company.
-     * @param array $params Array of optional parameters ['count', 'vidOffset']
+     * Returns an array of the associated contacts for the given company.
+     *
+     * @param int   $companyId the id of the company
+     * @param array $params    Array of optional parameters ['count', 'vidOffset']
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_contacts
      * @see CrmAssociations::get is used to manage associations between objects
-     *
      * @deprecated
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -212,9 +223,10 @@ class Companies extends Resource
     }
 
     /**
-     * Returns all of the contact IDs who are associated with the given company
-     * @param int $companyId The id of the company.
-     * @param array $params Array of optional parameters ['count', 'vidOffset']
+     * Returns all of the contact IDs who are associated with the given company.
+     *
+     * @param int   $companyId the id of the company
+     * @param array $params    Array of optional parameters ['count', 'vidOffset']
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_contacts_by_id
      *
@@ -230,7 +242,8 @@ class Companies extends Resource
     }
 
     /**
-     * Removes a contact from a company
+     * Removes a contact from a company.
+     *
      * @param int $contactId
      * @param int $companyId
      *

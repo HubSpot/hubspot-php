@@ -2,10 +2,9 @@
 
 namespace spec\SevenShores\Hubspot\Resources;
 
+use PhpSpec\ObjectBehavior;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Tests\Helpers\SendsRequests;
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class CompanyPropertiesSpec extends ObjectBehavior
 {

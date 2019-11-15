@@ -12,3 +12,6 @@ composer.lock
 test.php
 .phpintel
 /nbproject
+
+.php_cs
+.php_cs.cache

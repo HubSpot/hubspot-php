@@ -9,7 +9,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $query = [
             'firstname' => 'joe',
-            'lastname'  => 'blo'
+            'lastname' => 'blo',
         ];
 
         $queryString = build_query_string($query);
@@ -23,8 +23,8 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
         $query = [
             'property' => [
                 'firstname',
-                'lastname'
-            ]
+                'lastname',
+            ],
         ];
 
         $queryString = build_query_string($query);
@@ -50,8 +50,8 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
             'description' => 'two words',
             'property' => [
                 'firstname',
-                'lastname'
-            ]
+                'lastname',
+            ],
         ];
 
         $queryString = build_query_string($query);
@@ -70,8 +70,8 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
             'description' => 'two words',
             'property' => [
                 'firstname',
-                'lastname'
-            ]
+                'lastname',
+            ],
         ];
 
         $queryString = build_query_string($query, PHP_QUERY_RFC1738);

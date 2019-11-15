@@ -4,9 +4,8 @@ namespace SevenShores\Hubspot\Resources;
 
 class Integration extends Resource
 {
-    
     /**
-     * Get account details
+     * Get account details.
      *
      * @return \SevenShores\Hubspot\Http\Response
      *
@@ -14,12 +13,13 @@ class Integration extends Resource
      */
     public function getAccountDetails()
     {
-        $endpoint = "https://api.hubapi.com/integrations/v1/me";
+        $endpoint = 'https://api.hubapi.com/integrations/v1/me';
+
         return $this->client->request('get', $endpoint);
     }
-    
+
     /**
-     * Check daily API usage
+     * Check daily API usage.
      *
      * @return \SevenShores\Hubspot\Http\Response
      *
@@ -27,7 +27,8 @@ class Integration extends Resource
      */
     public function getDailyUsage()
     {
-        $endpoint = "https://api.hubapi.com/integrations/v1/limit/daily";
+        $endpoint = 'https://api.hubapi.com/integrations/v1/limit/daily';
+
         return $this->client->request('get', $endpoint);
     }
 }

@@ -1,11 +1,9 @@
 <?php
 
-
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-
-use SevenShores\Hubspot\Resources\DealProperties;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\DealProperties;
 
 class DealPropertiesTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,22 +31,22 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates a new deal property
+     * Creates a new deal property.
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
     private function createDealProperty()
     {
         $property = [
-            "name" => "t" . uniqid(),
-            "label" => "Custom property",
-            "description" => "An Awesome Custom property",
-            "groupName" => "dealinformation",
-            "type" => "string",
-            "fieldType" => "text",
-            "formField" => true,
-            "displayOrder" => 6,
-            "options" => []
+            'name' => 't'.uniqid(),
+            'label' => 'Custom property',
+            'description' => 'An Awesome Custom property',
+            'groupName' => 'dealinformation',
+            'type' => 'string',
+            'fieldType' => 'text',
+            'formField' => true,
+            'displayOrder' => 6,
+            'options' => [],
         ];
 
         $response = $this->dealProperties->create($property);
@@ -64,9 +62,9 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
     private function createDealPropertyGroup()
     {
         $group = [
-            "name" => "t" . uniqid(),
-            "displayName" => "A New Custom Group",
-            "displayOrder" => 6,
+            'name' => 't'.uniqid(),
+            'displayName' => 'A New Custom Group',
+            'displayOrder' => 6,
         ];
 
         $response = $this->dealProperties->createGroup($group);
@@ -107,8 +105,8 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
         $createdGroupResponse = $this->createDealPropertyGroup();
 
         $group = [
-            "displayName" => "An Updated Deal Property Group",
-            "displayOrder" => 6,
+            'displayName' => 'An Updated Deal Property Group',
+            'displayOrder' => 6,
         ];
 
         $response = $this->dealProperties->updateGroup($createdGroupResponse->name, $group);

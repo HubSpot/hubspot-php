@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Forms;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Forms;
 
 class FormsTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,39 +25,39 @@ class FormsTest extends \PHPUnit_Framework_TestCase
     private function createForm()
     {
         $response = $this->forms->create([
-            "name" => "Test Form " . uniqid(),
-            "action" => "",
-            "method" => "POST",
-            "cssClass" => "hs-form stacked",
-            "redirect" => "",
-            "submitText" => "Sign Up",
-            "followUpId" => "",
-            "leadNurturingCampaignId" => "",
-            "notifyRecipients" => "",
-            "embeddedCode" => "",
-            "formFieldGroups" => [
-                "fields" => [
+            'name' => 'Test Form '.uniqid(),
+            'action' => '',
+            'method' => 'POST',
+            'cssClass' => 'hs-form stacked',
+            'redirect' => '',
+            'submitText' => 'Sign Up',
+            'followUpId' => '',
+            'leadNurturingCampaignId' => '',
+            'notifyRecipients' => '',
+            'embeddedCode' => '',
+            'formFieldGroups' => [
+                'fields' => [
                     [
-                        "name" => "firstname",
-                        "label" => "First Name",
-                        "description" => "",
-                        "groupName" => "contactinformation",
-                        "type" => "string",
-                        "fieldType" => "text",
-                        "displayOrder" => 1,
-                        "required" => true,
-                        "enabled" => true,
-                        "hidden" => false,
-                        "defaultValue" => "",
-                        "isSmartField" => false,
-                        "validation" => [
-                            "name" => "",
-                            "message" => ""
+                        'name' => 'firstname',
+                        'label' => 'First Name',
+                        'description' => '',
+                        'groupName' => 'contactinformation',
+                        'type' => 'string',
+                        'fieldType' => 'text',
+                        'displayOrder' => 1,
+                        'required' => true,
+                        'enabled' => true,
+                        'hidden' => false,
+                        'defaultValue' => '',
+                        'isSmartField' => false,
+                        'validation' => [
+                            'name' => '',
+                            'message' => '',
                         ],
                     ],
                 ],
-                "default" => true,
-                "isSmartGroup" => false,
+                'default' => true,
+                'isSmartGroup' => false,
             ],
         ]);
 
@@ -80,7 +80,7 @@ class FormsTest extends \PHPUnit_Framework_TestCase
         $form = $this->createForm();
 
         $response = $this->forms->update($form->guid, [
-            'name' => 'new name ' . uniqid(),
+            'name' => 'new name '.uniqid(),
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -133,7 +133,7 @@ class FormsTest extends \PHPUnit_Framework_TestCase
         $form = $this->createForm();
 
         $response = $this->forms->submit(62515, $form->guid, [
-            'firstname' => 'FooBar'
+            'firstname' => 'FooBar',
         ]);
 
         $this->assertEquals(204, $response->getStatusCode());

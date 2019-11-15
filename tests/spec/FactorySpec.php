@@ -3,7 +3,6 @@
 namespace spec\SevenShores\Hubspot;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class FactorySpec extends ObjectBehavior
 {

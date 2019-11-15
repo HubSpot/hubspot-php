@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\ContactProperties;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\ContactProperties;
 
 class ContactPropertiesTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,15 +24,15 @@ class ContactPropertiesTest extends \PHPUnit_Framework_TestCase
         sleep(1);
 
         $response = $this->contactProperties->create([
-            "name"         => "t" . uniqid(),
-            "label"        => "A New Custom Property",
-            "description"  => "A new property for you",
-            "groupName"    => "contactinformation",
-            "type"         => "string",
-            "fieldType"    => "text",
-            "formField"    => false,
-            "displayOrder" => 6,
-            "options"      => [],
+            'name' => 't'.uniqid(),
+            'label' => 'A New Custom Property',
+            'description' => 'A new property for you',
+            'groupName' => 'contactinformation',
+            'type' => 'string',
+            'fieldType' => 'text',
+            'formField' => false,
+            'displayOrder' => 6,
+            'options' => [],
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -65,14 +65,14 @@ class ContactPropertiesTest extends \PHPUnit_Framework_TestCase
         $property = $this->createProperty();
 
         $response = $this->contactProperties->update($property->name, [
-            "label"        => "A New Custom Property",
-            "description"  => "A new property for you",
-            "groupName"    => "contactinformation",
-            "type"         => "string",
-            "fieldType"    => "text",
-            "formField"    => false,
-            "displayOrder" => 1,
-            "options"      => [],
+            'label' => 'A New Custom Property',
+            'description' => 'A new property for you',
+            'groupName' => 'contactinformation',
+            'type' => 'string',
+            'fieldType' => 'text',
+            'formField' => false,
+            'displayOrder' => 1,
+            'options' => [],
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -101,9 +101,9 @@ class ContactPropertiesTest extends \PHPUnit_Framework_TestCase
     public function createGroup_updateGroup_deleteGroup()
     {
         $group = [
-            "name"         => "g".uniqid(),
-            "displayName"  => "A New Custom Group",
-            "displayOrder" => 5,
+            'name' => 'g'.uniqid(),
+            'displayName' => 'A New Custom Group',
+            'displayOrder' => 5,
         ];
 
         $create = $this->contactProperties->createGroup($group);

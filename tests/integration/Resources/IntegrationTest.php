@@ -2,12 +2,12 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Integration;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Integration;
 
 /**
- * Class IntegrationTest
- * @package SevenShores\Hubspot\Tests\Integration\Resources
+ * Class IntegrationTest.
+ *
  * @group integration
  */
 class IntegrationTest extends \PHPUnit_Framework_TestCase
@@ -36,5 +36,4 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($data['usageLimit']);
         $this->assertNotEmpty($data['currentUsage']);
     }
-
 }

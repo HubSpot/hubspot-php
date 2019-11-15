@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Blogs;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Blogs;
 
 class BlogsTest extends \PHPUnit_Framework_TestCase
 {

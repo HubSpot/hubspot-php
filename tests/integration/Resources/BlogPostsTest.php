@@ -2,9 +2,9 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\BlogPosts;
 use SevenShores\Hubspot\Resources\Blogs;
-use SevenShores\Hubspot\Http\Client;
 
 class BlogPostsTest extends \PHPUnit_Framework_TestCase
 {
@@ -28,7 +28,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
 
         $response = $this->blogPosts->create([
-            'name'             => 'My Super Awesome Post ' . uniqid(),
+            'name' => 'My Super Awesome Post '.uniqid(),
             'content_group_id' => $this->blogId,
         ]);
 
@@ -49,7 +49,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
     public function all_with_params()
     {
         $response = $this->blogPosts->all([
-            'limit'  => 2,
+            'limit' => 2,
             'offset' => 3,
         ]);
 
@@ -62,7 +62,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
     public function all_with_params_and_array_access()
     {
         $response = $this->blogPosts->all([
-            'limit'  => 2,
+            'limit' => 2,
             'offset' => 3,
         ]);
 
@@ -143,7 +143,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
 
         $post = $this->createBlogPost();
 
-        $response = $this->blogPosts->publishAction($post->id, "schedule-publish");
+        $response = $this->blogPosts->publishAction($post->id, 'schedule-publish');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
