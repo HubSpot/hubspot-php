@@ -75,9 +75,9 @@ class Factory
     }
 
     /**
-     * Create an instance of the service with an Oauth token.
+     * Create an instance of the service with an OAuth token.
      *
-     * @param string $token         Hubspot oauth access token.
+     * @param string $token         Hubspot OAuth access token.
      * @param Client $client        An Http client.
      * @param array  $clientOptions options to be send with each request
      * @param bool   $wrapResponse  wrap request response in own Response object
@@ -87,6 +87,21 @@ class Factory
     public static function createWithToken($token, $client = null, $clientOptions = [], $wrapResponse = true)
     {
         return new static(['key' => $token, 'oauth' => true], $client, $clientOptions, $wrapResponse);
+    }
+
+    /**
+     * Create an instance of the service with an OAuth2 token.
+     *
+     * @param string $token         Hubspot OAuth2 access token.
+     * @param Client $client        An Http client.
+     * @param array  $clientOptions options to be send with each request
+     * @param bool   $wrapResponse  wrap request response in own Response object
+     *
+     * @return static
+     */
+    public static function createWithOAuth2Token($token, $client = null, $clientOptions = [], $wrapResponse = true)
+    {
+        return new static(['key' => $token, 'oauth2' => true], $client, $clientOptions, $wrapResponse);
     }
 
     /**
