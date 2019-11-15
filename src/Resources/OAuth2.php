@@ -46,7 +46,7 @@ class OAuth2 extends Resource
 
         $options['headers']['content-type'] = 'application/x-www-form-urlencoded';
 
-        return $this->client->request('post', $this->endpoint.'/token', $options, null, false);
+        return $this->client->request('post', $this->endpoint.'/token', $options, [], false);
     }
 
     /**
@@ -70,7 +70,7 @@ class OAuth2 extends Resource
 
         $options['headers']['content-type'] = 'application/x-www-form-urlencoded';
 
-        return $this->client->request('post', $this->endpoint.'/token', $options, null, false);
+        return $this->client->request('post', $this->endpoint.'/token', $options, [], false);
     }
 
     /**
@@ -82,7 +82,7 @@ class OAuth2 extends Resource
      */
     public function getAccessTokenInfo($token)
     {
-        return $this->client->request('get', $this->endpoint."/access-tokens/{$token}", null, false);
+        return $this->client->request('get', $this->endpoint."/access-tokens/{$token}", [], false);
     }
 
     /**
@@ -94,7 +94,7 @@ class OAuth2 extends Resource
      */
     public function getRefreshTokenInfo($token)
     {
-        return $this->client->request('get', $this->endpoint."/refresh-tokens/{$token}", null ,false);
+        return $this->client->request('get', $this->endpoint."/refresh-tokens/{$token}", [] ,false);
     }
 
     /**
@@ -106,7 +106,7 @@ class OAuth2 extends Resource
      */
     public function deleteRefreshToken($token)
     {
-        return $this->client->request('delete', $this->endpoint."/refresh-tokens/{$token}", null, false);
+        return $this->client->request('delete', $this->endpoint."/refresh-tokens/{$token}", [], false);
     }
 
 }
