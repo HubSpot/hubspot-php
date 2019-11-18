@@ -49,7 +49,7 @@ class OAuth2 extends Resource
 
         $options['headers']['content-type'] = 'application/x-www-form-urlencoded';
 
-        return $this->client->request('post', $this->endpoint.'/token', $options, [], false);
+        return $this->client->request('post', $this->endpoint.'/token', $options, null, false);
     }
 
     /**
