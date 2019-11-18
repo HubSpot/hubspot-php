@@ -9,6 +9,9 @@ use SevenShores\Hubspot\Resources\EcommerceBridge;
  * Class EcommerceBridgeTest.
  *
  * @group ecommerceBridge
+ *
+ * @internal
+ * @coversNothing
  */
 class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
 {

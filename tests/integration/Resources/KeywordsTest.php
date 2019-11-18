@@ -5,6 +5,10 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Keywords;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class KeywordsTest extends \PHPUnit_Framework_TestCase
 {
     private $keywords;
@@ -15,22 +19,6 @@ class KeywordsTest extends \PHPUnit_Framework_TestCase
         $this->markTestSkipped(); // TODO: fix test
         $this->keywords = new Keywords(new Client(['key' => 'demooooo-oooo-oooo-oooo-oooooooooooo', 'oauth' => true]));
         sleep(1);
-    }
-
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createKeyword()
-    {
-        $response = $this->keywords->create([
-            'keyword' => 'k '.uniqid(),
-        ]);
-
-        $this->assertEquals(201, $response->getStatusCode());
-
-        sleep(1);
-
-        return $response;
     }
 
     /** @test */
@@ -45,7 +33,7 @@ class KeywordsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all_with_search()
+    public function allWithSearch()
     {
         $response = $this->keywords->all('marketing');
 
@@ -76,5 +64,19 @@ class KeywordsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
 
         $this->assertEquals(204, $response->getStatusCode());
+    }
+
+    // Lots of tests need an existing object to modify.
+    private function createKeyword()
+    {
+        $response = $this->keywords->create([
+            'keyword' => 'k '.uniqid(),
+        ]);
+
+        $this->assertEquals(201, $response->getStatusCode());
+
+        sleep(1);
+
+        return $response;
     }
 }

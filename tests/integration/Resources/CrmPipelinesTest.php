@@ -5,6 +5,10 @@ namespace SevenShores\Hubspot\Tests\integration\Resources;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\CrmPipelines;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
 {
     /**

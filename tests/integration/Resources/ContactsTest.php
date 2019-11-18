@@ -5,6 +5,10 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Contacts;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ContactsTest extends \PHPUnit_Framework_TestCase
 {
     private $contacts;
@@ -16,26 +20,8 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createContact()
-    {
-        sleep(1);
-
-        $response = $this->contacts->create([
-            ['property' => 'email',     'value' => 'rw_test'.uniqid().'@hubspot.com'],
-            ['property' => 'firstname', 'value' => 'joe'],
-            ['property' => 'lastname',  'value' => 'user'],
-        ]);
-
-        $this->assertEquals(200, $response->getStatusCode());
-
-        return $response;
-    }
-
     /** @test */
-    public function all_with_no_params()
+    public function allWithNoParams()
     {
         $response = $this->contacts->all();
 
@@ -43,7 +29,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all_with_params()
+    public function allWithParams()
     {
         $response = $this->contacts->all([
             'count' => 2,
@@ -59,7 +45,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all_with_params_and_array_access()
+    public function allWithParamsAndArrayAccess()
     {
         $response = $this->contacts->all([
             'count' => 2,
@@ -257,5 +243,21 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contacts->statistics();
 
         $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    // Lots of tests need an existing object to modify.
+    private function createContact()
+    {
+        sleep(1);
+
+        $response = $this->contacts->create([
+            ['property' => 'email',     'value' => 'rw_test'.uniqid().'@hubspot.com'],
+            ['property' => 'firstname', 'value' => 'joe'],
+            ['property' => 'lastname',  'value' => 'user'],
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        return $response;
     }
 }

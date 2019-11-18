@@ -7,9 +7,9 @@ class EcommerceBridge extends Resource
     /**
      * Installs the ecommerce bridge into a portal.
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function install()
     {
@@ -21,9 +21,9 @@ class EcommerceBridge extends Resource
     /**
      * Check the status of the ecommerce bridge.
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function checkInstall()
     {
@@ -35,9 +35,9 @@ class EcommerceBridge extends Resource
     /**
      * Uninstall the ecommerce settings from a portal.
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function uninstall()
     {
@@ -51,9 +51,9 @@ class EcommerceBridge extends Resource
      *
      * @param array $settings
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function upsertSettings($settings = [])
     {
@@ -68,9 +68,9 @@ class EcommerceBridge extends Resource
      * Delete the ecommerce settings for your app or portal.
      * Note: This action cannot be undone. If you want to disable sync messages from being applied, it is recommended that you disable the settings rather than deleting them.
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function deleteSettings()
     {
@@ -85,9 +85,9 @@ class EcommerceBridge extends Resource
      * @param string $objectType - The object type that the updates are for. One of CONTACT, DEAL, PRODUCT, or LINE_ITEM.
      * @param array  $messages
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function sendSyncMessages($objectType, $messages = [])
     {
@@ -101,9 +101,9 @@ class EcommerceBridge extends Resource
     /**
      * Get errors from previously processed sync messages.
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function getSyncErrors()
     {
@@ -117,9 +117,9 @@ class EcommerceBridge extends Resource
      *
      * @param string $importTriggerUri - The URI that will be hit with the import webhook
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function setImportUri($importTriggerUri)
     {
@@ -135,9 +135,9 @@ class EcommerceBridge extends Resource
     /**
      * Retrieve the ecommerce import settings for an app.
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function getImportSettings()
     {
@@ -152,9 +152,9 @@ class EcommerceBridge extends Resource
      * @param int    $pageNumber      - A numeric page number that identifies this page of data
      * @param array  $messages        - The import messages
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function importObjects($importStartedAt, $objectType, $pageNumber, $messages)
     {
@@ -171,9 +171,9 @@ class EcommerceBridge extends Resource
      * @param int    $pageCount       - The total number of pages sent via the import pages endpoint
      * @param int    $itemCount       - The total number of items sent via the import pages endpoint
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function signalImportEnd($importStartedAt, $objectType, $pageCount, $itemCount)
     {

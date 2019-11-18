@@ -136,7 +136,8 @@ class Analytics extends Resource
      * @see https://developers.hubspot.com/docs/methods/analytics/check_for_analytics_data_existence
      *
      * @param string $id
-     * @param array  $params Array of optional parameters
+     * @param array  $params     Array of optional parameters
+     * @param mixed  $objectType
      *
      * @return \SevenShores\Hubspot\Http\Response
      */

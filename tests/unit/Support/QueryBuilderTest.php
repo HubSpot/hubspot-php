@@ -2,6 +2,10 @@
 
 namespace SevenShores\Hubspot\Tests\Unit\Support;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /** @test */
@@ -18,7 +22,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function build_with_batch()
+    public function buildWithBatch()
     {
         $query = [
             'property' => [
@@ -43,7 +47,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function build_nested_batch_with_encoding_RFC3986()
+    public function buildNestedBatchWithEncodingRFC3986()
     {
         $query = [
             'email' => 'test@test.com',
@@ -63,7 +67,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function build_nested_batch_with_encoding_RFC1738()
+    public function buildNestedBatchWithEncodingRFC1738()
     {
         $query = [
             'email' => 'test@test.com',
@@ -96,7 +100,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function encode_false()
+    public function encodeFalse()
     {
         $string = "I wan't this encoded!";
 

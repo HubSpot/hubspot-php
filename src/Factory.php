@@ -61,6 +61,22 @@ class Factory
     }
 
     /**
+     * Return an instance of a Resource based on the method called.
+     *
+     * @param string $name
+     * @param array  $arguments
+     * @param mixed  $args
+     *
+     * @return \SevenShores\Hubspot\Resources\Resource
+     */
+    public function __call($name, $args)
+    {
+        $resource = 'SevenShores\\Hubspot\\Resources\\'.ucfirst($name);
+
+        return new $resource($this->client);
+    }
+
+    /**
      * Create an instance of the service with an API key.
      *
      * @param string $api_key       hubspot API key
@@ -93,8 +109,8 @@ class Factory
     /**
      * Create an instance of the service with an OAuth2 token.
      *
-     * @param string $token         Hubspot OAuth2 access token.
-     * @param Client $client        An Http client.
+     * @param string $token         hubspot OAuth2 access token
+     * @param Client $client        an Http client
      * @param array  $clientOptions options to be send with each request
      * @param bool   $wrapResponse  wrap request response in own Response object
      *
@@ -103,20 +119,5 @@ class Factory
     public static function createWithOAuth2Token($token, $client = null, $clientOptions = [], $wrapResponse = true)
     {
         return new static(['key' => $token, 'oauth2' => true], $client, $clientOptions, $wrapResponse);
-    }
-
-    /**
-     * Return an instance of a Resource based on the method called.
-     *
-     * @param string $name
-     * @param array  $arguments
-     *
-     * @return \SevenShores\Hubspot\Resources\Resource
-     */
-    public function __call($name, $args)
-    {
-        $resource = 'SevenShores\\Hubspot\\Resources\\'.ucfirst($name);
-
-        return new $resource($this->client);
     }
 }

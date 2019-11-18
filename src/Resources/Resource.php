@@ -22,9 +22,9 @@ abstract class Resource
     /**
      * Convert a time, DateTime, or string to a millisecond timestamp.
      *
-     * @param \DateTime|int|null $time
+     * @param null|\DateTime|int $time
      *
-     * @return int|null
+     * @return null|int
      */
     protected function timestamp($time)
     {

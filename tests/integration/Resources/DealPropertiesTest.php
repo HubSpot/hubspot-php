@@ -5,6 +5,10 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\DealProperties;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class DealPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -28,48 +32,6 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Custom property', $response['label']);
-    }
-
-    /**
-     * Creates a new deal property.
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    private function createDealProperty()
-    {
-        $property = [
-            'name' => 't'.uniqid(),
-            'label' => 'Custom property',
-            'description' => 'An Awesome Custom property',
-            'groupName' => 'dealinformation',
-            'type' => 'string',
-            'fieldType' => 'text',
-            'formField' => true,
-            'displayOrder' => 6,
-            'options' => [],
-        ];
-
-        $response = $this->dealProperties->create($property);
-
-        return $response;
-    }
-
-    /**
-     * Creates a new deal property group.
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    private function createDealPropertyGroup()
-    {
-        $group = [
-            'name' => 't'.uniqid(),
-            'displayName' => 'A New Custom Group',
-            'displayOrder' => 6,
-        ];
-
-        $response = $this->dealProperties->createGroup($group);
-
-        return $response;
     }
 
     /** @test */
@@ -150,5 +112,43 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(2, count($response->getData()));
         $this->assertObjectHasAttribute('properties', $response->getData()[0]);
+    }
+
+    /**
+     * Creates a new deal property.
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    private function createDealProperty()
+    {
+        $property = [
+            'name' => 't'.uniqid(),
+            'label' => 'Custom property',
+            'description' => 'An Awesome Custom property',
+            'groupName' => 'dealinformation',
+            'type' => 'string',
+            'fieldType' => 'text',
+            'formField' => true,
+            'displayOrder' => 6,
+            'options' => [],
+        ];
+
+        return $this->dealProperties->create($property);
+    }
+
+    /**
+     * Creates a new deal property group.
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    private function createDealPropertyGroup()
+    {
+        $group = [
+            'name' => 't'.uniqid(),
+            'displayName' => 'A New Custom Group',
+            'displayOrder' => 6,
+        ];
+
+        return $this->dealProperties->createGroup($group);
     }
 }

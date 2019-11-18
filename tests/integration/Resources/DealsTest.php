@@ -11,6 +11,9 @@ use SevenShores\Hubspot\Resources\Deals;
  * Class DealsTest.
  *
  * @group deals
+ *
+ * @internal
+ * @coversNothing
  */
 class DealsTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,50 +27,6 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
         $this->deals = new Deals(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
-    }
-
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createDeal()
-    {
-        sleep(1);
-
-        $response = $this->deals->create([
-            'properties' => [
-                [
-                    'value' => 'Cool Deal',
-                    'name' => 'dealname',
-                ],
-                [
-                    'value' => '60000',
-                    'name' => 'amount',
-                ],
-            ],
-        ]);
-
-        return $response;
-    }
-
-    /**
-     * @return int
-     */
-    private function createCompany()
-    {
-        $companies = new Companies(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-
-        return $companies->create(['name' => 'name', 'value' => 'dl_test_company'.uniqid()])->companyId;
-    }
-
-    private function createContact()
-    {
-        $contacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-
-        $response = $contacts->create([
-            ['property' => 'email', 'value' => 'dl_test_contact'.uniqid().'@hubspot.com'],
-        ]);
-
-        return $response->vid;
     }
 
     /**
@@ -347,5 +306,45 @@ class DealsTest extends \PHPUnit_Framework_TestCase
 
         $response = $this->deals->getAssociatedDeals('contact', $contactId);
         $this->assertCount(3, $response->deals);
+    }
+
+    // Lots of tests need an existing object to modify.
+    private function createDeal()
+    {
+        sleep(1);
+
+        return $this->deals->create([
+            'properties' => [
+                [
+                    'value' => 'Cool Deal',
+                    'name' => 'dealname',
+                ],
+                [
+                    'value' => '60000',
+                    'name' => 'amount',
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @return int
+     */
+    private function createCompany()
+    {
+        $companies = new Companies(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+
+        return $companies->create(['name' => 'name', 'value' => 'dl_test_company'.uniqid()])->companyId;
+    }
+
+    private function createContact()
+    {
+        $contacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+
+        $response = $contacts->create([
+            ['property' => 'email', 'value' => 'dl_test_contact'.uniqid().'@hubspot.com'],
+        ]);
+
+        return $response->vid;
     }
 }

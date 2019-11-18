@@ -6,6 +6,9 @@ use SevenShores\Hubspot\Http\Client;
 
 /**
  * Class DealPipelinesTest.
+ *
+ * @internal
+ * @coversNothing
  */
 class DealPipelinesTest extends \PHPUnit_Framework_TestCase
 {

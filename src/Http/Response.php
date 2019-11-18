@@ -9,14 +9,13 @@ use Psr\Http\Message\StreamInterface;
 class Response implements ResponseInterface, ArrayAccess
 {
     /**
-     * @var \Psr\Http\Message\ResponseInterface
-     */
-    protected $response;
-
-    /**
      * @var mixed
      */
     public $data;
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    protected $response;
 
     public function __construct(ResponseInterface $response)
     {
@@ -33,17 +32,7 @@ class Response implements ResponseInterface, ArrayAccess
      */
     public function __get($name)
     {
-        return $this->data->$name;
-    }
-
-    /**
-     * @return mixed
-     */
-    private function getDataFromResponse(ResponseInterface $response)
-    {
-        $contents = $response->getBody()->getContents();
-
-        return $contents ? json_decode($contents) : null;
+        return $this->data->{$name};
     }
 
     /**
@@ -75,7 +64,7 @@ class Response implements ResponseInterface, ArrayAccess
      */
     public function offsetExists($offset)
     {
-        return isset($this->data->$offset);
+        return isset($this->data->{$offset});
     }
 
     /**
@@ -97,24 +86,20 @@ class Response implements ResponseInterface, ArrayAccess
      *
      * @param mixed $offset
      * @param mixed $value
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
-        $this->data->$offset = $value;
+        $this->data->{$offset} = $value;
     }
 
     /**
      * Offset to unset.
      *
      * @param mixed $offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
-        unset($this->data->$offset);
+        unset($this->data->{$offset});
     }
 
     /**
@@ -250,9 +235,9 @@ class Response implements ResponseInterface, ArrayAccess
      * @param string          $name  case-insensitive header field name
      * @param string|string[] $value header value(s)
      *
-     * @return self
-     *
      * @throws \InvalidArgumentException for invalid header names or values
+     *
+     * @return self
      */
     public function withHeader($name, $value)
     {
@@ -273,9 +258,9 @@ class Response implements ResponseInterface, ArrayAccess
      * @param string          $name  case-insensitive header field name to add
      * @param string|string[] $value header value(s)
      *
-     * @return self
-     *
      * @throws \InvalidArgumentException for invalid header names or values
+     *
+     * @return self
      */
     public function withAddedHeader($name, $value)
     {
@@ -321,9 +306,9 @@ class Response implements ResponseInterface, ArrayAccess
      *
      * @param StreamInterface $body body
      *
-     * @return self
-     *
      * @throws \InvalidArgumentException when the body is not valid
+     *
+     * @return self
      */
     public function withBody(StreamInterface $body)
     {
@@ -362,9 +347,9 @@ class Response implements ResponseInterface, ArrayAccess
      *                             provided status code; if none is provided, implementations MAY
      *                             use the defaults as suggested in the HTTP specification
      *
-     * @return self
-     *
      * @throws \InvalidArgumentException for invalid status code arguments
+     *
+     * @return self
      */
     public function withStatus($code, $reasonPhrase = '')
     {
@@ -388,5 +373,15 @@ class Response implements ResponseInterface, ArrayAccess
     public function getReasonPhrase()
     {
         return $this->response->getReasonPhrase();
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getDataFromResponse(ResponseInterface $response)
+    {
+        $contents = $response->getBody()->getContents();
+
+        return $contents ? json_decode($contents) : null;
     }
 }

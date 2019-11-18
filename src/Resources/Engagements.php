@@ -52,15 +52,15 @@ class Engagements extends Resource
      * @param array  $metadata   the engagement metadata to update
      * @param string $method
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function update($id, $engagement, $metadata, $method = 'patch')
     {
         $availableMethods = ['put', 'patch'];
 
-        if (! \in_array($method, $availableMethods)) {
+        if (!\in_array($method, $availableMethods)) {
             throw new BadRequest('Method name '.$method.' is invalid', 400);
         }
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}";
@@ -121,7 +121,7 @@ class Engagements extends Resource
      * @param int    $object_id
      *
      * @return \SevenShores\Hubspot\Http\Response
-     **/
+     */
     public function associate($id, $object_type, $object_id)
     {
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}/associations/{$object_type}/{$object_id}";
@@ -135,7 +135,7 @@ class Engagements extends Resource
      * @param array  $params      Array of optional parameters ['limit', 'offset']
      *
      * @return \SevenShores\Hubspot\Http\Response
-     **/
+     */
     public function associated($object_type, $object_id, $params = [])
     {
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements/associated/{$object_type}/{$object_id}/paged";

@@ -65,9 +65,9 @@ class Tickets extends Resource
      * @param int   $id
      * @param array $params Optional parameters ['properties', 'propertiesWithHistory', 'includeDeletes']
      *
-     * @return mixed
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return mixed
      */
     public function getById($id, array $params = [])
     {

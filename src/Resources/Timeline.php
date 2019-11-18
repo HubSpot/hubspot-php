@@ -10,9 +10,9 @@ class Timeline extends Resource
      * @param int         $appId
      * @param int         $eventTypeId
      * @param string      $id
-     * @param int|null    $objectId
-     * @param string|null $email
-     * @param string|null $utk
+     * @param null|int    $objectId
+     * @param null|string $email
+     * @param null|string $utk
      * @param array       $extraData
      * @param mixed       $timestamp
      * @param array       $eventTypeData
@@ -102,9 +102,9 @@ class Timeline extends Resource
      *
      * @param int         $appId
      * @param string      $name
-     * @param string|null $headerTemplate
-     * @param string|null $detailTemplate
-     * @param string|null $objectType
+     * @param null|string $headerTemplate
+     * @param null|string $detailTemplate
+     * @param null|string $objectType
      *
      * @return mixed
      *
@@ -135,10 +135,10 @@ class Timeline extends Resource
      *
      * @param int         $appId
      * @param int         $eventTypeId
-     * @param string|null $name
-     * @param string|null $headerTemplate
-     * @param string|null $detailTemplate
-     * @param string|null $objectType
+     * @param null|string $name
+     * @param null|string $headerTemplate
+     * @param null|string $detailTemplate
+     * @param null|string $objectType
      *
      * @return mixed
      *
@@ -207,7 +207,7 @@ class Timeline extends Resource
      * @param string      $name
      * @param string      $label
      * @param string      $propertyType
-     * @param string|null $objectProperty
+     * @param null|string $objectProperty
      * @param array       $options
      *
      * @return mixed
@@ -245,7 +245,7 @@ class Timeline extends Resource
      * @param string     $name
      * @param string     $label
      * @param string     $propertyType
-     * @param array|null $options
+     * @param null|array $options
      *
      * @return mixed
      *

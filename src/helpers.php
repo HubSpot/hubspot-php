@@ -1,6 +1,6 @@
 <?php
 
-if (! function_exists('build_query_string')) {
+if (!function_exists('build_query_string')) {
     /**
      * Generate a query string.
      *
@@ -19,7 +19,7 @@ if (! function_exists('build_query_string')) {
         foreach ($params as $key => $value) {
             if (is_array($value)) {
                 $query .= build_batch_query_string($key, $value, $encoding);
-            } elseif (! empty($value)) {
+            } elseif (!empty($value)) {
                 $query .= '&'.url_encode($key, $encoding).'='.url_encode($value, $encoding);
             }
         }
@@ -28,7 +28,7 @@ if (! function_exists('build_query_string')) {
     }
 }
 
-if (! function_exists('build_batch_query_string')) {
+if (!function_exists('build_batch_query_string')) {
     /**
      * Generate a query string for batch requests.
      *
@@ -46,7 +46,7 @@ if (! function_exists('build_batch_query_string')) {
     }
 }
 
-if (! function_exists('url_encode')) {
+if (!function_exists('url_encode')) {
     /**
      * Url encode a string.
      *
@@ -70,7 +70,7 @@ if (! function_exists('url_encode')) {
     }
 }
 
-if (! function_exists('ms_timestamp')) {
+if (!function_exists('ms_timestamp')) {
     /**
      * Get a millisecond timestamp from a date or time.
      *

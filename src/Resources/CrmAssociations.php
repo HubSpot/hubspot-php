@@ -49,9 +49,9 @@ class CrmAssociations extends Resource
      * @param $objectId
      * @param $definitionId
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
      * @throws BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      *
      * @see https://developers.hubspot.com/docs/methods/crm-associations/get-associations
      */
@@ -68,8 +68,6 @@ class CrmAssociations extends Resource
     }
 
     /**
-     * @param array $association
-     *
      * @throws BadRequest
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
@@ -86,8 +84,6 @@ class CrmAssociations extends Resource
     }
 
     /**
-     * @param array $associations
-     *
      * @throws BadRequest
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
@@ -104,8 +100,6 @@ class CrmAssociations extends Resource
     }
 
     /**
-     * @param array $association
-     *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      *
      * @see https://developers.hubspot.com/docs/methods/crm-associations/delete-association
@@ -120,8 +114,6 @@ class CrmAssociations extends Resource
     }
 
     /**
-     * @param array $associations
-     *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      *
      * @see https://developers.hubspot.com/docs/methods/crm-associations/batch-delete-associations

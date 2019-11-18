@@ -9,6 +9,9 @@ use SevenShores\Hubspot\Resources\Owners;
  * Class OwnersTest.
  *
  * @group owners
+ *
+ * @internal
+ * @coversNothing
  */
 class OwnersTest extends \PHPUnit_Framework_TestCase
 {

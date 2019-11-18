@@ -5,6 +5,10 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Pages;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class PagesTest extends \PHPUnit_Framework_TestCase
 {
     private $pages;
@@ -16,9 +20,15 @@ class PagesTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
-    /*
-     * Lots of tests need an existing object to modify.
-     */
+    /** @test */
+    public function clonePage()
+    {
+        $post = $this->createPage();
+        $response = $this->pages->clonePage($post->id, 'New page name');
+        $this->assertEquals(201, $response->getStatusCode());
+    }
+
+    // Lots of tests need an existing object to modify.
     private function createPage()
     {
         sleep(1);
@@ -31,13 +41,5 @@ class PagesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(201, $response->getStatusCode());
 
         return $response;
-    }
-
-    /** @test */
-    public function clonePage()
-    {
-        $post = $this->createPage();
-        $response = $this->pages->clonePage($post->id, 'New page name');
-        $this->assertEquals(201, $response->getStatusCode());
     }
 }
