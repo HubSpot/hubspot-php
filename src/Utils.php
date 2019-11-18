@@ -9,15 +9,15 @@ namespace SevenShores\Hubspot;
  */
 class Utils
 {
-    public static function getFactory()
-    {
-        return new static();
-    }
-
     public function __call($name, $arguments = null)
     {
         $resource = 'SevenShores\\Hubspot\\Utils\\'.ucfirst($name);
 
         return new $resource();
+    }
+
+    public static function getFactory()
+    {
+        return new static();
     }
 }

@@ -9,6 +9,9 @@ use SevenShores\Hubspot\Resources\Integration;
  * Class IntegrationTest.
  *
  * @group integration
+ *
+ * @internal
+ * @coversNothing
  */
 class IntegrationTest extends \PHPUnit_Framework_TestCase
 {

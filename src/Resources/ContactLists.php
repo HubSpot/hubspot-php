@@ -184,8 +184,8 @@ class ContactLists extends Resource
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$list_id}/add";
 
         $options['json'] = [
-          'vids' => $contact_ids,
-          'emails' => $emails,
+            'vids' => $contact_ids,
+            'emails' => $emails,
         ];
 
         return $this->client->request('post', $endpoint, $options);

@@ -5,6 +5,10 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\CompanyProperties;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -145,9 +149,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
             'options' => [],
         ];
 
-        $response = $this->companyProperties->create($property);
-
-        return $response;
+        return $this->companyProperties->create($property);
     }
 
     /**
@@ -163,8 +165,6 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
             'displayOrder' => 6,
         ];
 
-        $response = $this->companyProperties->createGroup($group);
-
-        return $response;
+        return $this->companyProperties->createGroup($group);
     }
 }

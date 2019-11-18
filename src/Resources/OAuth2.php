@@ -33,9 +33,9 @@ class OAuth2 extends Resource
      * @param string $redirectURI  The redirect URI that was used when the user authorized your app. This must exactly match the redirect_uri used when initiating the OAuth 2.0 connection.
      * @param string $tokenCode    The code parameter returned to your redirect URI when the user authorized your app. Or a refresh token.
      *
-     * @return Response
-     *
      * @throws BadRequest
+     *
+     * @return Response
      */
     public function getTokensByCode($clientId, $clientSecret, $redirectURI, $tokenCode)
     {
@@ -49,7 +49,7 @@ class OAuth2 extends Resource
 
         $options['headers']['content-type'] = 'application/x-www-form-urlencoded';
 
-        return $this->client->request('post', $this->endpoint . '/token', $options, [], false);
+        return $this->client->request('post', $this->endpoint.'/token', $options, [], false);
     }
 
     /**
@@ -60,9 +60,9 @@ class OAuth2 extends Resource
      * @param string $clientSecret the Client Secret of your app
      * @param string $refreshToken the refresh token
      *
-     * @return Response
-     *
      * @throws BadRequest
+     *
+     * @return Response
      */
     public function getTokensByRefresh($clientId, $clientSecret, $refreshToken)
     {
@@ -75,7 +75,7 @@ class OAuth2 extends Resource
 
         $options['headers']['content-type'] = 'application/x-www-form-urlencoded';
 
-        return $this->client->request('post', $this->endpoint . '/token', $options, null, false);
+        return $this->client->request('post', $this->endpoint.'/token', $options, null, false);
     }
 
     /**
@@ -83,13 +83,13 @@ class OAuth2 extends Resource
      *
      * @param int $token the access token that you want to get the information for
      *
-     * @return Response
-     *
      * @throws BadRequest
+     *
+     * @return Response
      */
     public function getAccessTokenInfo($token)
     {
-        return $this->client->request('get', $this->endpoint . "/access-tokens/{$token}", [], null, false);
+        return $this->client->request('get', $this->endpoint."/access-tokens/{$token}", [], null, false);
     }
 
     /**
@@ -97,9 +97,9 @@ class OAuth2 extends Resource
      *
      * @param int $token the refresh token that you want to get the information for
      *
-     * @return Response
-     *
      * @throws BadRequest
+     *
+     * @return Response
      */
     public function getRefreshTokenInfo($token)
     {
@@ -111,12 +111,12 @@ class OAuth2 extends Resource
      *
      * @param int $token the refresh token that you want to delete
      *
-     * @return Response
-     *
      * @throws BadRequest
+     *
+     * @return Response
      */
     public function deleteRefreshToken($token)
     {
-        return $this->client->request('delete', $this->endpoint . "/refresh-tokens/{$token}", [], null, false);
+        return $this->client->request('delete', $this->endpoint."/refresh-tokens/{$token}", [], null, false);
     }
 }

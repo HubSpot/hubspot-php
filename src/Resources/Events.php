@@ -33,9 +33,9 @@ class Events extends Resource
         $required['email'] = $contactEmail;
 
         $parameters = array_merge(
-          $required,
-          ['_m' => $contactRevenue],
-          $contactProperties
+            $required,
+            ['_m' => $contactRevenue],
+            $contactProperties
         );
 
         $query_string = build_query_string($parameters);

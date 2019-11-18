@@ -13,9 +13,9 @@ class CrmPipelines extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/pipelines/get_pipelines_for_object_type
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function all($objectType, $params = [])
     {
@@ -30,9 +30,9 @@ class CrmPipelines extends Resource
      * @param string $objectType
      * @param array  $properties Array of pipeline properties
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function create($objectType, $properties)
     {
@@ -48,9 +48,9 @@ class CrmPipelines extends Resource
      * @param $id
      * @param $properties
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function update($objectType, $id, $properties)
     {
@@ -65,9 +65,9 @@ class CrmPipelines extends Resource
      * @param $objectType
      * @param $id
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function delete($objectType, $id)
     {

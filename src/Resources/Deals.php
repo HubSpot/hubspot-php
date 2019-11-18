@@ -9,9 +9,9 @@ class Deals extends Resource
     /**
      * @param array $deal array of deal properties
      *
-     * @return mixed
-     *
      * @throws HubSpotException
+     *
+     * @return mixed
      */
     public function create(array $deal)
     {
@@ -56,9 +56,9 @@ class Deals extends Resource
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function getAll(array $params = [])
     {

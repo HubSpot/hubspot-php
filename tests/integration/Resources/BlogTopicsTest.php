@@ -5,6 +5,10 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\BlogTopics;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class BlogTopicsTest extends \PHPUnit_Framework_TestCase
 {
     private $blogTopics;
@@ -16,24 +20,8 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createBlogTopic()
-    {
-        sleep(1);
-
-        $response = $this->blogTopics->create('Topic Test '.uniqid(), [
-            'description' => 'Topic Test '.uniqid().' Description',
-        ]);
-
-        $this->assertEquals(201, $response->getStatusCode());
-
-        return $response;
-    }
-
     /** @test */
-    public function all_with_no_params()
+    public function allWithNoParams()
     {
         $response = $this->blogTopics->all();
 
@@ -41,7 +29,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all_with_params()
+    public function allWithParams()
     {
         $response = $this->blogTopics->all([
             'limit' => 2,
@@ -54,7 +42,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function search_without_query_and_params()
+    public function searchWithoutQueryAndParams()
     {
         $response = $this->blogTopics->search('');
 
@@ -62,7 +50,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function search_with_query_and_without_params()
+    public function searchWithQueryAndWithoutParams()
     {
         $response = $this->blogTopics->search('Test');
 
@@ -70,7 +58,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function search_with_query_and_params()
+    public function searchWithQueryAndParams()
     {
         $response = $this->blogTopics->search('Test', [
             'limit' => 5,
@@ -121,5 +109,19 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
         $response = $this->blogTopics->delete($topic->id);
 
         $this->assertEquals(204, $response->getStatusCode());
+    }
+
+    // Lots of tests need an existing object to modify.
+    private function createBlogTopic()
+    {
+        sleep(1);
+
+        $response = $this->blogTopics->create('Topic Test '.uniqid(), [
+            'description' => 'Topic Test '.uniqid().' Description',
+        ]);
+
+        $this->assertEquals(201, $response->getStatusCode());
+
+        return $response;
     }
 }

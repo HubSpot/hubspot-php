@@ -17,11 +17,6 @@ class ContactsSpec extends ObjectBehavior
         'User-Agent' => 'Fungku_HubSpot_PHP/0.9 (https://github.com/fungku/hubspot-php)',
     ];
 
-    private function getUrl($endpoint)
-    {
-        return $this->baseUrl.$endpoint.'?hapikey='.$this->apiKey;
-    }
-
     public function let(Client $client)
     {
         $this->beConstructedWith('demo', $client);
@@ -30,5 +25,10 @@ class ContactsSpec extends ObjectBehavior
     public function it_is_initializable()
     {
         $this->shouldHaveType('SevenShores\Hubspot\Resources\Contacts');
+    }
+
+    private function getUrl($endpoint)
+    {
+        return $this->baseUrl.$endpoint.'?hapikey='.$this->apiKey;
     }
 }

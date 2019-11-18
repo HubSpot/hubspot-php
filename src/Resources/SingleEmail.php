@@ -21,10 +21,10 @@ class SingleEmail extends Resource
         $endpoint = 'https://api.hubapi.com/email/public/v1/singleEmail/send';
 
         $options['json'] = [
-          'emailId' => $id,
-          'message' => $message,
-          'contactProperties' => $contactProperties,
-          'customProperties' => $customProperties,
+            'emailId' => $id,
+            'message' => $message,
+            'contactProperties' => $contactProperties,
+            'customProperties' => $customProperties,
         ];
 
         return $this->client->request('post', $endpoint, $options);

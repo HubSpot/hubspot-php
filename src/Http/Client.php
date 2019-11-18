@@ -80,10 +80,10 @@ class Client
      * @param string $query_string  A query string to send with the request
      * @param bool   $requires_auth Whether or not this HubSpot API endpoint requires authentication
      *
-     * @return \SevenShores\Hubspot\Http\Response|ResponseInterface
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      * @throws \SevenShores\Hubspot\Exceptions\HubspotException
+     *
+     * @return ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function request($method, $endpoint, $options = [], $query_string = null, $requires_auth = true)
     {
@@ -129,7 +129,7 @@ class Client
         if ($requires_auth) {
             $authType = $this->oauth ? 'access_token' : 'hapikey';
 
-            if (! $this->oauth2) {
+            if (!$this->oauth2) {
                 $url .= $authType.'='.$this->key;
 
                 if ($this->userId) {

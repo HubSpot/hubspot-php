@@ -5,6 +5,10 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\ContactLists;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ContactListsTest extends \PHPUnit_Framework_TestCase
 {
     private $contactLists;
@@ -16,36 +20,8 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createList()
-    {
-        sleep(1);
-
-        $response = $this->contactLists->create([
-            'name' => 'Test '.uniqid(),
-            'dynamic' => true,
-            'portalId' => 62515,
-            'filters' => [
-                [
-                    [
-                        'operator' => 'EQ',
-                        'value' => '@hubspot',
-                        'property' => 'twitterhandle',
-                        'type' => 'string',
-                    ],
-                ],
-            ],
-        ]);
-
-        $this->assertEquals(200, $response->getStatusCode());
-
-        return $response;
-    }
-
     /** @test */
-    public function all_with_no_params()
+    public function allWithNoParams()
     {
         $response = $this->contactLists->all();
 
@@ -53,7 +29,7 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all_with_params()
+    public function allWithParams()
     {
         $response = $this->contactLists->all([
             'count' => 2,
@@ -68,7 +44,7 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all_with_params_and_array_access()
+    public function allWithParamsAndArrayAccess()
     {
         $response = $this->contactLists->all([
             'count' => 2,
@@ -193,5 +169,31 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
     public function removeContact()
     {
         // TODO
+    }
+
+    // Lots of tests need an existing object to modify.
+    private function createList()
+    {
+        sleep(1);
+
+        $response = $this->contactLists->create([
+            'name' => 'Test '.uniqid(),
+            'dynamic' => true,
+            'portalId' => 62515,
+            'filters' => [
+                [
+                    [
+                        'operator' => 'EQ',
+                        'value' => '@hubspot',
+                        'property' => 'twitterhandle',
+                        'type' => 'string',
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        return $response;
     }
 }

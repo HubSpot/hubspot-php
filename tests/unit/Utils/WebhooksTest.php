@@ -4,13 +4,17 @@ namespace SevenShores\Hubspot\Tests\Unit\Utils;
 
 use SevenShores\Hubspot\Utils;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class WebhooksTest extends \PHPUnit_Framework_TestCase
 {
     protected $secret = 'clientSecret';
     protected $requestBody = 'SomeBody';
 
     /** @test */
-    public function validation_hubspot_signature_valid_data()
+    public function validationHubspotSignatureValidData()
     {
         $result = Utils\Webhooks::isHubspotSignatureValid(
             hash('sha256', $this->secret.$this->requestBody),
@@ -25,7 +29,7 @@ class WebhooksTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function validation_hubspot_signature_invalid_data()
+    public function validationHubspotSignatureInvalidData()
     {
         $result = Utils\Webhooks::isHubspotSignatureValid(
             hash('sha256', $this->secret.$this->requestBody.'1'),

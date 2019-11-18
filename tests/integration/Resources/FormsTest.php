@@ -5,6 +5,10 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Forms;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class FormsTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -19,55 +23,8 @@ class FormsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createForm()
-    {
-        $response = $this->forms->create([
-            'name' => 'Test Form '.uniqid(),
-            'action' => '',
-            'method' => 'POST',
-            'cssClass' => 'hs-form stacked',
-            'redirect' => '',
-            'submitText' => 'Sign Up',
-            'followUpId' => '',
-            'leadNurturingCampaignId' => '',
-            'notifyRecipients' => '',
-            'embeddedCode' => '',
-            'formFieldGroups' => [
-                'fields' => [
-                    [
-                        'name' => 'firstname',
-                        'label' => 'First Name',
-                        'description' => '',
-                        'groupName' => 'contactinformation',
-                        'type' => 'string',
-                        'fieldType' => 'text',
-                        'displayOrder' => 1,
-                        'required' => true,
-                        'enabled' => true,
-                        'hidden' => false,
-                        'defaultValue' => '',
-                        'isSmartField' => false,
-                        'validation' => [
-                            'name' => '',
-                            'message' => '',
-                        ],
-                    ],
-                ],
-                'default' => true,
-                'isSmartGroup' => false,
-            ],
-        ]);
-
-        $this->assertEquals(200, $response->getStatusCode());
-
-        return $response;
-    }
-
     /** @test */
-    public function all_with_no_params()
+    public function allWithNoParams()
     {
         $response = $this->forms->all();
 
@@ -137,5 +94,50 @@ class FormsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(204, $response->getStatusCode());
+    }
+
+    // Lots of tests need an existing object to modify.
+    private function createForm()
+    {
+        $response = $this->forms->create([
+            'name' => 'Test Form '.uniqid(),
+            'action' => '',
+            'method' => 'POST',
+            'cssClass' => 'hs-form stacked',
+            'redirect' => '',
+            'submitText' => 'Sign Up',
+            'followUpId' => '',
+            'leadNurturingCampaignId' => '',
+            'notifyRecipients' => '',
+            'embeddedCode' => '',
+            'formFieldGroups' => [
+                'fields' => [
+                    [
+                        'name' => 'firstname',
+                        'label' => 'First Name',
+                        'description' => '',
+                        'groupName' => 'contactinformation',
+                        'type' => 'string',
+                        'fieldType' => 'text',
+                        'displayOrder' => 1,
+                        'required' => true,
+                        'enabled' => true,
+                        'hidden' => false,
+                        'defaultValue' => '',
+                        'isSmartField' => false,
+                        'validation' => [
+                            'name' => '',
+                            'message' => '',
+                        ],
+                    ],
+                ],
+                'default' => true,
+                'isSmartGroup' => false,
+            ],
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        return $response;
     }
 }

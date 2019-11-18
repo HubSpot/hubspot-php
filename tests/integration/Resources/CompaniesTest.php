@@ -10,6 +10,9 @@ use SevenShores\Hubspot\Resources\Contacts;
  * Class CompaniesTest.
  *
  * @group companies
+ *
+ * @internal
+ * @coversNothing
  */
 class CompaniesTest extends \PHPUnit_Framework_TestCase
 {
@@ -171,9 +174,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $newCompanyResponse = $this->createCompany();
         $companyId = $newCompanyResponse['companyId'];
 
-        /**
-         * @var \SevenShores\Hubspot\Http\Response
-         */
+        // @var \SevenShores\Hubspot\Http\Response
         list($contactId, $response) = $this->createAssociatedContact($companyId);
 
         $this->assertEquals(200, $response->getStatusCode());

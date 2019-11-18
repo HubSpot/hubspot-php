@@ -4,10 +4,14 @@ namespace SevenShores\Hubspot\Tests\Unit\Utils;
 
 use SevenShores\Hubspot\Utils;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class OAuth2Test extends \PHPUnit_Framework_TestCase
 {
     /** @test */
-    public function build_authorization_url()
+    public function buildAuthorizationUrl()
     {
         $authUrl = Utils\OAuth2::getAuthUrl(
             'clientid',

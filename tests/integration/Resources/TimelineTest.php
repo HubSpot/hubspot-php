@@ -5,6 +5,10 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Timeline;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class TimelineTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -57,7 +61,7 @@ class TimelineTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
 
         // Make sure that everything still exists
-        if (! $this->timeline || ! $this->eventTypeId) {
+        if (!$this->timeline || !$this->eventTypeId) {
             return false;
         }
 
