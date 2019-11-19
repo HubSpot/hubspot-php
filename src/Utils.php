@@ -6,6 +6,7 @@ namespace SevenShores\Hubspot;
  * Class Utils.
  *
  * @method \SevenShores\Hubspot\Utils\OAuth2 oAuth2()
+ * @method \SevenShores\Hubspot\Utils\Webhooks Webhooks()
  */
 class Utils
 {

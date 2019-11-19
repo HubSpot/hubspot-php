@@ -128,20 +128,40 @@ class Client
 
         if ($requires_auth) {
             $authType = $this->oauth ? 'access_token' : 'hapikey';
+            $query_params = [];
 
             if (!$this->oauth2) {
-                $url .= $authType.'='.$this->key;
-
-                if ($this->userId) {
-                    $url .= "&userId={$this->userId}";
-                }
-            } else {
-                if ($this->userId) {
-                    $url .= "userId={$this->userId}";
-                }
+                $query_params[$authType] = $this->key;
             }
+
+            if ($this->userId) {
+                $query_params['userId'] = $this->userId;
+            }
+
+            $query_string .= $this->addQuery($query_string, http_build_query($query_params));
         }
 
         return $url.$query_string;
+    }
+
+    /**
+     * @param string $query_string  the query string to send to the endpoint
+     * @param string $addition  addition query string to send to the endpoint
+     *
+     * @return string
+     */
+    protected function addQuery($query_string, $addition)
+    {
+        $result = '';
+
+        if (!empty($addition)) {
+            if (empty($query_string)) {
+                $result = $addition;
+            } else {
+                $result .= '&' . $addition;
+            }
+        }
+
+        return $result;
     }
 }
