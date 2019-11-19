@@ -138,7 +138,7 @@ class Client
                 $query_params['userId'] = $this->userId;
             }
 
-            $query_string .= $this->mergeQuery($query_string, http_build_query($query_params));
+            $query_string .= $this->addQuery($query_string, http_build_query($query_params));
         }
 
         return $url.$query_string;
@@ -150,7 +150,7 @@ class Client
      *
      * @return string
      */
-    protected function mergeQuery($query_string, $addition)
+    protected function addQuery($query_string, $addition)
     {
         $result = '';
 

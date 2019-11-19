@@ -176,10 +176,15 @@ class Forms extends Resource
      */
     public function getUploadedFileByUrl($url)
     {
+        $endpoint = $url;
+        $query_string = null;
         $parsed = explode('?', $url);
-        if (count($parsed) != 2) {
-            return false;
+        
+        if (count($parsed) == 2) {
+            $endpoint = $parsed[0];
+            $query_string = $parsed[1];
         }
-        return $this->client->request('get', $parsed[0], ['allow_redirects' => true], $parsed[1]);
+        
+        return $this->client->request('get', $endpoint, ['allow_redirects' => true], $query_string);
     }
 }

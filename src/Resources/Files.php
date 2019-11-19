@@ -7,8 +7,7 @@ class Files extends Resource
     /**
      * Upload a new file.
      *
-     * @param Resouse $file you can get it with help fopen or file_get_contents
-     * e.g. fopen($file, 'rb')
+     * @param Resource|string $file 
      * @param array  $params Optional parameters
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -25,7 +24,7 @@ class Files extends Resource
         $options['multipart'] = [
             [
                 'name' => 'files',
-                'contents' => $file
+                'contents' => $this->getResource($file)
             ],
             [
                 'name' => 'file_names',
@@ -38,7 +37,22 @@ class Files extends Resource
 
         return $this->client->request('post', $endpoint, $options, $queryString);
     }
-
+    
+    /**
+     * 
+     * @param Resource|string $file
+     * 
+     * @return Resource
+     */
+    public function getResource($file)
+    {
+        if (is_resource($file)) {
+            return $file;
+        }
+        
+        return fopen($file, 'rb');
+    }
+    
     /**
      * Get meta data for all files.
      *
@@ -59,7 +73,7 @@ class Files extends Resource
      * Upload a replacement file.
      *
      * @param int    $file_id The file ID
-     * @param string $file    The file path
+     * @param string|Resource $file    The file path
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -70,7 +84,7 @@ class Files extends Resource
         $options['multipart'] = [
             [
                 'name' => 'files',
-                'contents' => fopen($file, 'rb'),
+                'contents' => $this->getResource($file),
             ],
         ];
 
