@@ -119,24 +119,38 @@ class Client
      */
     protected function generateUrl($endpoint, $query_string = null, $requires_auth = true)
     {
-        $url = $endpoint."?";
+        $url = $endpoint . '?';
 
         if ($requires_auth) {
             $authType = $this->oauth ? "access_token" : "hapikey";
-
+            $query_params = [];
+            
             if (!$this->oauth2) {
-                $url .= $authType."=".$this->key;
+                $query_params[$authType] = $this->key;
+            } 
+            
+            if ($this->userId) {
+                $query_params['userId'] = $this->userId;
+            }
 
-                if ($this->userId) {
-                    $url .= "&userId={$this->userId}";
-                }
+            $query_string .= $this->mergeQuery($query_string, http_build_query($query_params));
+        }
+        
+        return $url.$query_string;
+    }
+    
+    protected function mergeQuery($query_string, $addition)
+    {
+        $result = '';
+        
+        if (!empty($addition)) {
+            if (empty($query_string)) {
+                $result = $addition;
             } else {
-                if ($this->userId) {
-                    $url .= "userId={$this->userId}";
-                }
+                $result .= '&' . $addition;
             }
         }
-
-        return $url.$query_string;
+        
+        return $result;
     }
 }

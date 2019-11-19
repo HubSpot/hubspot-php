@@ -7,7 +7,8 @@ class Files extends Resource
     /**
      * Upload a new file.
      *
-     * @param string $file   File path
+     * @param Resouse $file you can get it with help fopen or file_get_contents 
+     * e.g. fopen($file, 'rb')
      * @param array  $params Optional parameters
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -23,7 +24,7 @@ class Files extends Resource
         $options['multipart'] = [
             [
                 'name' => 'files',
-                'contents' => fopen($file, 'rb')
+                'contents' => $file
             ],
             [
                 'name' => 'file_names',

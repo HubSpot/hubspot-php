@@ -163,4 +163,21 @@ class Forms extends Resource
         
         return $this->client->request('get', $endpoint, [], $queryString);
     }
+    
+    /**
+     * 
+     * Get a file uploaded via form by url
+     * 
+     * @param string $url
+     * 
+     * @see https://developers.hubspot.com/docs/methods/form-integrations/v1/uploaded-files/signed-url-redirect
+     */
+    public function getUploadedFileByUrl($url)
+    {
+        $parsed = explode('?', $url);
+        if (count($parsed) != 2) {
+            return false;
+        }
+        return $this->client->request('get', $parsed[0], ['allow_redirects' => true], $parsed[1]);
+    }
 }
