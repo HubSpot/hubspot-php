@@ -11,9 +11,10 @@ class Analytics extends Resource
      *
      * @param string $breakdown_by
      * @param string $time_period
-     * @param string $startDate (YYYYMMDD)
-     * @param string $endDate (YYYYMMDD)
-     * @param array $params Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     * @param string $startDate    (YYYYMMDD)
+     * @param string $endDate      (YYYYMMDD)
+     * @param array  $params       Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getByCategory($breakdown_by, $time_period, $startDate, $endDate, $params = [])
@@ -33,9 +34,10 @@ class Analytics extends Resource
      *
      * @param string $object_type
      * @param string $time_period
-     * @param string $startDate (YYYYMMDD)
-     * @param string $endDate (YYYYMMDD)
-     * @param array $params Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     * @param string $startDate   (YYYYMMDD)
+     * @param string $endDate     (YYYYMMDD)
+     * @param array  $params      Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getByType($object_type, $time_period, $startDate, $endDate, $params = [])
@@ -55,9 +57,10 @@ class Analytics extends Resource
      *
      * @param string $content_type
      * @param string $time_period
-     * @param string $startDate (YYYYMMDD)
-     * @param string $endDate (YYYYMMDD)
-     * @param array $params Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     * @param string $startDate    (YYYYMMDD)
+     * @param string $endDate      (YYYYMMDD)
+     * @param array  $params       Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getHosted($content_type, $time_period, $startDate, $endDate, $params = [])
@@ -76,11 +79,12 @@ class Analytics extends Resource
      * @see https://developers.hubspot.com/docs/methods/events/get_events
      *
      * @param array $params Array of optional parameters ['includeDeletes']
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getEvents($params = [])
     {
-        $endpoint = "https://api.hubapi.com/reports/v2/events";
+        $endpoint = 'https://api.hubapi.com/reports/v2/events';
 
         $queryString = build_query_string($params);
 
@@ -88,16 +92,17 @@ class Analytics extends Resource
     }
 
     /**
-     * Get all analytics views
+     * Get all analytics views.
      *
      * @see https://developers.hubspot.com/docs/methods/analytics-views/get-views
      *
      * @param array $params Array of optional parameters
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getViews($params = [])
     {
-        $endpoint = "https://api.hubapi.com/analytics/v2/views";
+        $endpoint = 'https://api.hubapi.com/analytics/v2/views';
 
         $queryString = build_query_string($params);
 
@@ -105,17 +110,18 @@ class Analytics extends Resource
     }
 
     /**
-     * Get a Group of Events by ID
+     * Get a Group of Events by ID.
      *
      * @see https://developers.hubspot.com/docs/methods/events/get_events_by_id
      *
-     * @param string $id Can be included multiple times to pull multiple events.
-     * @param array $params Array of optional parameters ['includeDeletes']
+     * @param string $id     can be included multiple times to pull multiple events
+     * @param array  $params Array of optional parameters ['includeDeletes']
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getEventsById($id, $params = [])
     {
-        $endpoint = "https://api.hubapi.com/analytics/v2/views";
+        $endpoint = 'https://api.hubapi.com/analytics/v2/views';
 
         $queryString = build_query_string($params);
 
@@ -125,12 +131,14 @@ class Analytics extends Resource
     }
 
     /**
-     * Check for the existence of analytics data for an object type
+     * Check for the existence of analytics data for an object type.
      *
      * @see https://developers.hubspot.com/docs/methods/analytics/check_for_analytics_data_existence
      *
      * @param string $id
-     * @param array $params Array of optional parameters
+     * @param array  $params     Array of optional parameters
+     * @param mixed  $objectType
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function checkForExistence($objectType, $params = [])

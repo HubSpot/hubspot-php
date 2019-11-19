@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 class HubDB extends Resource
 {
     /**
-     * Get all tables
+     * Get all tables.
      *
      * @param int $portalId Hub/Portal ID
      *
@@ -21,10 +21,10 @@ class HubDB extends Resource
     }
 
     /**
-     * Get details about a table
+     * Get details about a table.
      *
      * @param int $portalId Hub ID
-     * @param int $tableId Table ID
+     * @param int $tableId  Table ID
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
@@ -38,7 +38,7 @@ class HubDB extends Resource
     }
 
     /**
-     * Delete a table
+     * Delete a table.
      *
      * @param int $tableId Table ID
      *
@@ -52,10 +52,10 @@ class HubDB extends Resource
     }
 
     /**
-     * Delete a row
+     * Delete a row.
      *
      * @param int $tableId Table ID
-     * @param int $rowId Row ID
+     * @param int $rowId   Row ID
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
@@ -67,10 +67,10 @@ class HubDB extends Resource
     }
 
     /**
-     * @param string $name table name
-     * @param array $columns column name and type should be represented as associative array, e.g. ["name" => "Name", "type" => "TEXT"], @see https://developers.hubspot.com/docs/methods/hubdb/create_table
-     * @param bool $published whether to publish table
-     * @param bool $useForPages use table for dynamic pages, see https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb
+     * @param string $name        table name
+     * @param array  $columns     column name and type should be represented as associative array, e.g. ["name" => "Name", "type" => "TEXT"], @see https://developers.hubspot.com/docs/methods/hubdb/create_table
+     * @param bool   $published   whether to publish table
+     * @param bool   $useForPages use table for dynamic pages, see https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
@@ -78,7 +78,7 @@ class HubDB extends Resource
     {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v1/tables';
         $options['json'] = ['name' => $name, 'columns' => $columns];
-        if($published) {
+        if ($published) {
             $options['json']['publishedAt'] = round(microtime(true) * 1000);
         }
         $options['json']['useForPages'] = $useForPages;
@@ -87,11 +87,11 @@ class HubDB extends Resource
     }
 
     /**
-     * Get table rows
+     * Get table rows.
      *
-     * @param int $portalId Hub/Portal ID
-     * @param int $tableId table ID
-     * @param array $params key-value array to filter and sort rows
+     * @param int   $portalId Hub/Portal ID
+     * @param int   $tableId  table ID
+     * @param array $params   key-value array to filter and sort rows
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
@@ -106,7 +106,6 @@ class HubDB extends Resource
 
     /**
      * @param int $tableId table ID
-     * @param array $values
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
@@ -119,10 +118,9 @@ class HubDB extends Resource
     }
 
     /**
-     * @param int $tableId table ID
-     * @param array $values
-     * @param string $title page title for dynamic page
-     * @param string $path path to access page (appended to domain to form page URL)
+     * @param int    $tableId table ID
+     * @param string $title   page title for dynamic page
+     * @param string $path    path to access page (appended to domain to form page URL)
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
@@ -135,11 +133,10 @@ class HubDB extends Resource
     }
 
     /**
-     * update database table row
+     * update database table row.
      *
-     * @param int   $tableId
+     * @param int $tableId
      * @param int $rowId
-     * @param array $values
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */

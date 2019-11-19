@@ -2,9 +2,13 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\BlogAuthors;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\BlogAuthors;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
 {
     private $blogAuthors;
@@ -16,26 +20,8 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createBlogAuthor()
-    {
-        sleep(1);
-
-        $response = $this->blogAuthors->create([
-            'fullName' => 'John Smith ' . uniqid(),
-            'email' => 'john.smith' . uniqid() . '@example.com',
-            'username' => 'john-smith',
-        ]);
-
-        $this->assertEquals(201, $response->getStatusCode());
-
-        return $response;
-    }
-
     /** @test */
-    public function all_with_no_params()
+    public function allWithNoParams()
     {
         $response = $this->blogAuthors->all();
 
@@ -43,10 +29,10 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all_with_params()
+    public function allWithParams()
     {
         $response = $this->blogAuthors->all([
-            'limit'  => 2,
+            'limit' => 2,
             'offset' => 3,
         ]);
 
@@ -56,7 +42,7 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function search_without_query_and_params()
+    public function searchWithoutQueryAndParams()
     {
         $response = $this->blogAuthors->search();
 
@@ -64,7 +50,7 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function search_with_query_and_without_params()
+    public function searchWithQueryAndWithoutParams()
     {
         $response = $this->blogAuthors->search('john-smith');
 
@@ -72,10 +58,10 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function search_with_query_and_params()
+    public function searchWithQueryAndParams()
     {
         $response = $this->blogAuthors->search('john-smith', [
-            'limit'  => 5,
+            'limit' => 5,
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -96,8 +82,8 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     public function create()
     {
         $response = $this->blogAuthors->create([
-            'fullName' => 'John Smith ' . uniqid(),
-            'email' => 'john.smith' . uniqid() . '@example.com',
+            'fullName' => 'John Smith '.uniqid(),
+            'email' => 'john.smith'.uniqid().'@example.com',
             'username' => 'john-smith',
         ]);
 
@@ -125,5 +111,21 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
         $response = $this->blogAuthors->delete($author->id);
 
         $this->assertEquals(204, $response->getStatusCode());
+    }
+
+    // Lots of tests need an existing object to modify.
+    private function createBlogAuthor()
+    {
+        sleep(1);
+
+        $response = $this->blogAuthors->create([
+            'fullName' => 'John Smith '.uniqid(),
+            'email' => 'john.smith'.uniqid().'@example.com',
+            'username' => 'john-smith',
+        ]);
+
+        $this->assertEquals(201, $response->getStatusCode());
+
+        return $response;
     }
 }

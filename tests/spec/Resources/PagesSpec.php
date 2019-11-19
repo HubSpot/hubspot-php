@@ -2,9 +2,8 @@
 
 namespace spec\SevenShores\Hubspot\Resources;
 
-use SevenShores\Hubspot\Http\Client;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use SevenShores\Hubspot\Http\Client;
 
 class PagesSpec extends ObjectBehavior
 {

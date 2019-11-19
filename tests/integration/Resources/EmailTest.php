@@ -2,9 +2,13 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Email;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Email;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class EmailTest extends \PHPUnit_Framework_TestCase
 {
     private $email;

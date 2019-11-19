@@ -2,9 +2,13 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Analytics;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Analytics;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class AnalyticsTest extends \PHPUnit_Framework_TestCase
 {
     private $analytics;
@@ -17,7 +21,7 @@ class AnalyticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function get_by_category()
+    public function getByCategory()
     {
         $response = $this->analytics->getByCategory('totals', 'total', '20180101', '20180301');
 
@@ -25,7 +29,7 @@ class AnalyticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function get_by_type()
+    public function getByType()
     {
         $response = $this->analytics->getByType('forms', 'total', '20180101', '20180301');
 
@@ -33,7 +37,7 @@ class AnalyticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function get_hosted()
+    public function getHosted()
     {
         $response = $this->analytics->getHosted('standard-pages', 'total', '20180101', '20180301');
 
@@ -41,7 +45,7 @@ class AnalyticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function get_views()
+    public function getViews()
     {
         $response = $this->analytics->getViews();
 
@@ -49,7 +53,7 @@ class AnalyticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function check_for_analytics_data_existence()
+    public function checkForAnalyticsDataExistence()
     {
         $response = $this->analytics->checkForExistence('event-completions');
 

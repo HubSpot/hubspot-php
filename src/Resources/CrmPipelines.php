@@ -2,7 +2,6 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-
 class CrmPipelines extends Resource
 {
     /**
@@ -10,11 +9,13 @@ class CrmPipelines extends Resource
      * This currently supports pipelines for deals and tickets.
      *
      * @param string $objectType | Currently supports tickets or deals only
-     * @param array $params | Array of optional parameter ['includeInactive' => 'EXCLUDE_DELETED' (default) | 'INCLUDE_DELETED']
+     * @param array  $params     | Array of optional parameter ['includeInactive' => 'EXCLUDE_DELETED' (default) | 'INCLUDE_DELETED']
      *
      * @see https://developers.hubspot.com/docs/methods/pipelines/get_pipelines_for_object_type
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function all($objectType, $params = [])
     {
@@ -27,9 +28,11 @@ class CrmPipelines extends Resource
 
     /**
      * @param string $objectType
-     * @param array $properties Array of pipeline properties
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
+     * @param array  $properties Array of pipeline properties
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function create($objectType, $properties)
     {
@@ -44,8 +47,10 @@ class CrmPipelines extends Resource
      * @param string $objectType
      * @param $id
      * @param $properties
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function update($objectType, $id, $properties)
     {
@@ -59,8 +64,10 @@ class CrmPipelines extends Resource
     /**
      * @param $objectType
      * @param $id
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function delete($objectType, $id)
     {

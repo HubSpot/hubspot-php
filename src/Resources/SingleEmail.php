@@ -9,21 +9,22 @@ class SingleEmail extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/email/transactional_email/single-send-overview
      *
-     * @param int    $id
-     * @param array  $message
-     * @param array  $contactProperties
-     * @param array  $customProperties
+     * @param int   $id
+     * @param array $message
+     * @param array $contactProperties
+     * @param array $customProperties
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function send($id, $message = [], $contactProperties = [], $customProperties = [])
     {
-        $endpoint = "https://api.hubapi.com/email/public/v1/singleEmail/send";
+        $endpoint = 'https://api.hubapi.com/email/public/v1/singleEmail/send';
 
         $options['json'] = [
-          'emailId'           => $id,
-          'message'           => $message,
-          'contactProperties' => $contactProperties,
-          'customProperties'  => $customProperties
+            'emailId' => $id,
+            'message' => $message,
+            'contactProperties' => $contactProperties,
+            'customProperties' => $customProperties,
         ];
 
         return $this->client->request('post', $endpoint, $options);

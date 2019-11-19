@@ -1,15 +1,19 @@
 <?php
+
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Companies;
 use SevenShores\Hubspot\Resources\Contacts;
 use SevenShores\Hubspot\Resources\Deals;
-use SevenShores\Hubspot\Http\Client;
 
 /**
- * Class DealsTest
- * @package SevenShores\Hubspot\Tests\Integration\Resources
+ * Class DealsTest.
+ *
  * @group deals
+ *
+ * @internal
+ * @coversNothing
  */
 class DealsTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,50 +27,6 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
         $this->deals = new Deals(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
-    }
-
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createDeal()
-    {
-        sleep(1);
-
-        $response = $this->deals->create([
-            "properties" => [
-                [
-                    "value" => "Cool Deal",
-                    "name" => "dealname"
-                ],
-                [
-                    "value" => "60000",
-                    "name" => "amount"
-                ],
-            ]
-        ]);
-
-        return $response;
-    }
-
-    /**
-     * @return int
-     */
-    private function createCompany()
-    {
-        $companies = new Companies(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-
-        return $companies->create(['name' => 'name', 'value' => 'dl_test_company'.uniqid()])->companyId;
-    }
-
-    private function createContact()
-    {
-        $contacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-
-        $response = $contacts->create([
-            ['property' => 'email', 'value' => 'dl_test_contact'.uniqid().'@hubspot.com']
-        ]);
-
-        return $response->vid;
     }
 
     /**
@@ -107,10 +67,10 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $id = $response->dealId;
 
         $response = $this->deals->update($id, [
-            "properties" => [
+            'properties' => [
                 [
-                    "name"  => "amount",
-                    "value" => "70000",
+                    'name' => 'amount',
+                    'value' => '70000',
                 ],
             ],
         ]);
@@ -132,16 +92,16 @@ class DealsTest extends \PHPUnit_Framework_TestCase
             [
                 'objectId' => $deal1->dealId,
                 'properties' => [
-                    ['name' => 'dealname', 'value'  => 'Even cooler Deal'],
-                    ['name' => 'amount', 'value' => '59999' ],
+                    ['name' => 'dealname', 'value' => 'Even cooler Deal'],
+                    ['name' => 'amount', 'value' => '59999'],
                 ],
             ],
             [
                 'objectId' => $deal2->dealId,
                 'properties' => [
-                    ['name' => 'dealname', 'value'  => 'Still ok Deal'],
+                    ['name' => 'dealname', 'value' => 'Still ok Deal'],
                 ],
-            ]
+            ],
         ]);
 
         $this->assertEquals(202, $response->getStatusCode());
@@ -177,7 +137,7 @@ class DealsTest extends \PHPUnit_Framework_TestCase
     public function recentlyCreated()
     {
         //Create 4 deals
-        for ($i=1; $i<=4; ++$i) {
+        for ($i = 1; $i <= 4; ++$i) {
             $this->createDeal();
         }
 
@@ -189,7 +149,6 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertSame(3, count($response['results']));
     }
-
 
     /**
      * @getAll
@@ -204,7 +163,6 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertSame(2, count($response['results']));
     }
-
 
     /**
      * @test
@@ -234,7 +192,7 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $response = $this->deals->associateWithCompany($dealId, [
             $firstCompanyId,
             $secondCompanyId,
-            $thirdCompanyId
+            $thirdCompanyId,
         ]);
         $this->assertSame(204, $response->getStatusCode());
 
@@ -276,7 +234,7 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $response = $this->deals->associateWithContact($dealId, [
             $firstContactId,
             $secondContactId,
-            $thirdContactId
+            $thirdContactId,
         ]);
         $this->assertSame(204, $response->getStatusCode());
 
@@ -315,10 +273,10 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $secondDeal = $this->createDeal()->dealId;
 
         $this->deals->associateWithCompany($firstDeal, [
-            $companyId
+            $companyId,
         ]);
         $this->deals->associateWithCompany($secondDeal, [
-            $companyId
+            $companyId,
         ]);
 
         $response = $this->deals->getAssociatedDeals('company', $companyId);
@@ -337,16 +295,56 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         $thirdDeal = $this->createDeal()->dealId;
 
         $this->deals->associateWithContact($firstDeal, [
-            $contactId
+            $contactId,
         ]);
         $this->deals->associateWithContact($secondDeal, [
-            $contactId
+            $contactId,
         ]);
         $this->deals->associateWithContact($thirdDeal, [
-            $contactId
+            $contactId,
         ]);
 
         $response = $this->deals->getAssociatedDeals('contact', $contactId);
         $this->assertCount(3, $response->deals);
+    }
+
+    // Lots of tests need an existing object to modify.
+    private function createDeal()
+    {
+        sleep(1);
+
+        return $this->deals->create([
+            'properties' => [
+                [
+                    'value' => 'Cool Deal',
+                    'name' => 'dealname',
+                ],
+                [
+                    'value' => '60000',
+                    'name' => 'amount',
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @return int
+     */
+    private function createCompany()
+    {
+        $companies = new Companies(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+
+        return $companies->create(['name' => 'name', 'value' => 'dl_test_company'.uniqid()])->companyId;
+    }
+
+    private function createContact()
+    {
+        $contacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+
+        $response = $contacts->create([
+            ['property' => 'email', 'value' => 'dl_test_contact'.uniqid().'@hubspot.com'],
+        ]);
+
+        return $response->vid;
     }
 }

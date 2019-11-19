@@ -2,10 +2,14 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\BlogPosts;
 use SevenShores\Hubspot\Resources\Blogs;
-use SevenShores\Hubspot\Http\Client;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class BlogPostsTest extends \PHPUnit_Framework_TestCase
 {
     private $blogPosts;
@@ -20,25 +24,8 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createBlogPost()
-    {
-        sleep(1);
-
-        $response = $this->blogPosts->create([
-            'name'             => 'My Super Awesome Post ' . uniqid(),
-            'content_group_id' => $this->blogId,
-        ]);
-
-        $this->assertEquals(201, $response->getStatusCode());
-
-        return $response;
-    }
-
     /** @test */
-    public function all_with_no_params()
+    public function allWithNoParams()
     {
         $response = $this->blogPosts->all();
 
@@ -46,10 +33,10 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all_with_params()
+    public function allWithParams()
     {
         $response = $this->blogPosts->all([
-            'limit'  => 2,
+            'limit' => 2,
             'offset' => 3,
         ]);
 
@@ -59,10 +46,10 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all_with_params_and_array_access()
+    public function allWithParamsAndArrayAccess()
     {
         $response = $this->blogPosts->all([
-            'limit'  => 2,
+            'limit' => 2,
             'offset' => 3,
         ]);
 
@@ -143,7 +130,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
 
         $post = $this->createBlogPost();
 
-        $response = $this->blogPosts->publishAction($post->id, "schedule-publish");
+        $response = $this->blogPosts->publishAction($post->id, 'schedule-publish');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -159,7 +146,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function delete_restoreDeleted()
+    public function deleteRestoreDeleted()
     {
         $this->markTestSkipped(); // TODO: fix test
 
@@ -184,7 +171,7 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function versions_getVersion_restoreVersion()
+    public function versionsGetVersionRestoreVersion()
     {
         $this->markTestSkipped(); // TODO: fix test
 
@@ -203,5 +190,20 @@ class BlogPostsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $listResponse->getStatusCode());
         $this->assertEquals(200, $getResponse->getStatusCode());
         $this->assertEquals(200, $restoreResponse->getStatusCode());
+    }
+
+    // Lots of tests need an existing object to modify.
+    private function createBlogPost()
+    {
+        sleep(1);
+
+        $response = $this->blogPosts->create([
+            'name' => 'My Super Awesome Post '.uniqid(),
+            'content_group_id' => $this->blogId,
+        ]);
+
+        $this->assertEquals(201, $response->getStatusCode());
+
+        return $response;
     }
 }

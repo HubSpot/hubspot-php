@@ -2,9 +2,13 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Events;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Events;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class EventsTest extends \PHPUnit_Framework_TestCase
 {
     private $events;
@@ -25,7 +29,7 @@ class EventsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function trigger_with_email()
+    public function triggerWithEmail()
     {
         $response = $this->events->trigger(56043, 000000001625, 'test@hubspot.com');
 
@@ -33,7 +37,7 @@ class EventsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function trigger_with_revenue()
+    public function triggerWithRevenue()
     {
         $response = $this->events->trigger(56043, 000000001625, 'test@hubspot.com', 50);
 
@@ -41,7 +45,7 @@ class EventsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function trigger_with_properties()
+    public function triggerWithProperties()
     {
         $response = $this->events->trigger(56043, 000000001625, 'test@hubspot.com', 50, [
             'firstname' => 'Joe',

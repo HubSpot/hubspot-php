@@ -4,7 +4,6 @@ namespace SevenShores\Hubspot\Resources;
 
 class DealProperties extends Resource
 {
-
     /**
      * Get a Deal Property.
      *
@@ -12,7 +11,8 @@ class DealProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/deals/get_deal_property
      *
-     * @param string $name The name of the property.
+     * @param string $name the name of the property
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function get($name)
@@ -31,11 +31,12 @@ class DealProperties extends Resource
      * @see https://developers.hubspot.com/docs/methods/deals/create_deal_property
      *
      * @param array $property
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function create($property)
     {
-        $endpoint = "https://api.hubapi.com/properties/v1/deals/properties/";
+        $endpoint = 'https://api.hubapi.com/properties/v1/deals/properties/';
 
         $options['json'] = $property;
 
@@ -51,6 +52,7 @@ class DealProperties extends Resource
      *
      * @param string $name
      * @param array  $property
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function update($name, $property)
@@ -69,16 +71,18 @@ class DealProperties extends Resource
      * @see https://developers.hubspot.com/docs/methods/deals/delete_deal_property
      *
      * @param string $name
+     *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function delete($name)
     {
-        $endpoint = 'https://api.hubapi.com/properties/v1/deals/properties/named/' . $name;
+        $endpoint = 'https://api.hubapi.com/properties/v1/deals/properties/named/'.$name;
+
         return $this->client->request('delete', $endpoint);
     }
 
     /**
-     * Returns all of deal properties
+     * Returns all of deal properties.
      *
      * @see https://developers.hubspot.com/docs/methods/deals/get_deal_properties
      *
@@ -87,12 +91,14 @@ class DealProperties extends Resource
     public function all()
     {
         $endpoint = 'https://api.hubapi.com/properties/v1/deals/properties/';
+
         return $this->client->request('get', $endpoint);
     }
 
     /**
      * Create a new deal property group to gather like deal-level data.
-     * @param array $group Defines the group and any properties within it.
+     *
+     * @param array $group defines the group and any properties within it
      *
      * @see https://developers.hubspot.com/docs/methods/deals/create_deal_property_group
      *
@@ -102,13 +108,15 @@ class DealProperties extends Resource
     {
         $endpoint = 'https://api.hubapi.com/properties/v1/deals/groups/';
         $options['json'] = $group;
+
         return $this->client->request('post', $endpoint, $options);
     }
 
     /**
      * Update a previously created deal property group.
-     * @param string $groupName The API name of the property group that you will be updating.
-     * @param array $group Defines the property group and any properties within it.
+     *
+     * @param string $groupName the API name of the property group that you will be updating
+     * @param array  $group     defines the property group and any properties within it
      *
      * @see https://developers.hubspot.com/docs/methods/deals/update_deal_property_group
      *
@@ -126,7 +134,8 @@ class DealProperties extends Resource
 
     /**
      * Delete an existing deal property group.
-     * @param string $groupName The API name of the property group that you will be deleting.
+     *
+     * @param string $groupName the API name of the property group that you will be deleting
      *
      * @see https://developers.hubspot.com/docs/methods/deals/delete_deal_property_group
      *
@@ -140,10 +149,10 @@ class DealProperties extends Resource
     }
 
     /**
-     * Get a deals property group by name
+     * Get a deals property group by name.
      *
-     * @param string $groupName The API name of the property group that you will be returned.
-     * @param bool $includeProperties If true returns all of the properties for each deal property group.
+     * @param string $groupName         the API name of the property group that you will be returned
+     * @param bool   $includeProperties if true returns all of the properties for each deal property group
      *
      * @see https://developers.hubspot.com/docs/methods/deals/get_deal_property_group
      *
@@ -164,7 +173,8 @@ class DealProperties extends Resource
 
     /**
      * Returns all of the deal property groups for a given portal.
-     * @param bool $includeProperties If true returns all of the properties for each deal property group.
+     *
+     * @param bool $includeProperties if true returns all of the properties for each deal property group
      *
      * @see https://developers.hubspot.com/docs/methods/deals/get_deal_property_groups
      *

@@ -9,18 +9,14 @@ use Psr\Http\Message\StreamInterface;
 class Response implements ResponseInterface, ArrayAccess
 {
     /**
+     * @var mixed
+     */
+    public $data;
+    /**
      * @var \Psr\Http\Message\ResponseInterface
      */
     protected $response;
 
-    /**
-     * @var mixed
-     */
-    public $data;
-
-    /**
-     * @param \Psr\Http\Message\ResponseInterface $response
-     */
     public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
@@ -30,23 +26,13 @@ class Response implements ResponseInterface, ArrayAccess
     /**
      * Get the api data from the response as usual.
      *
-     * @param  string  $name
+     * @param string $name
+     *
      * @return mixed
      */
     public function __get($name)
     {
-        return $this->data->$name;
-    }
-
-    /**
-     * @param  ResponseInterface $response
-     * @return mixed
-     */
-    private function getDataFromResponse(ResponseInterface $response)
-    {
-        $contents = $response->getBody()->getContents();
-
-        return $contents ? json_decode($contents) : null;
+        return $this->data->{$name};
     }
 
     /**
@@ -70,20 +56,22 @@ class Response implements ResponseInterface, ArrayAccess
     }
 
     /**
-     * Whether a offset exists
+     * Whether a offset exists.
      *
-     * @param  mixed  $offset
-     * @return boolean
+     * @param mixed $offset
+     *
+     * @return bool
      */
     public function offsetExists($offset)
     {
-        return isset($this->data->$offset);
+        return isset($this->data->{$offset});
     }
 
     /**
-     * Offset to retrieve
+     * Offset to retrieve.
      *
-     * @param  mixed  $offset
+     * @param mixed $offset
+     *
      * @return mixed
      */
     public function offsetGet($offset)
@@ -94,26 +82,24 @@ class Response implements ResponseInterface, ArrayAccess
     }
 
     /**
-     * Offset to set
+     * Offset to set.
      *
-     * @param  mixed  $offset
-     * @param  mixed  $value
-     * @return void
+     * @param mixed $offset
+     * @param mixed $value
      */
     public function offsetSet($offset, $value)
     {
-        $this->data->$offset = $value;
+        $this->data->{$offset} = $value;
     }
 
     /**
-     * Offset to unset
+     * Offset to unset.
      *
-     * @param  mixed  $offset
-     * @return void
+     * @param mixed $offset
      */
     public function offsetUnset($offset)
     {
-        unset($this->data->$offset);
+        unset($this->data->{$offset});
     }
 
     /**
@@ -121,7 +107,7 @@ class Response implements ResponseInterface, ArrayAccess
      *
      * The string MUST contain only the HTTP version number (e.g., "1.1", "1.0").
      *
-     * @return string HTTP protocol version.
+     * @return string HTTP protocol version
      */
     public function getProtocolVersion()
     {
@@ -139,6 +125,7 @@ class Response implements ResponseInterface, ArrayAccess
      * new protocol version.
      *
      * @param string $version HTTP protocol version
+     *
      * @return self
      */
     public function withProtocolVersion($version)
@@ -168,8 +155,8 @@ class Response implements ResponseInterface, ArrayAccess
      * exact case in which headers were originally specified.
      *
      * @return array Returns an associative array of the message's headers. Each
-     *     key MUST be a header name, and each value MUST be an array of strings
-     *     for that header.
+     *               key MUST be a header name, and each value MUST be an array of strings
+     *               for that header.
      */
     public function getHeaders()
     {
@@ -179,10 +166,11 @@ class Response implements ResponseInterface, ArrayAccess
     /**
      * Checks if a header exists by the given case-insensitive name.
      *
-     * @param string $name Case-insensitive header field name.
+     * @param string $name case-insensitive header field name
+     *
      * @return bool Returns true if any header names match the given header
-     *     name using a case-insensitive string comparison. Returns false if
-     *     no matching header name is found in the message.
+     *              name using a case-insensitive string comparison. Returns false if
+     *              no matching header name is found in the message.
      */
     public function hasHeader($name)
     {
@@ -198,10 +186,11 @@ class Response implements ResponseInterface, ArrayAccess
      * If the header does not appear in the message, this method MUST return an
      * empty array.
      *
-     * @param string $name Case-insensitive header field name.
+     * @param string $name case-insensitive header field name
+     *
      * @return string[] An array of string values as provided for the given
-     *    header. If the header does not appear in the message, this method MUST
-     *    return an empty array.
+     *                  header. If the header does not appear in the message, this method MUST
+     *                  return an empty array.
      */
     public function getHeader($name)
     {
@@ -222,10 +211,11 @@ class Response implements ResponseInterface, ArrayAccess
      * If the header does not appear in the message, this method MUST return
      * an empty string.
      *
-     * @param string $name Case-insensitive header field name.
+     * @param string $name case-insensitive header field name
+     *
      * @return string A string of values as provided for the given header
-     *    concatenated together using a comma. If the header does not appear in
-     *    the message, this method MUST return an empty string.
+     *                concatenated together using a comma. If the header does not appear in
+     *                the message, this method MUST return an empty string.
      */
     public function getHeaderLine($name)
     {
@@ -242,10 +232,12 @@ class Response implements ResponseInterface, ArrayAccess
      * immutability of the message, and MUST return an instance that has the
      * new and/or updated header and value.
      *
-     * @param string $name Case-insensitive header field name.
-     * @param string|string[] $value Header value(s).
+     * @param string          $name  case-insensitive header field name
+     * @param string|string[] $value header value(s)
+     *
+     * @throws \InvalidArgumentException for invalid header names or values
+     *
      * @return self
-     * @throws \InvalidArgumentException for invalid header names or values.
      */
     public function withHeader($name, $value)
     {
@@ -263,10 +255,12 @@ class Response implements ResponseInterface, ArrayAccess
      * immutability of the message, and MUST return an instance that has the
      * new header and/or value.
      *
-     * @param string $name Case-insensitive header field name to add.
-     * @param string|string[] $value Header value(s).
+     * @param string          $name  case-insensitive header field name to add
+     * @param string|string[] $value header value(s)
+     *
+     * @throws \InvalidArgumentException for invalid header names or values
+     *
      * @return self
-     * @throws \InvalidArgumentException for invalid header names or values.
      */
     public function withAddedHeader($name, $value)
     {
@@ -282,7 +276,8 @@ class Response implements ResponseInterface, ArrayAccess
      * immutability of the message, and MUST return an instance that removes
      * the named header.
      *
-     * @param string $name Case-insensitive header field name to remove.
+     * @param string $name case-insensitive header field name to remove
+     *
      * @return self
      */
     public function withoutHeader($name)
@@ -293,7 +288,7 @@ class Response implements ResponseInterface, ArrayAccess
     /**
      * Gets the body of the message.
      *
-     * @return StreamInterface Returns the body as a stream.
+     * @return StreamInterface returns the body as a stream
      */
     public function getBody()
     {
@@ -309,9 +304,11 @@ class Response implements ResponseInterface, ArrayAccess
      * immutability of the message, and MUST return a new instance that has the
      * new body stream.
      *
-     * @param StreamInterface $body Body.
+     * @param StreamInterface $body body
+     *
+     * @throws \InvalidArgumentException when the body is not valid
+     *
      * @return self
-     * @throws \InvalidArgumentException When the body is not valid.
      */
     public function withBody(StreamInterface $body)
     {
@@ -324,7 +321,7 @@ class Response implements ResponseInterface, ArrayAccess
      * The status code is a 3-digit integer result code of the server's attempt
      * to understand and satisfy the request.
      *
-     * @return int Status code.
+     * @return int status code
      */
     public function getStatusCode()
     {
@@ -342,14 +339,17 @@ class Response implements ResponseInterface, ArrayAccess
      * immutability of the message, and MUST return an instance that has the
      * updated status and reason phrase.
      *
-     * @link http://tools.ietf.org/html/rfc7231#section-6
-     * @link http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
-     * @param int $code The 3-digit integer result code to set.
-     * @param string $reasonPhrase The reason phrase to use with the
-     *     provided status code; if none is provided, implementations MAY
-     *     use the defaults as suggested in the HTTP specification.
+     * @see http://tools.ietf.org/html/rfc7231#section-6
+     * @see http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
+     *
+     * @param int    $code         the 3-digit integer result code to set
+     * @param string $reasonPhrase the reason phrase to use with the
+     *                             provided status code; if none is provided, implementations MAY
+     *                             use the defaults as suggested in the HTTP specification
+     *
+     * @throws \InvalidArgumentException for invalid status code arguments
+     *
      * @return self
-     * @throws \InvalidArgumentException For invalid status code arguments.
      */
     public function withStatus($code, $reasonPhrase = '')
     {
@@ -365,12 +365,23 @@ class Response implements ResponseInterface, ArrayAccess
      * listed in the IANA HTTP Status Code Registry) for the response's
      * status code.
      *
-     * @link http://tools.ietf.org/html/rfc7231#section-6
-     * @link http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
-     * @return string Reason phrase; must return an empty string if none present.
+     * @see http://tools.ietf.org/html/rfc7231#section-6
+     * @see http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
+     *
+     * @return string reason phrase; must return an empty string if none present
      */
     public function getReasonPhrase()
     {
         return $this->response->getReasonPhrase();
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getDataFromResponse(ResponseInterface $response)
+    {
+        $contents = $response->getBody()->getContents();
+
+        return $contents ? json_decode($contents) : null;
     }
 }

@@ -2,13 +2,16 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Owners;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Owners;
 
 /**
- * Class OwnersTest
- * @package SevenShores\Hubspot\Tests\Integration\Resources
+ * Class OwnersTest.
+ *
  * @group owners
+ *
+ * @internal
+ * @coversNothing
  */
 class OwnersTest extends \PHPUnit_Framework_TestCase
 {
@@ -103,7 +106,8 @@ class OwnersTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates an Owner with the HubSpotApi
+     * Creates an Owner with the HubSpotApi.
+     *
      * @param string $email
      *
      * @return \SevenShores\Hubspot\Http\Response

@@ -20,6 +20,7 @@ class SocialMedia extends Resource
      * Get a broadcast channel.
      *
      * @param string $channel_guid
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getChannelById($channel_guid)
@@ -33,11 +34,12 @@ class SocialMedia extends Resource
      * Get all broadcast messages.
      *
      * @param array $params
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function broadcasts($params = [])
     {
-        $endpoint = "https://api.hubapi.com/broadcast/v1/broadcasts";
+        $endpoint = 'https://api.hubapi.com/broadcast/v1/broadcasts';
 
         $queryString = build_query_string($params);
 
@@ -48,6 +50,7 @@ class SocialMedia extends Resource
      * Get a broadcast.
      *
      * @param string $broadcast_guid
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getBroadcastById($broadcast_guid)
@@ -61,11 +64,12 @@ class SocialMedia extends Resource
      * Create a new broadcast message.
      *
      * @param array $broadcast
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function createBroadcast($broadcast)
     {
-        $endpoint = "https://api.hubapi.com/broadcast/v1/broadcasts";
+        $endpoint = 'https://api.hubapi.com/broadcast/v1/broadcasts';
 
         $options['json'] = $broadcast;
 
@@ -76,6 +80,7 @@ class SocialMedia extends Resource
      * Cancel a broadcast message.
      *
      * @param string $broadcast_guid
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function cancelBroadcast($broadcast_guid)

@@ -2,9 +2,13 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\ContactLists;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\ContactLists;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ContactListsTest extends \PHPUnit_Framework_TestCase
 {
     private $contactLists;
@@ -16,36 +20,8 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createList()
-    {
-        sleep(1);
-
-        $response = $this->contactLists->create([
-            'name'     => 'Test ' . uniqid(),
-            'dynamic'  => true,
-            'portalId' => 62515,
-            'filters'  => [
-                [
-                    [
-                        'operator' => 'EQ',
-                        'value'    => '@hubspot',
-                        'property' => 'twitterhandle',
-                        'type'     => 'string',
-                    ],
-                ],
-            ],
-        ]);
-
-        $this->assertEquals(200, $response->getStatusCode());
-
-        return $response;
-    }
-
     /** @test */
-    public function all_with_no_params()
+    public function allWithNoParams()
     {
         $response = $this->contactLists->all();
 
@@ -53,10 +29,10 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all_with_params()
+    public function allWithParams()
     {
         $response = $this->contactLists->all([
-            'count'  => 2,
+            'count' => 2,
             'offset' => 1,
         ]);
 
@@ -68,10 +44,10 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all_with_params_and_array_access()
+    public function allWithParamsAndArrayAccess()
     {
         $response = $this->contactLists->all([
-            'count'  => 2,
+            'count' => 2,
             'offset' => 1,
         ]);
 
@@ -104,7 +80,7 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         $list = $this->createList();
 
         $response = $this->contactLists->update($list->listId, [
-            'name' => 'New test name ' . uniqid(),
+            'name' => 'New test name '.uniqid(),
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -128,8 +104,9 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
             $this->createList(),
         ];
 
-        $ids = array_reduce($lists, function($listIds, $list) {
+        $ids = array_reduce($lists, function ($listIds, $list) {
             $listIds[] = $list->listId;
+
             return $listIds;
         }, []);
 
@@ -192,5 +169,31 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
     public function removeContact()
     {
         // TODO
+    }
+
+    // Lots of tests need an existing object to modify.
+    private function createList()
+    {
+        sleep(1);
+
+        $response = $this->contactLists->create([
+            'name' => 'Test '.uniqid(),
+            'dynamic' => true,
+            'portalId' => 62515,
+            'filters' => [
+                [
+                    [
+                        'operator' => 'EQ',
+                        'value' => '@hubspot',
+                        'property' => 'twitterhandle',
+                        'type' => 'string',
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        return $response;
     }
 }

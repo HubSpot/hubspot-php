@@ -11,12 +11,13 @@ class OAuth2 extends Resource
     protected $endpoint = 'https://api.hubapi.com/oauth/v1';
 
     /**
-     * Initiate an Integration with OAuth 2.0
+     * Initiate an Integration with OAuth 2.0.
      *
-     * @param string $clientId      The Client ID of your app.
-     * @param string $redirectURI   The URL that you want the visitor redirected to after granting access to your app. For security reasons, this URL must use https.
-     * @param array  $scopes  A set of scopes that your app will need access to.
-     * @param array  $optionalScopes   A set of optional scopes that your app will need access to.
+     * @param string $clientId       the Client ID of your app
+     * @param string $redirectURI    The URL that you want the visitor redirected to after granting access to your app. For security reasons, this URL must use https.
+     * @param array  $scopes         a set of scopes that your app will need access to
+     * @param array  $optionalScopes a set of optional scopes that your app will need access to
+     *
      * @return string
      */
     public function getAuthUrl($clientId, $redirectURI, $scopes = [], $optionalScopes = [])
@@ -25,14 +26,16 @@ class OAuth2 extends Resource
     }
 
     /**
-     * Get OAuth 2.0 Access Token and Refresh Tokens by using a one-time code
+     * Get OAuth 2.0 Access Token and Refresh Tokens by using a one-time code.
      *
-     * @param string $clientId The Client ID of your app.
-     * @param string $clientSecret The Client Secret of your app.
-     * @param string $redirectURI The redirect URI that was used when the user authorized your app. This must exactly match the redirect_uri used when initiating the OAuth 2.0 connection.
-     * @param string $tokenCode The code parameter returned to your redirect URI when the user authorized your app. Or a refresh token.
-     * @return Response
+     * @param string $clientId     the Client ID of your app
+     * @param string $clientSecret the Client Secret of your app
+     * @param string $redirectURI  The redirect URI that was used when the user authorized your app. This must exactly match the redirect_uri used when initiating the OAuth 2.0 connection.
+     * @param string $tokenCode    The code parameter returned to your redirect URI when the user authorized your app. Or a refresh token.
+     *
      * @throws BadRequest
+     *
+     * @return Response
      */
     public function getTokensByCode($clientId, $clientSecret, $redirectURI, $tokenCode)
     {
@@ -41,7 +44,7 @@ class OAuth2 extends Resource
             'client_id' => $clientId,
             'client_secret' => $clientSecret,
             'redirect_uri' => $redirectURI,
-            'code' => $tokenCode
+            'code' => $tokenCode,
         ];
 
         $options['headers']['content-type'] = 'application/x-www-form-urlencoded';
@@ -53,11 +56,13 @@ class OAuth2 extends Resource
      * Get OAuth 2.0 Access Token and Refresh Tokens by using a refresh token
      * Note: Contrary to HubSpot documentation, $redirectURI is NOT required.
      *
-     * @param string $clientId The Client ID of your app.
-     * @param string $clientSecret The Client Secret of your app.
-     * @param string $refreshToken The refresh token.
-     * @return Response
+     * @param string $clientId     the Client ID of your app
+     * @param string $clientSecret the Client Secret of your app
+     * @param string $refreshToken the refresh token
+     *
      * @throws BadRequest
+     *
+     * @return Response
      */
     public function getTokensByRefresh($clientId, $clientSecret, $refreshToken)
     {
@@ -65,7 +70,7 @@ class OAuth2 extends Resource
             'grant_type' => 'refresh_token',
             'client_id' => $clientId,
             'client_secret' => $clientSecret,
-            'refresh_token' => $refreshToken
+            'refresh_token' => $refreshToken,
         ];
 
         $options['headers']['content-type'] = 'application/x-www-form-urlencoded';
@@ -74,39 +79,44 @@ class OAuth2 extends Resource
     }
 
     /**
-     * Get Information for OAuth 2.0 Access Token
+     * Get Information for OAuth 2.0 Access Token.
      *
-     * @param int $token The access token that you want to get the information for.
-     * @return Response
+     * @param int $token the access token that you want to get the information for
+     *
      * @throws BadRequest
+     *
+     * @return Response
      */
     public function getAccessTokenInfo($token)
     {
-        return $this->client->request('get', $this->endpoint."/access-tokens/{$token}", null, false);
+        return $this->client->request('get', $this->endpoint."/access-tokens/{$token}", [], null, false);
     }
 
     /**
-     * Get Information for OAuth 2.0 Refresh Token
+     * Get Information for OAuth 2.0 Refresh Token.
      *
-     * @param int $token The refresh token that you want to get the information for.
-     * @return Response
+     * @param int $token the refresh token that you want to get the information for
+     *
      * @throws BadRequest
+     *
+     * @return Response
      */
     public function getRefreshTokenInfo($token)
     {
-        return $this->client->request('get', $this->endpoint."/refresh-tokens/{$token}", null ,false);
+        return $this->client->request('get', $this->endpoint."/refresh-tokens/{$token}", [], null, false);
     }
 
     /**
-     * Delete OAuth 2.0 Refresh Token
+     * Delete OAuth 2.0 Refresh Token.
      *
-     * @param int $token The refresh token that you want to delete.
-     * @return Response
+     * @param int $token the refresh token that you want to delete
+     *
      * @throws BadRequest
+     *
+     * @return Response
      */
     public function deleteRefreshToken($token)
     {
-        return $this->client->request('delete', $this->endpoint."/refresh-tokens/{$token}", null, false);
+        return $this->client->request('delete', $this->endpoint."/refresh-tokens/{$token}", [], null, false);
     }
-
 }

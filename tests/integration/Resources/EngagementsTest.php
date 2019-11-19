@@ -2,10 +2,14 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\Engagements;
-use SevenShores\Hubspot\Resources\Contacts;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Contacts;
+use SevenShores\Hubspot\Resources\Engagements;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class EngagementsTest extends \PHPUnit_Framework_TestCase
 {
     private $engagements;
@@ -19,42 +23,16 @@ class EngagementsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createEngagement()
-    {
-        sleep(1);
-        $contact = $this->contacts->create([]);
-        $response = $this->engagements->create([
-            "active" => true,
-            "ownerId" => 1,
-            "type" => "NOTE",
-            "timestamp" => 1409172644778,
-        ], [
-            "contactIds" => [$contact->vid],
-            "companyIds" => [],
-            "dealIds" => [],
-            "ownerIds" => [],
-        ], [
-            'body' => 'note body',
-        ]);
-
-        $this->assertEquals(200, $response->getStatusCode());
-
-        return $response;
-    }
-
     /** @test */
     public function update()
     {
         $engagement = $this->createEngagement();
         $contact = $this->contacts->create([]);
         $response = $this->engagements->update($engagement->engagement->id, [
-            "active" => true,
-            "ownerId" => 1,
-            "type" => "NOTE",
-            "timestamp" => 1409172644778
+            'active' => true,
+            'ownerId' => 1,
+            'type' => 'NOTE',
+            'timestamp' => 1409172644778,
         ], [
             'body' => 'note body',
         ]);
@@ -93,7 +71,7 @@ class EngagementsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function get_call_dispositions()
+    public function getCallDispositions()
     {
         $response = $this->engagements->getCallDispositions();
 
@@ -101,4 +79,27 @@ class EngagementsTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(6, $response->getData());
     }
 
+    // Lots of tests need an existing object to modify.
+    private function createEngagement()
+    {
+        sleep(1);
+        $contact = $this->contacts->create([]);
+        $response = $this->engagements->create([
+            'active' => true,
+            'ownerId' => 1,
+            'type' => 'NOTE',
+            'timestamp' => 1409172644778,
+        ], [
+            'contactIds' => [$contact->vid],
+            'companyIds' => [],
+            'dealIds' => [],
+            'ownerIds' => [],
+        ], [
+            'body' => 'note body',
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        return $response;
+    }
 }

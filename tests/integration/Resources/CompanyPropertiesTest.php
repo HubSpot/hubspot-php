@@ -1,12 +1,14 @@
 <?php
 
-
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-
-use SevenShores\Hubspot\Resources\CompanyProperties;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\CompanyProperties;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -37,14 +39,14 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
     {
         $createdPropertyResponse = $this->createCompanyProperty();
         $property = [
-            "label" => "Custom property Changed",
-            "description" => "An Awesome Custom property that changed",
-            "groupName" => "companyinformation",
-            "type" => "string",
-            "fieldType" => "text",
-            "formField" => true,
-            "displayOrder" => 6,
-            "options" => []
+            'label' => 'Custom property Changed',
+            'description' => 'An Awesome Custom property that changed',
+            'groupName' => 'companyinformation',
+            'type' => 'string',
+            'fieldType' => 'text',
+            'formField' => true,
+            'displayOrder' => 6,
+            'options' => [],
         ];
 
         $response = $this->companyProperties->update($createdPropertyResponse->name, $property);
@@ -96,8 +98,8 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         $createdGroupResponse = $this->createCompanyPropertyGroup();
 
         $group = [
-            "displayName" => "An Updated Company Property Group",
-            "displayOrder" => 6,
+            'displayName' => 'An Updated Company Property Group',
+            'displayOrder' => 6,
         ];
 
         $response = $this->companyProperties->updateGroup($createdGroupResponse->name, $group);
@@ -129,27 +131,25 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates a new company property
+     * Creates a new company property.
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
     private function createCompanyProperty()
     {
         $property = [
-            "name" => "t" . uniqid(),
-            "label" => "Custom property",
-            "description" => "An Awesome Custom property",
-            "groupName" => "companyinformation",
-            "type" => "string",
-            "fieldType" => "text",
-            "formField" => true,
-            "displayOrder" => 6,
-            "options" => []
+            'name' => 't'.uniqid(),
+            'label' => 'Custom property',
+            'description' => 'An Awesome Custom property',
+            'groupName' => 'companyinformation',
+            'type' => 'string',
+            'fieldType' => 'text',
+            'formField' => true,
+            'displayOrder' => 6,
+            'options' => [],
         ];
 
-        $response = $this->companyProperties->create($property);
-
-        return $response;
+        return $this->companyProperties->create($property);
     }
 
     /**
@@ -160,13 +160,11 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
     private function createCompanyPropertyGroup()
     {
         $group = [
-            "name" => "t" . uniqid(),
-            "displayName" => "A New Custom Group",
-            "displayOrder" => 6,
+            'name' => 't'.uniqid(),
+            'displayName' => 'A New Custom Group',
+            'displayOrder' => 6,
         ];
 
-        $response = $this->companyProperties->createGroup($group);
-
-        return $response;
+        return $this->companyProperties->createGroup($group);
     }
 }

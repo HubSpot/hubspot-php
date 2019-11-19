@@ -2,9 +2,13 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Resources\ContactProperties;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\ContactProperties;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ContactPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     private $contactProperties;
@@ -14,30 +18,6 @@ class ContactPropertiesTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
         $this->contactProperties = new ContactProperties(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
-    }
-
-    /*
-     * Lots of tests need an existing object to modify.
-     */
-    private function createProperty()
-    {
-        sleep(1);
-
-        $response = $this->contactProperties->create([
-            "name"         => "t" . uniqid(),
-            "label"        => "A New Custom Property",
-            "description"  => "A new property for you",
-            "groupName"    => "contactinformation",
-            "type"         => "string",
-            "fieldType"    => "text",
-            "formField"    => false,
-            "displayOrder" => 6,
-            "options"      => [],
-        ]);
-
-        $this->assertEquals(200, $response->getStatusCode());
-
-        return $response;
     }
 
     /** @test */
@@ -65,14 +45,14 @@ class ContactPropertiesTest extends \PHPUnit_Framework_TestCase
         $property = $this->createProperty();
 
         $response = $this->contactProperties->update($property->name, [
-            "label"        => "A New Custom Property",
-            "description"  => "A new property for you",
-            "groupName"    => "contactinformation",
-            "type"         => "string",
-            "fieldType"    => "text",
-            "formField"    => false,
-            "displayOrder" => 1,
-            "options"      => [],
+            'label' => 'A New Custom Property',
+            'description' => 'A new property for you',
+            'groupName' => 'contactinformation',
+            'type' => 'string',
+            'fieldType' => 'text',
+            'formField' => false,
+            'displayOrder' => 1,
+            'options' => [],
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -98,12 +78,12 @@ class ContactPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function createGroup_updateGroup_deleteGroup()
+    public function createGroupUpdateGroupDeleteGroup()
     {
         $group = [
-            "name"         => "g".uniqid(),
-            "displayName"  => "A New Custom Group",
-            "displayOrder" => 5,
+            'name' => 'g'.uniqid(),
+            'displayName' => 'A New Custom Group',
+            'displayOrder' => 5,
         ];
 
         $create = $this->contactProperties->createGroup($group);
@@ -113,5 +93,27 @@ class ContactPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $create->getStatusCode());
         $this->assertEquals(200, $update->getStatusCode());
         $this->assertEquals(204, $delete->getStatusCode());
+    }
+
+    // Lots of tests need an existing object to modify.
+    private function createProperty()
+    {
+        sleep(1);
+
+        $response = $this->contactProperties->create([
+            'name' => 't'.uniqid(),
+            'label' => 'A New Custom Property',
+            'description' => 'A new property for you',
+            'groupName' => 'contactinformation',
+            'type' => 'string',
+            'fieldType' => 'text',
+            'formField' => false,
+            'displayOrder' => 6,
+            'options' => [],
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        return $response;
     }
 }

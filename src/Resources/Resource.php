@@ -10,7 +10,7 @@ abstract class Resource
     protected $client;
 
     /**
-     * Makin' a good old resource
+     * Makin' a good old resource.
      *
      * @param \SevenShores\Hubspot\Http\Client $client
      */
@@ -22,8 +22,9 @@ abstract class Resource
     /**
      * Convert a time, DateTime, or string to a millisecond timestamp.
      *
-     * @param \DateTime|int|null $time
-     * @return int|null
+     * @param null|\DateTime|int $time
+     *
+     * @return null|int
      */
     protected function timestamp($time)
     {

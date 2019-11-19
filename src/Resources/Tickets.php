@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 class Tickets extends Resource
 {
     /**
-     * @param array $ticket Array of deal properties.
+     * @param array $ticket array of deal properties
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
@@ -21,8 +21,8 @@ class Tickets extends Resource
     }
 
     /**
-     * @param int   $id     The deal id.
-     * @param array $ticket The deal properties to update.
+     * @param int   $id     the deal id
+     * @param array $ticket the deal properties to update
      *
      * @return mixed
      */
@@ -36,8 +36,6 @@ class Tickets extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
@@ -67,8 +65,9 @@ class Tickets extends Resource
      * @param int   $id
      * @param array $params Optional parameters ['properties', 'propertiesWithHistory', 'includeDeletes']
      *
-     * @return mixed
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @return mixed
      */
     public function getById($id, array $params = [])
     {

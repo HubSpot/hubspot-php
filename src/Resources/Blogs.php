@@ -8,6 +8,7 @@ class Blogs extends Resource
      * Get all blogs.
      *
      * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function all($params = [])
@@ -23,6 +24,7 @@ class Blogs extends Resource
      * Get information about a specific blog.
      *
      * @param string $id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getById($id)
@@ -35,7 +37,8 @@ class Blogs extends Resource
     /**
      * Get previous versions of the blog.
      *
-     * @param string $id     Blog id.
+     * @param string $id blog id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function versions($id)
@@ -48,8 +51,9 @@ class Blogs extends Resource
     /**
      * Get a previous version of the blog.
      *
-     * @param string $id         Blog id.
-     * @param string $version_id Version id.
+     * @param string $id         blog id
+     * @param string $version_id version id
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getVersion($id, $version_id)
