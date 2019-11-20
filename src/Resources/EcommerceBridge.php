@@ -15,7 +15,6 @@ class EcommerceBridge extends Resource
      */
     public function install()
     {
-        $this->markTestSkipped(); // TODO: fix test
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v1/installs';
 
         return $this->client->request('post', $endpoint);
