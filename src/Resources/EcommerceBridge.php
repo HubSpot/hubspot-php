@@ -10,6 +10,8 @@ class EcommerceBridge extends Resource
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return \SevenShores\Hubspot\Http\Response
+     * 
+     * @see https://developers.hubspot.com/docs/methods/ecommerce/install-settings
      */
     public function install()
     {

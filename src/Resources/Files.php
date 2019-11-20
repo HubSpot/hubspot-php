@@ -12,7 +12,7 @@ class Files extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function upload($file, $params = [])
+    public function upload($file, array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/filemanager/api/v2/files';
 
@@ -54,13 +54,82 @@ class Files extends Resource
     }
     
     /**
+     * Upload new files.
+     *
+     * @param array $files
+     * @param array $params Optional parameters
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     * 
+     * @see https://developers.hubspot.com/docs/methods/files/post_files
+     */
+    public function batchUpload(array $files, array $params = [])
+    {
+        $endpoint = 'https://api.hubapi.com/filemanager/api/v2/files';
+
+        $queryString = build_query_string([
+            'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false,
+            'hidden' => isset($params['hidden']) ? $params['hidden'] : false,
+        ]);
+
+        return $this->client->request('post',
+                $endpoint,
+                ['multipart' => $this->getMultipart($files, $params)],
+                $queryString
+            );
+    }
+    
+    /**
+     * 
+     * @param array $files array of Resoures or filenames
+     * @param array $params
+     * 
+     * @return string
+     */
+    protected function getMultipart(array $files, array $params)
+    {
+        $multipart = [];
+        
+        foreach ($files as $key=>$file) {
+            
+            $multipart[] = [
+                'name' => 'files',
+                'contents' => $this->getResource($file),
+            ];
+            
+            $multipart[] = [
+                'name' => 'file_names',
+                'contents' => $this->getOptionValue($key, 'file_names', $params),
+            ];
+            
+            $multipart[] = [
+                'name' => 'folder_paths',
+                'contents' => $this->getOptionValue($key, 'folder_paths', $params),
+            ];
+        }
+        
+        return $multipart;
+    }
+
+
+    protected function getOptionValue($key, $option, array $params)
+    {
+        if (isset($params[$option]) && array_key_exists($key, $params[$option])) {
+            return $params[$option][$key];
+        }
+        
+        return null;
+    }
+
+
+    /**
      * Get meta data for all files.
      *
      * @param array $params Optional parameters
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function all($params = [])
+    public function all(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/filemanager/api/v2/files';
 
@@ -146,7 +215,7 @@ class Files extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function move($file_id, $params = [])
+    public function move($file_id, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/files/{$file_id}/move-file";
 
@@ -182,7 +251,7 @@ class Files extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function folders($params = [])
+    public function folders(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/filemanager/api/v2/folders';
 
@@ -199,7 +268,7 @@ class Files extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateFolder($folder_id, $params = [])
+    public function updateFolder($folder_id, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders/{$folder_id}";
 
@@ -244,7 +313,7 @@ class Files extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function moveFolder($folder_id, $params = [])
+    public function moveFolder($folder_id, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/filemanager/api/v2/folders/{$folder_id}/move-folder";
 
