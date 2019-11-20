@@ -185,6 +185,33 @@ class Forms extends Resource
             $query_string = $parsed[1];
         }
         
-        return $this->client->request('get', $endpoint, ['allow_redirects' => true], $query_string);
+        return $this->client->request(
+                'get',
+                $endpoint,
+                ['allow_redirects' => true],
+                $query_string
+            );
+    }
+    
+    /**
+     * 
+     * Get a file uploaded via form by id
+     * 
+     * @param string|int $id
+     * @param string $sign
+     * 
+     * @see https://developers.hubspot.com/docs/methods/form-integrations/v1/uploaded-files/signed-url-redirect
+     */
+    public function getUploadedFileById($id, $sign, $params = [])
+    {
+        $endpoint = "https://api.hubspot.com/form-integrations/v1/uploaded-files/signed-url-redirect/{$id}";
+        $params['sign'] = $sign;
+        
+        return $this->client->request(
+                'get',
+                $endpoint,
+                ['allow_redirects' => true],
+                http_build_query($params)
+            );
     }
 }
