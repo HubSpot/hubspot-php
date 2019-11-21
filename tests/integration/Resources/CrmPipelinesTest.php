@@ -19,7 +19,7 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->pipelines = new CrmPipelines(new Client(['key' => '4bb93d0f-a5b0-4739-8449-22a4c5ed772e'])); //getenv('HUBSPOT_TEST_API_KEY')]));
+        $this->pipelines = new CrmPipelines(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
     
