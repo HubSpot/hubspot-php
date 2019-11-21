@@ -22,7 +22,7 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
         $this->pipelines = new CrmPipelines(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
-
+    
     /** @test */
     public function getAllTicketsPipelinesTest()
     {
@@ -60,29 +60,86 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function createTicketsPipeline()
     {
-        $data = [
-            'label' => 'Demo Ticket Pipeline '.uniqid(),
-            'displayOrder' => 1,
-            'active' => true,
-            'stages' => [
-                [
-                    'label' => 'Demo Stage',
-                    'displayOrder' => 1,
-                ],
-            ],
-        ];
-
-        $response = $this->pipelines->create('tickets', $data);
+        $response = $this->createPipeline('tickets', $this->getTicketsData());
 
         $this->assertEquals(200, $response->getStatusCode());
-
-        return $response;
+        
+        $this->deletePipeline('tickets', $response->pipelineId);
     }
 
     /** @test */
     public function createDealsPipeline()
     {
-        $data = [
+        $response = $this->createPipeline('deals', $this->getDealsData());
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $this->deletePipeline('deals', $response->pipelineId);
+    }
+
+    /** @test */
+    public function updateTicketsPipeline()
+    {
+        $data = $this->getTicketsData();
+        $pipeline = $this->createPipeline('tickets', $data);
+
+        $data['label'] = 'Updated Ticket Pipeline ' . uniqid();
+
+        $response = $this->pipelines->update('tickets', $pipeline->pipelineId, $data);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        
+        $this->deletePipeline('tickets', $response->pipelineId);
+    }
+
+    /** @test */
+    public function updateDealsPipeline()
+    {
+        $data = $this->getDealsData();
+        $pipeline = $this->createPipeline('deals', $data);
+        
+        $data['label'] = 'Updated Deals Pipeline '.uniqid();
+
+        $response = $this->pipelines->update('deals', $pipeline->pipelineId, $data);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        
+        $this->deletePipeline('deals', $response->pipelineId);
+    }
+
+    /** @test */
+    public function deleteTicketsPipeline()
+    {
+        $pipeline = $this->createPipeline('tickets', $this->getTicketsData());
+        
+        $response = $this->deletePipeline('tickets', $pipeline->pipelineId);
+
+        $this->assertEquals(204, $response->getStatusCode());
+    }
+
+    /** @test */
+    public function deleteDealsPipeline()
+    {
+        $pipeline = $this->createPipeline('deals', $this->getDealsData());
+
+        $response = $this->deletePipeline('deals', $pipeline->pipelineId);
+
+        $this->assertEquals(204, $response->getStatusCode());
+    }
+    
+    protected function createPipeline($objectType, array $data)
+    {
+        return $this->pipelines->create($objectType, $data);
+    }
+    
+    protected function deletePipeline($objectType, $id)
+    {
+        return $this->pipelines->delete($objectType, $id);
+    }
+    
+    protected function getDealsData()
+    {
+        return [
             'label' => 'Demo Deal Pipeline '.uniqid(),
             'displayOrder' => 1,
             'active' => true,
@@ -96,21 +153,12 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
                 ],
             ],
         ];
-
-        $response = $this->pipelines->create('deals', $data);
-
-        $this->assertEquals(200, $response->getStatusCode());
-
-        return $response;
     }
-
-    /** @test */
-    public function updateTicketsPipeline()
+    
+    protected function getTicketsData()
     {
-        $pipeline = $this->createTicketsPipeline();
-
-        $data = [
-            'label' => 'Updated Ticket Pipeline '.uniqid(),
+        return [
+            'label' => 'Demo Ticket Pipeline '.uniqid(),
             'displayOrder' => 1,
             'active' => true,
             'stages' => [
@@ -120,50 +168,6 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
                 ],
             ],
         ];
-
-        $response = $this->pipelines->update('tickets', $pipeline->pipelineId, $data);
-
-        $this->assertEquals(200, $response->getStatusCode());
     }
-
-    /** @test */
-    public function updateDealsPipeline()
-    {
-        $pipeline = $this->createDealsPipeline();
-
-        $data = [
-            'label' => 'Updated Deals Pipeline '.uniqid(),
-            'displayOrder' => 1,
-            'active' => true,
-            'stages' => [
-                [
-                    'label' => 'Demo Stage',
-                    'displayOrder' => 1,
-                    'metadata' => [
-                        'probability' => 0.5,
-                    ],
-                ],
-            ],
-        ];
-
-        $response = $this->pipelines->update('deals', $pipeline->pipelineId, $data);
-
-        $this->assertEquals(200, $response->getStatusCode());
-    }
-
-    /** @test */
-    public function deleteTicketsPipeline()
-    {
-        $pipeline = $this->createTicketsPipeline();
-
-        $response = $this->pipelines->delete('tickets', $pipeline->pipelineId);
-    }
-
-    /** @test */
-    public function deleteDealsPipeline()
-    {
-        $pipeline = $this->createDealsPipeline();
-
-        $response = $this->pipelines->delete('deals', $pipeline->pipelineId);
-    }
+    
 }
