@@ -61,6 +61,14 @@ class Factory
     }
 
     /**
+     * @return Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
      * Return an instance of a Resource based on the method called.
      *
      * @param string $name
