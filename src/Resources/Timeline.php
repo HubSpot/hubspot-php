@@ -28,9 +28,9 @@ class Timeline extends Resource
         $objectId = null,
         $email = null,
         $utk = null,
-        $extraData = [],
+        array $extraData = [],
         $timestamp = null,
-        $eventTypeData = []
+        array $eventTypeData = []
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event";
 
@@ -48,6 +48,27 @@ class Timeline extends Resource
     }
 
     /**
+     * Get Timeline Event.
+     *
+     * @param int         $appId
+     * @param int         $eventTypeId
+     * @param string      $eventId
+     *
+     * @return mixed
+     *
+     * @see https://developers.hubspot.com/docs/methods/timeline/get-event
+     */
+    public function getEvent(
+        $appId,
+        $eventTypeId,
+        $eventId
+    ) {
+        $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event/{$eventTypeId}/{$eventId}";
+        
+        return $this->client->request('get', $endpoint);
+    }
+
+    /**
      * Batch Create or Update Timeline Events.
      *
      * @param int   $appId
@@ -57,7 +78,7 @@ class Timeline extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/timeline/batch-create-or-update-events
      */
-    public function createOrUpdateBatch($appId, $events = [])
+    public function createOrUpdateBatch($appId, array $events = [])
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event/batch";
 
@@ -221,7 +242,7 @@ class Timeline extends Resource
         $label,
         $propertyType,
         $objectProperty = null,
-        $options = []
+        array $options = []
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
 
