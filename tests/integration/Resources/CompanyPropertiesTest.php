@@ -24,14 +24,35 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function all()
+    {
+        $response = $this->companyProperties->all();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThanOrEqual(2, count($response->getData()));
+    }
+    
+    /** @test */
+    public function get()
+    {
+        $createdPropertyResponse = $this->createCompanyProperty();
+        $response = $this->companyProperties->get($createdPropertyResponse->name);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('Custom property', $response->label);
+        
+        $this->companyProperties->delete($createdPropertyResponse->name);
+    }
+
+    /** @test */
     public function create()
     {
-        sleep(1);
-
         $response = $this->createCompanyProperty();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('Custom property', $response['label']);
+        $this->assertEquals('Custom property', $response->label);
+        
+        $this->companyProperties->delete($response->name);
     }
 
     /** @test */
@@ -53,6 +74,8 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Custom property Changed', $response->label);
+        
+        $this->companyProperties->delete($createdPropertyResponse->name);
     }
 
     /** @test */
@@ -63,24 +86,19 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(204, $response->getStatusCode());
     }
-
-    /** @test */
-    public function get()
+    
+     /** @test */
+    public function getAllGroups()
     {
-        $createdPropertyResponse = $this->createCompanyProperty();
-        $response = $this->companyProperties->get($createdPropertyResponse->name);
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('Custom property', $response->label);
-    }
-
-    /** @test */
-    public function all()
-    {
-        $response = $this->companyProperties->all();
-
+        $response = $this->companyProperties->getAllGroups();
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(2, count($response->getData()));
+        $this->assertObjectNotHasAttribute('properties', $response->getData()[0]);
+
+        $includedPropertiesResponse = $this->companyProperties->getAllGroups(true);
+        $this->assertEquals(200, $includedPropertiesResponse->getStatusCode());
+        $this->assertGreaterThanOrEqual(2, count($includedPropertiesResponse->getData()));
+        $this->assertObjectHasAttribute('properties', $includedPropertiesResponse->getData()[0]);
     }
 
     /** @test */
@@ -89,7 +107,9 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         $response = $this->createCompanyPropertyGroup();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('A New Custom Group', $response['displayName']);
+        $this->assertEquals('A New Custom Group', $response->displayName);
+        
+        $this->companyProperties->deleteGroup($response->name);
     }
 
     /** @test */
@@ -104,7 +124,9 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 
         $response = $this->companyProperties->updateGroup($createdGroupResponse->name, $group);
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('An Updated Company Property Group', $response['displayName']);
+        $this->assertEquals('An Updated Company Property Group', $response->displayName);
+        
+        $this->companyProperties->deleteGroup($createdGroupResponse->name);
     }
 
     /** @test */
@@ -114,20 +136,6 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         $response = $this->companyProperties->deleteGroup($createdGroupResponse->name);
 
         $this->assertEquals(204, $response->getStatusCode());
-    }
-
-    /** @test */
-    public function getAllGroups()
-    {
-        $response = $this->companyProperties->getAllGroups();
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(2, count($response->getData()));
-        $this->assertObjectNotHasAttribute('properties', $response->getData()[0]);
-
-        $response = $this->companyProperties->getAllGroups(true);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(2, count($response->getData()));
-        $this->assertObjectHasAttribute('properties', $response->getData()[0]);
     }
 
     /**
