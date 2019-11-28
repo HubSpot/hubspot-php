@@ -13,7 +13,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function create($properties)
+    public function create(array $properties)
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/';
         $options['json'] = ['properties' => $properties];
@@ -31,7 +31,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function update($id, $properties)
+    public function update($id, array $properties)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/{$id}";
         $options['json'] = ['properties' => $properties];
@@ -44,7 +44,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateBatch($companies)
+    public function updateBatch(array $companies)
     {
         $endpoint = 'https://api.hubapi.com/companies/v1/batch-async/update';
         $options['json'] = $companies;
@@ -77,7 +77,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function all($params = [])
+    public function all(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/paged';
 
@@ -95,7 +95,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getRecentlyModified($params = [])
+    public function getRecentlyModified(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/recent/modified';
 
@@ -113,7 +113,7 @@ class Companies extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getRecentlyCreated($params = [])
+    public function getRecentlyCreated(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/recent/created';
 
@@ -150,7 +150,7 @@ class Companies extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function searchByDomain($domain, $properties = [], $limit = 100, $offset = 0)
+    public function searchByDomain($domain, array $properties = [], $limit = 100, $offset = 0)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/domains/{$domain}/companies";
         $options['json'] = [
@@ -191,7 +191,10 @@ class Companies extends Resource
      * @param int $companyId
      *
      * @see http://developers.hubspot.com/docs/methods/companies/add_contact_to_company
+     * @see CrmAssociations::create is used to create associations between objects
      *
+     * @deprecated
+     * 
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function addContact($contactId, $companyId)
@@ -208,12 +211,13 @@ class Companies extends Resource
      * @param array $params    Array of optional parameters ['count', 'vidOffset']
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_contacts
-     * @see CrmAssociations::get is used to manage associations between objects
+     * @see CrmAssociations::get is used to get associations between objects
+     * 
      * @deprecated
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getAssociatedContacts($companyId, $params = [])
+    public function getAssociatedContacts($companyId, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/{$companyId}/contacts";
 
@@ -229,10 +233,13 @@ class Companies extends Resource
      * @param array $params    Array of optional parameters ['count', 'vidOffset']
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_contacts_by_id
+     * @see CrmAssociations::get is used to get associations between objects
+     * 
+     * @deprecated
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getAssociatedContactIds($companyId, $params = [])
+    public function getAssociatedContactIds($companyId, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/{$companyId}/vids";
 
@@ -248,7 +255,10 @@ class Companies extends Resource
      * @param int $companyId
      *
      * @see http://developers.hubspot.com/docs/methods/companies/remove_contact_from_company
+     * @see CrmAssociations::delete is used to delete associations between objects
      *
+     * @deprecated
+     * 
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function removeContact($contactId, $companyId)
