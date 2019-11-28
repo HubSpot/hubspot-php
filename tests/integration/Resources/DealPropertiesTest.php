@@ -22,16 +22,53 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->dealProperties = new DealProperties(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
+    
+    /** @test */
+    public function all()
+    {
+        $response = $this->dealProperties->all();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThanOrEqual(2, count($response->getData()));
+    }
+    
+    /** @test */
+    public function getByName()
+    {
+        $response = $this->createDealProperty();
+        
+        $deal = $this->dealProperties->get($response->name);
+        
+        $this->assertEquals(200, $deal->getStatusCode());
+        $this->assertEquals('Custom property', $deal->label);
+        
+        $this->dealProperties->delete($deal->name);   
+    }
 
     /** @test */
     public function create()
     {
-        sleep(1);
-
         $response = $this->createDealProperty();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('Custom property', $response['label']);
+        $this->assertEquals('Custom property', $response->label);
+        
+        $this->dealProperties->delete($response->name);
+    }
+    
+    /** @test */
+    public function update()
+    {
+
+        $response = $this->createDealProperty();
+        $properties = $this->getData();
+        $properties['label'] = 'Updated custom property';
+        
+        $updateResponse = $this->dealProperties->update($response->name, $properties);
+        $this->assertEquals(200, $updateResponse->getStatusCode());
+        $this->assertEquals('Updated custom property', $updateResponse->label);
+        
+        $this->dealProperties->delete($response->name);
     }
 
     /** @test */
@@ -44,21 +81,46 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function all()
+    public function getAllGroups()
     {
-        $response = $this->dealProperties->all();
-
+        $response = $this->dealProperties->getAllGroups();
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(2, count($response->getData()));
-    }
+        $this->assertObjectNotHasAttribute('properties', $response->getData()[0]);
 
+        $withPropertiesResponse = $this->dealProperties->getAllGroups(true);
+        $this->assertEquals(200, $withPropertiesResponse->getStatusCode());
+        $this->assertGreaterThanOrEqual(2, count($withPropertiesResponse->getData()));
+        $this->assertObjectHasAttribute('properties', $withPropertiesResponse->getData()[0]);
+    }
+    
+    /** @test */
+    public function getGroup()
+    {
+        $createdGroupResponse = $this->createDealPropertyGroup();
+        
+        $response = $this->dealProperties->getGroup($createdGroupResponse->name);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('A New Custom Group', $response->displayName);
+        $this->assertObjectNotHasAttribute('properties', $response->getData());
+
+        $withPropertiesResponse = $this->dealProperties->getGroup($createdGroupResponse->name, true);
+        $this->assertEquals(200, $withPropertiesResponse->getStatusCode());
+        $this->assertEquals('A New Custom Group', $withPropertiesResponse->displayName);
+        $this->assertObjectHasAttribute('properties', $withPropertiesResponse->getData());
+        
+        $this->dealProperties->deleteGroup($createdGroupResponse->name);
+    }
+    
     /** @test */
     public function createGroup()
     {
         $response = $this->createDealPropertyGroup();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('A New Custom Group', $response['displayName']);
+        $this->assertEquals('A New Custom Group', $response->displayName);
+        
+        $this->dealProperties->deleteGroup($response->name);
     }
 
     /** @test */
@@ -74,6 +136,8 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
         $response = $this->dealProperties->updateGroup($createdGroupResponse->name, $group);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('An Updated Deal Property Group', $response['displayName']);
+        
+        $this->dealProperties->deleteGroup($createdGroupResponse->name);
     }
 
     /** @test */
@@ -85,44 +149,22 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(204, $response->getStatusCode());
     }
 
-    /** @test */
-    public function getGroup()
-    {
-        $createdGroupResponse = $this->createDealPropertyGroup();
-        $response = $this->dealProperties->getGroup($createdGroupResponse->name);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('A New Custom Group', $response['displayName']);
-        $this->assertObjectNotHasAttribute('properties', $response->getData());
-
-        $response = $this->dealProperties->getGroup($createdGroupResponse->name, true);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('A New Custom Group', $response['displayName']);
-        $this->assertObjectHasAttribute('properties', $response->getData());
-    }
-
-    /** @test */
-    public function getAllGroups()
-    {
-        $response = $this->dealProperties->getAllGroups();
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(2, count($response->getData()));
-        $this->assertObjectNotHasAttribute('properties', $response->getData()[0]);
-
-        $response = $this->dealProperties->getAllGroups(true);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(2, count($response->getData()));
-        $this->assertObjectHasAttribute('properties', $response->getData()[0]);
-    }
-
     /**
      * Creates a new deal property.
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    private function createDealProperty()
+    protected function createDealProperty()
     {
-        $property = [
-            'name' => 't'.uniqid(),
+        $property = $this->getData();
+        $property['name'] = 't'.uniqid();
+
+        return $this->dealProperties->create($property);
+    }
+    
+    protected function getData()
+    {
+        return $property = [
             'label' => 'Custom property',
             'description' => 'An Awesome Custom property',
             'groupName' => 'dealinformation',
@@ -131,9 +173,7 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
             'formField' => true,
             'displayOrder' => 6,
             'options' => [],
-        ];
-
-        return $this->dealProperties->create($property);
+        ];;
     }
 
     /**
@@ -141,7 +181,7 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    private function createDealPropertyGroup()
+    protected function createDealPropertyGroup()
     {
         $group = [
             'name' => 't'.uniqid(),
