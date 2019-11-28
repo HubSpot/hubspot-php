@@ -27,7 +27,6 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
 
     public function testInstall()
     {
-        $this->markTestSkipped(); // TODO: fix test
         $response = $this->ecommerceBridge->install();
 
         $this->assertEquals(204, $response->getStatusCode());
