@@ -92,7 +92,7 @@ class Client
         }
 
         $url = $this->generateUrl($endpoint, $query_string, $requires_auth);
-
+        
         $options = array_merge($this->clientOptions, $options);
         $options['headers']['User-Agent'] = $this->user_agent;
 

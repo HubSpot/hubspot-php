@@ -123,24 +123,6 @@ class Companies extends Resource
     }
 
     /**
-     * Returns an array of companies that have a matching domain.
-     *
-     * @deprecated use searchByDomain instead
-     *
-     * @param string $domain The domain of the company eq. 'example.com'.
-     *
-     * @see http://developers.hubspot.com/docs/methods/companies/get_companies_by_domain
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function getByDomain($domain)
-    {
-        $endpoint = "https://api.hubapi.com/companies/v2/companies/domain/{$domain}";
-
-        return $this->client->request('get', $endpoint);
-    }
-
-    /**
      * @param string $domain
      * @param array  $properties
      * @param int    $limit

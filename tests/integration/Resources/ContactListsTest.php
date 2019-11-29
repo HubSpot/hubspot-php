@@ -4,6 +4,7 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\ContactLists;
+use SevenShores\Hubspot\Resources\Contacts;
 
 /**
  * @internal
@@ -11,12 +12,23 @@ use SevenShores\Hubspot\Resources\ContactLists;
  */
 class ContactListsTest extends \PHPUnit_Framework_TestCase
 {
-    private $contactLists;
+    /**
+     *
+     * @var ContactLists $contactLists
+     */
+    protected $contactLists;
+    
+    /**
+     *
+     * @var Contacts $contacts
+     */
+    protected $contacts;
 
     public function setUp()
     {
         parent::setUp();
         $this->contactLists = new ContactLists(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        $this->contacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
 
@@ -84,6 +96,8 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
+        
+        $this->contactLists->delete($list->listId);
     }
 
     /** @test */
@@ -94,6 +108,8 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contactLists->getById($list->listId);
 
         $this->assertEquals(200, $response->getStatusCode());
+        
+        $this->contactLists->delete($list->listId);
     }
 
     /** @test */
@@ -113,6 +129,10 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contactLists->getBatchByIds($ids);
 
         $this->assertEquals(200, $response->getStatusCode());
+        
+        foreach ($ids as $id) {
+            $this->contactLists->delete($id);
+        } 
     }
 
     /** @test */
@@ -123,6 +143,8 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contactLists->contacts($list->listId);
 
         $this->assertEquals(200, $response->getStatusCode());
+        
+        $this->contactLists->delete($list->listId);
     }
 
     /** @test */
@@ -133,17 +155,8 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contactLists->recentContacts($list->listId);
 
         $this->assertEquals(200, $response->getStatusCode());
-    }
-
-    /** @test */
-    public function refresh()
-    {
-        $this->markTestSkipped(); // TODO: fix test
-        $list = $this->createList();
-
-        $response = $this->contactLists->refresh($list->listId);
-
-        $this->assertEquals(204, $response->getStatusCode());
+        
+        $this->contactLists->delete($list->listId);
     }
 
     /** @test */
@@ -155,30 +168,63 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(204, $response->getStatusCode());
     }
-
+    
+    /** @test */
     public function addContact()
     {
-        $list = $this->createList();
+        $list = $this->createList(false);
+        $contact = $this->createContact();
+        
+        $response = $this->contactLists->addContact($list->listId, [$contact->vid]);
 
-        // TODO - add additional test for vid based contact add.
-        $response = $this->addContact($list, [], 'test@test.com');
-
-        $this->assertEquals(204, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
+        
+        $this->contactLists->removeContact($list->listId, [$contact->vid]);
+        $this->contactLists->delete($list->listId);
+        $this->contacts->delete($contact->vid);
     }
 
+    /** @test **/
     public function removeContact()
     {
-        // TODO
+        $list = $this->createList(false);
+        $contact = $this->createContact();
+        
+        $this->contactLists->addContact($list->listId, [$contact->vid]);
+        $response = $this->contactLists->removeContact($list->listId, [$contact->vid]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        
+        $this->contactLists->delete($list->listId);
+        $this->contacts->delete($contact->vid);
+    }
+    
+    /**
+     * Creates a new contact with the HubSpotApi.
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    protected function createContact()
+    {
+
+        $contactResponse = $this->contacts->create([
+            ['property' => 'email', 'value' => 'ContactListsTest'.uniqid().'@hubspot.com'],
+            ['property' => 'firstname', 'value' => 'joe'],
+            ['property' => 'lastname', 'value' => 'user'],
+        ]);
+
+        sleep(1);
+        return $contactResponse;
     }
 
     // Lots of tests need an existing object to modify.
-    private function createList()
+    protected function createList($dynamic = true)
     {
         sleep(1);
 
         $response = $this->contactLists->create([
             'name' => 'Test '.uniqid(),
-            'dynamic' => true,
+            'dynamic' => $dynamic,
             'portalId' => 62515,
             'filters' => [
                 [

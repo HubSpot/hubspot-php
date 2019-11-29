@@ -154,21 +154,6 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function getByDomain()
-    {
-        $this->markTestSkipped();
-        
-        $newCompanyResponse = $this->createCompany();
-        
-        $domain = 'example.com';
-        $response = $this->companies->getByDomain($domain);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals($domain, $response->properties->domain->value);
-        
-        $this->companies->delete($newCompanyResponse->companyId);
-    }
-
-    /** @test */
     public function getById()
     {
         //Ensure that we have a company to fetch
