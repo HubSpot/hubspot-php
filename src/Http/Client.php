@@ -85,14 +85,14 @@ class Client
      *
      * @return ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function request($method, $endpoint, $options = [], $query_string = null, $requires_auth = true)
+    public function request($method, $endpoint, array $options = [], $query_string = null, $requires_auth = true)
     {
         if ($requires_auth && empty($this->key)) {
             throw new InvalidArgument('You must provide a Hubspot api key or token.');
         }
 
         $url = $this->generateUrl($endpoint, $query_string, $requires_auth);
-
+        
         $options = array_merge($this->clientOptions, $options);
         $options['headers']['User-Agent'] = $this->user_agent;
 

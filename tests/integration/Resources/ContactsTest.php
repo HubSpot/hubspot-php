@@ -71,6 +71,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(204, $response->getStatusCode());
+        $this->contacts->delete($contact->vid);
     }
 
     /** @test */
@@ -84,6 +85,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(204, $response->getStatusCode());
+        $this->contacts->delete($contact->vid);
     }
 
     /** @test */
@@ -95,52 +97,61 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
+        $this->contacts->delete($response->vid);
     }
 
     /** @test */
     public function createOrUpdateBatch()
     {
+        $emails = ['test1@hubspot.com', 'test2@hubspot.com'];
         $response = $this->contacts->createOrUpdateBatch([
             [
-                'email' => 'test1@hubspot.com',
+                'email' => $emails[0],
                 'properties' => [
                     ['property' => 'firstname', 'value' => 'joe'],
                     ['property' => 'lastname', 'value' => 'user'],
                 ],
             ],
             [
-                'email' => 'test2@hubspot.com',
+                'email' => $emails[1],
                 'properties' => [
                     ['property' => 'firstname', 'value' => 'jane'],
                     ['property' => 'lastname', 'value' => 'user'],
                 ],
             ],
         ]);
-
         $this->assertEquals(202, $response->getStatusCode());
+        
+        foreach ($this->contacts->getBatchByEmails($emails)->getData() as  $contact) {
+            $this->contacts->delete($contact->vid);
+        }
     }
 
     /** @test */
     public function createOrUpdateBatchWithAuditId()
     {
+        $emails = ['testWithAuditId3@hubspot.com', 'testWithAuditId4@hubspot.com'];
         $response = $this->contacts->createOrUpdateBatch([
             [
-                'email' => 'test1@hubspot.com',
+                'email' => $emails[0],
                 'properties' => [
                     ['property' => 'firstname', 'value' => 'joe'],
                     ['property' => 'lastname', 'value' => 'user'],
                 ],
             ],
             [
-                'email' => 'test2@hubspot.com',
+                'email' => $emails[1],
                 'properties' => [
                     ['property' => 'firstname', 'value' => 'jane'],
                     ['property' => 'lastname', 'value' => 'user'],
                 ],
             ],
         ], ['auditId' => 'TEST_CHANGE_SOURCE']);
-
         $this->assertEquals(202, $response->getStatusCode());
+        
+        foreach ($this->contacts->getBatchByEmails($emails)->getData() as  $contact) {
+            $this->contacts->delete($contact->vid);
+        }
     }
 
     /** @test */
@@ -169,6 +180,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contacts->getById($contact->vid);
 
         $this->assertEquals(200, $response->getStatusCode());
+        $this->contacts->delete($contact->vid);
     }
 
     /** @test */
@@ -188,6 +200,10 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contacts->getBatchByIds($ids);
 
         $this->assertEquals(200, $response->getStatusCode());
+        
+        foreach ($ids as $id) {
+            $this->contacts->delete($id);
+        }
     }
 
     /** @test */
@@ -198,6 +214,8 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contacts->getByEmail($contact->properties->email->value);
 
         $this->assertEquals(200, $response->getStatusCode());
+        
+        $this->contacts->delete($contact->vid);
     }
 
     /** @test */
@@ -217,6 +235,10 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contacts->getBatchByEmails($emails);
 
         $this->assertEquals(200, $response->getStatusCode());
+        
+        foreach ($contacts as $contact) {
+            $this->contacts->delete($contact->vid);
+        }
     }
 
     public function getByToken()
@@ -246,7 +268,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     }
 
     // Lots of tests need an existing object to modify.
-    private function createContact()
+    protected function createContact()
     {
         sleep(1);
 
