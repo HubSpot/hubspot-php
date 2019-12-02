@@ -15,58 +15,20 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
     /**
      * @var DealPipelines
      */
-    private $dealPipelines;
+    protected $dealPipelines;
+    /**
+     *
+     * @var $pipeline
+     */
+    protected $pipeline;
 
     public function setUp()
     {
         parent::setUp();
-        $this->markTestSkipped(); // TODO: fix test
         $this->dealPipelines = new DealPipelines(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
-    }
-
-    /**
-     * @test
-     */
-    public function getAllPipelines()
-    {
-        $this->markTestSkipped(); // TODO: fix test
-        $response = $this->dealPipelines->getAllPipelines();
-        $data = $response->getData();
-
-        // this is the default pipeline, always returned as first item.
-        // more results might be included, that depends on the following tests
-        // in order to get a reliable result, no other items are tested
-        $expected = [
-            [
-                'label' => 'Sales pipeline',
-                'stages' => 6,
-            ],
-        ];
-        $this->assertEquals($expected[0]['label'], $data[0]->label);
-        $this->assertCount($expected[0]['stages'], $data[0]->stages);
-    }
-
-    /**
-     * @test
-     */
-    public function getPipeline()
-    {
-        $this->markTestSkipped(); // TODO: fix test
-        $response = $this->dealPipelines->getPipeline('6da7f576-4dc7-4cba-a049-bc5cd0f4e105');
-        $data = $response->getData();
-        $this->assertEquals('Another pipeline', $data->label);
-        $this->assertCount(10, $data->stages);
-    }
-
-    /**
-     * @test
-     */
-    public function create()
-    {
-        $this->markTestSkipped('Test works only once, then return code 409 is given');
-        $response = $this->dealPipelines->create([
-            'label' => 'New Business Pipeline',
+        $this->pipeline = $this->dealPipelines->create([
+            'label' => 'New Business Pipeline'.uniqid(),
             'displayOrder' => 5,
             'stages' => [
                 [
@@ -76,9 +38,37 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
                 ],
             ],
         ]);
-        $data = $response->getData();
-        $this->assertEquals('New Business Pipeline', $data->label);
-        $this->assertCount(3, $data->stages);
+    }
+    
+    /**
+     * @test
+     */
+    public function create()
+    {
+        $this->assertEquals(200, $this->pipeline->getStatusCode());
+        $this->assertCount(1, $this->pipeline->stages);
+    }
+
+    /**
+     * @test
+     */
+    public function getAllPipelines()
+    {
+        $response = $this->dealPipelines->getAllPipelines();
+        
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThanOrEqual(1, count($response->getData()));
+    }
+
+    /**
+     * @test
+     */
+    public function getPipeline()
+    {
+        $response = $this->dealPipelines->getPipeline($this->pipeline->pipelineId);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals($this->pipeline->label, $response->label);
+        $this->assertCount(1, $response->stages);
     }
 
     /**
@@ -86,33 +76,34 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
      */
     public function update()
     {
-        $pipelines = $this->dealPipelines->getAllPipelines();
-        $pipelineData = $pipelines->getData();
-        // lets use the second returned pipeline
-        $id = $pipelineData[1]->pipelineId;
-        $newLabel = 'My shiny new updated pipeline';
-        $response = $this->dealPipelines->update($id, [
+        $newLabel = 'Updated pipeline' . uniqid();
+        $response = $this->dealPipelines->update($this->pipeline->pipelineId, [
             'label' => $newLabel,
-            'pipelineId' => $id,
+            'pipelineId' => $this->pipeline->pipelineId,
             'stages' => [
                 [
                     'label' => 'new stage',
                 ],
             ],
         ]);
-        $data = $response->getData();
-        $this->assertSame($newLabel, $data->label);
+        
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertSame($newLabel, $response->label);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function delete()
     {
-        $pipelines = $this->dealPipelines->getAllPipelines();
-        $pipelineData = $pipelines->getData();
-        $id = $pipelineData[1]->pipelineId;
-        $response = $this->dealPipelines->delete($id);
+        $response = $this->dealPipelines->delete($this->pipeline->pipelineId);
         $this->assertSame(204, $response->getStatusCode());
+        $this->pipeline = null;
+    }
+    
+    public function tearDown()
+    {
+        parent::tearDown();
+        if (!empty($this->pipeline)) {
+            $this->dealPipelines->delete($this->pipeline->pipelineId);
+        }
     }
 }
