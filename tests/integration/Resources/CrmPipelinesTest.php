@@ -14,7 +14,7 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
     /**
      * @var CrmPipelines
      */
-    private $pipelines;
+    protected $pipelines;
 
     public function setUp()
     {
@@ -35,7 +35,6 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
     public function getAllTicketsPipelinesIncludingDeleted()
     {
         $response = $this->pipelines->all('tickets', ['includeInactive' => 'INCLUDE_DELETED']);
-        $data = $response->getData();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -52,7 +51,6 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
     public function getAllDealsPipelinesIncludingDeleted()
     {
         $response = $this->pipelines->all('deals', ['includeInactive' => 'INCLUDE_DELETED']);
-        $data = $response->getData();
 
         $this->assertEquals(200, $response->getStatusCode());
     }

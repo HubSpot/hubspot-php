@@ -2,12 +2,22 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+/**
+ * @see https://developers.hubspot.com/docs/methods/deal-pipelines/overview
+ * @see CrmPipelines Please use CrmPipelines to manage deal pipelines.
+ * 
+ * @deprecated
+ */
 class DealPipelines extends Resource
 {
     /**
      * Get all pipelines.
      *
      * @return mixed
+     * 
+     * @see https://developers.hubspot.com/docs/methods/deal-pipelines/get-all-deal-pipelines
+     * @see CrmPipelines->all
+     * @deprecated
      */
     public function getAllPipelines()
     {
@@ -22,6 +32,10 @@ class DealPipelines extends Resource
      * @param int $id
      *
      * @return mixed
+     * 
+     * @see https://developers.hubspot.com/docs/methods/deal-pipelines/get-deal-pipeline
+     * @see CrmPipelines->all
+     * @deprecated
      */
     public function getPipeline($id)
     {
@@ -34,6 +48,10 @@ class DealPipelines extends Resource
      * Create a pipeline.
      *
      * @return mixed
+     * 
+     * @see https://developers.hubspot.com/docs/methods/deal-pipelines/create-deal-pipeline
+     * @see CrmPipelines->create
+     * @deprecated
      */
     public function create(array $pipeline)
     {
@@ -50,6 +68,10 @@ class DealPipelines extends Resource
      * @param int $id
      *
      * @return mixed
+     * 
+     * @see https://developers.hubspot.com/docs/methods/deal-pipelines/update-deal-pipeline
+     * @see CrmPipelines->update
+     * @deprecated
      */
     public function update($id, array $pipeline)
     {
@@ -66,6 +88,10 @@ class DealPipelines extends Resource
      * @param int $id
      *
      * @return mixed
+     * 
+     * @see https://developers.hubspot.com/docs/methods/deals/delete_deal_pipeline
+     * @see CrmPipelines->delete
+     * @deprecated
      */
     public function delete($id)
     {

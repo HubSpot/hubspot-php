@@ -17,7 +17,7 @@ class CrmPipelines extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function all($objectType, $params = [])
+    public function all($objectType, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}";
 
@@ -36,7 +36,7 @@ class CrmPipelines extends Resource
      * 
      * @see https://developers.hubspot.com/docs/methods/pipelines/create_new_pipeline
      */
-    public function create($objectType, $properties)
+    public function create($objectType, array $properties)
     {
         $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}";
 
@@ -48,7 +48,7 @@ class CrmPipelines extends Resource
     /**
      * @param string $objectType
      * @param $id
-     * @param $properties
+     * @param array $properties
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
@@ -56,7 +56,7 @@ class CrmPipelines extends Resource
      * 
      * @see https://developers.hubspot.com/docs/methods/pipelines/update_pipeline
      */
-    public function update($objectType, $id, $properties)
+    public function update($objectType, $id, array $properties)
     {
         $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}/{$id}";
 
