@@ -179,29 +179,26 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $response['contacts']);
         $this->assertEquals($contactId, $response['contacts'][0]['vid']);
         
-        $this->companies->removeContact($contactId, $newCompanyResponse->companyId);
-        $this->companies->delete($newCompanyResponse->companyId);
-        $this->contacts->delete($contactId);
+        $this->deleteCompanyWithContacts($newCompanyResponse->companyId, [$contactId]);
     }
 
     /** @test */
     public function getAssociatedContactsWithCountAndOffset()
     {
-        $this->markTestSkipped(); // TODO: fix test
         $newCompanyResponse = $this->createCompany();
-        $companyId = $newCompanyResponse['companyId'];
+        $companyId = $newCompanyResponse->companyId;
         list($contactId) = $this->createAssociatedContact($companyId);
         list($contactId2) = $this->createAssociatedContact($companyId);
 
-        $response = $this->companies->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => $contactId]);
+        $response = $this->companies->getAssociatedContacts($companyId, ['count' => 1]);
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertCount(1, $response['contacts']);
+        $this->assertCount(1, $response->contacts);
 
-        $offsetResponse = $this->companies->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => $contactId2 + 1]);
+        $offsetResponse = $this->companies->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => $contactId]);
         $this->assertEquals(200, $offsetResponse->getStatusCode());
-        $this->assertGreaterThanOrEqual($contactId2 + 1, $offsetResponse['vidOffset']);
+        $this->assertGreaterThanOrEqual($contactId2, $offsetResponse->vidOffset);
         
-        $this->companies->delete($newCompanyResponse->companyId);
+        $this->deleteCompanyWithContacts($companyId, [$contactId, $contactId2]);
     }
 
     /** @test */
@@ -215,35 +212,30 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $response = $this->companies->getAssociatedContactIds($companyId);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, $response['vids']);
-        $this->assertContains($contactId1, $response['vids']);
-        $this->assertContains($contactId2, $response['vids']);
+        $this->assertGreaterThanOrEqual(1, $response->vids);
+        $this->assertContains($contactId1, $response->vids);
+        $this->assertContains($contactId2, $response->vids);
         
-        $this->companies->removeContact($contactId1, $newCompanyResponse->companyId);
-        $this->companies->removeContact($contactId2, $newCompanyResponse->companyId);
-        $this->companies->delete($newCompanyResponse->companyId);
-        $this->contacts->delete($contactId1);
-        $this->contacts->delete($contactId2);
+        $this->deleteCompanyWithContacts($newCompanyResponse->companyId, $response->vids);
     }
 
     /** @test */
     public function getAssociatedContactIdsWithCountAndOffset()
     {
-        $this->markTestSkipped(); // TODO: fix test
         $newCompanyResponse = $this->createCompany();
-        $companyId = $newCompanyResponse['companyId'];
+        $companyId = $newCompanyResponse->companyId;
         list($contactId1) = $this->createAssociatedContact($companyId);
         list($contactId2) = $this->createAssociatedContact($companyId);
 
         $response = $this->companies->getAssociatedContactIds($companyId, ['count' => 1]);
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertCount(1, $response['vids']);
-
-        $offsetResponse = $this->companies->getAssociatedContactIds($companyId, ['count' => 1, 'vidOffset' => $contactId2 + 1]);
-        $this->assertEquals(200, $offsetResponse->getStatusCode());
-        $this->assertGreaterThanOrEqual($contactId2 + 1, $offsetResponse['vidOffset']);
+        $this->assertCount(1, $response->vids);
         
-        $this->companies->delete($newCompanyResponse->companyId);
+        $offsetResponse = $this->companies->getAssociatedContactIds($companyId, ['count' => 1, 'vidOffset' => $contactId1]);
+        $this->assertEquals(200, $offsetResponse->getStatusCode());
+        $this->assertGreaterThanOrEqual($contactId2, $offsetResponse->vidOffset);
+        
+        $this->deleteCompanyWithContacts($companyId, [$contactId1, $contactId2]);
     }
 
     /** @test */
@@ -342,5 +334,14 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         sleep(1);
 
         return [$contactId, $response];
+    }
+    
+    protected function deleteCompanyWithContacts($companyId, $contactIds = []) {
+        foreach ($contactIds as $contactId) {
+            $this->companies->removeContact($contactId, $companyId);
+            $this->contacts->delete($contactId);
+        }
+        
+        $this->companies->delete($companyId);
     }
 }
