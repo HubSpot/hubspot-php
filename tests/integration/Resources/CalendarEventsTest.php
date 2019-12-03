@@ -2,6 +2,7 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
+use Exception;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\CalendarEvents;
 use SevenShores\Hubspot\Resources\Owners;
@@ -15,30 +16,51 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Owners
      */
-    private $owners;
+    protected $owners;
+    
+    /**
+     * @var stdClass $owner
+     */
+    protected $owner;
+    
+    /**
+     * @var \SevenShores\Hubspot\Http\Response $task
+     */
+    protected $task;
 
     /**
      * @var EventsTask
      */
-    private $calendarEvents;
+    protected $calendarEvents;
 
     public function setUp()
     {
         parent::setUp();
-        $this->markTestSkipped(); // TODO: fix test
         $this->owners = new Owners(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         $this->calendarEvents = new CalendarEvents(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
+        $response = $this->owners->all(['email' => getenv('HUBSPOT_TEST_EMAIL')]);
+        if (empty($response->getData())) {
+            throw new Exception('Invalid Email (HUBSPOT_TEST_EMAIL)');
+        }
+        $this->owner = $response->getData()[0];
+        $this->task = $this->createTestTask();
     }
 
     /**
      * @test
      */
+    public function createTask()
+    {
+        $this->assertSame(200, $this->task->getStatusCode());
+    }
+    
+    /**
+     * @test
+     */
     public function updateTask()
     {
-        $task = $this->createTask();
-
-        $response = $this->calendarEvents->updateTask($task->id, [
+        $response = $this->calendarEvents->updateTask($this->task->id, [
             'name' => 'Another name',
             'description' => 'Another description',
         ]);
@@ -51,31 +73,27 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
      */
     public function getTaskById()
     {
-        $task = $this->createTask();
-
-        $response = $this->calendarEvents->getTaskById($task->id);
+        $response = $this->calendarEvents->getTaskById($this->task->id);
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertEquals($task->name, $response->name);
-        $this->assertEquals($task->description, $response->description);
-        $this->assertEquals($task->ownerId, $response->ownerId);
+        $this->assertEquals($this->task->name, $response->name);
+        $this->assertEquals($this->task->description, $response->description);
+        $this->assertEquals($this->task->ownerId, $response->ownerId);
     }
 
     /** @test */
     public function deleteTask()
     {
-        $task = $this->createTask();
-
-        $response = $this->calendarEvents->deleteTask($task->id);
-        $this->assertEquals(204, $response->getStatusCode()); //return no content
+        $response = $this->calendarEvents->deleteTask($this->task->id);
+        $this->assertEquals(204, $response->getStatusCode());
+        $this->task = null;
     }
 
     /** @test */
     public function all()
     {
-        $task = $this->createTask();
-        $startDate = $task['eventDate'] - 60 * 60 * 1000;
-        $endDate = $task['eventDate'] + 60 * 60 * 1000;
+        $startDate = $this->task['eventDate'] - 60 * 60 * 1000;
+        $endDate = $this->task['eventDate'] + 60 * 60 * 1000;
 
         $response = $this->calendarEvents->all($startDate, $endDate);
         $this->assertEquals(200, $response->getStatusCode());
@@ -85,21 +103,16 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function allTasks()
     {
-        $task = $this->createTask();
-        $startDate = $task['eventDate'] - 60 * 60 * 1000;
-        $endDate = $task['eventDate'] + 60 * 60 * 1000;
+        $startDate = $this->task['eventDate'] - 60 * 60 * 1000;
+        $endDate = $this->task['eventDate'] + 60 * 60 * 1000;
 
         $response = $this->calendarEvents->allTasks($startDate, $endDate);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->toArray()));
     }
 
-    // Lots of tests need an existing task to modify.
-    private function createTask()
+    protected function createTestTask()
     {
-        $email = uniqid('test_email').'@hubspot.com';
-        $owner = $this->createOwner($email);
-        $ownerData = $owner->toArray();
         $eventData = [
             'eventDate' => strtotime('+1 day') * 1000, //timestamp in milliseconds
             'eventType' => 'PUBLISHING_TASK',
@@ -107,8 +120,9 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
             'state' => 'TODO',
             'name' => 'Some task',
             'description' => 'Very important task',
-            'ownerId' => $ownerData['ownerId'],
+            'ownerId' => $this->owner->ownerId,
         ];
+        
         $response = $this->calendarEvents->createTask($eventData);
         $this->assertSame(200, $response->getStatusCode());
 
@@ -116,34 +130,12 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
 
         return $response;
     }
-
-    /**
-     * Creates an Owner with the HubSpotApi.
-     *
-     * @param string $email
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    private function createOwner($email = 'test@owner.com')
+        
+    public function tearDown()
     {
-        $response = $this->owners->create([
-            'type' => 'PERSON',
-            'portalId' => 62515, //demo portal id (http://developers.hubspot.com/docs/overview)
-            'firstName' => 'Testing',
-            'lastName' => 'Owner',
-            'email' => $email,
-            'remoteList' => [
-                [
-                    'portalId' => 62515,
-                    'remoteType' => 'EMAIL',
-                    'remoteId' => 'dev_'.$email,
-                    'active' => true,
-                ],
-            ],
-        ]);
-
-        sleep(1);
-
-        return $response;
+        parent::tearDown();
+        if (!empty($this->task)) {
+            $this->calendarEvents->deleteTask($this->task->id);
+        }
     }
 }

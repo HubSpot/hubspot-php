@@ -32,7 +32,7 @@ class OwnersTest extends \PHPUnit_Framework_TestCase
      */
     public function get()
     {
-        $owner = $this->owners->all(['email' => getenv('HUBSPOT_EMAIL')])->getData()[0];
+        $owner = $this->owners->all(['email' => getenv('HUBSPOT_TEST_EMAIL')])->getData()[0];
 
         $response = $this->owners->getById($owner->ownerId);
         $this->assertSame(200, $response->getStatusCode());
@@ -44,9 +44,9 @@ class OwnersTest extends \PHPUnit_Framework_TestCase
      */
     public function findByEmail()
     {
-        $response = $this->owners->all(['email' => getenv('HUBSPOT_EMAIL')]);
+        $response = $this->owners->all(['email' => getenv('HUBSPOT_TEST_EMAIL')]);
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame(getenv('HUBSPOT_EMAIL'), $response->getData()[0]->email);
+        $this->assertSame(getenv('HUBSPOT_TEST_EMAIL'), $response->getData()[0]->email);
     }
 
     /**

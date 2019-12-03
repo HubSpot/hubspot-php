@@ -8,8 +8,9 @@ class CalendarEvents extends Resource
      * @param array $properties
      *
      * @return \SevenShores\Hubspot\Http\Response
+     * @see https://developers.hubspot.com/docs/methods/calendar/create-task
      */
-    public function createTask($properties)
+    public function createTask(array $properties)
     {
         $endpoint = 'https://api.hubapi.com/calendar/v1/events/task';
         $options['json'] = $properties;
@@ -22,8 +23,9 @@ class CalendarEvents extends Resource
      * @param array $properties the task properties to update
      *
      * @return \SevenShores\Hubspot\Http\Response
+     * @see https://developers.hubspot.com/docs/methods/calendar/update-task
      */
-    public function updateTask($id, $properties)
+    public function updateTask($id, array $properties)
     {
         $endpoint = "https://api.hubapi.com/calendar/v1/events/task/{$id}";
 
@@ -36,6 +38,7 @@ class CalendarEvents extends Resource
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
+     * @see https://developers.hubspot.com/docs/methods/calendar/get-calendar-task-by-id
      */
     public function getTaskById($id)
     {
@@ -48,6 +51,7 @@ class CalendarEvents extends Resource
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
+     * @see https://developers.hubspot.com/docs/methods/calendar/delete-task
      */
     public function deleteTask($id)
     {
@@ -68,12 +72,13 @@ class CalendarEvents extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function all($startDate, $endDate, $params = [])
+    public function all($startDate, $endDate, array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/calendar/v1/events';
-        $params = array_merge(compact('startDate', 'endDate'), $params);
 
-        $queryString = build_query_string($params);
+        $queryString = build_query_string(
+                array_merge(compact('startDate', 'endDate'), $params)
+            );
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
@@ -91,12 +96,13 @@ class CalendarEvents extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function allTasks($startDate, $endDate, $params = [])
+    public function allTasks($startDate, $endDate, array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/calendar/v1/events/task';
-        $params = array_merge(compact('startDate', 'endDate'), $params);
 
-        $queryString = build_query_string($params);
+        $queryString = build_query_string(
+                array_merge(compact('startDate', 'endDate'), $params)
+            );
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
@@ -114,12 +120,13 @@ class CalendarEvents extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function allSocialEvents($startDate, $endDate, $params = [])
+    public function allSocialEvents($startDate, $endDate, array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/calendar/v1/events/social';
-        $params = array_merge(compact('startDate', 'endDate'), $params);
 
-        $queryString = build_query_string($params);
+        $queryString = build_query_string(
+                array_merge(compact('startDate', 'endDate'), $params)
+            );
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
@@ -137,12 +144,13 @@ class CalendarEvents extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function allContentEvents($startDate, $endDate, $params = [])
+    public function allContentEvents($startDate, $endDate, array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/calendar/v1/events/content';
-        $params = array_merge(compact('startDate', 'endDate'), $params);
 
-        $queryString = build_query_string($params);
+        $queryString = build_query_string(
+                array_merge(compact('startDate', 'endDate'), $params)
+            );
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
