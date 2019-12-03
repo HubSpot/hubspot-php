@@ -100,20 +100,18 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function all()
     {
-        $startDate = $this->task['eventDate'] - 60 * 60 * 1000;
-        $endDate = $this->task['eventDate'] + 60 * 60 * 1000;
-
+        $startDate = $this->task->eventDate - 60 * 60 * 1000;
+        $endDate = $this->task->eventDate + 60 * 60 * 1000;
         $response = $this->calendarEvents->all($startDate, $endDate);
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, count($response->toArray()));
+        $this->assertGreaterThanOrEqual(1, count($response->getData()));
     }
 
     /** @test */
     public function allTasks()
     {
-        $startDate = $this->task['eventDate'] - 60 * 60 * 1000;
-        $endDate = $this->task['eventDate'] + 60 * 60 * 1000;
-
+        $startDate = $this->task->eventDate - 60 * 60 * 1000;
+        $endDate = $this->task->eventDate + 60 * 60 * 1000;
         $response = $this->calendarEvents->allTasks($startDate, $endDate);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->toArray()));
