@@ -7,8 +7,8 @@ class Files extends Resource
     /**
      * Upload a new file.
      *
-     * @param Resource|string $file 
-     * @param array  $params Optional parameters
+     * @param resource|string $file
+     * @param array           $params Optional parameters
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -24,7 +24,7 @@ class Files extends Resource
         $options['multipart'] = [
             [
                 'name' => 'files',
-                'contents' => $this->getResource($file)
+                'contents' => $this->getResource($file),
             ],
             [
                 'name' => 'file_names',
@@ -37,30 +37,28 @@ class Files extends Resource
 
         return $this->client->request('post', $endpoint, $options, $queryString);
     }
-    
+
     /**
-     * 
-     * @param Resource|string $file
-     * 
-     * @return Resource
+     * @param resource|string $file
+     *
+     * @return resource
      */
     public function getResource($file)
     {
         if (is_resource($file)) {
             return $file;
         }
-        
+
         return fopen($file, 'rb');
     }
-    
+
     /**
      * Upload new files.
      *
-     * @param array $files
      * @param array $params Optional parameters
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/files/post_files
      */
     public function batchUpload(array $files, array $params = [])
@@ -72,55 +70,13 @@ class Files extends Resource
             'hidden' => isset($params['hidden']) ? $params['hidden'] : false,
         ]);
 
-        return $this->client->request('post',
-                $endpoint,
-                ['multipart' => $this->getMultipart($files, $params)],
-                $queryString
-            );
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['multipart' => $this->getMultipart($files, $params)],
+            $queryString
+        );
     }
-    
-    /**
-     * 
-     * @param array $files array of Resoures or filenames
-     * @param array $params
-     * 
-     * @return string
-     */
-    protected function getMultipart(array $files, array $params)
-    {
-        $multipart = [];
-        
-        foreach ($files as $key=>$file) {
-            
-            $multipart[] = [
-                'name' => 'files',
-                'contents' => $this->getResource($file),
-            ];
-            
-            $multipart[] = [
-                'name' => 'file_names',
-                'contents' => $this->getOptionValue($key, 'file_names', $params),
-            ];
-            
-            $multipart[] = [
-                'name' => 'folder_paths',
-                'contents' => $this->getOptionValue($key, 'folder_paths', $params),
-            ];
-        }
-        
-        return $multipart;
-    }
-
-
-    protected function getOptionValue($key, $option, array $params)
-    {
-        if (isset($params[$option]) && array_key_exists($key, $params[$option])) {
-            return $params[$option][$key];
-        }
-        
-        return null;
-    }
-
 
     /**
      * Get meta data for all files.
@@ -141,8 +97,8 @@ class Files extends Resource
     /**
      * Upload a replacement file.
      *
-     * @param int    $file_id The file ID
-     * @param string|Resource $file    The file path
+     * @param int             $file_id The file ID
+     * @param resource|string $file    The file path
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -210,8 +166,7 @@ class Files extends Resource
      * folder_id    string    The id of the folder to move the file into. Use this OR folder_path - not both.
      * name            string    The new name of the file.
      *
-     * @param int   $file_id
-     * @param array $params
+     * @param int $file_id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -247,8 +202,6 @@ class Files extends Resource
     /**
      * List folders metadata.
      *
-     * @param array $params
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function folders(array $params = [])
@@ -263,8 +216,7 @@ class Files extends Resource
     /**
      * Update a folder.
      *
-     * @param int   $folder_id
-     * @param array $params
+     * @param int $folder_id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -308,8 +260,7 @@ class Files extends Resource
     /**
      * Move a folder.
      *
-     * @param int   $folder_id
-     * @param array $params
+     * @param int $folder_id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -320,5 +271,43 @@ class Files extends Resource
         $options['json'] = $params;
 
         return $this->client->request('post', $endpoint, $options);
+    }
+
+    /**
+     * @param array $files array of Resoures or filenames
+     *
+     * @return string
+     */
+    protected function getMultipart(array $files, array $params)
+    {
+        $multipart = [];
+
+        foreach ($files as $key => $file) {
+            $multipart[] = [
+                'name' => 'files',
+                'contents' => $this->getResource($file),
+            ];
+
+            $multipart[] = [
+                'name' => 'file_names',
+                'contents' => $this->getOptionValue($key, 'file_names', $params),
+            ];
+
+            $multipart[] = [
+                'name' => 'folder_paths',
+                'contents' => $this->getOptionValue($key, 'folder_paths', $params),
+            ];
+        }
+
+        return $multipart;
+    }
+
+    protected function getOptionValue($key, $option, array $params)
+    {
+        if (isset($params[$option]) && array_key_exists($key, $params[$option])) {
+            return $params[$option][$key];
+        }
+
+        return null;
     }
 }

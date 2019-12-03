@@ -22,7 +22,7 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->dealProperties = new DealProperties(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
-    
+
     /** @test */
     public function all()
     {
@@ -31,18 +31,18 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(2, count($response->getData()));
     }
-    
+
     /** @test */
     public function getByName()
     {
         $response = $this->createDealProperty();
-        
+
         $deal = $this->dealProperties->get($response->name);
-        
+
         $this->assertEquals(200, $deal->getStatusCode());
         $this->assertEquals('Custom property', $deal->label);
-        
-        $this->dealProperties->delete($deal->name);   
+
+        $this->dealProperties->delete($deal->name);
     }
 
     /** @test */
@@ -52,22 +52,21 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Custom property', $response->label);
-        
+
         $this->dealProperties->delete($response->name);
     }
-    
+
     /** @test */
     public function update()
     {
-
         $response = $this->createDealProperty();
         $properties = $this->getData();
         $properties['label'] = 'Updated custom property';
-        
+
         $updateResponse = $this->dealProperties->update($response->name, $properties);
         $this->assertEquals(200, $updateResponse->getStatusCode());
         $this->assertEquals('Updated custom property', $updateResponse->label);
-        
+
         $this->dealProperties->delete($response->name);
     }
 
@@ -93,12 +92,12 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThanOrEqual(2, count($withPropertiesResponse->getData()));
         $this->assertObjectHasAttribute('properties', $withPropertiesResponse->getData()[0]);
     }
-    
+
     /** @test */
     public function getGroup()
     {
         $createdGroupResponse = $this->createDealPropertyGroup();
-        
+
         $response = $this->dealProperties->getGroup($createdGroupResponse->name);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('A New Custom Group', $response->displayName);
@@ -108,10 +107,10 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $withPropertiesResponse->getStatusCode());
         $this->assertEquals('A New Custom Group', $withPropertiesResponse->displayName);
         $this->assertObjectHasAttribute('properties', $withPropertiesResponse->getData());
-        
+
         $this->dealProperties->deleteGroup($createdGroupResponse->name);
     }
-    
+
     /** @test */
     public function createGroup()
     {
@@ -119,7 +118,7 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('A New Custom Group', $response->displayName);
-        
+
         $this->dealProperties->deleteGroup($response->name);
     }
 
@@ -136,7 +135,7 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
         $response = $this->dealProperties->updateGroup($createdGroupResponse->name, $group);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('An Updated Deal Property Group', $response['displayName']);
-        
+
         $this->dealProperties->deleteGroup($createdGroupResponse->name);
     }
 
@@ -161,7 +160,7 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
 
         return $this->dealProperties->create($property);
     }
-    
+
     protected function getData()
     {
         return $property = [
@@ -173,7 +172,7 @@ class DealPropertiesTest extends \PHPUnit_Framework_TestCase
             'formField' => true,
             'displayOrder' => 6,
             'options' => [],
-        ];;
+        ];
     }
 
     /**

@@ -165,13 +165,12 @@ class Forms extends Resource
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
-    
+
     /**
-     * 
-     * Get a file uploaded via form by url
-     * 
+     * Get a file uploaded via form by url.
+     *
      * @param string $url
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/form-integrations/v1/uploaded-files/signed-url-redirect
      */
     public function getUploadedFileByUrl($url)
@@ -179,39 +178,39 @@ class Forms extends Resource
         $endpoint = $url;
         $query_string = null;
         $parsed = explode('?', $url);
-        
-        if (count($parsed) == 2) {
+
+        if (2 == count($parsed)) {
             $endpoint = $parsed[0];
             $query_string = $parsed[1];
         }
-        
+
         return $this->client->request(
-                'get',
-                $endpoint,
-                ['allow_redirects' => true],
-                $query_string
-            );
+            'get',
+            $endpoint,
+            ['allow_redirects' => true],
+            $query_string
+        );
     }
-    
+
     /**
-     * 
-     * Get a file uploaded via form by id
-     * 
-     * @param string|int $id
-     * @param string $sign
-     * 
+     * Get a file uploaded via form by id.
+     *
+     * @param int|string $id
+     * @param string     $sign
+     * @param mixed      $params
+     *
      * @see https://developers.hubspot.com/docs/methods/form-integrations/v1/uploaded-files/signed-url-redirect
      */
     public function getUploadedFileById($id, $sign, $params = [])
     {
         $endpoint = "https://api.hubspot.com/form-integrations/v1/uploaded-files/signed-url-redirect/{$id}";
         $params['sign'] = $sign;
-        
+
         return $this->client->request(
-                'get',
-                $endpoint,
-                ['allow_redirects' => true],
-                http_build_query($params)
-            );
+            'get',
+            $endpoint,
+            ['allow_redirects' => true],
+            http_build_query($params)
+        );
     }
 }

@@ -92,7 +92,7 @@ class Client
         }
 
         $url = $this->generateUrl($endpoint, $query_string, $requires_auth);
-        
+
         $options = array_merge($this->clientOptions, $options);
         $options['headers']['User-Agent'] = $this->user_agent;
 
@@ -145,8 +145,8 @@ class Client
     }
 
     /**
-     * @param string $query_string  the query string to send to the endpoint
-     * @param string $addition  addition query string to send to the endpoint
+     * @param string $query_string the query string to send to the endpoint
+     * @param string $addition     addition query string to send to the endpoint
      *
      * @return string
      */
@@ -158,7 +158,7 @@ class Client
             if (empty($query_string)) {
                 $result = $addition;
             } else {
-                $result .= '&' . $addition;
+                $result .= '&'.$addition;
             }
         }
 

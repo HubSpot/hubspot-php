@@ -17,14 +17,14 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
      * @var Owners
      */
     protected $owners;
-    
+
     /**
-     * @var stdClass $owner
+     * @var stdClass
      */
     protected $owner;
-    
+
     /**
-     * @var \SevenShores\Hubspot\Http\Response $task
+     * @var \SevenShores\Hubspot\Http\Response
      */
     protected $task;
 
@@ -47,6 +47,14 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
         $this->task = $this->createTestTask();
     }
 
+    public function tearDown()
+    {
+        parent::tearDown();
+        if (!empty($this->task)) {
+            $this->calendarEvents->deleteTask($this->task->id);
+        }
+    }
+
     /**
      * @test
      */
@@ -54,7 +62,7 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame(200, $this->task->getStatusCode());
     }
-    
+
     /**
      * @test
      */
@@ -122,20 +130,12 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
             'description' => 'Very important task',
             'ownerId' => $this->owner->ownerId,
         ];
-        
+
         $response = $this->calendarEvents->createTask($eventData);
         $this->assertSame(200, $response->getStatusCode());
 
         sleep(1);
 
         return $response;
-    }
-        
-    public function tearDown()
-    {
-        parent::tearDown();
-        if (!empty($this->task)) {
-            $this->calendarEvents->deleteTask($this->task->id);
-        }
     }
 }

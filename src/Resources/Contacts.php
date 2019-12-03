@@ -8,6 +8,7 @@ class Contacts extends Resource
      * @param array $properties array of contact properties
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/contacts/create_contact
      */
     public function create(array $properties)
@@ -24,6 +25,7 @@ class Contacts extends Resource
      * @param array $properties the contact properties to update
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/contacts/update_contact
      */
     public function update($id, array $properties)
@@ -40,6 +42,7 @@ class Contacts extends Resource
      * @param array  $properties the contact properties to update
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/contacts/update_contact-by-email
      */
     public function updateByEmail($email, array $properties)
@@ -56,6 +59,7 @@ class Contacts extends Resource
      * @param array  $properties the contact properties
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/contacts/create_or_update
      */
     public function createOrUpdate($email, array $properties = [])
@@ -72,6 +76,7 @@ class Contacts extends Resource
      * @param array $params   Array of optional parameters ['auditId']
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/contacts/batch_create_or_update
      */
     public function createOrUpdateBatch(array $contacts, array $params = [])
@@ -89,6 +94,7 @@ class Contacts extends Resource
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/contacts/delete_contact
      */
     public function delete($id)
@@ -171,6 +177,7 @@ class Contacts extends Resource
      *                      'showListMemberships']
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/contacts/get_contact
      */
     public function getById($id, array $params = [])
@@ -214,6 +221,7 @@ class Contacts extends Resource
      *                       'showListMemberships']
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/contacts/get_contact_by_email
      */
     public function getByEmail($email, array $params = [])
@@ -256,6 +264,7 @@ class Contacts extends Resource
      *                       'showListMemberships']
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/contacts/get_contact_by_utk
      */
     public function getByToken($utk, array $params = [])
@@ -342,6 +351,7 @@ class Contacts extends Resource
      * @param int $vidToMerge contact ID of the secondary contact
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/contacts/merge-contacts
      */
     public function merge($id, $vidToMerge)

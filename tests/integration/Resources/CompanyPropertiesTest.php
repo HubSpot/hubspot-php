@@ -31,7 +31,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(2, count($response->getData()));
     }
-    
+
     /** @test */
     public function get()
     {
@@ -40,7 +40,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Custom property', $response->label);
-        
+
         $this->companyProperties->delete($createdPropertyResponse->name);
     }
 
@@ -51,7 +51,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Custom property', $response->label);
-        
+
         $this->companyProperties->delete($response->name);
     }
 
@@ -74,7 +74,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Custom property Changed', $response->label);
-        
+
         $this->companyProperties->delete($createdPropertyResponse->name);
     }
 
@@ -86,8 +86,8 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(204, $response->getStatusCode());
     }
-    
-     /** @test */
+
+    /** @test */
     public function getAllGroups()
     {
         $response = $this->companyProperties->getAllGroups();
@@ -108,7 +108,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('A New Custom Group', $response->displayName);
-        
+
         $this->companyProperties->deleteGroup($response->name);
     }
 
@@ -125,7 +125,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         $response = $this->companyProperties->updateGroup($createdGroupResponse->name, $group);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('An Updated Company Property Group', $response->displayName);
-        
+
         $this->companyProperties->deleteGroup($createdGroupResponse->name);
     }
 

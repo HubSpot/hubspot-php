@@ -4,13 +4,12 @@ namespace SevenShores\Hubspot\Resources;
 
 /**
  * Class Owners.
+ *
  * @see https://developers.hubspot.com/docs/methods/owners/owners_overview
  */
 class Owners extends Resource
 {
     /**
-     * @param array $properties
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function create(array $properties)
@@ -22,8 +21,7 @@ class Owners extends Resource
     }
 
     /**
-     * @param int   $id
-     * @param array $properties
+     * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -39,6 +37,7 @@ class Owners extends Resource
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/owners/get_an_owner
      */
     public function getById($id)
@@ -49,9 +48,8 @@ class Owners extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/owners/get_owners
      */
     public function all(array $params = [])

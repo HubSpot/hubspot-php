@@ -33,7 +33,7 @@ class CrmPipelines extends Resource
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/pipelines/create_new_pipeline
      */
     public function create($objectType, array $properties)
@@ -48,12 +48,11 @@ class CrmPipelines extends Resource
     /**
      * @param string $objectType
      * @param $id
-     * @param array $properties
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/pipelines/update_pipeline
      */
     public function update($objectType, $id, array $properties)
@@ -72,7 +71,7 @@ class CrmPipelines extends Resource
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/pipelines/delete_pipeline
      */
     public function delete($objectType, $id)

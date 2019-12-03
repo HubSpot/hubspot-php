@@ -10,7 +10,7 @@ class ContactLists extends Resource
      * @param array $list contact list properties
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/create_list
      */
     public function create(array $list)
@@ -29,7 +29,7 @@ class ContactLists extends Resource
      * @param array $list the contact list properties to update
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/update_list
      */
     public function update($id, array $list)
@@ -47,7 +47,7 @@ class ContactLists extends Resource
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/delete_list
      */
     public function delete($id)
@@ -63,7 +63,7 @@ class ContactLists extends Resource
      * @param array $params ['count', 'offset']
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_lists
      */
     public function all(array $params = [])
@@ -79,7 +79,7 @@ class ContactLists extends Resource
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_list
      */
     public function getById($id)
@@ -90,10 +90,8 @@ class ContactLists extends Resource
     }
 
     /**
-     * @param array $ids
-     *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_batch_lists
      */
     public function getBatchByIds(array $ids)
@@ -109,7 +107,7 @@ class ContactLists extends Resource
      * @param array $params Optional parameters ['count', 'offset']
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_static_lists
      */
     public function getAllStatic(array $params = [])
@@ -125,7 +123,7 @@ class ContactLists extends Resource
      * @param array $params Optional parameters ['count', 'offset']
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_dynamic_lists
      */
     public function getAllDynamic($params = [])
@@ -145,7 +143,7 @@ class ContactLists extends Resource
      *                      { count, vidOffset, property, propertyMode, formSubmissionMode, showListMemberships }
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_list_contacts
      */
     public function contacts($id, $params = [])
@@ -164,7 +162,7 @@ class ContactLists extends Resource
      * @param array $params
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_list_contacts_recent
      */
     public function recentContacts($id, $params = [])
@@ -179,12 +177,10 @@ class ContactLists extends Resource
     /**
      * Add a contact to a list.
      *
-     * @param int   $list_id
-     * @param array $contact_ids
-     * @param array $emails
+     * @param int $list_id
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/add_contact_to_list
      */
     public function addContact($list_id, array $contact_ids, array $emails = [])
@@ -202,11 +198,10 @@ class ContactLists extends Resource
     /**
      * Remove a contact from a list.
      *
-     * @param int   $list_id
-     * @param array $contact_ids
+     * @param int $list_id
      *
      * @return \SevenShores\Hubspot\Http\Response
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/lists/remove_contact_from_list
      */
     public function removeContact($list_id, array $contact_ids)

@@ -5,9 +5,8 @@ namespace SevenShores\Hubspot\Resources;
 class CalendarEvents extends Resource
 {
     /**
-     * @param array $properties
-     *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/calendar/create-task
      */
     public function createTask(array $properties)
@@ -23,6 +22,7 @@ class CalendarEvents extends Resource
      * @param array $properties the task properties to update
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/calendar/update-task
      */
     public function updateTask($id, array $properties)
@@ -38,6 +38,7 @@ class CalendarEvents extends Resource
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/calendar/get-calendar-task-by-id
      */
     public function getTaskById($id)
@@ -51,6 +52,7 @@ class CalendarEvents extends Resource
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
      * @see https://developers.hubspot.com/docs/methods/calendar/delete-task
      */
     public function deleteTask($id)
@@ -77,8 +79,8 @@ class CalendarEvents extends Resource
         $endpoint = 'https://api.hubapi.com/calendar/v1/events';
 
         $queryString = build_query_string(
-                array_merge(compact('startDate', 'endDate'), $params)
-            );
+            array_merge(compact('startDate', 'endDate'), $params)
+        );
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
@@ -101,8 +103,8 @@ class CalendarEvents extends Resource
         $endpoint = 'https://api.hubapi.com/calendar/v1/events/task';
 
         $queryString = build_query_string(
-                array_merge(compact('startDate', 'endDate'), $params)
-            );
+            array_merge(compact('startDate', 'endDate'), $params)
+        );
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
@@ -125,8 +127,8 @@ class CalendarEvents extends Resource
         $endpoint = 'https://api.hubapi.com/calendar/v1/events/social';
 
         $queryString = build_query_string(
-                array_merge(compact('startDate', 'endDate'), $params)
-            );
+            array_merge(compact('startDate', 'endDate'), $params)
+        );
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
@@ -149,8 +151,8 @@ class CalendarEvents extends Resource
         $endpoint = 'https://api.hubapi.com/calendar/v1/events/content';
 
         $queryString = build_query_string(
-                array_merge(compact('startDate', 'endDate'), $params)
-            );
+            array_merge(compact('startDate', 'endDate'), $params)
+        );
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }

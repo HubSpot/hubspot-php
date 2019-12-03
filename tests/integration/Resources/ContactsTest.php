@@ -121,7 +121,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
             ],
         ]);
         $this->assertEquals(202, $response->getStatusCode());
-        
+
         foreach ($this->contacts->getBatchByEmails($emails)->getData() as  $contact) {
             $this->contacts->delete($contact->vid);
         }
@@ -148,7 +148,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
             ],
         ], ['auditId' => 'TEST_CHANGE_SOURCE']);
         $this->assertEquals(202, $response->getStatusCode());
-        
+
         foreach ($this->contacts->getBatchByEmails($emails)->getData() as  $contact) {
             $this->contacts->delete($contact->vid);
         }
@@ -200,7 +200,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contacts->getBatchByIds($ids);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         foreach ($ids as $id) {
             $this->contacts->delete($id);
         }
@@ -214,7 +214,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contacts->getByEmail($contact->properties->email->value);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $this->contacts->delete($contact->vid);
     }
 
@@ -235,7 +235,7 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contacts->getBatchByEmails($emails);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         foreach ($contacts as $contact) {
             $this->contacts->delete($contact->vid);
         }
