@@ -17,9 +17,8 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
      */
     protected $dealPipelines;
     /**
-     *
-     * @var $pipeline
-     */
+     * @var  
+     * $pipeline*/
     protected $pipeline;
 
     public function setUp()
@@ -39,7 +38,15 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
             ],
         ]);
     }
-    
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        if (!empty($this->pipeline)) {
+            $this->dealPipelines->delete($this->pipeline->pipelineId);
+        }
+    }
+
     /**
      * @test
      */
@@ -55,7 +62,7 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
     public function getAllPipelines()
     {
         $response = $this->dealPipelines->getAllPipelines();
-        
+
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
     }
@@ -76,7 +83,7 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
      */
     public function update()
     {
-        $newLabel = 'Updated pipeline' . uniqid();
+        $newLabel = 'Updated pipeline'.uniqid();
         $response = $this->dealPipelines->update($this->pipeline->pipelineId, [
             'label' => $newLabel,
             'pipelineId' => $this->pipeline->pipelineId,
@@ -86,7 +93,7 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
                 ],
             ],
         ]);
-        
+
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertSame($newLabel, $response->label);
     }
@@ -97,13 +104,5 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
         $response = $this->dealPipelines->delete($this->pipeline->pipelineId);
         $this->assertSame(204, $response->getStatusCode());
         $this->pipeline = null;
-    }
-    
-    public function tearDown()
-    {
-        parent::tearDown();
-        if (!empty($this->pipeline)) {
-            $this->dealPipelines->delete($this->pipeline->pipelineId);
-        }
     }
 }

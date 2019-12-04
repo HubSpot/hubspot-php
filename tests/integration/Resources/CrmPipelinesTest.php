@@ -22,7 +22,7 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
         $this->pipelines = new CrmPipelines(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
-    
+
     /** @test */
     public function getAllTicketsPipelinesTest()
     {
@@ -61,7 +61,7 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
         $response = $this->createPipeline('tickets', $this->getTicketsData());
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $this->deletePipeline('tickets', $response->pipelineId);
     }
 
@@ -81,12 +81,12 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
         $data = $this->getTicketsData();
         $pipeline = $this->createPipeline('tickets', $data);
 
-        $data['label'] = 'Updated Ticket Pipeline ' . uniqid();
+        $data['label'] = 'Updated Ticket Pipeline '.uniqid();
 
         $response = $this->pipelines->update('tickets', $pipeline->pipelineId, $data);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $this->deletePipeline('tickets', $response->pipelineId);
     }
 
@@ -95,13 +95,13 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
     {
         $data = $this->getDealsData();
         $pipeline = $this->createPipeline('deals', $data);
-        
+
         $data['label'] = 'Updated Deals Pipeline '.uniqid();
 
         $response = $this->pipelines->update('deals', $pipeline->pipelineId, $data);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $this->deletePipeline('deals', $response->pipelineId);
     }
 
@@ -109,7 +109,7 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
     public function deleteTicketsPipeline()
     {
         $pipeline = $this->createPipeline('tickets', $this->getTicketsData());
-        
+
         $response = $this->deletePipeline('tickets', $pipeline->pipelineId);
 
         $this->assertEquals(204, $response->getStatusCode());
@@ -124,17 +124,17 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(204, $response->getStatusCode());
     }
-    
+
     protected function createPipeline($objectType, array $data)
     {
         return $this->pipelines->create($objectType, $data);
     }
-    
+
     protected function deletePipeline($objectType, $id)
     {
         return $this->pipelines->delete($objectType, $id);
     }
-    
+
     protected function getDealsData()
     {
         return [
@@ -152,7 +152,7 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
             ],
         ];
     }
-    
+
     protected function getTicketsData()
     {
         return [
@@ -167,5 +167,4 @@ class CrmPipelinesTest extends \PHPUnit_Framework_TestCase
             ],
         ];
     }
-    
 }

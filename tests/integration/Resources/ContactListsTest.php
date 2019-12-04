@@ -13,14 +13,12 @@ use SevenShores\Hubspot\Resources\Contacts;
 class ContactListsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     *
-     * @var ContactLists $contactLists
+     * @var ContactLists
      */
     protected $contactLists;
-    
+
     /**
-     *
-     * @var Contacts $contacts
+     * @var Contacts
      */
     protected $contacts;
 
@@ -96,7 +94,7 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $this->contactLists->delete($list->listId);
     }
 
@@ -108,7 +106,7 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contactLists->getById($list->listId);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $this->contactLists->delete($list->listId);
     }
 
@@ -129,10 +127,10 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contactLists->getBatchByIds($ids);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         foreach ($ids as $id) {
             $this->contactLists->delete($id);
-        } 
+        }
     }
 
     /** @test */
@@ -143,7 +141,7 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contactLists->contacts($list->listId);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $this->contactLists->delete($list->listId);
     }
 
@@ -155,7 +153,7 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         $response = $this->contactLists->recentContacts($list->listId);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $this->contactLists->delete($list->listId);
     }
 
@@ -168,37 +166,37 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(204, $response->getStatusCode());
     }
-    
+
     /** @test */
     public function addContact()
     {
         $list = $this->createList(false);
         $contact = $this->createContact();
-        
+
         $response = $this->contactLists->addContact($list->listId, [$contact->vid]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $this->contactLists->removeContact($list->listId, [$contact->vid]);
         $this->contactLists->delete($list->listId);
         $this->contacts->delete($contact->vid);
     }
 
-    /** @test **/
+    /** @test */
     public function removeContact()
     {
         $list = $this->createList(false);
         $contact = $this->createContact();
-        
+
         $this->contactLists->addContact($list->listId, [$contact->vid]);
         $response = $this->contactLists->removeContact($list->listId, [$contact->vid]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $this->contactLists->delete($list->listId);
         $this->contacts->delete($contact->vid);
     }
-    
+
     /**
      * Creates a new contact with the HubSpotApi.
      *
@@ -206,7 +204,6 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
      */
     protected function createContact()
     {
-
         $contactResponse = $this->contacts->create([
             ['property' => 'email', 'value' => 'ContactListsTest'.uniqid().'@hubspot.com'],
             ['property' => 'firstname', 'value' => 'joe'],
@@ -214,6 +211,7 @@ class ContactListsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         sleep(1);
+
         return $contactResponse;
     }
 

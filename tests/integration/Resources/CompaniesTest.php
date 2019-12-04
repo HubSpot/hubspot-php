@@ -17,12 +17,12 @@ use SevenShores\Hubspot\Resources\Contacts;
 class CompaniesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Companies $companies
+     * @var Companies
      */
     protected $companies;
-    
+
     /**
-     * @var Contacts $contacts
+     * @var Contacts
      */
     protected $contacts;
 
@@ -33,7 +33,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->contacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
-    
+
     /** @test */
     public function create()
     {
@@ -43,7 +43,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('A company name', $response['properties']['name']['value']);
         $this->assertEquals('A company description', $response['properties']['description']['value']);
         $this->assertEquals('example.com', $response['properties']['domain']['value']);
-        
+
         $this->companies->delete($response->companyId);
     }
 
@@ -63,7 +63,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($newCompanyResponse->companyId, $response->companyId);
         $this->assertEquals($companyDescription, $response['properties']['description']['value']);
-        
+
         $this->companies->delete($response->companyId);
     }
 
@@ -89,7 +89,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $response = $this->companies->updateBatch($companies);
 
         $this->assertEquals(202, $response->getStatusCode());
-        
+
         $this->companies->delete($newCompanyResponse->companyId);
     }
 
@@ -163,7 +163,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($newCompanyResponse->companyId, $response->companyId);
-        
+
         $this->companies->delete($newCompanyResponse->companyId);
     }
 
@@ -178,7 +178,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(1, $response['contacts']);
         $this->assertEquals($contactId, $response['contacts'][0]['vid']);
-        
+
         $this->deleteCompanyWithContacts($newCompanyResponse->companyId, [$contactId]);
     }
 
@@ -197,7 +197,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $offsetResponse = $this->companies->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => $contactId]);
         $this->assertEquals(200, $offsetResponse->getStatusCode());
         $this->assertGreaterThanOrEqual($contactId2, $offsetResponse->vidOffset);
-        
+
         $this->deleteCompanyWithContacts($companyId, [$contactId, $contactId2]);
     }
 
@@ -215,7 +215,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThanOrEqual(1, $response->vids);
         $this->assertContains($contactId1, $response->vids);
         $this->assertContains($contactId2, $response->vids);
-        
+
         $this->deleteCompanyWithContacts($newCompanyResponse->companyId, $response->vids);
     }
 
@@ -230,11 +230,11 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $response = $this->companies->getAssociatedContactIds($companyId, ['count' => 1]);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(1, $response->vids);
-        
+
         $offsetResponse = $this->companies->getAssociatedContactIds($companyId, ['count' => 1, 'vidOffset' => $contactId1]);
         $this->assertEquals(200, $offsetResponse->getStatusCode());
         $this->assertGreaterThanOrEqual($contactId2, $offsetResponse->vidOffset);
-        
+
         $this->deleteCompanyWithContacts($companyId, [$contactId1, $contactId2]);
     }
 
@@ -247,7 +247,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $response = $this->companies->removeContact($contactId, $newCompanyResponse->companyId);
 
         $this->assertEquals(204, $response->getStatusCode());
-        
+
         $this->companies->delete($newCompanyResponse->companyId);
         $this->contacts->delete($contactId);
     }
@@ -258,12 +258,12 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     public function searchCompanyByDomain()
     {
         $newCompanyResponse = $this->createCompany();
-        
+
         $response = $this->companies->searchByDomain('example.com', ['name', 'domain']);
         $this->assertEquals(200, $response->getStatusCode());
         $results = $response->getData()->results;
         $this->assertEquals('example.com', current($results)->properties->domain->value);
-        
+
         $this->companies->delete($newCompanyResponse->companyId);
     }
 
@@ -305,7 +305,6 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
      */
     protected function createContact()
     {
-
         $contactResponse = $this->contacts->create([
             ['property' => 'email', 'value' => 'rw_test'.uniqid().'@hubspot.com'],
             ['property' => 'firstname', 'value' => 'joe'],
@@ -335,13 +334,14 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
 
         return [$contactId, $response];
     }
-    
-    protected function deleteCompanyWithContacts($companyId, $contactIds = []) {
+
+    protected function deleteCompanyWithContacts($companyId, $contactIds = [])
+    {
         foreach ($contactIds as $contactId) {
             $this->companies->removeContact($contactId, $companyId);
             $this->contacts->delete($contactId);
         }
-        
+
         $this->companies->delete($companyId);
     }
 }

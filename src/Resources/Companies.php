@@ -124,7 +124,6 @@ class Companies extends Resource
 
     /**
      * @param string $domain
-     * @param array  $properties
      * @param int    $limit
      * @param int    $offset
      *
@@ -174,9 +173,8 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/add_contact_to_company
      * @see CrmAssociations::create is used to create associations between objects
-     *
      * @deprecated
-     * 
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function addContact($contactId, $companyId)
@@ -194,7 +192,6 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_contacts
      * @see CrmAssociations::get is used to get associations between objects
-     * 
      * @deprecated
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -216,7 +213,6 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/get_company_contacts_by_id
      * @see CrmAssociations::get is used to get associations between objects
-     * 
      * @deprecated
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -238,9 +234,8 @@ class Companies extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/companies/remove_contact_from_company
      * @see CrmAssociations::delete is used to delete associations between objects
-     *
      * @deprecated
-     * 
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function removeContact($contactId, $companyId)

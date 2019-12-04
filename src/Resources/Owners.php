@@ -4,15 +4,17 @@ namespace SevenShores\Hubspot\Resources;
 
 /**
  * Class Owners.
+ *
+ * @see https://developers.hubspot.com/docs/methods/owners/owners_overview
  */
 class Owners extends Resource
 {
     /**
-     * @param array $properties
-     *
      * @return \SevenShores\Hubspot\Http\Response
+     *
+     * @deprecated
      */
-    public function create($properties)
+    public function create(array $properties)
     {
         $endpoint = 'https://api.hubapi.com/owners/v2/owners/';
         $options['json'] = $properties;
@@ -21,12 +23,13 @@ class Owners extends Resource
     }
 
     /**
-     * @param int   $id
-     * @param array $properties
+     * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
+     * @deprecated
      */
-    public function update($id, $properties)
+    public function update($id, array $properties)
     {
         $endpoint = "https://api.hubapi.com/owners/v2/owners/{$id}";
         $options['json'] = $properties;
@@ -38,6 +41,8 @@ class Owners extends Resource
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
+     * @see https://developers.hubspot.com/docs/methods/owners/get_an_owner
      */
     public function getById($id)
     {
@@ -47,11 +52,11 @@ class Owners extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @return \SevenShores\Hubspot\Http\Response
+     *
+     * @see https://developers.hubspot.com/docs/methods/owners/get_owners
      */
-    public function all($params = [])
+    public function all(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/owners/v2/owners';
 

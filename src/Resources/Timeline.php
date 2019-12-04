@@ -13,9 +13,7 @@ class Timeline extends Resource
      * @param null|int    $objectId
      * @param null|string $email
      * @param null|string $utk
-     * @param array       $extraData
      * @param mixed       $timestamp
-     * @param array       $eventTypeData
      *
      * @return mixed
      *
@@ -50,9 +48,9 @@ class Timeline extends Resource
     /**
      * Get Timeline Event.
      *
-     * @param int         $appId
-     * @param int         $eventTypeId
-     * @param string      $eventId
+     * @param int    $appId
+     * @param int    $eventTypeId
+     * @param string $eventId
      *
      * @return mixed
      *
@@ -64,15 +62,14 @@ class Timeline extends Resource
         $eventId
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event/{$eventTypeId}/{$eventId}";
-        
+
         return $this->client->request('get', $endpoint);
     }
 
     /**
      * Batch Create or Update Timeline Events.
      *
-     * @param int   $appId
-     * @param array $events
+     * @param int $appId
      *
      * @return mixed
      *
@@ -229,7 +226,6 @@ class Timeline extends Resource
      * @param string      $label
      * @param string      $propertyType
      * @param null|string $objectProperty
-     * @param array       $options
      *
      * @return mixed
      *
