@@ -11,6 +11,8 @@ class Owners extends Resource
 {
     /**
      * @return \SevenShores\Hubspot\Http\Response
+     *
+     * @deprecated
      */
     public function create(array $properties)
     {
@@ -24,6 +26,8 @@ class Owners extends Resource
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *
+     * @deprecated
      */
     public function update($id, array $properties)
     {
