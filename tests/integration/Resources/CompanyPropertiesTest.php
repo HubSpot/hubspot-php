@@ -12,15 +12,26 @@ use SevenShores\Hubspot\Resources\CompanyProperties;
 class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var CompanyProperties
+     * @var CompanyProperties $companyProperties
      */
-    private $companyProperties;
+    protected $companyProperties;
+    
+    protected $property;
 
     public function setUp()
     {
         parent::setUp();
         $this->companyProperties = new CompanyProperties(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
+        $this->property = $this->createCompanyProperty();
+    }
+    
+    public function tearDown()
+    {
+        parent::tearDown();
+        if (!empty($this->property)) {
+            $this->companyProperties->delete($this->property->name);
+        }
     }
 
     /** @test */
@@ -29,36 +40,28 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         $response = $this->companyProperties->all();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(2, count($response->getData()));
+        $this->assertGreaterThanOrEqual(1, count($response->getData()));
     }
 
     /** @test */
     public function get()
     {
-        $createdPropertyResponse = $this->createCompanyProperty();
-        $response = $this->companyProperties->get($createdPropertyResponse->name);
+        $response = $this->companyProperties->get($this->property->name);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('Custom property', $response->label);
-
-        $this->companyProperties->delete($createdPropertyResponse->name);
+        $this->assertEquals($this->property->label, $response->label);
     }
 
     /** @test */
     public function create()
     {
-        $response = $this->createCompanyProperty();
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('Custom property', $response->label);
-
-        $this->companyProperties->delete($response->name);
+        $this->assertEquals(200, $this->property->getStatusCode());
+        $this->assertEquals('Custom property', $this->property->label);
     }
 
     /** @test */
     public function update()
     {
-        $createdPropertyResponse = $this->createCompanyProperty();
         $property = [
             'label' => 'Custom property Changed',
             'description' => 'An Awesome Custom property that changed',
@@ -70,72 +73,20 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
             'options' => [],
         ];
 
-        $response = $this->companyProperties->update($createdPropertyResponse->name, $property);
+        $response = $this->companyProperties->update($this->property->name, $property);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('Custom property Changed', $response->label);
-
-        $this->companyProperties->delete($createdPropertyResponse->name);
     }
 
     /** @test */
     public function delete()
     {
-        $createdPropertyResponse = $this->createCompanyProperty();
-        $response = $this->companyProperties->delete($createdPropertyResponse->name);
+        $response = $this->companyProperties->delete($this->property->name);
 
         $this->assertEquals(204, $response->getStatusCode());
-    }
-
-    /** @test */
-    public function getAllGroups()
-    {
-        $response = $this->companyProperties->getAllGroups();
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(2, count($response->getData()));
-        $this->assertObjectNotHasAttribute('properties', $response->getData()[0]);
-
-        $includedPropertiesResponse = $this->companyProperties->getAllGroups(true);
-        $this->assertEquals(200, $includedPropertiesResponse->getStatusCode());
-        $this->assertGreaterThanOrEqual(2, count($includedPropertiesResponse->getData()));
-        $this->assertObjectHasAttribute('properties', $includedPropertiesResponse->getData()[0]);
-    }
-
-    /** @test */
-    public function createGroup()
-    {
-        $response = $this->createCompanyPropertyGroup();
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('A New Custom Group', $response->displayName);
-
-        $this->companyProperties->deleteGroup($response->name);
-    }
-
-    /** @test */
-    public function updateGroup()
-    {
-        $createdGroupResponse = $this->createCompanyPropertyGroup();
-
-        $group = [
-            'displayName' => 'An Updated Company Property Group',
-            'displayOrder' => 6,
-        ];
-
-        $response = $this->companyProperties->updateGroup($createdGroupResponse->name, $group);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('An Updated Company Property Group', $response->displayName);
-
-        $this->companyProperties->deleteGroup($createdGroupResponse->name);
-    }
-
-    /** @test */
-    public function deleteGroup()
-    {
-        $createdGroupResponse = $this->createCompanyPropertyGroup();
-        $response = $this->companyProperties->deleteGroup($createdGroupResponse->name);
-
-        $this->assertEquals(204, $response->getStatusCode());
+        
+        $this->property = null;
     }
 
     /**
@@ -143,7 +94,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    private function createCompanyProperty()
+    protected function createCompanyProperty()
     {
         $property = [
             'name' => 't'.uniqid(),
@@ -158,21 +109,5 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         ];
 
         return $this->companyProperties->create($property);
-    }
-
-    /**
-     * Creates a new company property group.
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    private function createCompanyPropertyGroup()
-    {
-        $group = [
-            'name' => 't'.uniqid(),
-            'displayName' => 'A New Custom Group',
-            'displayOrder' => 6,
-        ];
-
-        return $this->companyProperties->createGroup($group);
     }
 }
