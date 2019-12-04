@@ -45,6 +45,7 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
         }
         $this->owner = $response->getData()[0];
         $this->task = $this->createTestTask();
+        sleep(1);
     }
 
     public function tearDown()
@@ -133,11 +134,6 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
             'ownerId' => $this->owner->ownerId,
         ];
 
-        $response = $this->calendarEvents->createTask($eventData);
-        $this->assertSame(200, $response->getStatusCode());
-
-        sleep(1);
-
-        return $response;
+        return $this->calendarEvents->createTask($eventData);
     }
 }
