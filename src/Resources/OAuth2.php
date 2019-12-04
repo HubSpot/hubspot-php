@@ -18,6 +18,8 @@ class OAuth2 extends Resource
      * @param array  $scopes         a set of scopes that your app will need access to
      * @param array  $optionalScopes a set of optional scopes that your app will need access to
      *
+     * @deprecated use Utils\OAuth2::getAuthUrl instead
+     *
      * @return string
      */
     public function getAuthUrl($clientId, $redirectURI, $scopes = [], $optionalScopes = [])
