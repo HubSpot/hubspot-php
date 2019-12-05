@@ -8,15 +8,11 @@ use SevenShores\Hubspot\Resources\DealProperties;
  * @internal
  * @coversNothing
  */
-class DealPropertiesTest extends Properties
+class DealPropertiesGroupTest extends PropertyGroups
 {
     /**
-     * @var null|SevenShores\Hubspot\Resources\Resource
+     *
+     * @var DealProperties
      */
     protected $resourceClass = DealProperties::class;
-    
-    /**
-     * @var string
-     */
-    protected $groupName = 'dealinformation';
 }
