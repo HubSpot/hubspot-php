@@ -109,7 +109,10 @@ class ContactProperties extends Resource
     {
         $endpoint = 'https://api.hubapi.com/contacts/v2/groups';
 
-        $queryString = build_query_string(['includeProperties' => $includeProperties ? 'true' : 'false']);
+        $queryString = '';
+        if ($includeProperties) {
+            $queryString = build_query_string(['includeProperties' => 'true']);
+        }
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }

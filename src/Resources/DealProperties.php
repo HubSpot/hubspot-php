@@ -30,17 +30,13 @@ class DealProperties extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/deals/create_deal_property
      *
-     * @param array $property
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function create($property)
+    public function create(array $property)
     {
         $endpoint = 'https://api.hubapi.com/properties/v1/deals/properties/';
 
-        $options['json'] = $property;
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $property]);
     }
 
     /**
@@ -51,18 +47,16 @@ class DealProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/deals/update_deal_property
      *
      * @param string $name
-     * @param array  $property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function update($name, $property)
+    public function update($name, array $property)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/properties/named/{$name}";
 
         $property['name'] = $name;
-        $options['json'] = $property;
 
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, ['json' => $property]);
     }
 
     /**
@@ -76,7 +70,7 @@ class DealProperties extends Resource
      */
     public function delete($name)
     {
-        $endpoint = 'https://api.hubapi.com/properties/v1/deals/properties/named/'.$name;
+        $endpoint = "https://api.hubapi.com/properties/v1/deals/properties/named/{$name}";
 
         return $this->client->request('delete', $endpoint);
     }
@@ -104,12 +98,11 @@ class DealProperties extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function createGroup($group)
+    public function createGroup(array $group)
     {
         $endpoint = 'https://api.hubapi.com/properties/v1/deals/groups/';
-        $options['json'] = $group;
 
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $group]);
     }
 
     /**
@@ -122,14 +115,13 @@ class DealProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateGroup($groupName, $group)
+    public function updateGroup($groupName, array $group)
     {
         $endpoint = "https://api.hubapi.com/properties/v1/deals/groups/named/{$groupName}";
 
         $group['name'] = $groupName;
-        $options['json'] = $group;
 
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, ['json' => $group]);
     }
 
     /**
@@ -162,13 +154,12 @@ class DealProperties extends Resource
     {
         $endpoint = "https://api.hubapi.com/properties/v1/deals/groups/named/{$groupName}";
 
+        $queryString = '';
         if ($includeProperties) {
             $queryString = build_query_string(['includeProperties' => 'true']);
-
-            return $this->client->request('get', $endpoint, [], $queryString);
         }
 
-        return $this->client->request('get', $endpoint);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 
     /**
@@ -184,12 +175,11 @@ class DealProperties extends Resource
     {
         $endpoint = 'https://api.hubapi.com/properties/v1/deals/groups';
 
+        $queryString = '';
         if ($includeProperties) {
             $queryString = build_query_string(['includeProperties' => 'true']);
-
-            return $this->client->request('get', $endpoint, [], $queryString);
         }
 
-        return $this->client->request('get', $endpoint);
+        return $this->client->request('get', $endpoint, [], $queryString);
     }
 }
