@@ -11,7 +11,6 @@ use SevenShores\Hubspot\Resources\DealProperties;
 class DealPropertiesGroupTest extends PropertyGroups
 {
     /**
-     *
      * @var DealProperties
      */
     protected $resourceClass = DealProperties::class;

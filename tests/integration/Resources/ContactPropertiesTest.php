@@ -14,9 +14,9 @@ class ContactPropertiesTest extends Properties
      * @var null|SevenShores\Hubspot\Resources\Resource
      */
     protected $resourceClass = ContactProperties::class;
-    
+
     /**
      * @var string
      */
     protected $groupName = 'contactinformation';
-}    
+}

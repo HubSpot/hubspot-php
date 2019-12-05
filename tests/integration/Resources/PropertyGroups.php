@@ -1,4 +1,5 @@
 <?php
+
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Http\Client;
@@ -6,16 +7,15 @@ use SevenShores\Hubspot\Http\Client;
 abstract class PropertyGroups extends \PHPUnit_Framework_TestCase
 {
     /**
-     *
      * @var string
      */
     protected $allGroupsMethod = 'getAllGroups';
-    
+
     /**
      * @var null|SevenShores\Hubspot\Resources\Resource
      */
     protected $resource;
-    
+
     /**
      * @var null|SevenShores\Hubspot\Resources\Resource
      */
@@ -25,7 +25,6 @@ abstract class PropertyGroups extends \PHPUnit_Framework_TestCase
      * @var null|\SevenShores\Hubspot\Http\Response
      */
     protected $group;
-    
 
     public function setUp()
     {

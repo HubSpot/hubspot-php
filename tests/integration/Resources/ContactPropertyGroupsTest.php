@@ -11,11 +11,10 @@ use SevenShores\Hubspot\Resources\ContactProperties;
 class ContactPropertyGroupsTest extends PropertyGroups
 {
     /**
-     *
      * @var string
      */
     protected $allGroupsMethod = 'getGroups';
-    
+
     /**
      * @var ContactProperties
      */

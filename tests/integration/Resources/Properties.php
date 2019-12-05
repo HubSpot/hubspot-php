@@ -1,16 +1,16 @@
 <?php
+
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Http\Client;
 
 abstract class Properties extends \PHPUnit_Framework_TestCase
 {
-    
     /**
      * @var null|SevenShores\Hubspot\Resources\Resource
      */
     protected $resource;
-    
+
     /**
      * @var null|SevenShores\Hubspot\Resources\Resource
      */
@@ -20,7 +20,7 @@ abstract class Properties extends \PHPUnit_Framework_TestCase
      * @var null|\SevenShores\Hubspot\Http\Response
      */
     protected $property;
-    
+
     /**
      * @var string
      */
@@ -97,7 +97,7 @@ abstract class Properties extends \PHPUnit_Framework_TestCase
     {
         return $this->resource->create($this->getData());
     }
-    
+
     protected function getData()
     {
         return [
@@ -112,14 +112,14 @@ abstract class Properties extends \PHPUnit_Framework_TestCase
             'options' => [],
         ];
     }
-    
+
     protected function getDataForUpdate()
     {
         $data = $this->getData();
-        
+
         unset($data['name']);
         $data['label'] = 'Updated '.$data['label'];
-        
+
         return $data;
     }
 }
