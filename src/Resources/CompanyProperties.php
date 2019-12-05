@@ -3,7 +3,6 @@
 namespace SevenShores\Hubspot\Resources;
 
 /**
- * 
  * @see https://developers.hubspot.com/docs/methods/companies/company-properties-overview
  */
 class CompanyProperties extends Resource
@@ -12,8 +11,6 @@ class CompanyProperties extends Resource
      * Creates a property on every company object to store a specific piece of data.
      *
      * @see http://developers.hubspot.com/docs/methods/companies/create_company_property
-     *
-     * @param array $property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -30,7 +27,6 @@ class CompanyProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/companies/update_company_property
      *
      * @param string $propertyName
-     * @param array  $property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -118,7 +114,7 @@ class CompanyProperties extends Resource
     public function updateGroup($groupName, array $group)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/groups/named/{$groupName}";
-        
+
         return $this->client->request('put', $endpoint, ['json' => $group]);
     }
 
@@ -150,9 +146,9 @@ class CompanyProperties extends Resource
     public function getAllGroups($includeProperties = false)
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/groups/';
-        
+
         $queryString = '';
-        
+
         if ($includeProperties) {
             $queryString = build_query_string(['includeProperties' => 'true']);
         }

@@ -14,17 +14,17 @@ use SevenShores\Hubspot\Resources\Owners;
 class CalendarEventsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Owners $owners
+     * @var Owners
      */
     protected $owners;
 
     /**
-     * @var stdClass $owner
+     * @var stdClass
      */
     protected $owner;
 
     /**
-     * @var \SevenShores\Hubspot\Http\Response $task
+     * @var \SevenShores\Hubspot\Http\Response
      */
     protected $task;
 

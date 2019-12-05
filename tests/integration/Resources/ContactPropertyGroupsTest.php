@@ -3,44 +3,44 @@
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Http\Client;
-use SevenShores\Hubspot\Resources\CompanyProperties;
+use SevenShores\Hubspot\Resources\ContactProperties;
 
 /**
  * @internal
  * @coversNothing
  */
-class CompanyPropertyGroupsTest extends \PHPUnit_Framework_TestCase
+class ContactPropertyGroupsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var CompanyProperties
+     * @var ContactProperties
      */
-    protected $companyProperties;
+    protected $contactProperties;
 
     /**
-     * @var \SevenShores\Hubspot\Http\Response
+     * @var null|\SevenShores\Hubspot\Http\Response
      */
     protected $group;
 
     public function setUp()
     {
         parent::setUp();
-        $this->companyProperties = new CompanyProperties(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        $this->contactProperties = new ContactProperties(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
-        $this->group = $this->createCompanyPropertyGroup();
+        $this->group = $this->createContactPropertyGroup();
     }
 
     public function tearDown()
     {
         parent::tearDown();
         if (!empty($this->group)) {
-            $this->companyProperties->deleteGroup($this->group->name);
+            $this->contactProperties->deleteGroup($this->group->name);
         }
     }
 
     /** @test */
     public function all()
     {
-        $response = $this->companyProperties->getAllGroups();
+        $response = $this->contactProperties->getGroups();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
@@ -50,8 +50,7 @@ class CompanyPropertyGroupsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function allWithProperties()
     {
-        $response = $this->companyProperties->getAllGroups(true);
-
+        $response = $this->contactProperties->getGroups(true);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
         $this->assertObjectHasAttribute('properties', $response->getData()[0]);
@@ -61,27 +60,27 @@ class CompanyPropertyGroupsTest extends \PHPUnit_Framework_TestCase
     public function create()
     {
         $this->assertEquals(200, $this->group->getStatusCode());
-        $this->assertEquals('A New Custom Group', $this->group->displayName);
+        $this->assertEquals('A New Contact Property Group', $this->group->displayName);
     }
 
     /** @test */
     public function update()
     {
         $group = [
-            'displayName' => 'An Updated Company Property Group',
+            'displayName' => 'An Updated Contact Property Group',
             'displayOrder' => 7,
         ];
 
-        $response = $this->companyProperties->updateGroup($this->group->name, $group);
+        $response = $this->contactProperties->updateGroup($this->group->name, $group);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('An Updated Company Property Group', $response->displayName);
+        $this->assertEquals('An Updated Contact Property Group', $response->displayName);
     }
 
     /** @test */
     public function delete()
     {
-        $response = $this->companyProperties->deleteGroup($this->group->name);
+        $response = $this->contactProperties->deleteGroup($this->group->name);
 
         $this->assertEquals(204, $response->getStatusCode());
 
@@ -89,18 +88,18 @@ class CompanyPropertyGroupsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates a new company property group.
+     * Creates a new contact property group.
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    protected function createCompanyPropertyGroup()
+    protected function createContactPropertyGroup()
     {
         $data = [
-            'name' => 't'.uniqid(),
-            'displayName' => 'A New Custom Group',
-            'displayOrder' => 7,
+            'name' => 'group'.uniqid(),
+            'displayName' => 'A New Contact Property Group',
+            'displayOrder' => 5,
         ];
 
-        return $this->companyProperties->createGroup($data);
+        return $this->contactProperties->createGroup($data);
     }
 }

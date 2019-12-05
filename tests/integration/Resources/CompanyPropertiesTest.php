@@ -12,10 +12,13 @@ use SevenShores\Hubspot\Resources\CompanyProperties;
 class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var CompanyProperties $companyProperties
+     * @var CompanyProperties
      */
     protected $companyProperties;
-    
+
+    /**
+     * @var null|\SevenShores\Hubspot\Http\Response
+     */
     protected $property;
 
     public function setUp()
@@ -25,7 +28,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         sleep(1);
         $this->property = $this->createCompanyProperty();
     }
-    
+
     public function tearDown()
     {
         parent::tearDown();
@@ -85,7 +88,7 @@ class CompanyPropertiesTest extends \PHPUnit_Framework_TestCase
         $response = $this->companyProperties->delete($this->property->name);
 
         $this->assertEquals(204, $response->getStatusCode());
-        
+
         $this->property = null;
     }
 
