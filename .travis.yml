@@ -12,4 +12,4 @@ before_script:
 
 script:
   - vendor/bin/phpspec run --verbose
-  - vendor/bin/phpunit --verbose --bootstrap ./vendor/autoload.php
+  - vendor/bin/phpunit --verbose
