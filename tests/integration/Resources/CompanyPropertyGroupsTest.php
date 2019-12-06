@@ -3,13 +3,13 @@
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Resources\CompanyProperties;
-use SevenShores\Hubspot\Tests\Integration\Abstraction\PropertyGroups;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\PropertyGroupsTestCase;
 
 /**
  * @internal
  * @coversNothing
  */
-class CompanyPropertyGroupsTest extends PropertyGroups
+class CompanyPropertyGroupsTest extends PropertyGroupsTestCase
 {
     /**
      * @var CompanyProperties
