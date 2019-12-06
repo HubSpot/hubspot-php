@@ -4,7 +4,7 @@ namespace SevenShores\Hubspot\Tests\Integration\Abstraction;
 
 use SevenShores\Hubspot\Http\Client;
 
-class PropertyGroupsTestCase extends \PHPUnit_Framework_TestCase
+abstract class PropertyGroupsTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var string
