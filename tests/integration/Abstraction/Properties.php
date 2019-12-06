@@ -1,6 +1,6 @@
 <?php
 
-namespace SevenShores\Hubspot\Tests\Integration;
+namespace SevenShores\Hubspot\Tests\Integration\Abstraction;
 
 use SevenShores\Hubspot\Http\Client;
 

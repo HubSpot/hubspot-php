@@ -3,7 +3,7 @@
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Resources\ContactProperties;
-use SevenShores\Hubspot\Tests\Integration\Properties;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\Properties;
 /**
  * @internal
  * @coversNothing
