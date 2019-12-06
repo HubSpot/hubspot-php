@@ -12,7 +12,7 @@ use SevenShores\Hubspot\Tests\Integration\Abstraction\PropertyGroups;
 class CompanyPropertyGroupsTest extends PropertyGroups
 {
     /**
-     * @var DealProperties
+     * @var CompanyProperties
      */
     protected $resourceClass = CompanyProperties::class;
 }
