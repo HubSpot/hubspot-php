@@ -3,7 +3,7 @@
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Resources\CompanyProperties;
-use SevenShores\Hubspot\Tests\Integration\Resources\Properties;
+use SevenShores\Hubspot\Tests\Integration\Properties;
 
 /**
  * @internal

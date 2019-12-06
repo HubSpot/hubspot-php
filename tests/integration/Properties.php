@@ -1,6 +1,6 @@
 <?php
 
-namespace SevenShores\Hubspot\Tests\Integration\Resources;
+namespace SevenShores\Hubspot\Tests\Integration;
 
 use SevenShores\Hubspot\Http\Client;
 

@@ -3,6 +3,7 @@
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Resources\ContactProperties;
+use SevenShores\Hubspot\Tests\Integration\PropertyGroups;
 
 /**
  * @internal
