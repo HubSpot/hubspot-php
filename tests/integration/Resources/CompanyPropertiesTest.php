@@ -3,12 +3,13 @@
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Resources\CompanyProperties;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\PropertyGroups;
 
 /**
  * @internal
  * @coversNothing
  */
-class CompanyPropertiesTest extends \SevenShores\Hubspot\Tests\Integration\Abstraction\Properties
+class CompanyPropertiesTest extends PropertyGroups
 {
     /**
      * @var null|SevenShores\Hubspot\Resources\Resource
@@ -18,5 +19,5 @@ class CompanyPropertiesTest extends \SevenShores\Hubspot\Tests\Integration\Abstr
     /**
      * @var string
      */
-    protected $groupName = 'companyinformation';
+    //protected $groupName = 'companyinformation';
 }
