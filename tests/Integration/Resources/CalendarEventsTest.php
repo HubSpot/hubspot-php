@@ -101,6 +101,7 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function all()
     {
+        sleep(5);
         $startDate = $this->task->eventDate - 60 * 60 * 1000;
         $endDate = $this->task->eventDate + 60 * 60 * 1000;
 
@@ -113,6 +114,7 @@ class CalendarEventsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function allTasks()
     {
+        sleep(5);
         $startDate = $this->task->eventDate - 60 * 60 * 1000;
         $endDate = $this->task->eventDate + 60 * 60 * 1000;
 
