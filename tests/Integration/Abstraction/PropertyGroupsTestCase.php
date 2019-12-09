@@ -2,45 +2,12 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Abstraction;
 
-use SevenShores\Hubspot\Http\Client;
-
-abstract class PropertyGroupsTestCase extends \PHPUnit_Framework_TestCase
+abstract class PropertyGroupsTestCase extends EntityTestCase
 {
     /**
      * @var string
      */
     protected $allGroupsMethod = 'getAllGroups';
-
-    /**
-     * @var null|SevenShores\Hubspot\Resources\Resource
-     */
-    protected $resource;
-
-    /**
-     * @var null|SevenShores\Hubspot\Resources\Resource
-     */
-    protected $resourceClass;
-
-    /**
-     * @var null|\SevenShores\Hubspot\Http\Response
-     */
-    protected $group;
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->resource = new $this->resourceClass(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
-        $this->group = $this->createPropertyGroup();
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-        if (!empty($this->group)) {
-            $this->resource->deleteGroup($this->group->name);
-        }
-    }
 
     /** @test */
     public function all()
@@ -64,8 +31,8 @@ abstract class PropertyGroupsTestCase extends \PHPUnit_Framework_TestCase
     /** @test */
     public function create()
     {
-        $this->assertEquals(200, $this->group->getStatusCode());
-        $this->assertEquals('A New Property Group', $this->group->displayName);
+        $this->assertEquals(200, $this->entity->getStatusCode());
+        $this->assertEquals('A New Property Group', $this->entity->displayName);
     }
 
     /** @test */
@@ -76,7 +43,7 @@ abstract class PropertyGroupsTestCase extends \PHPUnit_Framework_TestCase
             'displayOrder' => 7,
         ];
 
-        $response = $this->resource->updateGroup($this->group->name, $group);
+        $response = $this->resource->updateGroup($this->entity->name, $group);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('An Updated Property Group', $response->displayName);
@@ -85,19 +52,29 @@ abstract class PropertyGroupsTestCase extends \PHPUnit_Framework_TestCase
     /** @test */
     public function delete()
     {
-        $response = $this->resource->deleteGroup($this->group->name);
+        $response = $this->resource->deleteGroup($this->entity->name);
 
         $this->assertEquals(204, $response->getStatusCode());
 
-        $this->group = null;
+        $this->entity = null;
     }
 
     /**
-     * Creates a new contact property group.
+     * Delete a new property group.
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    protected function createPropertyGroup()
+    protected function deleteEntity()
+    {
+        return $this->resource->deleteGroup($this->entity->name);
+    }
+
+    /**
+     * Creates a new property group.
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    protected function createEntity()
     {
         $data = [
             'name' => 'group'.uniqid(),
