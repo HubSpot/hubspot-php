@@ -17,8 +17,8 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
      */
     protected $dealPipelines;
     /**
-     * @var  
-     * $pipeline*/
+     * @var null|\SevenShores\Hubspot\Http\Response
+     */
     protected $pipeline;
 
     public function setUp()

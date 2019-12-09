@@ -47,17 +47,13 @@ class ContactProperties extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property
      *
-     * @param array $property
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function create($property)
+    public function create(array $property)
     {
         $endpoint = 'https://api.hubapi.com/contacts/v2/properties';
 
-        $options['json'] = $property;
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $property]);
     }
 
     /**
@@ -68,18 +64,16 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property
      *
      * @param string $name
-     * @param array  $property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function update($name, $property)
+    public function update($name, array $property)
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/properties/named/{$name}";
 
         $property['name'] = $name;
-        $options['json'] = $property;
 
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, ['json' => $property]);
     }
 
     /**
@@ -115,7 +109,10 @@ class ContactProperties extends Resource
     {
         $endpoint = 'https://api.hubapi.com/contacts/v2/groups';
 
-        $queryString = build_query_string(['includeProperties' => $includeProperties]);
+        $queryString = '';
+        if ($includeProperties) {
+            $queryString = build_query_string(['includeProperties' => 'true']);
+        }
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
@@ -132,13 +129,11 @@ class ContactProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function createGroup($group)
+    public function createGroup(array $group)
     {
         $endpoint = 'https://api.hubapi.com/contacts/v2/groups';
 
-        $options['json'] = $group;
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $group]);
     }
 
     /**
@@ -149,18 +144,16 @@ class ContactProperties extends Resource
      * @see http://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property_group
      *
      * @param string $name
-     * @param array  $group
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateGroup($name, $group)
+    public function updateGroup($name, array $group)
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$name}";
 
         $group['name'] = $name;
-        $options['json'] = $group;
 
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, ['json' => $group]);
     }
 
     /**
