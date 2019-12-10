@@ -18,7 +18,7 @@ class Forms extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function submit($portal_id, $form_guid, $form)
+    public function submit($portal_id, $form_guid, array $form)
     {
         $endpoint = "https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_guid}";
 
@@ -70,13 +70,11 @@ class Forms extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function create($form)
+    public function create(array $form)
     {
         $endpoint = 'https://api.hubapi.com/forms/v2/forms';
 
-        $options['json'] = $form;
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $form]);
     }
 
     /**
@@ -89,13 +87,11 @@ class Forms extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function update($form_guid, $form)
+    public function update($form_guid, array $form)
     {
         $endpoint = "https://api.hubapi.com/forms/v2/forms/{$form_guid}";
 
-        $options['json'] = $form;
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $form]);
     }
 
     /**
