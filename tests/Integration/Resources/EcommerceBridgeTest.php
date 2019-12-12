@@ -16,79 +16,176 @@ use SevenShores\Hubspot\Resources\EcommerceBridge;
 class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
 {
     /** @var EcommerceBridge */
-    private $ecommerceBridge;
+    protected $resource;
 
     public function setUp()
     {
         parent::setUp();
-        $this->ecommerceBridge = new EcommerceBridge(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        $this->resource = new EcommerceBridge(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
-
-    public function testInstall()
+    
+    /** @test */
+    public function upsertSettings()
     {
-        $response = $this->ecommerceBridge->install();
-
-        $this->assertEquals(204, $response->getStatusCode());
-    }
-
-//    TODO: add back in once hubspot stops throwing 500 errors
-//    public function testCheckInstall()
-//    {
-//        $response = $this->ecommerceBridge->checkInstall();
-//
-//        $this->assertEquals(200, $response->getStatusCode());
-//        $this->assertContains([
-//            'installCompleted' => true
-//        ], $response->toArray());
-//    }
-
-    public function testUninstallSettings()
-    {
-        $response = $this->ecommerceBridge->uninstall();
-
-        $this->assertEquals(204, $response->getStatusCode());
-    }
-
-    public function testUpsertSettings()
-    {
-        $settings = [
-            'enabled' => false,
-            'importOnInstall' => false,
-            'productSyncSettings' => [
-                'properties' => [
-                    ['propertyName' => 'test_name', 'dataType' => 'STRING', 'targetHubspotProperty' => 'name'],
-                ],
-            ],
-            'dealSyncSettings' => [
-                'properties' => [],
-            ],
-            'lineItemSyncSettings' => [
-                'properties' => [],
-            ],
-            'contactSyncSettings' => [
-                'properties' => [],
-            ],
-        ];
-
-        $response = $this->ecommerceBridge->upsertSettings($settings);
+        $response = $this->resource->upsertSettings($this->getData());
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals($settings, $response->toArray());
+    }
+    
+    /** @test */
+    public function getSettings()
+    {
+        $response = $this->resource->getSettings();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertArrayHasKey('mappings', $response->toArray());
+    }
+    
+    /** @test */
+    public function createOrUpdateStore() {
+        $response = $this->resource->createOrUpdateStore([
+            'id' => 'ecommercebridge-test-store',
+            'label' => 'Ecommerce Bridge Test Store',
+            'adminUri' => 'https://ecommercebridge-test-store.myshopify.com'
+        ]);
+        
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+    
+    /** @test */
+    public function allStores()
+    {
+        $response = $this->resource->allStores();
+        
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThanOrEqual(1, count($response->getData()->results));
+    }
+    
+    /** @test */
+    public function getStore()
+    {
+        $response = $this->resource->getStore('ecommercebridge-test-store');
+        
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertContains('ecommercebridge-test-store', $response->toArray());
     }
 
-    public function testDeleteSettings()
+    /** @test */
+    public function deleteSettings()
     {
-        $response = $this->ecommerceBridge->deleteSettings();
+        $response = $this->resource->deleteSettings();
 
         $this->assertEquals(204, $response->getStatusCode());
     }
 
     public function testSyncErrors()
     {
-        $response = $this->ecommerceBridge->getSyncErrors();
+        $this->markTestSkipped();
+        $response = $this->resource->getSyncErrors();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertArrayHasKey('results', $response->toArray());
+    }
+    
+    protected function getData()
+    {
+        return [
+            'enabled' => false,
+            'webhookUri' => null,
+            'mappings' => [
+                'CONTACT' => [
+                    'properties' =>  [
+                        [
+                            'externalPropertyName' => 'firstname',
+                            'hubspotPropertyName'  => 'firstname',
+                            'dataType' => 'STRING',
+                        ],
+                        [
+                            'externalPropertyName' => 'phone_number',
+                            'hubspotPropertyName' => 'mobilephone',
+                            'dataType' => 'STRING'
+                        ],
+                        [
+                            'externalPropertyName' => 'familyname',
+                            'hubspotPropertyName' => 'lastname',
+                            'dataType' => 'STRING'
+                        ],
+                        [
+                            'externalPropertyName' => 'customer_email',
+                            'hubspotPropertyName' => 'email',
+                            'dataType' => 'STRING'
+                        ],
+                    ]
+                ],
+                'DEAL' => [
+                    'properties' =>  [
+                        [
+                            'externalPropertyName' => 'purchase_date',
+                            'hubspotPropertyName' => 'closedate',
+                            'dataType' => 'STRING'
+                        ],
+                        [
+                            'externalPropertyName' => 'name',
+                            'hubspotPropertyName' => 'dealname',
+                            'dataType' => 'STRING'
+                        ],
+                        [
+                            'externalPropertyName' => 'stage',
+                            'hubspotPropertyName' => 'dealstage',
+                            'dataType' => 'STRING'
+                        ],
+                        [
+                            'externalPropertyName' => 'abandoned_cart_url',
+                            'hubspotPropertyName' => 'ip__ecomm_bride__abandoned_cart_url',
+                            'dataType' => 'STRING'
+                        ]
+                    ],
+                ],
+                'PRODUCT' => [
+                    'properties' =>  [
+                        [
+                            'externalPropertyName' => 'product_name',
+                            'hubspotPropertyName' => 'name',
+                            'dataType' => 'STRING'
+                        ],
+                        [
+                            'externalPropertyName' => 'product_description',
+                            'hubspotPropertyName' => 'description',
+                            'dataType' => 'STRING'
+                        ],
+                        [
+                            'externalPropertyName' => 'price',
+                            'hubspotPropertyName' => 'price',
+                            'dataType' => 'NUMBER'
+                        ]
+                    ],
+                ],
+                'LINE_ITEM' => [
+                    'properties' =>  [
+                        [
+                            'externalPropertyName' => 'discount_amount',
+                            'hubspotPropertyName' => 'discount',
+                            'dataType' => 'NUMBER'
+                        ],
+                        [
+                            'externalPropertyName' => 'num_items',
+                            'hubspotPropertyName' => 'quantity',
+                            'dataType' => 'NUMBER'
+                        ],
+                        [
+                            'externalPropertyName' => 'price',
+                            'hubspotPropertyName' => 'price',
+                            'dataType' => 'NUMBER'
+                        ],
+                        [
+                            'externalPropertyName' => 'tax_amount',
+                            'hubspotPropertyName' => 'tax',
+                            'dataType' => 'NUMBER'
+                        ]
+                    ],
+                ],
+            ]
+        ];
     }
 }
