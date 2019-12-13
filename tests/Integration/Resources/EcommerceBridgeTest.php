@@ -15,9 +15,15 @@ use SevenShores\Hubspot\Resources\EcommerceBridge;
  */
 class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
 {
+    const STORE_ID = 'ecommercebridge-test-store';
+    
     /** @var EcommerceBridge */
     protected $resource;
     
+    /**
+     *
+     * @var int $timestamp
+     */
     protected $timestamp;
 
     public function setUp()
@@ -47,8 +53,8 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function createOrUpdateStore() {
         $response = $this->resource->createOrUpdateStore([
-            'id' => 'ecommercebridge-test-store',
-            'label' => 'Ecommerce Bridge Test Store',
+            'id' => static::STORE_ID,
+            'label' => 'Ecommerce Bridge Test Store '.uniqid(),
             'adminUri' => 'https://ecommercebridge-test-store.myshopify.com'
         ]);
         
@@ -67,40 +73,41 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getStore()
     {
-        $response = $this->resource->getStore('ecommercebridge-test-store');
+        $response = $this->resource->getStore(static::STORE_ID);
         
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains('ecommercebridge-test-store', $response->toArray());
+        $this->assertContains(static::STORE_ID, $response->toArray());
     }
     
     /** @test */
     public function sendSyncMessages()
     {
         $response = $this->resource->sendSyncMessages(
-                'ecommercebridge-test-store',
+                static::STORE_ID,
                 'CONTACT',
                 [
                     [
                         'action' => 'UPSERT',
                         'changedAt' => $this->getTimestamp(),
-                        'externalObjectId' => '1234',
+                        'externalObjectId' => '12345',
                         'properties' => [
                             'firstname' => 'Jeff' . uniqid(),
                             'lastname' => 'David',
-                            'email' => 'test@example.com'
+                            'customer_email' => 'test@example.com'
                         ]
                     ]
                 ]
             );
         
         $this->assertEquals(204, $response->getStatusCode());
+        sleep(1);
     }
     
     /** @test */
     public function getAllSyncErrorsAccount()
     {
         $response = $this->resource->getAllSyncErrorsAccount();
-        
+        var_dump($response->getData());
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertArrayHasKey('results', $response->toArray());
     }
@@ -109,12 +116,51 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
     public function checkSyncStatus()
     {
         $response = $this->resource->checkSyncStatus(
-                'ecommercebridge-test-store',
+                static::STORE_ID,
                 'CONTACT',
-                '1234'
+                '12345'
             );
         
         $this->assertEquals(200, $response->getStatusCode());
+    }
+    
+    /** @test */
+    public function importData()
+    {
+        $response = $this->resource->importData(
+                time(),
+                1,
+                [
+                    [
+                        'externalObjectId' => '123487878',
+                        'properties' => [
+                            'firstname' => 'Jeff' . uniqid(),
+                            'phone_number' => '+375441234567',
+                            'familyname' => 'David',
+                            'customer_email' => 'test1@example.com',
+                        ]
+                    ]
+                ],
+                static::STORE_ID,
+                'CONTACT'
+            );
+        
+            //var_dump($response->getStatusCode(), $response->getReasonPhrase());
+        $this->assertEquals(204, $response->getStatusCode());
+    }
+    
+    /** @test */
+    public function signalImportEnd()
+    {
+        $response = $this->resource->signalImportEnd(
+                $this->getTimestamp(),
+                1,
+                1,
+                static::STORE_ID,
+                'DEAL'
+            );
+        
+        $this->assertEquals(204, $response->getStatusCode());
     }
 
     /** @test */
@@ -139,6 +185,7 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
     {
         return [
             'enabled' => true,
+            'importOnInstall' => true,
             'webhookUri' => null,
             'mappings' => [
                 'CONTACT' => [

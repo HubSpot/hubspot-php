@@ -286,8 +286,9 @@ class EcommerceBridge extends Resource
         $options['json'] = [
             'importStartedAt' => $importStartedAt,
             'pageCount' => $pageCount,
-            'pageCount' => $pageCount,
             'itemCount' => $itemCount,
+            'storeId' => $storeId,
+            'objectType' => $objectType,
         ];
 
         return $this->client->request('post', $endpoint, $options);
