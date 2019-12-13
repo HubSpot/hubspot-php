@@ -17,6 +17,8 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
 {
     /** @var EcommerceBridge */
     protected $resource;
+    
+    protected $timestamp;
 
     public function setUp()
     {
@@ -70,6 +72,50 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains('ecommercebridge-test-store', $response->toArray());
     }
+    
+    /** @test */
+    public function sendSyncMessages()
+    {
+        $response = $this->resource->sendSyncMessages(
+                'ecommercebridge-test-store',
+                'CONTACT',
+                [
+                    [
+                        'action' => 'UPSERT',
+                        'changedAt' => $this->getTimestamp(),
+                        'externalObjectId' => '1234',
+                        'properties' => [
+                            'firstname' => 'Jeff' . uniqid(),
+                            'lastname' => 'David',
+                            'email' => 'test@example.com'
+                        ]
+                    ]
+                ]
+            );
+        
+        $this->assertEquals(204, $response->getStatusCode());
+    }
+    
+    /** @test */
+    public function getAllSyncErrorsAccount()
+    {
+        $response = $this->resource->getAllSyncErrorsAccount();
+        
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertArrayHasKey('results', $response->toArray());
+    }
+    
+    /** @test */
+    public function checkSyncStatus()
+    {
+        $response = $this->resource->checkSyncStatus(
+                'ecommercebridge-test-store',
+                'CONTACT',
+                '1234'
+            );
+        
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
     /** @test */
     public function deleteSettings()
@@ -78,20 +124,21 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(204, $response->getStatusCode());
     }
-
-    public function testSyncErrors()
-    {
-        $this->markTestSkipped();
-        $response = $this->resource->getSyncErrors();
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertArrayHasKey('results', $response->toArray());
-    }
     
+    protected function getTimestamp()
+    {
+        if (is_null($this->timestamp)) {
+            $this->timestamp = time();
+        }
+        
+        return $this->timestamp;
+    }
+
+
     protected function getData()
     {
         return [
-            'enabled' => false,
+            'enabled' => true,
             'webhookUri' => null,
             'mappings' => [
                 'CONTACT' => [
