@@ -107,7 +107,6 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
     public function getAllSyncErrorsAccount()
     {
         $response = $this->resource->getAllSyncErrorsAccount();
-        var_dump($response->getData());
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertArrayHasKey('results', $response->toArray());
     }
@@ -127,6 +126,7 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function importData()
     {
+        $this->markTestSkipped();
         $response = $this->resource->importData(
                 time(),
                 1,
@@ -145,13 +145,13 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
                 'CONTACT'
             );
         
-            //var_dump($response->getStatusCode(), $response->getReasonPhrase());
         $this->assertEquals(204, $response->getStatusCode());
     }
     
     /** @test */
     public function signalImportEnd()
     {
+        $this->markTestSkipped();
         $response = $this->resource->signalImportEnd(
                 $this->getTimestamp(),
                 1,
