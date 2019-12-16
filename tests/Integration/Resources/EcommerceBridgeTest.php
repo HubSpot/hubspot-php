@@ -119,7 +119,7 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
                 'CONTACT',
                 '12345'
             );
-        
+
         $this->assertEquals(200, $response->getStatusCode());
     }
     
@@ -128,21 +128,28 @@ class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped();
         $response = $this->resource->importData(
-                time(),
+                $this->getTimestamp(),
                 1,
                 [
                     [
-                        'externalObjectId' => '123487878',
+                        'externalObjectId' => 'deal1',
                         'properties' => [
-                            'firstname' => 'Jeff' . uniqid(),
+                            'firstname' => 'ever',
                             'phone_number' => '+375441234567',
-                            'familyname' => 'David',
-                            'customer_email' => 'test1@example.com',
+                            'familyname' => 'greatest',
+                            'customer_email' => 'testingapis@hubspot.com',
+//                            'firstname' => 'Jeff' . uniqid(),
+//                            'mobilephone' => '+375441234567',
+//                            'lastname' => 'David',
+//                            'email' => 'test1@example.com',
+                        ],
+                        'assocations' => [
+                            'CONTACT' => ['123456']
                         ]
                     ]
                 ],
                 static::STORE_ID,
-                'CONTACT'
+                'DEAL'
             );
         
         $this->assertEquals(204, $response->getStatusCode());
