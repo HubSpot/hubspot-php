@@ -32,7 +32,7 @@ class Timeline extends Resource
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event";
 
-        $data['json'] = array_merge([
+        $data = ['json' => array_merge([
             'eventTypeId' => $eventTypeId,
             'id' => $id,
             'objectId' => $objectId,
@@ -40,7 +40,8 @@ class Timeline extends Resource
             'utk' => $utk,
             'extraData' => $extraData,
             'timestamp' => $this->timestamp($timestamp),
-        ], $eventTypeData);
+        ], $eventTypeData),
+        ];
 
         return $this->client->request('put', $endpoint, $data);
     }
@@ -79,9 +80,11 @@ class Timeline extends Resource
     {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event/batch";
 
-        $data['json'] = ['eventWrappers' => $events];
-
-        return $this->client->request('put', $endpoint, $data);
+        return $this->client->request(
+            'put',
+            $endpoint,
+            ['json' => ['eventWrappers' => $events]]
+        );
     }
 
     /**
@@ -107,6 +110,8 @@ class Timeline extends Resource
      * @param int $eventTypeId
      *
      * @return mixed
+     *
+     * @see https://developers.hubspot.com/docs/methods/timeline/get-event-type-by-id
      */
     public function getEventTypeById($appId, $eventTypeId)
     {
@@ -137,12 +142,13 @@ class Timeline extends Resource
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types";
 
-        $data['json'] = [
+        $data = ['json' => [
             'applicationId' => $appId,
             'name' => $name,
             'headerTemplate' => $headerTemplate,
             'detailTemplate' => $detailTemplate,
             'objectType' => $objectType,
+        ],
         ];
 
         return $this->client->request('post', $endpoint, $data);
@@ -172,12 +178,13 @@ class Timeline extends Resource
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}";
 
-        $data['json'] = [
+        $data = ['json' => [
             'applicationId' => $appId,
             'name' => $name,
             'headerTemplate' => $headerTemplate,
             'detailTemplate' => $detailTemplate,
             'objectType' => $objectType,
+        ],
         ];
 
         return $this->client->request('put', $endpoint, $data);
@@ -242,12 +249,13 @@ class Timeline extends Resource
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
 
-        $data['json'] = [
+        $data = ['json' => [
             'name' => $name,
             'label' => $label,
             'propertyType' => $propertyType,
             'objectProperty' => $objectProperty,
             'options' => $options,
+        ],
         ];
 
         return $this->client->request('post', $endpoint, $data);
@@ -256,13 +264,12 @@ class Timeline extends Resource
     /**
      * Update Property for Timeline Event Type.
      *
-     * @param int        $appId
-     * @param int        $eventTypeId
-     * @param int        $eventTypePropertyId
-     * @param string     $name
-     * @param string     $label
-     * @param string     $propertyType
-     * @param null|array $options
+     * @param int    $appId
+     * @param int    $eventTypeId
+     * @param int    $eventTypePropertyId
+     * @param string $name
+     * @param string $label
+     * @param string $propertyType
      *
      * @return mixed
      *
@@ -275,7 +282,7 @@ class Timeline extends Resource
         $name,
         $label,
         $propertyType,
-        $options = null
+        array $options = []
     ) {
         $endpoint = "https://api.hubapi.com/integrations/v1/{$appId}/timeline/event-types/{$eventTypeId}/properties";
 
