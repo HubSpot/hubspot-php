@@ -2,42 +2,57 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+/**
+ * @see https://developers.hubspot.com/docs/methods/email/email_subscriptions_overview
+ */
 class Email extends Resource
 {
     /**
      * Get email subscription types for a portal.
+     * 
+     * @see https://developers.hubspot.com/docs/methods/email/get_subscriptions
      *
-     * @param int $portal_id
+     * @param int $portalId
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function subscriptions($portal_id)
+    public function subscriptions($portalId)
     {
         $endpoint = 'https://api.hubapi.com/email/public/v1/subscriptions';
 
-        $queryString = build_query_string(['portalId' => $portal_id]);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string(['portalId' => $portalId])
+        );
     }
 
     /**
      * View subscriptions timeline for a portal.
      *
+     * @see https://developers.hubspot.com/docs/methods/email/get_subscriptions_timeline
+     * 
      * @param array $params Optional parameters
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function subscriptionsTimeline($params = [])
+    public function subscriptionsTimeline(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/email/public/v1/subscriptions/timeline';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
      * Get email subscription status for an email address.
+     * 
+     * @see https://developers.hubspot.com/docs/methods/email/get_status
      *
      * @param int    $portal_id
      * @param string $email
@@ -48,27 +63,33 @@ class Email extends Resource
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions/{$email}";
 
-        $queryString = build_query_string(['portalId' => $portal_id]);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string(['portalId' => $portal_id])
+        );
     }
 
     /**
      * Update email subscription status for an email address.
      *
+     * @see https://developers.hubspot.com/docs/methods/email/update_status
+     * 
      * @param int    $portal_id
      * @param string $email
-     * @param array  $params
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateSubscription($portal_id, $email, $params = [])
+    public function updateSubscription($portal_id, $email, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions/{$email}";
 
-        $queryString = build_query_string(['portalId' => $portal_id]);
-        $options['json'] = $params;
-
-        return $this->client->request('put', $endpoint, $options, $queryString);
+        return $this->client->request(
+            'put',
+            $endpoint,
+            ['json' => $params],
+            build_query_string(['portalId' => $portal_id])
+        );
     }
 }
