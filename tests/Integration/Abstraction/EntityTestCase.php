@@ -22,12 +22,20 @@ abstract class EntityTestCase extends PHPUnit_Framework_TestCase
      */
     protected $entity;
 
+    /**
+     * @var string
+     */
+    protected $key = 'HUBSPOT_TEST_API_KEY';
+
     public function setUp()
     {
         parent::setUp();
-        $this->resource = new $this->resourceClass(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
+        if (empty($this->resource)) {
+            $this->resource = new $this->resourceClass(new Client(['key' => getenv($this->key)]));
+        }
+
         $this->entity = $this->createEntity();
+        sleep(1);
     }
 
     public function tearDown()
@@ -38,7 +46,7 @@ abstract class EntityTestCase extends PHPUnit_Framework_TestCase
         }
     }
 
-    abstract protected function deleteEntity();
-
     abstract protected function createEntity();
+
+    abstract protected function deleteEntity();
 }
