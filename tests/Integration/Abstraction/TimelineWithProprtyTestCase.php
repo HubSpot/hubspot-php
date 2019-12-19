@@ -18,7 +18,7 @@ abstract class TimelineWithProprtyTestCase extends TimelineTestCase
     public function tearDown()
     {
         if (!empty($this->property)) {
-            //$this->deleteProperty();
+            $this->deleteProperty();
         }
 
         parent::tearDown();
