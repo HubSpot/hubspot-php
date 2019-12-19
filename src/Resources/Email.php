@@ -9,7 +9,7 @@ class Email extends Resource
 {
     /**
      * Get email subscription types for a portal.
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/email/get_subscriptions
      *
      * @param int $portalId
@@ -32,7 +32,7 @@ class Email extends Resource
      * View subscriptions timeline for a portal.
      *
      * @see https://developers.hubspot.com/docs/methods/email/get_subscriptions_timeline
-     * 
+     *
      * @param array $params Optional parameters
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -51,7 +51,7 @@ class Email extends Resource
 
     /**
      * Get email subscription status for an email address.
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/email/get_status
      *
      * @param int    $portal_id
@@ -75,7 +75,7 @@ class Email extends Resource
      * Update email subscription status for an email address.
      *
      * @see https://developers.hubspot.com/docs/methods/email/update_status
-     * 
+     *
      * @param int    $portal_id
      * @param string $email
      *

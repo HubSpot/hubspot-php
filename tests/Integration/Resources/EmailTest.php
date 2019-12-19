@@ -2,9 +2,9 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
+use Exception;
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Email;
-use Exception;
 
 /**
  * @internal
@@ -13,11 +13,10 @@ use Exception;
 class EmailTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     *
      * @var Email
      */
     protected $resource;
-    
+
     /**
      * @var string
      */
@@ -29,9 +28,9 @@ class EmailTest extends \PHPUnit_Framework_TestCase
             throw new Exception('Invalid Portal Id (HUBSPOT_TEST_PORTAL_ID)');
         }
         $this->portalId = getenv('HUBSPOT_TEST_PORTAL_ID');
-        
+
         parent::setUp();
-        
+
         $this->resource = new Email(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
