@@ -19,7 +19,7 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Resources\ContactProperties contactProperties()
  * @method \SevenShores\Hubspot\Resources\Contacts          contacts()
  * @method \SevenShores\Hubspot\Resources\CrmAssociations   crmAssociations()
- * @method \SevenShores\Hubspot\Resources\Email             email()
+ * @method \SevenShores\Hubspot\Resources\EmailSubscription emailSubscription()
  * @method \SevenShores\Hubspot\Resources\EmailEvents       emailEvents()
  * @method \SevenShores\Hubspot\Resources\Engagements       engagements()
  * @method \SevenShores\Hubspot\Resources\Files             files()
