@@ -53,7 +53,6 @@ class TimelineEventTypePropertyTest extends TimelineWithProprtyTestCase
      */
     public function deleteEventTypeProperty()
     {
-        $this->markTestSkipped();
         $response = $this->deleteProperty();
 
         $this->assertEquals(204, $response->getStatusCode());
