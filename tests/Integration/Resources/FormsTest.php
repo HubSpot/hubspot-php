@@ -24,7 +24,7 @@ class FormsTest extends EntityTestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
     }
-    
+
     /** @test */
     public function create()
     {
@@ -55,7 +55,7 @@ class FormsTest extends EntityTestCase
         $reponse = $this->deleteEntity();
 
         $this->assertEquals(204, $reponse->getStatusCode());
-        
+
         $this->entity = null;
     }
 

@@ -14,7 +14,6 @@ class Forms extends Resource
      *
      * @param int    $portal_id
      * @param string $form_guid
-     * @param array  $form
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -66,8 +65,6 @@ class Forms extends Resource
      *
      * @see http://developers.hubspot.com/docs/methods/forms/v2/create_form
      *
-     * @param array $form
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function create(array $form)
@@ -83,7 +80,6 @@ class Forms extends Resource
      * @see http://developers.hubspot.com/docs/methods/forms/v2/update_form
      *
      * @param string $form_guid
-     * @param array  $form
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
