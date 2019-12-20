@@ -41,6 +41,7 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Resources\EcommerceBridge   ecommerceBridge()
  * @method \SevenShores\Hubspot\Resources\Webhooks          webhooks()
  * @method \SevenShores\Hubspot\Resources\OAuth2            oAuth2()
+ * @method \SevenShores\Hubspot\Resources\ObjectProperties  objectProperties()
  */
 class Factory
 {
@@ -73,7 +74,7 @@ class Factory
     {
         $resource = 'SevenShores\\Hubspot\\Resources\\'.ucfirst($name);
 
-        return new $resource($this->client);
+        return new $resource($this->client, ...$args);
     }
 
     /**
