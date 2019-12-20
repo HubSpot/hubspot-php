@@ -2,41 +2,39 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Forms;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
 /**
  * @internal
  * @coversNothing
  */
-class FormsTest extends \PHPUnit_Framework_TestCase
+class FormsTest extends EntityTestCase
 {
     /**
-     * @var Forms
+     * @var null|SevenShores\Hubspot\Resources\Forms::class
      */
-    private $forms;
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->forms = new Forms(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
-    }
+    protected $resourceClass = Forms::class;
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->forms->all();
+        $response = $this->resource->all();
 
         $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThanOrEqual(1, count($response->getData()));
+    }
+
+    /** @test */
+    public function create()
+    {
+        $this->assertEquals(200, $this->entity->getStatusCode());
     }
 
     /** @test */
     public function update()
     {
-        $form = $this->createForm();
-
-        $response = $this->forms->update($form->guid, [
+        $response = $this->resource->update($this->entity->guid, [
             'name' => 'new name '.uniqid(),
         ]);
 
@@ -46,9 +44,7 @@ class FormsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getById()
     {
-        $form = $this->createForm();
-
-        $response = $this->forms->getById($form->guid);
+        $response = $this->resource->getById($this->entity->guid);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -56,19 +52,17 @@ class FormsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function delete()
     {
-        $form = $this->createForm();
-
-        $reponse = $this->forms->delete($form->guid);
+        $reponse = $this->deleteEntity();
 
         $this->assertEquals(204, $reponse->getStatusCode());
+
+        $this->entity = null;
     }
 
     /** @test */
     public function getFields()
     {
-        $form = $this->createForm();
-
-        $response = $this->forms->getFields($form->guid);
+        $response = $this->resource->getFields($this->entity->guid);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -76,9 +70,7 @@ class FormsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getFieldByName()
     {
-        $form = $this->createForm();
-
-        $response = $this->forms->getFieldByName($form->guid, 'firstname');
+        $response = $this->resource->getFieldByName($this->entity->guid, 'firstname');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -86,20 +78,22 @@ class FormsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function submit()
     {
-        $this->markTestSkipped(); // TODO: fix test
-        $form = $this->createForm();
-
-        $response = $this->forms->submit(62515, $form->guid, [
-            'firstname' => 'FooBar',
+        $response = $this->resource->submit(getenv('HUBSPOT_TEST_PORTAL_ID'), $this->entity->guid, [
+            'fields' => [
+                [
+                    'name' => 'firstname',
+                    'value' => 'Test Name',
+                ],
+            ],
         ]);
 
-        $this->assertEquals(204, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     // Lots of tests need an existing object to modify.
-    private function createForm()
+    protected function createEntity()
     {
-        $response = $this->forms->create([
+        return $this->resource->create([
             'name' => 'Test Form '.uniqid(),
             'action' => '',
             'method' => 'POST',
@@ -135,9 +129,10 @@ class FormsTest extends \PHPUnit_Framework_TestCase
                 'isSmartGroup' => false,
             ],
         ]);
+    }
 
-        $this->assertEquals(200, $response->getStatusCode());
-
-        return $response;
+    protected function deleteEntity()
+    {
+        return $this->resource->delete($this->entity->guid);
     }
 }

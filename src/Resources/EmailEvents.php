@@ -2,59 +2,100 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+/**
+ * @see https://developers.hubspot.com/docs/methods/email/email_events_overview
+ */
 class EmailEvents extends Resource
 {
     /**
-     * Get campaign IDs for a portal.
+     * Get campaign IDs with recent activity for a portal.
+     *
+     * @see https://developers.hubspot.com/docs/methods/email/get_campaigns_by_id
      *
      * @param array $params Optional parameters
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getCampaignIds($params = [])
+    public function getCampaignIds(array $params = [])
+    {
+        $endpoint = 'https://api.hubapi.com/email/public/v1/campaigns/by-id';
+
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
+    }
+    
+    /**
+     * Get campaign IDs with recent activity for a portal.
+     *
+     * @see https://developers.hubspot.com/docs/methods/email/get_campaigns
+     *
+     * @param array $params Optional parameters
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function getCampaignIdsWithRecentActivity(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/email/public/v1/campaigns';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
      * Get campaign data for a given campaign.
      *
-     * @param int $campaign_id
-     * @param int $application_id
+     * @see https://developers.hubspot.com/docs/methods/email/get_campaign_data
+     *
+     * @param int $campaignId
+     * @param int $applicationId
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getCampaignById($campaign_id, $application_id)
+    public function getCampaignById($campaignId, $applicationId)
     {
-        $endpoint = "https://api.hubapi.com/email/public/v1/campaigns/{$campaign_id}";
+        $endpoint = "https://api.hubapi.com/email/public/v1/campaigns/{$campaignId}";
 
-        $queryString = build_query_string(['appId' => $application_id]);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string(['appId' => $applicationId])
+        );
     }
 
     /**
      * Get email events for a campaign or recipient.
      *
+     * @see https://developers.hubspot.com/docs/methods/email/get_events
+     *
      * @param array $params Optional parameters
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function all($params = [])
+    public function all(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/email/public/v1/events';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
      * Get event data for a specific event.
+     *
+     * @see https://developers.hubspot.com/docs/methods/email/get_event_by_id
      *
      * @param int $id      The event ID
      * @param int $created Timestamp (milliseconds) when the event was created
