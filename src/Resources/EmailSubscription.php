@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/email/email_subscriptions_overview
  */
-class Email extends Resource
+class EmailSubscription extends Resource
 {
     /**
      * Get email subscription types for a portal.
