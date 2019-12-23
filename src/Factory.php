@@ -45,8 +45,10 @@ use SevenShores\Hubspot\Http\Client;
  */
 class Factory
 {
-    /** @var Client */
-    private $client;
+    /** 
+     * @var Client
+     */
+    protected $client;
 
     /**
      * C O N S T R U C T O R ( ^_^)y.
@@ -56,7 +58,7 @@ class Factory
      * @param array  $clientOptions options to be send with each request
      * @param bool   $wrapResponse  wrap request response in own Response object
      */
-    public function __construct($config = [], $client = null, $clientOptions = [], $wrapResponse = true)
+    public function __construct(array $config = [], $client = null, array $clientOptions = [], $wrapResponse = true)
     {
         $this->client = $client ?: new Client($config, null, $clientOptions, $wrapResponse);
     }
@@ -95,7 +97,7 @@ class Factory
      *
      * @return static
      */
-    public static function create($api_key = null, $client = null, $clientOptions = [], $wrapResponse = true)
+    public static function create($api_key = null, $client = null, array $clientOptions = [], $wrapResponse = true)
     {
         return new static(['key' => $api_key], $client, $clientOptions, $wrapResponse);
     }
@@ -110,7 +112,7 @@ class Factory
      *
      * @return static
      */
-    public static function createWithToken($token, $client = null, $clientOptions = [], $wrapResponse = true)
+    public static function createWithToken($token, $client = null, array $clientOptions = [], $wrapResponse = true)
     {
         return new static(['key' => $token, 'oauth' => true], $client, $clientOptions, $wrapResponse);
     }
@@ -125,7 +127,7 @@ class Factory
      *
      * @return static
      */
-    public static function createWithOAuth2Token($token, $client = null, $clientOptions = [], $wrapResponse = true)
+    public static function createWithOAuth2Token($token, $client = null, array $clientOptions = [], $wrapResponse = true)
     {
         return new static(['key' => $token, 'oauth2' => true], $client, $clientOptions, $wrapResponse);
     }
