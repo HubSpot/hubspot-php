@@ -32,8 +32,6 @@ abstract class HubDBRowTestCase extends EntityTestCase
         parent::setUp();
     }
 
-    
-
     protected function createEntity()
     {
         return $this->resource->createTable('Test Table'.uniqid(), [

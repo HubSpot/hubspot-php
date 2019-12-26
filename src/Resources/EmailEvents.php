@@ -27,7 +27,7 @@ class EmailEvents extends Resource
             build_query_string($params)
         );
     }
-    
+
     /**
      * Get campaign IDs with recent activity for a portal.
      *
