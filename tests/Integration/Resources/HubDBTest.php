@@ -21,7 +21,7 @@ class HubDBTest extends HubDBRowTestCase
      */
     public function getTable() 
     {
-        $response = $this->resource->getTable($this->portalId, $this->entity->id);
+        $response = $this->resource->getTable($this->entity->id, $this->portalId);
         
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains($this->entity->id, $response->toArray());
@@ -69,5 +69,33 @@ class HubDBTest extends HubDBRowTestCase
         $this->assertEquals(204, $response->getStatusCode());
         
         $this->entity = null;
+    }
+    
+    /**
+     * @test
+     */
+    public function import() {
+        $response = $this->resource->import(
+            $this->entity->id,
+            __DIR__.'/../../file.csv',
+            [
+                'resetTable' => false,
+                'skipRows' => 1,
+                'format' => 'csv',
+                'columnMappings' => [
+                    [
+                        'source' => 1,
+                        'target' => 1,
+                    ],
+                    [
+                        'source' => 2,
+                        'target' => 2,
+                    ],
+                ]
+            ]
+        );
+        
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(2, $response->rowsImported);
     }
 }

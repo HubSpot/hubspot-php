@@ -2,6 +2,8 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+use CURLFile;
+
 /**
  * @see https://developers.hubspot.com/docs/methods/hubdb/hubdb_overview
  */
@@ -49,15 +51,19 @@ class HubDB extends Resource
      * @see https://developers.hubspot.com/docs/methods/hubdb/v2/get_table
      *
      * @param int $tableId  Table ID
+     * @param int $portalId
      * @param bool $draft
      * @param array $params You can set some specific params (E.g. Hub/Portal ID).
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function getTable($tableId, $draft = false, array $params = [])
+    public function getTable($tableId, $portalId = null, $draft = false, array $params = [])
     {
         $endpoint = $this->getEndpoint("https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}", $draft);
-
+        if (!empty($portalId)) {
+            $params['portalId'] = $portalId;
+        }
+        
         return $this->client->request(
             'get',
             $endpoint,
@@ -182,18 +188,22 @@ class HubDB extends Resource
      * @see https://developers.hubspot.com/docs/methods/hubdb/v2/get_table_rows
      *
      * @param int   $tableId  table ID
+     * @param int $portalId
      * @param bool $draft
      * @param array $params You can set some specific params (E.g. Hub/Portal ID).
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function getRows($tableId, $draft = false, array $params = [])
+    public function getRows($tableId, $portalId = null, $draft = false, array $params = [])
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows",
             $draft
         );
-
+        if (!empty($portalId)) {
+            $params['portalId'] = $portalId;
+        }
+        
         return $this->client->request(
             'get',
             $endpoint,
@@ -238,7 +248,7 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function cloneRow($tableId, $rowId, array $values, $draft = false)
+    public function cloneRow($tableId, $rowId, $draft = false)
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows/{$rowId}/clone",
@@ -247,8 +257,7 @@ class HubDB extends Resource
 
         return $this->client->request(
             'post',
-            $endpoint,
-            ['json' => ['values' => $values]]
+            $endpoint
         );
     }
     
@@ -316,7 +325,7 @@ class HubDB extends Resource
         return $this->client->request(
             'put',
             $endpoint,
-            ['json' => ['values' => $values]]
+            ['json' => $values]
         );
     }
 
@@ -377,10 +386,21 @@ class HubDB extends Resource
      * @param int $tableId
      * @param bool $draft
      */
-    public function import($tableId, $draft)
+    public function import($tableId, $file, array $cofig = [], $draft = false)
     {
         $endpoint = $this->getEndpoint("https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/import", $draft);
         
-        return $this->client->request('post', $endpoint);
+        return $this->client->request('post', $endpoint, [
+            'multipart' => [
+                [
+                    'name' => 'file',
+                    'contents' => file_get_contents($file),
+                ],
+                [
+                    'name' => 'config',
+                    'contents' => json_encode($cofig).';type=application/json',
+                ],
+            ],
+        ]);
     }
 }

@@ -40,7 +40,11 @@ abstract class HubDBRowTestCase extends EntityTestCase
             [
                 'name' => 'Name',
                 'type' => 'TEXT',
-            ]
+            ],
+            [
+                'name' => 'Count',
+                'type' => 'NUMBER',
+            ],
         ]);
     }
 
