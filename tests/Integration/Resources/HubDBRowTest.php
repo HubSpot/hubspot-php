@@ -8,7 +8,7 @@ use SevenShores\Hubspot\Tests\Integration\Abstraction\HubDBRowTestCase;
  * @internal
  * @coversNothing
  */
-class HubDBTest extends HubDBRowTestCase
+class HubDBRowTest extends HubDBRowTestCase
 {
     /**
      * @var \SevenShores\Hubspot\Http\Response
