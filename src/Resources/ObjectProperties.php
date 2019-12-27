@@ -3,24 +3,22 @@
 namespace SevenShores\Hubspot\Resources;
 
 /**
- * 
  * @see https://developers.hubspot.com/docs/methods/crm-properties/crm-properties-overview
  */
 class ObjectProperties extends Resource
 {
     /**
-     *
-     * @var string 
+     * @var string
      */
     protected $objectType;
-    
+
     public function __construct($client, $objectType)
     {
         parent::__construct($client);
-        
+
         $this->objectType = $objectType;
     }
-    
+
     /**
      * Get an Object Property.
      *
@@ -34,7 +32,7 @@ class ObjectProperties extends Resource
 
         return $this->client->request('get', $endpoint);
     }
-    
+
     /**
      * Get all object properties.
      *
@@ -48,7 +46,7 @@ class ObjectProperties extends Resource
 
         return $this->client->request('get', $endpoint);
     }
-    
+
     /**
      * Create a new object property.
      *
@@ -62,9 +60,9 @@ class ObjectProperties extends Resource
 
         return $this->client->request('post', $endpoint, ['json' => $property]);
     }
-        
+
     /**
-     * Update an object property
+     * Update an object property.
      *
      * Update a specified contact property.
      *
@@ -82,10 +80,9 @@ class ObjectProperties extends Resource
 
         return $this->client->request('patch', $endpoint, ['json' => $property]);
     }
-        
+
     /**
      * Delete an object property.
-     *
      *
      * @see https://developers.hubspot.com/docs/methods/crm-properties/delete-property
      *
@@ -99,7 +96,7 @@ class ObjectProperties extends Resource
 
         return $this->client->request('delete', $endpoint);
     }
-    
+
     /**
      * Get all object property groups.
      *
@@ -120,13 +117,14 @@ class ObjectProperties extends Resource
 
         return $this->client->request('get', $endpoint, [], $queryString);
     }
-    
+
     /**
      * Get an object property group.
      *
      * @see https://developers.hubspot.com/docs/methods/crm-properties/get-property-groups
      *
-     * @param bool $includeProperties
+     * @param bool  $includeProperties
+     * @param mixed $name
      *
      * @return \SevenShores\Hubspot\Http\Response
      */

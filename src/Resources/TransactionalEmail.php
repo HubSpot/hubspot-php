@@ -9,7 +9,7 @@ class TransactionalEmail extends Resource
 {
     /**
      * List SMTP API Tokens.
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/email/transactional_email/smtpapi_overview/list
      */
     public function getTokens()
@@ -18,7 +18,7 @@ class TransactionalEmail extends Resource
 
         return $this->client->request('get', $endpoint);
     }
-    
+
     /**
      * Send an email designed and maintained in the HubSpot marketing Email Tool.
      *
