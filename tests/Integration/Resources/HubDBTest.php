@@ -83,7 +83,7 @@ class HubDBTest extends HubDBRowTestCase
     {
         $response = $this->resource->import(
             $this->entity->id,
-            __DIR__.'/../../file.csv',
+            __DIR__.'/../../data/hubdb.csv',
             [
                 'resetTable' => false,
                 'skipRows' => 1,
