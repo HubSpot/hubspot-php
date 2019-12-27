@@ -68,11 +68,16 @@ class Workflows extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function create($workflow)
+    public function create(array $workflow, array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/automation/v3/workflows';
-        $options['json'] = $workflow;
-        return $this->client->request('post', $endpoint, $options);
+        
+        return $this->client->request(
+                'post',
+                $endpoint,
+                ['json' => $workflow],
+                build_query_string($params)
+            );
     }
     
     /**
@@ -111,11 +116,13 @@ class Workflows extends Resource
     /**
      * Get current enrollments for a contact.
      *
+     * @see https://developers.hubspot.com/docs/methods/workflows/current_enrollments
+     * 
      * @param int $contactId
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function enrollmentsForContact($contactId)
+    public function currentEnrollments($contactId)
     {
         $endpoint = "https://api.hubapi.com/automation/v2/workflows/enrollments/contacts/{$contactId}";
         
@@ -123,22 +130,30 @@ class Workflows extends Resource
     }
     
     /**
-     * Get a history of events for a specific workflow, filtered for a
-     * specific contact and/or event type(s).
-     *
-     * @param int   $workflowId
-     * @param array $filter
-     * @param array $params      Optional parameters.
+     * Get performance statistics for a workflow.
+     * 
+     * @see https://developers.hubspot.com/docs/methods/workflows/get_performance_statistics
+     * 
+     * @param int $workflowId
+     * @param int $startDate The start date for the data you want. Must be specified as a millisecond timestamp.
+     * @param int $endDate The end date for the data you want. Must be specified as a millisecond timestamp.
+     * @param string $bucket The time period used to group the data. Must be one of DAY, WEEK, or MONTH
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function logEvents($workflowId, $filter, $params = [])
+    public function getPerformanceStatistics($workflowId, $startDate, $endDate, $bucket = 'DAY')
     {
-        $endpoint = "https://api.hubapi.com/automation/v3/logevents/workflows/{$workflowId}/filter";
+        $endpoint = "https://api.hubapi.com/automation/v3/performance/workflow/{$workflowId}";
         
-        $options['json'] = $filter;
-        $queryString = build_query_string($params);
-        
-        return $this->client->request('put', $endpoint, $options, $queryString);
+        return $this->client->request(
+                'get',
+                $endpoint,
+                [],
+                build_query_string([
+                    'start' => $startDate,
+                    'end' => $endDate,
+                    'bucket' => $bucket,
+                ])
+            );
     }
 }
