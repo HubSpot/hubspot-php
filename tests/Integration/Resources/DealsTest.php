@@ -6,6 +6,7 @@ use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Companies;
 use SevenShores\Hubspot\Resources\Contacts;
 use SevenShores\Hubspot\Resources\Deals;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
 /**
  * Class DealsTest.
@@ -15,46 +16,31 @@ use SevenShores\Hubspot\Resources\Deals;
  * @internal
  * @coversNothing
  */
-class DealsTest extends \PHPUnit_Framework_TestCase
+class DealsTest extends EntityTestCase
 {
     /**
-     * @var Deals
+     * @var Deals::class
      */
-    private $deals;
+    protected $resourceClass = Deals::class;
 
-    public function setUp()
-    {
-        parent::setUp();
-        $this->deals = new Deals(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
-    }
+    /**
+     * @var Contacts
+     */
+    protected $resourceContacts;
+
+    /**
+     * @var Companies
+     */
+    protected $resourceCompanies;
 
     /**
      * @test
      */
     public function create()
     {
-        $response = $this->createDeal();
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertSame('Cool Deal', $response['properties']['dealname']['value']);
-        $this->assertSame('60000', $response['properties']['amount']['value']);
-    }
-
-    /**
-     * @test
-     */
-    public function find()
-    {
-        $response = $this->createDeal();
-        $id = $response['dealId'];
-
-        //Should not be able to find a deal after it was deleted
-        $response = $this->deals->getById($id);
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertSame('Cool Deal', $response['properties']['dealname']['value']);
-        $this->assertSame('60000', $response['properties']['amount']['value']);
+        $this->assertEquals(200, $this->entity->getStatusCode());
+        $this->assertSame('Cool Deal', $this->entity->properties->dealname->value);
+        $this->assertSame('60000', $this->entity->properties->amount->value);
     }
 
     /**
@@ -62,11 +48,7 @@ class DealsTest extends \PHPUnit_Framework_TestCase
      */
     public function update()
     {
-        $response = $this->createDeal();
-
-        $id = $response->dealId;
-
-        $response = $this->deals->update($id, [
+        $response = $this->resource->update($this->entity->dealId, [
             'properties' => [
                 [
                     'name' => 'amount',
@@ -76,7 +58,7 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertSame('70000', $response['properties']['amount']['value']);
+        $this->assertSame('70000', $response->properties->amount->value);
     }
 
     /**
@@ -84,20 +66,18 @@ class DealsTest extends \PHPUnit_Framework_TestCase
      */
     public function updateBatch()
     {
-        $this->markTestSkipped(); // TODO: fix test
-        $deal1 = $this->createDeal();
-        $deal2 = $this->createDeal();
+        $deal = $this->createEntity();
 
-        $response = $this->deals->updateBatch([
+        $response = $this->resource->updateBatch([
             [
-                'objectId' => $deal1->dealId,
+                'objectId' => $this->entity->dealId,
                 'properties' => [
                     ['name' => 'dealname', 'value' => 'Even cooler Deal'],
                     ['name' => 'amount', 'value' => '59999'],
                 ],
             ],
             [
-                'objectId' => $deal2->dealId,
+                'objectId' => $deal->dealId,
                 'properties' => [
                     ['name' => 'dealname', 'value' => 'Still ok Deal'],
                 ],
@@ -106,12 +86,58 @@ class DealsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(202, $response->getStatusCode());
 
-        $response = $this->deals->getById($deal1->dealId);
-        $this->assertSame('Even cooler Deal', $response['properties']['dealname']['value']);
-        $this->assertSame('59999', $response['properties']['amount']['value']);
+        $this->resource->delete($deal->dealId);
+    }
 
-        $response = $this->deals->getById($deal2->dealId);
-        $this->assertSame('Still ok Deal', $response['properties']['dealname']['value']);
+    /**
+     * @test
+     */
+    public function all()
+    {
+        $response = $this->resource->getAll([
+            'offset' => 1,
+            'limit' => 1,
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(1, count($response->deals));
+    }
+
+    /**
+     * @test
+     */
+    public function getRecentlyModified()
+    {
+        $this->resource->update($this->entity->dealId, [
+            'properties' => [
+                [
+                    'name' => 'amount',
+                    'value' => '70000',
+                ],
+            ],
+        ]);
+
+        $response = $this->resource->getRecentlyModified([
+            'offset' => 1,
+            'count' => 1,
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(1, count($response->results));
+    }
+
+    /**
+     * @test
+     */
+    public function getRecentlyCreated()
+    {
+        $response = $this->resource->getRecentlyCreated([
+            'offset' => 1,
+            'count' => 1,
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(1, count($response->results));
     }
 
     /**
@@ -119,147 +145,102 @@ class DealsTest extends \PHPUnit_Framework_TestCase
      */
     public function delete()
     {
-        $this->markTestSkipped(); // TODO: fix test
-        $response = $this->createDeal();
-        $id = $response['dealId'];
-
-        $response = $this->deals->delete($id);
+        $response = $this->deleteEntity();
         $this->assertEquals(204, $response->getStatusCode());
 
-        //Should not be able to find a deal after it was deleted
-        $response = $this->deals->getById($id);
-        $this->assertEquals(404, $response->getStatusCode());
+        $this->entity = null;
     }
 
     /**
      * @test
      */
-    public function recentlyCreated()
+    public function getById()
     {
-        //Create 4 deals
-        for ($i = 1; $i <= 4; ++$i) {
-            $this->createDeal();
-        }
-
-        $response = $this->deals->getRecentlyCreated([
-            'offset' => 1,
-            'count' => 3,
-        ]);
+        $response = $this->resource->getById($this->entity->dealId);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertSame(3, count($response['results']));
-    }
-
-    /**
-     * @getAll
-     */
-    public function getAll()
-    {
-        $response = $this->deals->getAll([
-            'offset' => 1,
-            'count' => 2,
-        ]);
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertSame(2, count($response['results']));
+        $this->assertSame('Cool Deal', $response->properties->dealname->value);
+        $this->assertSame('60000', $response->properties->amount->value);
     }
 
     /**
      * @test
      */
-    public function recentlyModified()
+    public function associateAndDisassociateWithCompany()
     {
-        $response = $this->deals->getRecentlyModified([
-            'offset' => 1,
-            'count' => 2,
-        ]);
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertSame(2, count($response['results']));
-    }
-
-    /**
-     * @group now
-     */
-    public function associateWithCompany()
-    {
-        $dealId = $this->createDeal()->dealId;
-
         $firstCompanyId = $this->createCompany();
         $secondCompanyId = $this->createCompany();
         $thirdCompanyId = $this->createCompany();
 
-        $response = $this->deals->associateWithCompany($dealId, [
+        $associateResponse = $this->resource->associateWithCompany($this->entity->dealId, [
             $firstCompanyId,
             $secondCompanyId,
             $thirdCompanyId,
         ]);
-        $this->assertSame(204, $response->getStatusCode());
+        $this->assertEquals(204, $associateResponse->getStatusCode());
 
         //Check what was associated
-        $response = $this->deals->getById($dealId);
+        $byIdResponse = $this->resource->getById($this->entity->dealId);
 
-        $associatedCompanies = $response->associations->associatedCompanyIds;
+        $associatedCompanies = $byIdResponse->associations->associatedCompanyIds;
         $expectedAssociatedCompanies = [$firstCompanyId, $secondCompanyId, $thirdCompanyId];
 
-        //sorting as order is not predicatable
         sort($associatedCompanies);
         sort($expectedAssociatedCompanies);
 
         $this->assertEquals($expectedAssociatedCompanies, $associatedCompanies);
 
         //Now disassociate
-        $response = $this->deals->disassociateFromCompany($dealId, [
+        $response = $this->resource->disassociateFromCompany($this->entity->dealId, [
             $firstCompanyId,
+            $secondCompanyId,
             $thirdCompanyId,
         ]);
         $this->assertSame(204, $response->getStatusCode());
 
-        //Ensure that only one associated company left
-        $response = $this->deals->getById($dealId);
-        $this->assertSame([$secondCompanyId], $response->associations->associatedCompanyIds);
+        foreach ($expectedAssociatedCompanies as $id) {
+            $this->deleteCompany($id);
+        }
     }
 
     /**
      * @test
      */
-    public function associateWithContact()
+    public function associateAndDisassociateWithContact()
     {
-        $dealId = $this->createDeal()->dealId;
-
         $firstContactId = $this->createContact();
         $secondContactId = $this->createContact();
         $thirdContactId = $this->createContact();
 
-        $response = $this->deals->associateWithContact($dealId, [
+        $associateResponse = $this->resource->associateWithContact($this->entity->dealId, [
             $firstContactId,
             $secondContactId,
             $thirdContactId,
         ]);
-        $this->assertSame(204, $response->getStatusCode());
+        $this->assertSame(204, $associateResponse->getStatusCode());
 
         //Check what was associated
-        $response = $this->deals->getById($dealId);
+        $byIdResponse = $this->resource->getById($this->entity->dealId);
 
-        $associatedContacts = $response->associations->associatedVids;
+        $associatedContacts = $byIdResponse->associations->associatedVids;
         $expectedAssociatedContacts = [$firstContactId, $secondContactId, $thirdContactId];
 
-        //sorting as order is not predicatable
         sort($associatedContacts);
         sort($expectedAssociatedContacts);
 
         $this->assertEquals($expectedAssociatedContacts, $associatedContacts);
 
         //Now disassociate
-        $response = $this->deals->disassociateFromContact($dealId, [
+        $response = $this->resource->disassociateFromContact($this->entity->dealId, [
             $firstContactId,
+            $secondContactId,
             $thirdContactId,
         ]);
         $this->assertSame(204, $response->getStatusCode());
 
-        //Ensure that only one associated contact left
-        $response = $this->deals->getById($dealId);
-        $this->assertSame([$secondContactId], $response->associations->associatedVids);
+        foreach ($expectedAssociatedContacts as $id) {
+            $this->deleteContact($id);
+        }
     }
 
     /**
@@ -269,18 +250,22 @@ class DealsTest extends \PHPUnit_Framework_TestCase
     {
         $companyId = $this->createCompany();
 
-        $firstDeal = $this->createDeal()->dealId;
-        $secondDeal = $this->createDeal()->dealId;
+        $deal = $this->createEntity()->dealId;
 
-        $this->deals->associateWithCompany($firstDeal, [
-            $companyId,
-        ]);
-        $this->deals->associateWithCompany($secondDeal, [
+        $this->resource->associateWithCompany($this->entity->dealId, [
             $companyId,
         ]);
 
-        $response = $this->deals->getAssociatedDeals('company', $companyId);
+        $this->resource->associateWithCompany($deal, [
+            $companyId,
+        ]);
+
+        $response = $this->resource->getAssociatedDeals('company', $companyId);
         $this->assertCount(2, $response->deals);
+
+        $this->resource->delete($deal);
+
+        $this->deleteCompany($companyId);
     }
 
     /**
@@ -290,30 +275,50 @@ class DealsTest extends \PHPUnit_Framework_TestCase
     {
         $contactId = $this->createContact();
 
-        $firstDeal = $this->createDeal()->dealId;
-        $secondDeal = $this->createDeal()->dealId;
-        $thirdDeal = $this->createDeal()->dealId;
+        $deal = $this->createEntity()->dealId;
 
-        $this->deals->associateWithContact($firstDeal, [
-            $contactId,
-        ]);
-        $this->deals->associateWithContact($secondDeal, [
-            $contactId,
-        ]);
-        $this->deals->associateWithContact($thirdDeal, [
+        $this->resource->associateWithContact($this->entity->dealId, [
             $contactId,
         ]);
 
-        $response = $this->deals->getAssociatedDeals('contact', $contactId);
-        $this->assertCount(3, $response->deals);
+        $this->resource->associateWithContact($deal, [
+            $contactId,
+        ]);
+
+        $response = $this->resource->getAssociatedDeals('contact', $contactId);
+        $this->assertCount(2, $response->deals);
+
+        $this->resource->delete($deal);
+        $this->deleteContact($contactId);
     }
 
-    // Lots of tests need an existing object to modify.
-    private function createDeal()
+    protected function createCompany()
     {
-        sleep(1);
+        return $this->getCompanies()
+            ->create(['name' => 'name', 'value' => 'dl_test_company'.uniqid()])
+            ->companyId;
+    }
 
-        return $this->deals->create([
+    protected function createContact()
+    {
+        return $this->getContacts()->create([
+            ['property' => 'email', 'value' => 'dl_test_contact'.uniqid().'@hubspot.com'],
+        ])->vid;
+    }
+
+    protected function deleteCompany($id)
+    {
+        return $this->getCompanies()->delete($id);
+    }
+
+    protected function deleteContact($id)
+    {
+        return $this->getContacts()->delete($id);
+    }
+
+    protected function createEntity()
+    {
+        return $this->resource->create([
             'properties' => [
                 [
                     'value' => 'Cool Deal',
@@ -327,24 +332,26 @@ class DealsTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
-    /**
-     * @return int
-     */
-    private function createCompany()
+    protected function deleteEntity()
     {
-        $companies = new Companies(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-
-        return $companies->create(['name' => 'name', 'value' => 'dl_test_company'.uniqid()])->companyId;
+        return $this->resource->delete($this->entity->dealId);
     }
 
-    private function createContact()
+    protected function getContacts()
     {
-        $contacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        if (empty($this->resourceContacts)) {
+            $this->resourceContacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        }
 
-        $response = $contacts->create([
-            ['property' => 'email', 'value' => 'dl_test_contact'.uniqid().'@hubspot.com'],
-        ]);
+        return $this->resourceContacts;
+    }
 
-        return $response->vid;
+    protected function getCompanies()
+    {
+        if (empty($this->resourceCompanies)) {
+            $this->resourceCompanies = new Companies(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        }
+
+        return $this->resourceCompanies;
     }
 }
