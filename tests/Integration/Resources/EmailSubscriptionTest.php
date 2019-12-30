@@ -4,13 +4,13 @@ namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use Exception;
 use SevenShores\Hubspot\Http\Client;
-use SevenShores\Hubspot\Resources\Email;
+use SevenShores\Hubspot\Resources\EmailSubscription;
 
 /**
  * @internal
  * @coversNothing
  */
-class EmailTest extends \PHPUnit_Framework_TestCase
+class EmailSubscriptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Email
@@ -31,7 +31,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
 
         parent::setUp();
 
-        $this->resource = new Email(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        $this->resource = new EmailSubscription(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
 

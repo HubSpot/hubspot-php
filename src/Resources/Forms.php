@@ -7,10 +7,7 @@ class Forms extends Resource
     /**
      * Submit data to a form.
      *
-     * @see http://developers.hubspot.com/docs/methods/forms/submit_form
-     *
-     * Send form submission data to HubSpot. Form submissions from external sources can be made to any registered
-     * HubSpot form. You can see a list of forms on your portal by going to the Contacts > Forms page
+     * @see https://developers.hubspot.com/docs/methods/forms/submit_form_v3
      *
      * @param int    $portal_id
      * @param string $form_guid
@@ -19,15 +16,9 @@ class Forms extends Resource
      */
     public function submit($portal_id, $form_guid, array $form)
     {
-        $endpoint = "https://forms.hubspot.com/uploads/form/v2/{$portal_id}/{$form_guid}";
+        $endpoint = "https://forms.hubspot.com/submissions/v3/integration/submit/{$portal_id}/{$form_guid}";
 
-        if (!empty($form['hs_context']) && !is_string($form['hs_context'])) {
-            $form['hs_context'] = json_encode($form['hs_context']);
-        }
-
-        $options['form_params'] = $form;
-
-        return $this->client->request('post', $endpoint, $options, null, false);
+        return $this->client->request('post', $endpoint, ['json' => $form], null, false);
     }
 
     /**
@@ -145,11 +136,10 @@ class Forms extends Resource
      * @see https://developers.hubspot.com/docs/methods/forms/get-submissions-for-a-form
      *
      * @param string $form_guid
-     * @param mixed  $params
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getSubmissions($form_guid, $params = [])
+    public function getSubmissions($form_guid, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/form-integrations/v1/submissions/forms/{$form_guid}";
 
@@ -189,11 +179,10 @@ class Forms extends Resource
      *
      * @param int|string $id
      * @param string     $sign
-     * @param mixed      $params
      *
      * @see https://developers.hubspot.com/docs/methods/form-integrations/v1/uploaded-files/signed-url-redirect
      */
-    public function getUploadedFileById($id, $sign, $params = [])
+    public function getUploadedFileById($id, $sign, array $params = [])
     {
         $endpoint = "https://api.hubspot.com/form-integrations/v1/uploaded-files/signed-url-redirect/{$id}";
         $params['sign'] = $sign;
