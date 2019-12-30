@@ -2,39 +2,42 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-use SevenShores\Hubspot\Exceptions\HubspotException;
-
+/**
+ * @see https://developers.hubspot.com/docs/methods/deals/deals_overview
+ */
 class Deals extends Resource
 {
     /**
+     * Create a deal.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/create_deal
+     *
      * @param array $deal array of deal properties
      *
-     * @throws HubSpotException
-     *
-     * @return mixed
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function create(array $deal)
     {
         $endpoint = 'https://api.hubapi.com/deals/v1/deal';
 
-        $options['json'] = $deal;
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $deal]);
     }
 
     /**
+     * Update a Deal.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/update_deal
+     *
      * @param int   $id   the deal id
      * @param array $deal the deal properties to update
      *
-     * @return mixed
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function update($id, array $deal)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
-        $options['json'] = $deal;
-
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, ['json' => $deal]);
     }
 
     /**
@@ -50,12 +53,14 @@ class Deals extends Resource
     {
         $endpoint = 'https://api.hubapi.com/deals/v1/batch-async/update';
 
-        $options['json'] = $deals;
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $deals]);
     }
 
     /**
+     * Get all deals.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/get-all-deals
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
@@ -64,40 +69,43 @@ class Deals extends Resource
     {
         $endpoint = 'https://api.hubapi.com/deals/v1/deal/paged';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
-     * @param int $id
+     * Get Recently Modified Deals.
      *
-     * @return mixed
-     */
-    public function delete($id)
-    {
-        $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
-
-        return $this->client->request('delete', $endpoint);
-    }
-
-    /**
+     * @see https://developers.hubspot.com/docs/methods/deals/get_deals_modified
+     *
      * @param array $params Optional parameters ['limit', 'offset']
      *
-     * @return mixed
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function getRecentlyModified(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/deals/v1/deal/recent/modified';
-        $queryString = build_query_string($params);
 
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
+     * Get Recently Created Deals.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/get_deals_created
+     *
      * @param array $params Optional parameters ['limit', 'offset']
      *
-     * @return mixed
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function getRecentlyCreated(array $params = [])
     {
@@ -108,9 +116,29 @@ class Deals extends Resource
     }
 
     /**
+     * Delete a Deal.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/delete_deal
+     *
      * @param int $id
      *
-     * @return mixed
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function delete($id)
+    {
+        $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
+
+        return $this->client->request('delete', $endpoint);
+    }
+
+    /**
+     * Get a Deal.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/get_deal
+     *
+     * @param int $id
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function getById($id)
     {
@@ -120,95 +148,147 @@ class Deals extends Resource
     }
 
     /**
+     * Associate a deal with a company.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/associate_deal
+     *
      * @param int       $dealId
      * @param int|int[] $companyIds
      *
-     * @return mixed
+     * @deprecated
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function associateWithCompany($dealId, $companyIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/COMPANY";
 
-        $queryString = build_query_string(['id' => (array) $companyIds]);
-
-        return $this->client->request('put', $endpoint, [], $queryString);
+        return $this->client->request(
+            'put',
+            $endpoint,
+            [],
+            build_query_string(['id' => (array) $companyIds])
+        );
     }
 
     /**
+     * Removes a deal's association with a company.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/delete_association
+     *
      * @param int       $dealId
      * @param int|int[] $companyIds
      *
-     * @return mixed
+     * @deprecated
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function disassociateFromCompany($dealId, $companyIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/COMPANY";
 
-        $queryString = build_query_string(['id' => (array) $companyIds]);
-
-        return $this->client->request('delete', $endpoint, [], $queryString);
+        return $this->client->request(
+            'delete',
+            $endpoint,
+            [],
+            build_query_string(['id' => (array) $companyIds])
+        );
     }
 
     /**
+     * Associate a deal with a contact.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/associate_deal
+     *
      * @param int       $dealId
      * @param int|int[] $contactIds
      *
-     * @return mixed
+     * @deprecated
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function associateWithContact($dealId, $contactIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/CONTACT";
 
-        $queryString = build_query_string(['id' => (array) $contactIds]);
-
-        return $this->client->request('put', $endpoint, [], $queryString);
+        return $this->client->request(
+            'put',
+            $endpoint,
+            [],
+            build_query_string(['id' => (array) $contactIds])
+        );
     }
 
     /**
+     * Get Associated Deals.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/get-associated-deals
+     *
      * @param int   $contactId
      * @param array $params    Optional parameters ['limit', 'offset']
      *
-     * @return mixed
+     * @deprecated
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function associatedWithContact($contactId, $params = [])
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/associated/contact/{$contactId}/paged";
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
+     * Removes a deal's association with a contact.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/delete_association
+     *
      * @param int       $dealId
      * @param int|int[] $contactIds
      *
-     * @return mixed
+     * @deprecated
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function disassociateFromContact($dealId, $contactIds)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$dealId}/associations/CONTACT";
 
-        $queryString = build_query_string(['id' => (array) $contactIds]);
-
-        return $this->client->request('delete', $endpoint, [], $queryString);
+        return $this->client->request(
+            'delete',
+            $endpoint,
+            [],
+            build_query_string(['id' => (array) $contactIds])
+        );
     }
 
     /**
+     * Get Associated Deals.
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/get-associated-deals
+     *
      * @param string $objectType
      * @param int    $objectId
      * @param array  $params
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
+     * @deprecated
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/get-associated-deals
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function getAssociatedDeals($objectType, $objectId, $params = [])
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/associated/{$objectType}/{$objectId}/paged";
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 }
