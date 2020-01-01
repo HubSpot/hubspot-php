@@ -171,30 +171,51 @@ $authUrl = Utils::getFactory()->oAuth2()->getAuthUrl(
 
 ## Status
 
-If you see something not planned, that you want, make an [issue](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
+If you see something not planned, that you want, make an [issue](https://github.com/HubSpot/hubspot-php/issues) and there's a good chance I will add it.
 
-- [x] Analytics :new:
-- [x] Blogs (COS) :new:
-- [x] Blog Authors (COS) :new:
-- [x] Blog Posts (COS) :new:
-- [x] Blog Topics (COS) :new:
-- [x] Companies :new:
-- [x] Company Properties :new:
-- [x] Contacts
-- [x] Contact Lists
-- [x] Contact Properties
-- [x] CRM Pipelines :new:
-- [x] Deals :new:
-- [x] Email :new:
-- [x] Email Events :new:
-- [x] Engagements
-- [x] Events (Enterprise) :new:
-- [x] Files (COS) :new:
-- [x] Forms
-- [x] Keywords
-- [x] Owners
-- [x] Page Publishing (COS) :new:
-- [x] Social Media
-- [ ] Templates (COS) :new:
-- [x] Timeline :new:
-- [x] Workflows
+- [x] Analytics API
+- [x] Calendar API :upadated:
+- [x] Companies API :upadated:
+- [x] Company Properties API :upadated:
+- [x] Contacts API :upadated:
+- [x] Contact Lists API :upadated:
+- [x] Contact Properties API :upadated:
+- [ ] Conversations Live Chat Widget API (Front End)
+- [x] CMS Blog API (Blogs)
+- [x] CMS Blog Authors API (BlogAuthors)
+- [ ] CMS Blog Comments API
+- [x] CMS Blog Post API (BlogPosts)
+- [x] CMS Blog Topics API (BlogTopics)
+- [ ] CMS Domains API
+- [x] CMS Files API (Files)
+- [x] CMS HubDB API (HubDB) :upadated:
+- [ ] CMS Layouts API
+- [x] CMS Page Publishing API (Pages)
+- [ ] CMS Site Maps
+- [ ] CMS Site Search API
+- [ ] CMS Templates API
+- [ ] CMS URL Mappings API
+- [x] CRM Associations API
+- [ ] CRM Extensions API
+- [x] CRM Object Properties API (ObjectProperties) :new:
+- [x] CRM Pipelines API (CrmPipelines)
+- [x] Deals API
+- [x] Deal Pipelines API :deprecated:
+- [x] Deal Properties API :upadated:
+- [x] Ecommerce Bridge API :upadated:
+- [x] Email Subscription API :upadated:
+- [x] Email Events API :upadated:
+- [x] Engagements API
+- [x] Events API
+- [x] Forms API :upadated:
+- [ ] Line Items API
+- [ ] Marketing Email API
+- [x] Owners API :upadated:
+- [ ] Products API
+- [x] Social Media API
+- [x] Tickets API
+- [x] Timeline API :upadated:
+- [ ] Tracking Code API
+- [x] Transactional Email API
+- [x] Workflows API :upadated:
+- [x] Webhooks API
