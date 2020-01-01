@@ -12,7 +12,7 @@ class ObjectProperties extends Resource
      */
     protected $objectType;
 
-    public function __construct($client, $objectType)
+    public function __construct($client, string $objectType)
     {
         parent::__construct($client);
 
@@ -26,7 +26,7 @@ class ObjectProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function get($name)
+    public function get(string $name)
     {
         $endpoint = "https://api.hubapi.com/properties/v2/{$this->objectType}/properties/named/{$name}";
 
@@ -68,11 +68,9 @@ class ObjectProperties extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/crm-properties/update-property
      *
-     * @param string $name
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function update($name, array $property)
+    public function update(string $name, array $property)
     {
         $endpoint = "https://api.hubapi.com/properties/v2/{$this->objectType}/properties/named/{$name}";
 
@@ -86,11 +84,9 @@ class ObjectProperties extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/crm-properties/delete-property
      *
-     * @param string $name
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function delete($name)
+    public function delete(string $name)
     {
         $endpoint = "https://api.hubapi.com/properties/v2/{$this->objectType}/properties/named/{$name}";
 
@@ -102,11 +98,9 @@ class ObjectProperties extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/crm-properties/get-property-groups
      *
-     * @param bool $includeProperties
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getGroups($includeProperties = false)
+    public function getGroups(bool $includeProperties = false)
     {
         $endpoint = "https://api.hubapi.com/properties/v2/{$this->objectType}/groups";
 
@@ -123,12 +117,11 @@ class ObjectProperties extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/crm-properties/get-property-groups
      *
-     * @param bool  $includeProperties
      * @param mixed $name
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getGroup($name, $includeProperties = false)
+    public function getGroup(string $name, bool $includeProperties = false)
     {
         $endpoint = "https://api.hubapi.com/properties/v2/{$this->objectType}/groups/named/{$name}";
 
@@ -161,11 +154,9 @@ class ObjectProperties extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/crm-properties/udpate-property-group
      *
-     * @param string $name
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateGroup($name, array $group)
+    public function updateGroup(string $name, array $group)
     {
         $endpoint = "https://api.hubapi.com/properties/v2/{$this->objectType}/groups/named/{$name}";
 
@@ -181,11 +172,9 @@ class ObjectProperties extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/crm-properties/delete-property-group
      *
-     * @param string $name
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function deleteGroup($name)
+    public function deleteGroup(string $name)
     {
         $endpoint = "https://api.hubapi.com/properties/v2/{$this->objectType}/groups/named/{$name}";
 

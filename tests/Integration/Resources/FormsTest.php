@@ -79,10 +79,15 @@ class FormsTest extends EntityTestCase
     public function submit()
     {
         $response = $this->resource->submit(getenv('HUBSPOT_TEST_PORTAL_ID'), $this->entity->guid, [
-            'firstname' => 'FooBar',
+            'fields' => [
+                [
+                    'name' => 'firstname',
+                    'value' => 'Test Name',
+                ],
+            ],
         ]);
 
-        $this->assertEquals(204, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     // Lots of tests need an existing object to modify.

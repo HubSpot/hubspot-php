@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/email/email_subscriptions_overview
  */
-class Email extends Resource
+class EmailSubscription extends Resource
 {
     /**
      * Get email subscription types for a portal.
@@ -16,7 +16,7 @@ class Email extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function subscriptions($portalId)
+    public function subscriptions($portalId = null)
     {
         $endpoint = 'https://api.hubapi.com/email/public/v1/subscriptions';
 
@@ -24,7 +24,7 @@ class Email extends Resource
             'get',
             $endpoint,
             [],
-            build_query_string(['portalId' => $portalId])
+            $this->getQueryString($portalId)
         );
     }
 
@@ -54,12 +54,12 @@ class Email extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/email/get_status
      *
-     * @param int    $portal_id
      * @param string $email
+     * @param int    $portalId
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function subscriptionStatus($portal_id, $email)
+    public function subscriptionStatus($email, $portalId = null)
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions/{$email}";
 
@@ -67,7 +67,7 @@ class Email extends Resource
             'get',
             $endpoint,
             [],
-            build_query_string(['portalId' => $portal_id])
+            $this->getQueryString($portalId)
         );
     }
 
@@ -76,20 +76,34 @@ class Email extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/email/update_status
      *
-     * @param int    $portal_id
      * @param string $email
+     * @param int    $portalId
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateSubscription($portal_id, $email, array $params = [])
+    public function updateSubscription($email, array $data = [], $portalId = null)
     {
         $endpoint = "https://api.hubapi.com/email/public/v1/subscriptions/{$email}";
 
         return $this->client->request(
             'put',
             $endpoint,
-            ['json' => $params],
-            build_query_string(['portalId' => $portal_id])
+            ['json' => $data],
+            $this->getQueryString($portalId)
         );
+    }
+
+    /**
+     * @param type $portalId
+     *
+     * @return string
+     */
+    protected function getQueryString($portalId)
+    {
+        if (!empty($portalId)) {
+            return build_query_string(['portalId' => $portalId]);
+        }
+
+        return null;
     }
 }

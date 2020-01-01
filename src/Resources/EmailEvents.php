@@ -10,13 +10,34 @@ class EmailEvents extends Resource
     /**
      * Get campaign IDs with recent activity for a portal.
      *
-     * @see https://developers.hubspot.com/docs/methods/email/get_campaigns
+     * @see https://developers.hubspot.com/docs/methods/email/get_campaigns_by_id
      *
      * @param array $params Optional parameters
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getCampaignIds(array $params = [])
+    {
+        $endpoint = 'https://api.hubapi.com/email/public/v1/campaigns/by-id';
+
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
+    }
+
+    /**
+     * Get campaign IDs with recent activity for a portal.
+     *
+     * @see https://developers.hubspot.com/docs/methods/email/get_campaigns
+     *
+     * @param array $params Optional parameters
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function getCampaignIdsWithRecentActivity(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/email/public/v1/campaigns';
 

@@ -40,7 +40,7 @@ class Tickets extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function getAll(array $params = [])
+    public function all(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/crm-objects/v1/objects/tickets/paged';
 

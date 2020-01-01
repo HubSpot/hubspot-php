@@ -94,7 +94,7 @@ class DealsTest extends EntityTestCase
      */
     public function all()
     {
-        $response = $this->resource->getAll([
+        $response = $this->resource->all([
             'offset' => 1,
             'limit' => 1,
         ]);

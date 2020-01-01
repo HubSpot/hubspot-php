@@ -52,6 +52,14 @@ class EmailEventsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function getCampaignIdsWithRecentActivity()
+    {
+        $response = $this->resource->getCampaignIdsWithRecentActivity(['limit' => 2]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /** @test */
     public function getCampaignById()
     {
         $list = $this->resource->getCampaignIds(['limit' => 2]);
