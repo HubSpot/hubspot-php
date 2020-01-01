@@ -173,28 +173,29 @@ $authUrl = Utils::getFactory()->oAuth2()->getAuthUrl(
 
 If you see something not planned, that you want, make an [issue](https://github.com/fungku/hubspot-php/issues) and there's a good chance I will add it.
 
-- [x] Analytics :new:
-- [x] Blogs (COS) :new:
-- [x] Blog Authors (COS) :new:
-- [x] Blog Posts (COS) :new:
-- [x] Blog Topics (COS) :new:
-- [x] Companies :new:
-- [x] Company Properties :new:
+- [x] Analytics
+- [x] Blogs (COS)
+- [x] Blog Authors (COS)
+- [x] Blog Posts (COS)
+- [x] Blog Topics (COS)
+- [x] Companies
+- [x] Company Properties
 - [x] Contacts
 - [x] Contact Lists
 - [x] Contact Properties
-- [x] CRM Pipelines :new:
-- [x] Deals :new:
-- [x] Email :new:
-- [x] Email Events :new:
+- [x] CRM Pipelines
+- [x] Deals
+- [x] Email
+- [x] Email Events
 - [x] Engagements
-- [x] Events (Enterprise) :new:
-- [x] Files (COS) :new:
+- [x] Events (Enterprise)
+- [x] Files (COS)
 - [x] Forms
 - [x] Keywords
+- [x] Object Properties :new:
 - [x] Owners
-- [x] Page Publishing (COS) :new:
+- [x] Page Publishing (COS)
 - [x] Social Media
-- [ ] Templates (COS) :new:
-- [x] Timeline :new:
+- [ ] Templates (COS) 
+- [x] Timeline
 - [x] Workflows
