@@ -35,12 +35,11 @@ class HubDB extends Resource
      *
      * @param int   $tableId  Table ID
      * @param int   $portalId
-     * @param bool  $draft
      * @param array $params   You can set some specific params (E.g. Hub/Portal ID).
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function getTable($tableId, $portalId = null, $draft = false, array $params = [])
+    public function getTable($tableId, $portalId = null, bool $draft = false, array $params = [])
     {
         $endpoint = $this->getEndpoint("https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}", $draft);
         if (!empty($portalId)) {
@@ -68,7 +67,7 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function createTable($name, array $columns, $published = true, $useForPages = false)
+    public function createTable($name, array $columns, bool $published = true, bool $useForPages = false)
     {
         $endpoint = 'https://api.hubapi.com/hubdb/api/v2/tables';
         $options = ['json' => [
@@ -90,13 +89,11 @@ class HubDB extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/hubdb/v2/clone_table
      *
-     * @param int    $tableId
-     * @param string $newName
-     * @param bool   $draft
+     * @param int $tableId
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function cloneTable($tableId, $newName, $draft = false, array $params = [])
+    public function cloneTable($tableId, string $newName, bool $draft = false, array $params = [])
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/clone",
@@ -119,13 +116,12 @@ class HubDB extends Resource
      * @param int    $tableId
      * @param string $name        table name
      * @param array  $columns     column name and type should be represented as associative array, e.g. ["name" => "Name", "type" => "TEXT"]
-     * @param bool   $draft
      * @param bool   $published   whether to publish table
      * @param bool   $useForPages use table for dynamic pages, see https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function updateTable($tableId, $name, array $columns = [], $draft = false, $published = true, $useForPages = false)
+    public function updateTable($tableId, string $name, array $columns = [], bool $draft = false, bool $published = true, bool $useForPages = false)
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}",
@@ -168,12 +164,11 @@ class HubDB extends Resource
      *
      * @param int   $tableId  table ID
      * @param int   $portalId
-     * @param bool  $draft
      * @param array $params   You can set some specific params (E.g. Hub/Portal ID).
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function getRows($tableId, $portalId = null, $draft = false, array $params = [])
+    public function getRows($tableId, $portalId = null, bool $draft = false, array $params = [])
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows",
@@ -197,12 +192,11 @@ class HubDB extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/hubdb/v2/create_row
      *
-     * @param int  $tableId table ID
-     * @param bool $draft
+     * @param int $tableId table ID
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function addRow($tableId, array $values, $draft = false)
+    public function addRow($tableId, array $values, bool $draft = false)
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows",
@@ -221,13 +215,12 @@ class HubDB extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/hubdb/v2/clone_row
      *
-     * @param int  $tableId table ID
-     * @param int  $rowId   row ID
-     * @param bool $draft
+     * @param int $tableId table ID
+     * @param int $rowId   row ID
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function cloneRow($tableId, $rowId, $draft = false)
+    public function cloneRow($tableId, $rowId, bool $draft = false)
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows/{$rowId}/clone",
@@ -266,13 +259,12 @@ class HubDB extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/hubdb/v2/delete_row
      *
-     * @param int  $tableId Table ID
-     * @param int  $rowId   Row ID
-     * @param bool $draft
+     * @param int $tableId Table ID
+     * @param int $rowId   Row ID
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function deleteRow($tableId, $rowId, $draft = false)
+    public function deleteRow($tableId, $rowId, bool $draft = false)
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows/{$rowId}",
@@ -287,14 +279,13 @@ class HubDB extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/hubdb/v2/update_row
      *
-     * @param int  $tableId
-     * @param int  $rowId
-     * @param int  $cellId
-     * @param bool $draft
+     * @param int $tableId
+     * @param int $rowId
+     * @param int $cellId
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function updateCell($tableId, $rowId, $cellId, array $values, $draft = false)
+    public function updateCell($tableId, $rowId, $cellId, array $values, bool $draft = false)
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows/{$rowId}/cells/{$cellId}",
@@ -315,12 +306,11 @@ class HubDB extends Resource
      *
      * @param int   $tableId Table ID
      * @param int   $rowId   Row ID
-     * @param bool  $draft
      * @param mixed $cellId
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function deleteCell($tableId, $rowId, $cellId, $draft = false)
+    public function deleteCell($tableId, $rowId, $cellId, bool $draft = false)
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows/{$rowId}/cells/{$cellId}",
@@ -336,6 +326,8 @@ class HubDB extends Resource
      * @see https://developers.hubspot.com/docs/methods/hubdb/v2/publish-draft-table
      *
      * @param int $tableId
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function publishDraftTable($tableId)
     {
@@ -350,6 +342,8 @@ class HubDB extends Resource
      * @see https://developers.hubspot.com/docs/methods/hubdb/v2/revert-draft-data-for-table
      *
      * @param int $tableId
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function revertDraftTable($tableId)
     {
@@ -363,11 +357,11 @@ class HubDB extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/hubdb/v2/import_csv
      *
-     * @param int   $tableId
-     * @param bool  $draft
-     * @param mixed $file
+     * @param int $tableId
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function import($tableId, $file, array $cofig = [], $draft = false)
+    public function import($tableId, string $file, array $cofig = [], bool $draft = false)
     {
         $endpoint = $this->getEndpoint("https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/import", $draft);
 
@@ -387,11 +381,8 @@ class HubDB extends Resource
 
     /**
      * Get Endpoint.
-     *
-     * @param string $endpoint
-     * @param bool   $draft
      */
-    protected function getEndpoint($endpoint, $draft = false)
+    protected function getEndpoint(string $endpoint, bool $draft = false): string
     {
         if ($draft) {
             return $endpoint.'/draft';

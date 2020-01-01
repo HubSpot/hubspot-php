@@ -19,7 +19,7 @@ class EmailSubscription extends Resource
     public function subscriptions($portalId = null)
     {
         $endpoint = 'https://api.hubapi.com/email/public/v1/subscriptions';
-        
+
         return $this->client->request(
             'get',
             $endpoint,
@@ -92,11 +92,10 @@ class EmailSubscription extends Resource
             $this->getQueryString($portalId)
         );
     }
-    
+
     /**
-     * 
      * @param type $portalId
-     * 
+     *
      * @return string
      */
     protected function getQueryString($portalId)
@@ -104,7 +103,7 @@ class EmailSubscription extends Resource
         if (!empty($portalId)) {
             return build_query_string(['portalId' => $portalId]);
         }
-        
+
         return null;
     }
 }

@@ -3,6 +3,7 @@
 namespace SevenShores\Hubspot;
 
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Resource;
 
 /**
  * Class Factory.
@@ -58,7 +59,7 @@ class Factory
      * @param array  $clientOptions options to be send with each request
      * @param bool   $wrapResponse  wrap request response in own Response object
      */
-    public function __construct(array $config = [], $client = null, array $clientOptions = [], $wrapResponse = true)
+    public function __construct(array $config = [], Client $client = null, array $clientOptions = [], $wrapResponse = true)
     {
         $this->client = $client ?: new Client($config, null, $clientOptions, $wrapResponse);
     }
@@ -66,13 +67,10 @@ class Factory
     /**
      * Return an instance of a Resource based on the method called.
      *
-     * @param string $name
-     * @param array  $arguments
-     * @param mixed  $args
-     *
-     * @return \SevenShores\Hubspot\Resources\Resource
+     * @param array $arguments
+     * @param mixed $args
      */
-    public function __call($name, $args)
+    public function __call(string $name, $args): Resource
     {
         $resource = 'SevenShores\\Hubspot\\Resources\\'.ucfirst($name);
 
@@ -97,7 +95,7 @@ class Factory
      *
      * @return static
      */
-    public static function create($api_key = null, $client = null, array $clientOptions = [], $wrapResponse = true)
+    public static function create(string $api_key = null, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
     {
         return new static(['key' => $api_key], $client, $clientOptions, $wrapResponse);
     }
@@ -112,7 +110,7 @@ class Factory
      *
      * @return static
      */
-    public static function createWithToken($token, $client = null, array $clientOptions = [], $wrapResponse = true)
+    public static function createWithToken(string $token, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
     {
         return new static(['key' => $token, 'oauth' => true], $client, $clientOptions, $wrapResponse);
     }
@@ -127,7 +125,7 @@ class Factory
      *
      * @return static
      */
-    public static function createWithOAuth2Token($token, $client = null, array $clientOptions = [], $wrapResponse = true)
+    public static function createWithOAuth2Token(string $token, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
     {
         return new static(['key' => $token, 'oauth2' => true], $client, $clientOptions, $wrapResponse);
     }
