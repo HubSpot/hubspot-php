@@ -20,6 +20,7 @@ use SevenShores\Hubspot\Resources\Resource;
  * @method \SevenShores\Hubspot\Resources\ContactProperties  contactProperties()
  * @method \SevenShores\Hubspot\Resources\Contacts           contacts()
  * @method \SevenShores\Hubspot\Resources\CrmAssociations    crmAssociations()
+ * @method \SevenShores\Hubspot\Resources\CrmPipelines       crmPipelines()
  * @method \SevenShores\Hubspot\Resources\EmailSubscription  emailSubscription()
  * @method \SevenShores\Hubspot\Resources\EmailEvents        emailEvents()
  * @method \SevenShores\Hubspot\Resources\Engagements        engagements()
