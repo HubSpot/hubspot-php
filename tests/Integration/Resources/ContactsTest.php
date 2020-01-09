@@ -2,118 +2,109 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Contacts;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
 /**
  * @internal
  * @coversNothing
  */
-class ContactsTest extends \PHPUnit_Framework_TestCase
+class ContactsTest extends EntityTestCase
 {
-    private $contacts;
+    /**
+     * @var SevenShores\Hubspot\Resources\Contacts
+     */
+    protected $resource;
 
-    public function setUp()
-    {
-        parent::setUp();
-        $this->contacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
-    }
+    /**
+     * @var SevenShores\Hubspot\Resources\Contacts::class
+     */
+    protected $resourceClass = Contacts::class;
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->contacts->all();
+        $response = $this->resource->all();
 
         $this->assertEquals(200, $response->getStatusCode());
+        $this->assertGreaterThanOrEqual(1, count($response->contacts));
     }
 
     /** @test */
     public function allWithParams()
     {
-        $response = $this->contacts->all([
-            'count' => 2,
+        $response = $this->resource->all([
             'property' => ['firstname', 'lastname'],
-            'vidOffset' => 1234,
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(2, count($response->contacts));
-        // $this->assertNotNull($response->contacts[0]->properties->email->value);
-        // $this->assertNotNull($response->contacts[0]->properties->lastname->value);
-        $this->assertGreaterThanOrEqual(1234, $response->{'vid-offset'});
+        $this->assertGreaterThanOrEqual(1, count($response->contacts));
     }
 
     /** @test */
     public function allWithParamsAndArrayAccess()
     {
-        $response = $this->contacts->all([
-            'count' => 2,
+        $response = $this->resource->all([
             'property' => ['firstname', 'lastname'],
-            'vidOffset' => 1234,
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(2, count($response['contacts']));
-        // $this->assertNotNull($response['contacts'][0]['properties']['firstname']['value']);
-        // $this->assertNotNull($response['contacts'][0]['properties']['lastname']['value']);
-        $this->assertGreaterThanOrEqual(1234, $response['vid-offset']);
+        $this->assertGreaterThanOrEqual(1, count($response->contacts));
+    }
+
+    /** @test */
+    public function create()
+    {
+        $this->assertEquals(200, $this->entity->getStatusCode());
     }
 
     /** @test */
     public function update()
     {
-        $contact = $this->createContact();
-
-        $response = $this->contacts->update($contact->vid, [
+        $response = $this->resource->update($this->entity->vid, [
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value' => 'user'],
         ]);
 
         $this->assertEquals(204, $response->getStatusCode());
-        $this->contacts->delete($contact->vid);
     }
 
     /** @test */
     public function updateByEmail()
     {
-        $contact = $this->createContact();
-
-        $response = $this->contacts->updateByEmail($contact->properties->email->value, [
+        $response = $this->resource->updateByEmail($this->entity->properties->email->value, [
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value' => 'user'],
         ]);
 
         $this->assertEquals(204, $response->getStatusCode());
-        $this->contacts->delete($contact->vid);
     }
 
     /** @test */
     public function createOrUpdate()
     {
-        $response = $this->contacts->createOrUpdate('test@hubspot.com', [
+        $response = $this->resource->createOrUpdate($this->entity->properties->email->value, [
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value' => 'user'],
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->contacts->delete($response->vid);
     }
 
     /** @test */
     public function createOrUpdateBatch()
     {
-        $emails = ['test1@hubspot.com', 'test2@hubspot.com'];
-        $response = $this->contacts->createOrUpdateBatch([
+        $secondEmail = 'test2@hubspot.com';
+        $response = $this->resource->createOrUpdateBatch([
             [
-                'email' => $emails[0],
+                'email' => $this->entity->properties->email->value,
                 'properties' => [
                     ['property' => 'firstname', 'value' => 'joe'],
                     ['property' => 'lastname', 'value' => 'user'],
                 ],
             ],
             [
-                'email' => $emails[1],
+                'email' => $secondEmail,
                 'properties' => [
                     ['property' => 'firstname', 'value' => 'jane'],
                     ['property' => 'lastname', 'value' => 'user'],
@@ -122,16 +113,16 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         ]);
         $this->assertEquals(202, $response->getStatusCode());
 
-        foreach ($this->contacts->getBatchByEmails($emails)->getData() as  $contact) {
-            $this->contacts->delete($contact->vid);
-        }
+        sleep(1);
+        $contact = $this->resource->getByEmail($secondEmail)->getData();
+        $this->resource->delete($contact->vid);
     }
 
     /** @test */
     public function createOrUpdateBatchWithAuditId()
     {
         $emails = ['testWithAuditId3@hubspot.com', 'testWithAuditId4@hubspot.com'];
-        $response = $this->contacts->createOrUpdateBatch([
+        $response = $this->resource->createOrUpdateBatch([
             [
                 'email' => $emails[0],
                 'properties' => [
@@ -149,25 +140,25 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
         ], ['auditId' => 'TEST_CHANGE_SOURCE']);
         $this->assertEquals(202, $response->getStatusCode());
 
-        foreach ($this->contacts->getBatchByEmails($emails)->getData() as  $contact) {
-            $this->contacts->delete($contact->vid);
+        foreach ($this->resource->getBatchByEmails($emails)->getData() as  $contact) {
+            $this->resource->delete($contact->vid);
         }
     }
 
     /** @test */
     public function delete()
     {
-        $contact = $this->createContact();
-
-        $response = $this->contacts->delete($contact->vid);
+        $response = $this->deleteEntity();
 
         $this->assertEquals(200, $response->getStatusCode());
+
+        $this->entity = null;
     }
 
     /** @test */
     public function recent()
     {
-        $response = $this->contacts->recent(['count' => 2]);
+        $response = $this->resource->recent(['count' => 2]);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -175,86 +166,57 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getById()
     {
-        $contact = $this->createContact();
-
-        $response = $this->contacts->getById($contact->vid);
+        $response = $this->resource->getById($this->entity->vid);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->contacts->delete($contact->vid);
     }
 
     /** @test */
     public function getBatchByIds()
     {
-        $contacts = [
-            $this->createContact(),
-            $this->createContact(),
+        $contact = $this->createEntity();
+
+        $ids = [
+            $this->entity->vid,
+            $contact->vid,
         ];
 
-        $ids = array_reduce($contacts, function ($vids, $contact) {
-            $vids[] = $contact->vid;
-
-            return $vids;
-        }, []);
-
-        $response = $this->contacts->getBatchByIds($ids);
+        $response = $this->resource->getBatchByIds($ids);
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        foreach ($ids as $id) {
-            $this->contacts->delete($id);
-        }
+        $this->resource->delete($contact->vid);
     }
 
     /** @test */
     public function getByEmail()
     {
-        $contact = $this->createContact();
-
-        $response = $this->contacts->getByEmail($contact->properties->email->value);
+        $response = $this->resource->getByEmail($this->entity->properties->email->value);
 
         $this->assertEquals(200, $response->getStatusCode());
-
-        $this->contacts->delete($contact->vid);
     }
 
     /** @test */
     public function getBatchByEmails()
     {
-        $contacts = [
-            $this->createContact(),
-            $this->createContact(),
+        $contact = $this->createEntity();
+
+        $emails = [
+            $this->entity->properties->email->value,
+            $contact->properties->email->value,
         ];
 
-        $emails = array_reduce($contacts, function ($values, $contact) {
-            $values[] = $contact->properties->email->value;
-
-            return $values;
-        }, []);
-
-        $response = $this->contacts->getBatchByEmails($emails);
+        $response = $this->resource->getBatchByEmails($emails);
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        foreach ($contacts as $contact) {
-            $this->contacts->delete($contact->vid);
-        }
-    }
-
-    public function getByToken()
-    {
-        // TODO: This is harder...
-    }
-
-    public function getBatchByTokens()
-    {
-        // TODO: ... and so is this one
+        $this->resource->delete($contact->vid);
     }
 
     /** @test */
     public function search()
     {
-        $response = $this->contacts->search('hub', ['count' => 2]);
+        $response = $this->resource->search('hub', ['count' => 2]);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -262,24 +224,30 @@ class ContactsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function statistics()
     {
-        $response = $this->contacts->statistics();
+        $response = $this->resource->statistics();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-    // Lots of tests need an existing object to modify.
-    protected function createContact()
+    /** @test */
+    public function getLifecycleStageMetrics()
     {
-        sleep(1);
+        $response = $this->resource->getLifecycleStageMetrics();
 
-        $response = $this->contacts->create([
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    protected function createEntity()
+    {
+        return $this->resource->create([
             ['property' => 'email',     'value' => 'rw_test'.uniqid().'@hubspot.com'],
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname',  'value' => 'user'],
         ]);
+    }
 
-        $this->assertEquals(200, $response->getStatusCode());
-
-        return $response;
+    protected function deleteEntity()
+    {
+        return $this->resource->delete($this->entity->vid);
     }
 }

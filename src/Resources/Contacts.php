@@ -2,9 +2,14 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+/**
+ * @see https://developers.hubspot.com/docs/methods/contacts/contacts-overview
+ */
 class Contacts extends Resource
 {
     /**
+     * Create a new contact.
+     *
      * @param array $properties array of contact properties
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -21,6 +26,8 @@ class Contacts extends Resource
     }
 
     /**
+     * Update an existing contact.
+     *
      * @param int   $id         the contact id
      * @param array $properties the contact properties to update
      *
@@ -38,6 +45,8 @@ class Contacts extends Resource
     }
 
     /**
+     * Update an existing contact by email.
+     *
      * @param string $email      the contact's email address
      * @param array  $properties the contact properties to update
      *
@@ -55,6 +64,8 @@ class Contacts extends Resource
     }
 
     /**
+     * Create or update a contact.
+     *
      * @param string $email      the contact's email address
      * @param array  $properties the contact properties
      *
@@ -72,6 +83,8 @@ class Contacts extends Resource
     }
 
     /**
+     * Create or update a group of contacts.
+     *
      * @param array $contacts the contacts and properties
      * @param array $params   Array of optional parameters ['auditId']
      *
@@ -91,6 +104,8 @@ class Contacts extends Resource
     }
 
     /**
+     * Delete a contact.
+     *
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -172,6 +187,8 @@ class Contacts extends Resource
     }
 
     /**
+     * Get a contact by vid(id).
+     *
      * @param int   $id
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                      'showListMemberships']
@@ -216,6 +233,8 @@ class Contacts extends Resource
     }
 
     /**
+     * Get a contact by email address.
+     *
      * @param string $email
      * @param array  $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                       'showListMemberships']
@@ -259,6 +278,8 @@ class Contacts extends Resource
     }
 
     /**
+     * Get a contact by its user token.
+     *
      * @param string $utk
      * @param array  $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                       'showListMemberships']
@@ -333,6 +354,8 @@ class Contacts extends Resource
     }
 
     /**
+     * @deprecated
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function statistics()
@@ -361,5 +384,19 @@ class Contacts extends Resource
         $options['json'] = ['vidToMerge' => $vidToMerge];
 
         return $this->client->request('post', $endpoint, $options);
+    }
+
+    /**
+     * Get Lifecycle Stage metrics for Contacts.
+     *
+     * @see https://developers.hubspot.com/docs/methods/contacts/get-lifecycle-stage-metrics-for-contacts
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function getLifecycleStageMetrics(array $params = [])
+    {
+        $endpoint = 'https://api.hubapi.com/contacts/v1/contacts/statistics';
+
+        return $this->client->request('get', $endpoint, [], build_query_string($params));
     }
 }
