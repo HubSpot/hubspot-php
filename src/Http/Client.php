@@ -3,6 +3,8 @@
 namespace SevenShores\Hubspot\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use Psr\Http\Message\ResponseInterface;
 use SevenShores\Hubspot\Exceptions\BadRequest;
 use SevenShores\Hubspot\Exceptions\HubspotException;
@@ -106,10 +108,10 @@ class Client
             }
 
             return new Response($this->client->request($method, $url, $options));
-        } catch (\GuzzleHttp\Exception\ServerException $e) {
-            throw new HubspotException(\GuzzleHttp\Psr7\str($e->getResponse()), $e->getCode(), $e);
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
-            throw new BadRequest($e->getMessage(), $e->getCode(), $e);
+        } catch (ServerException $e) {
+            throw HubspotException::create($e);
+        } catch (ClientException $e) {
+            throw BadRequest::create($e);
         }
     }
 
