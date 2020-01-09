@@ -10,7 +10,7 @@ namespace SevenShores\Hubspot;
  */
 class Utils
 {
-    public function __call($name, $arguments = null)
+    public function __call(string $name, $arguments = null)
     {
         $resource = 'SevenShores\\Hubspot\\Utils\\'.ucfirst($name);
 

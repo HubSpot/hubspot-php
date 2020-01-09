@@ -3,51 +3,54 @@
 namespace SevenShores\Hubspot;
 
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\Resource;
 
 /**
  * Class Factory.
  *
- * @method \SevenShores\Hubspot\Resources\Analytics         analytics()
- * @method \SevenShores\Hubspot\Resources\BlogAuthors       blogAuthors()
- * @method \SevenShores\Hubspot\Resources\Blogs             blogs()
- * @method \SevenShores\Hubspot\Resources\BlogPosts         blogPosts()
- * @method \SevenShores\Hubspot\Resources\BlogTopics        blogTopics()
- * @method \SevenShores\Hubspot\Resources\Companies         companies()
- * @method \SevenShores\Hubspot\Resources\CompanyProperties companyProperties()
- * @method \SevenShores\Hubspot\Resources\CalendarEvents    calendarEvents()
- * @method \SevenShores\Hubspot\Resources\ContactLists      contactLists()
- * @method \SevenShores\Hubspot\Resources\ContactProperties contactProperties()
- * @method \SevenShores\Hubspot\Resources\Contacts          contacts()
- * @method \SevenShores\Hubspot\Resources\CrmAssociations   crmAssociations()
- * @method \SevenShores\Hubspot\Resources\CrmPipelines      crmPipelines()
- * @method \SevenShores\Hubspot\Resources\Email             email()
- * @method \SevenShores\Hubspot\Resources\EmailEvents       emailEvents()
- * @method \SevenShores\Hubspot\Resources\Engagements       engagements()
- * @method \SevenShores\Hubspot\Resources\Files             files()
- * @method \SevenShores\Hubspot\Resources\Forms             forms()
- * @method \SevenShores\Hubspot\Resources\HubDB             hubDB()
- * @method \SevenShores\Hubspot\Resources\Keywords          keywords()
- * @method \SevenShores\Hubspot\Resources\Pages             pages()
- * @method \SevenShores\Hubspot\Resources\SocialMedia       socialMedia()
- * @method \SevenShores\Hubspot\Resources\Tickets           tickets()
- * @method \SevenShores\Hubspot\Resources\Timeline          timeline()
- * @method \SevenShores\Hubspot\Resources\Workflows         workflows()
- * @method \SevenShores\Hubspot\Resources\Events            events()
- * @method \SevenShores\Hubspot\Resources\DealPipelines     dealPipelines()
- * @method \SevenShores\Hubspot\Resources\DealProperties    dealProperties()
- * @method \SevenShores\Hubspot\Resources\Deals             deals()
- * @method \SevenShores\Hubspot\Resources\Owners            owners()
- * @method \SevenShores\Hubspot\Resources\SingleEmail       singleEmail()
- * @method \SevenShores\Hubspot\Resources\Integration       integration()
- * @method \SevenShores\Hubspot\Resources\EcommerceBridge   ecommerceBridge()
- * @method \SevenShores\Hubspot\Resources\Webhooks          webhooks()
- * @method \SevenShores\Hubspot\Resources\OAuth2            oAuth2()
- * @method \SevenShores\Hubspot\Resources\ObjectProperties  objectProperties()
+ * @method \SevenShores\Hubspot\Resources\Analytics          analytics()
+ * @method \SevenShores\Hubspot\Resources\BlogAuthors        blogAuthors()
+ * @method \SevenShores\Hubspot\Resources\Blogs              blogs()
+ * @method \SevenShores\Hubspot\Resources\BlogPosts          blogPosts()
+ * @method \SevenShores\Hubspot\Resources\BlogTopics         blogTopics()
+ * @method \SevenShores\Hubspot\Resources\Companies          companies()
+ * @method \SevenShores\Hubspot\Resources\CompanyProperties  companyProperties()
+ * @method \SevenShores\Hubspot\Resources\CalendarEvents     calendarEvents()
+ * @method \SevenShores\Hubspot\Resources\ContactLists       contactLists()
+ * @method \SevenShores\Hubspot\Resources\ContactProperties  contactProperties()
+ * @method \SevenShores\Hubspot\Resources\Contacts           contacts()
+ * @method \SevenShores\Hubspot\Resources\CrmAssociations    crmAssociations()
+ * @method \SevenShores\Hubspot\Resources\CrmPipelines       crmPipelines()
+ * @method \SevenShores\Hubspot\Resources\EmailSubscription  emailSubscription()
+ * @method \SevenShores\Hubspot\Resources\EmailEvents        emailEvents()
+ * @method \SevenShores\Hubspot\Resources\Engagements        engagements()
+ * @method \SevenShores\Hubspot\Resources\Files              files()
+ * @method \SevenShores\Hubspot\Resources\Forms              forms()
+ * @method \SevenShores\Hubspot\Resources\HubDB              hubDB()
+ * @method \SevenShores\Hubspot\Resources\Keywords           keywords()
+ * @method \SevenShores\Hubspot\Resources\Pages              pages()
+ * @method \SevenShores\Hubspot\Resources\SocialMedia        socialMedia()
+ * @method \SevenShores\Hubspot\Resources\Tickets            tickets()
+ * @method \SevenShores\Hubspot\Resources\Timeline           timeline()
+ * @method \SevenShores\Hubspot\Resources\Workflows          workflows()
+ * @method \SevenShores\Hubspot\Resources\Events             events()
+ * @method \SevenShores\Hubspot\Resources\DealPipelines      dealPipelines()
+ * @method \SevenShores\Hubspot\Resources\DealProperties     dealProperties()
+ * @method \SevenShores\Hubspot\Resources\Deals              deals()
+ * @method \SevenShores\Hubspot\Resources\Owners             owners()
+ * @method \SevenShores\Hubspot\Resources\TransactionalEmail transactionalEmail()
+ * @method \SevenShores\Hubspot\Resources\Integration        integration()
+ * @method \SevenShores\Hubspot\Resources\EcommerceBridge    ecommerceBridge()
+ * @method \SevenShores\Hubspot\Resources\Webhooks           webhooks()
+ * @method \SevenShores\Hubspot\Resources\OAuth2             oAuth2()
+ * @method \SevenShores\Hubspot\Resources\ObjectProperties   objectProperties()
  */
 class Factory
 {
-    /** @var Client */
-    private $client;
+    /**
+     * @var Client
+     */
+    protected $client;
 
     /**
      * C O N S T R U C T O R ( ^_^)y.
@@ -57,7 +60,7 @@ class Factory
      * @param array  $clientOptions options to be send with each request
      * @param bool   $wrapResponse  wrap request response in own Response object
      */
-    public function __construct($config = [], $client = null, $clientOptions = [], $wrapResponse = true)
+    public function __construct(array $config = [], Client $client = null, array $clientOptions = [], $wrapResponse = true)
     {
         $this->client = $client ?: new Client($config, null, $clientOptions, $wrapResponse);
     }
@@ -65,13 +68,10 @@ class Factory
     /**
      * Return an instance of a Resource based on the method called.
      *
-     * @param string $name
-     * @param array  $arguments
-     * @param mixed  $args
-     *
-     * @return \SevenShores\Hubspot\Resources\Resource
+     * @param array $arguments
+     * @param mixed $args
      */
-    public function __call($name, $args)
+    public function __call(string $name, $args): Resource
     {
         $resource = 'SevenShores\\Hubspot\\Resources\\'.ucfirst($name);
 
@@ -96,7 +96,7 @@ class Factory
      *
      * @return static
      */
-    public static function create($api_key = null, $client = null, $clientOptions = [], $wrapResponse = true)
+    public static function create(string $api_key = null, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
     {
         return new static(['key' => $api_key], $client, $clientOptions, $wrapResponse);
     }
@@ -111,7 +111,7 @@ class Factory
      *
      * @return static
      */
-    public static function createWithToken($token, $client = null, $clientOptions = [], $wrapResponse = true)
+    public static function createWithToken(string $token, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
     {
         return new static(['key' => $token, 'oauth' => true], $client, $clientOptions, $wrapResponse);
     }
@@ -126,7 +126,7 @@ class Factory
      *
      * @return static
      */
-    public static function createWithOAuth2Token($token, $client = null, $clientOptions = [], $wrapResponse = true)
+    public static function createWithOAuth2Token(string $token, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
     {
         return new static(['key' => $token, 'oauth2' => true], $client, $clientOptions, $wrapResponse);
     }

@@ -53,7 +53,7 @@ class FactorySpec extends ObjectBehavior
 
     public function it_creates_a_email_api_class()
     {
-        $this->email()->shouldHaveType('SevenShores\Hubspot\Resources\Email');
+        $this->emailSubscription()->shouldHaveType('SevenShores\Hubspot\Resources\EmailSubscription');
     }
 
     public function it_creates_a_emailEvents_api_class()

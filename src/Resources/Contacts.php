@@ -58,7 +58,7 @@ class Contacts extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/update_contact-by-email
      */
-    public function updateByEmail($email, array $properties)
+    public function updateByEmail(string $email, array $properties)
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile";
 
@@ -79,7 +79,7 @@ class Contacts extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/create_or_update
      */
-    public function createOrUpdate($email, array $properties = [])
+    public function createOrUpdate(string $email, array $properties = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/{$email}";
 
@@ -259,15 +259,14 @@ class Contacts extends Resource
     /**
      * Get a contact by email address.
      *
-     * @param string $email
-     * @param array  $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
-     *                       'showListMemberships']
+     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
+     *                      'showListMemberships']
      *
      * @return \SevenShores\Hubspot\Http\Response
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/get_contact_by_email
      */
-    public function getByEmail($email, array $params = [])
+    public function getByEmail(string $email, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile";
 
@@ -310,15 +309,14 @@ class Contacts extends Resource
     /**
      * Get a contact by its user token.
      *
-     * @param string $utk
-     * @param array  $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
-     *                       'showListMemberships']
+     * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
+     *                      'showListMemberships']
      *
      * @return \SevenShores\Hubspot\Http\Response
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/get_contact_by_utk
      */
-    public function getByToken($utk, array $params = [])
+    public function getByToken(string $utk, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/utk/{$utk}/profile";
 
@@ -378,7 +376,7 @@ class Contacts extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function search($query, array $params = [])
+    public function search(string $query, array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/search/query';
 
