@@ -17,7 +17,7 @@ class Timeline extends Resource
      *
      * @return mixed
      *
-     * @see http://developers.hubspot.com/docs/methods/timeline/create-or-update-event
+     * @see https://developers.hubspot.com/docs/methods/timeline/create-or-update-event
      */
     public function createOrUpdate(
         $appId,
@@ -94,7 +94,7 @@ class Timeline extends Resource
      *
      * @return mixed
      *
-     * @see http://developers.hubspot.com/docs/methods/timeline/get-event-types
+     * @see https://developers.hubspot.com/docs/methods/timeline/get-event-types
      */
     public function getEventTypes($appId)
     {
@@ -131,7 +131,7 @@ class Timeline extends Resource
      *
      * @return mixed
      *
-     * @see http://developers.hubspot.com/docs/methods/timeline/create-event-type
+     * @see https://developers.hubspot.com/docs/methods/timeline/create-event-type
      */
     public function createEventType(
         $appId,
@@ -166,7 +166,7 @@ class Timeline extends Resource
      *
      * @return mixed
      *
-     * @see http://developers.hubspot.com/docs/methods/timeline/update-event-type
+     * @see https://developers.hubspot.com/docs/methods/timeline/update-event-type
      */
     public function updateEventType(
         $appId,
@@ -198,7 +198,7 @@ class Timeline extends Resource
      *
      * @return mixed
      *
-     * @see http://developers.hubspot.com/docs/methods/timeline/delete-event-type
+     * @see https://developers.hubspot.com/docs/methods/timeline/delete-event-type
      */
     public function deleteEventType($appId, $eventTypeId)
     {
@@ -215,7 +215,7 @@ class Timeline extends Resource
      *
      * @return mixed
      *
-     * @see http://developers.hubspot.com/docs/methods/timeline/get-timeline-event-type-properties
+     * @see https://developers.hubspot.com/docs/methods/timeline/get-timeline-event-type-properties
      */
     public function getEventTypeProperties($appId, $eventTypeId)
     {
@@ -236,7 +236,7 @@ class Timeline extends Resource
      *
      * @return mixed
      *
-     * @see http://developers.hubspot.com/docs/methods/timeline/create-timeline-event-type-property
+     * @see https://developers.hubspot.com/docs/methods/timeline/create-timeline-event-type-property
      */
     public function createEventTypeProperty(
         $appId,
@@ -273,7 +273,7 @@ class Timeline extends Resource
      *
      * @return mixed
      *
-     * @see http://developers.hubspot.com/docs/methods/timeline/udpate-timeline-event-type-property
+     * @see https://developers.hubspot.com/docs/methods/timeline/udpate-timeline-event-type-property
      */
     public function updateEventTypeProperty(
         $appId,
@@ -309,7 +309,7 @@ class Timeline extends Resource
      *
      * @return mixed
      *
-     * @see http://developers.hubspot.com/docs/methods/timeline/delete-timeline-event-type-property
+     * @see https://developers.hubspot.com/docs/methods/timeline/delete-timeline-event-type-property
      */
     public function deleteEventTypeProperty($appId, $eventTypeId, $eventTypePropertyId)
     {

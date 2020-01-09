@@ -23,7 +23,7 @@ class BlogTopics extends Resource
     /**
      * Search a topic by the query. $query will match name and slug partially.
      *
-     * @see http://developers.hubspot.com/docs/methods/blog/v3/search-blog-topics
+     * @see https://developers.hubspot.com/docs/methods/blog/v3/search-blog-topics
      *
      * @param string $query  Search query
      * @param array  $params Array of optional parameters ['name','slug','limit', 'offset', 'active', 'blog']

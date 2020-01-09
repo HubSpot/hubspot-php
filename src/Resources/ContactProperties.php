@@ -10,7 +10,7 @@ class ContactProperties extends Resource
      * Properties in HubSpot are fields that have been created, in this case for deals in a given portal.
      * This endpoint will return all of the contacts properties, including their definition, for a given portal.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/v2/get_contacts_properties
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/get_contacts_properties
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -26,7 +26,7 @@ class ContactProperties extends Resource
      *
      * Returns a JSON object representing the definition for a given contact property.
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/get_contact_property
+     * @see https://developers.hubspot.com/docs/methods/companies/get_contact_property
      *
      * @param string $name the name of the property
      *
@@ -45,7 +45,7 @@ class ContactProperties extends Resource
      * Create a property on every contact object to store a specific piece of data. In the example below,
      * we want to store an invoice number on a separate field on deals.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -61,7 +61,7 @@ class ContactProperties extends Resource
      *
      * Update a specified contact property.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property
      *
      * @param string $name
      *
@@ -81,7 +81,7 @@ class ContactProperties extends Resource
      *
      * For a portal, delete an existing contact property.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property
      *
      * @param string $name
      *
@@ -99,7 +99,7 @@ class ContactProperties extends Resource
      *
      * Returns all of the contact property groups for a given portal.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
      *
      * @param bool $includeProperties
      *
@@ -123,7 +123,7 @@ class ContactProperties extends Resource
      * Create a new contact property group to gather like contact-level data. Property groups allow you to more
      * easily manage properties in a given portal and make contact records easier to parse for the user.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property_group
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property_group
      *
      * @param array $group Group properties
      *
@@ -141,7 +141,7 @@ class ContactProperties extends Resource
      *
      * Update a previously created contact property group.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property_group
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property_group
      *
      * @param string $name
      *
@@ -161,7 +161,7 @@ class ContactProperties extends Resource
      *
      * Delete an existing contact property group.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property_group
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property_group
      *
      * @param string $name
      *

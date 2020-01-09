@@ -9,7 +9,7 @@ class DealProperties extends Resource
      *
      * Returns a JSON object representing the definition for a given deal property.
      *
-     * @see http://developers.hubspot.com/docs/methods/deals/get_deal_property
+     * @see https://developers.hubspot.com/docs/methods/deals/get_deal_property
      *
      * @param string $name the name of the property
      *
@@ -44,7 +44,7 @@ class DealProperties extends Resource
      *
      * Update a specified deal property.
      *
-     * @see http://developers.hubspot.com/docs/methods/deals/update_deal_property
+     * @see https://developers.hubspot.com/docs/methods/deals/update_deal_property
      *
      * @param string $name
      *
