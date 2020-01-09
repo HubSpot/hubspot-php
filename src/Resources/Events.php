@@ -26,7 +26,7 @@ class Events extends Resource
         $contactRevenue = null,
         $contactProperties = []
     ) {
-        $endpoint = 'http://track.hubspot.com/v1/event';
+        $endpoint = 'https://track.hubspot.com/v1/event';
 
         $required['_a'] = $hubId;
         $required['_n'] = $eventId;

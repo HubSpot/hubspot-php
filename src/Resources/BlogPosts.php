@@ -84,7 +84,7 @@ class BlogPosts extends Resource
     /**
      * Updates the auto-save buffer. Live objects will not be impacted.
      *
-     * @see http://developers.hubspot.com/docs/methods/blogv2/put_blog_posts_blog_post_id_buffer
+     * @see https://developers.hubspot.com/docs/methods/blogv2/put_blog_posts_blog_post_id_buffer
      *
      * @param int   $id     the blog post ID
      * @param array $params allowed parameters

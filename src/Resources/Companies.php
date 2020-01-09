@@ -9,7 +9,7 @@ class Companies extends Resource
      *
      * @param array $properties array of company properties
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/create_company
+     * @see https://developers.hubspot.com/docs/methods/companies/create_company
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -27,7 +27,7 @@ class Companies extends Resource
      * @param int   $id         the company id
      * @param array $properties the company properties to update
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/update_company
+     * @see https://developers.hubspot.com/docs/methods/companies/update_company
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -57,7 +57,7 @@ class Companies extends Resource
      *
      * @param int $id The company id
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/delete_company
+     * @see https://developers.hubspot.com/docs/methods/companies/delete_company
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -73,7 +73,7 @@ class Companies extends Resource
      *
      * @param array $params Array of optional parameters ['limit', 'offset', 'properties']
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/get-all-companies
+     * @see https://developers.hubspot.com/docs/methods/companies/get-all-companies
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -91,7 +91,7 @@ class Companies extends Resource
      *
      * @param array $params Array of optional parameters ['count', 'offset']
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/get_companies_modified
+     * @see https://developers.hubspot.com/docs/methods/companies/get_companies_modified
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -109,7 +109,7 @@ class Companies extends Resource
      *
      * @param array $params Array of optional parameters ['count', 'offset']
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/get_companies_created
+     * @see https://developers.hubspot.com/docs/methods/companies/get_companies_created
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -153,7 +153,7 @@ class Companies extends Resource
      *
      * @param int $id
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/get_company
+     * @see https://developers.hubspot.com/docs/methods/companies/get_company
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -171,7 +171,7 @@ class Companies extends Resource
      * @param int $contactId
      * @param int $companyId
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/add_contact_to_company
+     * @see https://developers.hubspot.com/docs/methods/companies/add_contact_to_company
      * @see CrmAssociations::create is used to create associations between objects
      * @deprecated
      *
@@ -190,7 +190,7 @@ class Companies extends Resource
      * @param int   $companyId the id of the company
      * @param array $params    Array of optional parameters ['count', 'vidOffset']
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/get_company_contacts
+     * @see https://developers.hubspot.com/docs/methods/companies/get_company_contacts
      * @see CrmAssociations::get is used to get associations between objects
      * @deprecated
      *
@@ -211,7 +211,7 @@ class Companies extends Resource
      * @param int   $companyId the id of the company
      * @param array $params    Array of optional parameters ['count', 'vidOffset']
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/get_company_contacts_by_id
+     * @see https://developers.hubspot.com/docs/methods/companies/get_company_contacts_by_id
      * @see CrmAssociations::get is used to get associations between objects
      * @deprecated
      *
@@ -232,7 +232,7 @@ class Companies extends Resource
      * @param int $contactId
      * @param int $companyId
      *
-     * @see http://developers.hubspot.com/docs/methods/companies/remove_contact_from_company
+     * @see https://developers.hubspot.com/docs/methods/companies/remove_contact_from_company
      * @see CrmAssociations::delete is used to delete associations between objects
      * @deprecated
      *

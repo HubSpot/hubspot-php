@@ -22,7 +22,7 @@ class TransactionalEmail extends Resource
     /**
      * Send an email designed and maintained in the HubSpot marketing Email Tool.
      *
-     * @see http://developers.hubspot.com/docs/methods/email/transactional_email/single-send-overview
+     * @see https://developers.hubspot.com/docs/methods/email/transactional_email/single-send-overview
      *
      * @param int   $id
      * @param array $message

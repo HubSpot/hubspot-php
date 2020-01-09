@@ -114,7 +114,7 @@ class Contacts extends Resource
      * you know where you are in the list of contacts. You can then use the "vid-offset" field in the "vidOffset"
      * parameter described below.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/get_contacts
+     * @see https://developers.hubspot.com/docs/methods/contacts/get_contacts
      *
      * @param array $params Array of optional parameters ['count', 'property', 'vidOffset']
      *
@@ -134,7 +134,7 @@ class Contacts extends Resource
      * A paginated list of contacts will be returned to you, with a maximum of 100 contacts per page, as specified by
      * the "count" parameter. The endpoint only scrolls back in time 30 days.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
+     * @see https://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
      *
      * @param array $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property',
      *                      'propertyMode', 'formSubmissionMode', 'showListMemberships']
@@ -155,7 +155,7 @@ class Contacts extends Resource
      * A paginated list of contacts will be returned to you, with a maximum of 100 contacts per page, as specified by
      * the "count" parameter. The endpoint only scrolls back in time 30 days.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
+     * @see https://developers.hubspot.com/docs/methods/contacts/get_recently_updated_contacts
      *
      * @param array $params Array of optional parameters ['count', 'timeOffset', 'vidOffset', 'property',
      *                      'propertyMode', 'formSubmissionMode', 'showListMemberships']
@@ -196,7 +196,7 @@ class Contacts extends Resource
      * This method will also return you much of the HubSpot lead "intelligence" for each requested contact record. The
      * endpoint accepts many query parameters that allow for customization based on a variety of integration use cases.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/get_batch_by_vid
+     * @see https://developers.hubspot.com/docs/methods/contacts/get_batch_by_vid
      *
      * @param array $vids   Array of visitor IDs
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
@@ -238,7 +238,7 @@ class Contacts extends Resource
      * This method will also return you much of the HubSpot lead "intelligence" for each requested contact record. The
      * endpoint accepts many query parameters that allow for customization based on a variety of integration use cases.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/get_batch_by_email
+     * @see https://developers.hubspot.com/docs/methods/contacts/get_batch_by_email
      *
      * @param array $emails Array of email adresses
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
@@ -284,7 +284,7 @@ class Contacts extends Resource
      * The endpoint does not allow for CORS, so if you are looking up contacts from their user token on the client,
      * you'll need to spin up a proxy server to interact with the API.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/get_batch_by_utk
+     * @see https://developers.hubspot.com/docs/methods/contacts/get_batch_by_utk
      *
      * @param array $utks   Array of hubspot user tokens (hubspotutk)
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
@@ -312,7 +312,7 @@ class Contacts extends Resource
      * return is the contact ID (vid) that you can then use to look up much
      * more data about that particular contact by its ID.
      *
-     * @see http://developers.hubspot.com/docs/methods/contacts/search_contacts
+     * @see https://developers.hubspot.com/docs/methods/contacts/search_contacts
      *
      * @param string $query  Search query
      * @param array  $params Array of optional parameters ['count', 'offset']

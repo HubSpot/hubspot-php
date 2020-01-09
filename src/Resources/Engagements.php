@@ -102,7 +102,7 @@ class Engagements extends Resource
      *
      * @param array $params Array of optional parameters ['limit', 'offset']
      *
-     * @see http://developers.hubspot.com/docs/methods/engagements/get-all-engagements
+     * @see https://developers.hubspot.com/docs/methods/engagements/get-all-engagements
      *
      * @return \SevenShores\Hubspot\Http\Response
      */

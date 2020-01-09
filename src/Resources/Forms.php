@@ -24,7 +24,7 @@ class Forms extends Resource
     /**
      * Return all forms that have been created in the portal.
      *
-     * @see http://developers.hubspot.com/docs/methods/forms/v2/get_forms
+     * @see https://developers.hubspot.com/docs/methods/forms/v2/get_forms
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -38,7 +38,7 @@ class Forms extends Resource
     /**
      * Return a single form based on the unique ID of that form.
      *
-     * @see http://developers.hubspot.com/docs/methods/forms/v2/get_form
+     * @see https://developers.hubspot.com/docs/methods/forms/v2/get_form
      *
      * @param string $form_guid
      *
@@ -54,7 +54,7 @@ class Forms extends Resource
     /**
      * Create a new form.
      *
-     * @see http://developers.hubspot.com/docs/methods/forms/v2/create_form
+     * @see https://developers.hubspot.com/docs/methods/forms/v2/create_form
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -68,7 +68,7 @@ class Forms extends Resource
     /**
      * Update an existing form.
      *
-     * @see http://developers.hubspot.com/docs/methods/forms/v2/update_form
+     * @see https://developers.hubspot.com/docs/methods/forms/v2/update_form
      *
      * @param string $form_guid
      *
@@ -84,7 +84,7 @@ class Forms extends Resource
     /**
      * Delete an existing form.
      *
-     * @see http://developers.hubspot.com/docs/methods/forms/v2/delete_form
+     * @see https://developers.hubspot.com/docs/methods/forms/v2/delete_form
      *
      * @param string $form_guid
      *
@@ -100,7 +100,7 @@ class Forms extends Resource
     /**
      * Get all fields from a form.
      *
-     * @see http://developers.hubspot.com/docs/methods/forms/v2/get_fields
+     * @see https://developers.hubspot.com/docs/methods/forms/v2/get_fields
      *
      * @param string $form_guid
      *
@@ -116,7 +116,7 @@ class Forms extends Resource
     /**
      * Get a single field from a form.
      *
-     * @see http://developers.hubspot.com/docs/methods/forms/v2/get_field
+     * @see https://developers.hubspot.com/docs/methods/forms/v2/get_field
      *
      * @param string $form_guid
      * @param string $name
