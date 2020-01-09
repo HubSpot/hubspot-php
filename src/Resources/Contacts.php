@@ -2,9 +2,14 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+/**
+ * @see https://developers.hubspot.com/docs/methods/contacts/contacts-overview
+ */
 class Contacts extends Resource
 {
     /**
+     * Create a new contact.
+     *
      * @param array $properties array of contact properties
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -15,12 +20,16 @@ class Contacts extends Resource
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/contact';
 
-        $options['json'] = ['properties' => $properties];
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => ['properties' => $properties]]
+        );
     }
 
     /**
+     * Update an existing contact.
+     *
      * @param int   $id         the contact id
      * @param array $properties the contact properties to update
      *
@@ -32,12 +41,16 @@ class Contacts extends Resource
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/vid/{$id}/profile";
 
-        $options['json'] = ['properties' => $properties];
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => ['properties' => $properties]]
+        );
     }
 
     /**
+     * Update an existing contact by email.
+     *
      * @param string $email      the contact's email address
      * @param array  $properties the contact properties to update
      *
@@ -49,12 +62,16 @@ class Contacts extends Resource
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile";
 
-        $options['json'] = ['properties' => $properties];
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => ['properties' => $properties]]
+        );
     }
 
     /**
+     * Create or update a contact.
+     *
      * @param string $email      the contact's email address
      * @param array  $properties the contact properties
      *
@@ -66,12 +83,16 @@ class Contacts extends Resource
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/{$email}";
 
-        $options['json'] = ['properties' => $properties];
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => ['properties' => $properties]]
+        );
     }
 
     /**
+     * Create or update a group of contacts.
+     *
      * @param array $contacts the contacts and properties
      * @param array $params   Array of optional parameters ['auditId']
      *
@@ -83,14 +104,17 @@ class Contacts extends Resource
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/contact/batch';
 
-        $queryString = build_query_string($params);
-
-        $options['json'] = $contacts;
-
-        return $this->client->request('post', $endpoint, $options, $queryString);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => $contacts],
+            build_query_string($params)
+        );
     }
 
     /**
+     * Delete a contact.
+     *
      * @param int $id
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -124,9 +148,12 @@ class Contacts extends Resource
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/lists/all/contacts/all';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -145,9 +172,12 @@ class Contacts extends Resource
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/lists/recently_updated/contacts/recent';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -166,12 +196,17 @@ class Contacts extends Resource
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/lists/all/contacts/recent';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
+     * Get a contact by vid(id).
+     *
      * @param int   $id
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                      'showListMemberships']
@@ -184,9 +219,12 @@ class Contacts extends Resource
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/vid/{$id}/profile";
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -210,12 +248,17 @@ class Contacts extends Resource
 
         $params['vid'] = $vids;
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
+     * Get a contact by email address.
+     *
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                      'showListMemberships']
      *
@@ -227,9 +270,12 @@ class Contacts extends Resource
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/email/{$email}/profile";
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -246,18 +292,23 @@ class Contacts extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getBatchByEmails(array $emails, array $params = [])
+    public function getBatchByEmails($emails, array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/contact/emails/batch/';
 
         $params['email'] = $emails;
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
+     * Get a contact by its user token.
+     *
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                      'showListMemberships']
      *
@@ -269,9 +320,12 @@ class Contacts extends Resource
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/utk/{$utk}/profile";
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -298,9 +352,12 @@ class Contacts extends Resource
 
         $params['utk'] = $utks;
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -325,12 +382,17 @@ class Contacts extends Resource
 
         $params['q'] = $query;
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
+     * @deprecated
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function statistics()
@@ -356,8 +418,29 @@ class Contacts extends Resource
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/contact/merge-vids/{$id}/";
 
-        $options['json'] = ['vidToMerge' => $vidToMerge];
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => ['vidToMerge' => $vidToMerge]]
+        );
+    }
 
-        return $this->client->request('post', $endpoint, $options);
+    /**
+     * Get Lifecycle Stage metrics for Contacts.
+     *
+     * @see https://developers.hubspot.com/docs/methods/contacts/get-lifecycle-stage-metrics-for-contacts
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function getLifecycleStageMetrics(array $params = [])
+    {
+        $endpoint = 'https://api.hubapi.com/contacts/v1/contacts/statistics';
+
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 }
