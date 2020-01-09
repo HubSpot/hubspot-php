@@ -9,7 +9,7 @@ use GuzzleHttp\Psr7\Response;
 class HubspotException extends Exception
 {
     /** @var Response|null */
-    private $response;
+    protected $response;
 
     /**
      * @return Response|null
@@ -32,7 +32,7 @@ class HubspotException extends Exception
         return $e;
     }
 
-    private static function sanitizeResponseMessage(string $message): string
+    protected static function sanitizeResponseMessage(string $message): string
     {
         return preg_replace('/(hapikey|access_token)=[a-z0-9-]+/i', '$1=***', $message);
     }
