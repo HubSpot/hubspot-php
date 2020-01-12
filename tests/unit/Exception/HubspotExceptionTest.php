@@ -17,7 +17,8 @@ class HubspotExceptionTest extends TestCase
 {
     const EXAMPLE_TOKEN = '8907e60c-600d-4af8-a987-191c104a215c';
 
-    public function testCreateExceptionFromGuzzleRequestException()
+    /** @test */
+    public function createExceptionFromGuzzleRequestException()
     {
         $e = new RequestException('Request Failed', new Request('GET', 'https://api.hubspot.com/x'));
 
@@ -27,12 +28,13 @@ class HubspotExceptionTest extends TestCase
         $this->assertNull($hubspotException->getResponse());
     }
 
-    public function testCreateExceptionFromGuzzleClientException()
+    /** @test */
+    public function createExceptionFromGuzzleClientException()
     {
         $e = ClientException::create(
             new Request(
                 'GET',
-                sprintf('https://api.hubapi.com/deals/v1/deal/12345?access_token=%s', self::EXAMPLE_TOKEN)
+                sprintf('https://api.hubapi.com/deals/v1/deal/12345?access_token=%s', static::EXAMPLE_TOKEN)
             ),
             new Response(
                 400,
@@ -44,19 +46,20 @@ class HubspotExceptionTest extends TestCase
         $hubspotException = BadRequest::create($e);
 
         $this->assertInstanceOf(BadRequest::class, $hubspotException);
-        $this->assertNotContains(self::EXAMPLE_TOKEN, $hubspotException->getMessage());
+        $this->assertNotContains(static::EXAMPLE_TOKEN, $hubspotException->getMessage());
         $this->assertSame($e->getResponse(), $hubspotException->getResponse());
         $this->assertSame('Client error: `GET https://api.hubapi.com/deals/v1/deal/12345?access_token=***` resulted in a `400 Bad Request` response:
 {"status":"error","message":"xyz"}
 ', $hubspotException->getMessage());
     }
 
-    public function testCreateExceptionFromGuzzleServerException()
+    /** @test */
+    public function createExceptionFromGuzzleServerException()
     {
         $e = ServerException::create(
             new Request(
                 'GET',
-                sprintf('https://api.hubapi.com/deals/v1/deal/12345?hapikey=%s', self::EXAMPLE_TOKEN)
+                sprintf('https://api.hubapi.com/deals/v1/deal/12345?hapikey=%s', static::EXAMPLE_TOKEN)
             ),
             new Response(
                 502,
@@ -69,7 +72,7 @@ class HubspotExceptionTest extends TestCase
         $hubspotException = HubspotException::create($e);
 
         $this->assertInstanceOf(HubspotException::class, $hubspotException);
-        $this->assertNotContains(self::EXAMPLE_TOKEN, $hubspotException->getMessage());
+        $this->assertNotContains(static::EXAMPLE_TOKEN, $hubspotException->getMessage());
         $this->assertSame($e->getResponse(), $hubspotException->getResponse());
         $this->assertSame('Server error: `GET https://api.hubapi.com/deals/v1/deal/12345?hapikey=***` resulted in a `502 Bad Gateway` response:
 <!DOCTYPE html>

@@ -22,7 +22,7 @@ class HubspotException extends Exception
     public static function create(RequestException $guzzleException): self
     {
         $e = new static(
-            self::sanitizeResponseMessage($guzzleException->getMessage()),
+            static::sanitizeResponseMessage($guzzleException->getMessage()),
             $guzzleException->getCode(),
             $guzzleException
         );
