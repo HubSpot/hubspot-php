@@ -202,17 +202,11 @@ class HubDB extends Resource
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows",
             $draft
         );
-
+        
         return $this->client->request(
             'post',
             $endpoint,
-            [
-                'json' => array_diff([
-                    'values' => $values,
-                    'name' => $name,
-                    'path' => $path,
-                ], [null]),
-            ]
+            $this->getBody($values, $name, $path)
         );
     }
 
@@ -256,13 +250,7 @@ class HubDB extends Resource
         return $this->client->request(
             'put',
             $endpoint,
-            [
-                'json' => array_diff([
-                    'values' => $values,
-                    'name' => $name,
-                    'path' => $path,
-                ], [null]),
-            ]
+            $this->getBody($values, $name, $path)
         );
     }
 
@@ -389,6 +377,22 @@ class HubDB extends Resource
                 ],
             ],
         ]);
+    }
+    
+    /**
+     * Get body.
+     */
+    protected function getBody(array $values, string $name = null, string $path = null): array
+    {
+        return [
+            'json' => array_filter([
+                'values' => $values,
+                'name' => $name,
+                'path' => $path,
+            ], function ($value) {
+                return !empty($value);
+            }),
+        ];
     }
 
     /**
