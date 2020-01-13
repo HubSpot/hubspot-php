@@ -196,7 +196,7 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function addRow($tableId, array $values, bool $draft = false)
+    public function addRow($tableId, array $values, bool $draft = false, string $name = null, string $path = null)
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows",
@@ -206,7 +206,13 @@ class HubDB extends Resource
         return $this->client->request(
             'post',
             $endpoint,
-            ['json' => ['values' => $values]]
+            [
+                'json' => array_diff([
+                    'values' => $values,
+                    'name' => $name,
+                    'path' => $path,
+                ], [null]),
+            ]
         );
     }
 
@@ -243,14 +249,20 @@ class HubDB extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function updateRow($tableId, $rowId, array $values)
+    public function updateRow($tableId, $rowId, array $values, string $name = null, string $path = null)
     {
         $endpoint = "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows/{$rowId}";
 
         return $this->client->request(
             'put',
             $endpoint,
-            ['json' => ['values' => $values]]
+            [
+                'json' => array_diff([
+                    'values' => $values,
+                    'name' => $name,
+                    'path' => $path,
+                ], [null]),
+            ]
         );
     }
 

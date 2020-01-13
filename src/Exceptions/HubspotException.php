@@ -8,11 +8,11 @@ use GuzzleHttp\Psr7\Response;
 
 class HubspotException extends Exception
 {
-    /** @var Response|null */
+    /** @var null|Response */
     protected $response;
 
     /**
-     * @return Response|null
+     * @return null|Response
      */
     public function getResponse()
     {

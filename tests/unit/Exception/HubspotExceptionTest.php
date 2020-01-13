@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace SevenShores\Hubspot\Tests\unit\Exception;
@@ -8,11 +9,15 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use function GuzzleHttp\Psr7\stream_for;
 use PHPUnit\Framework\TestCase;
 use SevenShores\Hubspot\Exceptions\BadRequest;
 use SevenShores\Hubspot\Exceptions\HubspotException;
-use function GuzzleHttp\Psr7\stream_for;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class HubspotExceptionTest extends TestCase
 {
     const EXAMPLE_TOKEN = '8907e60c-600d-4af8-a987-191c104a215c';
