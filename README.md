@@ -211,7 +211,7 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [ ] Line Items API
 - [ ] Marketing Email API
 - [x] Owners API :upadated:
-- [ ] Products API
+- [x] Products API :new:
 - [x] Social Media API
 - [x] Tickets API
 - [x] Timeline API :upadated:
