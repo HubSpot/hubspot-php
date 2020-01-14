@@ -16,7 +16,7 @@ class ContactProperties extends Resource
      */
     public function all()
     {
-        $endpoint = 'https://api.hubapi.com/contacts/v2/properties';
+        $endpoint = "https://api.hubapi.com/contacts/v2/properties";
 
         return $this->client->request('get', $endpoint);
     }
@@ -51,7 +51,7 @@ class ContactProperties extends Resource
      */
     public function create(array $property)
     {
-        $endpoint = 'https://api.hubapi.com/contacts/v2/properties';
+        $endpoint = "https://api.hubapi.com/contacts/v2/properties";
 
         return $this->client->request('post', $endpoint, ['json' => $property]);
     }
@@ -107,7 +107,30 @@ class ContactProperties extends Resource
      */
     public function getGroups($includeProperties = false)
     {
-        $endpoint = 'https://api.hubapi.com/contacts/v2/groups';
+        $endpoint = "https://api.hubapi.com/contacts/v2/groups";
+
+        $queryString = '';
+        if ($includeProperties) {
+            $queryString = build_query_string(['includeProperties' => 'true']);
+        }
+
+        return $this->client->request('get', $endpoint, [], $queryString);
+    }
+
+    /**
+     * Get single contact property group.
+     *
+     * Returns all of the contact property group data for given name.
+     *
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_group
+     *
+     * @param string $groupName
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function getGroupDetails($groupName, $includeProperties = false)
+    {
+        $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$groupName}";
 
         $queryString = '';
         if ($includeProperties) {
@@ -131,7 +154,7 @@ class ContactProperties extends Resource
      */
     public function createGroup(array $group)
     {
-        $endpoint = 'https://api.hubapi.com/contacts/v2/groups';
+        $endpoint = "https://api.hubapi.com/contacts/v2/groups";
 
         return $this->client->request('post', $endpoint, ['json' => $group]);
     }
