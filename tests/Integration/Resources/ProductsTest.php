@@ -9,7 +9,7 @@ use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
  * @internal
  * @coversNothing
  */
-class ContactsTest extends EntityTestCase
+class ProductsTest extends EntityTestCase
 {
     /**
      * @var SevenShores\Hubspot\Resources\Products
