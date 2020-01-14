@@ -107,5 +107,4 @@ class BlogAuthorsTest extends EntityTestCase
     protected function deleteEntity() {
         $this->resource->delete($this->entity->id);
     }
-
 }
