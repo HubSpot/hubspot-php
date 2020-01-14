@@ -9,21 +9,28 @@ class Blogs extends Resource
      *
      * @param array $params Optional parameters ['limit', 'offset', 'created', 'deleted_at', 'name']
      *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/get_blogs
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function all($params = [])
+    public function all(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/content/api/v2/blogs';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
      * Get information about a specific blog.
      *
-     * @param string $id
+     * @param int $id
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/get_blogs_blog_id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -37,7 +44,9 @@ class Blogs extends Resource
     /**
      * Get previous versions of the blog.
      *
-     * @param string $id blog id
+     * @param int $id blog id
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/get_blogs_blog_id_versions
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -51,8 +60,10 @@ class Blogs extends Resource
     /**
      * Get a previous version of the blog.
      *
-     * @param string $id         blog id
-     * @param string $version_id version id
+     * @param int $id         blog id
+     * @param int $version_id version id
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/get_blogs_blog_id_versions_version_id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
