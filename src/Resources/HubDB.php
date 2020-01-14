@@ -202,7 +202,7 @@ class HubDB extends Resource
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows",
             $draft
         );
-        
+
         return $this->client->request(
             'post',
             $endpoint,
@@ -378,7 +378,7 @@ class HubDB extends Resource
             ],
         ]);
     }
-    
+
     /**
      * Get body.
      */
