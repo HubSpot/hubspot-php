@@ -2,28 +2,21 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\BlogAuthors;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
 /**
  * @internal
  * @coversNothing
  */
-class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
+class BlogAuthorsTest extends EntityTestCase
 {
-    private $blogAuthors;
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->blogAuthors = new BlogAuthors(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
-    }
+    protected $resourceClass = BlogAuthors::class;
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->blogAuthors->all();
+        $response = $this->resource->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -31,7 +24,7 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function allWithParams()
     {
-        $response = $this->blogAuthors->all([
+        $response = $this->resource->all([
             'limit' => 2,
             'offset' => 3,
         ]);
@@ -44,7 +37,7 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function searchWithoutQueryAndParams()
     {
-        $response = $this->blogAuthors->search();
+        $response = $this->resource->search();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -52,7 +45,7 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function searchWithQueryAndWithoutParams()
     {
-        $response = $this->blogAuthors->search('john-smith');
+        $response = $this->resource->search('john-smith');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -60,7 +53,7 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function searchWithQueryAndParams()
     {
-        $response = $this->blogAuthors->search('john-smith', [
+        $response = $this->resource->search('john-smith', [
             'limit' => 5,
         ]);
 
@@ -71,9 +64,7 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getById()
     {
-        $author = $this->createBlogAuthor();
-
-        $response = $this->blogAuthors->getById($author->id);
+        $response = $this->resource->getById($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -81,21 +72,13 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function create()
     {
-        $response = $this->blogAuthors->create([
-            'fullName' => 'John Smith '.uniqid(),
-            'email' => 'john.smith'.uniqid().'@example.com',
-            'username' => 'john-smith',
-        ]);
-
-        $this->assertEquals(201, $response->getStatusCode());
+        $this->assertEquals(201, $this->entity->getStatusCode());
     }
 
     /** @test */
     public function update()
     {
-        $author = $this->createBlogAuthor();
-
-        $response = $this->blogAuthors->update($author->id, [
+        $response = $this->resource->update($this->entity->id, [
             'bio' => 'Lorem ipsum dolor sit amet.',
             'website' => 'http://example.com',
         ]);
@@ -106,26 +89,22 @@ class BlogAuthorsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function delete()
     {
-        $author = $this->createBlogAuthor();
-
-        $response = $this->blogAuthors->delete($author->id);
+        $response = $this->resource->delete($this->entity->id);
 
         $this->assertEquals(204, $response->getStatusCode());
+        
+        $this->entity = null;
     }
 
-    // Lots of tests need an existing object to modify.
-    private function createBlogAuthor()
-    {
-        sleep(1);
-
-        $response = $this->blogAuthors->create([
+    protected function createEntity() {
+        return $this->resource->create([
             'fullName' => 'John Smith '.uniqid(),
             'email' => 'john.smith'.uniqid().'@example.com',
             'username' => 'john-smith',
         ]);
+    }
 
-        $this->assertEquals(201, $response->getStatusCode());
-
-        return $response;
+    protected function deleteEntity() {
+        $this->resource->delete($this->entity->id);
     }
 }

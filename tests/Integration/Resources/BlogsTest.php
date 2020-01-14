@@ -11,19 +11,22 @@ use SevenShores\Hubspot\Resources\Blogs;
  */
 class BlogsTest extends \PHPUnit_Framework_TestCase
 {
-    private $blogs;
+    /**
+     * @var Blogs
+     */
+    protected $resource;
 
     public function setUp()
     {
         parent::setUp();
-        $this->blogs = new Blogs(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        $this->resource = new Blogs(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->blogs->all();
+        $response = $this->resource->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -31,7 +34,7 @@ class BlogsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function allWithParams()
     {
-        $response = $this->blogs->all(['limit' => 1]);
+        $response = $this->resource->all(['limit' => 1]);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertNotNull($response->objects[0]->created);
@@ -40,7 +43,7 @@ class BlogsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function allWithParamsAndArrayAccess()
     {
-        $response = $this->blogs->all(['limit' => 1]);
+        $response = $this->resource->all(['limit' => 1]);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertNotNull($response['objects'][0]['created']);
@@ -49,26 +52,10 @@ class BlogsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getById()
     {
-        $blogs = $this->blogs->all(['limit' => 1]);
+        $blogs = $this->resource->all(['limit' => 1]);
 
-        $response = $this->blogs->getById($blogs->objects[0]->id);
+        $response = $this->resource->getById($blogs->objects[0]->id);
 
         $this->assertEquals(200, $response->getStatusCode());
-    }
-
-    /** @test */
-    public function versionsGetVersion()
-    {
-        $this->markTestSkipped(); // TODO: fix test
-        $blogs = $this->blogs->all(['limit' => 1]);
-
-        $listResponse = $this->blogs->versions($blogs->objects[0]->id);
-        $getResponse = $this->blogs->getVersion(
-            $blogs->objects[0]->id,
-            $listResponse->getData()[0]->version_id
-        );
-
-        $this->assertEquals(200, $listResponse->getStatusCode());
-        $this->assertEquals(200, $getResponse->getStatusCode());
     }
 }
