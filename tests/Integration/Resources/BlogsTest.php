@@ -58,21 +58,4 @@ class BlogsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
     }
-
-    /** @test */
-    public function versionsGetVersion()
-    {
-        $blogs = $this->resource->all(['limit' => 1]);
-
-        $listResponse = $this->resource->versions($blogs->objects[0]->id);
-
-        $this->assertEquals(200, $listResponse->getStatusCode());
-
-        $getResponse = $this->resource->getVersion(
-            $blogs->objects[0]->id,
-            $listResponse->getData()[0]->version_id
-        );
-
-        $this->assertEquals(200, $getResponse->getStatusCode());
-    }
 }
