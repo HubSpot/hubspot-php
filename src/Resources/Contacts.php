@@ -391,8 +391,6 @@ class Contacts extends Resource
     }
 
     /**
-     * @deprecated
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function statistics()
