@@ -75,7 +75,7 @@ class LineItems extends Resource
      */
     public function create(array $properties)
     {
-        $endpoint = 'https://api.hubapi.com/crm-objects/v1/objects/line_items/batch-create';
+        $endpoint = 'https://api.hubapi.com/crm-objects/v1/objects/line_items';
 
         return $this->client->request(
             'post',
