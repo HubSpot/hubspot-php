@@ -181,8 +181,8 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [x] Contact Lists API :upadated:
 - [x] Contact Properties API :upadated:
 - [ ] Conversations Live Chat Widget API (Front End)
-- [x] CMS Blog API (Blogs)
-- [x] CMS Blog Authors API (BlogAuthors)
+- [x] CMS Blog API (Blogs) :upadated:
+- [x] CMS Blog Authors API (BlogAuthors) :upadated:
 - [ ] CMS Blog Comments API
 - [x] CMS Blog Post API (BlogPosts)
 - [x] CMS Blog Topics API (BlogTopics)
@@ -208,7 +208,7 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [x] Engagements API
 - [x] Events API
 - [x] Forms API :upadated:
-- [ ] Line Items API
+- [x] Line Items API :new:
 - [ ] Marketing Email API
 - [x] Owners API :upadated:
 - [x] Products API :new:
