@@ -2,6 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
+use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\LineItems;
 use SevenShores\Hubspot\Resources\Products;
 use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
@@ -9,19 +11,45 @@ use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
  * @internal
  * @coversNothing
  */
-class ProductsTest extends EntityTestCase
+class LineItemsTest extends EntityTestCase
 {
-    use \SevenShores\Hubspot\Tests\Integration\Abstraction\ProductData;
+    use \SevenShores\Hubspot\Tests\Integration\Abstraction\ProductData { getData as getProductData; }
 
     /**
-     * @var SevenShores\Hubspot\Resources\Products
+     * @var LineItems
      */
     protected $resource;
 
     /**
-     * @var SevenShores\Hubspot\Resources\Products::class
+     * @var LineItems::class
      */
-    protected $resourceClass = Products::class;
+    protected $resourceClass = LineItems::class;
+
+    /**
+     * $var Products.
+     */
+    protected $resourceProducts;
+
+    /**
+     * $var \SevenShores\Hubspot\Http\Response.
+     */
+    protected $product;
+
+    public function setUp()
+    {
+        $this->product = $this->createProduct();
+
+        parent::setUp();
+    }
+
+    public function tearDown()
+    {
+        parent::tearDown();
+
+        if (!empty($this->product)) {
+            $this->deleteProduct();
+        }
+    }
 
     /** @test */
     public function all()
@@ -43,11 +71,11 @@ class ProductsTest extends EntityTestCase
     /** @test */
     public function getBatchByIds()
     {
-        $product = $this->createEntity();
+        $lineItem = $this->createEntity();
 
         $ids = [
             $this->entity->objectId,
-            $product->objectId,
+            $lineItem->objectId,
         ];
 
         $response = $this->resource->getBatchByIds($ids);
@@ -55,7 +83,7 @@ class ProductsTest extends EntityTestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(2, $response->toArray());
 
-        $this->resource->delete($product->objectId);
+        $this->resource->delete($lineItem->objectId);
     }
 
     /** @test */
@@ -76,8 +104,8 @@ class ProductsTest extends EntityTestCase
 
         sleep(1);
 
-        $this->resource->deleteBatch(array_map(function ($product) {
-            return $product->objectId;
+        $this->resource->deleteBatch(array_map(function ($lineItem) {
+            return $lineItem->objectId;
         }, array_values($response->getData())));
     }
 
@@ -85,7 +113,7 @@ class ProductsTest extends EntityTestCase
     public function update()
     {
         $response = $this->resource->update($this->entity->objectId, [
-            ['name' => 'name', 'value' => 'An updated product'],
+            ['name' => 'name', 'value' => 'An updated custom name for the product for this line item. Discounting 5% on bulk purchase.'],
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -94,7 +122,7 @@ class ProductsTest extends EntityTestCase
     /** @test */
     public function updateBatch()
     {
-        $product = $this->createEntity();
+        $lineItem = $this->createEntity();
 
         $response = $this->resource->updateBatch([
             [
@@ -102,23 +130,23 @@ class ProductsTest extends EntityTestCase
                 'properties' => [
                     [
                         'name' => 'price',
-                        'value' => 85.00,
+                        'value' => 55.00,
                     ],
                     [
                         'name' => 'description',
-                        'value' => 'This is an updated product, it\'s getting a price change.',
+                        'value' => 'This is an updated description for this item, it\'s getting a price change.',
                     ],
                 ],
             ],
             [
-                'objectId' => $product->objectId,
+                'objectId' => $lineItem->objectId,
                 'properties' => [
                     [
-                        'name' => 'description',
-                        'value' => 'Updated product name now with discount',
+                        'name' => 'name',
+                        'value' => 'Updated name, new quantity',
                     ],
                     [
-                        'name' => 'discount',
+                        'name' => 'quantity',
                         'value' => 20,
                     ],
                 ],
@@ -127,7 +155,7 @@ class ProductsTest extends EntityTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->resource->delete($product->objectId);
+        $this->resource->delete($lineItem->objectId);
     }
 
     /** @test */
@@ -150,17 +178,17 @@ class ProductsTest extends EntityTestCase
 
         sleep(1);
 
-        $deleteResponse = $this->resource->deleteBatch(array_map(function ($product) {
-            return $product->objectId;
+        $deleteResponse = $this->resource->deleteBatch(array_map(function ($lineItem) {
+            return $lineItem->objectId;
         }, array_values($response->getData())));
 
         $this->assertEquals(204, $deleteResponse->getStatusCode());
     }
 
     /** @test */
-    public function getProductChanges()
+    public function getLineItemChanges()
     {
-        $response = $this->resource->getProductChanges();
+        $response = $this->resource->getLineItemChanges();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -173,5 +201,34 @@ class ProductsTest extends EntityTestCase
     protected function deleteEntity()
     {
         return $this->resource->delete($this->entity->objectId);
+    }
+
+    protected function getData(): array
+    {
+        return [
+            ['name' => 'hs_product_id', 'value' => $this->product->objectId],
+            ['name' => 'quantity', 'value' => 50],
+            ['name' => 'price',  'value' => 9.50],
+            ['name' => 'name',  'value' => 'A custom name for the product for this line item. Discounting 5% on bulk purchase.'],
+        ];
+    }
+
+    protected function getProducts()
+    {
+        if (empty($this->resourceProducts)) {
+            $this->resourceProducts = new Products(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        }
+
+        return $this->resourceProducts;
+    }
+
+    protected function createProduct()
+    {
+        return $this->getProducts()->create($this->getProductData());
+    }
+
+    protected function deleteProduct()
+    {
+        return $this->getProducts()->delete($this->product->objectId);
     }
 }

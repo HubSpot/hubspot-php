@@ -8,7 +8,7 @@ class BlogAuthors extends Resource
      * Get all blog authors.
      *
      * @param array $params optional parameters
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/list-blog-authors
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -32,7 +32,7 @@ class BlogAuthors extends Resource
      * @param array  $params optional parameters
      *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/search-blog-authors
-     * 
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function search($q = '', array $params = [])
@@ -42,18 +42,18 @@ class BlogAuthors extends Resource
         $params['q'] = $q;
 
         return $this->client->request(
-                'get',
-                $endpoint,
-                [],
-                build_query_string($params)
-            );
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
      * Get a specific blog author.
      *
      * @param int $id unique identifier for a blog author
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/get-blog-author-by-id
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -63,18 +63,18 @@ class BlogAuthors extends Resource
         $endpoint = "https://api.hubapi.com/blogs/v3/blog-authors/{$id}";
 
         return $this->client->request(
-                'get',
-                $endpoint,
-                [],
-                build_query_string($params)
-            );
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
-    
+
     /**
      * Create a new blog author.
      *
      * @param array $options optional Parameters
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/create-blog-author
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -84,11 +84,11 @@ class BlogAuthors extends Resource
         $endpoint = 'https://api.hubapi.com/blogs/v3/blog-authors';
 
         return $this->client->request(
-                'post',
-                $endpoint,
-                ['json' => $options],
-                build_query_string($params)
-            );
+            'post',
+            $endpoint,
+            ['json' => $options],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -96,7 +96,7 @@ class BlogAuthors extends Resource
      *
      * @param int   $id     unique identifier for a blog author
      * @param array $params fields to update
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/update-blog-author
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -114,7 +114,7 @@ class BlogAuthors extends Resource
      * @param int $id unique identifier for the blog author to delete
      *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/delete-blog-author
-     * 
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function delete($id)

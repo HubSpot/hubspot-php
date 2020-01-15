@@ -92,11 +92,12 @@ class BlogAuthorsTest extends EntityTestCase
         $response = $this->resource->delete($this->entity->id);
 
         $this->assertEquals(204, $response->getStatusCode());
-        
+
         $this->entity = null;
     }
 
-    protected function createEntity() {
+    protected function createEntity()
+    {
         return $this->resource->create([
             'fullName' => 'John Smith '.uniqid(),
             'email' => 'john.smith'.uniqid().'@example.com',
@@ -104,7 +105,8 @@ class BlogAuthorsTest extends EntityTestCase
         ]);
     }
 
-    protected function deleteEntity() {
+    protected function deleteEntity()
+    {
         $this->resource->delete($this->entity->id);
     }
 }
