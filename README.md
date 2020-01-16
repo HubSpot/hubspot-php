@@ -13,6 +13,10 @@
 composer require "hubspot/hubspot-php"
 ```
 
+## Sample apps
+
+[Link](https://github.com/HubSpot/integration-examples-php)
+
 ## Quickstart
 
 ### Examples Using Factory
