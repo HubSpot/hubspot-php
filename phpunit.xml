@@ -9,8 +9,14 @@
          stopOnFailure="false"
          bootstrap="./vendor/autoload.php">
     <testsuites>
-        <testsuite name="Package Test Suite">
-            <directory>./tests/</directory>
+        <testsuite name="All">
+            <directory>./tests</directory>
+        </testsuite>
+        <testsuite name="Unit">
+            <directory>./tests/unit</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>./tests/Integration</directory>
         </testsuite>
     </testsuites>
     <filter>

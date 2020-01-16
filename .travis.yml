@@ -1,15 +1,27 @@
 language: php
-
-php:
-  - 7.0
-  - 7.1
-
 sudo: false
+
+jobs:
+  include:
+    - php: 7.0
+      env: PHPUNIT_SUITE=All
+    - php: 7.1
+      env: PHPUNIT_SUITE=Unit
+    - php: 7.2
+      env: PHPUNIT_SUITE=Unit
+    - php: 7.3
+      env: PHPUNIT_SUITE=Unit
+    - php: 7.4
+      env: PHPUNIT_SUITE=All
+
+cache:
+  directories:
+    - $HOME/.composer/cache
 
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --prefer-source
+  - travis_retry composer install --no-interaction --prefer-dist
 
 script:
   - vendor/bin/phpspec run --verbose
-  - vendor/bin/phpunit --verbose
+  - vendor/bin/phpunit --verbose --testsuite $PHPUNIT_SUITE
