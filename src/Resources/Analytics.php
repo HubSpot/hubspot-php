@@ -18,8 +18,13 @@ class Analytics extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getByCategory(string $breakdown_by, string $time_period, string $startDate, string $endDate, array $params = [])
-    {
+    public function getByCategory(
+        string $breakdown_by,
+        string $time_period,
+        string $startDate,
+        string $endDate,
+        array $params = []
+    ) {
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$breakdown_by}/{$time_period}";
 
         return $this->client->request(
@@ -27,8 +32,8 @@ class Analytics extends Resource
             $endpoint,
             [],
             build_query_string(
-                    array_merge(compact('startDate', 'endDate'), $params)
-                )
+                array_merge(compact('startDate', 'endDate'), $params)
+            )
         );
     }
 
@@ -43,8 +48,13 @@ class Analytics extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getByType(string $object_type, string $time_period, string $startDate, string $endDate, array $params = [])
-    {
+    public function getByType(
+        string $object_type,
+        string $time_period,
+        string $startDate,
+        string $endDate,
+        array $params = []
+    ) {
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$object_type}/{$time_period}";
 
         return $this->client->request(
@@ -52,8 +62,8 @@ class Analytics extends Resource
             $endpoint,
             [],
             build_query_string(
-                    array_merge(compact('startDate', 'endDate'), $params)
-                )
+                array_merge(compact('startDate', 'endDate'), $params)
+            )
         );
     }
 
@@ -68,8 +78,13 @@ class Analytics extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getHosted(string $content_type, string $time_period, string $startDate, string $endDate, array $params = [])
-    {
+    public function getHosted(
+        string $content_type,
+        string $time_period,
+        string $startDate,
+        string $endDate,
+        array $params = []
+    ) {
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$content_type}/{$time_period}";
 
         return $this->client->request(
@@ -77,8 +92,8 @@ class Analytics extends Resource
             $endpoint,
             [],
             build_query_string(
-                    array_merge(compact('startDate', 'endDate'), $params)
-                )
+                array_merge(compact('startDate', 'endDate'), $params)
+            )
         );
     }
 
