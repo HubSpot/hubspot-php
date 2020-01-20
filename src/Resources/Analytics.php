@@ -10,11 +10,9 @@ class Analytics extends Resource
     /**
      * Get analytics data broken down by the specified category.
      *
-     * @param string $breakdown_by
-     * @param string $time_period
-     * @param string $startDate    (YYYYMMDD)
-     * @param string $endDate      (YYYYMMDD)
-     * @param array  $params       Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     * @param string $startDate (YYYYMMDD)
+     * @param string $endDate   (YYYYMMDD)
+     * @param array  $params    Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      *
      * @see https://developers.hubspot.com/docs/methods/analytics/get-analytics-data-breakdowns
      *
@@ -25,23 +23,21 @@ class Analytics extends Resource
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$breakdown_by}/{$time_period}";
 
         return $this->client->request(
-                'get',
-                $endpoint,
-                [],
-                build_query_string(
+            'get',
+            $endpoint,
+            [],
+            build_query_string(
                     array_merge(compact('startDate', 'endDate'), $params)
                 )
-            );
+        );
     }
 
     /**
      * Get analytics data for specific objects, based on the type of object.
      *
-     * @param string $object_type
-     * @param string $time_period
-     * @param string $startDate   (YYYYMMDD)
-     * @param string $endDate     (YYYYMMDD)
-     * @param array  $params      Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     * @param string $startDate (YYYYMMDD)
+     * @param string $endDate   (YYYYMMDD)
+     * @param array  $params    Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      *
      * @see https://developers.hubspot.com/docs/methods/analytics/get-analytics-data-by-object
      *
@@ -51,25 +47,22 @@ class Analytics extends Resource
     {
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$object_type}/{$time_period}";
 
-
         return $this->client->request(
-                'get',
-                $endpoint,
-                [],
-                build_query_string(
-                        array_merge(compact('startDate', 'endDate'), $params)
-                    )
-            );
+            'get',
+            $endpoint,
+            [],
+            build_query_string(
+                    array_merge(compact('startDate', 'endDate'), $params)
+                )
+        );
     }
 
     /**
      * Get analytics data for your HubSpot hosted content.
      *
-     * @param string $content_type
-     * @param string $time_period
-     * @param string $startDate    (YYYYMMDD)
-     * @param string $endDate      (YYYYMMDD)
-     * @param array  $params       Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     * @param string $startDate (YYYYMMDD)
+     * @param string $endDate   (YYYYMMDD)
+     * @param array  $params    Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      *
      * @see https://developers.hubspot.com/docs/methods/analytics/get-data-for-hubspot-content
      *
@@ -80,20 +73,19 @@ class Analytics extends Resource
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$content_type}/{$time_period}";
 
         return $this->client->request(
-                'get',
-                $endpoint,
-                [],
-                build_query_string(
-                        array_merge(compact('startDate', 'endDate'), $params)
-                    )
-            );
+            'get',
+            $endpoint,
+            [],
+            build_query_string(
+                    array_merge(compact('startDate', 'endDate'), $params)
+                )
+        );
     }
-    
+
     /**
      * Check for the existence of analytics data for an object type.
      *
-     * @param string  $objectType
-     * @param array  $params     Array of optional parameters
+     * @param array $params Array of optional parameters
      *
      * @see https://developers.hubspot.com/docs/methods/analytics/check_for_analytics_data_existence
      *
@@ -104,11 +96,11 @@ class Analytics extends Resource
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$objectType}/exists";
 
         return $this->client->request(
-                'get',
-                $endpoint,
-                [],
-                build_query_string($params)
-            );
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -125,18 +117,18 @@ class Analytics extends Resource
         $endpoint = 'https://api.hubapi.com/reports/v2/events';
 
         return $this->client->request(
-                'get',
-                $endpoint,
-                [],
-                build_query_string($params)
-            );
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
-    
+
     /**
      * Get a Group of Events by ID.
      *
      * @param mixed $id     can be included multiple times to pull multiple events
-     * @param array  $params Array of optional parameters ['includeDeletes']
+     * @param array $params Array of optional parameters ['includeDeletes']
      *
      * @see https://developers.hubspot.com/docs/methods/events/get_events_by_id
      *
@@ -149,11 +141,11 @@ class Analytics extends Resource
         $params['id'] = $id;
 
         return $this->client->request(
-                'get',
-                $endpoint,
-                [],
-                build_query_string($params)
-            );
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -170,10 +162,10 @@ class Analytics extends Resource
         $endpoint = 'https://api.hubapi.com/analytics/v2/views';
 
         return $this->client->request(
-                'get',
-                $endpoint,
-                [],
-                build_query_string($params)
-            );
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 }
