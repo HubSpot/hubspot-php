@@ -227,7 +227,7 @@ class BlogPosts extends Resource
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/restore-deleted";
 
-        return $this->client->request('post', $endpoint);
+        return $this->client->request('put', $endpoint);
     }
 
     /**

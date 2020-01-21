@@ -2,16 +2,18 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Tests\Integration\Abstraction\DefaultTestCase;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\BlogAuthors;
 use SevenShores\Hubspot\Resources\BlogPosts;
 use SevenShores\Hubspot\Resources\Blogs;
+use DateTime;
 
 /**
  * @internal
  * @coversNothing
  */
-class BlogPostsTest extends DefaultTestCase
+class BlogPostsTest extends EntityTestCase
 {
     /**
      * @var BlogPosts::class
@@ -23,14 +25,19 @@ class BlogPostsTest extends DefaultTestCase
      */
     protected $resource;
     
-    private $blogId;
-
+    protected $blogId;
+    
+    protected $authorId;
+    
     public function setUp()
     {
+        $blogs = new Blogs(new Client(['key' => getenv($this->key)]));
+        $this->blogId = $blogs->all(['limit' => 1])->objects[0]->id;
+        
+        $blogAuthor = new BlogAuthors(new Client(['key' => getenv($this->key)]));
+        $this->authorId = $blogAuthor->all(['limit' => 1])->objects[0]->id;
+        
         parent::setUp();
-        $client = new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]);
-        $this->blogId = (new Blogs($client))->all(['limit' => 1])->objects[0]->id;
-        sleep(1);
     }
 
     /** @test */
@@ -66,13 +73,17 @@ class BlogPostsTest extends DefaultTestCase
         $this->assertLessThanOrEqual(2, count($response['objects']));
         $this->assertGreaterThanOrEqual(3, $response['offset']);
     }
+    
+    /** @test */
+    public function create()
+    {
+        $this->assertEquals(201, $this->entity->getStatusCode());
+    }
 
     /** @test */
     public function update()
     {
-        $post = $this->createBlogPost();
-
-        $response = $this->resource->update($post->id, [
+        $response = $this->resource->update($this->entity->id, [
             'post_body' => '<p>Hey man!</p>',
         ]);
 
@@ -82,9 +93,7 @@ class BlogPostsTest extends DefaultTestCase
     /** @test */
     public function getById()
     {
-        $post = $this->createBlogPost();
-
-        $response = $this->resource->getById($post->id);
+        $response = $this->resource->getById($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -92,9 +101,7 @@ class BlogPostsTest extends DefaultTestCase
     /** @test */
     public function updateAutoSaveBuffer()
     {
-        $post = $this->createBlogPost();
-
-        $response = $this->resource->updateAutoSaveBuffer($post->id, [
+        $response = $this->resource->updateAutoSaveBuffer($this->entity->id, [
             'post_body' => '<p>Hey! It is a test!</p>',
         ]);
 
@@ -104,9 +111,7 @@ class BlogPostsTest extends DefaultTestCase
     /** @test */
     public function getAutoSaveBufferContents()
     {
-        $post = $this->createBlogPost();
-
-        $response = $this->resource->getAutoSaveBufferContents($post->id);
+        $response = $this->resource->getAutoSaveBufferContents($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -114,19 +119,17 @@ class BlogPostsTest extends DefaultTestCase
     /** @test */
     public function clonePost()
     {
-        $post = $this->createBlogPost();
-
-        $response = $this->resource->clonePost($post->id, 'Cloned post name');
+        $response = $this->resource->clonePost($this->entity->id, 'Cloned post name');
 
         $this->assertEquals(201, $response->getStatusCode());
+        
+        $this->resource->delete($response->id);
     }
 
     /** @test */
     public function hasBufferedChanges()
     {
-        $post = $this->createBlogPost();
-
-        $response = $this->resource->hasBufferedChanges($post->id);
+        $response = $this->resource->hasBufferedChanges($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->has_changes);
@@ -135,70 +138,85 @@ class BlogPostsTest extends DefaultTestCase
     /** @test */
     public function publishAction()
     {
-        $this->markTestSkipped(); // TODO: fix test
-
-        $post = $this->createBlogPost();
-
-        $response = $this->resource->publishAction($post->id, 'schedule-publish');
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $response = $this->resource->publishAction($this->entity->id, 'schedule-publish');
+        
+        $this->assertEquals(204, $response->getStatusCode());
     }
 
     /** @test */
     public function pushBufferLive()
     {
-        $post = $this->createBlogPost();
-
-        $response = $this->resource->pushBufferLive($post->id);
+        $response = $this->resource->pushBufferLive($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     /** @test */
-    public function deleteRestoreDeleted()
+    public function restoreDeleted()
     {
-        $this->markTestSkipped(); // TODO: fix test
+        $this->deleteEntity();
+        $response = $this->resource->restoreDeleted($this->entity->id);
 
-        $post = $this->createBlogPost();
-
-        $deleteResponse = $this->resource->delete($post->id);
-        $response = $this->resource->restoreDeleted($post->id);
-
-        $this->assertEquals(200, $deleteResponse->getStatusCode());
         $this->assertEquals(200, $response->getStatusCode());
+    }
+    
+    /** @test */
+    public function delete()
+    {
+        $response = $this->deleteEntity();
+        
+        $this->assertEquals(204, $response->getStatusCode());
+        
+        $this->entity = null;
     }
 
     /** @test */
     public function validateBuffer()
     {
-        $post = $this->createBlogPost();
-
-        $response = $this->resource->validateBuffer($post->id);
+        $response = $this->resource->validateBuffer($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertTrue($response->succeeded);
     }
 
     /** @test */
-    public function versionsGetVersionRestoreVersion()
+    public function versions()
     {
-        $this->markTestSkipped(); // TODO: fix test
-
-        $post = $this->createBlogPost();
-
-        // versions()
-        $listResponse = $this->resource->versions($post->id);
-        $versions = $listResponse->getData();
-
-        // getVersion()
-        $getResponse = $this->resource->getVersion($post->id, $versions[0]->version_id);
-
-        // restoreVersion()
-        $restoreResponse = $this->resource->restoreVersion($post->id, $versions[0]->version_id);
-
-        $this->assertEquals(200, $listResponse->getStatusCode());
-        $this->assertEquals(200, $getResponse->getStatusCode());
-        $this->assertEquals(200, $restoreResponse->getStatusCode());
+        $response = $this->resource->versions($this->entity->id);
+        
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+    
+    /** @test */
+    public function getVersion()
+    {
+        $this->resource->update($this->entity->id, [
+            'post_body' => '<p>Hey! It is a test!</p>',
+        ]);
+        
+        $listResponse = $this->resource->versions($this->entity->id);
+        
+        $versionId = $listResponse->getData()[1]->id;
+        
+        $response = $this->resource->getVersion($this->entity->id, $versionId);
+        
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+    
+    /** @test */
+    public function restoreVersion()
+    {
+        $this->resource->update($this->entity->id, [
+            'post_body' => '<p>Hey! It is a test!</p>',
+        ]);
+        
+        $listResponse = $this->resource->versions($this->entity->id);
+        
+        $versionId = $listResponse->getData()[1]->id;
+        
+        $response = $this->resource->restoreVersion($this->entity->id, $versionId);
+        
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     // Lots of tests need an existing object to modify.
@@ -214,5 +232,25 @@ class BlogPostsTest extends DefaultTestCase
         $this->assertEquals(201, $response->getStatusCode());
 
         return $response;
+    }
+
+    protected function createEntity()
+    {
+        $date = new DateTime();
+        $date->modify('+1 day');
+        
+        return $this->resource->create([
+            'name' => 'My Super Awesome Post '.uniqid(),
+            'content_group_id' => $this->blogId,
+            'publish_date' => $date->getTimestamp(),
+            'blog_author_id' => $this->authorId,
+            'meta_description' => 'My Super Awesome Post ...',
+            'slug' => '/blog/'.uniqid().'/my-first-api-blog-post',
+        ]);
+    }
+
+    protected function deleteEntity()
+    {
+        return $this->resource->delete($this->entity->id);
     }
 }
