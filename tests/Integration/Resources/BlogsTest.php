@@ -15,7 +15,7 @@ class BlogsTest extends DefaultTestCase
      * @var Blogs
      */
     protected $resource;
-    
+
     /**
      * @var Blogs::class
      */

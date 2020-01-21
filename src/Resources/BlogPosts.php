@@ -10,7 +10,7 @@ class BlogPosts extends Resource
      * @param array $params optional parameters
      *
      * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts
-     * 
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function all(array $params = [])
@@ -29,7 +29,7 @@ class BlogPosts extends Resource
      * Get a blog post by ID.
      *
      * @param mixed $id
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -40,14 +40,14 @@ class BlogPosts extends Resource
 
         return $this->client->request('get', $endpoint);
     }
-    
+
     /**
      * Create a new blog post.
      *
      * @param array $fields a blog post fields to create
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts
-     * 
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function create(array $fields = [])
@@ -78,7 +78,7 @@ class BlogPosts extends Resource
      * Delete a blog post.
      *
      * @param mixed $id
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/delete_blog_posts_blog_post_id
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -96,7 +96,7 @@ class BlogPosts extends Resource
      *
      * @param mixed  $id   The blog post ID
      * @param string $name The cloned post name
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_clone
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -104,14 +104,14 @@ class BlogPosts extends Resource
     public function clonePost($id, string $name)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/clone";
-        
+
         return $this->client->request(
             'post',
             $endpoint,
             ['json' => ['name' => $name]]
         );
     }
-    
+
     /**
      * Either publishes or cancels publishing based on the POSTed JSON.
      *
@@ -121,7 +121,7 @@ class BlogPosts extends Resource
      *
      * @param mixed  $id     The blog post ID
      * @param string $action The publish action
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_publish_action
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -137,7 +137,7 @@ class BlogPosts extends Resource
      * Gets the current contents of the auto-save buffer.
      *
      * @param mixed $id The blog post ID
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id_buffer
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -170,7 +170,7 @@ class BlogPosts extends Resource
      * Determine if the auto-save buffer differs from the live blog post.
      *
      * @param mixed $id The blog post ID
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id_has_buffered_changes
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -186,7 +186,7 @@ class BlogPosts extends Resource
      * Validates the auto-save buffer version of the blog post.
      *
      * @param mixed $id The blog post ID
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_validate_buffer
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -204,7 +204,7 @@ class BlogPosts extends Resource
      * @param mixed $id The blog post ID
      *
      * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_push_buffer_live
-     * 
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function pushBufferLive($id)
@@ -218,7 +218,7 @@ class BlogPosts extends Resource
      * Restores a previously deleted blog post.
      *
      * @param mixed $id The blog post ID
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_restore_deleted
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -234,7 +234,7 @@ class BlogPosts extends Resource
      * List previous versions of the blog post.
      *
      * @param mixed $id The blog post ID
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id_versions
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -251,7 +251,7 @@ class BlogPosts extends Resource
      *
      * @param mixed $postId    The blog post ID
      * @param mixed $versionId The version ID
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id_versions_version_id
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -268,7 +268,7 @@ class BlogPosts extends Resource
      *
      * @param mixed $postId    The blog post ID
      * @param mixed $versionId The version ID
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_versions_restore
      *
      * @return \SevenShores\Hubspot\Http\Response

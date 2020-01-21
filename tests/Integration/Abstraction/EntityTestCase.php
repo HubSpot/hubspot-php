@@ -12,7 +12,7 @@ abstract class EntityTestCase extends DefaultTestCase
     public function setUp()
     {
         parent::setUp();
-        
+
         $this->entity = $this->createEntity();
         sleep(1);
     }
