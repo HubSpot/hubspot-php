@@ -3,17 +3,14 @@
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use DateTime;
-use SevenShores\Hubspot\Http\Client;
-use SevenShores\Hubspot\Resources\BlogAuthors;
 use SevenShores\Hubspot\Resources\BlogPosts;
-use SevenShores\Hubspot\Resources\Blogs;
-use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\BlogPostTestCase;
 
 /**
  * @internal
  * @coversNothing
  */
-class BlogPostsTest extends EntityTestCase
+class BlogPostsTest extends BlogPostTestCase
 {
     /**
      * @var BlogPosts::class
@@ -24,21 +21,6 @@ class BlogPostsTest extends EntityTestCase
      * @var BlogPosts
      */
     protected $resource;
-
-    protected $blogId;
-
-    protected $authorId;
-
-    public function setUp()
-    {
-        $blogs = new Blogs(new Client(['key' => getenv($this->key)]));
-        $this->blogId = $blogs->all(['limit' => 1])->objects[0]->id;
-
-        $blogAuthor = new BlogAuthors(new Client(['key' => getenv($this->key)]));
-        $this->authorId = $blogAuthor->all(['limit' => 1])->objects[0]->id;
-
-        parent::setUp();
-    }
 
     /** @test */
     public function allWithNoParams()

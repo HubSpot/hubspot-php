@@ -3,13 +3,13 @@
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Resources\Comments;
-use SevenShores\Hubspot\Tests\Integration\Abstraction\DefaultTestCase;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
 /**
  * @internal
  * @coversNothing
  */
-class BlogCommentsTest extends DefaultTestCase
+class BlogCommentsTest extends EntityTestCase
 {
     /**
      * @var Comments
@@ -28,4 +28,15 @@ class BlogCommentsTest extends DefaultTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
     }
+
+    protected function createEntity()
+    {
+        
+    }
+
+    protected function deleteEntity()
+    {
+        
+    }
+
 }
