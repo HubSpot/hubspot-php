@@ -5,6 +5,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 - *nothing of note yet here*
 
+## [2.0.3]
+
+### Added
+- Line Items Resource
+- Products Resource
+- Object Properties Resource
+
+### Changed
+- Up php version to 7.0
+- Update Ecommerce Bridge to v2
+- Update Hub DB to v2
+- Update Form(only submit) to v3
+- Update Workflows to v3
+- Rename Email to EmailSubscriptions
+- Update many resources (Method's Visibility, Type Hinting etc)
+- Repair majority of tests
+
 ## [1.0.0-rc.1]
 
 ### Added
