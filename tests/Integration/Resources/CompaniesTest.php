@@ -149,8 +149,6 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
         $response = $this->companies->getRecentlyCreated($params);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertCount(2, $response['results']);
-        $this->assertEquals(3, $response['offset']);
     }
 
     /** @test */
