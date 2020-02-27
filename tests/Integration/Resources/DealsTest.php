@@ -116,14 +116,13 @@ class DealsTest extends EntityTestCase
                 ],
             ],
         ]);
-
+        
         $response = $this->resource->getRecentlyModified([
-            'offset' => 1,
+            'offset' => 0,
             'count' => 1,
         ]);
-
+        
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(1, count($response->results));
     }
 
     /**
@@ -132,12 +131,11 @@ class DealsTest extends EntityTestCase
     public function getRecentlyCreated()
     {
         $response = $this->resource->getRecentlyCreated([
-            'offset' => 1,
+            'offset' => 0,
             'count' => 1,
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(1, count($response->results));
     }
 
     /**
