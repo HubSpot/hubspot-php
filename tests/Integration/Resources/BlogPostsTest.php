@@ -2,7 +2,6 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use DateTime;
 use SevenShores\Hubspot\Resources\BlogPosts;
 use SevenShores\Hubspot\Tests\Integration\Abstraction\BlogPostTestCase;
 
@@ -203,17 +202,7 @@ class BlogPostsTest extends BlogPostTestCase
 
     protected function createEntity()
     {
-        $date = new DateTime();
-        $date->modify('+1 day');
-
-        return $this->resource->create([
-            'name' => 'My Super Awesome Post '.uniqid(),
-            'content_group_id' => $this->blogId,
-            'publish_date' => $date->getTimestamp(),
-            'blog_author_id' => $this->authorId,
-            'meta_description' => 'My Super Awesome Post ...',
-            'slug' => '/blog/'.uniqid().'/my-first-api-blog-post',
-        ]);
+        return $this->createPost($this->resource);
     }
 
     protected function deleteEntity()
