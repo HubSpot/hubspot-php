@@ -5,72 +5,32 @@ namespace SevenShores\Hubspot\Resources;
 class BlogPosts extends Resource
 {
     /**
-     * Create a new blog post.
-     *
-     * @param array $params optional Parameters
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function create($params = [])
-    {
-        $endpoint = 'https://api.hubapi.com/content/api/v2/blog-posts';
-
-        $options['json'] = $params;
-
-        return $this->client->request('post', $endpoint, $options);
-    }
-
-    /**
      * Get all blog posts.
      *
      * @param array $params optional parameters
      *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function all($params = [])
+    public function all(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/content/api/v2/blog-posts';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
-     * Update a blog post.
+     * Get a blog post by ID.
      *
-     * @param int   $id     the blog post id
-     * @param array $params the blog post fields to update
+     * @param mixed $id
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function update($id, $params = [])
-    {
-        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}";
-
-        $options['json'] = $params;
-
-        return $this->client->request('put', $endpoint, $options);
-    }
-
-    /**
-     * Delete a blog post.
-     *
-     * @param int $id
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function delete($id)
-    {
-        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}";
-
-        return $this->client->request('delete', $endpoint);
-    }
-
-    /**
-     * Get a specific blog post.
-     *
-     * @param int $id
+     * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -82,28 +42,103 @@ class BlogPosts extends Resource
     }
 
     /**
-     * Updates the auto-save buffer. Live objects will not be impacted.
+     * Create a new blog post.
      *
-     * @see https://developers.hubspot.com/docs/methods/blogv2/put_blog_posts_blog_post_id_buffer
+     * @param array $fields a blog post fields to create
      *
-     * @param int   $id     the blog post ID
-     * @param array $params allowed parameters
+     * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateAutoSaveBuffer($id, $params = [])
+    public function create(array $fields = [])
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/buffer";
+        $endpoint = 'https://api.hubapi.com/content/api/v2/blog-posts';
 
-        $options['json'] = $params;
+        return $this->client->request('post', $endpoint, ['json' => $fields]);
+    }
+
+    /**
+     * Update a blog post.
+     *
+     * @param int   $id     the blog post id
+     * @param array $fields the blog post fields to update
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function update($id, array $fields = [])
+    {
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}";
+
+        $options['json'] = $fields;
 
         return $this->client->request('put', $endpoint, $options);
     }
 
     /**
+     * Delete a blog post.
+     *
+     * @param mixed $id
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/delete_blog_posts_blog_post_id
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function delete($id)
+    {
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}";
+
+        return $this->client->request('delete', $endpoint);
+    }
+
+    /**
+     * Clone the blog post.
+     * Requires including a request body of {"name": "New Page Name"}.
+     *
+     * @param mixed  $id   The blog post ID
+     * @param string $name The cloned post name
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_clone
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function clonePost($id, string $name)
+    {
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/clone";
+
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => ['name' => $name]]
+        );
+    }
+
+    /**
+     * Either publishes or cancels publishing based on the POSTed JSON.
+     *
+     * Allowable actions are: "schedule-publish", "cancel-publish".
+     * "schedule-publish":  sets up the content for publishing at the publish_date already set on the post.
+     * "cancel-publish": cancels a previously scheduled blog post publish.
+     *
+     * @param mixed  $id     The blog post ID
+     * @param string $action The publish action
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_publish_action
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function publishAction($id, string $action)
+    {
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/publish-action";
+
+        return $this->client->request('post', $endpoint, ['json' => ['action' => $action]]);
+    }
+
+    /**
      * Gets the current contents of the auto-save buffer.
      *
-     * @param int $id The blog post ID
+     * @param mixed $id The blog post ID
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id_buffer
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -115,27 +150,28 @@ class BlogPosts extends Resource
     }
 
     /**
-     * Clone the blog post.
-     * Requires including a request body of {"name": "New Page Name"}.
+     * Updates the auto-save buffer. Live objects will not be impacted.
      *
-     * @param int    $id   The blog post ID
-     * @param string $name The cloned post name
+     * @param mixed $id     the blog post ID
+     * @param array $params allowed parameters
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/put_blog_posts_blog_post_id_buffer
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function clonePost($id, $name)
+    public function updateAutoSaveBuffer($id, array $params = [])
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/clone";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/buffer";
 
-        $options['json'] = ['name' => $name];
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('put', $endpoint, ['json' => $params]);
     }
 
     /**
      * Determine if the auto-save buffer differs from the live blog post.
      *
-     * @param int $id The blog post ID
+     * @param mixed $id The blog post ID
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id_has_buffered_changes
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -147,32 +183,27 @@ class BlogPosts extends Resource
     }
 
     /**
-     * Either publishes or cancels publishing based on the POSTed JSON.
+     * Validates the auto-save buffer version of the blog post.
      *
-     * Allowable actions are: "push-buffer-live", "schedule-publish", "cancel-publish".
-     * "push-buffer-live": copies the current contents of the auto-save buffer into the live object.
-     * "schedule-publish": which pushes the buffer live and then sets up the content for publishing at
-     *     the existing publish_date time.
-     * "cancel-publish": cancels a previous schedule-publish action.
+     * @param mixed $id The blog post ID
      *
-     * @param int    $id     The blog post ID
-     * @param string $action The publish action
+     * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_validate_buffer
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function publishAction($id, $action)
+    public function validateBuffer($id)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/publish-action";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/validate-buffer";
 
-        $options['json'] = ['action' => $action];
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint);
     }
 
     /**
      * Copies the contents of the auto-save buffer into the live blog post.
      *
-     * @param int $id The blog post ID
+     * @param mixed $id The blog post ID
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_push_buffer_live
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -186,7 +217,9 @@ class BlogPosts extends Resource
     /**
      * Restores a previously deleted blog post.
      *
-     * @param int $id The blog post ID
+     * @param mixed $id The blog post ID
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_restore_deleted
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -194,27 +227,15 @@ class BlogPosts extends Resource
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/restore-deleted";
 
-        return $this->client->request('post', $endpoint);
-    }
-
-    /**
-     * Validates the auto-save buffer version of the blog post.
-     *
-     * @param int $id The blog post ID
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function validateBuffer($id)
-    {
-        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/validate-buffer";
-
-        return $this->client->request('post', $endpoint);
+        return $this->client->request('put', $endpoint);
     }
 
     /**
      * List previous versions of the blog post.
      *
-     * @param int $id The blog post ID
+     * @param mixed $id The blog post ID
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id_versions
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -228,14 +249,16 @@ class BlogPosts extends Resource
     /**
      * Get a previous version of the blog post.
      *
-     * @param int $post_id    The blog post ID
-     * @param int $version_id The version ID
+     * @param mixed $postId    The blog post ID
+     * @param mixed $versionId The version ID
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id_versions_version_id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getVersion($post_id, $version_id)
+    public function getVersion($postId, $versionId)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$post_id}/versions/{$version_id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$postId}/versions/{$versionId}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -243,17 +266,21 @@ class BlogPosts extends Resource
     /**
      * Restore a previous version of the blog post.
      *
-     * @param int $post_id    The blog post ID
-     * @param int $version_id The version ID
+     * @param mixed $postId    The blog post ID
+     * @param mixed $versionId The version ID
+     *
+     * @see https://developers.hubspot.com/docs/methods/blogv2/post_blog_posts_blog_post_id_versions_restore
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function restoreVersion($post_id, $version_id)
+    public function restoreVersion($postId, $versionId)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$post_id}/versions/restore";
+        $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$postId}/versions/restore";
 
-        $options['json'] = compact('version_id');
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => ['version_id' => $versionId]]
+        );
     }
 }

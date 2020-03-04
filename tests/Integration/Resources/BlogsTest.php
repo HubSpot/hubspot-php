@@ -2,26 +2,24 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Blogs;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\DefaultTestCase;
 
 /**
  * @internal
  * @coversNothing
  */
-class BlogsTest extends \PHPUnit_Framework_TestCase
+class BlogsTest extends DefaultTestCase
 {
     /**
      * @var Blogs
      */
     protected $resource;
 
-    public function setUp()
-    {
-        parent::setUp();
-        $this->resource = new Blogs(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
-    }
+    /**
+     * @var Blogs::class
+     */
+    protected $resourceClass = Blogs::class;
 
     /** @test */
     public function allWithNoParams()
