@@ -12,7 +12,7 @@ jobs:
     - php: 7.3
       env: PHPUNIT_SUITE=Unit
     - php: 7.4
-      env: PHPUNIT_SUITE=All
+      env: PHPUNIT_SUITE=All PHPSPEC=false
 
 cache:
   directories:
@@ -23,5 +23,5 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-dist
 
 script:
-  - vendor/bin/phpspec run --verbose
+  - ./phpspec.sh
   - vendor/bin/phpunit --verbose --testsuite $PHPUNIT_SUITE
