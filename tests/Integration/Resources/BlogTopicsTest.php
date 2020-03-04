@@ -2,28 +2,29 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\BlogTopics;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
 /**
  * @internal
  * @coversNothing
  */
-class BlogTopicsTest extends \PHPUnit_Framework_TestCase
+class BlogTopicsTest extends EntityTestCase
 {
-    private $blogTopics;
+    /**
+     * @var BlogTopics::class
+     */
+    protected $resourceClass = BlogTopics::class;
 
-    public function setUp()
-    {
-        parent::setUp();
-        $this->blogTopics = new BlogTopics(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
-    }
+    /**
+     * @var BlogTopics
+     */
+    protected $resource;
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->blogTopics->all();
+        $response = $this->resource->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -31,7 +32,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function allWithParams()
     {
-        $response = $this->blogTopics->all([
+        $response = $this->resource->all([
             'limit' => 2,
             'offset' => 3,
         ]);
@@ -44,7 +45,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function searchWithoutQueryAndParams()
     {
-        $response = $this->blogTopics->search('');
+        $response = $this->resource->search('');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -52,7 +53,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function searchWithQueryAndWithoutParams()
     {
-        $response = $this->blogTopics->search('Test');
+        $response = $this->resource->search('Test');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -60,7 +61,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function searchWithQueryAndParams()
     {
-        $response = $this->blogTopics->search('Test', [
+        $response = $this->resource->search('Test', [
             'limit' => 5,
         ]);
 
@@ -71,9 +72,7 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getById()
     {
-        $topic = $this->createBlogTopic();
-
-        $response = $this->blogTopics->getById($topic->id);
+        $response = $this->resource->getById($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -81,19 +80,13 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function create()
     {
-        $response = $this->blogTopics->create('Topic Test '.uniqid(), [
-            'description' => 'Topic Test '.uniqid().' Description',
-        ]);
-
-        $this->assertEquals(201, $response->getStatusCode());
+        $this->assertEquals(201, $this->entity->getStatusCode());
     }
 
     /** @test */
     public function update()
     {
-        $topic = $this->createBlogTopic();
-
-        $response = $this->blogTopics->update($topic->id, [
+        $response = $this->resource->update($this->entity->id, [
             'name' => 'Topic Test '.uniqid().' Updated',
             'description' => 'Topic Test '.uniqid().' Description Updated',
         ]);
@@ -104,24 +97,22 @@ class BlogTopicsTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function delete()
     {
-        $topic = $this->createBlogTopic();
-
-        $response = $this->blogTopics->delete($topic->id);
+        $response = $this->deleteEntity();
 
         $this->assertEquals(204, $response->getStatusCode());
+        
+        $this->entity = null;
     }
-
-    // Lots of tests need an existing object to modify.
-    private function createBlogTopic()
+    
+    protected function createEntity()
     {
-        sleep(1);
-
-        $response = $this->blogTopics->create('Topic Test '.uniqid(), [
+        return $this->resource->create('Topic Test '.uniqid(), [
             'description' => 'Topic Test '.uniqid().' Description',
         ]);
-
-        $this->assertEquals(201, $response->getStatusCode());
-
-        return $response;
+    }
+    
+    protected function deleteEntity()
+    {
+        return $this->resource->delete($this->entity->id);
     }
 }
