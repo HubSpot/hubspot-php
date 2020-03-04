@@ -23,5 +23,5 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-dist
 
 script:
-  - ./phpspec.sh $PHPSPEC
+  - ./phpspec.sh
   - vendor/bin/phpunit --verbose --testsuite $PHPUNIT_SUITE
