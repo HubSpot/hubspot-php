@@ -8,7 +8,7 @@ class BlogTopics extends Resource
      * Get all the blog topcis.
      *
      * @param array $params Optional parameters ['name','slug','limit','offset']
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/list-blog-topics
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -51,11 +51,11 @@ class BlogTopics extends Resource
 
     /**
      * Get a blog topic by ID.
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/get-blog-topic-by-id
-     * 
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getById($id, array $params = [])
@@ -73,10 +73,10 @@ class BlogTopics extends Resource
     /**
      * Create a new blog topic.
      *
-     * @param string $name   Name of the topic
+     * @param string $name       Name of the topic
      * @param array  $prorerties Blog topic's fields
-     * @param array  $params Optional parametrs
-     * 
+     * @param array  $params     Optional parametrs
+     *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/create-blog-topic
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -98,10 +98,10 @@ class BlogTopics extends Resource
     /**
      * Update a blog topic.
      *
-     * @param int   $id     the blog topic id
+     * @param int   $id         the blog topic id
      * @param array $prorerties the blog topic fields to update
-     * @param array  $params Optional parametrs
-     * 
+     * @param array $params     Optional parametrs
+     *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/update-topic
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -122,7 +122,7 @@ class BlogTopics extends Resource
      * Delete a blog topic.
      *
      * @param int $id
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/delete-blog-topic
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -139,8 +139,8 @@ class BlogTopics extends Resource
      *
      * @param array  $topicIds         Array of topic ids
      * @param string $groupedTopicName New name of the group
-     * @param array  $params Optional parametrs
-     * 
+     * @param array  $params           Optional parametrs
+     *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/group-blog-topics
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -153,9 +153,9 @@ class BlogTopics extends Resource
             'post',
             $endpoint,
             ['json' => [
-                    'topicIds' => $topicIds,
-                    'groupedTopicName' => $groupedTopicName,
-                ]
+                'topicIds' => $topicIds,
+                'groupedTopicName' => $groupedTopicName,
+            ],
             ]
         );
     }

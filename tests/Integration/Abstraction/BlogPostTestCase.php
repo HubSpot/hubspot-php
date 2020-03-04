@@ -2,15 +2,14 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Abstraction;
 
-use SevenShores\Hubspot\Resources\Blogs;
+use DateTime;
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\BlogAuthors;
 use SevenShores\Hubspot\Resources\BlogPosts;
-use SevenShores\Hubspot\Http\Client;
-use DateTime;
+use SevenShores\Hubspot\Resources\Blogs;
 
 abstract class BlogPostTestCase extends EntityTestCase
 {
-   
     protected $blogId;
 
     protected $authorId;
@@ -25,7 +24,7 @@ abstract class BlogPostTestCase extends EntityTestCase
 
         parent::setUp();
     }
-    
+
     protected function createPost(BlogPosts $resource)
     {
         $date = new DateTime();

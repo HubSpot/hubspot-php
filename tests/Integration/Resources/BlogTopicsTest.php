@@ -100,17 +100,17 @@ class BlogTopicsTest extends EntityTestCase
         $response = $this->deleteEntity();
 
         $this->assertEquals(204, $response->getStatusCode());
-        
+
         $this->entity = null;
     }
-    
+
     protected function createEntity()
     {
         return $this->resource->create('Topic Test '.uniqid(), [
             'description' => 'Topic Test '.uniqid().' Description',
         ]);
     }
-    
+
     protected function deleteEntity()
     {
         return $this->resource->delete($this->entity->id);

@@ -2,9 +2,9 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\BlogPosts;
 use SevenShores\Hubspot\Resources\Comments;
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Tests\Integration\Abstraction\BlogPostTestCase;
 
 /**
@@ -22,22 +22,21 @@ class BlogCommentsTest extends BlogPostTestCase
      * @var Comments:class
      */
     protected $resourceClass = Comments::class;
-    
+
     /**
      * @var BlogPosts
      */
     protected $blogPostsResource;
-    
+
     /**
      * @var null\SevenShores\Hubspot\Http\Response
      */
     protected $post;
 
-
     public function setUp()
     {
         $this->blogPostsResource = new BlogPosts(new Client(['key' => getenv($this->key)]));
-        
+
         parent::setUp();
     }
 
@@ -77,7 +76,7 @@ class BlogCommentsTest extends BlogPostTestCase
         $response = $this->deleteEntity();
 
         $this->assertEquals(204, $response->getStatusCode());
-        
+
         $this->entity = null;
     }
 
@@ -85,7 +84,7 @@ class BlogCommentsTest extends BlogPostTestCase
     public function restore()
     {
         $this->deleteEntity();
-        
+
         $response = $this->resource->restore($this->entity->id);
 
         $this->assertEquals(204, $response->getStatusCode());
@@ -94,9 +93,9 @@ class BlogCommentsTest extends BlogPostTestCase
     protected function createEntity()
     {
         $this->post = $this->createPost($this->blogPostsResource);
-        
+
         sleep(1);
-        
+
         return $this->resource->create([
             'comment' => 'This is a test blog comment',
             'contentId' => $this->post->id,
@@ -116,5 +115,4 @@ class BlogCommentsTest extends BlogPostTestCase
     {
         return $this->blogPostsResource->delete($this->post->id);
     }
-
 }
