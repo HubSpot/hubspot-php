@@ -4,15 +4,15 @@ sudo: false
 jobs:
   include:
     - php: 7.0
-      env: PHPUNIT_SUITE=All
-    - php: 7.1
-      env: PHPUNIT_SUITE=Unit
-    - php: 7.2
-      env: PHPUNIT_SUITE=Unit
-    - php: 7.3
-      env: PHPUNIT_SUITE=Unit
-    - php: 7.4
       env: PHPUNIT_SUITE=All PHPSPEC=true
+    - php: 7.1
+      env: PHPUNIT_SUITE=Unit PHPSPEC=true
+    - php: 7.2
+      env: PHPUNIT_SUITE=Unit PHPSPEC=true
+    - php: 7.3
+      env: PHPUNIT_SUITE=Unit PHPSPEC=true
+    - php: 7.4
+      env: PHPUNIT_SUITE=All
 
 cache:
   directories:
