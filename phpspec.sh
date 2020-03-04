@@ -1,4 +1,4 @@
 #!/bin/bash
-if [ "${PHPSPEC}" = "true" ]; then
+if [ "${PHPSPEC}" != "false" ]; then
   vendor/bin/phpspec run --verbose
 fi
