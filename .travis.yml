@@ -12,7 +12,7 @@ jobs:
     - php: 7.3
       env: PHPUNIT_SUITE=Unit
     - php: 7.4
-      env: PHPUNIT_SUITE=All
+      env: PHPUNIT_SUITE=Integration
 
 cache:
   directories:
