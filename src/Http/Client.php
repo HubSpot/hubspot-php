@@ -43,7 +43,7 @@ class Client
     protected $wrapResponse = true;
 
     /** @var string */
-    protected $user_agent = 'SevenShores_Hubspot_PHP/2.0.1 (https://github.com/HubSpot/hubspot-php)';
+    protected $user_agent = 'SevenShores_Hubspot_PHP/2.0.3 (https://github.com/HubSpot/hubspot-php)';
 
     /**
      * Make it, baby.
