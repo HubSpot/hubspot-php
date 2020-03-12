@@ -43,7 +43,7 @@ class Client
     protected $wrapResponse = true;
 
     /** @var string */
-    protected $user_agent = 'SevenShores_Hubspot_PHP/2.0.3 (https://github.com/HubSpot/hubspot-php)';
+    protected $user_agent = 'SevenShores_Hubspot_PHP/2.0.4 (https://github.com/HubSpot/hubspot-php)';
 
     /**
      * Make it, baby.
@@ -70,7 +70,10 @@ class Client
             throw new InvalidArgument('Cannot sign requests with both OAuth1 and OAuth2');
         }
 
-        $this->client = $client ?: new GuzzleClient();
+        if (is_null($client)) {
+            $client = new GuzzleClient();
+        }
+        $this->client = $client;
     }
 
     /**

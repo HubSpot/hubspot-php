@@ -116,12 +116,12 @@ class DealsTest extends EntityTestCase
                 ],
             ],
         ]);
-        
+
         $response = $this->resource->getRecentlyModified([
             'offset' => 0,
             'count' => 1,
         ]);
-        
+
         $this->assertEquals(200, $response->getStatusCode());
     }
 

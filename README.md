@@ -56,6 +56,33 @@ false // return Guzzle Response object for any ->request(*) call
 By setting `http_errors` to false, you will not receive any exceptions at all, but pure responses.
 For possible options, see http://docs.guzzlephp.org/en/latest/request-options.html.
 
+#### API Client comes with Middleware for implementation of Rate and Concurrent Limiting.
+It provides an ability to turn on retry for failed requests with statuses 429 or 500. You can read more about working within the HubSpot API rate limits [here](https://developers.hubspot.com/docs/faq/working-within-the-hubspot-api-rate-limits).
+
+```php
+$handlerStack = \GuzzleHttp\HandlerStack::create();
+$handlerStack->push(
+    \SevenShores\Hubspot\RetryMiddlewareFactory::createRateLimitMiddleware(
+        \SevenShores\Hubspot\Delay::getConstantDelayFunction()
+    )
+);
+        
+$handlerStack->push(
+    \SevenShores\Hubspot\RetryMiddlewareFactory::createInternalErrorsMiddleware(
+        \SevenShores\Hubspot\Delay::getExponentialDelayFunction(2)
+    )
+);
+
+$guzzleClient = new \GuzzleHttp\Client(['handler' => $handlerStack]);
+
+$config = [
+    'key'      => 'demo',
+    'oauth2'   => 'false',
+];
+
+$hubspot = new \SevenShores\Hubspot\Factory(config, new \SevenShores\Hubspot\Client($config, guzzleClient));
+```
+
 #### Get a single contact:
 
 ```php
