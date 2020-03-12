@@ -69,8 +69,8 @@ class Client
         if ($this->oauth && $this->oauth2) {
             throw new InvalidArgument('Cannot sign requests with both OAuth1 and OAuth2');
         }
-        
-        if(is_null($client)) {
+
+        if (is_null($client)) {
             $client = new GuzzleClient();
         }
         $this->client = $client;
@@ -104,7 +104,7 @@ class Client
         if ($this->oauth2) {
             $options['headers']['Authorization'] = 'Bearer '.$this->key;
         }
-        
+
         try {
             if (false === $this->wrapResponse) {
                 return $this->client->request($method, $url, $options);
