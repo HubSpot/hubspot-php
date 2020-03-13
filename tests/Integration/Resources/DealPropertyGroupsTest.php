@@ -9,8 +9,13 @@ use SevenShores\Hubspot\Tests\Integration\Abstraction\PropertyGroupsTestCase;
  * @internal
  * @coversNothing
  */
-class DealPropertiesGroupTest extends PropertyGroupsTestCase
+class DealPropertyGroupsTest extends PropertyGroupsTestCase
 {
+    /**
+     * @var bool
+     */
+    protected $getGroup = true;
+
     /**
      * @var DealProperties
      */

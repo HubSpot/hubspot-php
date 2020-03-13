@@ -8,9 +8,9 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
      * @var string
      */
     protected $allGroupsMethod = 'getAllGroups';
-    
+
     /**
-     * @var boolean
+     * @var bool
      */
     protected $getGroup = false;
 

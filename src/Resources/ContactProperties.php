@@ -120,16 +120,16 @@ class ContactProperties extends Resource
     /**
      * Get Contact Property Group Details.
      *
-     * @param string $groupName         The internal name of the property group.
+     * @param string $groupName         the internal name of the property group
      * @param bool   $includeProperties if true returns all of the properties for each deal property group
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getGroup($includeProperties = false)
+    public function getGroup(string $groupName, $includeProperties = false)
     {
-        $endpoint = 'https://api.hubapi.com/properties/v1/contacts/groups/named/';
+        $endpoint = "https://api.hubapi.com/properties/v1/contacts/groups/named/{$groupName}";
 
         $queryString = '';
         if ($includeProperties) {
