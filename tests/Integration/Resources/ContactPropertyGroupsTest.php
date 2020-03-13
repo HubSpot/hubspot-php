@@ -15,6 +15,11 @@ class ContactPropertyGroupsTest extends PropertyGroupsTestCase
      * @var string
      */
     protected $allGroupsMethod = 'getGroups';
+    
+    /**
+     * @var boolean
+     */
+    protected $getGroup = true;
 
     /**
      * @var ContactProperties

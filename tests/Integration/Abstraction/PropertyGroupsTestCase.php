@@ -8,6 +8,11 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
      * @var string
      */
     protected $allGroupsMethod = 'getAllGroups';
+    
+    /**
+     * @var boolean
+     */
+    protected $getGroup = false;
 
     /** @test */
     public function all()
@@ -26,6 +31,17 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
         $this->assertObjectHasAttribute('properties', $response->getData()[0]);
+    }
+
+    /** @test */
+    public function getGroup()
+    {
+        if (!$this->getGroup) {
+            return true;
+        }
+        $response = $this->resource->getGroup($this->entity->name);
+
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     /** @test */

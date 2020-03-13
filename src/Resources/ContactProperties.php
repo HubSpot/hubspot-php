@@ -26,9 +26,9 @@ class ContactProperties extends Resource
      *
      * Returns a JSON object representing the definition for a given contact property.
      *
-     * @see https://developers.hubspot.com/docs/methods/companies/get_contact_property
-     *
      * @param string $name the name of the property
+     *
+     * @see https://developers.hubspot.com/docs/methods/companies/get_contact_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -61,9 +61,9 @@ class ContactProperties extends Resource
      *
      * Update a specified contact property.
      *
-     * @see https://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property
-     *
      * @param string $name
+     *
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -81,9 +81,9 @@ class ContactProperties extends Resource
      *
      * For a portal, delete an existing contact property.
      *
-     * @see https://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property
-     *
      * @param string $name
+     *
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -99,9 +99,9 @@ class ContactProperties extends Resource
      *
      * Returns all of the contact property groups for a given portal.
      *
-     * @see https://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
-     *
      * @param bool $includeProperties
+     *
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -118,14 +118,36 @@ class ContactProperties extends Resource
     }
 
     /**
+     * Get Contact Property Group Details.
+     *
+     * @param string $groupName         The internal name of the property group.
+     * @param bool   $includeProperties if true returns all of the properties for each deal property group
+     *
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function getGroup($includeProperties = false)
+    {
+        $endpoint = 'https://api.hubapi.com/properties/v1/contacts/groups/named/';
+
+        $queryString = '';
+        if ($includeProperties) {
+            $queryString = build_query_string(['includeProperties' => 'true']);
+        }
+
+        return $this->client->request('get', $endpoint, [], $queryString);
+    }
+
+    /**
      * Create a contact property group.
      *
      * Create a new contact property group to gather like contact-level data. Property groups allow you to more
      * easily manage properties in a given portal and make contact records easier to parse for the user.
      *
-     * @see https://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property_group
-     *
      * @param array $group Group properties
+     *
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property_group
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -141,9 +163,9 @@ class ContactProperties extends Resource
      *
      * Update a previously created contact property group.
      *
-     * @see https://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property_group
-     *
      * @param string $name
+     *
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property_group
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -161,9 +183,9 @@ class ContactProperties extends Resource
      *
      * Delete an existing contact property group.
      *
-     * @see https://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property_group
-     *
      * @param string $name
+     *
+     * @see https://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property_group
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
