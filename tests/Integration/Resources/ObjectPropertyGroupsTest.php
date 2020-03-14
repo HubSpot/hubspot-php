@@ -12,6 +12,11 @@ use SevenShores\Hubspot\Tests\Integration\Abstraction\PropertyGroupsTestCase;
 class ObjectPropertyGroupsTest extends PropertyGroupsTestCase
 {
     /**
+     * @var bool
+     */
+    protected $getGroup = true;
+
+    /**
      * @var string
      */
     protected $allGroupsMethod = 'getGroups';
@@ -21,13 +26,5 @@ class ObjectPropertyGroupsTest extends PropertyGroupsTestCase
         $this->resource = Factory::create(getenv('HUBSPOT_TEST_API_KEY'))->objectProperties('products');
         sleep(1);
         $this->entity = $this->createEntity();
-    }
-
-    /** @test */
-    public function get()
-    {
-        $response = $this->resource->getGroup($this->entity->name);
-
-        $this->assertEquals(200, $response->getStatusCode());
     }
 }
