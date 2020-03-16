@@ -2,6 +2,9 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+/**
+ * @see https://developers.hubspot.com/docs/methods/pipelines/pipelines_overview
+ */
 class CrmPipelines extends Resource
 {
     /**
@@ -11,13 +14,13 @@ class CrmPipelines extends Resource
      * @param string $objectType | Currently supports tickets or deals only
      * @param array  $params     | Array of optional parameter ['includeInactive' => 'EXCLUDE_DELETED' (default) | 'INCLUDE_DELETED']
      *
-     * @see https://developers.hubspot.com/docs/methods/pipelines/get_pipelines_for_object_type
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @see https://developers.hubspot.com/docs/methods/pipelines/get_pipelines_for_object_type
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function all($objectType, array $params = [])
+    public function all(string $objectType, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}";
 
@@ -27,16 +30,17 @@ class CrmPipelines extends Resource
     }
 
     /**
-     * @param string $objectType
-     * @param array  $properties Array of pipeline properties
+     * Create a new pipeline.
+     *
+     * @param array $properties Array of pipeline properties
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
      * @see https://developers.hubspot.com/docs/methods/pipelines/create_new_pipeline
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function create($objectType, array $properties)
+    public function create(string $objectType, array $properties)
     {
         $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}";
 
@@ -46,8 +50,7 @@ class CrmPipelines extends Resource
     }
 
     /**
-     * @param string $objectType
-     * @param $id
+     * Update an existing pipeline.
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
@@ -55,7 +58,7 @@ class CrmPipelines extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/pipelines/update_pipeline
      */
-    public function update($objectType, $id, array $properties)
+    public function update(string $objectType, string $id, array $properties)
     {
         $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}/{$id}";
 
@@ -65,16 +68,15 @@ class CrmPipelines extends Resource
     }
 
     /**
-     * @param $objectType
-     * @param $id
+     * Delete an existing pipeline.
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
      * @see https://developers.hubspot.com/docs/methods/pipelines/delete_pipeline
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function delete($objectType, $id)
+    public function delete(string $objectType, string $id)
     {
         $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}/{$id}";
 
