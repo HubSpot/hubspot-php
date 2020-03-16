@@ -35,7 +35,7 @@ class DefaultTestCase extends PHPUnit_Framework_TestCase
         }
         sleep(1);
     }
-    
+
     protected function getClient(): Client
     {
         return new Client(['key' => getenv($this->key)]);

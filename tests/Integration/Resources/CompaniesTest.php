@@ -92,7 +92,7 @@ class CompaniesTest extends EntityTestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($this->entity->companyId, $response->companyId);
         $this->assertTrue($response['deleted']);
-        
+
         $this->entity = null;
     }
 
@@ -284,7 +284,6 @@ class CompaniesTest extends EntityTestCase
 
     protected function createEntity()
     {
-
         return $this->resource->create([
             [
                 'name' => 'name',
@@ -298,7 +297,7 @@ class CompaniesTest extends EntityTestCase
                 'name' => 'domain',
                 'value' => 'example.com',
             ],
-        ]);  
+        ]);
     }
 
     protected function deleteEntity()

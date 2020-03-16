@@ -237,7 +237,7 @@ class Contacts extends Resource
      * @param array $vids   Array of visitor IDs
      * @param array $params Array of optional parameters ['property', 'propertyMode', 'formSubmissionMode',
      *                      'showListMemberships', 'includeDeletes']
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/contacts/get_batch_by_vid
      *
      * @return \SevenShores\Hubspot\Http\Response
