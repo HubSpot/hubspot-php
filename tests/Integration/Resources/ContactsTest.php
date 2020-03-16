@@ -83,6 +83,7 @@ class ContactsTest extends EntityTestCase
     /** @test */
     public function createOrUpdate()
     {
+        sleep(1);
         $response = $this->resource->createOrUpdate($this->entity->properties->email->value, [
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value' => 'user'],

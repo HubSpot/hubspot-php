@@ -2,9 +2,9 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Companies;
 use SevenShores\Hubspot\Resources\Contacts;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
 /**
  * Class CompaniesTest.
@@ -14,69 +14,62 @@ use SevenShores\Hubspot\Resources\Contacts;
  * @internal
  * @coversNothing
  */
-class CompaniesTest extends \PHPUnit_Framework_TestCase
+class CompaniesTest extends EntityTestCase
 {
     /**
      * @var Companies
      */
-    protected $companies;
+    protected $resource;
+
+    /**
+     * @var Companies::class
+     */
+    protected $resourceClass = Companies::class;
 
     /**
      * @var Contacts
      */
-    protected $contacts;
+    protected $contactsResource;
 
     public function setUp()
     {
+        $this->contactsResource = new Contacts($this->getClient());
         parent::setUp();
-        $this->companies = new Companies(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        $this->contacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
     }
 
     /** @test */
     public function create()
     {
-        $response = $this->createCompany();
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('A company name', $response['properties']['name']['value']);
-        $this->assertEquals('A company description', $response['properties']['description']['value']);
-        $this->assertEquals('example.com', $response['properties']['domain']['value']);
-
-        $this->companies->delete($response->companyId);
+        $this->assertEquals(200, $this->entity->getStatusCode());
+        $this->assertEquals('A company name', $this->entity->properties->name->value);
+        $this->assertEquals('A company description', $this->entity->properties->description->value);
+        $this->assertEquals('example.com', $this->entity->properties->domain->value);
     }
 
     /** @test */
     public function update()
     {
-        $newCompanyResponse = $this->createCompany();
-
         $companyDescription = 'A far better description than before';
         $properties = [
             'name' => 'description',
             'value' => $companyDescription,
         ];
 
-        $response = $this->companies->update($newCompanyResponse->companyId, $properties);
+        $response = $this->resource->update($this->entity->companyId, $properties);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals($newCompanyResponse->companyId, $response->companyId);
-        $this->assertEquals($companyDescription, $response['properties']['description']['value']);
-
-        $this->companies->delete($response->companyId);
+        $this->assertEquals($this->entity->companyId, $response->companyId);
+        $this->assertEquals($companyDescription, $response->properties->description->value);
     }
 
     /** @test */
     public function updateBatch()
     {
-        $newCompanyResponse = $this->createCompany();
-
         $companyDescription = 'A far better description than before';
 
         $companies = [
             [
-                'objectId' => $newCompanyResponse->companyId,
+                'objectId' => $this->entity->companyId,
                 'properties' => [
                     [
                         'name' => 'description',
@@ -86,29 +79,27 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
             ],
         ];
 
-        $response = $this->companies->updateBatch($companies);
+        $response = $this->resource->updateBatch($companies);
 
         $this->assertEquals(202, $response->getStatusCode());
-
-        $this->companies->delete($newCompanyResponse->companyId);
     }
 
     /** @test */
     public function delete()
     {
-        $newCompanyResponse = $this->createCompany();
-
-        $response = $this->companies->delete($newCompanyResponse->companyId);
+        $response = $this->deleteEntity();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals($newCompanyResponse->companyId, $response->companyId);
+        $this->assertEquals($this->entity->companyId, $response->companyId);
         $this->assertTrue($response['deleted']);
+
+        $this->entity = null;
     }
 
     /** @test */
     public function getAll()
     {
-        $response = $this->companies->all();
+        $response = $this->resource->all();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThan(0, count($response->data->companies));
@@ -117,7 +108,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getRecentlyModified()
     {
-        $response = $this->companies->getRecentlyModified();
+        $response = $this->resource->getRecentlyModified();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThan(2, $response['results']);
@@ -127,7 +118,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     public function getRecentlyModifiedWithCountAndOffset()
     {
         $params = ['count' => 2, 'offset' => 1];
-        $response = $this->companies->getRecentlyModified($params);
+        $response = $this->resource->getRecentlyModified($params);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(2, $response['results']);
         $this->assertEquals(3, $response['offset']);
@@ -136,7 +127,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getRecentlyCreated()
     {
-        $response = $this->companies->getRecentlyCreated();
+        $response = $this->resource->getRecentlyCreated();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThan(2, $response['results']);
@@ -146,7 +137,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     public function getRecentlyCreatedWithCountAndOffset()
     {
         $params = ['count' => 2, 'offset' => 1];
-        $response = $this->companies->getRecentlyCreated($params);
+        $response = $this->resource->getRecentlyCreated($params);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -154,100 +145,86 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function getById()
     {
-        //Ensure that we have a company to fetch
-        $newCompanyResponse = $this->createCompany();
-
-        $response = $this->companies->getById($newCompanyResponse->companyId);
+        $response = $this->resource->getById($this->entity->companyId);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals($newCompanyResponse->companyId, $response->companyId);
-
-        $this->companies->delete($newCompanyResponse->companyId);
+        $this->assertEquals($this->entity->companyId, $response->companyId);
     }
 
     /** @test */
     public function getAssociatedContacts()
     {
-        $newCompanyResponse = $this->createCompany();
-        list($contactId) = $this->createAssociatedContact($newCompanyResponse->companyId);
+        list($contactId) = $this->createAssociatedContact($this->entity->companyId);
 
-        $response = $this->companies->getAssociatedContacts($newCompanyResponse->companyId);
+        $response = $this->resource->getAssociatedContacts($this->entity->companyId);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertCount(1, $response['contacts']);
-        $this->assertEquals($contactId, $response['contacts'][0]['vid']);
+        $this->assertCount(1, $response->contacts);
+        $this->assertEquals($contactId, $response->contacts[0]->vid);
 
-        $this->deleteCompanyWithContacts($newCompanyResponse->companyId, [$contactId]);
+        $this->deleteAssociatedContacts($this->entity->companyId, [$contactId]);
     }
 
     /** @test */
     public function getAssociatedContactsWithCountAndOffset()
     {
-        $newCompanyResponse = $this->createCompany();
-        $companyId = $newCompanyResponse->companyId;
-        list($contactId) = $this->createAssociatedContact($companyId);
-        list($contactId2) = $this->createAssociatedContact($companyId);
+        list($contactId) = $this->createAssociatedContact($this->entity->companyId);
+        list($contactId2) = $this->createAssociatedContact($this->entity->companyId);
 
-        $response = $this->companies->getAssociatedContacts($companyId, ['count' => 1]);
+        $response = $this->resource->getAssociatedContacts($this->entity->companyId, ['count' => 1]);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(1, $response->contacts);
 
-        $offsetResponse = $this->companies->getAssociatedContacts($companyId, ['count' => 1, 'vidOffset' => $contactId]);
+        $offsetResponse = $this->resource->getAssociatedContacts($this->entity->companyId, ['count' => 1, 'vidOffset' => $contactId]);
         $this->assertEquals(200, $offsetResponse->getStatusCode());
         $this->assertGreaterThanOrEqual($contactId2, $offsetResponse->vidOffset);
 
-        $this->deleteCompanyWithContacts($companyId, [$contactId, $contactId2]);
+        $this->deleteAssociatedContacts($this->entity->companyId, [$contactId, $contactId2]);
     }
 
     /** @test */
     public function getAssociatedContactIds()
     {
-        $newCompanyResponse = $this->createCompany();
-        $companyId = $newCompanyResponse['companyId'];
-        list($contactId1) = $this->createAssociatedContact($companyId);
-        list($contactId2) = $this->createAssociatedContact($companyId);
+        list($contactId1) = $this->createAssociatedContact($this->entity->companyId);
+        list($contactId2) = $this->createAssociatedContact($this->entity->companyId);
 
-        $response = $this->companies->getAssociatedContactIds($companyId);
+        $response = $this->resource->getAssociatedContactIds($this->entity->companyId);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, $response->vids);
         $this->assertContains($contactId1, $response->vids);
         $this->assertContains($contactId2, $response->vids);
 
-        $this->deleteCompanyWithContacts($newCompanyResponse->companyId, $response->vids);
+        $this->deleteAssociatedContacts($this->entity->companyId, $response->vids);
     }
 
     /** @test */
     public function getAssociatedContactIdsWithCountAndOffset()
     {
-        $newCompanyResponse = $this->createCompany();
-        $companyId = $newCompanyResponse->companyId;
-        list($contactId1) = $this->createAssociatedContact($companyId);
-        list($contactId2) = $this->createAssociatedContact($companyId);
+        list($contactId1) = $this->createAssociatedContact($this->entity->companyId);
+        list($contactId2) = $this->createAssociatedContact($this->entity->companyId);
 
-        $response = $this->companies->getAssociatedContactIds($companyId, ['count' => 1]);
+        $response = $this->resource->getAssociatedContactIds($this->entity->companyId, ['count' => 1]);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(1, $response->vids);
 
-        $offsetResponse = $this->companies->getAssociatedContactIds($companyId, ['count' => 1, 'vidOffset' => $contactId1]);
+        $offsetResponse = $this->resource->getAssociatedContactIds($this->entity->companyId, ['count' => 1, 'vidOffset' => $contactId1]);
         $this->assertEquals(200, $offsetResponse->getStatusCode());
         $this->assertGreaterThanOrEqual($contactId2, $offsetResponse->vidOffset);
 
-        $this->deleteCompanyWithContacts($companyId, [$contactId1, $contactId2]);
+        $this->deleteAssociatedContacts($this->entity->companyId, [$contactId1, $contactId2]);
     }
 
     /** @test */
     public function removeContact()
     {
-        $newCompanyResponse = $this->createCompany();
-        list($contactId) = $this->createAssociatedContact($newCompanyResponse->companyId);
+        list($contactId) = $this->createAssociatedContact($this->entity->companyId);
 
-        $response = $this->companies->removeContact($contactId, $newCompanyResponse->companyId);
+        $response = $this->resource->removeContact($contactId, $this->entity->companyId);
 
         $this->assertEquals(204, $response->getStatusCode());
 
-        $this->companies->delete($newCompanyResponse->companyId);
-        $this->contacts->delete($contactId);
+        $this->contactsResource->delete($contactId);
     }
 
     /**
@@ -255,45 +232,10 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
      */
     public function searchCompanyByDomain()
     {
-        $newCompanyResponse = $this->createCompany();
-
-        $response = $this->companies->searchByDomain('example.com', ['name', 'domain']);
+        $response = $this->resource->searchByDomain('example.com', ['name', 'domain']);
         $this->assertEquals(200, $response->getStatusCode());
         $results = $response->getData()->results;
         $this->assertEquals('example.com', current($results)->properties->domain->value);
-
-        $this->companies->delete($newCompanyResponse->companyId);
-    }
-
-    /**
-     * Creates a Company with the HubSpotApi.
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    protected function createCompany()
-    {
-        $companyName = 'A company name';
-        $companyDescription = 'A company description';
-        $properties = [
-            [
-                'name' => 'name',
-                'value' => $companyName,
-            ],
-            [
-                'name' => 'description',
-                'value' => $companyDescription,
-            ],
-            [
-                'name' => 'domain',
-                'value' => 'example.com',
-            ],
-        ];
-
-        $response = $this->companies->create($properties);
-
-        sleep(1);
-
-        return $response;
     }
 
     /**
@@ -303,7 +245,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
      */
     protected function createContact()
     {
-        $contactResponse = $this->contacts->create([
+        $response = $this->contactsResource->create([
             ['property' => 'email', 'value' => 'rw_test'.uniqid().'@hubspot.com'],
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value' => 'user'],
@@ -311,7 +253,7 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
 
         sleep(1);
 
-        return $contactResponse;
+        return $response;
     }
 
     /**
@@ -323,23 +265,43 @@ class CompaniesTest extends \PHPUnit_Framework_TestCase
      */
     protected function createAssociatedContact($companyId)
     {
-        $newContactResponse = $this->createContact();
-        $contactId = $newContactResponse['vid'];
+        $contact = $this->createContact();
 
-        $response = $this->companies->addContact($contactId, $companyId);
+        $response = $this->resource->addContact($contact->vid, $companyId);
 
         sleep(1);
 
-        return [$contactId, $response];
+        return [$contact->vid, $response];
     }
 
-    protected function deleteCompanyWithContacts($companyId, $contactIds = [])
+    protected function deleteAssociatedContacts($companyId, $contactIds = [])
     {
         foreach ($contactIds as $contactId) {
-            $this->companies->removeContact($contactId, $companyId);
-            $this->contacts->delete($contactId);
+            $this->resource->removeContact($contactId, $companyId);
+            $this->contactsResource->delete($contactId);
         }
+    }
 
-        $this->companies->delete($companyId);
+    protected function createEntity()
+    {
+        return $this->resource->create([
+            [
+                'name' => 'name',
+                'value' => 'A company name',
+            ],
+            [
+                'name' => 'description',
+                'value' => 'A company description',
+            ],
+            [
+                'name' => 'domain',
+                'value' => 'example.com',
+            ],
+        ]);
+    }
+
+    protected function deleteEntity()
+    {
+        return $this->resource->delete($this->entity->companyId);
     }
 }
