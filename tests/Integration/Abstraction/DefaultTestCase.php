@@ -31,8 +31,13 @@ class DefaultTestCase extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         if (empty($this->resource)) {
-            $this->resource = new $this->resourceClass(new Client(['key' => getenv($this->key)]));
+            $this->resource = new $this->resourceClass($this->getClient());
         }
         sleep(1);
+    }
+    
+    protected function getClient(): Client
+    {
+        return new Client(['key' => getenv($this->key)]);
     }
 }

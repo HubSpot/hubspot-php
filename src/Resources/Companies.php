@@ -2,6 +2,9 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+/**
+ * @see https://developers.hubspot.com/docs/methods/companies/companies-overview
+ */
 class Companies extends Resource
 {
     /**
@@ -16,9 +19,12 @@ class Companies extends Resource
     public function create(array $properties)
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/';
-        $options['json'] = ['properties' => $properties];
 
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => ['properties' => $properties]]
+        );
     }
 
     /**
@@ -34,9 +40,12 @@ class Companies extends Resource
     public function update($id, array $properties)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/companies/{$id}";
-        $options['json'] = ['properties' => $properties];
 
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request(
+            'put',
+            $endpoint,
+            ['json' => ['properties' => $properties]]
+        );
     }
 
     /**
@@ -47,9 +56,8 @@ class Companies extends Resource
     public function updateBatch(array $companies)
     {
         $endpoint = 'https://api.hubapi.com/companies/v1/batch-async/update';
-        $options['json'] = $companies;
 
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $companies]);
     }
 
     /**
@@ -81,9 +89,12 @@ class Companies extends Resource
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/paged';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -99,9 +110,12 @@ class Companies extends Resource
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/recent/modified';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -117,35 +131,45 @@ class Companies extends Resource
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/companies/recent/created';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
-     * @param string $domain
-     * @param int    $limit
-     * @param int    $offset
+     * Search for companies by domain.
      *
      * @see https://developers.hubspot.com/docs/methods/companies/search_companies_by_domain
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function searchByDomain($domain, array $properties = [], $limit = 100, $offset = 0)
-    {
+    public function searchByDomain(
+        string $domain,
+        array $properties = [],
+        int $limit = 100,
+        int $offset = 0
+    ) {
         $endpoint = "https://api.hubapi.com/companies/v2/domains/{$domain}/companies";
-        $options['json'] = [
-            'limit' => $limit,
-            'offset' => [
-                'isPrimary' => true,
-                'companyId' => $offset,
-            ],
-            'requestOptions' => [
-                'properties' => $properties,
-            ],
-        ];
 
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            [
+                'json' => [
+                    'limit' => $limit,
+                    'offset' => [
+                        'isPrimary' => true,
+                        'companyId' => $offset,
+                    ],
+                    'requestOptions' => [
+                        'properties' => $properties,
+                    ],
+                ],
+            ]
+        );
     }
 
     /**
