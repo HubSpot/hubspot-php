@@ -13,7 +13,7 @@ class FactorySpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('SevenShores\Hubspot\Factory');
+        $this->shouldHaveType('SevenShores\Hubspot\HubspotClientFactory');
     }
 
     public function it_creates_a_blogs_api_class()
