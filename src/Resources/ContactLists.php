@@ -2,59 +2,25 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+/**
+ * @see https://developers.hubspot.com/docs/methods/lists/contact-lists-overview
+ */
 class ContactLists extends Resource
 {
     /**
      * Create a new contact list.
      *
-     * @param array $list contact list properties
-     *
-     * @return \SevenShores\Hubspot\Http\Response
+     * @param array $properties contact list properties
      *
      * @see https://developers.hubspot.com/docs/methods/lists/create_list
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    public function create(array $list)
+    public function create(array $properties)
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/lists';
 
-        $options['json'] = $list;
-
-        return $this->client->request('post', $endpoint, $options);
-    }
-
-    /**
-     * Update a contact list.
-     *
-     * @param int   $id   the contact list id
-     * @param array $list the contact list properties to update
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
-     * @see https://developers.hubspot.com/docs/methods/lists/update_list
-     */
-    public function update($id, array $list)
-    {
-        $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}";
-
-        $options['json'] = $list;
-
-        return $this->client->request('post', $endpoint, $options);
-    }
-
-    /**
-     * Delete a contact list.
-     *
-     * @param int $id
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
-     * @see https://developers.hubspot.com/docs/methods/lists/delete_list
-     */
-    public function delete($id)
-    {
-        $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}";
-
-        return $this->client->request('delete', $endpoint);
+        return $this->client->request('post', $endpoint, ['json' => $properties]);
     }
 
     /**
@@ -62,25 +28,25 @@ class ContactLists extends Resource
      *
      * @param array $params ['count', 'offset']
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_lists
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function all(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/lists';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], build_query_string($params));
     }
 
     /**
+     * Get a contact list by its unique ID.
+     *
      * @param int $id
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_list
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function getById($id)
     {
@@ -90,49 +56,97 @@ class ContactLists extends Resource
     }
 
     /**
+     * Update a contact list.
+     *
+     * @param int   $id         the contact list id
+     * @param array $properties the contact list properties to update
+     *
+     * @see https://developers.hubspot.com/docs/methods/lists/update_list
+     *
      * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function update($id, array $properties)
+    {
+        $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}";
+
+        return $this->client->request('post', $endpoint, ['json' => $properties]);
+    }
+
+    /**
+     * Delete a contact list.
+     *
+     * @param int $id
+     *
+     * @see https://developers.hubspot.com/docs/methods/lists/delete_list
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function delete($id)
+    {
+        $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}";
+
+        return $this->client->request('delete', $endpoint);
+    }
+
+    /**
+     * Get a group of contact lists.
      *
      * @see https://developers.hubspot.com/docs/methods/lists/get_batch_lists
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function getBatchByIds(array $ids)
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/lists/batch';
 
-        $queryString = build_query_string(['listId' => $ids]);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string(['listId' => $ids])
+        );
     }
 
     /**
+     * Get static contact lists.
+     *
      * @param array $params Optional parameters ['count', 'offset']
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_static_lists
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
     public function getAllStatic(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/lists/static';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
+     * Get dynamic contact lists (active lists).
+     *
      * @param array $params Optional parameters ['count', 'offset']
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_dynamic_lists
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getAllDynamic($params = [])
+    public function getAllDynamic(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/contacts/v1/lists/dynamic';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -142,74 +156,84 @@ class ContactLists extends Resource
      * @param array $params Optional parameters
      *                      { count, vidOffset, property, propertyMode, formSubmissionMode, showListMemberships }
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
      * @see https://developers.hubspot.com/docs/methods/lists/get_list_contacts
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    public function contacts($id, $params = [])
+    public function contacts($id, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}/contacts/all";
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
      * Get recently added contact from a list.
      *
-     * @param int   $id     List id
-     * @param array $params
-     *
-     * @return \SevenShores\Hubspot\Http\Response
+     * @param int $id List id
      *
      * @see https://developers.hubspot.com/docs/methods/lists/get_list_contacts_recent
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    public function recentContacts($id, $params = [])
+    public function recentContacts($id, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$id}/contacts/recent";
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request('get', $endpoint, [], build_query_string($params));
     }
 
     /**
      * Add a contact to a list.
      *
-     * @param int $list_id
+     * @param int $listId
      *
      * @return \SevenShores\Hubspot\Http\Response
      *
      * @see https://developers.hubspot.com/docs/methods/lists/add_contact_to_list
      */
-    public function addContact($list_id, array $contact_ids, array $emails = [])
+    public function addContact($listId, array $contactIds, array $emails = [])
     {
-        $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$list_id}/add";
+        $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$listId}/add";
 
-        $options['json'] = [
-            'vids' => $contact_ids,
-            'emails' => $emails,
-        ];
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            [
+                'json' => [
+                    'vids' => $contactIds,
+                    'emails' => $emails,
+                ],
+            ]
+        );
     }
 
     /**
      * Remove a contact from a list.
      *
-     * @param int $list_id
-     *
-     * @return \SevenShores\Hubspot\Http\Response
+     * @param int $listId
      *
      * @see https://developers.hubspot.com/docs/methods/lists/remove_contact_from_list
+     *
+     * @return \SevenShores\Hubspot\Http\Response
      */
-    public function removeContact($list_id, array $contact_ids)
+    public function removeContact($listId, array $contactIds)
     {
-        $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$list_id}/remove";
+        $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$listId}/remove";
 
-        $options['json'] = ['vids' => $contact_ids];
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            [
+                'json' => [
+                    'vids' => $contactIds,
+                ],
+            ]
+        );
     }
 }
