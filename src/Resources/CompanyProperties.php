@@ -26,11 +26,9 @@ class CompanyProperties extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/companies/update_company_property
      *
-     * @param string $propertyName
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function update($propertyName, array $property)
+    public function update(string $propertyName, array $property)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
@@ -48,7 +46,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function delete($propertyName)
+    public function delete(string $propertyName)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
@@ -64,7 +62,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function get($propertyName)
+    public function get(string $propertyName)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/properties/named/{$propertyName}";
 
@@ -111,7 +109,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateGroup($groupName, array $group)
+    public function updateGroup(string $groupName, array $group)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/groups/named/{$groupName}";
 
@@ -127,7 +125,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function deleteGroup($groupName)
+    public function deleteGroup(string $groupName)
     {
         $endpoint = "https://api.hubapi.com/companies/v2/groups/named/{$groupName}";
 
@@ -143,7 +141,7 @@ class CompanyProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getAllGroups($includeProperties = false)
+    public function getAllGroups(bool $includeProperties = false)
     {
         $endpoint = 'https://api.hubapi.com/companies/v2/groups/';
 
