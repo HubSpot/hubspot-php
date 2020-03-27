@@ -2,7 +2,8 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
+use SevenShores\Hubspot\Resources\DealPipelines;
 
 /**
  * Class DealPipelinesTest.
@@ -10,50 +11,30 @@ use SevenShores\Hubspot\Http\Client;
  * @internal
  * @coversNothing
  */
-class DealPipelinesTest extends \PHPUnit_Framework_TestCase
+class DealPipelinesTest extends EntityTestCase
 {
     /**
      * @var DealPipelines
      */
-    protected $dealPipelines;
+    protected $resource;
+    
+    /**
+     * @var DealPipelines::class
+     */
+    protected $resourceClass = DealPipelines::class;
+    
     /**
      * @var null|\SevenShores\Hubspot\Http\Response
      */
     protected $pipeline;
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->dealPipelines = new DealPipelines(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
-        $this->pipeline = $this->dealPipelines->create([
-            'label' => 'New Business Pipeline'.uniqid(),
-            'displayOrder' => 5,
-            'stages' => [
-                [
-                    'label' => 'Initial Stage',
-                    'displayOrder' => 0,
-                    'probability' => 0.3,
-                ],
-            ],
-        ]);
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-        if (!empty($this->pipeline)) {
-            $this->dealPipelines->delete($this->pipeline->pipelineId);
-        }
-    }
 
     /**
      * @test
      */
     public function create()
     {
-        $this->assertEquals(200, $this->pipeline->getStatusCode());
-        $this->assertCount(1, $this->pipeline->stages);
+        $this->assertEquals(200, $this->entity->getStatusCode());
+        $this->assertCount(1, $this->entity->stages);
     }
 
     /**
@@ -61,7 +42,7 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
      */
     public function getAllPipelines()
     {
-        $response = $this->dealPipelines->getAllPipelines();
+        $response = $this->resource->getAllPipelines();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
@@ -72,9 +53,10 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
      */
     public function getPipeline()
     {
-        $response = $this->dealPipelines->getPipeline($this->pipeline->pipelineId);
+        $response = $this->resource->getPipeline($this->entity->pipelineId);
+        
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals($this->pipeline->label, $response->label);
+        $this->assertEquals($this->entity->label, $response->label);
         $this->assertCount(1, $response->stages);
     }
 
@@ -84,9 +66,9 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
     public function update()
     {
         $newLabel = 'Updated pipeline'.uniqid();
-        $response = $this->dealPipelines->update($this->pipeline->pipelineId, [
+        $response = $this->resource->update($this->entity->pipelineId, [
             'label' => $newLabel,
-            'pipelineId' => $this->pipeline->pipelineId,
+            'pipelineId' => $this->entity->pipelineId,
             'stages' => [
                 [
                     'label' => 'new stage',
@@ -101,8 +83,29 @@ class DealPipelinesTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function delete()
     {
-        $response = $this->dealPipelines->delete($this->pipeline->pipelineId);
+        $response = $this->deleteEntity();
+        
         $this->assertSame(204, $response->getStatusCode());
-        $this->pipeline = null;
+        
+        $this->entity = null;
     }
+
+    protected function createEntity() {
+        return $this->resource->create([
+            'label' => 'New Business Pipeline'.uniqid(),
+            'displayOrder' => 5,
+            'stages' => [
+                [
+                    'label' => 'Initial Stage',
+                    'displayOrder' => 0,
+                    'probability' => 0.3,
+                ],
+            ],
+        ]);
+    }
+
+    protected function deleteEntity() {
+        return $this->resource->delete($this->entity->pipelineId);
+    }
+
 }
