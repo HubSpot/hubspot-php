@@ -2,6 +2,9 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+/**
+ * https://developers.hubspot.com/docs/methods/deals/deal_properties_overview
+ */
 class DealProperties extends Resource
 {
     /**
@@ -9,13 +12,13 @@ class DealProperties extends Resource
      *
      * Returns a JSON object representing the definition for a given deal property.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/get_deal_property
-     *
      * @param string $name the name of the property
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/get_deal_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function get($name)
+    public function get(string $name)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/properties/named/{$name}";
 
@@ -50,7 +53,7 @@ class DealProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function update($name, array $property)
+    public function update(string $name, array $property)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/properties/named/{$name}";
 
@@ -68,7 +71,7 @@ class DealProperties extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function delete($name)
+    public function delete(string $name)
     {
         $endpoint = "https://api.hubapi.com/properties/v1/deals/properties/named/{$name}";
 
@@ -92,36 +95,36 @@ class DealProperties extends Resource
     /**
      * Create a new deal property group to gather like deal-level data.
      *
-     * @param array $group defines the group and any properties within it
+     * @param array $properties defines the group and any properties within it
      *
      * @see https://developers.hubspot.com/docs/methods/deals/create_deal_property_group
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function createGroup(array $group)
+    public function createGroup(array $properties)
     {
         $endpoint = 'https://api.hubapi.com/properties/v1/deals/groups/';
 
-        return $this->client->request('post', $endpoint, ['json' => $group]);
+        return $this->client->request('post', $endpoint, ['json' => $properties]);
     }
 
     /**
      * Update a previously created deal property group.
      *
      * @param string $groupName the API name of the property group that you will be updating
-     * @param array  $group     defines the property group and any properties within it
+     * @param array  $properties     defines the property group and any properties within it
      *
      * @see https://developers.hubspot.com/docs/methods/deals/update_deal_property_group
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateGroup($groupName, array $group)
+    public function updateGroup(string $groupName, array $properties)
     {
         $endpoint = "https://api.hubapi.com/properties/v1/deals/groups/named/{$groupName}";
 
-        $group['name'] = $groupName;
+        $properties['name'] = $groupName;
 
-        return $this->client->request('put', $endpoint, ['json' => $group]);
+        return $this->client->request('put', $endpoint, ['json' => $properties]);
     }
 
     /**
@@ -133,7 +136,7 @@ class DealProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function deleteGroup($groupName)
+    public function deleteGroup(string $groupName)
     {
         $endpoint = "https://api.hubapi.com/properties/v1/deals/groups/named/{$groupName}";
 
@@ -150,7 +153,7 @@ class DealProperties extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function getGroup($groupName, $includeProperties = false)
+    public function getGroup(string $groupName, bool $includeProperties = false)
     {
         $endpoint = "https://api.hubapi.com/properties/v1/deals/groups/named/{$groupName}";
 
@@ -171,7 +174,7 @@ class DealProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getAllGroups($includeProperties = false)
+    public function getAllGroups(bool $includeProperties = false)
     {
         $endpoint = 'https://api.hubapi.com/properties/v1/deals/groups';
 
