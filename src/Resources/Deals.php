@@ -10,58 +10,58 @@ class Deals extends Resource
     /**
      * Create a deal.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/create_deal
+     * @param array $properties array of deal properties
      *
-     * @param array $deal array of deal properties
+     * @see https://developers.hubspot.com/docs/methods/deals/create_deal
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function create(array $deal)
+    public function create(array $properties)
     {
         $endpoint = 'https://api.hubapi.com/deals/v1/deal';
 
-        return $this->client->request('post', $endpoint, ['json' => $deal]);
+        return $this->client->request('post', $endpoint, ['json' => $properties]);
     }
 
     /**
      * Update a Deal.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/update_deal
-     *
      * @param int   $id   the deal id
-     * @param array $deal the deal properties to update
+     * @param array $properties the deal properties to update
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/update_deal
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function update($id, array $deal)
+    public function update($id, array $properties)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
-        return $this->client->request('put', $endpoint, ['json' => $deal]);
+        return $this->client->request('put', $endpoint, ['json' => $properties]);
     }
 
     /**
      * Update a group of existing deal records by their dealId.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/batch-update-deals
+     * @param array $properties the deals and properties
      *
-     * @param array $deals the deals and properties
+     * @see https://developers.hubspot.com/docs/methods/deals/batch-update-deals
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateBatch(array $deals)
+    public function updateBatch(array $properties)
     {
         $endpoint = 'https://api.hubapi.com/deals/v1/batch-async/update';
 
-        return $this->client->request('post', $endpoint, ['json' => $deals]);
+        return $this->client->request('post', $endpoint, ['json' => $properties]);
     }
 
     /**
      * Get all deals.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/get-all-deals
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/get-all-deals
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
@@ -80,9 +80,9 @@ class Deals extends Resource
     /**
      * Get Recently Modified Deals.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/get_deals_modified
-     *
      * @param array $params Optional parameters ['limit', 'offset']
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/get_deals_modified
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -101,26 +101,30 @@ class Deals extends Resource
     /**
      * Get Recently Created Deals.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/get_deals_created
-     *
      * @param array $params Optional parameters ['limit', 'offset']
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/get_deals_created
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function getRecentlyCreated(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/deals/v1/deal/recent/created';
-        $queryString = build_query_string($params);
 
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
      * Delete a Deal.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/delete_deal
-     *
      * @param int $id
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/delete_deal
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -134,9 +138,9 @@ class Deals extends Resource
     /**
      * Get a Deal.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/get_deal
-     *
      * @param int $id
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/get_deal
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -150,12 +154,12 @@ class Deals extends Resource
     /**
      * Associate a deal with a company.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/associate_deal
-     *
      * @param int       $dealId
      * @param int|int[] $companyIds
      *
      * @deprecated
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/associate_deal
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -174,12 +178,12 @@ class Deals extends Resource
     /**
      * Removes a deal's association with a company.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/delete_association
-     *
      * @param int       $dealId
      * @param int|int[] $companyIds
      *
      * @deprecated
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/delete_association
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -198,12 +202,12 @@ class Deals extends Resource
     /**
      * Associate a deal with a contact.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/associate_deal
-     *
      * @param int       $dealId
      * @param int|int[] $contactIds
      *
      * @deprecated
+     * 
+     * @see https://developers.hubspot.com/docs/methods/deals/associate_deal
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -222,12 +226,12 @@ class Deals extends Resource
     /**
      * Get Associated Deals.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/get-associated-deals
-     *
      * @param int   $contactId
      * @param array $params    Optional parameters ['limit', 'offset']
      *
      * @deprecated
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/get-associated-deals
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -246,12 +250,12 @@ class Deals extends Resource
     /**
      * Removes a deal's association with a contact.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/delete_association
-     *
      * @param int       $dealId
      * @param int|int[] $contactIds
      *
      * @deprecated
+     *
+     * @see https://developers.hubspot.com/docs/methods/deals/delete_association
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -270,17 +274,17 @@ class Deals extends Resource
     /**
      * Get Associated Deals.
      *
-     * @see https://developers.hubspot.com/docs/methods/deals/get-associated-deals
-     *
      * @param string $objectType
      * @param int    $objectId
      * @param array  $params
      *
      * @deprecated
      *
+     * @see https://developers.hubspot.com/docs/methods/deals/get-associated-deals
+     *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function getAssociatedDeals($objectType, $objectId, $params = [])
+    public function getAssociatedDeals($objectType, $objectId, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/associated/{$objectType}/{$objectId}/paged";
 
