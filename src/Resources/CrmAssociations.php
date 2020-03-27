@@ -4,6 +4,9 @@ namespace SevenShores\Hubspot\Resources;
 
 use SevenShores\Hubspot\Exceptions\BadRequest;
 
+/**
+ * @see https://developers.hubspot.com/docs/methods/crm-associations/crm-associations-overview
+ */
 class CrmAssociations extends Resource
 {
     const CONTACT_TO_COMPANY = 1;
@@ -46,16 +49,18 @@ class CrmAssociations extends Resource
     const COMPANY_TO_RESELLER = 46;
 
     /**
-     * @param $objectId
-     * @param $definitionId
+     * Get associations for a CRM object.
+     * 
+     * @param mixed $objectId
+     * @param int $definitionId
      *
      * @throws BadRequest
+     * 
+     * @see https://developers.hubspot.com/docs/methods/crm-associations/get-associations
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
-     * @see https://developers.hubspot.com/docs/methods/crm-associations/get-associations
      */
-    public function get($objectId, $definitionId, array $params = [])
+    public function get($objectId, int $definitionId, array $params = [])
     {
         $endpoint = "https://api.hubapi.com/crm-associations/v1/associations/{$objectId}/HUBSPOT_DEFINED/{$definitionId}";
 
@@ -63,67 +68,75 @@ class CrmAssociations extends Resource
         if ($params) {
             $query_string = http_build_query($params);
         }
-
+        
         return $this->client->request('get', $endpoint, [], $query_string);
     }
 
     /**
+     * Associate CRM objects.
+     * 
      * @throws BadRequest
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
      * @see https://developers.hubspot.com/docs/methods/crm-associations/associate-objects
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function create(array $association)
     {
         $endpoint = 'https://api.hubapi.com/crm-associations/v1/associations';
 
-        $options['json'] = $association;
-
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, ['json' => $association]);
     }
 
     /**
+     * Create multiple associations between CRM objects.
+     * 
      * @throws BadRequest
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
      * @see https://developers.hubspot.com/docs/methods/crm-associations/batch-associate-objects
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function createBatch(array $associations)
     {
         $endpoint = 'https://api.hubapi.com/crm-associations/v1/associations/create-batch';
 
-        $options['json'] = $associations;
-
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request(
+            'put',
+            $endpoint,
+            ['json' => $associations]
+        );
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
+     * Delete an association.
+     * 
      * @see https://developers.hubspot.com/docs/methods/crm-associations/delete-association
+     * 
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function delete(array $association)
     {
         $endpoint = 'https://api.hubapi.com/crm-associations/v1/associations/delete';
 
-        $options['json'] = $association;
-
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, ['json' => $association]);
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
+     * Delete multiple associations between CRM objects.
+     * 
      * @see https://developers.hubspot.com/docs/methods/crm-associations/batch-delete-associations
+     * 
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function deleteBatch(array $associations)
     {
         $endpoint = 'https://api.hubapi.com/crm-associations/v1/associations/delete-batch';
 
-        $options['json'] = $associations;
-
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request(
+            'put',
+            $endpoint,
+            ['json' => $associations]
+        );
     }
 }
