@@ -24,9 +24,12 @@ class CrmPipelines extends Resource
     {
         $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}";
 
-        $query = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $query);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
@@ -44,9 +47,7 @@ class CrmPipelines extends Resource
     {
         $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}";
 
-        $options['json'] = $properties;
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $properties]);
     }
 
     /**
@@ -54,17 +55,15 @@ class CrmPipelines extends Resource
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
-     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
-     *
      * @see https://developers.hubspot.com/docs/methods/pipelines/update_pipeline
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function update(string $objectType, string $id, array $properties)
     {
         $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}/{$id}";
 
-        $options['json'] = $properties;
-
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, ['json' => $properties]);
     }
 
     /**
