@@ -2,6 +2,9 @@
 
 namespace SevenShores\Hubspot\Resources;
 
+/**
+ * @see https://developers.hubspot.com/docs/methods/contacts/contact-properties-overview
+ */
 class ContactProperties extends Resource
 {
     /**
@@ -26,13 +29,13 @@ class ContactProperties extends Resource
      *
      * Returns a JSON object representing the definition for a given contact property.
      *
-     * @param string $name the name of the property
+     * @param string $name The API name of the property that you wish to see the metadata for.
      *
      * @see https://developers.hubspot.com/docs/methods/companies/get_contact_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function get($name)
+    public function get(string $name)
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/properties/named/{$name}";
 
@@ -61,13 +64,13 @@ class ContactProperties extends Resource
      *
      * Update a specified contact property.
      *
-     * @param string $name
+     * @param string $name The API name of the property that you wish to see the metadata for.
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function update($name, array $property)
+    public function update(string $name, array $property)
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/properties/named/{$name}";
 
@@ -81,13 +84,13 @@ class ContactProperties extends Resource
      *
      * For a portal, delete an existing contact property.
      *
-     * @param string $name
+     * @param string $name The API name of the property that you wish to see the metadata for.
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function delete($name)
+    public function delete(string $name)
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/properties/named/{$name}";
 
@@ -99,13 +102,13 @@ class ContactProperties extends Resource
      *
      * Returns all of the contact property groups for a given portal.
      *
-     * @param bool $includeProperties
+     * @param bool $includeProperties if true returns all of the properties for each company property group.
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getGroups($includeProperties = false)
+    public function getGroups(bool $includeProperties = false)
     {
         $endpoint = 'https://api.hubapi.com/contacts/v2/groups';
 
@@ -145,17 +148,17 @@ class ContactProperties extends Resource
      * Create a new contact property group to gather like contact-level data. Property groups allow you to more
      * easily manage properties in a given portal and make contact records easier to parse for the user.
      *
-     * @param array $group Group properties
+     * @param array $properties Group properties
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property_group
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function createGroup(array $group)
+    public function createGroup(array $properties)
     {
         $endpoint = 'https://api.hubapi.com/contacts/v2/groups';
 
-        return $this->client->request('post', $endpoint, ['json' => $group]);
+        return $this->client->request('post', $endpoint, ['json' => $properties]);
     }
 
     /**
@@ -163,19 +166,19 @@ class ContactProperties extends Resource
      *
      * Update a previously created contact property group.
      *
-     * @param string $name
+     * @param string $groupName The internal name of the property group.
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property_group
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateGroup($name, array $group)
+    public function updateGroup(string $groupName, array $properties)
     {
-        $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$name}";
+        $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$groupName}";
 
-        $group['name'] = $name;
+        $group['name'] = $groupName;
 
-        return $this->client->request('put', $endpoint, ['json' => $group]);
+        return $this->client->request('put', $endpoint, ['json' => $properties]);
     }
 
     /**
@@ -183,15 +186,15 @@ class ContactProperties extends Resource
      *
      * Delete an existing contact property group.
      *
-     * @param string $name
+     * @param string $groupName The internal name of the property group.
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property_group
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function deleteGroup($name)
+    public function deleteGroup(string $groupName)
     {
-        $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$name}";
+        $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$groupName}";
 
         return $this->client->request('delete', $endpoint);
     }

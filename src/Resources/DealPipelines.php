@@ -12,11 +12,11 @@ class DealPipelines extends Resource
     /**
      * Get all pipelines.
      *
-     * @return mixed
-     *
      * @see https://developers.hubspot.com/docs/methods/deal-pipelines/get-all-deal-pipelines
      * @see CrmPipelines->all
      * @deprecated
+     * 
+     * @return mixed
      */
     public function getAllPipelines()
     {
@@ -29,12 +29,12 @@ class DealPipelines extends Resource
      * Get single pipeline by id.
      *
      * @param int $id
-     *
-     * @return mixed
-     *
+     * 
      * @see https://developers.hubspot.com/docs/methods/deal-pipelines/get-deal-pipeline
      * @see CrmPipelines->all
      * @deprecated
+     *
+     * @return mixed
      */
     public function getPipeline($id)
     {
@@ -46,19 +46,17 @@ class DealPipelines extends Resource
     /**
      * Create a pipeline.
      *
-     * @return mixed
-     *
      * @see https://developers.hubspot.com/docs/methods/deal-pipelines/create-deal-pipeline
      * @see CrmPipelines->create
      * @deprecated
+     *
+     * @return mixed
      */
     public function create(array $pipeline)
     {
         $endpoint = 'https://api.hubapi.com/deals/v1/pipelines';
 
-        $options['json'] = $pipeline;
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $pipeline]);
     }
 
     /**
@@ -66,19 +64,17 @@ class DealPipelines extends Resource
      *
      * @param int $id
      *
-     * @return mixed
-     *
      * @see https://developers.hubspot.com/docs/methods/deal-pipelines/update-deal-pipeline
      * @see CrmPipelines->update
      * @deprecated
+     *
+     * @return mixed
      */
     public function update($id, array $pipeline)
     {
         $endpoint = "https://api.hubapi.com/deals/v1/pipelines/{$id}";
 
-        $options['json'] = $pipeline;
-
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, ['json' => $pipeline]);
     }
 
     /**
@@ -86,11 +82,11 @@ class DealPipelines extends Resource
      *
      * @param int $id
      *
-     * @return mixed
-     *
      * @see https://developers.hubspot.com/docs/methods/deals/delete_deal_pipeline
      * @see CrmPipelines->delete
      * @deprecated
+     *
+     * @return mixed
      */
     public function delete($id)
     {
