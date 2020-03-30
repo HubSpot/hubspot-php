@@ -77,10 +77,10 @@ $guzzleClient = new \GuzzleHttp\Client(['handler' => $handlerStack]);
 
 $config = [
     'key'      => 'demo',
-    'oauth2'   => 'false',
+    'oauth2'   => false,
 ];
 
-$hubspot = new \SevenShores\Hubspot\Factory(config, new \SevenShores\Hubspot\Client($config, guzzleClient));
+$hubspot = new \SevenShores\Hubspot\Factory(config, new \SevenShores\Hubspot\Http\Client($config, guzzleClient));
 ```
 
 #### Get a single contact:
