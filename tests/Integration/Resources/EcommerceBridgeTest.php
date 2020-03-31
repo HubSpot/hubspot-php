@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\integration\Resources;
 
-use SevenShores\Hubspot\Tests\Integration\Abstraction\DefaultTestCase;
 use SevenShores\Hubspot\Resources\EcommerceBridge;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\DefaultTestCase;
 
 /**
  * Class EcommerceBridgeTest.
@@ -16,7 +16,7 @@ use SevenShores\Hubspot\Resources\EcommerceBridge;
 class EcommerceBridgeTest extends DefaultTestCase
 {
     const STORE_ID = 'ecommercebridge-test-store';
-    
+
     /**
      * @var EcommerceBridge
      */

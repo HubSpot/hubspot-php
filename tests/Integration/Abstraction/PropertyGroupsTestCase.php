@@ -28,7 +28,7 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
     public function allWithProperties()
     {
         $response = $this->resource->{$this->allGroupsMethod}(true);
-        
+
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
         $this->assertObjectHasAttribute('properties', $response->getData()[0]);

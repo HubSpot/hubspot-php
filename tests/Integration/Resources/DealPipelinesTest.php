@@ -3,7 +3,6 @@
 namespace SevenShores\Hubspot\Resources;
 
 use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
-use SevenShores\Hubspot\Resources\DealPipelines;
 
 /**
  * Class DealPipelinesTest.
@@ -17,12 +16,12 @@ class DealPipelinesTest extends EntityTestCase
      * @var DealPipelines
      */
     protected $resource;
-    
+
     /**
      * @var DealPipelines::class
      */
     protected $resourceClass = DealPipelines::class;
-    
+
     /**
      * @var null|\SevenShores\Hubspot\Http\Response
      */
@@ -54,7 +53,7 @@ class DealPipelinesTest extends EntityTestCase
     public function getPipeline()
     {
         $response = $this->resource->getPipeline($this->entity->pipelineId);
-        
+
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($this->entity->label, $response->label);
         $this->assertCount(1, $response->stages);
@@ -84,13 +83,14 @@ class DealPipelinesTest extends EntityTestCase
     public function delete()
     {
         $response = $this->deleteEntity();
-        
+
         $this->assertSame(204, $response->getStatusCode());
-        
+
         $this->entity = null;
     }
 
-    protected function createEntity() {
+    protected function createEntity()
+    {
         return $this->resource->create([
             'label' => 'New Business Pipeline'.uniqid(),
             'displayOrder' => 5,
@@ -104,8 +104,8 @@ class DealPipelinesTest extends EntityTestCase
         ]);
     }
 
-    protected function deleteEntity() {
+    protected function deleteEntity()
+    {
         return $this->resource->delete($this->entity->pipelineId);
     }
-
 }
