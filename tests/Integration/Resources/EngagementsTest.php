@@ -2,7 +2,6 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\Contacts;
 use SevenShores\Hubspot\Resources\Engagements;
 use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
@@ -107,14 +106,13 @@ class EngagementsTest extends EntityTestCase
     }
 
     /** @test */
-     public function getCallDispositions()
-     {
-         $response = $this->resource->getCallDispositions();
- 
-         $this->assertEquals(200, $response->getStatusCode());
-         $this->assertCount(6, $response->getData());
-     }
- 
+    public function getCallDispositions()
+    {
+        $response = $this->resource->getCallDispositions();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertCount(6, $response->getData());
+    }
 
     protected function createEntity()
     {
@@ -137,7 +135,7 @@ class EngagementsTest extends EntityTestCase
     {
         return $this->resource->delete($this->entity->engagement->id);
     }
-    
+
     protected function createContact()
     {
         return $this->contactsResource->create([
@@ -146,10 +144,9 @@ class EngagementsTest extends EntityTestCase
             ['property' => 'lastname',  'value' => 'user'],
         ]);
     }
-    
+
     protected function deleteContact()
     {
         return $this->contactsResource->delete($this->contact->vid);
     }
-
 }
