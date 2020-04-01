@@ -176,6 +176,8 @@ class Engagements extends Resource
     }
 
     /**
+     * @deprecated
+     * 
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function activityTypes()
