@@ -94,7 +94,7 @@ class EmailSubscription extends Resource
     }
 
     /**
-     * @param type $portalId
+     * @param int $portalId
      *
      * @return string
      */

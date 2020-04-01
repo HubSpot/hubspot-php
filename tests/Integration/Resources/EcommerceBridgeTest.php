@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\integration\Resources;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Resources\EcommerceBridge;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\DefaultTestCase;
 
 /**
  * Class EcommerceBridgeTest.
@@ -13,24 +13,24 @@ use SevenShores\Hubspot\Resources\EcommerceBridge;
  * @internal
  * @coversNothing
  */
-class EcommerceBridgeTest extends \PHPUnit_Framework_TestCase
+class EcommerceBridgeTest extends DefaultTestCase
 {
     const STORE_ID = 'ecommercebridge-test-store';
 
-    /** @var EcommerceBridge */
+    /**
+     * @var EcommerceBridge
+     */
     protected $resource;
+
+    /**
+     * @var EcommerceBridge::class
+     */
+    protected $resourceClass = EcommerceBridge::class;
 
     /**
      * @var int
      */
     protected $timestamp;
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->resource = new EcommerceBridge(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
-    }
 
     /** @test */
     public function upsertSettings()

@@ -15,7 +15,7 @@ class DealPipelines extends Resource
      * @see https://developers.hubspot.com/docs/methods/deal-pipelines/get-all-deal-pipelines
      * @see CrmPipelines->all
      * @deprecated
-     * 
+     *
      * @return mixed
      */
     public function getAllPipelines()
@@ -29,7 +29,7 @@ class DealPipelines extends Resource
      * Get single pipeline by id.
      *
      * @param int $id
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/deal-pipelines/get-deal-pipeline
      * @see CrmPipelines->all
      * @deprecated

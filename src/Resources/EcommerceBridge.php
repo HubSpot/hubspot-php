@@ -55,6 +55,8 @@ class EcommerceBridge extends Resource
      * Delete ecommerce settings.
      * Note: This action cannot be undone. If you want to disable sync messages from being applied, it is recommended that you disable the settings rather than deleting them.
      *
+     * @see https://developers.hubspot.com/docs/methods/ecommerce/v2/delete-ecommerce-settings
+     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -108,13 +110,13 @@ class EcommerceBridge extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/ecomm-bridge/v2/get-a-store
      *
-     * @param string $storeId
+     * @param string $storeId the ID of the store you want to get the details for
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getStore($storeId)
+    public function getStore(string $storeId)
     {
         $endpoint = "https://api.hubapi.com/extensions/ecomm/v2/stores/{$storeId}";
 
@@ -124,35 +126,41 @@ class EcommerceBridge extends Resource
     /**
      * Send a group of sync messages for a specific object type. Sync messages would be notifications of creates, updates, or deletes of ecommerce objects.
      *
-     * @param string $storeId
-     * @param string $objectType - The object type that the updates are for. One of CONTACT, DEAL, PRODUCT, or LINE_ITEM.
-     *
      * @see https://developers.hubspot.com/docs/methods/ecommerce/v2/send-sync-messages
+     *
+     * @param string $storeId    the ID of the store that the objects are being synced for
+     * @param string $objectType - The object type that the updates are for. One of CONTACT, DEAL, PRODUCT, or LINE_ITEM.
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function sendSyncMessages($storeId, $objectType, array $messages = [])
-    {
+    public function sendSyncMessages(
+        string $storeId,
+        string $objectType,
+        array $messages = []
+    ) {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v2/sync/messages';
 
-        $options = ['json' => [
-            'storeId' => $storeId,
-            'objectType' => $objectType,
-            'messages' => $messages,
-        ],
-        ];
-
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request(
+            'put',
+            $endpoint,
+            [
+                'json' => [
+                    'storeId' => $storeId,
+                    'objectType' => $objectType,
+                    'messages' => $messages,
+                ],
+            ]
+        );
     }
 
     /**
      * Get all sync errors for an app.
      *
-     * @param int $appId
-     *
      * @see https://developers.hubspot.com/docs/methods/ecommerce/v2/get-all-sync-errors-for-an-app
+     *
+     * @param int $appId
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
@@ -215,17 +223,16 @@ class EcommerceBridge extends Resource
     /**
      * Check the sync status of an object.
      *
-     * @param string $storeId
+     * @see https://developers.hubspot.com/docs/methods/ecommerce/v2/check-sync-status
+     *
      * @param string $objectType       - The object type that the updates are for. One of CONTACT, DEAL, PRODUCT, or LINE_ITEM.
      * @param int    $externalObjectId
-     *
-     * @see https://developers.hubspot.com/docs/methods/ecommerce/v2/check-sync-status
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function checkSyncStatus($storeId, $objectType, $externalObjectId)
+    public function checkSyncStatus(string $storeId, string $objectType, $externalObjectId)
     {
         $endpoint = "https://api.hubapi.com/extensions/ecomm/v2/sync/status/{$storeId}/{$objectType}/{$externalObjectId}";
 
@@ -235,33 +242,40 @@ class EcommerceBridge extends Resource
     /**
      * Import ecommerce data.
      *
+     * @see https://developers.hubspot.com/docs/methods/ecommerce/v2/import-data
+     *
      * @param int    $importStartedAt - Timestamp from the webhook when the customer requested imported in HubSpot UI
      * @param int    $pageNumber      - Integer starting at zero of the page number for that objectType
      * @param array  $messages        - Array of sync messages for this page of imports. Up to 200 messages can be included.
      * @param string $storeId         - The key of the store for this import
      * @param string $objectType      - The HubSpot object this page of imports is for. Must be one of CONTACT, DEAL, LINE_ITEM or PRODUCT.
      *
-     * @see https://developers.hubspot.com/docs/methods/ecommerce/v2/import-data
-     *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function importData($importStartedAt, $pageNumber, array $messages, $storeId, $objectType)
-    {
+    public function importData(
+        $importStartedAt,
+        int $pageNumber,
+        array $messages,
+        string $storeId,
+        string $objectType
+    ) {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v2/imports/page';
 
-        $options = [
-            'json' => [
-                'importStartedAt' => $importStartedAt,
-                'pageNumber' => $pageNumber,
-                'messages' => $messages,
-                'storeId' => $storeId,
-                'objectType' => $objectType,
-            ],
-        ];
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            [
+                'json' => [
+                    'importStartedAt' => $importStartedAt,
+                    'pageNumber' => $pageNumber,
+                    'messages' => $messages,
+                    'storeId' => $storeId,
+                    'objectType' => $objectType,
+                ],
+            ]
+        );
     }
 
     /**
@@ -279,18 +293,27 @@ class EcommerceBridge extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function signalImportEnd($importStartedAt, $pageCount, $itemCount, $storeId, $objectType)
-    {
+    public function signalImportEnd(
+        $importStartedAt,
+        int $pageCount,
+        int $itemCount,
+        string $storeId,
+        string $objectType
+    ) {
         $endpoint = 'https://api.hubapi.com/extensions/ecomm/v2/imports/end';
 
-        $options['json'] = [
-            'importStartedAt' => $importStartedAt,
-            'pageCount' => $pageCount,
-            'itemCount' => $itemCount,
-            'storeId' => $storeId,
-            'objectType' => $objectType,
-        ];
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            [
+                'json' => [
+                    'importStartedAt' => $importStartedAt,
+                    'pageCount' => $pageCount,
+                    'itemCount' => $itemCount,
+                    'storeId' => $storeId,
+                    'objectType' => $objectType,
+                ],
+            ]
+        );
     }
 }

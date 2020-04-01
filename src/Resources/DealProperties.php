@@ -3,7 +3,7 @@
 namespace SevenShores\Hubspot\Resources;
 
 /**
- * https://developers.hubspot.com/docs/methods/deals/deal_properties_overview
+ * https://developers.hubspot.com/docs/methods/deals/deal_properties_overview.
  */
 class DealProperties extends Resource
 {
@@ -49,8 +49,6 @@ class DealProperties extends Resource
      *
      * @see https://developers.hubspot.com/docs/methods/deals/update_deal_property
      *
-     * @param string $name
-     *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function update(string $name, array $property)
@@ -66,8 +64,6 @@ class DealProperties extends Resource
      * Delete a deal property.
      *
      * @see https://developers.hubspot.com/docs/methods/deals/delete_deal_property
-     *
-     * @param string $name
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
@@ -111,8 +107,8 @@ class DealProperties extends Resource
     /**
      * Update a previously created deal property group.
      *
-     * @param string $groupName the API name of the property group that you will be updating
-     * @param array  $properties     defines the property group and any properties within it
+     * @param string $groupName  the API name of the property group that you will be updating
+     * @param array  $properties defines the property group and any properties within it
      *
      * @see https://developers.hubspot.com/docs/methods/deals/update_deal_property_group
      *

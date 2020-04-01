@@ -50,12 +50,11 @@ class CrmAssociations extends Resource
 
     /**
      * Get associations for a CRM object.
-     * 
+     *
      * @param mixed $objectId
-     * @param int $definitionId
      *
      * @throws BadRequest
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/crm-associations/get-associations
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
@@ -68,13 +67,13 @@ class CrmAssociations extends Resource
         if ($params) {
             $query_string = http_build_query($params);
         }
-        
+
         return $this->client->request('get', $endpoint, [], $query_string);
     }
 
     /**
      * Associate CRM objects.
-     * 
+     *
      * @throws BadRequest
      *
      * @see https://developers.hubspot.com/docs/methods/crm-associations/associate-objects
@@ -90,7 +89,7 @@ class CrmAssociations extends Resource
 
     /**
      * Create multiple associations between CRM objects.
-     * 
+     *
      * @throws BadRequest
      *
      * @see https://developers.hubspot.com/docs/methods/crm-associations/batch-associate-objects
@@ -110,9 +109,9 @@ class CrmAssociations extends Resource
 
     /**
      * Delete an association.
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/crm-associations/delete-association
-     * 
+     *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function delete(array $association)
@@ -124,9 +123,9 @@ class CrmAssociations extends Resource
 
     /**
      * Delete multiple associations between CRM objects.
-     * 
+     *
      * @see https://developers.hubspot.com/docs/methods/crm-associations/batch-delete-associations
-     * 
+     *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
     public function deleteBatch(array $associations)

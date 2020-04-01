@@ -29,7 +29,7 @@ class ContactProperties extends Resource
      *
      * Returns a JSON object representing the definition for a given contact property.
      *
-     * @param string $name The API name of the property that you wish to see the metadata for.
+     * @param string $name the API name of the property that you wish to see the metadata for
      *
      * @see https://developers.hubspot.com/docs/methods/companies/get_contact_property
      *
@@ -64,7 +64,7 @@ class ContactProperties extends Resource
      *
      * Update a specified contact property.
      *
-     * @param string $name The API name of the property that you wish to see the metadata for.
+     * @param string $name the API name of the property that you wish to see the metadata for
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property
      *
@@ -84,7 +84,7 @@ class ContactProperties extends Resource
      *
      * For a portal, delete an existing contact property.
      *
-     * @param string $name The API name of the property that you wish to see the metadata for.
+     * @param string $name the API name of the property that you wish to see the metadata for
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property
      *
@@ -102,7 +102,7 @@ class ContactProperties extends Resource
      *
      * Returns all of the contact property groups for a given portal.
      *
-     * @param bool $includeProperties if true returns all of the properties for each company property group.
+     * @param bool $includeProperties if true returns all of the properties for each company property group
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
      *
@@ -166,7 +166,7 @@ class ContactProperties extends Resource
      *
      * Update a previously created contact property group.
      *
-     * @param string $groupName The internal name of the property group.
+     * @param string $groupName the internal name of the property group
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property_group
      *
@@ -186,7 +186,7 @@ class ContactProperties extends Resource
      *
      * Delete an existing contact property group.
      *
-     * @param string $groupName The internal name of the property group.
+     * @param string $groupName the internal name of the property group
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/v2/delete_contact_property_group
      *

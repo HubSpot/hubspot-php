@@ -26,7 +26,7 @@ class Deals extends Resource
     /**
      * Update a Deal.
      *
-     * @param int   $id   the deal id
+     * @param int   $id         the deal id
      * @param array $properties the deal properties to update
      *
      * @see https://developers.hubspot.com/docs/methods/deals/update_deal
@@ -158,7 +158,6 @@ class Deals extends Resource
      * @param int|int[] $companyIds
      *
      * @deprecated
-     *
      * @see https://developers.hubspot.com/docs/methods/deals/associate_deal
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -182,7 +181,6 @@ class Deals extends Resource
      * @param int|int[] $companyIds
      *
      * @deprecated
-     *
      * @see https://developers.hubspot.com/docs/methods/deals/delete_association
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -206,7 +204,6 @@ class Deals extends Resource
      * @param int|int[] $contactIds
      *
      * @deprecated
-     * 
      * @see https://developers.hubspot.com/docs/methods/deals/associate_deal
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -230,7 +227,6 @@ class Deals extends Resource
      * @param array $params    Optional parameters ['limit', 'offset']
      *
      * @deprecated
-     *
      * @see https://developers.hubspot.com/docs/methods/deals/get-associated-deals
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -254,7 +250,6 @@ class Deals extends Resource
      * @param int|int[] $contactIds
      *
      * @deprecated
-     *
      * @see https://developers.hubspot.com/docs/methods/deals/delete_association
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -276,10 +271,8 @@ class Deals extends Resource
      *
      * @param string $objectType
      * @param int    $objectId
-     * @param array  $params
      *
      * @deprecated
-     *
      * @see https://developers.hubspot.com/docs/methods/deals/get-associated-deals
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
