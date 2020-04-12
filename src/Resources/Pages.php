@@ -84,7 +84,8 @@ class Pages extends Resource
     /**
      * Updates the auto-save buffer.
      *
-     * @param in $page_id The page ID
+     * @param int $page_id The page ID
+     * @param array $params  the auto-save buffer fields to update
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
