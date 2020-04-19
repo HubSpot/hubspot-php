@@ -57,7 +57,7 @@ class LineItemsTest extends EntityTestCase
         $response = $this->resource->all();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, count($response->objects));
+        $this->assertGreaterThanOrEqual(1, \count($response->objects));
     }
 
     /** @test */

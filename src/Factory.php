@@ -64,7 +64,7 @@ class Factory
      */
     public function __construct(array $config = [], Client $client = null, array $clientOptions = [], $wrapResponse = true)
     {
-        if (is_null($client)) {
+        if (\is_null($client)) {
             $client = new Client($config, null, $clientOptions, $wrapResponse);
         }
         $this->client = $client;

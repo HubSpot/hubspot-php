@@ -100,7 +100,7 @@ class DealsTest extends EntityTestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(1, count($response->deals));
+        $this->assertEquals(1, \count($response->deals));
     }
 
     /**

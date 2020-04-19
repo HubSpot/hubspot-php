@@ -100,7 +100,7 @@ class CalendarEventsTest extends EntityTestCase
         $response = $this->resource->all($startDate, $endDate);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, count($response->getData()));
+        $this->assertGreaterThanOrEqual(1, \count($response->getData()));
     }
 
     /** @test */
@@ -113,7 +113,7 @@ class CalendarEventsTest extends EntityTestCase
         $response = $this->resource->allTasks($startDate, $endDate);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, count($response->toArray()));
+        $this->assertGreaterThanOrEqual(1, \count($response->toArray()));
     }
 
     protected function createEntity()

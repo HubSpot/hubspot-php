@@ -56,7 +56,7 @@ class Engagements extends Resource
     {
         $availableMethods = ['put', 'patch'];
 
-        if (!in_array($method, $availableMethods)) {
+        if (!\in_array($method, $availableMethods)) {
             throw new BadRequest('Method name '.$method.' is invalid', 400);
         }
         $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}";

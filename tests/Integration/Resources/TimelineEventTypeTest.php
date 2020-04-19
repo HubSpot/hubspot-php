@@ -18,7 +18,7 @@ class TimelineEventTypeTest extends TimelineTestCase
         $response = $this->resource->getEventTypes($this->appId);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, count($response->toArray()));
+        $this->assertGreaterThanOrEqual(1, \count($response->toArray()));
     }
 
     /**

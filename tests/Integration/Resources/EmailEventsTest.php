@@ -33,7 +33,7 @@ class EmailEventsTest extends \PHPUnit_Framework_TestCase
     {
         $list = $this->resource->all(['limit' => 2]);
 
-        if (count($list->events) > 0) {
+        if (\count($list->events) > 0) {
             $response = $this->resource->getById(
                 $list->events[0]->id,
                 $list->events[0]->created
@@ -64,7 +64,7 @@ class EmailEventsTest extends \PHPUnit_Framework_TestCase
     {
         $list = $this->resource->getCampaignIds(['limit' => 2]);
 
-        if (count($list->campaigns) > 0) {
+        if (\count($list->campaigns) > 0) {
             $response = $this->resource->getCampaignById(
                 $list->campaigns[0]->id,
                 $list->campaigns[0]->appId

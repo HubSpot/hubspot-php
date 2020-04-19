@@ -67,7 +67,7 @@ class EcommerceBridgeTest extends DefaultTestCase
         $response = $this->resource->allStores();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, count($response->getData()->results));
+        $this->assertGreaterThanOrEqual(1, \count($response->getData()->results));
     }
 
     /** @test */
@@ -180,7 +180,7 @@ class EcommerceBridgeTest extends DefaultTestCase
 
     protected function getTimestamp()
     {
-        if (is_null($this->timestamp)) {
+        if (\is_null($this->timestamp)) {
             $this->timestamp = time();
         }
 

@@ -81,7 +81,7 @@ class CrmPipelinesTestCase extends EntityTestCase
 
     protected function getData(string $label = null)
     {
-        if (is_null($label)) {
+        if (\is_null($label)) {
             $label = 'Demo '.$this->type.' Pipeline';
         }
 

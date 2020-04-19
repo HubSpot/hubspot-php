@@ -161,7 +161,7 @@ class Forms extends Resource
         $query_string = null;
         $parsed = explode('?', $url);
 
-        if (2 == count($parsed)) {
+        if (2 == \count($parsed)) {
             $endpoint = $parsed[0];
             $query_string = $parsed[1];
         }

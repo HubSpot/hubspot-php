@@ -91,7 +91,7 @@ class RetryMiddlewareFactory
                 return false;
             }
 
-            if (($response instanceof Response) && in_array($response->getStatusCode(), $codes)) {
+            if (($response instanceof Response) && \in_array($response->getStatusCode(), $codes)) {
                 return true;
             }
 

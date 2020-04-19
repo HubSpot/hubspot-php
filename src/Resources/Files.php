@@ -45,7 +45,7 @@ class Files extends Resource
      */
     public function getResource($file)
     {
-        if (is_resource($file)) {
+        if (\is_resource($file)) {
             return $file;
         }
 
@@ -304,7 +304,7 @@ class Files extends Resource
 
     protected function getOptionValue($key, $option, array $params)
     {
-        if (isset($params[$option]) && array_key_exists($key, $params[$option])) {
+        if (isset($params[$option]) && \array_key_exists($key, $params[$option])) {
             return $params[$option][$key];
         }
 

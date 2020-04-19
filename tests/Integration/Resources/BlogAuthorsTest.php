@@ -30,7 +30,7 @@ class BlogAuthorsTest extends EntityTestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertLessThanOrEqual(2, count($response->objects));
+        $this->assertLessThanOrEqual(2, \count($response->objects));
         $this->assertGreaterThanOrEqual(3, $response->offset);
     }
 
@@ -58,7 +58,7 @@ class BlogAuthorsTest extends EntityTestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertLessThanOrEqual(5, count($response->objects));
+        $this->assertLessThanOrEqual(5, \count($response->objects));
     }
 
     /** @test */

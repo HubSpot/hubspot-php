@@ -20,7 +20,7 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
         $response = $this->resource->{$this->allGroupsMethod}();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, count($response->getData()));
+        $this->assertGreaterThanOrEqual(1, \count($response->getData()));
         $this->assertObjectNotHasAttribute('properties', $response->getData()[0]);
     }
 
@@ -30,7 +30,7 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
         $response = $this->resource->{$this->allGroupsMethod}(true);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, count($response->getData()));
+        $this->assertGreaterThanOrEqual(1, \count($response->getData()));
         $this->assertObjectHasAttribute('properties', $response->getData()[0]);
     }
 

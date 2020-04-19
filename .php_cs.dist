@@ -11,5 +11,9 @@ return PhpCsFixer\Config::create()
     ->setRules([
         '@PSR2' => true,
         '@PhpCsFixer' => true,
+        'native_function_invocation' => [
+            'include' => ['@compiler_optimized'],
+            'scope' => 'namespaced',
+        ],
     ])
 ;

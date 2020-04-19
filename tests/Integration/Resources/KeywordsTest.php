@@ -29,7 +29,7 @@ class KeywordsTest extends \PHPUnit_Framework_TestCase
         sleep(1);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, count($response->getData()));
+        $this->assertGreaterThanOrEqual(1, \count($response->getData()));
     }
 
     /** @test */

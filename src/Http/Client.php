@@ -70,7 +70,7 @@ class Client
             throw new InvalidArgument('Cannot sign requests with both OAuth1 and OAuth2');
         }
 
-        if (is_null($client)) {
+        if (\is_null($client)) {
             $client = new GuzzleClient();
         }
         $this->client = $client;

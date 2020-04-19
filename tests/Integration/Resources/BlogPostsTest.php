@@ -38,7 +38,7 @@ class BlogPostsTest extends BlogPostTestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertLessThanOrEqual(2, count($response->objects));
+        $this->assertLessThanOrEqual(2, \count($response->objects));
         $this->assertGreaterThanOrEqual(3, $response->offset);
     }
 
@@ -51,7 +51,7 @@ class BlogPostsTest extends BlogPostTestCase
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertLessThanOrEqual(2, count($response['objects']));
+        $this->assertLessThanOrEqual(2, \count($response['objects']));
         $this->assertGreaterThanOrEqual(3, $response['offset']);
     }
 

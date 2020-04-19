@@ -18,7 +18,7 @@ class HubDBTest extends HubDBRowTestCase
         $response = $this->resource->tables();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, count($response->objects));
+        $this->assertGreaterThanOrEqual(1, \count($response->objects));
     }
 
     /**

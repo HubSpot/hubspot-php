@@ -51,7 +51,7 @@ class HubDB extends Resource
             $endpoint,
             [],
             build_query_string($params),
-            boolval($draft)
+            \boolval($draft)
         );
     }
 
@@ -183,7 +183,7 @@ class HubDB extends Resource
             $endpoint,
             [],
             build_query_string($params),
-            boolval($draft)
+            \boolval($draft)
         );
     }
 

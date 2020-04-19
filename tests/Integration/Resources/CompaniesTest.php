@@ -102,7 +102,7 @@ class CompaniesTest extends EntityTestCase
         $response = $this->resource->all();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThan(0, count($response->data->companies));
+        $this->assertGreaterThan(0, \count($response->data->companies));
     }
 
     /** @test */

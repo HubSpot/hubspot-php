@@ -22,7 +22,7 @@ class FormsTest extends EntityTestCase
         $response = $this->resource->all();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, count($response->getData()));
+        $this->assertGreaterThanOrEqual(1, \count($response->getData()));
     }
 
     /** @test */
