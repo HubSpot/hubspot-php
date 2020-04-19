@@ -17,11 +17,19 @@ if (!function_exists('build_query_string')) {
 
         $query = '';
         foreach ($params as $key => $value) {
+            if (empty($value)) {
+                continue;
+            }
+
             if (is_array($value)) {
                 $query .= build_batch_query_string($key, $value, $encoding);
-            } elseif (!empty($value)) {
-                $query .= '&'.url_encode($key, $encoding).'='.url_encode($value, $encoding);
+
+                continue;
             }
+
+            $parameter = url_encode($key, $encoding);
+            $propertyValue = is_bool($value) ? 'true' : url_encode($value, $encoding);
+            $query .= "&{$parameter}={$propertyValue}";
         }
 
         return $query ?: '';

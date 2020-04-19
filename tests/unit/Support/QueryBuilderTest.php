@@ -8,17 +8,16 @@ namespace SevenShores\Hubspot\Tests\Unit\Support;
  */
 class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 {
-    /** @test */
-    public function build()
+    /**
+     * @test
+     * @dataProvider buildDataProvider
+     *
+     * @param array $params
+     * @param string $result
+     */
+    public function build(array $params, string $result)
     {
-        $query = [
-            'firstname' => 'joe',
-            'lastname' => 'blo',
-        ];
-
-        $queryString = build_query_string($query);
-
-        $this->assertEquals('&firstname=joe&lastname=blo', $queryString);
+        $this->assertEquals($result, build_query_string($params));
     }
 
     /** @test */
@@ -107,5 +106,15 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
         $queryString = url_encode($string, false);
 
         $this->assertEquals($string, $queryString);
+    }
+
+    public function buildDataProvider()
+    {
+        yield 'string' => [['firstname' => 'joe', 'lastname' => 'blo'], '&firstname=joe&lastname=blo'];
+        yield 'int' => [['firstname' => 'joe', 'active' => 1], '&firstname=joe&active=1'];
+        yield 'bool true' => [['firstname' => 'joe', 'active' => true], '&firstname=joe&active=true'];
+        yield 'bool false' => [['firstname' => 'joe', 'active' => false], '&firstname=joe'];
+        yield 'empty array' => [['firstname' => 'joe', 'property' => []], '&firstname=joe'];
+        yield 'array' => [['firstname' => 'joe', 'property' => ['foo']], '&firstname=joe&property=foo'];
     }
 }
