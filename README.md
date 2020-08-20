@@ -5,6 +5,8 @@
 [![Build Status](https://travis-ci.org/hubspot/hubspot-php.svg?branch=master)](https://travis-ci.org/hubspot/hubspot-php)
 [![License](https://img.shields.io/packagist/l/hubspot/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/hubspot/hubspot-php)
 
+[Hubspot](https://www.hubspot.com/) is a marketing, sales, and service software that helps your business grow without compromise. Because “good for the business” should also mean “good for the customer.”
+
 ## Setup
 
 **Composer:**
@@ -66,7 +68,7 @@ $handlerStack->push(
         \SevenShores\Hubspot\Delay::getConstantDelayFunction()
     )
 );
-        
+
 $handlerStack->push(
     \SevenShores\Hubspot\RetryMiddlewareFactory::createInternalErrorsMiddleware(
         \SevenShores\Hubspot\Delay::getExponentialDelayFunction(2)
