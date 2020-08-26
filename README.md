@@ -5,6 +5,8 @@
 [![Build Status](https://travis-ci.org/hubspot/hubspot-php.svg?branch=master)](https://travis-ci.org/hubspot/hubspot-php)
 [![License](https://img.shields.io/packagist/l/hubspot/hubspot-php.svg?style=flat-square)](https://packagist.org/packages/hubspot/hubspot-php)
 
+[Hubspot](https://www.hubspot.com/) is a marketing, sales, and service software that helps your business grow without compromise. Because “good for the business” should also mean “good for the customer.”
+
 ## Setup
 
 **Composer:**
@@ -38,6 +40,9 @@ $hubspot = new SevenShores\Hubspot\Factory([
   'oauth2'   => 'false', // default
 ]);
 ```
+
+You can find more information about API keys [here](https://knowledge.hubspot.com/integrations/how-do-i-get-my-hubspot-api-key) and about access tokens [here](https://developers.hubspot.com/docs/api/oauth/tokens)
+
 *Note:* You can prevent any error handling provided by this package by passing following options into client creation routine:
 (applies also to `Factory::create()` and `Factory::createWithOAuth2Token()`)
 
@@ -66,7 +71,7 @@ $handlerStack->push(
         \SevenShores\Hubspot\Delay::getConstantDelayFunction()
     )
 );
-        
+
 $handlerStack->push(
     \SevenShores\Hubspot\RetryMiddlewareFactory::createInternalErrorsMiddleware(
         \SevenShores\Hubspot\Delay::getExponentialDelayFunction(2)
