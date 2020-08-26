@@ -222,7 +222,7 @@ class ContactLists extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function removeContact($listId, array $contactIds)
+    public function removeContact($listId, array $contactIds, array $emails = [])
     {
         $endpoint = "https://api.hubapi.com/contacts/v1/lists/{$listId}/remove";
 
@@ -232,6 +232,7 @@ class ContactLists extends Resource
             [
                 'json' => [
                     'vids' => $contactIds,
+                    'emails' => $emails,
                 ],
             ]
         );
