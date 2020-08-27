@@ -84,15 +84,18 @@ class Pages extends Resource
     /**
      * Updates the auto-save buffer.
      *
-     * @param in $page_id The page ID
+     * @param int $page_id The page ID
+     * @param array $params  the auto-save buffer fields to update
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateAutoSaveBuffer($page_id)
+    public function updateAutoSaveBuffer($page_id, $params)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/buffer";
+        
+        $options['json'] = $params;
 
-        return $this->client->request('put', $endpoint);
+        return $this->client->request('put', $endpoint, $options);
     }
 
     /**
