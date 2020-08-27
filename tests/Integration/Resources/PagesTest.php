@@ -2,44 +2,81 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
-use SevenShores\Hubspot\Http\Client;
-use SevenShores\Hubspot\Resources\Pages;
+use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
 /**
  * @internal
  * @coversNothing
  */
-class PagesTest extends \PHPUnit_Framework_TestCase
+class PagesTest extends EntityTestCase
 {
-    private $pages;
+    /**
+     * @var null|SevenShores\Hubspot\Resources\Resource::class
+     */
+    protected $resourceClass = 'SevenShores\Hubspot\Resources\Pages';
 
-    public function setUp()
+    /** @test */
+    public function create()
     {
-        parent::setUp();
-        $this->pages = new Pages(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
-        sleep(1);
+        $this->assertEquals(201, $this->entity->getStatusCode());
+    }
+
+    /** @test */
+    public function update()
+    {
+        $response = $this->resource->update(
+            $this->entity->id,
+            ['name' => 'Updated '.$this->entity->name]
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /** @test */
+    public function getById()
+    {
+        $response = $this->resource->getById($this->entity->id);
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /** @test */
+    public function delete()
+    {
+        $response = $this->deleteEntity();
+
+        $this->assertEquals(204, $response->getStatusCode());
+
+        $this->entity = null;
+    }
+
+    /** @test */
+    public function all()
+    {
+        $response = $this->resource->all();
+
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     /** @test */
     public function clonePage()
     {
-        $post = $this->createPage();
-        $response = $this->pages->clonePage($post->id, 'New page name');
+        $response = $this->resource->clonePage($this->entity->id, 'New page name');
+
         $this->assertEquals(201, $response->getStatusCode());
+
+        $this->resource->delete($response->id);
     }
 
-    // Lots of tests need an existing object to modify.
-    private function createPage()
+    protected function createEntity()
     {
-        sleep(1);
-
-        $response = $this->pages->create([
-            'name' => 'My Super Awesome Post '.uniqid(),
-            'content_group_id' => 351076997,
+        return $this->resource->create([
+            'name' => 'My Super Awesome Post(AutoTest)',
         ]);
+    }
 
-        $this->assertEquals(201, $response->getStatusCode());
-
-        return $response;
+    protected function deleteEntity()
+    {
+        return $this->resource->delete($this->entity->id);
     }
 }

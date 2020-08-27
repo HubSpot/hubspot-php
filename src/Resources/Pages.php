@@ -9,15 +9,15 @@ class Pages extends Resource
      *
      * @param array $params optional Parameters
      *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/post_pages
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function create($params)
+    public function create(array $params)
     {
         $endpoint = 'https://api.hubapi.com/content/api/v2/pages';
 
-        $options['json'] = $params;
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request('post', $endpoint, ['json' => $params]);
     }
 
     /**
@@ -25,89 +25,67 @@ class Pages extends Resource
      *
      * @param array $params optional parameters
      *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/get_pages
+     *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function all($params = [])
+    public function all(array $params = [])
     {
         $endpoint = 'https://api.hubapi.com/content/api/v2/pages';
 
-        $queryString = build_query_string($params);
-
-        return $this->client->request('get', $endpoint, [], $queryString);
+        return $this->client->request(
+            'get',
+            $endpoint,
+            [],
+            build_query_string($params)
+        );
     }
 
     /**
      * Update a page.
      *
-     * @param int   $page_id the page id
-     * @param array $params  the page fields to update
+     * @param int   $pageId the page id
+     * @param array $params the page fields to update
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/put_pages_page_id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function update($page_id, $params)
+    public function update($pageId, array $params)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}";
 
-        $options['json'] = $params;
-
-        return $this->client->request('put', $endpoint, $options);
+        return $this->client->request('put', $endpoint, ['json' => $params]);
     }
 
     /**
      * Delete a page.
      *
-     * @param int $page_id
+     * @param int $pageId
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/delete_pages_page_id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function delete($page_id)
+    public function delete($pageId)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}";
 
         return $this->client->request('delete', $endpoint);
     }
 
     /**
-     * Get a specific page.
+     * Get a Page by ID.
      *
-     * @param int $page_id
+     * @param int $pageId
      *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function getById($page_id)
-    {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}";
-
-        return $this->client->request('get', $endpoint);
-    }
-
-    /**
-     * Updates the auto-save buffer.
-     *
-     * @param int $page_id The page ID
-     * @param array $params  the auto-save buffer fields to update
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/get_pages_page_id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function updateAutoSaveBuffer($page_id, $params)
+    public function getById($pageId)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/buffer";
-        
-        $options['json'] = $params;
-
-        return $this->client->request('put', $endpoint, $options);
-    }
-
-    /**
-     * Gets the current contents of the auto-save buffer.
-     *
-     * @param int $page_id The page ID
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function getAutoSaveBufferContents($page_id)
-    {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/buffer";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}";
 
         return $this->client->request('get', $endpoint);
     }
@@ -115,32 +93,18 @@ class Pages extends Resource
     /**
      * Clone the page.
      *
-     * @param int    $page_id The page ID
-     * @param string $name    The cloned page name
+     * @param int    $pageId The page ID
+     * @param string $name   The cloned page name
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/post_pages_page_id_clone
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function clonePage($page_id, $name)
+    public function clonePage($pageId, $name)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/clone";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}/clone";
 
-        $options['json'] = ['name' => $name];
-
-        return $this->client->request('post', $endpoint, $options);
-    }
-
-    /**
-     * Determine if the auto-save buffer differs from the live page.
-     *
-     * @param int $page_id The page ID
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function hasBufferedChanges($page_id)
-    {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/has-buffered-changes";
-
-        return $this->client->request('get', $endpoint);
+        return $this->client->request('post', $endpoint, ['json' => ['name' => $name]]);
     }
 
     /**
@@ -152,44 +116,85 @@ class Pages extends Resource
      *     the existing publish_date time.
      * "cancel-publish": cancels a previous schedule-publish action.
      *
-     * @param int    $page_id The page ID
-     * @param string $action  The publish action
+     * @param int    $pageId The page ID
+     * @param string $action The publish action
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/post_pages_page_id_publish_action
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function publishAction($page_id, $action)
+    public function publishAction($pageId, string $action)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/publish-action";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}/publish-action";
 
-        $options['json'] = ['action' => $action];
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => ['action' => $action]]
+        );
+    }
 
-        return $this->client->request('post', $endpoint, $options);
+    /**
+     * Gets the current contents of the auto-save buffer.
+     *
+     * @param int $pageId The page ID
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/get_pages_page_id_buffer
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function getAutoSaveBufferContents($pageId)
+    {
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}/buffer";
+
+        return $this->client->request('get', $endpoint);
+    }
+
+    /**
+     * Updates the auto-save buffer.
+     *
+     * @param int   $pageId The page ID
+     * @param array $params the auto-save buffer fields to update
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/put_pages_page_id_buffer
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function updateAutoSaveBuffer($pageId, array $params = [])
+    {
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}/buffer";
+
+        return $this->client->request('put', $endpoint, ['json' => $params]);
+    }
+
+    /**
+     * Determine if the auto-save buffer differs from the live page.
+     *
+     * @param int $pageId The page ID
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/get_pages_page_id_has_buffered_changes
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function hasBufferedChanges($pageId)
+    {
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}/has-buffered-changes";
+
+        return $this->client->request('get', $endpoint);
     }
 
     /**
      * Copies the contents of the auto-save buffer into the live page.
      *
-     * @param int $page_id The page ID
+     * @param int $pageId The page ID
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/post_pages_page_id_push_buffer_live
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function pushBufferLive($page_id)
+    public function pushBufferLive($pageId)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/push-buffer-live";
-
-        return $this->client->request('post', $endpoint);
-    }
-
-    /**
-     * Restores a previously deleted page.
-     *
-     * @param int $page_id The page ID
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function restoreDeleted($page_id)
-    {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/restore-deleted";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}/push-buffer-live";
 
         return $this->client->request('post', $endpoint);
     }
@@ -197,13 +202,31 @@ class Pages extends Resource
     /**
      * Validates the auto-save buffer version of the page.
      *
-     * @param int $page_id The page ID
+     * @param int $pageId The page ID
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/post_pages_page_id_validate_buffer
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function validateBuffer($page_id)
+    public function validateBuffer($pageId)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/validate-buffer";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}/validate-buffer";
+
+        return $this->client->request('post', $endpoint);
+    }
+
+    /**
+     * Restores a previously deleted page.
+     *
+     * @param int $pageId The page ID
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/post_pages_page_id_restore_deleted
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function restoreDeleted($pageId)
+    {
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}/restore-deleted";
 
         return $this->client->request('post', $endpoint);
     }
@@ -211,13 +234,15 @@ class Pages extends Resource
     /**
      * List previous versions of the page.
      *
-     * @param int $page_id The page ID
+     * @param int $pageId The page ID
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/get_pages_page_id_versions
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function versions($page_id)
+    public function versions($pageId)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/versions";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}/versions";
 
         return $this->client->request('get', $endpoint);
     }
@@ -225,17 +250,21 @@ class Pages extends Resource
     /**
      * Restore a previous version of the page.
      *
-     * @param int $page_id    The page ID
-     * @param int $version_id The version ID
+     * @param int $pageId    The page ID
+     * @param int $versionId The version ID
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/pages/post_pages_page_id_versions_restore
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function restoreVersion($page_id, $version_id)
+    public function restoreVersion($pageId, $versionId)
     {
-        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$page_id}/versions/restore";
+        $endpoint = "https://api.hubapi.com/content/api/v2/pages/{$pageId}/versions/restore";
 
-        $options['json'] = compact('version_id');
-
-        return $this->client->request('post', $endpoint, $options);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => ['version_id' => $versionId]]
+        );
     }
 }
