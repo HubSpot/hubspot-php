@@ -11,9 +11,6 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider buildDataProvider
-     *
-     * @param array $params
-     * @param string $result
      */
     public function build(array $params, string $result)
     {
