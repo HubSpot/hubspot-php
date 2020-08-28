@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 - *nothing of note yet here*
 
+## [2.0.5]
+
+### Changed
+- removing list contacts by email address
+- minor changes
+
 ## [2.0.3]
 
 ### Added
