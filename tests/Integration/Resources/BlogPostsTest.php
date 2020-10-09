@@ -92,7 +92,7 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function clonePost()
     {
-        $response = $this->resource->clonePost($this->entity->id, 'Cloned post name');
+        $response = $this->resource->clone($this->entity->id, 'Cloned post name');
 
         $this->assertEquals(201, $response->getStatusCode());
 

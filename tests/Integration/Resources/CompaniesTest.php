@@ -278,6 +278,7 @@ class CompaniesTest extends EntityTestCase
     {
         foreach ($contactIds as $contactId) {
             $this->resource->removeContact($contactId, $companyId);
+            sleep(1);
             $this->contactsResource->delete($contactId);
         }
     }

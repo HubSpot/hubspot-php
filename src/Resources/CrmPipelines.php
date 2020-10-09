@@ -8,11 +8,22 @@ namespace SevenShores\Hubspot\Resources;
 class CrmPipelines extends Resource
 {
     /**
+     * @var string
+     */
+    protected $objectType;
+
+    public function __construct($client, string $objectType)
+    {
+        parent::__construct($client);
+
+        $this->objectType = $objectType;
+    }
+
+    /**
      * Get all of the pipelines for the specified object type.
      * This currently supports pipelines for deals and tickets.
      *
-     * @param string $objectType | Currently supports tickets or deals only
-     * @param array  $params     | Array of optional parameter ['includeInactive' => 'EXCLUDE_DELETED' (default) | 'INCLUDE_DELETED']
+     * @param array $params | Array of optional parameter ['includeInactive' => 'EXCLUDE_DELETED' (default) | 'INCLUDE_DELETED']
      *
      * @throws \SevenShores\Hubspot\Exceptions\BadRequest
      *
@@ -20,9 +31,9 @@ class CrmPipelines extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function all(string $objectType, array $params = [])
+    public function all(array $params = [])
     {
-        $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}";
+        $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$this->objectType}";
 
         return $this->client->request(
             'get',
@@ -43,9 +54,9 @@ class CrmPipelines extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function create(string $objectType, array $properties)
+    public function create(array $properties)
     {
-        $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}";
+        $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$this->objectType}";
 
         return $this->client->request('post', $endpoint, ['json' => $properties]);
     }
@@ -59,9 +70,9 @@ class CrmPipelines extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function update(string $objectType, string $id, array $properties)
+    public function update(string $id, array $properties)
     {
-        $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}/{$id}";
+        $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$this->objectType}/{$id}";
 
         return $this->client->request('put', $endpoint, ['json' => $properties]);
     }
@@ -75,9 +86,9 @@ class CrmPipelines extends Resource
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function delete(string $objectType, string $id)
+    public function delete(string $id)
     {
-        $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$objectType}/{$id}";
+        $endpoint = "https://api.hubapi.com/crm-pipelines/v1/pipelines/{$this->objectType}/{$id}";
 
         return $this->client->request('delete', $endpoint);
     }
