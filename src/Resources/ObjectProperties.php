@@ -100,7 +100,7 @@ class ObjectProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getGroups(bool $includeProperties = false)
+    public function getAllGroups(bool $includeProperties = false)
     {
         $endpoint = "https://api.hubapi.com/properties/v2/{$this->objectType}/groups";
 

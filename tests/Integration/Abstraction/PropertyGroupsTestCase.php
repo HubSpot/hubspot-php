@@ -5,11 +5,6 @@ namespace SevenShores\Hubspot\Tests\Integration\Abstraction;
 abstract class PropertyGroupsTestCase extends EntityTestCase
 {
     /**
-     * @var string
-     */
-    protected $allGroupsMethod = 'getAllGroups';
-
-    /**
      * @var bool
      */
     protected $getGroup = false;
@@ -17,7 +12,7 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
     /** @test */
     public function all()
     {
-        $response = $this->resource->{$this->allGroupsMethod}();
+        $response = $this->resource->getAllGroups();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
@@ -27,7 +22,7 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
     /** @test */
     public function allWithProperties()
     {
-        $response = $this->resource->{$this->allGroupsMethod}(true);
+        $response = $this->resource->getAllGroups(true);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));

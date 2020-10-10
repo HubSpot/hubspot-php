@@ -12,11 +12,6 @@ use SevenShores\Hubspot\Tests\Integration\Abstraction\PropertyGroupsTestCase;
 class ContactPropertyGroupsTest extends PropertyGroupsTestCase
 {
     /**
-     * @var string
-     */
-    protected $allGroupsMethod = 'getGroups';
-
-    /**
      * @var bool
      */
     protected $getGroup = true;

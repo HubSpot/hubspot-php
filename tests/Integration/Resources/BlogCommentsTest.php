@@ -3,8 +3,8 @@
 namespace SevenShores\Hubspot\Tests\Integration\Resources;
 
 use SevenShores\Hubspot\Http\Client;
+use SevenShores\Hubspot\Resources\BlogComments;
 use SevenShores\Hubspot\Resources\BlogPosts;
-use SevenShores\Hubspot\Resources\Comments;
 use SevenShores\Hubspot\Tests\Integration\Abstraction\BlogPostTestCase;
 
 /**
@@ -14,14 +14,14 @@ use SevenShores\Hubspot\Tests\Integration\Abstraction\BlogPostTestCase;
 class BlogCommentsTest extends BlogPostTestCase
 {
     /**
-     * @var Comments
+     * @var BlogComments
      */
     protected $resource;
 
     /**
-     * @var Comments:class
+     * @var BlogComments:class
      */
-    protected $resourceClass = Comments::class;
+    protected $resourceClass = BlogComments::class;
 
     /**
      * @var BlogPosts

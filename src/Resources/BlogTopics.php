@@ -73,19 +73,16 @@ class BlogTopics extends Resource
     /**
      * Create a new blog topic.
      *
-     * @param string $name       Name of the topic
-     * @param array  $prorerties Blog topic's fields
-     * @param array  $params     Optional parametrs
+     * @param array $prorerties Blog topic's fields
+     * @param array $params     Optional parametrs
      *
      * @see https://developers.hubspot.com/docs/methods/blog/v3/create-blog-topic
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function create($name, array $prorerties = [], $params = [])
+    public function create(array $prorerties, $params = [])
     {
         $endpoint = 'https://api.hubapi.com/blogs/v3/topics';
-
-        $prorerties['name'] = $name;
 
         return $this->client->request(
             'post',

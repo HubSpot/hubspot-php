@@ -73,7 +73,6 @@ class Factory
     /**
      * Return an instance of a Resource based on the method called.
      *
-     * @param array $arguments
      * @param mixed $args
      */
     public function __call(string $name, $args): Resource
