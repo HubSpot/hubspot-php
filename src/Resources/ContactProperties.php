@@ -176,7 +176,7 @@ class ContactProperties extends Resource
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$groupName}";
 
-        $group['name'] = $groupName;
+        $properties['name'] = $groupName;
 
         return $this->client->request('put', $endpoint, ['json' => $properties]);
     }
