@@ -16,11 +16,21 @@ class Deals extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function create(array $properties)
+    public function create(array $properties, array $associations = [])
     {
         $endpoint = 'https://api.hubapi.com/deals/v1/deal';
 
-        return $this->client->request('post', $endpoint, ['json' => $properties]);
+        $data = ['properties' => $properties];
+
+        if (!empty($associations)) {
+            $data['associations'] = $associations;
+        }
+
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => $data]
+        );
     }
 
     /**
@@ -37,7 +47,11 @@ class Deals extends Resource
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
-        return $this->client->request('put', $endpoint, ['json' => $properties]);
+        return $this->client->request(
+            'put',
+            $endpoint,
+            ['json' => ['properties' => $properties]]
+        );
     }
 
     /**

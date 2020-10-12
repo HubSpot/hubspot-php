@@ -19,6 +19,11 @@ use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 class DealsTest extends EntityTestCase
 {
     /**
+     * @var Deals
+     */
+    protected $resource;
+
+    /**
      * @var Deals::class
      */
     protected $resourceClass = Deals::class;
@@ -49,11 +54,9 @@ class DealsTest extends EntityTestCase
     public function update()
     {
         $response = $this->resource->update($this->entity->dealId, [
-            'properties' => [
-                [
-                    'name' => 'amount',
-                    'value' => '70000',
-                ],
+            [
+                'name' => 'amount',
+                'value' => '70000',
             ],
         ]);
 
@@ -109,11 +112,9 @@ class DealsTest extends EntityTestCase
     public function getRecentlyModified()
     {
         $this->resource->update($this->entity->dealId, [
-            'properties' => [
-                [
-                    'name' => 'amount',
-                    'value' => '70000',
-                ],
+            [
+                'name' => 'amount',
+                'value' => '70000',
             ],
         ]);
 
@@ -317,15 +318,13 @@ class DealsTest extends EntityTestCase
     protected function createEntity()
     {
         return $this->resource->create([
-            'properties' => [
-                [
-                    'value' => 'Cool Deal',
-                    'name' => 'dealname',
-                ],
-                [
-                    'value' => '60000',
-                    'name' => 'amount',
-                ],
+            [
+                'value' => 'Cool Deal',
+                'name' => 'dealname',
+            ],
+            [
+                'value' => '60000',
+                'name' => 'amount',
             ],
         ]);
     }
