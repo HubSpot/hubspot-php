@@ -10,7 +10,8 @@ class Deals extends Resource
     /**
      * Create a deal.
      *
-     * @param array $properties array of deal properties
+     * @param array $properties   array of deal properties
+     * @param array $associations array of IDs for records that the new deal should be associated with
      *
      * @see https://developers.hubspot.com/docs/methods/deals/create_deal
      *
