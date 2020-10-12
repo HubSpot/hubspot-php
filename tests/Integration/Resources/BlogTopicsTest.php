@@ -106,7 +106,8 @@ class BlogTopicsTest extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->create('Topic Test '.uniqid(), [
+        return $this->resource->create([
+            'name' => 'Topic Test '.uniqid(),
             'description' => 'Topic Test '.uniqid().' Description',
         ]);
     }

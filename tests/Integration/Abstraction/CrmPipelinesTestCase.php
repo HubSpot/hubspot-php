@@ -25,10 +25,20 @@ class CrmPipelinesTestCase extends EntityTestCase
      */
     protected $resourceClass = CrmPipelines::class;
 
+    public function setUp()
+    {
+        if (empty($this->resource)) {
+            $this->resource = new $this->resourceClass($this->getClient(), $this->type);
+        }
+        sleep(1);
+
+        parent::setUp();
+    }
+
     /** @test */
     public function getAllPipelinesTest()
     {
-        $response = $this->resource->all($this->type);
+        $response = $this->resource->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -36,7 +46,7 @@ class CrmPipelinesTestCase extends EntityTestCase
     /** @test */
     public function getAllPipelinesIncludingDeleted()
     {
-        $response = $this->resource->all($this->type, ['includeInactive' => 'INCLUDE_DELETED']);
+        $response = $this->resource->all(['includeInactive' => 'INCLUDE_DELETED']);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -51,7 +61,6 @@ class CrmPipelinesTestCase extends EntityTestCase
     public function updatePipeline()
     {
         $response = $this->resource->update(
-            $this->type,
             $this->entity->pipelineId,
             $this->getData('Updated '.$this->type.' Pipeline')
         );
@@ -71,12 +80,12 @@ class CrmPipelinesTestCase extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->create($this->type, $this->getData());
+        return $this->resource->create($this->getData());
     }
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->type, $this->entity->pipelineId);
+        return $this->resource->delete($this->entity->pipelineId);
     }
 
     protected function getData(string $label = null)

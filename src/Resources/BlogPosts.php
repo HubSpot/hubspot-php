@@ -101,7 +101,7 @@ class BlogPosts extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function clonePost($id, string $name)
+    public function clone($id, string $name)
     {
         $endpoint = "https://api.hubapi.com/content/api/v2/blog-posts/{$id}/clone";
 

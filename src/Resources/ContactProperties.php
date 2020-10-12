@@ -98,8 +98,6 @@ class ContactProperties extends Resource
     }
 
     /**
-     * Get contact property groups.
-     *
      * Returns all of the contact property groups for a given portal.
      *
      * @param bool $includeProperties if true returns all of the properties for each company property group
@@ -108,7 +106,7 @@ class ContactProperties extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function getGroups(bool $includeProperties = false)
+    public function getAllGroups(bool $includeProperties = false)
     {
         $endpoint = 'https://api.hubapi.com/contacts/v2/groups';
 
@@ -176,7 +174,7 @@ class ContactProperties extends Resource
     {
         $endpoint = "https://api.hubapi.com/contacts/v2/groups/named/{$groupName}";
 
-        $group['name'] = $groupName;
+        $properties['name'] = $groupName;
 
         return $this->client->request('put', $endpoint, ['json' => $properties]);
     }

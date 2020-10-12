@@ -219,7 +219,7 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [ ] Conversations Live Chat Widget API (Front End)
 - [x] CMS Blog API (Blogs) :upadated:
 - [x] CMS Blog Authors API (BlogAuthors) :upadated:
-- [ ] CMS Blog Comments API (Comments)
+- [x] CMS Blog Comments API (BlogComments)
 - [x] CMS Blog Post API (BlogPosts)
 - [x] CMS Blog Topics API (BlogTopics)
 - [ ] CMS Domains API
