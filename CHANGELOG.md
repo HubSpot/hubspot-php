@@ -2,7 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v2.0.5...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v3.0.0...HEAD)
+
+## [3.0.0]
+
+### Changed
+- Comments to BlogComments
+- Deal create + update change params 
+- BlogPosts::clonePost => BlogPosts::clone
+- BlogTopics::create remove name
+- contactsProperties getGroups => getAllGroups
+- CrmPipelines move object type to __construct
+- Up Guzzle version to 7
+- Up php version to 7.2
 
 ## [2.0.5]
 
