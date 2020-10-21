@@ -14,7 +14,7 @@ class Files extends Resource
      */
     public function upload($file, array $params = [])
     {
-        $endpoint = 'https://api.hubapi.com/filemanager/api/v2/files';
+        $endpoint = 'https://api.hubapi.com/filemanager/api/v3/files';
 
         $queryString = build_query_string([
             'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false,
@@ -63,7 +63,7 @@ class Files extends Resource
      */
     public function batchUpload(array $files, array $params = [])
     {
-        $endpoint = 'https://api.hubapi.com/filemanager/api/v2/files';
+        $endpoint = 'https://api.hubapi.com/filemanager/api/v3/files';
 
         $queryString = build_query_string([
             'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false,
