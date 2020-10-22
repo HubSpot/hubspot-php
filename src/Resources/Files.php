@@ -9,20 +9,19 @@ class Files extends Resource
      *
      * @param resource|string $file
      * @param array           $params Optional parameters
-     * 
+     *
      * @see https://legacydocs.hubspot.com/docs/methods/files/v3/upload_new_file
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
     public function upload(
-            $file,
-            string $fileName = null,
-            array $options = [],
-            string $folderPath = '/',
-            string $folderId = null,
-            string $charsetHunch = null
-        )
-    {
+        $file,
+        string $fileName = null,
+        array $options = [],
+        string $folderPath = '/',
+        string $folderId = null,
+        string $charsetHunch = null
+    ) {
         $endpoint = 'https://api.hubapi.com/filemanager/api/v3/files/upload';
 
         $defaultOptions = [
@@ -30,11 +29,11 @@ class Files extends Resource
             'ttl' => 'P3M',
             'overwrite' => false,
             'duplicateValidationStrategy' => 'NONE',
-            'duplicateValidationScope' => 'ENTIRE_PORTAL'
+            'duplicateValidationScope' => 'ENTIRE_PORTAL',
         ];
 
         $data = [
-            'multipart' =>[
+            'multipart' => [
                 [
                     'name' => 'file',
                     'contents' => $this->getResource($file),
@@ -46,15 +45,15 @@ class Files extends Resource
                     'name' => 'folderPath',
                     'contents' => $folderPath,
                 ],
-            ]
+            ],
         ];
-        
+
         $additional = [
             'fileName' => $fileName,
             'folderId' => $folderId,
             'charsetHunch' => $charsetHunch,
         ];
-        
+
         foreach ($additional as $name => $contents) {
             if (!empty($contents)) {
                 $data['multipart'][] = [
@@ -63,9 +62,10 @@ class Files extends Resource
                 ];
             }
         }
-        
+
         return $this->client->request('post', $endpoint, $data);
     }
+
     /**
      * @param resource|string $file
      *
