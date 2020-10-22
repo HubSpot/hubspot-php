@@ -9,7 +9,7 @@ class Files extends Resource
      *
      * @param resource|string $file
      * @param array           $params Optional parameters
-     * 
+     *
      * @see https://legacydocs.hubspot.com/docs/methods/files/v3/upload_new_file
      *
      * @return \SevenShores\Hubspot\Http\Response
@@ -23,7 +23,7 @@ class Files extends Resource
         string $charsetHunch = null
     ) {
         $endpoint = 'https://api.hubapi.com/filemanager/api/v3/files/upload';
-        
+
         $multipart = [
             [
                 'name' => 'file',
@@ -45,37 +45,9 @@ class Files extends Resource
                     'fileName' => $fileName,
                     'folderId' => $folderId,
                     'charsetHunch' => $charsetHunch,
-                ]))
+                ])),
             ]
         );
-    }
-    
-    protected function getAdditionalParams(array $params): array
-    {
-        $results = [];
-        
-        foreach ($params as $name => $contents) {
-            if (!empty($contents)) {
-                $results[] = [
-                    'name' => $name,
-                    'contents' => $contents,
-                ];
-            }
-        }
-        
-        return $results;
-    }
-
-
-    protected function getDefaultOptions(): array
-    {
-        return [
-            'access' => 'PUBLIC_INDEXABLE',
-            'ttl' => 'P3M',
-            'overwrite' => false,
-            'duplicateValidationStrategy' => 'NONE',
-            'duplicateValidationScope' => 'ENTIRE_PORTAL',
-        ];
     }
 
     /**
@@ -285,5 +257,32 @@ class Files extends Resource
         $options['json'] = $params;
 
         return $this->client->request('post', $endpoint, $options);
+    }
+
+    protected function getAdditionalParams(array $params): array
+    {
+        $results = [];
+
+        foreach ($params as $name => $contents) {
+            if (!empty($contents)) {
+                $results[] = [
+                    'name' => $name,
+                    'contents' => $contents,
+                ];
+            }
+        }
+
+        return $results;
+    }
+
+    protected function getDefaultOptions(): array
+    {
+        return [
+            'access' => 'PUBLIC_INDEXABLE',
+            'ttl' => 'P3M',
+            'overwrite' => false,
+            'duplicateValidationStrategy' => 'NONE',
+            'duplicateValidationScope' => 'ENTIRE_PORTAL',
+        ];
     }
 }
