@@ -7,12 +7,10 @@ class Files extends Resource
     /**
      * Upload a new file.
      *
-     * @param resource|string   $file 
-     * @param array             $options
-     * @param string            $folderPath
-     * @param string            $fileName
-     * @param string            $folderId
-     * @param string            $charsetHunch = null
+     * @param resource|string $file
+     * @param string          $fileName
+     * @param string          $folderId
+     * @param string          $charsetHunch = null
      *
      * @see https://legacydocs.hubspot.com/docs/methods/files/v3/upload_new_file
      *
