@@ -53,33 +53,6 @@ class Files extends Resource
             ]
         );
     }
-    
-    protected function getAdditionalParams(array $params): array
-    {
-        $results = [];
-
-        foreach ($params as $name => $contents) {
-            if (!empty($contents)) {
-                $results[] = [
-                    'name' => $name,
-                    'contents' => $contents,
-                ];
-            }
-        }
-        
-        return $results;
-    }
-    
-    protected function getDefaultOptions(): array
-    {
-        return [
-            'access' => 'PUBLIC_INDEXABLE',
-            'ttl' => 'P3M',
-            'overwrite' => false,
-            'duplicateValidationStrategy' => 'NONE',
-            'duplicateValidationScope' => 'ENTIRE_PORTAL',
-        ];
-    }
 
     /**
      * @param resource|string $file
@@ -288,5 +261,32 @@ class Files extends Resource
         $options['json'] = $params;
 
         return $this->client->request('post', $endpoint, $options);
+    }
+
+    protected function getAdditionalParams(array $params): array
+    {
+        $results = [];
+
+        foreach ($params as $name => $contents) {
+            if (!empty($contents)) {
+                $results[] = [
+                    'name' => $name,
+                    'contents' => $contents,
+                ];
+            }
+        }
+
+        return $results;
+    }
+
+    protected function getDefaultOptions(): array
+    {
+        return [
+            'access' => 'PUBLIC_INDEXABLE',
+            'ttl' => 'P3M',
+            'overwrite' => false,
+            'duplicateValidationStrategy' => 'NONE',
+            'duplicateValidationScope' => 'ENTIRE_PORTAL',
+        ];
     }
 }
