@@ -24,46 +24,57 @@ class Files extends Resource
     ) {
         $endpoint = 'https://api.hubapi.com/filemanager/api/v3/files/upload';
 
-        $defaultOptions = [
+        $multipart = [
+            [
+                'name' => 'file',
+                'contents' => $this->getResource($file),
+            ], [
+                'name' => 'options',
+                'contents' => json_encode(array_merge($this->getDefaultOptions(), $options)),
+            ], [
+                'name' => 'folderPath',
+                'contents' => $folderPath,
+            ],
+        ];
+
+        return $this->client->request(
+            'post',
+            $endpoint,
+            [
+                'multipart' => array_merge($multipart, $this->getAdditionalParams([
+                    'fileName' => $fileName,
+                    'folderId' => $folderId,
+                    'charsetHunch' => $charsetHunch,
+                ])),
+            ]
+        );
+    }
+    
+    protected function getAdditionalParams(array $params): array
+    {
+        $results = [];
+
+        foreach ($params as $name => $contents) {
+            if (!empty($contents)) {
+                $results[] = [
+                    'name' => $name,
+                    'contents' => $contents,
+                ];
+            }
+        }
+        
+        return $results;
+    }
+    
+    protected function getDefaultOptions(): array
+    {
+        return [
             'access' => 'PUBLIC_INDEXABLE',
             'ttl' => 'P3M',
             'overwrite' => false,
             'duplicateValidationStrategy' => 'NONE',
             'duplicateValidationScope' => 'ENTIRE_PORTAL',
         ];
-
-        $data = [
-            'multipart' => [
-                [
-                    'name' => 'file',
-                    'contents' => $this->getResource($file),
-                ],
-                [
-                    'name' => 'options',
-                    'contents' => json_encode(array_merge($defaultOptions, $options)),
-                ], [
-                    'name' => 'folderPath',
-                    'contents' => $folderPath,
-                ],
-            ],
-        ];
-
-        $additional = [
-            'fileName' => $fileName,
-            'folderId' => $folderId,
-            'charsetHunch' => $charsetHunch,
-        ];
-
-        foreach ($additional as $name => $contents) {
-            if (!empty($contents)) {
-                $data['multipart'][] = [
-                    'name' => $name,
-                    'contents' => $contents,
-                ];
-            }
-        }
-
-        return $this->client->request('post', $endpoint, $data);
     }
 
     /**
