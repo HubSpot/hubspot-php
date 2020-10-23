@@ -16,11 +16,6 @@ class ObjectPropertyGroupsTest extends PropertyGroupsTestCase
      */
     protected $getGroup = true;
 
-    /**
-     * @var string
-     */
-    protected $allGroupsMethod = 'getGroups';
-
     public function setUp()
     {
         $this->resource = Factory::create(getenv('HUBSPOT_TEST_API_KEY'))->objectProperties('products');

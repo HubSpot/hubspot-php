@@ -10,17 +10,28 @@ class Deals extends Resource
     /**
      * Create a deal.
      *
-     * @param array $properties array of deal properties
+     * @param array $properties   array of deal properties
+     * @param array $associations array of IDs for records that the new deal should be associated with
      *
      * @see https://developers.hubspot.com/docs/methods/deals/create_deal
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function create(array $properties)
+    public function create(array $properties, array $associations = [])
     {
         $endpoint = 'https://api.hubapi.com/deals/v1/deal';
 
-        return $this->client->request('post', $endpoint, ['json' => $properties]);
+        $data = ['properties' => $properties];
+
+        if (!empty($associations)) {
+            $data['associations'] = $associations;
+        }
+
+        return $this->client->request(
+            'post',
+            $endpoint,
+            ['json' => $data]
+        );
     }
 
     /**
@@ -37,7 +48,11 @@ class Deals extends Resource
     {
         $endpoint = "https://api.hubapi.com/deals/v1/deal/{$id}";
 
-        return $this->client->request('put', $endpoint, ['json' => $properties]);
+        return $this->client->request(
+            'put',
+            $endpoint,
+            ['json' => ['properties' => $properties]]
+        );
     }
 
     /**
