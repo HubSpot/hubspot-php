@@ -8,34 +8,45 @@ class Files extends Resource
      * Upload a new file.
      *
      * @param resource|string $file
-     * @param array           $params Optional parameters
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/files/v3/upload_new_file
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function upload($file, array $params = [])
-    {
-        $endpoint = 'https://api.hubapi.com/filemanager/api/v2/files';
+    public function upload(
+        $file,
+        array $options = [],
+        string $folderPath = '/',
+        string $fileName = null,
+        string $folderId = null,
+        string $charsetHunch = null
+    ) {
+        $endpoint = 'https://api.hubapi.com/filemanager/api/v3/files/upload';
 
-        $queryString = build_query_string([
-            'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false,
-            'hidden' => isset($params['hidden']) ? $params['hidden'] : false,
-        ]);
-
-        $options['multipart'] = [
+        $multipart = [
             [
-                'name' => 'files',
+                'name' => 'file',
                 'contents' => $this->getResource($file),
-            ],
-            [
-                'name' => 'file_names',
-                'contents' => isset($params['file_names']) ? $params['file_names'] : null,
             ], [
-                'name' => 'folder_paths',
-                'contents' => isset($params['folder_paths']) ? $params['folder_paths'] : null,
+                'name' => 'options',
+                'contents' => json_encode(array_merge($this->getDefaultOptions(), $options)),
+            ], [
+                'name' => 'folderPath',
+                'contents' => $folderPath,
             ],
         ];
 
-        return $this->client->request('post', $endpoint, $options, $queryString);
+        return $this->client->request(
+            'post',
+            $endpoint,
+            [
+                'multipart' => array_merge($multipart, $this->getAdditionalParams([
+                    'fileName' => $fileName,
+                    'folderId' => $folderId,
+                    'charsetHunch' => $charsetHunch,
+                ])),
+            ]
+        );
     }
 
     /**
@@ -50,32 +61,6 @@ class Files extends Resource
         }
 
         return fopen($file, 'rb');
-    }
-
-    /**
-     * Upload new files.
-     *
-     * @param array $params Optional parameters
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
-     * @see https://developers.hubspot.com/docs/methods/files/post_files
-     */
-    public function batchUpload(array $files, array $params = [])
-    {
-        $endpoint = 'https://api.hubapi.com/filemanager/api/v2/files';
-
-        $queryString = build_query_string([
-            'overwrite' => isset($params['overwrite']) ? $params['overwrite'] : false,
-            'hidden' => isset($params['hidden']) ? $params['hidden'] : false,
-        ]);
-
-        return $this->client->request(
-            'post',
-            $endpoint,
-            ['multipart' => $this->getMultipart($files, $params)],
-            $queryString
-        );
     }
 
     /**
@@ -273,41 +258,30 @@ class Files extends Resource
         return $this->client->request('post', $endpoint, $options);
     }
 
-    /**
-     * @param array $files array of Resoures or filenames
-     *
-     * @return string
-     */
-    protected function getMultipart(array $files, array $params)
+    protected function getAdditionalParams(array $params): array
     {
-        $multipart = [];
+        $results = [];
 
-        foreach ($files as $key => $file) {
-            $multipart[] = [
-                'name' => 'files',
-                'contents' => $this->getResource($file),
-            ];
-
-            $multipart[] = [
-                'name' => 'file_names',
-                'contents' => $this->getOptionValue($key, 'file_names', $params),
-            ];
-
-            $multipart[] = [
-                'name' => 'folder_paths',
-                'contents' => $this->getOptionValue($key, 'folder_paths', $params),
-            ];
+        foreach ($params as $name => $contents) {
+            if (!empty($contents)) {
+                $results[] = [
+                    'name' => $name,
+                    'contents' => $contents,
+                ];
+            }
         }
 
-        return $multipart;
+        return $results;
     }
 
-    protected function getOptionValue($key, $option, array $params)
+    protected function getDefaultOptions(): array
     {
-        if (isset($params[$option]) && array_key_exists($key, $params[$option])) {
-            return $params[$option][$key];
-        }
-
-        return null;
+        return [
+            'access' => 'PUBLIC_INDEXABLE',
+            'ttl' => 'P3M',
+            'overwrite' => false,
+            'duplicateValidationStrategy' => 'NONE',
+            'duplicateValidationScope' => 'ENTIRE_PORTAL',
+        ];
     }
 }
