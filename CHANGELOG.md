@@ -2,7 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v3.0.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v3.0.1...HEAD)
+
+## [3.0.1]
+
+### Changed
+- Files::upload
+- Guzzle version 6 or 7
 
 ## [3.0.0]
 
