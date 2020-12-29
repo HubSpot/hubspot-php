@@ -85,7 +85,7 @@ $config = [
     'oauth2'   => false,
 ];
 
-$hubspot = new \SevenShores\Hubspot\Factory(config, new \SevenShores\Hubspot\Http\Client($config, guzzleClient));
+$hubspot = new \SevenShores\Hubspot\Factory($config, new \SevenShores\Hubspot\Http\Client($config, $guzzleClient));
 ```
 
 #### Get a single contact:
