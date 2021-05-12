@@ -65,7 +65,7 @@ class CrmAssociations extends Resource
 
         $query_string = null;
         if ($params) {
-            $query_string = http_build_query($params);
+            $query_string = build_query_string($params);
         }
 
         return $this->client->request('get', $endpoint, [], $query_string);
