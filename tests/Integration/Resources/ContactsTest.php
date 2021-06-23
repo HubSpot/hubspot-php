@@ -231,6 +231,29 @@ class ContactsTest extends EntityTestCase
     }
 
     /** @test */
+    public function addSecondaryEmail()
+    {
+        $secondaryEmail = 'rw_test'.uniqid().'@hubspot.com';
+
+        $response = $this->resource->addSecondaryEmail($this->entity->vid, $secondaryEmail);
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /** @test */
+    public function deleteSecondaryEmail()
+    {
+        $secondaryEmail = 'rw_test'.uniqid().'@hubspot.com';
+
+        $response = $this->resource->addSecondaryEmail($this->entity->vid, $secondaryEmail);
+        $this->assertEquals(200, $response->getStatusCode());
+
+        sleep(1);
+
+        $response = $this->resource->deleteSecondaryEmail($this->entity->vid, $secondaryEmail);
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /** @test */
     public function getLifecycleStageMetrics()
     {
         $response = $this->resource->getLifecycleStageMetrics();

@@ -443,6 +443,25 @@ class Contacts extends Resource
     }
 
     /**
+     * @param int $id
+     * @param string $emailToAdd
+     * @return \SevenShores\Hubspot\Http\Response
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/contacts/add-a-secondary-email-address
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function addSecondaryEmail($id, $emailToAdd)
+    {
+        $endpoint = "https://api.hubapi.com/contacts/v1/secondary-email/{$id}/email/{$emailToAdd}";
+
+        return $this->client->request(
+            'put',
+            $endpoint
+        );
+    }
+
+    /**
      * Get Lifecycle Stage metrics for Contacts.
      *
      * @see https://developers.hubspot.com/docs/methods/contacts/get-lifecycle-stage-metrics-for-contacts
