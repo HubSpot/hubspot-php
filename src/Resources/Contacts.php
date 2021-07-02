@@ -424,8 +424,9 @@ class Contacts extends Resource
     }
 
     /**
-     * @param int $id
+     * @param int    $id
      * @param string $emailToDelete
+     *
      * @return \SevenShores\Hubspot\Http\Response
      *
      * @see https://legacydocs.hubspot.com/docs/methods/contacts/delete-a-secondary-email-address
@@ -443,8 +444,9 @@ class Contacts extends Resource
     }
 
     /**
-     * @param int $id
+     * @param int    $id
      * @param string $emailToAdd
+     *
      * @return \SevenShores\Hubspot\Http\Response
      *
      * @see https://legacydocs.hubspot.com/docs/methods/contacts/add-a-secondary-email-address
