@@ -2,9 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v3.1.1...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v3.1.0...HEAD)
 
-## [3.1.1]
+## [3.1.0]
 
 ### Added
 - contacts->addSecondaryEmail()
