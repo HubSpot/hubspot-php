@@ -210,21 +210,21 @@ $authUrl = Utils::getFactory()->oAuth2()->getAuthUrl(
 If you see something not planned, that you want, make an [issue](https://github.com/HubSpot/hubspot-php/issues) and there's a good chance I will add it.
 
 - [x] Analytics API
-- [x] Calendar API :upadated:
-- [x] Companies API :upadated:
-- [x] Company Properties API :upadated:
-- [x] Contacts API :upadated:
-- [x] Contact Lists API :upadated:
-- [x] Contact Properties API :upadated:
+- [x] Calendar API :updated:
+- [x] Companies API :updated:
+- [x] Company Properties API :updated:
+- [x] Contacts API :updated:
+- [x] Contact Lists API :updated:
+- [x] Contact Properties API :updated:
 - [ ] Conversations Live Chat Widget API (Front End)
-- [x] CMS Blog API (Blogs) :upadated:
-- [x] CMS Blog Authors API (BlogAuthors) :upadated:
+- [x] CMS Blog API (Blogs) :updated:
+- [x] CMS Blog Authors API (BlogAuthors) :updated:
 - [x] CMS Blog Comments API (BlogComments)
 - [x] CMS Blog Post API (BlogPosts)
 - [x] CMS Blog Topics API (BlogTopics)
 - [ ] CMS Domains API
 - [x] CMS Files API (Files)
-- [x] CMS HubDB API (HubDB) :upadated:
+- [x] CMS HubDB API (HubDB) :updated:
 - [ ] CMS Layouts API
 - [x] CMS Page Publishing API (Pages)
 - [ ] CMS Site Maps
@@ -237,21 +237,22 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [x] CRM Pipelines API (CrmPipelines)
 - [x] Deals API
 - [x] Deal Pipelines API :deprecated:
-- [x] Deal Properties API :upadated:
-- [x] Ecommerce Bridge API :upadated:
-- [x] Email Subscription API :upadated:
-- [x] Email Events API :upadated:
+- [x] Deal Properties API :updated:
+- [x] Ecommerce Bridge API :updated:
+- [x] Email Subscription API :updated:
+- [x] Email Events API :updated:
 - [x] Engagements API
 - [x] Events API
-- [x] Forms API :upadated:
+- [x] Forms API :updated:
 - [x] Line Items API :new:
 - [ ] Marketing Email API
-- [x] Owners API :upadated:
+- [x] Owners API :updated:
 - [x] Products API :new:
 - [x] Social Media API
 - [x] Tickets API
-- [x] Timeline API :upadated:
+- [x] Timeline API :updated:
 - [ ] Tracking Code API
 - [x] Transactional Email API
-- [x] Workflows API :upadated:
+- [x] Workflows API :updated:
 - [x] Webhooks API
+
