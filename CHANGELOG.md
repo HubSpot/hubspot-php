@@ -31,7 +31,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [2.0.5]
 
 ### Changed
-- removing list contacts by email address
+- Added ability to remove list contacts by email address
 - minor changes
 
 ## [2.0.3]
