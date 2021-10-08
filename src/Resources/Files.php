@@ -277,11 +277,7 @@ class Files extends Resource
     protected function getDefaultOptions(): array
     {
         return [
-            'access' => 'PUBLIC_INDEXABLE',
-            'ttl' => 'P3M',
-            'overwrite' => false,
-            'duplicateValidationStrategy' => 'NONE',
-            'duplicateValidationScope' => 'ENTIRE_PORTAL',
+            'access' => 'PUBLIC_INDEXABLE'
         ];
     }
 }
