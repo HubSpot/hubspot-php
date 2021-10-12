@@ -152,6 +152,23 @@ class CompaniesTest extends EntityTestCase
     }
 
     /** @test */
+    public function getByIdWithVersions()
+    {
+        // Force a change to the description
+        $newDescription = 'Better descriptions are not easy to create.';
+        $properties = [
+            'name' => 'description',
+            'value' => $newDescription,
+        ];
+        $response = $this->resource->update($this->entity->companyId, $properties);
+
+        // Get multiple versions for property
+        $params = ['includePropertyVersions' => true];
+        $response = $this->resource->getById($this->entity->companyId, $params);
+        $this->assertCount(2, $response->getData()->properties->description->versions);
+    }
+
+    /** @test */
     public function getAssociatedContacts()
     {
         list($contactId) = $this->createAssociatedContact($this->entity->companyId);
