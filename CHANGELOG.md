@@ -36,6 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Rename Email to EmailSubscriptions
 - Update many resources (Method's Visibility, Type Hinting etc)
 - Repair majority of tests
+- SingleEmail => TransactionEmail
 
 ## [1.0.0-rc.1]
 
