@@ -2,7 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v3.1.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v3.2.0...HEAD)
+
+## [3.2.0]
+
+### Changed
+- companies->getById($id) => companies->getById($id, array $params = [])
+- Remove unneeded defaults for files api
 
 ## [3.1.0]
 
@@ -50,6 +56,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Rename Email to EmailSubscriptions
 - Update many resources (Method's Visibility, Type Hinting etc)
 - Repair majority of tests
+- SingleEmail => TransactionEmail
 
 ## [1.0.0-rc.1]
 
