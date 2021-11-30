@@ -91,14 +91,14 @@ class Products extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function createBatch(array $contacts)
+    public function createBatch(array $products)
     {
         $endpoint = 'https://api.hubapi.com/crm-objects/v1/objects/products/batch-create';
 
         return $this->client->request(
             'post',
             $endpoint,
-            ['json' => $contacts]
+            ['json' => $products]
         );
     }
 
