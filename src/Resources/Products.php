@@ -91,23 +91,23 @@ class Products extends Resource
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
-    public function createBatch(array $contacts)
+    public function createBatch(array $products)
     {
         $endpoint = 'https://api.hubapi.com/crm-objects/v1/objects/products/batch-create';
 
         return $this->client->request(
             'post',
             $endpoint,
-            ['json' => $contacts]
+            ['json' => $products]
         );
     }
 
     /**
      * Update a product.
      *
-     * @param int $id
-     *
      * @see https://developers.hubspot.com/docs/methods/products/update-products
+     *
+     * @param mixed $id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
@@ -143,9 +143,9 @@ class Products extends Resource
     /**
      * Delete a product.
      *
-     * @param int $id
-     *
      * @see https://developers.hubspot.com/docs/methods/products/delete-product
+     *
+     * @param mixed $id
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
