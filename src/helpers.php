@@ -4,12 +4,9 @@ if (!function_exists('build_query_string')) {
     /**
      * Generate a query string.
      *
-     * @param array $params
-     * @param int   $encoding
-     *
-     * @return string
+     * @param int $encoding
      */
-    function build_query_string($params = [], $encoding = PHP_QUERY_RFC3986)
+    function build_query_string(array $params = [], $encoding = PHP_QUERY_RFC3986): string
     {
         if (empty($params)) {
             return '';
@@ -43,10 +40,8 @@ if (!function_exists('build_batch_query_string')) {
      * @param string $key      the name of the query variable
      * @param array  $items    an array of item values for the variable
      * @param int    $encoding
-     *
-     * @return string
      */
-    function build_batch_query_string($key, $items, $encoding = PHP_QUERY_RFC3986)
+    function build_batch_query_string($key, array $items, $encoding = PHP_QUERY_RFC3986): string
     {
         return array_reduce($items, function ($query, $item) use ($key, $encoding) {
             return $query.'&'.url_encode($key, $encoding).'='.url_encode($item, $encoding);

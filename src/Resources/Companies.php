@@ -175,8 +175,8 @@ class Companies extends Resource
     /**
      * Returns a company with id $id.
      *
-     * @param int $id
-     * @param array $params    Array of optional parameters ['includeMergeAudits', 'includePropertyVersions']
+     * @param int   $id
+     * @param array $params Array of optional parameters ['includeMergeAudits', 'includePropertyVersions']
      *
      * @see https://developers.hubspot.com/docs/methods/companies/get_company
      *

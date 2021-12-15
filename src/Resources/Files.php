@@ -277,7 +277,7 @@ class Files extends Resource
     protected function getDefaultOptions(): array
     {
         return [
-            'access' => 'PUBLIC_INDEXABLE'
+            'access' => 'PUBLIC_INDEXABLE',
         ];
     }
 }

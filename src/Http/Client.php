@@ -53,7 +53,7 @@ class Client
      * @param array        $clientOptions options to be passed to Guzzle upon each request
      * @param bool         $wrapResponse  wrap request response in own Response object
      */
-    public function __construct($config = [], $client = null, $clientOptions = [], $wrapResponse = true)
+    public function __construct(array $config = [], $client = null, array $clientOptions = [], bool $wrapResponse = true)
     {
         $this->clientOptions = $clientOptions;
         $this->wrapResponse = $wrapResponse;
@@ -152,10 +152,8 @@ class Client
     /**
      * @param string $query_string the query string to send to the endpoint
      * @param string $addition     addition query string to send to the endpoint
-     *
-     * @return string
      */
-    protected function addQuery($query_string, $addition)
+    protected function addQuery($query_string, $addition): string
     {
         $result = '';
 
