@@ -39,6 +39,11 @@ $hubspot = new SevenShores\Hubspot\Factory([
   'key'      => 'demo',
   'oauth2'   => 'false', // default
 ]);
+
+// Then you can call a resource 
+// When referencing resources, use camelCase
+
+$hubspot->contactlists
 ```
 
 You can find more information about API keys [here](https://knowledge.hubspot.com/integrations/how-do-i-get-my-hubspot-api-key) and about access tokens [here](https://developers.hubspot.com/docs/api/oauth/tokens)
