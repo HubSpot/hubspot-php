@@ -2,7 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v3.2.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v3.2.1...HEAD)
+
+## [3.2.1]
+
+### Changed
+- Update type hinting
+- Update Readme 
+- Fix Products (rename parameter for createBatch) 
 
 ## [3.2.0]
 
