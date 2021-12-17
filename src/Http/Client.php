@@ -53,7 +53,7 @@ class Client
      * @param array        $clientOptions options to be passed to Guzzle upon each request
      * @param bool         $wrapResponse  wrap request response in own Response object
      */
-    public function __construct($config = [], $client = null, $clientOptions = [], $wrapResponse = true)
+    public function __construct(array $config = [], $client = null, array $clientOptions = [], bool $wrapResponse = true)
     {
         $this->clientOptions = $clientOptions;
         $this->wrapResponse = $wrapResponse;
@@ -90,7 +90,7 @@ class Client
      *
      * @return ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function request($method, $endpoint, array $options = [], $query_string = null, $requires_auth = true)
+    public function request(string $method, string $endpoint, array $options = [], $query_string = null, bool $requires_auth = true)
     {
         if ($requires_auth && empty($this->key)) {
             throw new InvalidArgument('You must provide a Hubspot api key or token.');
@@ -127,7 +127,7 @@ class Client
      *
      * @return string
      */
-    protected function generateUrl($endpoint, $query_string = null, $requires_auth = true)
+    protected function generateUrl(string $endpoint, $query_string = null, $requires_auth = true)
     {
         $url = $endpoint.'?';
 
@@ -152,10 +152,8 @@ class Client
     /**
      * @param string $query_string the query string to send to the endpoint
      * @param string $addition     addition query string to send to the endpoint
-     *
-     * @return string
      */
-    protected function addQuery($query_string, $addition)
+    protected function addQuery($query_string, $addition): string
     {
         $result = '';
 

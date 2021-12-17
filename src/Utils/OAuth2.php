@@ -13,10 +13,8 @@ class OAuth2
      * @param string $redirectURI         The URL that you want the visitor redirected to after granting access to your app. For security reasons, this URL must use https.
      * @param array  $scopesArray         a set of scopes that your app will need access to
      * @param array  $optionalScopesArray a set of optional scopes that your app will need access to
-     *
-     * @return string
      */
-    public static function getAuthUrl($clientId, $redirectURI, array $scopesArray = [], array $optionalScopesArray = [])
+    public static function getAuthUrl($clientId, $redirectURI, array $scopesArray = [], array $optionalScopesArray = []): string
     {
         return self::AUTHORIZE_URL.'?'.http_build_query([
             'client_id' => $clientId,

@@ -62,7 +62,7 @@ class Factory
      * @param array  $clientOptions options to be send with each request
      * @param bool   $wrapResponse  wrap request response in own Response object
      */
-    public function __construct(array $config = [], Client $client = null, array $clientOptions = [], $wrapResponse = true)
+    public function __construct(array $config = [], Client $client = null, array $clientOptions = [], bool $wrapResponse = true)
     {
         if (is_null($client)) {
             $client = new Client($config, null, $clientOptions, $wrapResponse);
