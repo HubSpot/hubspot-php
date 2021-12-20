@@ -20,7 +20,7 @@ use SevenShores\Hubspot\Exceptions\HubspotException;
  */
 class HubspotExceptionTest extends TestCase
 {
-    const EXAMPLE_TOKEN = '8907e60c-600d-4af8-a987-191c104a215c';
+    public const EXAMPLE_TOKEN = '8907e60c-600d-4af8-a987-191c104a215c';
 
     /** @test */
     public function createExceptionFromGuzzleRequestException()

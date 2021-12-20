@@ -15,7 +15,7 @@ use SevenShores\Hubspot\Tests\Integration\Abstraction\DefaultTestCase;
  */
 class EcommerceBridgeTest extends DefaultTestCase
 {
-    const STORE_ID = 'ecommercebridge-test-store';
+    public const STORE_ID = 'ecommercebridge-test-store';
 
     /**
      * @var EcommerceBridge
