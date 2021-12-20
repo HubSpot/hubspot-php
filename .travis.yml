@@ -3,8 +3,6 @@ sudo: false
 
 jobs:
   include:
-    - php: 7.2
-      env: PHPUNIT_SUITE=All
     - php: 7.3
       env: PHPUNIT_SUITE=Unit
     - php: 7.4
