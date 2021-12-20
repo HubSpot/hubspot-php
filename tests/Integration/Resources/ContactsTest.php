@@ -141,7 +141,7 @@ class ContactsTest extends EntityTestCase
         ], ['auditId' => 'TEST_CHANGE_SOURCE']);
         $this->assertEquals(202, $response->getStatusCode());
 
-        foreach ($this->resource->getBatchByEmails($emails)->getData() as  $contact) {
+        foreach ($this->resource->getBatchByEmails($emails)->getData() as $contact) {
             $this->resource->delete($contact->vid);
         }
     }
