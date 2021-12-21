@@ -6,7 +6,7 @@ namespace SevenShores\Hubspot\Tests\Unit\Support;
  * @internal
  * @coversNothing
  */
-class QueryBuilderTest extends \PHPUnit_Framework_TestCase
+class QueryBuilderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

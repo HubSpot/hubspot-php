@@ -13,14 +13,14 @@ use SevenShores\Hubspot\Resources\Owners;
  * @internal
  * @coversNothing
  */
-class OwnersTest extends \PHPUnit_Framework_TestCase
+class OwnersTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Owners
      */
     protected $owners;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->owners = new Owners(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));

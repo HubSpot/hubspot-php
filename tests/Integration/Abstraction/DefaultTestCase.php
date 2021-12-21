@@ -2,14 +2,14 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Abstraction;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use SevenShores\Hubspot\Http\Client;
 
 /**
  * @internal
  * @coversNothing
  */
-class DefaultTestCase extends PHPUnit_Framework_TestCase
+class DefaultTestCase extends TestCase
 {
     /**
      * @var null|SevenShores\Hubspot\Resources\Resource
@@ -26,7 +26,7 @@ class DefaultTestCase extends PHPUnit_Framework_TestCase
      */
     protected $key = 'HUBSPOT_TEST_API_KEY';
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

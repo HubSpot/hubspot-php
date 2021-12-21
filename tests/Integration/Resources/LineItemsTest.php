@@ -35,14 +35,14 @@ class LineItemsTest extends EntityTestCase
      */
     protected $product;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->product = $this->createProduct();
 
         parent::setUp();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
 

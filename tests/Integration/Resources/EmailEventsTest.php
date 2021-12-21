@@ -9,11 +9,11 @@ use SevenShores\Hubspot\Resources\EmailEvents;
  * @internal
  * @coversNothing
  */
-class EmailEventsTest extends \PHPUnit_Framework_TestCase
+class EmailEventsTest extends \PHPUnit\Framework\TestCase
 {
     protected $resource;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->resource = new EmailEvents(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));

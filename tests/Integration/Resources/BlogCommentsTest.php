@@ -33,14 +33,14 @@ class BlogCommentsTest extends BlogPostTestCase
      */
     protected $post;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->blogPostsResource = new BlogPosts(new Client(['key' => getenv($this->key)]));
 
         parent::setUp();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
         if (!empty($this->post)) {
