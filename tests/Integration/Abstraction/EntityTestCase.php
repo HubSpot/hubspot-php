@@ -9,7 +9,7 @@ abstract class EntityTestCase extends DefaultTestCase
      */
     protected $entity;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -17,7 +17,7 @@ abstract class EntityTestCase extends DefaultTestCase
         sleep(1);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
         if (!empty($this->entity)) {

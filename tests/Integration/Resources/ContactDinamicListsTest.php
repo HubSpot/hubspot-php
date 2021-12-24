@@ -21,7 +21,7 @@ class ContactDinamicListsTest extends ContactListsTestCase
      */
     protected $contactsResource;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

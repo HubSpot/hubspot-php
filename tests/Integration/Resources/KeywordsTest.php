@@ -9,11 +9,11 @@ use SevenShores\Hubspot\Resources\Keywords;
  * @internal
  * @coversNothing
  */
-class KeywordsTest extends \PHPUnit_Framework_TestCase
+class KeywordsTest extends \PHPUnit\Framework\TestCase
 {
     private $keywords;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->markTestSkipped(); // TODO: fix test

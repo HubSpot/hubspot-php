@@ -15,7 +15,7 @@ class HubDBRowTest extends HubDBRowTestCase
      */
     protected $row;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->row = $this->createRow();

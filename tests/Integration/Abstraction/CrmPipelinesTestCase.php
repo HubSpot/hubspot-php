@@ -25,7 +25,7 @@ class CrmPipelinesTestCase extends EntityTestCase
      */
     protected $resourceClass = CrmPipelines::class;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (empty($this->resource)) {
             $this->resource = new $this->resourceClass($this->getClient(), $this->type);

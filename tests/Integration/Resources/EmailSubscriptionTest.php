@@ -9,14 +9,14 @@ use SevenShores\Hubspot\Resources\EmailSubscription;
  * @internal
  * @coversNothing
  */
-class EmailSubscriptionTest extends \PHPUnit_Framework_TestCase
+class EmailSubscriptionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Email
      */
     protected $resource;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

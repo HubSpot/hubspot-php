@@ -8,7 +8,7 @@ use SevenShores\Hubspot\Utils;
  * @internal
  * @coversNothing
  */
-class WebhooksTest extends \PHPUnit_Framework_TestCase
+class WebhooksTest extends \PHPUnit\Framework\TestCase
 {
     protected $secret = 'clientSecret';
     protected $requestBody = 'SomeBody';

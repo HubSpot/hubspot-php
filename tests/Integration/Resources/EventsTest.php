@@ -9,11 +9,11 @@ use SevenShores\Hubspot\Resources\Events;
  * @internal
  * @coversNothing
  */
-class EventsTest extends \PHPUnit_Framework_TestCase
+class EventsTest extends \PHPUnit\Framework\TestCase
 {
     private $events;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->events = new Events(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
