@@ -33,7 +33,7 @@ class CalendarEventsTest extends EntityTestCase
      */
     protected $owner;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->ownersResource = new Owners($this->getClient());
         $response = $this->ownersResource->all(['email' => getenv('HUBSPOT_TEST_EMAIL')]);

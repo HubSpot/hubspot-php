@@ -13,5 +13,7 @@ test.php
 .phpintel
 /nbproject
 
-.php_cs
-.php_cs.cache
+.php_cs-fixer
+.php-cs-fixer.cache
+
+.phpunit.result.cache

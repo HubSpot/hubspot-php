@@ -31,7 +31,7 @@ class CompaniesTest extends EntityTestCase
      */
     protected $contactsResource;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->contactsResource = new Contacts($this->getClient());
         parent::setUp();

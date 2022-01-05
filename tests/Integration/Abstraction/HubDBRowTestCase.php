@@ -22,7 +22,7 @@ abstract class HubDBRowTestCase extends EntityTestCase
      */
     protected $portalId;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (empty(getenv('HUBSPOT_TEST_PORTAL_ID'))) {
             throw new Exception('Invalid Portal Id (HUBSPOT_TEST_PORTAL_ID)');

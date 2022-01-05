@@ -8,7 +8,7 @@ use SevenShores\Hubspot\Utils;
  * @internal
  * @coversNothing
  */
-class OAuth2Test extends \PHPUnit_Framework_TestCase
+class OAuth2Test extends \PHPUnit\Framework\TestCase
 {
     /** @test */
     public function buildAuthorizationUrl()

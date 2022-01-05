@@ -32,7 +32,7 @@ class EngagementsTest extends EntityTestCase
      */
     protected $contact;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->contactsResource = new Contacts($this->getClient());
 
@@ -42,7 +42,7 @@ class EngagementsTest extends EntityTestCase
         parent::setUp();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
         if (!empty($this->contact)) {

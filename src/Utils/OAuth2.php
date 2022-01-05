@@ -4,7 +4,7 @@ namespace SevenShores\Hubspot\Utils;
 
 class OAuth2
 {
-    const AUTHORIZE_URL = 'https://app.hubspot.com/oauth/authorize';
+    public const AUTHORIZE_URL = 'https://app.hubspot.com/oauth/authorize';
 
     /**
      * Initiate an Integration with OAuth 2.0.

@@ -9,13 +9,13 @@ abstract class TimelineWithProprtyTestCase extends TimelineTestCase
      */
     protected $property;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->property = $this->createProperty();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if (!empty($this->property)) {
             $this->deleteProperty();

@@ -14,7 +14,7 @@ abstract class BlogPostTestCase extends EntityTestCase
 
     protected $authorId;
 
-    public function setUp()
+    public function setUp(): void
     {
         $blogs = new Blogs(new Client(['key' => getenv($this->key)]));
         $this->blogId = $blogs->all(['limit' => 1])->objects[0]->id;

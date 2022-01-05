@@ -13,14 +13,14 @@ use SevenShores\Hubspot\Resources\Integration;
  * @internal
  * @coversNothing
  */
-class IntegrationTest extends \PHPUnit_Framework_TestCase
+class IntegrationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Integration
      */
     private $integration;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->integration = new Integration(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));

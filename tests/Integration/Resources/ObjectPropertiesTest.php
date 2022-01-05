@@ -16,7 +16,7 @@ class ObjectPropertiesTest extends PropertiesTestCase
      */
     protected $groupName = 'productinformation';
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->resource = Factory::create(getenv('HUBSPOT_TEST_API_KEY'))->objectProperties('products');
         sleep(1);

@@ -63,10 +63,13 @@ if (!function_exists('url_encode')) {
         switch ($encoding) {
             case false:
                 return $value;
+
             case PHP_QUERY_RFC3986:
                 return rawurlencode($value);
+
             case PHP_QUERY_RFC1738:
                 return urlencode($value);
+
             default:
                 throw new \InvalidArgumentException('Invalid type');
         }
@@ -86,10 +89,13 @@ if (!function_exists('ms_timestamp')) {
         switch (true) {
             case $time instanceof \DateTime:
                 return $time->getTimestamp() * 1000;
+
             case is_numeric($time) && 10 === strlen((string) $time):
                 return $time * 1000;
+
             case is_string($time):
                 return strtotime($time) * 1000;
+
             default:
                 return $time;
         }

@@ -27,7 +27,7 @@ abstract class TimelineTestCase extends EntityTestCase
      */
     protected $appId;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (empty(getenv('HUBSPOT_TEST_APP_ID'))) {
             throw new Exception('Invalid Application Id (HUBSPOT_TEST_APP_ID)');
