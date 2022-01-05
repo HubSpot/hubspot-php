@@ -2,7 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v3.2.1...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v4.0.0...HEAD)
+
+## [4.0.0]
+
+### Changed
+- Update Guzzle version (^7.3)
+- Update Php version (>=7.3)
+- Update Php cs fixer (^3.4)
+- Update Phpunit (^9.5)
+- Update Phpspec (^7.1)
 
 ## [3.2.1]
 
