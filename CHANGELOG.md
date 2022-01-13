@@ -2,7 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v4.0.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v4.0.1...HEAD)
+
+## [4.0.1]
+
+### Changed
+- Fix composer json
 
 ## [4.0.0]
 
