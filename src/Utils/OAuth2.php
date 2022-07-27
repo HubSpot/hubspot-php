@@ -14,13 +14,13 @@ class OAuth2
      * @param array  $scopesArray         a set of scopes that your app will need access to
      * @param array  $optionalScopesArray a set of optional scopes that your app will need access to
      */
-    public static function getAuthUrl($clientId, $redirectURI, array $scopesArray = [], array $optionalScopesArray = []): string
+    public static function getAuthUrl(string $clientId, string $redirectURI, array $scopesArray = [], array $optionalScopesArray = []): string
     {
         return self::AUTHORIZE_URL.'?'.http_build_query([
             'client_id' => $clientId,
             'redirect_uri' => $redirectURI,
             'scope' => implode(' ', $scopesArray),
             'optional_scope' => implode(' ', $optionalScopesArray),
-        ], null, '&', PHP_QUERY_RFC3986);
+        ], '', '&', PHP_QUERY_RFC3986);
     }
 }
