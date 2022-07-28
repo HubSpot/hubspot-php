@@ -6,8 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.0.2]
 
-### Added
-- add support php v8.1
+### Changed
+- fix warnings on php v8.1
 
 ## [4.0.1]
 
