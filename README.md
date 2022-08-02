@@ -7,11 +7,9 @@
 
 [Hubspot](https://www.hubspot.com/) is a marketing, sales, and service software that helps your business grow without compromise. Because “good for the business” should also mean “good for the customer.”
 
-## This library supports only legacy API
+## This library supports only [legacy API](https://legacydocs.hubspot.com/docs/overview)
 
-[Legacy API docs](https://legacydocs.hubspot.com/docs/overview)
-
-[Switch to HubSpot API v3 SDK](https://github.com/HubSpot/hubspot-api-php)
+Please consider switching to [the latest API](https://github.com/HubSpot/hubspot-api-php).
 
 ## Setup
 
