@@ -7,6 +7,12 @@
 
 [Hubspot](https://www.hubspot.com/) is a marketing, sales, and service software that helps your business grow without compromise. Because “good for the business” should also mean “good for the customer.”
 
+## This library supports only legacy API
+
+[Legacy API docs](https://legacydocs.hubspot.com/docs/overview)
+
+[Switch to HubSpot API v3 SDK](https://github.com/HubSpot/hubspot-api-php)
+
 ## Setup
 
 **Composer:**
@@ -28,7 +34,7 @@ All following examples assume this step.
 ```php
 $hubspot = SevenShores\Hubspot\Factory::create('api-key');
 
-// OR create with OAuth2 access token
+// OR create with access token (OAuth2 or Private App)
 
 $hubspot = SevenShores\Hubspot\Factory::createWithOAuth2Token('access-token');
 
@@ -46,7 +52,7 @@ $hubspot = new SevenShores\Hubspot\Factory([
 $hubspot->contactlists
 ```
 
-You can find more information about API keys [here](https://knowledge.hubspot.com/integrations/how-do-i-get-my-hubspot-api-key) and about access tokens [here](https://developers.hubspot.com/docs/api/oauth/tokens)
+You can find more information about API keys [here](https://knowledge.hubspot.com/integrations/how-do-i-get-my-hubspot-api-key), about oauth2 access tokens [here](https://developers.hubspot.com/docs/api/oauth/tokens) and about private app access token [here](https://developers.hubspot.com/docs/api/private-apps)
 
 *Note:* You can prevent any error handling provided by this package by passing following options into client creation routine:
 (applies also to `Factory::create()` and `Factory::createWithOAuth2Token()`)
