@@ -8,6 +8,7 @@ WORKDIR /app
 ADD composer.json /app
 ADD tests /app/tests
 ADD src /app/src
+
 RUN /usr/local/bin/composer install
-# , "./vendor/bin/phpunit", "tests/integration/Resources/ContactsTest.php" 
-CMD [ "php", "./vendor/bin/phpunit", "tests/integration/Resources/ContactsTest.php"]
+
+CMD [ "php", "./vendor/bin/phpunit", "tests"]
