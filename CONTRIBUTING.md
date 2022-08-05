@@ -20,9 +20,9 @@ agree to not be a jerk.
     vendor/bin/phpunit tests/integration/Resources/TimelineTest
 ```
 or you can run tests with docker:
-    1. Copy .env.template to .env
-    2. Specify data in .env (for most tests it is enough to specify HUBSPOT_TEST_API_KEY)
-    3. `docker-compose up --build`
+1. Copy .env.template to .env
+2. Specify data in .env (for most tests it is enough to specify HUBSPOT_TEST_API_KEY)
+3. `docker-compose up --build`
 
 
 - Push to your fork and [submit a pull request][pr].
