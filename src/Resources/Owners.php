@@ -7,7 +7,7 @@ namespace SevenShores\Hubspot\Resources;
  *
  * @see https://developers.hubspot.com/docs/methods/owners/owners_overview
  */
-class Owners extends Resource
+class Owners extends Endpoint
 {
     /**
      * @return \SevenShores\Hubspot\Http\Response

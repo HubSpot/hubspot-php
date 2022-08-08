@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/pipelines/pipelines_overview
  */
-class CrmPipelines extends Resource
+class CrmPipelines extends Endpoint
 {
     /**
      * @var string

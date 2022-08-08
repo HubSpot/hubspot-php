@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/workflows/v3/get_workflows
  */
-class Workflows extends Resource
+class Workflows extends Endpoint
 {
     /**
      * Get all workflows.

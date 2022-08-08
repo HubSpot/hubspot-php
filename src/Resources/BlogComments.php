@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class BlogComments extends Resource
+class BlogComments extends Endpoint
 {
     /**
      * Get all comments.

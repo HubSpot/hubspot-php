@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class Events extends Resource
+class Events extends Endpoint
 {
     /**
      * Trigger a custom event.

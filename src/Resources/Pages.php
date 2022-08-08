@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class Pages extends Resource
+class Pages extends Endpoint
 {
     /**
      * Create a new page.

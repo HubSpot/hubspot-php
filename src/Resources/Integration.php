@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class Integration extends Resource
+class Integration extends Endpoint
 {
     /**
      * Get account details.

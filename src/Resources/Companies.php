@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/companies/companies-overview
  */
-class Companies extends Resource
+class Companies extends Endpoint
 {
     /**
      * Create a company.

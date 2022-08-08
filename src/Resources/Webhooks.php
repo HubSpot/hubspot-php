@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class Webhooks extends Resource
+class Webhooks extends Endpoint
 {
     /**
      * Get list of subscriptions.

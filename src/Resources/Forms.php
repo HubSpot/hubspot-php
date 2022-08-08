@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class Forms extends Resource
+class Forms extends Endpoint
 {
     /**
      * Submit data to a form.

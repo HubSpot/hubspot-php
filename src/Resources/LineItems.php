@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/line-items/line-items-overview
  */
-class LineItems extends Resource
+class LineItems extends Endpoint
 {
     /**
      * Get all line items.

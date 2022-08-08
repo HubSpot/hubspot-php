@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/contacts/contact-properties-overview
  */
-class ContactProperties extends Resource
+class ContactProperties extends Endpoint
 {
     /**
      * Get all Contact properties.

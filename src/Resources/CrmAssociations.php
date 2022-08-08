@@ -7,7 +7,7 @@ use SevenShores\Hubspot\Exceptions\BadRequest;
 /**
  * @see https://developers.hubspot.com/docs/methods/crm-associations/crm-associations-overview
  */
-class CrmAssociations extends Resource
+class CrmAssociations extends Endpoint
 {
     public const CONTACT_TO_COMPANY = 1;
     public const COMPANY_TO_CONTACT = 2;

@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * https://developers.hubspot.com/docs/methods/deals/deal_properties_overview.
  */
-class DealProperties extends Resource
+class DealProperties extends Endpoint
 {
     /**
      * Get a Deal Property.

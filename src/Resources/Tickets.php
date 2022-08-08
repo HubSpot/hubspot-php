@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class Tickets extends Resource
+class Tickets extends Endpoint
 {
     /**
      * @param array $ticket array of deal properties

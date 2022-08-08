@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/email/email_events_overview
  */
-class EmailEvents extends Resource
+class EmailEvents extends Endpoint
 {
     /**
      * Get campaign IDs with recent activity for a portal.

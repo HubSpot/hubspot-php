@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/companies/company-properties-overview
  */
-class CompanyProperties extends Resource
+class CompanyProperties extends Endpoint
 {
     /**
      * Creates a property on every company object to store a specific piece of data.

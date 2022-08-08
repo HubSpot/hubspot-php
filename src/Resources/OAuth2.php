@@ -6,7 +6,7 @@ use SevenShores\Hubspot\Exceptions\BadRequest;
 use SevenShores\Hubspot\Http\Response;
 use SevenShores\Hubspot\Utils;
 
-class OAuth2 extends Resource
+class OAuth2 extends Endpoint
 {
     protected $endpoint = 'https://api.hubapi.com/oauth/v1';
 

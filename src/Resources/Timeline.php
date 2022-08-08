@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class Timeline extends Resource
+class Timeline extends Endpoint
 {
     /**
      * Create or Update Timeline Event.

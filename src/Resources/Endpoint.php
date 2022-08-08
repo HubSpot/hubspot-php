@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-abstract class Resource
+abstract class Endpoint
 {
     /**
      * @var \SevenShores\Hubspot\Http\Client

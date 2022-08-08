@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/hubdb/hubdb_overview
  */
-class HubDB extends Resource
+class HubDB extends Endpoint
 {
     /**
      * Get all tables.

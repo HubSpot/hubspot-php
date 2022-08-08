@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/analytics/analytics-overview
  */
-class Analytics extends Resource
+class Analytics extends Endpoint
 {
     /**
      * Get analytics data broken down by the specified category.

@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class CalendarEvents extends Resource
+class CalendarEvents extends Endpoint
 {
     /**
      * List content events.

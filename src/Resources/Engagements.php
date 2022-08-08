@@ -7,7 +7,7 @@ use SevenShores\Hubspot\Exceptions\BadRequest;
 /**
  * @see https://developers.hubspot.com/docs/methods/engagements/engagements-overview
  */
-class Engagements extends Resource
+class Engagements extends Endpoint
 {
     /**
      * Create an engagement.

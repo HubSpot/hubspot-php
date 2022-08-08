@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class BlogAuthors extends Resource
+class BlogAuthors extends Endpoint
 {
     /**
      * Get all blog authors.

@@ -3,7 +3,7 @@
 namespace SevenShores\Hubspot;
 
 use SevenShores\Hubspot\Http\Client;
-use SevenShores\Hubspot\Resources\Resource;
+use SevenShores\Hubspot\Resources\Endpoint;
 
 /**
  * Class Factory.
@@ -71,11 +71,11 @@ class Factory
     }
 
     /**
-     * Return an instance of a Resource based on the method called.
+     * Return an instance of a Endpoint based on the method called.
      *
      * @param mixed $args
      */
-    public function __call(string $name, $args): Resource
+    public function __call(string $name, $args): Endpoint
     {
         $resource = 'SevenShores\\Hubspot\\Resources\\'.ucfirst($name);
 

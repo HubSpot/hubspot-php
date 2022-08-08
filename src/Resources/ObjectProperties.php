@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/crm-properties/crm-properties-overview
  */
-class ObjectProperties extends Resource
+class ObjectProperties extends Endpoint
 {
     /**
      * @var string

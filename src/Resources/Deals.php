@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/deals/deals_overview
  */
-class Deals extends Resource
+class Deals extends Endpoint
 {
     /**
      * Create a deal.

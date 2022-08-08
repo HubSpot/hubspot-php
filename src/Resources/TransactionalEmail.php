@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/email/transactional_email
  */
-class TransactionalEmail extends Resource
+class TransactionalEmail extends Endpoint
 {
     /**
      * List SMTP API Tokens.

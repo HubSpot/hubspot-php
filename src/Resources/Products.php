@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/products/products-overview
  */
-class Products extends Resource
+class Products extends Endpoint
 {
     /**
      * Get all products.

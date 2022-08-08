@@ -5,7 +5,7 @@ namespace SevenShores\Hubspot\Resources;
 /**
  * @see https://developers.hubspot.com/docs/methods/lists/contact-lists-overview
  */
-class ContactLists extends Resource
+class ContactLists extends Endpoint
 {
     /**
      * Create a new contact list.

@@ -7,7 +7,7 @@ namespace SevenShores\Hubspot\Resources;
  * @see CrmPipelines Please use CrmPipelines to manage deal pipelines.
  * @deprecated
  */
-class DealPipelines extends Resource
+class DealPipelines extends Endpoint
 {
     /**
      * Get all pipelines.

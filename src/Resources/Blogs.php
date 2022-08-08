@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class Blogs extends Resource
+class Blogs extends Endpoint
 {
     /**
      * Get all blogs.

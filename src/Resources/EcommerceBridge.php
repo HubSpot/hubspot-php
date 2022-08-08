@@ -7,7 +7,7 @@ namespace SevenShores\Hubspot\Resources;
  *
  * @see https://developers.hubspot.com/docs/methods/ecomm-bridge/v2/ecommerce-bridge-overview
  */
-class EcommerceBridge extends Resource
+class EcommerceBridge extends Endpoint
 {
     /**
      * Create or update ecommerce settings.

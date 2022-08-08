@@ -2,16 +2,16 @@
 
 namespace SevenShores\Hubspot\Resources;
 
-class Files extends Resource
+class Files extends Endpoint
 {
     /**
      * Upload a new file.
      *
-     * @param resource|string $file
-     *
-     * @see https://legacydocs.hubspot.com/docs/methods/files/v3/upload_new_file
+     * @param Endpoint|string $file
      *
      * @return \SevenShores\Hubspot\Http\Response
+     *@see https://legacydocs.hubspot.com/docs/methods/files/v3/upload_new_file
+     *
      */
     public function upload(
         $file,
@@ -50,9 +50,9 @@ class Files extends Resource
     }
 
     /**
-     * @param resource|string $file
+     * @param Endpoint|string $file
      *
-     * @return resource
+     * @return Endpoint
      */
     public function getResource($file)
     {
@@ -83,7 +83,7 @@ class Files extends Resource
      * Upload a replacement file.
      *
      * @param int             $file_id The file ID
-     * @param resource|string $file    The file path
+     * @param Endpoint|string $file    The file path
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
