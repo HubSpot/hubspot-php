@@ -3,7 +3,7 @@
 namespace SevenShores\Hubspot\Tests\Integration\Abstraction;
 
 use Exception;
-use SevenShores\Hubspot\Resources\HubDB;
+use SevenShores\Hubspot\Endpoints\HubDB;
 
 abstract class HubDBRowTestCase extends EntityTestCase
 {

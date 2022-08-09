@@ -12,12 +12,12 @@ use SevenShores\Hubspot\Http\Client;
 class DefaultTestCase extends TestCase
 {
     /**
-     * @var null|SevenShores\Hubspot\Resources\Resource
+     * @var null|SevenShores\Hubspot\Endpoints\Endpoint
      */
     protected $resource;
 
     /**
-     * @var null|SevenShores\Hubspot\Resources\Resource::class
+     * @var null|SevenShores\Hubspot\Endpoints\Endpoint::class
      */
     protected $resourceClass;
 

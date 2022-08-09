@@ -2,7 +2,7 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Abstraction;
 
-use SevenShores\Hubspot\Resources\CrmPipelines;
+use SevenShores\Hubspot\Endpoints\CrmPipelines;
 
 /**
  * @internal
@@ -16,12 +16,12 @@ class CrmPipelinesTestCase extends EntityTestCase
     protected $type = 'deals';
 
     /**
-     * @var SevenShores\Hubspot\Resources\CrmPipelines
+     * @var SevenShores\Hubspot\Endpoints\CrmPipelines
      */
     protected $resource;
 
     /**
-     * @var SevenShores\Hubspot\Resources\CrmPipelines::class
+     * @var SevenShores\Hubspot\Endpoints\CrmPipelines::class
      */
     protected $resourceClass = CrmPipelines::class;
 

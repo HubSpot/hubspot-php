@@ -166,7 +166,7 @@ $response->getReasonPhrase() // 'OK';
 require 'vendor/autoload.php';
 
 use SevenShores\Hubspot\Http\Client;
-use SevenShores\Hubspot\Resources\Contacts;
+use SevenShores\Hubspot\Endpoints\Contacts;
 
 $client = new Client(['key' => 'demo']);
 
