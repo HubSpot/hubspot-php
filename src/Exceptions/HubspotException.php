@@ -23,7 +23,8 @@ class HubspotException extends Exception
     {
         $e = new static(
             static::sanitizeResponseMessage($guzzleException->getMessage()),
-            $guzzleException->getCode()
+            $guzzleException->getCode(),
+            $guzzleException
         );
 
         $e->response = $guzzleException->getResponse();
