@@ -112,8 +112,14 @@ class Client
 
             return new Response($this->client->request($method, $url, $options));
         } catch (ServerException $e) {
+            if (false === $this->wrapResponse) {
+                throw $e;
+            }
             throw HubspotException::create($e);
         } catch (ClientException $e) {
+            if (false === $this->wrapResponse) {
+                throw $e;
+            }
             throw BadRequest::create($e);
         }
     }
