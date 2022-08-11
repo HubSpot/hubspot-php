@@ -16,7 +16,7 @@ class SignatureTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function validationHubspotSignatureValidData()
     {
-        $result = Utils\Signature::isHubspotSignatureValid([
+        $result = Utils\Signature::isValid([
             'signature' => hash('sha256', $this->secret.$this->requestBody),
             'secret' => $this->secret,
             'requestBody' => $this->requestBody
@@ -31,7 +31,7 @@ class SignatureTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function validationHubspotSignatureInvalidData()
     {
-        $result = Utils\Signature::isHubspotSignatureValid([
+        $result = Utils\Signature::isValid([
             'signature' => hash('sha256', $this->secret.$this->requestBody.'1'),
             'secret' => $this->secret,
             'requestBody' => $this->requestBody
