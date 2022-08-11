@@ -2,7 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v4.0.2...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.0.0...HEAD)
+
+## [5.0.0]
+
+### Changed
+- All `Resources` was renamed to `Endponts` (e.x. `SevenShores\Hubspot\Endpoints\Contacts`)
+- Added to exceptions ('SevenShores\Hubspot\Exceptions{ BadRequest, HubspotException}') previous exception
+- Fixed wrapResponse (if wrapResponse=false exeptions won't be wrapped)
+- Added docker container for running tests and updated contributing.mb
+- Webhooks Util announced deprecated
+- Signature Util added (Validation requests from HubSpot)
 
 ## [4.0.2]
 
@@ -105,5 +115,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Trying to return a response with`RequestException` in the `Client`. It now re-throws a new `BadRequest` Exception. [#48](https://github.com/ryanwinchester/hubspot-php/issues/48) @ryanwinchester
 
-[Unreleased]: https://github.com/ryanwinchester/hubspot-php/compare/v4.0.2...HEAD
+[Unreleased]: https://github.com/ryanwinchester/hubspot-php/compare/v5.0.0...HEAD
 [1.0.0-rc.1]: https://github.com/ryanwinchester/hubspot-php/compare/v0.9.11...v1.0.0-rc.1
