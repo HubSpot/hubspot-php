@@ -3,7 +3,7 @@
 namespace SevenShores\Hubspot\Tests\Integration\Abstraction;
 
 use Exception;
-use SevenShores\Hubspot\Resources\ContactLists;
+use SevenShores\Hubspot\Endpoints\ContactLists;
 
 abstract class ContactListsTestCase extends EntityTestCase
 {

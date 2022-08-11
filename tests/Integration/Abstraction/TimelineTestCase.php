@@ -3,7 +3,7 @@
 namespace SevenShores\Hubspot\Tests\Integration\Abstraction;
 
 use Exception;
-use SevenShores\Hubspot\Resources\Timeline;
+use SevenShores\Hubspot\Endpoints\Timeline;
 
 abstract class TimelineTestCase extends EntityTestCase
 {

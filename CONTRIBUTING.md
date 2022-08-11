@@ -17,7 +17,7 @@ agree to not be a jerk.
 
 - Make your change. Add test for your changes. Make the tests pass, e.g.:
 ```
-    vendor/bin/phpunit tests/integration/Resources/TimelineTest
+    vendor/bin/phpunit tests/integration/Endpoints/TimelineTest
 ```
 or you can run tests with docker:
 1. Copy .env.template to .env
@@ -46,7 +46,7 @@ Some things that will increase the chance that your pull request is accepted:
 
 This is actually pretty easy.
 
-- Create a new Class in `src/Resources` that extends `Resource`.
+- Create a new Class in `src/Endpoints` that extends `Endpoint`.
 - Check existing classes for examples, it is pretty simple.
 - Add a method for each endpoint with a name that matches the endpoint url.
 - Make **required** parameters separate method arguments and *optional* parameters part of a `$params` array
