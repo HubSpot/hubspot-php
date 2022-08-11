@@ -19,7 +19,7 @@ class SignatureTest extends \PHPUnit\Framework\TestCase
         $result = Utils\Signature::isValid([
             'signature' => hash('sha256', $this->secret.$this->requestBody),
             'secret' => $this->secret,
-            'requestBody' => $this->requestBody
+            'requestBody' => $this->requestBody,
         ]);
 
         $this->assertEquals(
@@ -34,7 +34,7 @@ class SignatureTest extends \PHPUnit\Framework\TestCase
         $result = Utils\Signature::isValid([
             'signature' => hash('sha256', $this->secret.$this->requestBody.'1'),
             'secret' => $this->secret,
-            'requestBody' => $this->requestBody
+            'requestBody' => $this->requestBody,
         ]);
 
         $this->assertEquals(

@@ -115,11 +115,13 @@ class Client
             if (false === $this->wrapResponse) {
                 throw $e;
             }
+
             throw HubspotException::create($e);
         } catch (ClientException $e) {
             if (false === $this->wrapResponse) {
                 throw $e;
             }
+
             throw BadRequest::create($e);
         }
     }

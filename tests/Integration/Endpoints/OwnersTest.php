@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Endpoints;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Endpoints\Owners;
+use SevenShores\Hubspot\Http\Client;
 
 /**
  * Class OwnersTest.

@@ -2,9 +2,9 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Endpoints;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Endpoints\BlogComments;
 use SevenShores\Hubspot\Endpoints\BlogPosts;
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Tests\Integration\Abstraction\BlogPostTestCase;
 
 /**

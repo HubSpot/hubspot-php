@@ -2,10 +2,10 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Endpoints;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Endpoints\Companies;
 use SevenShores\Hubspot\Endpoints\Contacts;
 use SevenShores\Hubspot\Endpoints\Deals;
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
 /**
@@ -178,7 +178,7 @@ class DealsTest extends EntityTestCase
         ]);
         $this->assertEquals(204, $associateResponse->getStatusCode());
 
-        //Check what was associated
+        // Check what was associated
         $byIdResponse = $this->resource->getById($this->entity->dealId);
 
         $associatedCompanies = $byIdResponse->associations->associatedCompanyIds;
@@ -189,7 +189,7 @@ class DealsTest extends EntityTestCase
 
         $this->assertEquals($expectedAssociatedCompanies, $associatedCompanies);
 
-        //Now disassociate
+        // Now disassociate
         $response = $this->resource->disassociateFromCompany($this->entity->dealId, [
             $firstCompanyId,
             $secondCompanyId,
@@ -218,7 +218,7 @@ class DealsTest extends EntityTestCase
         ]);
         $this->assertSame(204, $associateResponse->getStatusCode());
 
-        //Check what was associated
+        // Check what was associated
         $byIdResponse = $this->resource->getById($this->entity->dealId);
 
         $associatedContacts = $byIdResponse->associations->associatedVids;
@@ -229,7 +229,7 @@ class DealsTest extends EntityTestCase
 
         $this->assertEquals($expectedAssociatedContacts, $associatedContacts);
 
-        //Now disassociate
+        // Now disassociate
         $response = $this->resource->disassociateFromContact($this->entity->dealId, [
             $firstContactId,
             $secondContactId,
