@@ -1,6 +1,6 @@
 {
     "name": "hubspot/hubspot-php",
-    "version": "4.0.2",
+    "version": "5.0.0",
     "description": "HubSpot PHP API client",
     "keywords": [ "hubspot", "api" ],
     "license": "Apache-2.0",
