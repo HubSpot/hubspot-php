@@ -7,7 +7,7 @@ class Files extends Endpoint
     /**
      * Upload a new file.
      *
-     * @param Endpoint|string $file
+     * @param resource|string $file
      *
      * @return \SevenShores\Hubspot\Http\Response
      *@see https://legacydocs.hubspot.com/docs/methods/files/v3/upload_new_file
@@ -50,9 +50,9 @@ class Files extends Endpoint
     }
 
     /**
-     * @param Endpoint|string $file
+     * @param resource|string $file
      *
-     * @return Endpoint
+     * @return resource
      */
     public function getResource($file)
     {
@@ -83,7 +83,7 @@ class Files extends Endpoint
      * Upload a replacement file.
      *
      * @param int             $file_id The file ID
-     * @param Endpoint|string $file    The file path
+     * @param resource|string $file    The file path
      *
      * @return \SevenShores\Hubspot\Http\Response
      */
