@@ -2,9 +2,9 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Endpoints;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Endpoints\LineItems;
 use SevenShores\Hubspot\Endpoints\Products;
+use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
 /**

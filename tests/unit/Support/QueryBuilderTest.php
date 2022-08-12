@@ -108,10 +108,15 @@ class QueryBuilderTest extends \PHPUnit\Framework\TestCase
     public function buildDataProvider()
     {
         yield 'string' => [['firstname' => 'joe', 'lastname' => 'blo'], '&firstname=joe&lastname=blo'];
+
         yield 'int' => [['firstname' => 'joe', 'active' => 1], '&firstname=joe&active=1'];
+
         yield 'bool true' => [['firstname' => 'joe', 'active' => true], '&firstname=joe&active=true'];
+
         yield 'bool false' => [['firstname' => 'joe', 'active' => false], '&firstname=joe'];
+
         yield 'empty array' => [['firstname' => 'joe', 'property' => []], '&firstname=joe'];
+
         yield 'array' => [['firstname' => 'joe', 'property' => ['foo']], '&firstname=joe&property=foo'];
     }
 }

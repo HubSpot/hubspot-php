@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Endpoints\Endpoint;
+use SevenShores\Hubspot\Http\Client;
 
 /**
  * Class Factory.

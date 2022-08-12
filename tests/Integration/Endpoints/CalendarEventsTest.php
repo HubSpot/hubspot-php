@@ -119,7 +119,7 @@ class CalendarEventsTest extends EntityTestCase
     protected function createEntity()
     {
         return $this->resource->createTask([
-            'eventDate' => strtotime('+1 day') * 1000, //timestamp in milliseconds
+            'eventDate' => strtotime('+1 day') * 1000, // timestamp in milliseconds
             'eventType' => 'PUBLISHING_TASK',
             'category' => 'EMAIL',
             'state' => 'TODO',

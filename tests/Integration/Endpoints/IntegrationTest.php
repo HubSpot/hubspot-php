@@ -2,8 +2,8 @@
 
 namespace SevenShores\Hubspot\Tests\Integration\Endpoints;
 
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Endpoints\Integration;
+use SevenShores\Hubspot\Http\Client;
 
 /**
  * Class IntegrationTest.

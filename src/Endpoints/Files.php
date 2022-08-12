@@ -10,8 +10,8 @@ class Files extends Endpoint
      * @param resource|string $file
      *
      * @return \SevenShores\Hubspot\Http\Response
-     *@see https://legacydocs.hubspot.com/docs/methods/files/v3/upload_new_file
      *
+     *@see https://legacydocs.hubspot.com/docs/methods/files/v3/upload_new_file
      */
     public function upload(
         $file,

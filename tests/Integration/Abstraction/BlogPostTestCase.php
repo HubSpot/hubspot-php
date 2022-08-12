@@ -3,10 +3,10 @@
 namespace SevenShores\Hubspot\Tests\Integration\Abstraction;
 
 use DateTime;
-use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Endpoints\BlogAuthors;
 use SevenShores\Hubspot\Endpoints\BlogPosts;
 use SevenShores\Hubspot\Endpoints\Blogs;
+use SevenShores\Hubspot\Http\Client;
 
 abstract class BlogPostTestCase extends EntityTestCase
 {
