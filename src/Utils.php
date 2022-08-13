@@ -12,9 +12,9 @@ class Utils
 {
     public function __call(string $name, $arguments = null)
     {
-        $resource = 'SevenShores\\Hubspot\\Utils\\'.ucfirst($name);
+        $endpoint = 'SevenShores\\Hubspot\\Utils\\'.ucfirst($name);
 
-        return new $resource();
+        return new $endpoint();
     }
 
     public static function getFactory()
