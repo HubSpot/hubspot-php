@@ -14,17 +14,17 @@ class AnalyticsTest extends DefaultTestCase
     /**
      * @var Analytics
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var Analytics:class
      */
-    protected $resourceClass = Analytics::class;
+    protected $endpointClass = Analytics::class;
 
     /** @test */
     public function getByCategory()
     {
-        $response = $this->resource->getByCategory('totals', 'total', '20180101', '20180301');
+        $response = $this->endpoint->getByCategory('totals', 'total', '20180101', '20180301');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -32,7 +32,7 @@ class AnalyticsTest extends DefaultTestCase
     /** @test */
     public function getByType()
     {
-        $response = $this->resource->getByType('forms', 'total', '20180101', '20180301');
+        $response = $this->endpoint->getByType('forms', 'total', '20180101', '20180301');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -40,7 +40,7 @@ class AnalyticsTest extends DefaultTestCase
     /** @test */
     public function getHosted()
     {
-        $response = $this->resource->getHosted('standard-pages', 'total', '20180101', '20180301');
+        $response = $this->endpoint->getHosted('standard-pages', 'total', '20180101', '20180301');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -48,7 +48,7 @@ class AnalyticsTest extends DefaultTestCase
     /** @test */
     public function checkForExistence()
     {
-        $response = $this->resource->checkForExistence('event-completions');
+        $response = $this->endpoint->checkForExistence('event-completions');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -56,7 +56,7 @@ class AnalyticsTest extends DefaultTestCase
     /** @test */
     public function getEvents()
     {
-        $response = $this->resource->getEvents();
+        $response = $this->endpoint->getEvents();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -64,7 +64,7 @@ class AnalyticsTest extends DefaultTestCase
     /** @test */
     public function getViews()
     {
-        $response = $this->resource->getViews();
+        $response = $this->endpoint->getViews();
 
         $this->assertEquals(200, $response->getStatusCode());
     }

@@ -25,11 +25,11 @@ abstract class BlogPostTestCase extends EntityTestCase
         parent::setUp();
     }
 
-    protected function createPost(BlogPosts $resource)
+    protected function createPost(BlogPosts $endpoint)
     {
         $date = new DateTime();
 
-        return $resource->create([
+        return $endpoint->create([
             'name' => 'My Super Awesome Post '.uniqid(),
             'content_group_id' => $this->blogId,
             'publish_date' => $date->getTimestamp(),

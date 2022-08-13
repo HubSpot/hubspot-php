@@ -14,7 +14,7 @@ class ContactPropertiesTest extends PropertiesTestCase
     /**
      * @var null|SevenShores\Hubspot\Endpoints\Endpoint
      */
-    protected $resourceClass = ContactProperties::class;
+    protected $endpointClass = ContactProperties::class;
 
     /**
      * @var string

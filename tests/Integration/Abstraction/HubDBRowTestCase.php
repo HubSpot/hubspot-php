@@ -10,12 +10,12 @@ abstract class HubDBRowTestCase extends EntityTestCase
     /**
      * @var null|Timeline
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var null|Timeline::class
      */
-    protected $resourceClass = HubDB::class;
+    protected $endpointClass = HubDB::class;
 
     /**
      * @var string
@@ -34,7 +34,7 @@ abstract class HubDBRowTestCase extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->createTable('Test Table'.uniqid(), [
+        return $this->endpoint->createTable('Test Table'.uniqid(), [
             [
                 'name' => 'Name',
                 'type' => 'TEXT',
@@ -48,6 +48,6 @@ abstract class HubDBRowTestCase extends EntityTestCase
 
     protected function deleteEntity()
     {
-        return $this->resource->deleteTable($this->entity->id);
+        return $this->endpoint->deleteTable($this->entity->id);
     }
 }

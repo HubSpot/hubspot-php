@@ -10,12 +10,12 @@ abstract class TimelineTestCase extends EntityTestCase
     /**
      * @var null|Timeline
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var null|Timeline::class
      */
-    protected $resourceClass = Timeline::class;
+    protected $endpointClass = Timeline::class;
 
     /**
      * @var string
@@ -40,7 +40,7 @@ abstract class TimelineTestCase extends EntityTestCase
 
     public function deleteEntity()
     {
-        return $this->resource->deleteEventType(
+        return $this->endpoint->deleteEventType(
             $this->appId,
             $this->entity->id
         );
@@ -48,7 +48,7 @@ abstract class TimelineTestCase extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->createEventType(
+        return $this->endpoint->createEventType(
             $this->appId,
             'Test Event Name',
             'Test Event header template',

@@ -14,17 +14,17 @@ class BlogsTest extends DefaultTestCase
     /**
      * @var Blogs
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var Blogs::class
      */
-    protected $resourceClass = Blogs::class;
+    protected $endpointClass = Blogs::class;
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -32,7 +32,7 @@ class BlogsTest extends DefaultTestCase
     /** @test */
     public function allWithParams()
     {
-        $response = $this->resource->all(['limit' => 1]);
+        $response = $this->endpoint->all(['limit' => 1]);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertNotNull($response->objects[0]->created);
@@ -41,7 +41,7 @@ class BlogsTest extends DefaultTestCase
     /** @test */
     public function allWithParamsAndArrayAccess()
     {
-        $response = $this->resource->all(['limit' => 1]);
+        $response = $this->endpoint->all(['limit' => 1]);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertNotNull($response['objects'][0]['created']);
@@ -50,9 +50,9 @@ class BlogsTest extends DefaultTestCase
     /** @test */
     public function getById()
     {
-        $blogs = $this->resource->all(['limit' => 1]);
+        $blogs = $this->endpoint->all(['limit' => 1]);
 
-        $response = $this->resource->getById($blogs->objects[0]->id);
+        $response = $this->endpoint->getById($blogs->objects[0]->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }

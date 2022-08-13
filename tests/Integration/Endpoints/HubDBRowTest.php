@@ -26,7 +26,7 @@ class HubDBRowTest extends HubDBRowTestCase
      */
     public function getRows()
     {
-        $response = $this->resource->getRows($this->entity->id, $this->portalId, true);
+        $response = $this->endpoint->getRows($this->entity->id, $this->portalId, true);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, $response->totalCount);
@@ -45,7 +45,7 @@ class HubDBRowTest extends HubDBRowTestCase
      */
     public function cloneRow()
     {
-        $response = $this->resource->cloneRow($this->entity->id, $this->row->id);
+        $response = $this->endpoint->cloneRow($this->entity->id, $this->row->id);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains('Test name', $response->toArray());
@@ -56,7 +56,7 @@ class HubDBRowTest extends HubDBRowTestCase
      */
     public function updateRow()
     {
-        $response = $this->resource->updateRow(
+        $response = $this->endpoint->updateRow(
             $this->entity->id,
             $this->row->id,
             [
@@ -73,7 +73,7 @@ class HubDBRowTest extends HubDBRowTestCase
      */
     public function deleteRow()
     {
-        $response = $this->resource->deleteRow(
+        $response = $this->endpoint->deleteRow(
             $this->entity->id,
             $this->row->id
         );
@@ -86,7 +86,7 @@ class HubDBRowTest extends HubDBRowTestCase
      */
     public function updateCell()
     {
-        $response = $this->resource->updateCell(
+        $response = $this->endpoint->updateCell(
             $this->entity->id,
             $this->row->id,
             $this->entity->columns[0]->id,
@@ -104,7 +104,7 @@ class HubDBRowTest extends HubDBRowTestCase
      */
     public function deleteCell()
     {
-        $response = $this->resource->deleteCell(
+        $response = $this->endpoint->deleteCell(
             $this->entity->id,
             $this->row->id,
             $this->entity->columns[0]->id
@@ -118,7 +118,7 @@ class HubDBRowTest extends HubDBRowTestCase
      */
     public function publishDraftTable()
     {
-        $response = $this->resource->publishDraftTable($this->entity->id);
+        $response = $this->endpoint->publishDraftTable($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains($this->entity->name, $response->toArray());
@@ -129,14 +129,14 @@ class HubDBRowTest extends HubDBRowTestCase
      */
     public function revertDraftTable()
     {
-        $response = $this->resource->revertDraftTable($this->entity->id);
+        $response = $this->endpoint->revertDraftTable($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     protected function createRow()
     {
-        return $this->resource->addRow($this->entity->id, [
+        return $this->endpoint->addRow($this->entity->id, [
             $this->entity->columns[0]->id => 'Test name',
             $this->entity->columns[1]->id => 10,
         ]);

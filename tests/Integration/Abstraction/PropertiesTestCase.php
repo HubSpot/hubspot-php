@@ -12,7 +12,7 @@ abstract class PropertiesTestCase extends EntityTestCase
     /** @test */
     public function all()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
@@ -21,7 +21,7 @@ abstract class PropertiesTestCase extends EntityTestCase
     /** @test */
     public function get()
     {
-        $response = $this->resource->get($this->entity->name);
+        $response = $this->endpoint->get($this->entity->name);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($this->entity->label, $response->label);
@@ -39,7 +39,7 @@ abstract class PropertiesTestCase extends EntityTestCase
     {
         $property = $this->getDataForUpdate();
 
-        $response = $this->resource->update($this->entity->name, $property);
+        $response = $this->endpoint->update($this->entity->name, $property);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($property['label'], $response->label);
@@ -62,7 +62,7 @@ abstract class PropertiesTestCase extends EntityTestCase
      */
     protected function createEntity()
     {
-        return $this->resource->create($this->getData());
+        return $this->endpoint->create($this->getData());
     }
 
     /**
@@ -72,7 +72,7 @@ abstract class PropertiesTestCase extends EntityTestCase
      */
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->name);
+        return $this->endpoint->delete($this->entity->name);
     }
 
     protected function getData()

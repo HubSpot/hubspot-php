@@ -26,7 +26,7 @@ abstract class TimelineWithProprtyTestCase extends TimelineTestCase
 
     public function deleteProperty()
     {
-        return $this->resource->deleteEventTypeProperty(
+        return $this->endpoint->deleteEventTypeProperty(
             $this->appId,
             $this->entity->id,
             $this->property->id
@@ -35,7 +35,7 @@ abstract class TimelineWithProprtyTestCase extends TimelineTestCase
 
     protected function createProperty()
     {
-        return $this->resource->createEventTypeProperty(
+        return $this->endpoint->createEventTypeProperty(
             $this->appId,
             $this->entity->id,
             'test_property',

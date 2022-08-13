@@ -19,5 +19,5 @@ class DealPropertyGroupsTest extends PropertyGroupsTestCase
     /**
      * @var DealProperties
      */
-    protected $resourceClass = DealProperties::class;
+    protected $endpointClass = DealProperties::class;
 }

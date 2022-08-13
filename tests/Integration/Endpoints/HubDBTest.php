@@ -15,7 +15,7 @@ class HubDBTest extends HubDBRowTestCase
      */
     public function tables()
     {
-        $response = $this->resource->tables();
+        $response = $this->endpoint->tables();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->objects));
@@ -26,7 +26,7 @@ class HubDBTest extends HubDBRowTestCase
      */
     public function getTable()
     {
-        $response = $this->resource->getTable($this->entity->id, $this->portalId);
+        $response = $this->endpoint->getTable($this->entity->id, $this->portalId);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains($this->entity->id, $response->toArray());
@@ -45,12 +45,12 @@ class HubDBTest extends HubDBRowTestCase
      */
     public function cloneTable()
     {
-        $response = $this->resource->cloneTable($this->entity->id, 'Cloned Table');
+        $response = $this->endpoint->cloneTable($this->entity->id, 'Cloned Table');
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains('Cloned Table', $response->toArray());
 
-        $this->resource->deleteTable($response->id);
+        $this->endpoint->deleteTable($response->id);
     }
 
     /**
@@ -58,7 +58,7 @@ class HubDBTest extends HubDBRowTestCase
      */
     public function updateTable()
     {
-        $response = $this->resource->updateTable($this->entity->id, 'Updated Table');
+        $response = $this->endpoint->updateTable($this->entity->id, 'Updated Table');
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains('Updated Table', $response->toArray());
@@ -81,7 +81,7 @@ class HubDBTest extends HubDBRowTestCase
      */
     public function import()
     {
-        $response = $this->resource->import(
+        $response = $this->endpoint->import(
             $this->entity->id,
             __DIR__.'/../../data/hubdb.csv',
             [

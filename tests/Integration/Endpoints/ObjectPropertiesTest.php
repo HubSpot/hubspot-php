@@ -18,7 +18,7 @@ class ObjectPropertiesTest extends PropertiesTestCase
 
     public function setUp(): void
     {
-        $this->resource = Factory::create(getenv('HUBSPOT_TEST_API_KEY'))->objectProperties('products');
+        $this->endpoint = Factory::create(getenv('HUBSPOT_TEST_API_KEY'))->objectProperties('products');
         sleep(1);
         $this->entity = $this->createEntity();
     }

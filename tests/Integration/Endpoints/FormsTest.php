@@ -14,12 +14,12 @@ class FormsTest extends EntityTestCase
     /**
      * @var null|SevenShores\Hubspot\Endpoints\Forms::class
      */
-    protected $resourceClass = Forms::class;
+    protected $endpointClass = Forms::class;
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
@@ -34,7 +34,7 @@ class FormsTest extends EntityTestCase
     /** @test */
     public function update()
     {
-        $response = $this->resource->update($this->entity->guid, [
+        $response = $this->endpoint->update($this->entity->guid, [
             'name' => 'new name '.uniqid(),
         ]);
 
@@ -44,7 +44,7 @@ class FormsTest extends EntityTestCase
     /** @test */
     public function getById()
     {
-        $response = $this->resource->getById($this->entity->guid);
+        $response = $this->endpoint->getById($this->entity->guid);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -62,7 +62,7 @@ class FormsTest extends EntityTestCase
     /** @test */
     public function getFields()
     {
-        $response = $this->resource->getFields($this->entity->guid);
+        $response = $this->endpoint->getFields($this->entity->guid);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -70,7 +70,7 @@ class FormsTest extends EntityTestCase
     /** @test */
     public function getFieldByName()
     {
-        $response = $this->resource->getFieldByName($this->entity->guid, 'firstname');
+        $response = $this->endpoint->getFieldByName($this->entity->guid, 'firstname');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -78,7 +78,7 @@ class FormsTest extends EntityTestCase
     /** @test */
     public function submit()
     {
-        $response = $this->resource->submit(getenv('HUBSPOT_TEST_PORTAL_ID'), $this->entity->guid, [
+        $response = $this->endpoint->submit(getenv('HUBSPOT_TEST_PORTAL_ID'), $this->entity->guid, [
             'fields' => [
                 [
                     'name' => 'firstname',
@@ -93,7 +93,7 @@ class FormsTest extends EntityTestCase
     // Lots of tests need an existing object to modify.
     protected function createEntity()
     {
-        return $this->resource->create([
+        return $this->endpoint->create([
             'name' => 'Test Form '.uniqid(),
             'action' => '',
             'method' => 'POST',
@@ -133,6 +133,6 @@ class FormsTest extends EntityTestCase
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->guid);
+        return $this->endpoint->delete($this->entity->guid);
     }
 }

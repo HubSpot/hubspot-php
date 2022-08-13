@@ -14,17 +14,17 @@ class ContactsTest extends EntityTestCase
     /**
      * @var SevenShores\Hubspot\Endpoints\Contacts
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var SevenShores\Hubspot\Endpoints\Contacts::class
      */
-    protected $resourceClass = Contacts::class;
+    protected $endpointClass = Contacts::class;
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->contacts));
@@ -33,7 +33,7 @@ class ContactsTest extends EntityTestCase
     /** @test */
     public function allWithParams()
     {
-        $response = $this->resource->all([
+        $response = $this->endpoint->all([
             'property' => ['firstname', 'lastname'],
         ]);
 
@@ -44,7 +44,7 @@ class ContactsTest extends EntityTestCase
     /** @test */
     public function allWithParamsAndArrayAccess()
     {
-        $response = $this->resource->all([
+        $response = $this->endpoint->all([
             'property' => ['firstname', 'lastname'],
         ]);
 
@@ -61,7 +61,7 @@ class ContactsTest extends EntityTestCase
     /** @test */
     public function update()
     {
-        $response = $this->resource->update($this->entity->vid, [
+        $response = $this->endpoint->update($this->entity->vid, [
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value' => 'user'],
         ]);
@@ -72,7 +72,7 @@ class ContactsTest extends EntityTestCase
     /** @test */
     public function updateByEmail()
     {
-        $response = $this->resource->updateByEmail($this->entity->properties->email->value, [
+        $response = $this->endpoint->updateByEmail($this->entity->properties->email->value, [
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value' => 'user'],
         ]);
@@ -84,7 +84,7 @@ class ContactsTest extends EntityTestCase
     public function createOrUpdate()
     {
         sleep(2);
-        $response = $this->resource->createOrUpdate($this->entity->properties->email->value, [
+        $response = $this->endpoint->createOrUpdate($this->entity->properties->email->value, [
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value' => 'user'],
         ]);
@@ -96,7 +96,7 @@ class ContactsTest extends EntityTestCase
     public function createOrUpdateBatch()
     {
         $secondEmail = 'test2@hubspot.com';
-        $response = $this->resource->createOrUpdateBatch([
+        $response = $this->endpoint->createOrUpdateBatch([
             [
                 'email' => $this->entity->properties->email->value,
                 'properties' => [
@@ -115,15 +115,15 @@ class ContactsTest extends EntityTestCase
         $this->assertEquals(202, $response->getStatusCode());
 
         sleep(1);
-        $contact = $this->resource->getByEmail($secondEmail)->getData();
-        $this->resource->delete($contact->vid);
+        $contact = $this->endpoint->getByEmail($secondEmail)->getData();
+        $this->endpoint->delete($contact->vid);
     }
 
     /** @test */
     public function createOrUpdateBatchWithAuditId()
     {
         $emails = ['testWithAuditId3@hubspot.com', 'testWithAuditId4@hubspot.com'];
-        $response = $this->resource->createOrUpdateBatch([
+        $response = $this->endpoint->createOrUpdateBatch([
             [
                 'email' => $emails[0],
                 'properties' => [
@@ -141,8 +141,8 @@ class ContactsTest extends EntityTestCase
         ], ['auditId' => 'TEST_CHANGE_SOURCE']);
         $this->assertEquals(202, $response->getStatusCode());
 
-        foreach ($this->resource->getBatchByEmails($emails)->getData() as $contact) {
-            $this->resource->delete($contact->vid);
+        foreach ($this->endpoint->getBatchByEmails($emails)->getData() as $contact) {
+            $this->endpoint->delete($contact->vid);
         }
     }
 
@@ -159,7 +159,7 @@ class ContactsTest extends EntityTestCase
     /** @test */
     public function recent()
     {
-        $response = $this->resource->recent(['count' => 2]);
+        $response = $this->endpoint->recent(['count' => 2]);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -167,7 +167,7 @@ class ContactsTest extends EntityTestCase
     /** @test */
     public function getById()
     {
-        $response = $this->resource->getById($this->entity->vid);
+        $response = $this->endpoint->getById($this->entity->vid);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -182,17 +182,17 @@ class ContactsTest extends EntityTestCase
             $contact->vid,
         ];
 
-        $response = $this->resource->getBatchByIds($ids);
+        $response = $this->endpoint->getBatchByIds($ids);
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->resource->delete($contact->vid);
+        $this->endpoint->delete($contact->vid);
     }
 
     /** @test */
     public function getByEmail()
     {
-        $response = $this->resource->getByEmail($this->entity->properties->email->value);
+        $response = $this->endpoint->getByEmail($this->entity->properties->email->value);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -207,17 +207,17 @@ class ContactsTest extends EntityTestCase
             $contact->properties->email->value,
         ];
 
-        $response = $this->resource->getBatchByEmails($emails);
+        $response = $this->endpoint->getBatchByEmails($emails);
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->resource->delete($contact->vid);
+        $this->endpoint->delete($contact->vid);
     }
 
     /** @test */
     public function search()
     {
-        $response = $this->resource->search('hub', ['count' => 2]);
+        $response = $this->endpoint->search('hub', ['count' => 2]);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -225,7 +225,7 @@ class ContactsTest extends EntityTestCase
     /** @test */
     public function statistics()
     {
-        $response = $this->resource->statistics();
+        $response = $this->endpoint->statistics();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -235,7 +235,7 @@ class ContactsTest extends EntityTestCase
     {
         $secondaryEmail = 'rw_test'.uniqid().'@hubspot.com';
 
-        $response = $this->resource->addSecondaryEmail($this->entity->vid, $secondaryEmail);
+        $response = $this->endpoint->addSecondaryEmail($this->entity->vid, $secondaryEmail);
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -244,26 +244,26 @@ class ContactsTest extends EntityTestCase
     {
         $secondaryEmail = 'rw_test'.uniqid().'@hubspot.com';
 
-        $response = $this->resource->addSecondaryEmail($this->entity->vid, $secondaryEmail);
+        $response = $this->endpoint->addSecondaryEmail($this->entity->vid, $secondaryEmail);
         $this->assertEquals(200, $response->getStatusCode());
 
         sleep(1);
 
-        $response = $this->resource->deleteSecondaryEmail($this->entity->vid, $secondaryEmail);
+        $response = $this->endpoint->deleteSecondaryEmail($this->entity->vid, $secondaryEmail);
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     /** @test */
     public function getLifecycleStageMetrics()
     {
-        $response = $this->resource->getLifecycleStageMetrics();
+        $response = $this->endpoint->getLifecycleStageMetrics();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     protected function createEntity()
     {
-        return $this->resource->create([
+        return $this->endpoint->create([
             ['property' => 'email',     'value' => 'rw_test'.uniqid().'@hubspot.com'],
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname',  'value' => 'user'],
@@ -272,6 +272,6 @@ class ContactsTest extends EntityTestCase
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->vid);
+        return $this->endpoint->delete($this->entity->vid);
     }
 }

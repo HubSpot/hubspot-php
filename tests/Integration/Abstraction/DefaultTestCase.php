@@ -14,12 +14,12 @@ class DefaultTestCase extends TestCase
     /**
      * @var null|SevenShores\Hubspot\Endpoints\Endpoint
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var null|SevenShores\Hubspot\Endpoints\Endpoint::class
      */
-    protected $resourceClass;
+    protected $endpointClass;
 
     /**
      * @var string
@@ -30,8 +30,8 @@ class DefaultTestCase extends TestCase
     {
         parent::setUp();
 
-        if (empty($this->resource)) {
-            $this->resource = new $this->resourceClass($this->getClient());
+        if (empty($this->endpoint)) {
+            $this->endpoint = new $this->endpointClass($this->getClient());
         }
         sleep(1);
     }

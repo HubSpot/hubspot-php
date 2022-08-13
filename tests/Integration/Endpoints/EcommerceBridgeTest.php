@@ -20,12 +20,12 @@ class EcommerceBridgeTest extends DefaultTestCase
     /**
      * @var EcommerceBridge
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var EcommerceBridge::class
      */
-    protected $resourceClass = EcommerceBridge::class;
+    protected $endpointClass = EcommerceBridge::class;
 
     /**
      * @var int
@@ -35,7 +35,7 @@ class EcommerceBridgeTest extends DefaultTestCase
     /** @test */
     public function upsertSettings()
     {
-        $response = $this->resource->upsertSettings($this->getData());
+        $response = $this->endpoint->upsertSettings($this->getData());
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -43,7 +43,7 @@ class EcommerceBridgeTest extends DefaultTestCase
     /** @test */
     public function getSettings()
     {
-        $response = $this->resource->getSettings();
+        $response = $this->endpoint->getSettings();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertArrayHasKey('mappings', $response->toArray());
@@ -52,7 +52,7 @@ class EcommerceBridgeTest extends DefaultTestCase
     /** @test */
     public function createOrUpdateStore()
     {
-        $response = $this->resource->createOrUpdateStore([
+        $response = $this->endpoint->createOrUpdateStore([
             'id' => static::STORE_ID,
             'label' => 'Ecommerce Bridge Test Store '.uniqid(),
             'adminUri' => 'https://ecommercebridge-test-store.myshopify.com',
@@ -64,7 +64,7 @@ class EcommerceBridgeTest extends DefaultTestCase
     /** @test */
     public function allStores()
     {
-        $response = $this->resource->allStores();
+        $response = $this->endpoint->allStores();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()->results));
@@ -73,7 +73,7 @@ class EcommerceBridgeTest extends DefaultTestCase
     /** @test */
     public function getStore()
     {
-        $response = $this->resource->getStore(static::STORE_ID);
+        $response = $this->endpoint->getStore(static::STORE_ID);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains(static::STORE_ID, $response->toArray());
@@ -82,7 +82,7 @@ class EcommerceBridgeTest extends DefaultTestCase
     /** @test */
     public function sendSyncMessages()
     {
-        $response = $this->resource->sendSyncMessages(
+        $response = $this->endpoint->sendSyncMessages(
             static::STORE_ID,
             'CONTACT',
             [
@@ -106,7 +106,7 @@ class EcommerceBridgeTest extends DefaultTestCase
     /** @test */
     public function getAllSyncErrorsAccount()
     {
-        $response = $this->resource->getAllSyncErrorsAccount();
+        $response = $this->endpoint->getAllSyncErrorsAccount();
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertArrayHasKey('results', $response->toArray());
     }
@@ -114,7 +114,7 @@ class EcommerceBridgeTest extends DefaultTestCase
     /** @test */
     public function checkSyncStatus()
     {
-        $response = $this->resource->checkSyncStatus(
+        $response = $this->endpoint->checkSyncStatus(
             static::STORE_ID,
             'CONTACT',
             '12345'
@@ -127,7 +127,7 @@ class EcommerceBridgeTest extends DefaultTestCase
     public function importData()
     {
         $this->markTestSkipped();
-        $response = $this->resource->importData(
+        $response = $this->endpoint->importData(
             $this->getTimestamp(),
             1,
             [
@@ -159,7 +159,7 @@ class EcommerceBridgeTest extends DefaultTestCase
     public function signalImportEnd()
     {
         $this->markTestSkipped();
-        $response = $this->resource->signalImportEnd(
+        $response = $this->endpoint->signalImportEnd(
             $this->getTimestamp(),
             1,
             1,
@@ -173,7 +173,7 @@ class EcommerceBridgeTest extends DefaultTestCase
     /** @test */
     public function deleteSettings()
     {
-        $response = $this->resource->deleteSettings();
+        $response = $this->endpoint->deleteSettings();
 
         $this->assertEquals(204, $response->getStatusCode());
     }

@@ -14,7 +14,7 @@ class DealPropertiesTest extends PropertiesTestCase
     /**
      * @var null|SevenShores\Hubspot\Endpoints\Endpoint
      */
-    protected $resourceClass = DealProperties::class;
+    protected $endpointClass = DealProperties::class;
 
     /**
      * @var string

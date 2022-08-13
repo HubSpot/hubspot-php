@@ -11,12 +11,12 @@ use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
  */
 class BlogAuthorsTest extends EntityTestCase
 {
-    protected $resourceClass = BlogAuthors::class;
+    protected $endpointClass = BlogAuthors::class;
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -24,7 +24,7 @@ class BlogAuthorsTest extends EntityTestCase
     /** @test */
     public function allWithParams()
     {
-        $response = $this->resource->all([
+        $response = $this->endpoint->all([
             'limit' => 2,
             'offset' => 3,
         ]);
@@ -37,7 +37,7 @@ class BlogAuthorsTest extends EntityTestCase
     /** @test */
     public function searchWithoutQueryAndParams()
     {
-        $response = $this->resource->search();
+        $response = $this->endpoint->search();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -45,7 +45,7 @@ class BlogAuthorsTest extends EntityTestCase
     /** @test */
     public function searchWithQueryAndWithoutParams()
     {
-        $response = $this->resource->search('john-smith');
+        $response = $this->endpoint->search('john-smith');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -53,7 +53,7 @@ class BlogAuthorsTest extends EntityTestCase
     /** @test */
     public function searchWithQueryAndParams()
     {
-        $response = $this->resource->search('john-smith', [
+        $response = $this->endpoint->search('john-smith', [
             'limit' => 5,
         ]);
 
@@ -64,7 +64,7 @@ class BlogAuthorsTest extends EntityTestCase
     /** @test */
     public function getById()
     {
-        $response = $this->resource->getById($this->entity->id);
+        $response = $this->endpoint->getById($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -78,7 +78,7 @@ class BlogAuthorsTest extends EntityTestCase
     /** @test */
     public function update()
     {
-        $response = $this->resource->update($this->entity->id, [
+        $response = $this->endpoint->update($this->entity->id, [
             'bio' => 'Lorem ipsum dolor sit amet.',
             'website' => 'http://example.com',
         ]);
@@ -89,7 +89,7 @@ class BlogAuthorsTest extends EntityTestCase
     /** @test */
     public function delete()
     {
-        $response = $this->resource->delete($this->entity->id);
+        $response = $this->endpoint->delete($this->entity->id);
 
         $this->assertEquals(204, $response->getStatusCode());
 
@@ -98,7 +98,7 @@ class BlogAuthorsTest extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->create([
+        return $this->endpoint->create([
             'fullName' => 'John Smith '.uniqid(),
             'email' => 'john.smith'.uniqid().'@example.com',
             'username' => 'john-smith',
@@ -107,6 +107,6 @@ class BlogAuthorsTest extends EntityTestCase
 
     protected function deleteEntity()
     {
-        $this->resource->delete($this->entity->id);
+        $this->endpoint->delete($this->entity->id);
     }
 }

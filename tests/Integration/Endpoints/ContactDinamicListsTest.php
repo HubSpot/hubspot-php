@@ -19,19 +19,19 @@ class ContactDinamicListsTest extends ContactListsTestCase
     /**
      * @var Contacts
      */
-    protected $contactsResource;
+    protected $contactsEndpoint;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->contactsResource = new Contacts($this->getClient());
+        $this->contactsEndpoint = new Contacts($this->getClient());
     }
 
     /** @test */
     public function getAllDynamic()
     {
-        $response = $this->resource->getAllStatic();
+        $response = $this->endpoint->getAllStatic();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -41,13 +41,13 @@ class ContactDinamicListsTest extends ContactListsTestCase
     {
         $contact = $this->createContact();
 
-        $response = $this->resource->addContact($this->entity->listId, [$contact->vid]);
+        $response = $this->endpoint->addContact($this->entity->listId, [$contact->vid]);
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->resource->removeContact($this->entity->listId, [$contact->vid]);
+        $this->endpoint->removeContact($this->entity->listId, [$contact->vid]);
 
-        $this->contactsResource->delete($contact->vid);
+        $this->contactsEndpoint->delete($contact->vid);
     }
 
     /** @test */
@@ -55,13 +55,13 @@ class ContactDinamicListsTest extends ContactListsTestCase
     {
         $contact = $this->createContact();
 
-        $this->resource->addContact($this->entity->listId, [$contact->vid]);
+        $this->endpoint->addContact($this->entity->listId, [$contact->vid]);
 
-        $response = $this->resource->removeContact($this->entity->listId, [$contact->vid]);
+        $response = $this->endpoint->removeContact($this->entity->listId, [$contact->vid]);
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->contactsResource->delete($contact->vid);
+        $this->contactsEndpoint->delete($contact->vid);
     }
 
     /**
@@ -71,7 +71,7 @@ class ContactDinamicListsTest extends ContactListsTestCase
      */
     protected function createContact()
     {
-        $contactResponse = $this->contactsResource->create([
+        $contactResponse = $this->contactsEndpoint->create([
             ['property' => 'email', 'value' => 'ContactListsTest'.uniqid().'@hubspot.com'],
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname', 'value' => 'user'],

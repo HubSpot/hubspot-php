@@ -13,7 +13,7 @@ class PagesTest extends EntityTestCase
     /**
      * @var null|SevenShores\Hubspot\Endpoints\Endpoint::class
      */
-    protected $resourceClass = 'SevenShores\Hubspot\Endpoints\Pages';
+    protected $endpointClass = 'SevenShores\Hubspot\Endpoints\Pages';
 
     /** @test */
     public function create()
@@ -24,7 +24,7 @@ class PagesTest extends EntityTestCase
     /** @test */
     public function update()
     {
-        $response = $this->resource->update(
+        $response = $this->endpoint->update(
             $this->entity->id,
             ['name' => 'Updated '.$this->entity->name]
         );
@@ -35,7 +35,7 @@ class PagesTest extends EntityTestCase
     /** @test */
     public function getById()
     {
-        $response = $this->resource->getById($this->entity->id);
+        $response = $this->endpoint->getById($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -53,7 +53,7 @@ class PagesTest extends EntityTestCase
     /** @test */
     public function all()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -61,22 +61,22 @@ class PagesTest extends EntityTestCase
     /** @test */
     public function clonePage()
     {
-        $response = $this->resource->clonePage($this->entity->id, 'New page name');
+        $response = $this->endpoint->clonePage($this->entity->id, 'New page name');
 
         $this->assertEquals(201, $response->getStatusCode());
 
-        $this->resource->delete($response->id);
+        $this->endpoint->delete($response->id);
     }
 
     protected function createEntity()
     {
-        return $this->resource->create([
+        return $this->endpoint->create([
             'name' => 'My Super Awesome Post(AutoTest)',
         ]);
     }
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->id);
+        return $this->endpoint->delete($this->entity->id);
     }
 }
