@@ -21,22 +21,22 @@ class DealsTest extends EntityTestCase
     /**
      * @var Deals
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var Deals::class
      */
-    protected $resourceClass = Deals::class;
+    protected $endpointClass = Deals::class;
 
     /**
      * @var Contacts
      */
-    protected $resourceContacts;
+    protected $endpointContacts;
 
     /**
      * @var Companies
      */
-    protected $resourceCompanies;
+    protected $endpointCompanies;
 
     /**
      * @test
@@ -53,7 +53,7 @@ class DealsTest extends EntityTestCase
      */
     public function update()
     {
-        $response = $this->resource->update($this->entity->dealId, [
+        $response = $this->endpoint->update($this->entity->dealId, [
             [
                 'name' => 'amount',
                 'value' => '70000',
@@ -71,7 +71,7 @@ class DealsTest extends EntityTestCase
     {
         $deal = $this->createEntity();
 
-        $response = $this->resource->updateBatch([
+        $response = $this->endpoint->updateBatch([
             [
                 'objectId' => $this->entity->dealId,
                 'properties' => [
@@ -89,7 +89,7 @@ class DealsTest extends EntityTestCase
 
         $this->assertEquals(202, $response->getStatusCode());
 
-        $this->resource->delete($deal->dealId);
+        $this->endpoint->delete($deal->dealId);
     }
 
     /**
@@ -97,7 +97,7 @@ class DealsTest extends EntityTestCase
      */
     public function all()
     {
-        $response = $this->resource->all([
+        $response = $this->endpoint->all([
             'offset' => 1,
             'limit' => 1,
         ]);
@@ -111,14 +111,14 @@ class DealsTest extends EntityTestCase
      */
     public function getRecentlyModified()
     {
-        $this->resource->update($this->entity->dealId, [
+        $this->endpoint->update($this->entity->dealId, [
             [
                 'name' => 'amount',
                 'value' => '70000',
             ],
         ]);
 
-        $response = $this->resource->getRecentlyModified([
+        $response = $this->endpoint->getRecentlyModified([
             'offset' => 0,
             'count' => 1,
         ]);
@@ -131,7 +131,7 @@ class DealsTest extends EntityTestCase
      */
     public function getRecentlyCreated()
     {
-        $response = $this->resource->getRecentlyCreated([
+        $response = $this->endpoint->getRecentlyCreated([
             'offset' => 0,
             'count' => 1,
         ]);
@@ -155,7 +155,7 @@ class DealsTest extends EntityTestCase
      */
     public function getById()
     {
-        $response = $this->resource->getById($this->entity->dealId);
+        $response = $this->endpoint->getById($this->entity->dealId);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertSame('Cool Deal', $response->properties->dealname->value);
@@ -171,7 +171,7 @@ class DealsTest extends EntityTestCase
         $secondCompanyId = $this->createCompany();
         $thirdCompanyId = $this->createCompany();
 
-        $associateResponse = $this->resource->associateWithCompany($this->entity->dealId, [
+        $associateResponse = $this->endpoint->associateWithCompany($this->entity->dealId, [
             $firstCompanyId,
             $secondCompanyId,
             $thirdCompanyId,
@@ -179,7 +179,7 @@ class DealsTest extends EntityTestCase
         $this->assertEquals(204, $associateResponse->getStatusCode());
 
         // Check what was associated
-        $byIdResponse = $this->resource->getById($this->entity->dealId);
+        $byIdResponse = $this->endpoint->getById($this->entity->dealId);
 
         $associatedCompanies = $byIdResponse->associations->associatedCompanyIds;
         $expectedAssociatedCompanies = [$firstCompanyId, $secondCompanyId, $thirdCompanyId];
@@ -190,7 +190,7 @@ class DealsTest extends EntityTestCase
         $this->assertEquals($expectedAssociatedCompanies, $associatedCompanies);
 
         // Now disassociate
-        $response = $this->resource->disassociateFromCompany($this->entity->dealId, [
+        $response = $this->endpoint->disassociateFromCompany($this->entity->dealId, [
             $firstCompanyId,
             $secondCompanyId,
             $thirdCompanyId,
@@ -211,7 +211,7 @@ class DealsTest extends EntityTestCase
         $secondContactId = $this->createContact();
         $thirdContactId = $this->createContact();
 
-        $associateResponse = $this->resource->associateWithContact($this->entity->dealId, [
+        $associateResponse = $this->endpoint->associateWithContact($this->entity->dealId, [
             $firstContactId,
             $secondContactId,
             $thirdContactId,
@@ -219,7 +219,7 @@ class DealsTest extends EntityTestCase
         $this->assertSame(204, $associateResponse->getStatusCode());
 
         // Check what was associated
-        $byIdResponse = $this->resource->getById($this->entity->dealId);
+        $byIdResponse = $this->endpoint->getById($this->entity->dealId);
 
         $associatedContacts = $byIdResponse->associations->associatedVids;
         $expectedAssociatedContacts = [$firstContactId, $secondContactId, $thirdContactId];
@@ -230,7 +230,7 @@ class DealsTest extends EntityTestCase
         $this->assertEquals($expectedAssociatedContacts, $associatedContacts);
 
         // Now disassociate
-        $response = $this->resource->disassociateFromContact($this->entity->dealId, [
+        $response = $this->endpoint->disassociateFromContact($this->entity->dealId, [
             $firstContactId,
             $secondContactId,
             $thirdContactId,
@@ -251,18 +251,18 @@ class DealsTest extends EntityTestCase
 
         $deal = $this->createEntity()->dealId;
 
-        $this->resource->associateWithCompany($this->entity->dealId, [
+        $this->endpoint->associateWithCompany($this->entity->dealId, [
             $companyId,
         ]);
 
-        $this->resource->associateWithCompany($deal, [
+        $this->endpoint->associateWithCompany($deal, [
             $companyId,
         ]);
 
-        $response = $this->resource->getAssociatedDeals('company', $companyId);
+        $response = $this->endpoint->getAssociatedDeals('company', $companyId);
         $this->assertCount(2, $response->deals);
 
-        $this->resource->delete($deal);
+        $this->endpoint->delete($deal);
 
         $this->deleteCompany($companyId);
     }
@@ -276,18 +276,18 @@ class DealsTest extends EntityTestCase
 
         $deal = $this->createEntity()->dealId;
 
-        $this->resource->associateWithContact($this->entity->dealId, [
+        $this->endpoint->associateWithContact($this->entity->dealId, [
             $contactId,
         ]);
 
-        $this->resource->associateWithContact($deal, [
+        $this->endpoint->associateWithContact($deal, [
             $contactId,
         ]);
 
-        $response = $this->resource->getAssociatedDeals('contact', $contactId);
+        $response = $this->endpoint->getAssociatedDeals('contact', $contactId);
         $this->assertCount(2, $response->deals);
 
-        $this->resource->delete($deal);
+        $this->endpoint->delete($deal);
         $this->deleteContact($contactId);
     }
 
@@ -317,7 +317,7 @@ class DealsTest extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->create([
+        return $this->endpoint->create([
             [
                 'value' => 'Cool Deal',
                 'name' => 'dealname',
@@ -331,24 +331,24 @@ class DealsTest extends EntityTestCase
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->dealId);
+        return $this->endpoint->delete($this->entity->dealId);
     }
 
     protected function getContacts()
     {
-        if (empty($this->resourceContacts)) {
-            $this->resourceContacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        if (empty($this->endpointContacts)) {
+            $this->endpointContacts = new Contacts(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         }
 
-        return $this->resourceContacts;
+        return $this->endpointContacts;
     }
 
     protected function getCompanies()
     {
-        if (empty($this->resourceCompanies)) {
-            $this->resourceCompanies = new Companies(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        if (empty($this->endpointCompanies)) {
+            $this->endpointCompanies = new Companies(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         }
 
-        return $this->resourceCompanies;
+        return $this->endpointCompanies;
     }
 }

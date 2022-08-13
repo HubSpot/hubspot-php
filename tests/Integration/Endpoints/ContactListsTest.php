@@ -14,17 +14,17 @@ class ContactListsTest extends ContactListsTestCase
     /**
      * @var ContactLists
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var ContactLists::class
      */
-    protected $resourceClass = ContactLists::class;
+    protected $endpointClass = ContactLists::class;
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -32,7 +32,7 @@ class ContactListsTest extends ContactListsTestCase
     /** @test */
     public function getAllStatic()
     {
-        $response = $this->resource->getAllStatic();
+        $response = $this->endpoint->getAllStatic();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -40,7 +40,7 @@ class ContactListsTest extends ContactListsTestCase
     /** @test */
     public function update()
     {
-        $response = $this->resource->update($this->entity->listId, [
+        $response = $this->endpoint->update($this->entity->listId, [
             'name' => 'New test name '.uniqid(),
         ]);
 
@@ -50,7 +50,7 @@ class ContactListsTest extends ContactListsTestCase
     /** @test */
     public function getById()
     {
-        $response = $this->resource->getById($this->entity->listId);
+        $response = $this->endpoint->getById($this->entity->listId);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -65,17 +65,17 @@ class ContactListsTest extends ContactListsTestCase
             $list->listId,
         ];
 
-        $response = $this->resource->getBatchByIds($ids);
+        $response = $this->endpoint->getBatchByIds($ids);
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->resource->delete($list->listId);
+        $this->endpoint->delete($list->listId);
     }
 
     /** @test */
     public function contacts()
     {
-        $response = $this->resource->contacts($this->entity->listId);
+        $response = $this->endpoint->contacts($this->entity->listId);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -83,7 +83,7 @@ class ContactListsTest extends ContactListsTestCase
     /** @test */
     public function recentContacts()
     {
-        $response = $this->resource->recentContacts($this->entity->listId);
+        $response = $this->endpoint->recentContacts($this->entity->listId);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -91,7 +91,7 @@ class ContactListsTest extends ContactListsTestCase
     /** @test */
     public function delete()
     {
-        $response = $this->resource->delete($this->entity->listId);
+        $response = $this->endpoint->delete($this->entity->listId);
 
         $this->assertEquals(204, $response->getStatusCode());
 

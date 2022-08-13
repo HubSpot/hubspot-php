@@ -45,7 +45,7 @@ $hubspot = new SevenShores\Hubspot\Factory([
 ]);
 
 // Then you can call a resource 
-// When referencing resources, use camelCase
+// When referencing endpoints, use camelCase
 
 $hubspot->contactlists
 ```

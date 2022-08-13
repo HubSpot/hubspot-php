@@ -15,7 +15,7 @@ class TimelineEventTypeTest extends TimelineTestCase
      */
     public function getEventTypes()
     {
-        $response = $this->resource->getEventTypes($this->appId);
+        $response = $this->endpoint->getEventTypes($this->appId);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->toArray()));
@@ -26,7 +26,7 @@ class TimelineEventTypeTest extends TimelineTestCase
      */
     public function getEventTypeById()
     {
-        $response = $this->resource->getEventTypeById($this->appId, $this->entity->id);
+        $response = $this->endpoint->getEventTypeById($this->appId, $this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains($this->entity->id, $response->toArray());
@@ -46,7 +46,7 @@ class TimelineEventTypeTest extends TimelineTestCase
      */
     public function updateEventType()
     {
-        $response = $this->resource->updateEventType(
+        $response = $this->endpoint->updateEventType(
             $this->appId,
             $this->entity->id,
             'Updated Test Event Name',

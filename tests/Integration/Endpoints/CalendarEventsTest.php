@@ -16,17 +16,17 @@ class CalendarEventsTest extends EntityTestCase
     /**
      * @var CalendarEvents
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var CalendarEvents::class
      */
-    protected $resourceClass = CalendarEvents::class;
+    protected $endpointClass = CalendarEvents::class;
 
     /**
      * @var Owners
      */
-    protected $ownersResource;
+    protected $ownersEndpoint;
 
     /**
      * @var stdClass
@@ -35,8 +35,8 @@ class CalendarEventsTest extends EntityTestCase
 
     public function setUp(): void
     {
-        $this->ownersResource = new Owners($this->getClient());
-        $response = $this->ownersResource->all(['email' => getenv('HUBSPOT_TEST_EMAIL')]);
+        $this->ownersEndpoint = new Owners($this->getClient());
+        $response = $this->ownersEndpoint->all(['email' => getenv('HUBSPOT_TEST_EMAIL')]);
         if (empty($response->getData())) {
             throw new Exception('Invalid Email (HUBSPOT_TEST_EMAIL)');
         }
@@ -59,7 +59,7 @@ class CalendarEventsTest extends EntityTestCase
      */
     public function updateTask()
     {
-        $response = $this->resource->updateTask($this->entity->id, [
+        $response = $this->endpoint->updateTask($this->entity->id, [
             'name' => 'Another name',
             'description' => 'Another description',
         ]);
@@ -72,7 +72,7 @@ class CalendarEventsTest extends EntityTestCase
      */
     public function getTaskById()
     {
-        $response = $this->resource->getTaskById($this->entity->id);
+        $response = $this->endpoint->getTaskById($this->entity->id);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertEquals($this->entity->name, $response->name);
@@ -97,7 +97,7 @@ class CalendarEventsTest extends EntityTestCase
         $startDate = $this->entity->eventDate - 60 * 60 * 1000;
         $endDate = $this->entity->eventDate + 60 * 60 * 1000;
 
-        $response = $this->resource->all($startDate, $endDate);
+        $response = $this->endpoint->all($startDate, $endDate);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
@@ -110,7 +110,7 @@ class CalendarEventsTest extends EntityTestCase
         $startDate = $this->entity->eventDate - 60 * 60 * 1000;
         $endDate = $this->entity->eventDate + 60 * 60 * 1000;
 
-        $response = $this->resource->allTasks($startDate, $endDate);
+        $response = $this->endpoint->allTasks($startDate, $endDate);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->toArray()));
@@ -118,7 +118,7 @@ class CalendarEventsTest extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->createTask([
+        return $this->endpoint->createTask([
             'eventDate' => strtotime('+1 day') * 1000, // timestamp in milliseconds
             'eventType' => 'PUBLISHING_TASK',
             'category' => 'EMAIL',
@@ -131,6 +131,6 @@ class CalendarEventsTest extends EntityTestCase
 
     protected function deleteEntity()
     {
-        return $this->resource->deleteTask($this->entity->id);
+        return $this->endpoint->deleteTask($this->entity->id);
     }
 }

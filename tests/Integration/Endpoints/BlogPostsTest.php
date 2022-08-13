@@ -14,17 +14,17 @@ class BlogPostsTest extends BlogPostTestCase
     /**
      * @var BlogPosts::class
      */
-    protected $resourceClass = BlogPosts::class;
+    protected $endpointClass = BlogPosts::class;
 
     /**
      * @var BlogPosts
      */
-    protected $resource;
+    protected $endpoint;
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -32,7 +32,7 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function allWithParams()
     {
-        $response = $this->resource->all([
+        $response = $this->endpoint->all([
             'limit' => 2,
             'offset' => 3,
         ]);
@@ -45,7 +45,7 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function allWithParamsAndArrayAccess()
     {
-        $response = $this->resource->all([
+        $response = $this->endpoint->all([
             'limit' => 2,
             'offset' => 3,
         ]);
@@ -58,7 +58,7 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function getById()
     {
-        $response = $this->resource->getById($this->entity->id);
+        $response = $this->endpoint->getById($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -72,7 +72,7 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function update()
     {
-        $response = $this->resource->update($this->entity->id, [
+        $response = $this->endpoint->update($this->entity->id, [
             'post_body' => '<p>Hey man!</p>',
         ]);
 
@@ -92,17 +92,17 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function clonePost()
     {
-        $response = $this->resource->clone($this->entity->id, 'Cloned post name');
+        $response = $this->endpoint->clone($this->entity->id, 'Cloned post name');
 
         $this->assertEquals(201, $response->getStatusCode());
 
-        $this->resource->delete($response->id);
+        $this->endpoint->delete($response->id);
     }
 
     /** @test */
     public function publishAction()
     {
-        $response = $this->resource->publishAction($this->entity->id, 'schedule-publish');
+        $response = $this->endpoint->publishAction($this->entity->id, 'schedule-publish');
 
         $this->assertEquals(204, $response->getStatusCode());
     }
@@ -110,7 +110,7 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function getAutoSaveBufferContents()
     {
-        $response = $this->resource->getAutoSaveBufferContents($this->entity->id);
+        $response = $this->endpoint->getAutoSaveBufferContents($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -118,7 +118,7 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function updateAutoSaveBuffer()
     {
-        $response = $this->resource->updateAutoSaveBuffer($this->entity->id, [
+        $response = $this->endpoint->updateAutoSaveBuffer($this->entity->id, [
             'post_body' => '<p>Hey! It is a test!</p>',
         ]);
 
@@ -128,7 +128,7 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function hasBufferedChanges()
     {
-        $response = $this->resource->hasBufferedChanges($this->entity->id);
+        $response = $this->endpoint->hasBufferedChanges($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->has_changes);
@@ -137,7 +137,7 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function validateBuffer()
     {
-        $response = $this->resource->validateBuffer($this->entity->id);
+        $response = $this->endpoint->validateBuffer($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertTrue($response->succeeded);
@@ -146,7 +146,7 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function pushBufferLive()
     {
-        $response = $this->resource->pushBufferLive($this->entity->id);
+        $response = $this->endpoint->pushBufferLive($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -155,7 +155,7 @@ class BlogPostsTest extends BlogPostTestCase
     public function restoreDeleted()
     {
         $this->deleteEntity();
-        $response = $this->resource->restoreDeleted($this->entity->id);
+        $response = $this->endpoint->restoreDeleted($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -163,7 +163,7 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function versions()
     {
-        $response = $this->resource->versions($this->entity->id);
+        $response = $this->endpoint->versions($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -171,15 +171,15 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function getVersion()
     {
-        $this->resource->update($this->entity->id, [
+        $this->endpoint->update($this->entity->id, [
             'post_body' => '<p>Hey! It is a test!</p>',
         ]);
 
-        $listResponse = $this->resource->versions($this->entity->id);
+        $listResponse = $this->endpoint->versions($this->entity->id);
 
         $versionId = $listResponse->getData()[1]->id;
 
-        $response = $this->resource->getVersion($this->entity->id, $versionId);
+        $response = $this->endpoint->getVersion($this->entity->id, $versionId);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -187,26 +187,26 @@ class BlogPostsTest extends BlogPostTestCase
     /** @test */
     public function restoreVersion()
     {
-        $this->resource->update($this->entity->id, [
+        $this->endpoint->update($this->entity->id, [
             'post_body' => '<p>Hey! It is a test!</p>',
         ]);
 
-        $listResponse = $this->resource->versions($this->entity->id);
+        $listResponse = $this->endpoint->versions($this->entity->id);
 
         $versionId = $listResponse->getData()[1]->id;
 
-        $response = $this->resource->restoreVersion($this->entity->id, $versionId);
+        $response = $this->endpoint->restoreVersion($this->entity->id, $versionId);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     protected function createEntity()
     {
-        return $this->createPost($this->resource);
+        return $this->createPost($this->endpoint);
     }
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->id);
+        return $this->endpoint->delete($this->entity->id);
     }
 }

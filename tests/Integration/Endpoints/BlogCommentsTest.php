@@ -16,17 +16,17 @@ class BlogCommentsTest extends BlogPostTestCase
     /**
      * @var BlogComments
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var BlogComments:class
      */
-    protected $resourceClass = BlogComments::class;
+    protected $endpointClass = BlogComments::class;
 
     /**
      * @var BlogPosts
      */
-    protected $blogPostsResource;
+    protected $blogPostsEndpoint;
 
     /**
      * @var null\SevenShores\Hubspot\Http\Response
@@ -35,7 +35,7 @@ class BlogCommentsTest extends BlogPostTestCase
 
     public function setUp(): void
     {
-        $this->blogPostsResource = new BlogPosts(new Client(['key' => getenv($this->key)]));
+        $this->blogPostsEndpoint = new BlogPosts(new Client(['key' => getenv($this->key)]));
 
         parent::setUp();
     }
@@ -51,7 +51,7 @@ class BlogCommentsTest extends BlogPostTestCase
     /** @test */
     public function all()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -59,7 +59,7 @@ class BlogCommentsTest extends BlogPostTestCase
     /** @test */
     public function getById()
     {
-        $response = $this->resource->getById($this->entity->id);
+        $response = $this->endpoint->getById($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -85,18 +85,18 @@ class BlogCommentsTest extends BlogPostTestCase
     {
         $this->deleteEntity();
 
-        $response = $this->resource->restore($this->entity->id);
+        $response = $this->endpoint->restore($this->entity->id);
 
         $this->assertEquals(204, $response->getStatusCode());
     }
 
     protected function createEntity()
     {
-        $this->post = $this->createPost($this->blogPostsResource);
+        $this->post = $this->createPost($this->blogPostsEndpoint);
 
         sleep(1);
 
-        return $this->resource->create([
+        return $this->endpoint->create([
             'comment' => 'This is a test blog comment',
             'contentId' => $this->post->id,
             'collectionId' => $this->blogId,
@@ -108,11 +108,11 @@ class BlogCommentsTest extends BlogPostTestCase
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->id);
+        return $this->endpoint->delete($this->entity->id);
     }
 
     protected function deletePost()
     {
-        return $this->blogPostsResource->delete($this->post->id);
+        return $this->blogPostsEndpoint->delete($this->post->id);
     }
 }

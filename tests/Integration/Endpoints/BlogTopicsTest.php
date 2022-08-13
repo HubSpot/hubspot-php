@@ -14,17 +14,17 @@ class BlogTopicsTest extends EntityTestCase
     /**
      * @var BlogTopics::class
      */
-    protected $resourceClass = BlogTopics::class;
+    protected $endpointClass = BlogTopics::class;
 
     /**
      * @var BlogTopics
      */
-    protected $resource;
+    protected $endpoint;
 
     /** @test */
     public function allWithNoParams()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -32,7 +32,7 @@ class BlogTopicsTest extends EntityTestCase
     /** @test */
     public function allWithParams()
     {
-        $response = $this->resource->all([
+        $response = $this->endpoint->all([
             'limit' => 2,
             'offset' => 3,
         ]);
@@ -45,7 +45,7 @@ class BlogTopicsTest extends EntityTestCase
     /** @test */
     public function searchWithoutQueryAndParams()
     {
-        $response = $this->resource->search('');
+        $response = $this->endpoint->search('');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -53,7 +53,7 @@ class BlogTopicsTest extends EntityTestCase
     /** @test */
     public function searchWithQueryAndWithoutParams()
     {
-        $response = $this->resource->search('Test');
+        $response = $this->endpoint->search('Test');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -61,7 +61,7 @@ class BlogTopicsTest extends EntityTestCase
     /** @test */
     public function searchWithQueryAndParams()
     {
-        $response = $this->resource->search('Test', [
+        $response = $this->endpoint->search('Test', [
             'limit' => 5,
         ]);
 
@@ -72,7 +72,7 @@ class BlogTopicsTest extends EntityTestCase
     /** @test */
     public function getById()
     {
-        $response = $this->resource->getById($this->entity->id);
+        $response = $this->endpoint->getById($this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -86,7 +86,7 @@ class BlogTopicsTest extends EntityTestCase
     /** @test */
     public function update()
     {
-        $response = $this->resource->update($this->entity->id, [
+        $response = $this->endpoint->update($this->entity->id, [
             'name' => 'Topic Test '.uniqid().' Updated',
             'description' => 'Topic Test '.uniqid().' Description Updated',
         ]);
@@ -106,7 +106,7 @@ class BlogTopicsTest extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->create([
+        return $this->endpoint->create([
             'name' => 'Topic Test '.uniqid(),
             'description' => 'Topic Test '.uniqid().' Description',
         ]);
@@ -114,6 +114,6 @@ class BlogTopicsTest extends EntityTestCase
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->id);
+        return $this->endpoint->delete($this->entity->id);
     }
 }

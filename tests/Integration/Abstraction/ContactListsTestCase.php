@@ -10,12 +10,12 @@ abstract class ContactListsTestCase extends EntityTestCase
     /**
      * @var ContactLists
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var ContactLists::class
      */
-    protected $resourceClass = ContactLists::class;
+    protected $endpointClass = ContactLists::class;
 
     /**
      * @var bool
@@ -33,7 +33,7 @@ abstract class ContactListsTestCase extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->create(
+        return $this->endpoint->create(
             [
                 'name' => 'Test '.uniqid(),
                 'dynamic' => $this->dynamic,
@@ -54,6 +54,6 @@ abstract class ContactListsTestCase extends EntityTestCase
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->listId);
+        return $this->endpoint->delete($this->entity->listId);
     }
 }

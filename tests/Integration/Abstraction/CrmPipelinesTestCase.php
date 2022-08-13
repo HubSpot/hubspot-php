@@ -18,17 +18,17 @@ class CrmPipelinesTestCase extends EntityTestCase
     /**
      * @var SevenShores\Hubspot\Endpoints\CrmPipelines
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var SevenShores\Hubspot\Endpoints\CrmPipelines::class
      */
-    protected $resourceClass = CrmPipelines::class;
+    protected $endpointClass = CrmPipelines::class;
 
     public function setUp(): void
     {
-        if (empty($this->resource)) {
-            $this->resource = new $this->resourceClass($this->getClient(), $this->type);
+        if (empty($this->endpoint)) {
+            $this->endpoint = new $this->endpointClass($this->getClient(), $this->type);
         }
         sleep(1);
 
@@ -38,7 +38,7 @@ class CrmPipelinesTestCase extends EntityTestCase
     /** @test */
     public function getAllPipelinesTest()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -46,7 +46,7 @@ class CrmPipelinesTestCase extends EntityTestCase
     /** @test */
     public function getAllPipelinesIncludingDeleted()
     {
-        $response = $this->resource->all(['includeInactive' => 'INCLUDE_DELETED']);
+        $response = $this->endpoint->all(['includeInactive' => 'INCLUDE_DELETED']);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -60,7 +60,7 @@ class CrmPipelinesTestCase extends EntityTestCase
     /** @test */
     public function updatePipeline()
     {
-        $response = $this->resource->update(
+        $response = $this->endpoint->update(
             $this->entity->pipelineId,
             $this->getData('Updated '.$this->type.' Pipeline')
         );
@@ -80,12 +80,12 @@ class CrmPipelinesTestCase extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->create($this->getData());
+        return $this->endpoint->create($this->getData());
     }
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->pipelineId);
+        return $this->endpoint->delete($this->entity->pipelineId);
     }
 
     protected function getData(string $label = null)

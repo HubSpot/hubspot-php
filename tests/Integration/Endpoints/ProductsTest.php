@@ -16,17 +16,17 @@ class ProductsTest extends EntityTestCase
     /**
      * @var SevenShores\Hubspot\Endpoints\Products
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var SevenShores\Hubspot\Endpoints\Products::class
      */
-    protected $resourceClass = Products::class;
+    protected $endpointClass = Products::class;
 
     /** @test */
     public function all()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->objects));
@@ -35,7 +35,7 @@ class ProductsTest extends EntityTestCase
     /** @test */
     public function getById()
     {
-        $response = $this->resource->getById($this->entity->objectId);
+        $response = $this->endpoint->getById($this->entity->objectId);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -50,12 +50,12 @@ class ProductsTest extends EntityTestCase
             $product->objectId,
         ];
 
-        $response = $this->resource->getBatchByIds($ids);
+        $response = $this->endpoint->getBatchByIds($ids);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(2, $response->toArray());
 
-        $this->resource->delete($product->objectId);
+        $this->endpoint->delete($product->objectId);
     }
 
     /** @test */
@@ -67,7 +67,7 @@ class ProductsTest extends EntityTestCase
     /** @test */
     public function createBatch()
     {
-        $response = $this->resource->createBatch([
+        $response = $this->endpoint->createBatch([
             $this->getData(),
             $this->getData(),
         ]);
@@ -76,7 +76,7 @@ class ProductsTest extends EntityTestCase
 
         sleep(1);
 
-        $this->resource->deleteBatch(array_map(function ($product) {
+        $this->endpoint->deleteBatch(array_map(function ($product) {
             return $product->objectId;
         }, array_values($response->getData())));
     }
@@ -84,7 +84,7 @@ class ProductsTest extends EntityTestCase
     /** @test */
     public function update()
     {
-        $response = $this->resource->update($this->entity->objectId, [
+        $response = $this->endpoint->update($this->entity->objectId, [
             ['name' => 'name', 'value' => 'An updated product'],
         ]);
 
@@ -96,7 +96,7 @@ class ProductsTest extends EntityTestCase
     {
         $product = $this->createEntity();
 
-        $response = $this->resource->updateBatch([
+        $response = $this->endpoint->updateBatch([
             [
                 'objectId' => $this->entity->objectId,
                 'properties' => [
@@ -127,7 +127,7 @@ class ProductsTest extends EntityTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->resource->delete($product->objectId);
+        $this->endpoint->delete($product->objectId);
     }
 
     /** @test */
@@ -143,14 +143,14 @@ class ProductsTest extends EntityTestCase
     /** @test */
     public function deleteBatch()
     {
-        $response = $this->resource->createBatch([
+        $response = $this->endpoint->createBatch([
             $this->getData(),
             $this->getData(),
         ]);
 
         sleep(1);
 
-        $deleteResponse = $this->resource->deleteBatch(array_map(function ($product) {
+        $deleteResponse = $this->endpoint->deleteBatch(array_map(function ($product) {
             return $product->objectId;
         }, array_values($response->getData())));
 
@@ -160,18 +160,18 @@ class ProductsTest extends EntityTestCase
     /** @test */
     public function getProductChanges()
     {
-        $response = $this->resource->getProductChanges();
+        $response = $this->endpoint->getProductChanges();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     protected function createEntity()
     {
-        return $this->resource->create($this->getData());
+        return $this->endpoint->create($this->getData());
     }
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->objectId);
+        return $this->endpoint->delete($this->entity->objectId);
     }
 }

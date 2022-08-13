@@ -10,7 +10,7 @@ abstract class Endpoint
     protected $client;
 
     /**
-     * Makin' a good old resource.
+     * Makin' a good old endpoint.
      *
      * @param \SevenShores\Hubspot\Http\Client $client
      */

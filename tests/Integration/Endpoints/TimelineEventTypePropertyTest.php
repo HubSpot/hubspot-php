@@ -15,7 +15,7 @@ class TimelineEventTypePropertyTest extends TimelineWithProprtyTestCase
      */
     public function getEventTypeProperties()
     {
-        $response = $this->resource->getEventTypeProperties($this->appId, $this->entity->id);
+        $response = $this->endpoint->getEventTypeProperties($this->appId, $this->entity->id);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->toArray()));
@@ -35,7 +35,7 @@ class TimelineEventTypePropertyTest extends TimelineWithProprtyTestCase
      */
     public function updateEventTypeProperty()
     {
-        $response = $this->resource->updateEventTypeProperty(
+        $response = $this->endpoint->updateEventTypeProperty(
             $this->appId,
             $this->entity->id,
             $this->property->id,

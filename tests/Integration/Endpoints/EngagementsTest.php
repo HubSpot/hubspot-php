@@ -15,17 +15,17 @@ class EngagementsTest extends EntityTestCase
     /**
      * @var Engagements
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var Engagements::class
      */
-    protected $resourceClass = Engagements::class;
+    protected $endpointClass = Engagements::class;
 
     /**
      * @var Contacts
      */
-    protected $contactsResource;
+    protected $contactsEndpoint;
 
     /**
      * @var \SevenShores\Hubspot\Http\Response
@@ -34,7 +34,7 @@ class EngagementsTest extends EntityTestCase
 
     public function setUp(): void
     {
-        $this->contactsResource = new Contacts($this->getClient());
+        $this->contactsEndpoint = new Contacts($this->getClient());
 
         $this->contact = $this->createContact();
         sleep(1);
@@ -59,7 +59,7 @@ class EngagementsTest extends EntityTestCase
     /** @test */
     public function update()
     {
-        $response = $this->resource->update($this->entity->engagement->id, [
+        $response = $this->endpoint->update($this->entity->engagement->id, [
             'active' => true,
             'ownerId' => 1,
             'type' => 'NOTE',
@@ -84,7 +84,7 @@ class EngagementsTest extends EntityTestCase
     /** @test */
     public function get()
     {
-        $response = $this->resource->get($this->entity->engagement->id);
+        $response = $this->endpoint->get($this->entity->engagement->id);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -92,7 +92,7 @@ class EngagementsTest extends EntityTestCase
     /** @test */
     public function all()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -100,7 +100,7 @@ class EngagementsTest extends EntityTestCase
     /** @test */
     public function recent()
     {
-        $response = $this->resource->recent();
+        $response = $this->endpoint->recent();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -108,7 +108,7 @@ class EngagementsTest extends EntityTestCase
     /** @test */
     public function getCallDispositions()
     {
-        $response = $this->resource->getCallDispositions();
+        $response = $this->endpoint->getCallDispositions();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(6, $response->getData());
@@ -116,7 +116,7 @@ class EngagementsTest extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->create([
+        return $this->endpoint->create([
             'active' => true,
             'ownerId' => 1,
             'type' => 'NOTE',
@@ -133,12 +133,12 @@ class EngagementsTest extends EntityTestCase
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->engagement->id);
+        return $this->endpoint->delete($this->entity->engagement->id);
     }
 
     protected function createContact()
     {
-        return $this->contactsResource->create([
+        return $this->contactsEndpoint->create([
             ['property' => 'email',     'value' => 'rw_test'.uniqid().'@hubspot.com'],
             ['property' => 'firstname', 'value' => 'joe'],
             ['property' => 'lastname',  'value' => 'user'],
@@ -147,6 +147,6 @@ class EngagementsTest extends EntityTestCase
 
     protected function deleteContact()
     {
-        return $this->contactsResource->delete($this->contact->vid);
+        return $this->contactsEndpoint->delete($this->contact->vid);
     }
 }

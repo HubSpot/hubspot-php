@@ -14,7 +14,7 @@ class CompanyPropertiesTest extends PropertiesTestCase
     /**
      * @var null|SevenShores\Hubspot\Endpoints\Endpoint
      */
-    protected $resourceClass = CompanyProperties::class;
+    protected $endpointClass = CompanyProperties::class;
 
     /**
      * @var string

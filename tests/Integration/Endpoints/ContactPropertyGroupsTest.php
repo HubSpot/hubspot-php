@@ -19,5 +19,5 @@ class ContactPropertyGroupsTest extends PropertyGroupsTestCase
     /**
      * @var ContactProperties
      */
-    protected $resourceClass = ContactProperties::class;
+    protected $endpointClass = ContactProperties::class;
 }

@@ -12,7 +12,7 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
     /** @test */
     public function all()
     {
-        $response = $this->resource->getAllGroups();
+        $response = $this->endpoint->getAllGroups();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
@@ -22,7 +22,7 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
     /** @test */
     public function allWithProperties()
     {
-        $response = $this->resource->getAllGroups(true);
+        $response = $this->endpoint->getAllGroups(true);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
@@ -35,7 +35,7 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
         if (!$this->getGroup) {
             return true;
         }
-        $response = $this->resource->getGroup($this->entity->name);
+        $response = $this->endpoint->getGroup($this->entity->name);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -55,7 +55,7 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
             'displayOrder' => 7,
         ];
 
-        $response = $this->resource->updateGroup($this->entity->name, $group);
+        $response = $this->endpoint->updateGroup($this->entity->name, $group);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('An Updated Property Group', $response->displayName);
@@ -64,7 +64,7 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
     /** @test */
     public function delete()
     {
-        $response = $this->resource->deleteGroup($this->entity->name);
+        $response = $this->endpoint->deleteGroup($this->entity->name);
 
         $this->assertEquals(204, $response->getStatusCode());
 
@@ -78,7 +78,7 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
      */
     protected function deleteEntity()
     {
-        return $this->resource->deleteGroup($this->entity->name);
+        return $this->endpoint->deleteGroup($this->entity->name);
     }
 
     /**
@@ -94,6 +94,6 @@ abstract class PropertyGroupsTestCase extends EntityTestCase
             'displayOrder' => 7,
         ];
 
-        return $this->resource->createGroup($data);
+        return $this->endpoint->createGroup($data);
     }
 }

@@ -14,20 +14,20 @@ class EmailSubscriptionTest extends \PHPUnit\Framework\TestCase
     /**
      * @var Email
      */
-    protected $resource;
+    protected $endpoint;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->resource = new EmailSubscription(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        $this->endpoint = new EmailSubscription(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         sleep(1);
     }
 
     /** @test */
     public function subscriptions()
     {
-        $response = $this->resource->subscriptions();
+        $response = $this->endpoint->subscriptions();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -35,7 +35,7 @@ class EmailSubscriptionTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function subscriptionsTimeline()
     {
-        $response = $this->resource->subscriptionsTimeline(['limit' => 2]);
+        $response = $this->endpoint->subscriptionsTimeline(['limit' => 2]);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -43,7 +43,7 @@ class EmailSubscriptionTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function subscriptionStatus()
     {
-        $response = $this->resource->subscriptionStatus('test@hubspot.com');
+        $response = $this->endpoint->subscriptionStatus('test@hubspot.com');
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -51,7 +51,7 @@ class EmailSubscriptionTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function updateSubscription()
     {
-        $response = $this->resource->updateSubscription('test@hubspot.com', ['unsubscribeFromAll' => true]);
+        $response = $this->endpoint->updateSubscription('test@hubspot.com', ['unsubscribeFromAll' => true]);
 
         $this->assertEquals(200, $response->getStatusCode());
     }

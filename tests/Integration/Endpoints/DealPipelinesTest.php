@@ -15,12 +15,12 @@ class DealPipelinesTest extends EntityTestCase
     /**
      * @var DealPipelines
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var DealPipelines::class
      */
-    protected $resourceClass = DealPipelines::class;
+    protected $endpointClass = DealPipelines::class;
 
     /**
      * @var null|\SevenShores\Hubspot\Http\Response
@@ -41,7 +41,7 @@ class DealPipelinesTest extends EntityTestCase
      */
     public function getAllPipelines()
     {
-        $response = $this->resource->getAllPipelines();
+        $response = $this->endpoint->getAllPipelines();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->getData()));
@@ -52,7 +52,7 @@ class DealPipelinesTest extends EntityTestCase
      */
     public function getPipeline()
     {
-        $response = $this->resource->getPipeline($this->entity->pipelineId);
+        $response = $this->endpoint->getPipeline($this->entity->pipelineId);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($this->entity->label, $response->label);
@@ -65,7 +65,7 @@ class DealPipelinesTest extends EntityTestCase
     public function update()
     {
         $newLabel = 'Updated pipeline'.uniqid();
-        $response = $this->resource->update($this->entity->pipelineId, [
+        $response = $this->endpoint->update($this->entity->pipelineId, [
             'label' => $newLabel,
             'pipelineId' => $this->entity->pipelineId,
             'stages' => [
@@ -91,7 +91,7 @@ class DealPipelinesTest extends EntityTestCase
 
     protected function createEntity()
     {
-        return $this->resource->create([
+        return $this->endpoint->create([
             'label' => 'New Business Pipeline'.uniqid(),
             'displayOrder' => 5,
             'stages' => [
@@ -106,6 +106,6 @@ class DealPipelinesTest extends EntityTestCase
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->pipelineId);
+        return $this->endpoint->delete($this->entity->pipelineId);
     }
 }

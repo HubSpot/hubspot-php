@@ -14,5 +14,5 @@ class CompanyPropertyGroupsTest extends PropertyGroupsTestCase
     /**
      * @var CompanyProperties
      */
-    protected $resourceClass = CompanyProperties::class;
+    protected $endpointClass = CompanyProperties::class;
 }

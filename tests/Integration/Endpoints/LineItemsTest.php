@@ -18,17 +18,17 @@ class LineItemsTest extends EntityTestCase
     /**
      * @var LineItems
      */
-    protected $resource;
+    protected $endpoint;
 
     /**
      * @var LineItems::class
      */
-    protected $resourceClass = LineItems::class;
+    protected $endpointClass = LineItems::class;
 
     /**
      * $var Products.
      */
-    protected $resourceProducts;
+    protected $endpointProducts;
 
     /**
      * $var \SevenShores\Hubspot\Http\Response.
@@ -54,7 +54,7 @@ class LineItemsTest extends EntityTestCase
     /** @test */
     public function all()
     {
-        $response = $this->resource->all();
+        $response = $this->endpoint->all();
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertGreaterThanOrEqual(1, count($response->objects));
@@ -63,7 +63,7 @@ class LineItemsTest extends EntityTestCase
     /** @test */
     public function getById()
     {
-        $response = $this->resource->getById($this->entity->objectId);
+        $response = $this->endpoint->getById($this->entity->objectId);
 
         $this->assertEquals(200, $response->getStatusCode());
     }
@@ -78,12 +78,12 @@ class LineItemsTest extends EntityTestCase
             $lineItem->objectId,
         ];
 
-        $response = $this->resource->getBatchByIds($ids);
+        $response = $this->endpoint->getBatchByIds($ids);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertCount(2, $response->toArray());
 
-        $this->resource->delete($lineItem->objectId);
+        $this->endpoint->delete($lineItem->objectId);
     }
 
     /** @test */
@@ -95,7 +95,7 @@ class LineItemsTest extends EntityTestCase
     /** @test */
     public function createBatch()
     {
-        $response = $this->resource->createBatch([
+        $response = $this->endpoint->createBatch([
             $this->getData(),
             $this->getData(),
         ]);
@@ -104,7 +104,7 @@ class LineItemsTest extends EntityTestCase
 
         sleep(1);
 
-        $this->resource->deleteBatch(array_map(function ($lineItem) {
+        $this->endpoint->deleteBatch(array_map(function ($lineItem) {
             return $lineItem->objectId;
         }, array_values($response->getData())));
     }
@@ -112,7 +112,7 @@ class LineItemsTest extends EntityTestCase
     /** @test */
     public function update()
     {
-        $response = $this->resource->update($this->entity->objectId, [
+        $response = $this->endpoint->update($this->entity->objectId, [
             ['name' => 'name', 'value' => 'An updated custom name for the product for this line item. Discounting 5% on bulk purchase.'],
         ]);
 
@@ -124,7 +124,7 @@ class LineItemsTest extends EntityTestCase
     {
         $lineItem = $this->createEntity();
 
-        $response = $this->resource->updateBatch([
+        $response = $this->endpoint->updateBatch([
             [
                 'objectId' => $this->entity->objectId,
                 'properties' => [
@@ -155,7 +155,7 @@ class LineItemsTest extends EntityTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->resource->delete($lineItem->objectId);
+        $this->endpoint->delete($lineItem->objectId);
     }
 
     /** @test */
@@ -171,14 +171,14 @@ class LineItemsTest extends EntityTestCase
     /** @test */
     public function deleteBatch()
     {
-        $response = $this->resource->createBatch([
+        $response = $this->endpoint->createBatch([
             $this->getData(),
             $this->getData(),
         ]);
 
         sleep(1);
 
-        $deleteResponse = $this->resource->deleteBatch(array_map(function ($lineItem) {
+        $deleteResponse = $this->endpoint->deleteBatch(array_map(function ($lineItem) {
             return $lineItem->objectId;
         }, array_values($response->getData())));
 
@@ -188,19 +188,19 @@ class LineItemsTest extends EntityTestCase
     /** @test */
     public function getLineItemChanges()
     {
-        $response = $this->resource->getLineItemChanges();
+        $response = $this->endpoint->getLineItemChanges();
 
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     protected function createEntity()
     {
-        return $this->resource->create($this->getData());
+        return $this->endpoint->create($this->getData());
     }
 
     protected function deleteEntity()
     {
-        return $this->resource->delete($this->entity->objectId);
+        return $this->endpoint->delete($this->entity->objectId);
     }
 
     protected function getData(): array
@@ -215,11 +215,11 @@ class LineItemsTest extends EntityTestCase
 
     protected function getProducts()
     {
-        if (empty($this->resourceProducts)) {
-            $this->resourceProducts = new Products(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
+        if (empty($this->endpointProducts)) {
+            $this->endpointProducts = new Products(new Client(['key' => getenv('HUBSPOT_TEST_API_KEY')]));
         }
 
-        return $this->resourceProducts;
+        return $this->endpointProducts;
     }
 
     protected function createProduct()
