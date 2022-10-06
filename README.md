@@ -41,7 +41,7 @@ $hubspot = SevenShores\Hubspot\Factory::createWithOAuth2Token('access-token');
 
 $hubspot = new SevenShores\Hubspot\Factory([
   'key'      => 'demo',
-  'oauth2'   => 'false', // default
+  'oauth2'   => false, // default
 ]);
 
 // Then you can call a resource 
