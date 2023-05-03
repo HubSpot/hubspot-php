@@ -16,7 +16,7 @@ class Forms extends Endpoint
      */
     public function submit($portal_id, $form_guid, array $form)
     {
-        $endpoint = "https://forms.hubspot.com/submissions/v3/integration/submit/{$portal_id}/{$form_guid}";
+        $endpoint = "https://forms.hubspot.com/submissions/v3/integration/secure/submit/{$portal_id}/{$form_guid}";
 
         return $this->client->request('post', $endpoint, ['json' => $form], null, false);
     }
