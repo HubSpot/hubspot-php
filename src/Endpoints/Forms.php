@@ -7,7 +7,7 @@ class Forms extends Endpoint
     /**
      * Submit data to a form.
      *
-     * @see https://developers.hubspot.com/docs/methods/forms/submit_form_v3
+     * @see https://legacydocs.hubspot.com/docs/methods/forms/submit_form
      *
      * @param int    $portal_id
      * @param string $form_guid
@@ -16,9 +16,26 @@ class Forms extends Endpoint
      */
     public function submit($portal_id, $form_guid, array $form)
     {
-        $endpoint = "https://forms.hubspot.com/submissions/v3/integration/submit/{$portal_id}/{$form_guid}";
+        $endpoint = "https://api.hsforms.com/submissions/v3/integration/submit/{$portal_id}/{$form_guid}";
 
         return $this->client->request('post', $endpoint, ['json' => $form], null, false);
+    }
+
+    /**
+     * Submit data to a form (Supporting Authentication).
+     *
+     * @see https://legacydocs.hubspot.com/docs/methods/forms/submit_form_v3_authentication
+     *
+     * @param int    $portal_id
+     * @param string $form_guid
+     *
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    public function secureSubmit($portal_id, $form_guid, array $form)
+    {
+        $endpoint = "https://api.hsforms.com/submissions/v3/integration/secure/submit/{$portal_id}/{$form_guid}";
+
+        return $this->client->request('post', $endpoint, ['json' => $form]);
     }
 
     /**
@@ -153,7 +170,7 @@ class Forms extends Endpoint
      *
      * @param string $url
      *
-     * @see https://developers.hubspot.com/docs/methods/form-integrations/v1/uploaded-files/signed-url-redirect
+     * @see https://developers.hubspgit ot.com/docs/methods/form-integrations/v1/uploaded-files/signed-url-redirect
      */
     public function getUploadedFileByUrl($url)
     {
