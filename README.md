@@ -34,7 +34,7 @@ $hubspot = SevenShores\Hubspot\Factory::create('api-key');
 
 // OR create with access token (OAuth2 or Private App)
 
-$hubspot = SevenShores\Hubspot\Factory::createWithOAuth2Token('access-token');
+$hubspot = SevenShores\Hubspot\Factory::createWithAccessToken('access-token');
 
 // OR instantiate by passing a configuration array.
 // The only required value is the 'key'
