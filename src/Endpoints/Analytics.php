@@ -10,8 +10,8 @@ class Analytics extends Endpoint
     /**
      * Get analytics data broken down by the specified category.
      *
-     * @param string $startDate (YYYYMMDD)
-     * @param string $endDate   (YYYYMMDD)
+     * @param string $start (YYYYMMDD)
+     * @param string $end   (YYYYMMDD)
      * @param array  $params    Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      *
      * @see https://developers.hubspot.com/docs/methods/analytics/get-analytics-data-breakdowns
@@ -21,8 +21,8 @@ class Analytics extends Endpoint
     public function getByCategory(
         string $breakdown_by,
         string $time_period,
-        string $startDate,
-        string $endDate,
+        string $start,
+        string $end,
         array $params = []
     ) {
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$breakdown_by}/{$time_period}";
@@ -32,7 +32,7 @@ class Analytics extends Endpoint
             $endpoint,
             [],
             build_query_string(
-                array_merge(compact('startDate', 'endDate'), $params)
+                array_merge(compact('start', 'end'), $params)
             )
         );
     }
@@ -40,8 +40,8 @@ class Analytics extends Endpoint
     /**
      * Get analytics data for specific objects, based on the type of object.
      *
-     * @param string $startDate (YYYYMMDD)
-     * @param string $endDate   (YYYYMMDD)
+     * @param string $start (YYYYMMDD)
+     * @param string $end   (YYYYMMDD)
      * @param array  $params    Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      *
      * @see https://developers.hubspot.com/docs/methods/analytics/get-analytics-data-by-object
@@ -51,8 +51,8 @@ class Analytics extends Endpoint
     public function getByType(
         string $object_type,
         string $time_period,
-        string $startDate,
-        string $endDate,
+        string $start,
+        string $end,
         array $params = []
     ) {
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$object_type}/{$time_period}";
@@ -62,7 +62,7 @@ class Analytics extends Endpoint
             $endpoint,
             [],
             build_query_string(
-                array_merge(compact('startDate', 'endDate'), $params)
+                array_merge(compact('start', 'end'), $params)
             )
         );
     }
@@ -70,8 +70,8 @@ class Analytics extends Endpoint
     /**
      * Get analytics data for your HubSpot hosted content.
      *
-     * @param string $startDate (YYYYMMDD)
-     * @param string $endDate   (YYYYMMDD)
+     * @param string $start (YYYYMMDD)
+     * @param string $end   (YYYYMMDD)
      * @param array  $params    Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      *
      * @see https://developers.hubspot.com/docs/methods/analytics/get-data-for-hubspot-content
@@ -81,8 +81,8 @@ class Analytics extends Endpoint
     public function getHosted(
         string $content_type,
         string $time_period,
-        string $startDate,
-        string $endDate,
+        string $start,
+        string $end,
         array $params = []
     ) {
         $endpoint = "https://api.hubapi.com/analytics/v2/reports/{$content_type}/{$time_period}";
@@ -92,7 +92,7 @@ class Analytics extends Endpoint
             $endpoint,
             [],
             build_query_string(
-                array_merge(compact('startDate', 'endDate'), $params)
+                array_merge(compact('start', 'end'), $params)
             )
         );
     }
