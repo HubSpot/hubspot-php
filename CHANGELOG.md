@@ -2,7 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.0.1...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.1.0...HEAD)
+
+## [5.1.0]
+
+### Changed
+
+- `Factory::createWithOAuth2Token()` announced deprecated.
+- Added new method `Factory::createWithAccessToken()`.
+- Locked `psr/http-message` to version `v1.1`.
+- Fixed `Analytics::getByCategory()`, `Analytics::getByType()` and `Analytics::getHosted()` methods.
+- Added new method `Forms:secureSubmit()`.
+- Fixed `Forms::submit()` method.
+- Updated `RetryMiddlewareFactory::getRetryFunctionByRange()` and `RetryMiddlewareFactory::getRetryFunction()`.
 
 ## [5.0.1]
 
@@ -121,5 +133,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Trying to return a response with`RequestException` in the `Client`. It now re-throws a new `BadRequest` Exception. [#48](https://github.com/ryanwinchester/hubspot-php/issues/48) @ryanwinchester
 
-[Unreleased]: https://github.com/ryanwinchester/hubspot-php/compare/v5.0.1...HEAD
+[Unreleased]: https://github.com/ryanwinchester/hubspot-php/compare/v5.1.0...HEAD
 [1.0.0-rc.1]: https://github.com/ryanwinchester/hubspot-php/compare/v0.9.11...v1.0.0-rc.1
