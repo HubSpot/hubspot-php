@@ -38,10 +38,11 @@ $hubspot = SevenShores\Hubspot\Factory::createWithAccessToken('access-token');
 
 // OR instantiate by passing a configuration array.
 // The only required value is the 'key'
+// Please note: as of November 30, 2022, HubSpot API Keys are being deprecated and are no longer supported.
 
 $hubspot = new SevenShores\Hubspot\Factory([
-  'key'      => 'demo',
-  'oauth2'   => false, // default
+    'key'      => 'demo',
+    'oauth2'   => false, // default
 ]);
 
 // Then you can call a resource 
@@ -50,27 +51,29 @@ $hubspot = new SevenShores\Hubspot\Factory([
 $hubspot->contactlists
 ```
 
-You can find more information about API keys [here](https://knowledge.hubspot.com/integrations/how-do-i-get-my-hubspot-api-key), about oauth2 access tokens [here](https://developers.hubspot.com/docs/api/oauth/tokens) and about private app access token [here](https://developers.hubspot.com/docs/api/private-apps)
+You can find more information about oauth2 access tokens [here](https://developers.hubspot.com/docs/api/oauth/tokens) and about private app access token [here](https://developers.hubspot.com/docs/api/private-apps).
 
 *Note:* You can prevent any error handling provided by this package by passing following options into client creation routine:
-(applies also to `Factory::create()` and `Factory::createWithOAuth2Token()`)
+(applies also to `Factory::create()` and `Factory::createWithAccessToken()`)
 
 ```php
-$hubspot = new SevenShores\Hubspot\Factory([
-  'key'      => 'demo',
-],
-null,
-[
-  'http_errors' => false // pass any Guzzle related option to any request, e.g. throw no exceptions
-],
-false // return Guzzle Response object for any ->request(*) call
+$hubspot = new SevenShores\Hubspot\Factory(
+    [
+        'key' => 'demo',
+    ],
+    null,
+    [
+        'http_errors' => false // pass any Guzzle related option to any request, e.g. throw no exceptions
+    ],
+    false // return Guzzle Response object for any ->request(*) call
 );
 ```
 
 By setting `http_errors` to false, you will not receive any exceptions at all, but pure responses.
 For possible options, see http://docs.guzzlephp.org/en/latest/request-options.html.
 
-#### API Client comes with Middleware for implementation of Rate and Concurrent Limiting.
+#### API Client comes with Middleware for implementation of Rate and Concurrent Limiting
+
 It provides an ability to turn on retry for failed requests with statuses 429 or 500. You can read more about working within the HubSpot API rate limits [here](https://developers.hubspot.com/docs/faq/working-within-the-hubspot-api-rate-limits).
 
 ```php
@@ -90,14 +93,14 @@ $handlerStack->push(
 $guzzleClient = new \GuzzleHttp\Client(['handler' => $handlerStack]);
 
 $config = [
-    'key'      => 'demo',
-    'oauth2'   => false,
+    'key' => 'access token',
+    'oauth2' => true,
 ];
 
 $hubspot = new \SevenShores\Hubspot\Factory($config, new \SevenShores\Hubspot\Http\Client($config, $guzzleClient));
 ```
 
-#### Get a single contact:
+#### Get a single contact
 
 ```php
 $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
@@ -105,7 +108,7 @@ $contact = $hubspot->contacts()->getByEmail("test@hubspot.com");
 echo $contact->properties->email->value;
 ```
 
-#### Paginate through all contacts:
+#### Paginate through all contacts
 
 ```php
 // Get an array of 10 contacts
@@ -168,7 +171,7 @@ require 'vendor/autoload.php';
 use SevenShores\Hubspot\Http\Client;
 use SevenShores\Hubspot\Endpoints\Contacts;
 
-$client = new Client(['key' => 'demo']);
+$client = new Client(['key' => 'access token', 'oauth2' => true,]);
 
 $contacts = new Contacts($client);
 
@@ -197,7 +200,6 @@ $authUrl = OAuth2::getAuthUrl(
 ```
 
 or using Factory:
-
 
 ```php
 <?php

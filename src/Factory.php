@@ -106,13 +106,15 @@ class Factory
     }
 
     /**
-     * Create an instance of the service with an OAuth token.
+     * Create an instance of the service with an access token.
      *
      * @param string $token         hubspot oauth access token
      * @param Client $client        an Http client
      * @param array  $clientOptions options to be send with each request
      * @param bool   $wrapResponse  wrap request response in own Response object
-     *
+     * 
+     * @deprecated
+     * 
      * @return static
      */
     public static function createWithToken(string $token, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
