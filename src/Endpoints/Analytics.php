@@ -10,9 +10,9 @@ class Analytics extends Endpoint
     /**
      * Get analytics data broken down by the specified category.
      *
-     * @param string $start (YYYYMMDD)
-     * @param string $end   (YYYYMMDD)
-     * @param array  $params    Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     * @param string $start  (YYYYMMDD)
+     * @param string $end    (YYYYMMDD)
+     * @param array  $params Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      *
      * @see https://developers.hubspot.com/docs/methods/analytics/get-analytics-data-breakdowns
      *
@@ -40,9 +40,9 @@ class Analytics extends Endpoint
     /**
      * Get analytics data for specific objects, based on the type of object.
      *
-     * @param string $start (YYYYMMDD)
-     * @param string $end   (YYYYMMDD)
-     * @param array  $params    Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     * @param string $start  (YYYYMMDD)
+     * @param string $end    (YYYYMMDD)
+     * @param array  $params Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      *
      * @see https://developers.hubspot.com/docs/methods/analytics/get-analytics-data-by-object
      *
@@ -70,9 +70,9 @@ class Analytics extends Endpoint
     /**
      * Get analytics data for your HubSpot hosted content.
      *
-     * @param string $start (YYYYMMDD)
-     * @param string $end   (YYYYMMDD)
-     * @param array  $params    Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
+     * @param string $start  (YYYYMMDD)
+     * @param string $end    (YYYYMMDD)
+     * @param array  $params Array of optional parameters ['filterId', 'sort', 'sortDir','limit', 'offset']
      *
      * @see https://developers.hubspot.com/docs/methods/analytics/get-data-for-hubspot-content
      *

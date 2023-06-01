@@ -112,9 +112,9 @@ class Factory
      * @param Client $client        an Http client
      * @param array  $clientOptions options to be send with each request
      * @param bool   $wrapResponse  wrap request response in own Response object
-     * 
+     *
      * @deprecated
-     * 
+     *
      * @return static
      */
     public static function createWithToken(string $token, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
@@ -131,7 +131,7 @@ class Factory
      * @param bool   $wrapResponse  wrap request response in own Response object
      *
      * @deprecated
-     * 
+     *
      * @return static
      */
     public static function createWithOAuth2Token(string $token, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self

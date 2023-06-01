@@ -30,8 +30,7 @@ class RetryMiddlewareFactory
         array $codes,
         callable $delayFunction,
         int $maxRetries = 5
-    ): callable
-    {
+    ): callable {
         return Middleware::retry(
             static::getRetryFunction($codes, $maxRetries),
             $delayFunction
@@ -47,8 +46,7 @@ class RetryMiddlewareFactory
         int $to,
         callable $delayFunction,
         int $maxRetries = 5
-    ): callable
-    {
+    ): callable {
         return Middleware::retry(
             static::getRetryFunctionByRange($from, $to, $maxRetries),
             $delayFunction
