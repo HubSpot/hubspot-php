@@ -3,7 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.1.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.1.1...HEAD)
+
+## [5.1.1]
+
+### Changed
+
+- Fix `Utils\OAuth2::getAuthUrl()` (don't add empty scopes or optional scopes to OAuth url).
 
 ## [5.1.0]
 
