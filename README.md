@@ -45,7 +45,7 @@ $hubspot = new SevenShores\Hubspot\Factory([
     'oauth2'   => false, // default
 ]);
 
-// Then you can call a resource 
+// Then you can call a resource
 // When referencing endpoints, use camelCase
 
 $hubspot->contactlists
@@ -266,4 +266,3 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [x] Transactional Email API
 - [x] Workflows API :updated:
 - [x] Webhooks API
-

@@ -6,24 +6,28 @@ agree to not be a jerk.
 ## Getting Started
 
 - Fork, then clone the repo:
-```
+
+```bash
     git clone git@github.com:your-username/hubspot-php.git
 ```
 
 - Set up your machine:
-```
+
+```bash
     composer install
 ```
 
 - Make your change. Add test for your changes. Make the tests pass, e.g.:
-```
+
+```bash
     vendor/bin/phpunit tests/integration/Endpoints/TimelineTest
 ```
-or you can run tests with docker:
-1. Copy .env.template to .env
-2. Specify data in .env (for most tests it is enough to specify HUBSPOT_TEST_API_KEY)
-3. `docker-compose up --build`
 
+or you can run tests with docker:
+
+1. Copy `.env.template` to `.env`
+2. Specify data in `.env` (for most tests it is enough to specify `HUBSPOT_TEST_API_KEY`)
+3. `docker-compose up --build`
 
 - Push to your fork and [submit a pull request][pr].
 
@@ -35,9 +39,9 @@ some changes or improvements or alternatives.
 
 Some things that will increase the chance that your pull request is accepted:
 
-* Write tests.
-* Follow PSR-2 [style guide][style].
-* Write a [good commit message][commit].
+- Write tests.
+- Follow PSR-2 [style guide][style].
+- Write a [good commit message][commit].
 
 [style]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
 [commit]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
