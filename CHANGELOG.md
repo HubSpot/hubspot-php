@@ -3,7 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.1.1...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.2.0...HEAD)
+
+## [5.2.0]
+
+### Changed
+
+- Added type hinting for a few method of `SevenShores\Hubspot\Http\Response`.
 
 ## [5.1.1]
 
@@ -96,7 +102,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Comments to BlogComments
-- Deal create + update change params 
+- Deal create + update change params
 - BlogPosts::clonePost => BlogPosts::clone
 - BlogTopics::create remove name
 - contactsProperties getGroups => getAllGroups
