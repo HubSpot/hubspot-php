@@ -3,7 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.2.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.3.0...HEAD)
+
+## [5.3.0]
+
+### Changes
+
+- Added `SevenShores\Hubspot\Utils\Timestamp`.
+- Update `psr/http-message` version to `^1.1 || ^2.0`.
 
 ## [5.2.0]
 
