@@ -3,7 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.3.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.4.0...HEAD)
+
+## [5.4.0]
+
+### Changes
+
+- Fixed implicitly nullable parameter declarations.
 
 ## [5.3.0]
 
