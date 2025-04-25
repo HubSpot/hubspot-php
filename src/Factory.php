@@ -62,7 +62,7 @@ class Factory
      * @param array  $clientOptions options to be send with each request
      * @param bool   $wrapResponse  wrap request response in own Response object
      */
-    public function __construct(array $config = [], Client $client = null, array $clientOptions = [], bool $wrapResponse = true)
+    public function __construct(array $config = [], ?Client $client = null, array $clientOptions = [], bool $wrapResponse = true)
     {
         if (is_null($client)) {
             $client = new Client($config, null, $clientOptions, $wrapResponse);
@@ -100,7 +100,7 @@ class Factory
      *
      * @return static
      */
-    public static function create(string $api_key = null, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
+    public static function create(?string $api_key = null, ?Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
     {
         return new static(['key' => $api_key], $client, $clientOptions, $wrapResponse);
     }
@@ -117,7 +117,7 @@ class Factory
      *
      * @return static
      */
-    public static function createWithToken(string $token, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
+    public static function createWithToken(string $token, ?Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
     {
         return new static(['key' => $token, 'oauth' => true], $client, $clientOptions, $wrapResponse);
     }
@@ -134,7 +134,7 @@ class Factory
      *
      * @return static
      */
-    public static function createWithOAuth2Token(string $token, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
+    public static function createWithOAuth2Token(string $token, ?Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
     {
         return new static(['key' => $token, 'oauth2' => true], $client, $clientOptions, $wrapResponse);
     }
@@ -149,7 +149,7 @@ class Factory
      *
      * @return static
      */
-    public static function createWithAccessToken(string $token, Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
+    public static function createWithAccessToken(string $token, ?Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
     {
         return new static(['key' => $token, 'oauth2' => true], $client, $clientOptions, $wrapResponse);
     }
