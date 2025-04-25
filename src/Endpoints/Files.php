@@ -17,9 +17,9 @@ class Files extends Endpoint
         $file,
         array $options = [],
         string $folderPath = '/',
-        string $fileName = null,
-        string $folderId = null,
-        string $charsetHunch = null
+        ?string $fileName = null,
+        ?string $folderId = null,
+        ?string $charsetHunch = null
     ) {
         $endpoint = 'https://api.hubapi.com/filemanager/api/v3/files/upload';
 

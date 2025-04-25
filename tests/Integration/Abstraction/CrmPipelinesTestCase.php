@@ -88,7 +88,7 @@ class CrmPipelinesTestCase extends EntityTestCase
         return $this->endpoint->delete($this->entity->pipelineId);
     }
 
-    protected function getData(string $label = null)
+    protected function getData(?string $label = null)
     {
         if (is_null($label)) {
             $label = 'Demo '.$this->type.' Pipeline';

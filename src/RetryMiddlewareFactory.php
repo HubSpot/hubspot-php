@@ -9,14 +9,14 @@ use GuzzleHttp\Psr7\Response;
 class RetryMiddlewareFactory
 {
     public static function createInternalErrorsMiddleware(
-        callable $delayFunction = null,
+        ?callable $delayFunction = null,
         int $maxRetries = 5
     ) {
         return static::createMiddlewareByHttpCodeRange(500, 504, $delayFunction, $maxRetries);
     }
 
     public static function createRateLimitMiddleware(
-        callable $delayFunction = null,
+        ?callable $delayFunction = null,
         int $maxRetries = 5
     ) {
         return static::createMiddlewareByHttpCodes([429], $delayFunction, $maxRetries);
@@ -61,7 +61,7 @@ class RetryMiddlewareFactory
         return function (
             $retries,
             Request $request,
-            Response $response = null
+            ?Response $response = null
         ) use ($from, $to, $maxRetries) {
             if ($retries >= $maxRetries) {
                 return false;
@@ -82,7 +82,7 @@ class RetryMiddlewareFactory
         return function (
             $retries,
             Request $request,
-            Response $response = null
+            ?Response $response = null
         ) use ($codes, $maxRetries) {
             if ($retries >= $maxRetries) {
                 return false;
