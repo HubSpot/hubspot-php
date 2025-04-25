@@ -196,7 +196,7 @@ class HubDB extends Endpoint
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function addRow($tableId, array $values, bool $draft = false, string $name = null, string $path = null)
+    public function addRow($tableId, array $values, bool $draft = false, ?string $name = null, ?string $path = null)
     {
         $endpoint = $this->getEndpoint(
             "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows",
@@ -243,7 +243,7 @@ class HubDB extends Endpoint
      *
      * @return \Psr\Http\Message\ResponseInterface|\SevenShores\Hubspot\Http\Response
      */
-    public function updateRow($tableId, $rowId, array $values, string $name = null, string $path = null)
+    public function updateRow($tableId, $rowId, array $values, ?string $name = null, ?string $path = null)
     {
         $endpoint = "https://api.hubapi.com/hubdb/api/v2/tables/{$tableId}/rows/{$rowId}";
 
@@ -382,7 +382,7 @@ class HubDB extends Endpoint
     /**
      * Get body.
      */
-    protected function getBody(array $values, string $name = null, string $path = null): array
+    protected function getBody(array $values, ?string $name = null, ?string $path = null): array
     {
         return [
             'json' => array_filter([
