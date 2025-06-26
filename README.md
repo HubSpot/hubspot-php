@@ -221,7 +221,6 @@ $authUrl = Utils::getFactory()->oAuth2()->getAuthUrl(
 If you see something not planned, that you want, make an [issue](https://github.com/HubSpot/hubspot-php/issues) and there's a good chance I will add it.
 
 - [x] Analytics API
-- [x] Calendar API :updated:
 - [x] Companies API :updated:
 - [x] Company Properties API :updated:
 - [x] Contacts API :updated:
