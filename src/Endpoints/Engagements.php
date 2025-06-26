@@ -138,56 +138,6 @@ class Engagements extends Endpoint
     }
 
     /**
-     * Associate Engagement with CRM object.
-     *
-     * @see https://developers.hubspot.com/docs/methods/engagements/associate_engagement
-     * @see CrmAssociations::create is used to create associations between objects
-     * @deprecated
-     *
-     * @param int $id
-     * @param int $object_id
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function associate($id, string $object_type, $object_id)
-    {
-        $endpoint = "https://api.hubapi.com/engagements/v1/engagements/{$id}/associations/{$object_type}/{$object_id}";
-
-        return $this->client->request('put', $endpoint);
-    }
-
-    /**
-     * Get Associated Engagements.
-     *
-     * @see https://developers.hubspot.com/docs/methods/engagements/get_associated_engagements
-     * @see CrmAssociations::get is used to get associations between objects
-     * @deprecated
-     *
-     * @param int   $object_id
-     * @param array $params    Array of optional parameters ['limit', 'offset']
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function associated(string $object_type, $object_id, array $params = [])
-    {
-        $endpoint = "https://api.hubapi.com/engagements/v1/engagements/associated/{$object_type}/{$object_id}/paged";
-
-        return $this->client->request('get', $endpoint, [], build_query_string($params));
-    }
-
-    /**
-     * @deprecated
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    public function activityTypes()
-    {
-        $endpoint = 'https://api.hubapi.com/engagements/v1/activity-types';
-
-        return $this->client->request('get', $endpoint);
-    }
-
-    /**
      * Get call engagement dispositions.
      *
      * Get the possible dispositions for sales calls (stored as engagements), listed as
