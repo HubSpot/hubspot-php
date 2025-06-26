@@ -15,7 +15,6 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Endpoints\BlogTopics         blogTopics()
  * @method \SevenShores\Hubspot\Endpoints\Companies          companies()
  * @method \SevenShores\Hubspot\Endpoints\CompanyProperties  companyProperties()
- * @method \SevenShores\Hubspot\Endpoints\CalendarEvents     calendarEvents()
  * @method \SevenShores\Hubspot\Endpoints\ContactLists       contactLists()
  * @method \SevenShores\Hubspot\Endpoints\ContactProperties  contactProperties()
  * @method \SevenShores\Hubspot\Endpoints\Contacts           contacts()
