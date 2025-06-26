@@ -3,7 +3,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.4.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-php/compare/v5.5.0...HEAD)
+
+## [5.5.0]
+
+### Removed deprecated methods and APIs
+
+- Calendar Events API.
+- Deals Pipelines API.
+- Associations methods from Companies, Deals and Engagements.
+- `getAuthUrl` method from OAuth2 API.
+- `create` and `update` methods from Owners API.
+- `createWithToken` and `createWithOAuth2Token` method from `Factory`.
+- Webhooks util.
 
 ## [5.4.0]
 
