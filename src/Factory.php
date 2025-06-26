@@ -35,7 +35,6 @@ use SevenShores\Hubspot\Http\Client;
  * @method \SevenShores\Hubspot\Endpoints\Timeline           timeline()
  * @method \SevenShores\Hubspot\Endpoints\Workflows          workflows()
  * @method \SevenShores\Hubspot\Endpoints\Events             events()
- * @method \SevenShores\Hubspot\Endpoints\DealPipelines      dealPipelines()
  * @method \SevenShores\Hubspot\Endpoints\DealProperties     dealProperties()
  * @method \SevenShores\Hubspot\Endpoints\Deals              deals()
  * @method \SevenShores\Hubspot\Endpoints\Owners             owners()

@@ -246,7 +246,6 @@ If you see something not planned, that you want, make an [issue](https://github.
 - [x] CRM Object Properties API (ObjectProperties) :new:
 - [x] CRM Pipelines API (CrmPipelines)
 - [x] Deals API
-- [x] Deal Pipelines API :deprecated:
 - [x] Deal Properties API :updated:
 - [x] Ecommerce Bridge API :updated:
 - [x] Email Subscription API :updated:
