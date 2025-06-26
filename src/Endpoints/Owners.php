@@ -9,33 +9,6 @@ namespace SevenShores\Hubspot\Endpoints;
  */
 class Owners extends Endpoint
 {
-    /**
-     * @return \SevenShores\Hubspot\Http\Response
-     *
-     * @deprecated
-     */
-    public function create(array $properties)
-    {
-        $endpoint = 'https://api.hubapi.com/owners/v2/owners/';
-        $options['json'] = $properties;
-
-        return $this->client->request('post', $endpoint, $options);
-    }
-
-    /**
-     * @param int $id
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     *
-     * @deprecated
-     */
-    public function update($id, array $properties)
-    {
-        $endpoint = "https://api.hubapi.com/owners/v2/owners/{$id}";
-        $options['json'] = $properties;
-
-        return $this->client->request('put', $endpoint, $options);
-    }
 
     /**
      * @param int $id
