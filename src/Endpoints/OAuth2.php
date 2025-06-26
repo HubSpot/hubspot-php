@@ -11,23 +11,6 @@ class OAuth2 extends Endpoint
     protected $endpoint = 'https://api.hubapi.com/oauth/v1';
 
     /**
-     * Initiate an Integration with OAuth 2.0.
-     *
-     * @param string $clientId       the Client ID of your app
-     * @param string $redirectURI    The URL that you want the visitor redirected to after granting access to your app. For security reasons, this URL must use https.
-     * @param array  $scopes         a set of scopes that your app will need access to
-     * @param array  $optionalScopes a set of optional scopes that your app will need access to
-     *
-     * @deprecated use Utils\OAuth2::getAuthUrl instead
-     *
-     * @return string
-     */
-    public function getAuthUrl($clientId, $redirectURI, $scopes = [], $optionalScopes = [])
-    {
-        return Utils\OAuth2::getAuthUrl($clientId, $redirectURI, $scopes, $optionalScopes);
-    }
-
-    /**
      * Get OAuth 2.0 Access Token and Refresh Tokens by using a one-time code.
      *
      * @param string $clientId     the Client ID of your app

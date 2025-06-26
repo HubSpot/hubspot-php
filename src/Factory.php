@@ -106,40 +106,6 @@ class Factory
     /**
      * Create an instance of the service with an access token.
      *
-     * @param string $token         hubspot oauth access token
-     * @param Client $client        an Http client
-     * @param array  $clientOptions options to be send with each request
-     * @param bool   $wrapResponse  wrap request response in own Response object
-     *
-     * @deprecated
-     *
-     * @return static
-     */
-    public static function createWithToken(string $token, ?Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
-    {
-        return new static(['key' => $token, 'oauth' => true], $client, $clientOptions, $wrapResponse);
-    }
-
-    /**
-     * Create an instance of the service with an OAuth2 token.
-     *
-     * @param string $token         hubspot OAuth2 access token
-     * @param Client $client        an Http client
-     * @param array  $clientOptions options to be send with each request
-     * @param bool   $wrapResponse  wrap request response in own Response object
-     *
-     * @deprecated
-     *
-     * @return static
-     */
-    public static function createWithOAuth2Token(string $token, ?Client $client = null, array $clientOptions = [], bool $wrapResponse = true): self
-    {
-        return new static(['key' => $token, 'oauth2' => true], $client, $clientOptions, $wrapResponse);
-    }
-
-    /**
-     * Create an instance of the service with an access token.
-     *
      * @param string $token         Hubspot access token
      * @param Client $client        an Http client
      * @param array  $clientOptions options to be send with each request

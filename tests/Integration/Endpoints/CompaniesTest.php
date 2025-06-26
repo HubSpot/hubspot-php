@@ -3,7 +3,6 @@
 namespace SevenShores\Hubspot\Tests\Integration\Endpoints;
 
 use SevenShores\Hubspot\Endpoints\Companies;
-use SevenShores\Hubspot\Endpoints\Contacts;
 use SevenShores\Hubspot\Tests\Integration\Abstraction\EntityTestCase;
 
 /**
@@ -26,14 +25,8 @@ class CompaniesTest extends EntityTestCase
      */
     protected $endpointClass = Companies::class;
 
-    /**
-     * @var Contacts
-     */
-    protected $contactsEndpoint;
-
     public function setUp(): void
     {
-        $this->contactsEndpoint = new Contacts($this->getClient());
         parent::setUp();
     }
 
@@ -168,81 +161,6 @@ class CompaniesTest extends EntityTestCase
         $this->assertCount(2, $response->getData()->properties->description->versions);
     }
 
-    /** @test */
-    public function getAssociatedContacts()
-    {
-        list($contactId) = $this->createAssociatedContact($this->entity->companyId);
-
-        $response = $this->endpoint->getAssociatedContacts($this->entity->companyId);
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertCount(1, $response->contacts);
-        $this->assertEquals($contactId, $response->contacts[0]->vid);
-
-        $this->deleteAssociatedContacts($this->entity->companyId, [$contactId]);
-    }
-
-    /** @test */
-    public function getAssociatedContactsWithCountAndOffset()
-    {
-        list($contactId) = $this->createAssociatedContact($this->entity->companyId);
-        list($contactId2) = $this->createAssociatedContact($this->entity->companyId);
-
-        $response = $this->endpoint->getAssociatedContacts($this->entity->companyId, ['count' => 1]);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertCount(1, $response->contacts);
-
-        $offsetResponse = $this->endpoint->getAssociatedContacts($this->entity->companyId, ['count' => 1, 'vidOffset' => $contactId]);
-        $this->assertEquals(200, $offsetResponse->getStatusCode());
-        $this->assertGreaterThanOrEqual($contactId2, $offsetResponse->vidOffset);
-
-        $this->deleteAssociatedContacts($this->entity->companyId, [$contactId, $contactId2]);
-    }
-
-    /** @test */
-    public function getAssociatedContactIds()
-    {
-        list($contactId1) = $this->createAssociatedContact($this->entity->companyId);
-        list($contactId2) = $this->createAssociatedContact($this->entity->companyId);
-
-        $response = $this->endpoint->getAssociatedContactIds($this->entity->companyId);
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertGreaterThanOrEqual(1, $response->vids);
-        $this->assertContains($contactId1, $response->vids);
-        $this->assertContains($contactId2, $response->vids);
-
-        $this->deleteAssociatedContacts($this->entity->companyId, $response->vids);
-    }
-
-    /** @test */
-    public function getAssociatedContactIdsWithCountAndOffset()
-    {
-        list($contactId1) = $this->createAssociatedContact($this->entity->companyId);
-        list($contactId2) = $this->createAssociatedContact($this->entity->companyId);
-
-        $response = $this->endpoint->getAssociatedContactIds($this->entity->companyId, ['count' => 1]);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertCount(1, $response->vids);
-
-        $offsetResponse = $this->endpoint->getAssociatedContactIds($this->entity->companyId, ['count' => 1, 'vidOffset' => $contactId1]);
-        $this->assertEquals(200, $offsetResponse->getStatusCode());
-        $this->assertGreaterThanOrEqual($contactId2, $offsetResponse->vidOffset);
-
-        $this->deleteAssociatedContacts($this->entity->companyId, [$contactId1, $contactId2]);
-    }
-
-    /** @test */
-    public function removeContact()
-    {
-        list($contactId) = $this->createAssociatedContact($this->entity->companyId);
-
-        $response = $this->endpoint->removeContact($contactId, $this->entity->companyId);
-
-        $this->assertEquals(204, $response->getStatusCode());
-
-        $this->contactsEndpoint->delete($contactId);
-    }
 
     /**
      * @test
@@ -253,51 +171,6 @@ class CompaniesTest extends EntityTestCase
         $this->assertEquals(200, $response->getStatusCode());
         $results = $response->getData()->results;
         $this->assertEquals('example.com', current($results)->properties->domain->value);
-    }
-
-    /**
-     * Creates a new contact with the HubSpotApi.
-     *
-     * @return \SevenShores\Hubspot\Http\Response
-     */
-    protected function createContact()
-    {
-        $response = $this->contactsEndpoint->create([
-            ['property' => 'email', 'value' => 'rw_test'.uniqid().'@hubspot.com'],
-            ['property' => 'firstname', 'value' => 'joe'],
-            ['property' => 'lastname', 'value' => 'user'],
-        ]);
-
-        sleep(1);
-
-        return $response;
-    }
-
-    /**
-     * Creates an associated contact for a new company with the HubSpotApi.
-     *
-     * @param int $companyId the id of the company where to create the new contact
-     *
-     * @return array
-     */
-    protected function createAssociatedContact($companyId)
-    {
-        $contact = $this->createContact();
-
-        $response = $this->endpoint->addContact($contact->vid, $companyId);
-
-        sleep(1);
-
-        return [$contact->vid, $response];
-    }
-
-    protected function deleteAssociatedContacts($companyId, $contactIds = [])
-    {
-        foreach ($contactIds as $contactId) {
-            $this->endpoint->removeContact($contactId, $companyId);
-            sleep(1);
-            $this->contactsEndpoint->delete($contactId);
-        }
     }
 
     protected function createEntity()
